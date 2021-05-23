@@ -1,0 +1,3 @@
+git remote add origin https://github.com/<username>/<repository_Name>.git
+git branch -M <branch>
+git push -u origin <branch>
