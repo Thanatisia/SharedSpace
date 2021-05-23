@@ -20,6 +20,7 @@
   
 * Last Update/Modified:
   * 2021-05-24 0057H, Asura
+  * 2021-05-24 0127H, Asura
 
 
 
@@ -31,15 +32,33 @@
 
 ## Getting Started
 
+### Pre-Requisites
+
+1. chmod +x setup.sh
+2. chmod +x postinstallations.sh
+
+### Dependencies
+
+### Installing
+
+### Executing
+
 
 
 ## Files
 
+1. setup.sh
 
+2. postinstallations.sh
+
+   
 
 ## Usage
 
 > How to use
+
+1. ./setup.sh
+2. ./postinstallations.sh
 
 
 
@@ -73,6 +92,13 @@
     * Version History (Changelogs)
     * License
     * Acknowledgements
+* 2021-05-24 0127H, Asura
+  * Added
+    * Documentations
+      * Pre-Requisites
+      * Dependencies
+      * Installing
+      * Execution
 
 
 
