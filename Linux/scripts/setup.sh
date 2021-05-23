@@ -61,7 +61,7 @@ for d in "${default_Dir[@]}"; do
 	curr_Dir="$d"
 	if [[ ! -d "$curr_Dir" ]]; then
 		# If does not exist
-		mkdir -p "$curr_Dir" && tee -a ~/.logs/setup-changelog.log
+		mkdir -p "$curr_Dir" | tee -a ~/.logs/setup-changelog.log
 		res="$?"
 
 		# Validation
@@ -97,8 +97,7 @@ fi
 """ | tee -a ~/.bashrc
 
 ### 4. Edit .bashrc-personal ###
-echo """
-#
+echo """#
 # Bash Resource Control (BashRC) [Personal]
 #
 """ | tee -a $bashrc_Personal

@@ -101,7 +101,7 @@ number_of_Values="${#val[@]}"
 
 ## Processes ##
 # Loop and Install packages
-for i in $number_of_Values; do
+for(( i=0; i < $number_of_Values; i++ )); do
 	curr_Key="${keys[$i]}"
 	curr_Pkg="${val[$i]}"
 	sudo pacman -S $curr_Pkg | tee -a ${log_Files["changelog"]}

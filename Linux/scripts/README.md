@@ -21,6 +21,7 @@
 * Last Update/Modified:
   * 2021-05-24 0057H, Asura
   * 2021-05-24 0127H, Asura
+  * 2021-05-24 0154H, Asura
 
 
 
@@ -36,6 +37,7 @@
 
 1. chmod +x setup.sh
 2. chmod +x postinstallations.sh
+3. chmod +x good-aliases.sh
 
 ### Dependencies
 
@@ -51,6 +53,8 @@
 
 2. postinstallations.sh
 
+3. good-aliases.sh
+
    
 
 ## Usage
@@ -59,6 +63,10 @@
 
 1. ./setup.sh
 2. ./postinstallations.sh
+3. good-aliases.sh
+   * Source alias
+     * . good-aliases.sh
+     * source good-aliases.sh
 
 
 
@@ -99,6 +107,17 @@
       * Dependencies
       * Installing
       * Execution
+* 2021-05-24 0154H, Asura
+  * Created
+    * Library
+      * good-aliases.sh
+  * Modified
+    * setup.sh
+      * Changed 
+        * mkdir -p && | tee -a to mkdir -p | tee -a 
+    * postinstallations.sh
+      * Changed for loop to a C-style loop; 
+      * Able to recognize array indexes
 
 
 
