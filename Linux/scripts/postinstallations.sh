@@ -6,6 +6,7 @@
 #	2021-05-23 1900H, Asura
 #	2021-05-23 1942H, Asura
 #	2021-05-23 2004H, Asura
+#	2021-05-24 0233H, Asura
 # Background Info:
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
 #	such as installing window managers/desktop environment, terminals, file browsers etc.
@@ -44,8 +45,9 @@ declare -A pkgs=(
 	# i.e.
 	# (OLD) : [terminal]="urxvt"
 	# (NEW) : [terminal]="urxvt alacritty"
-	[editor]="nano vim"		# Text Editors
-	[terminal]="urxvt"		# Terminal Emulator
+	[editor-1]="nano"		# Text Editors
+	[editor-2]="vim"
+	[terminal]="rxvt-unicode"	# Terminal Emulator
 	[browser]="firefox"		# Browser
 	[file_manager]="pcmanfm"	# File Manager
 	[wm]="bspwm"			# Window Manager
@@ -104,13 +106,20 @@ number_of_Values="${#val[@]}"
 for(( i=0; i < $number_of_Values; i++ )); do
 	curr_Key="${keys[$i]}"
 	curr_Pkg="${val[$i]}"
-	sudo pacman -S $curr_Pkg | tee -a ${log_Files["changelog"]}
-	res="$?"
-	# Validation
-	if [[ "$res" == "0" ]]; then
-		res="Success"
-	else
-		res="Failed"
+
+	# Check if package exists in repository
+	exists="$(pacman -Ss ^$curr_Pkg$)"
+	if [[ ! "$exists" == "" ]]; then
+		# Install
+		sudo pacman -S $curr_Pkg | tee -a ${log_Files["changelog"]}
+		res="$?"
+	
+		# Validation
+		if [[ "$res" == "0" ]]; then
+			res="Success"
+		else
+			res="Failed"
+		fi
 	fi
 	echo "Installing [ $curr_Key --> $curr_Pkg ] : $res" | tee -a ${log_Files["status"]}
 done

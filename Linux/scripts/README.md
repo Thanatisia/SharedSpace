@@ -22,6 +22,7 @@
   * 2021-05-24 0057H, Asura
   * 2021-05-24 0127H, Asura
   * 2021-05-24 0154H, Asura
+  * 2021-05-24 0233H, Asura
 
 
 
@@ -118,6 +119,16 @@
     * postinstallations.sh
       * Changed for loop to a C-style loop; 
       * Able to recognize array indexes
+* 2021-05-24 0233H, Asura
+  * Modified
+    * postinstallations.sh
+      * Changed 
+        * 'urxvt' -> 'rxvt-unicode'
+        * seperated "vim nano" to 2 keys:
+          * editor-1 : vim
+          * editor-2 : nano
+      * Added
+        * function to check if package exists in repository before proceeding with installation
 
 
 
