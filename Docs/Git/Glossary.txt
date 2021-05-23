@@ -1,0 +1,7 @@
+#
+# Git Dictionary
+#
+
+
+origin: alias for cloned remote repository substituted for git@github.com:git/git.git
+pull: A way to alert a repo's owners that you want to make some changes to their code.; It allows them to review the code & make sure it looks good before putting your changes on the primary branch

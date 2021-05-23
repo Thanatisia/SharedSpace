@@ -1,0 +1,13 @@
+#
+# Git guide - Getting changes on Github back to your computer
+#
+
+1. To get the changes on github
+
+	# Pull from the master branch of the target remote repository
+	git pull origin master
+
+2. See all new commits
+	git log
+
+

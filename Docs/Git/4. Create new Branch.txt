@@ -1,0 +1,13 @@
+#
+# Git guide - Creating new Branch
+#
+
+1. If you are in primary branch and
+	Want to create a new branch
+		# Create new branch and move to new branch
+		git checkout -b <new branch name>
+
+
+2. Verify new branch
+	git branch
+

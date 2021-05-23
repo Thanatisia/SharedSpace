@@ -1,0 +1,7 @@
+#
+# Git guide - Cloning a repository
+#
+
+1. To clone a repository
+	git clone <repository_url>
+

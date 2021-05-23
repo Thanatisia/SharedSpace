@@ -1,0 +1,7 @@
+#
+# Git guide - Delete Branch
+#
+
+1. Go to the branch 
+2. Click on grey 'Delete branch' button
+

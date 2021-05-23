@@ -1,0 +1,27 @@
+#
+# Git guide - Setup
+#
+
+1. Open Git Command Line
+	Windows:
+		- Using 'Git Bash' 
+		- Download GitPortable
+	Mac:
+		- Applications > Utilities > Terminal.app
+	Linux:
+		- Open a terminal and install 'git'
+
+2. Setup git config
+
+	# Username
+	git config --global user.name "<Your name>"
+
+	# Password
+	git config --global user.email "<your@email.com>"
+
+3. Check git config
+
+	# Dont put value to read
+	git config --global user.name
+	git config --global user.email
+

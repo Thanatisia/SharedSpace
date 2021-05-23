@@ -1,0 +1,18 @@
+#
+# Git guide - Pushing branch to Github
+#
+
+1. add & commit all files before proceeding
+	git add *
+	git commit -m "Message"
+
+2. Push <branch-of-local-repo> to Github repository
+	
+	# Push <branch-of-local-repo> to target remote repository (alias 'origin')
+	git push origin <branch-of-local-repo>
+
+	OR
+
+	# Push <branch-of-local-repo> to target remote repository (with Repository URL)
+	git push git@github.com:git/git.git
+

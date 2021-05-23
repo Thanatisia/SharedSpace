@@ -1,0 +1,10 @@
+#
+# Git guide - Adding Files
+#
+
+1. Check if files are recognized by git
+	git status
+
+2. Add files
+	git add <files>
+

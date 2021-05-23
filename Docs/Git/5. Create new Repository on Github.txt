@@ -1,0 +1,15 @@
+#
+# Git guide - Creating new Repository on Github
+#
+
+1. Open Github
+2. login to github
+3. Click on "New Repository"
+4. Enter description
+5. Push previously-created repository nto github
+	# Add target repository to push to
+	git remote add origin <url-of-repository>
+
+	# Push <branch-of-local-repo> to target repository
+	git push -u origin <branch-of-local-repo>
+

@@ -1,0 +1,19 @@
+#
+# Git guide - Creating and Merge Pull Request
+#
+
+# Pull Request (PR) : 
+	A way to alert a repo's owners that you want to make some changes to their code.
+	It allows them to review the code & make sure it looks good before putting your changes on the primary branch
+
+1. Go to Github
+2. Go to target repository
+3. Click "Open a pull request"
+4. State the change and write comments
+5. Click "Create Pull Request"
+
+<In Repository>
+6. Click on "Merge Pull Request" to 
+	merge your changes into the primary branch
+
+

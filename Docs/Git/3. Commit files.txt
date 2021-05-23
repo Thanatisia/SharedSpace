@@ -1,0 +1,15 @@
+#
+# Git guide - Committing Files
+#
+
+1. Check if files have been added and are to be committed
+	git status
+
+2. Commit files
+	git commit -m <"Your commit message>"
+
+	# NOTE:
+		The message at the end of the commit should be related to the commit
+
+
+
