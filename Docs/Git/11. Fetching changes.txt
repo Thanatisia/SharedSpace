@@ -1,0 +1,8 @@
+#
+# Git guide - Fetching changes from a repository
+#
+
+1. Ensure you have made a backup of the current repository commit
+2. Ensure it is the correct repository
+3. Fetch
+	git fetch

@@ -20,6 +20,7 @@
 
 * Last Update/Modified:
   * 2021-05-24 0044H, Asura
+  * 2021-05-24 2026H, Asura
 
 
 
@@ -44,11 +45,13 @@
 7. Create & Merge Pull Request.txt
 8. Delete Branch.txt
 9. Get changes on Github back to your computer.txt
-10. Cloning a repository
-11. EX1. create new repository.txt
-12. EX2. push existing repository.txt
-13. README.md
-14. Glossary.txt
+10. Cloning a repository.txt
+11. Fetching changes.txt
+12. Pull changes.txt
+13. EX1. create new repository.txt
+14. EX2. push existing repository.txt
+15. README.md
+16. Glossary.txt
 
 
 
@@ -88,6 +91,17 @@
     * Version History (Changelogs)
     * License
     * Acknowledgements
+* 2021-05-24 2026H, Asura
+  * Created
+    * Files
+      * 11. Fetching changes.txt
+        12. Pull changes.txt
+  * Modified
+    * Files
+      * Glossary.txt 
+        * Seperated keywords to categories
+          * Added categories [Terminology] and [Commands].
+        * Added new definitions of commands and terminology.
 
 
 

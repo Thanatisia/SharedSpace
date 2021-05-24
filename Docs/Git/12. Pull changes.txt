@@ -1,0 +1,11 @@
+#
+# Git guide - Fetching changes from a repository
+#
+
+1. Ensure you have made a backup of the current repository commit
+2. Ensure it is the correct repository
+3. NOTE:
+	Pulling will automatically fetch the changes from the remote repository and Merge with your local repository
+	- Ensure that any changes made to the files that have yet to be committed are backed-up
+4. Pull
+	git pull

@@ -2,6 +2,15 @@
 # Git Dictionary
 #
 
+[Commands]
+add    : To tell git the files you want to commit or push
+commit : To confirm changes made to files in the form of hooks; each commit allows users to see changes made and files linked
+fetch  : To get changes from a target remote repository without merging (non-overwrite, just get changes for viewing)
+init   : Initializing of local repository in a target folder
+merge  : To merge any fetch'd new changes to a repository from the target remote repository with the current local repository
+push   : To 'push' and upload the currently committed local repository to a target remote github repository
+pull   : To get changes from a target remote repository and merge with current local repository; A way to alert a repo's owners that you want to make some changes to their code.; It allows them to review the code & make sure it looks good before putting your changes on the primary branch
+status : To check/find if git recognizes any files that have changes made.
 
-origin: alias for cloned remote repository substituted for git@github.com:git/git.git
-pull: A way to alert a repo's owners that you want to make some changes to their code.; It allows them to review the code & make sure it looks good before putting your changes on the primary branch
+[Terminology]
+origin : alias for cloned remote repository substituted for git@github.com:git/git.git
