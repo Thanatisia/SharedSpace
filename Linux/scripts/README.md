@@ -153,6 +153,12 @@
 * 2021-05-25 0825H, Asura
   * Created
     * customs.sh
+* 2021-05-25 0903H, Asura
+  * Modified
+    * customs.sh
+      * Line 45 : Changed 'default_Files' to 'custom_Files'
+    * postinstallations.sh
+      * Added empty spaces after each packages are installed
 
 
 

@@ -112,6 +112,8 @@ for(( i=0; i < $number_of_Values; i++ )); do
 	curr_Key="${keys[$i]}"
 	curr_Pkg="${val[$i]}"
 
+	echo ""
+
 	# Check if package exists in repository
 	exists="$(pacman -Ss ^$curr_Pkg$)"
 	if [[ ! "$exists" == "" ]]; then

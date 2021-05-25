@@ -42,7 +42,7 @@ declare -A custom_Files=(
 )
 
 # Local Variables
-bashrc_Personal="${default_Files["bashrc-personal"]}"
+bashrc_Personal="${custom_Files["bashrc-personal"]}"
 
 
 # --- Processing
