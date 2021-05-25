@@ -16,3 +16,5 @@
 	# Push <branch-of-local-repo> to target remote repository (with Repository URL)
 	git push git@github.com:git/git.git
 
+3. Example:
+	git push origin main
