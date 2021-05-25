@@ -23,6 +23,7 @@
   * 2021-05-24 0127H, Asura
   * 2021-05-24 0154H, Asura
   * 2021-05-24 0233H, Asura
+  * 2021-05-25 0824H, Asura
 
 
 
@@ -39,6 +40,7 @@
 1. chmod +x setup.sh
 2. chmod +x postinstallations.sh
 3. chmod +x good-aliases.sh
+4. chmod +x customs.sh
 
 ### Dependencies
 
@@ -52,9 +54,25 @@
 
 1. setup.sh
 
+   > A basic setup script that will setup the basic requirements after a complete/minimal installation such as making default directories, 
+   >
+   > installing basic packages if they were not installed during setup
+
 2. postinstallations.sh
 
+   > A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
+   >
+   > such as installing window managers/desktop environment, terminals, file browsers etc.
+
 3. good-aliases.sh
+
+   > This contains a library of aliases to source into your dotfiles for use
+
+4. customs.sh
+
+   > A script with commands that are what I consider essential custom folders to create, use etc.
+   >
+   > - Please edit this and adjust it to fit what you would consider essential for you
 
    
 
@@ -68,6 +86,7 @@
    * Source alias
      * . good-aliases.sh
      * source good-aliases.sh
+4. ./customs.sh
 
 
 
@@ -89,18 +108,20 @@
 
 * 2021-05-24 0057H, Asura
   * Created 
-    * README
-    * Basic Information (Description)
-    * To Note
-    * Documentations
-      * Getting Started
-      * Files
-      * Usage
-      * Help
-    * Authors
-    * Version History (Changelogs)
-    * License
-    * Acknowledgements
+    * README.md
+      * Basic Information (Description)
+      * To Note
+      * Documentations
+        * Getting Started
+        * Files
+        * Usage
+        * Help
+      * Authors
+      * Version History (Changelogs)
+      * License
+      * Acknowledgements
+    * postinstallations.sh
+    * setup.sh
 * 2021-05-24 0127H, Asura
   * Added
     * Documentations
@@ -129,6 +150,9 @@
           * editor-2 : nano
       * Added
         * function to check if package exists in repository before proceeding with installation
+* 2021-05-25 0825H, Asura
+  * Created
+    * customs.sh
 
 
 

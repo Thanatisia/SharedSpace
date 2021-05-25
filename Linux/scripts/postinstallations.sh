@@ -7,6 +7,7 @@
 #	2021-05-23 1942H, Asura
 #	2021-05-23 2004H, Asura
 #	2021-05-24 0233H, Asura
+#	2021-05-25 0834H, Asura
 # Background Info:
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
 #	such as installing window managers/desktop environment, terminals, file browsers etc.
@@ -19,6 +20,10 @@
 #		[setup.sh]
 #		4. Proper home file directory structure (Home, Desktop, Documents, Media etc.)
 #		5. A default OOTB universal preset that is easily understandable
+#	- Use this alongside [customs.sh] to get dotfiles that will expand the linux OOTB experience and are considered essentials
+#		1. Essential custom dotfiles, commands, files that can be adjusted to fit your needs
+#			such as:
+#				a bashrc-personal file in ~/.portable/dotfiles/BashRC/aliases folder (Path adjustable in customs.sh)
 # Features:
 #	- Installation fundamental linux packages, ricing packages and other useful utilities that are essential to any linux users and
 #	- raw/new installations

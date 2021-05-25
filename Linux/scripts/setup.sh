@@ -6,6 +6,7 @@
 #	2021-05-23 1934H, Asura
 #	2021-05-23 1942H, Asura
 #	2021-05-23 2004H, Asura
+#	2021-05-25 0831H, Asura
 # Background Info:
 #	A basic setup script that will setup the basic requirements after a complete/minimal installation such as making default directories, 
 #	installing basic packages if they were not installed during setup
@@ -15,8 +16,12 @@
 #		2. File Browser
 #		3. Terminals
 #		[setup.sh]
-#		4. Proper home file directory structure (Home, Desktop, Documents, Media etc.)
-#		5. A default OOTB universal preset that is easily understandable
+#		1. Proper home file directory structure (Home, Desktop, Documents, Media etc.)
+#		2. A default OOTB universal preset that is easily understandable
+#	- Use this alongside [customs.sh] to get dotfiles that will expand the linux OOTB experience and are considered essentials
+#		1. Essential custom dotfiles, commands, files that can be adjusted to fit your needs
+#			such as:
+#				a bashrc-personal file in ~/.portable/dotfiles/BashRC/aliases folder (Path adjustable in customs.sh)
 # Features:
 #	- Creating default directories
 #	- Creating default files
@@ -41,15 +46,11 @@ default_Dir=(
 	~/Media/screenshots
 	~/Media/music
 	~/Media/videos
-	~/portable/dotfiles/BashRC/aliases
 )
 ## Associative Arrays
-declare -A default_Files=(
-	[bashrc-personal]=~/portable/dotfiles/BashRC/.bashrc-personal
-)
 
 ## Local Variables
-bashrc_Personal="${default_Files["bashrc-personal"]}"
+
 
 #
 # Processing
@@ -76,42 +77,12 @@ for d in "${default_Dir[@]}"; do
 	fi
 done
 
-### 2. Create default files ###
-for f in "${default_Files[@]}"; do
-	if [[ ! -f $f ]]; then
-		# If file does not exist, create
-		touch "$f"
-	fi
-done
-
-
-#================= 2. BashRC ===================#
-
-### 3. Link .bashrc with .bashrc-personal ###
-echo """
-# Link .bashrc with .bashrc-personal #
-if [[ -f "$bashrc_Personal" ]]; then
-	# File exists
-	. "$bashrc_Personal"
-fi
-""" | tee -a ~/.bashrc
-
-### 4. Edit .bashrc-personal ###
-echo """#
-# Bash Resource Control (BashRC) [Personal]
-#
-""" | tee -a $bashrc_Personal
-
-
 
 #
 # Output
 #
 
 #================= Finishing Touches ================#
-
-# Reload Terminal
-source ~/.bashrc
 
 # Finish
 complete_uInput=""
