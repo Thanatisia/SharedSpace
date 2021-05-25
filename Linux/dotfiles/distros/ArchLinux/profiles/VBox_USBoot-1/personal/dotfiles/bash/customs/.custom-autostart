@@ -1,0 +1,29 @@
+#
+# Custom file with
+# Functions for autostarting external programs
+#
+
+# --- Entr
+
+# Functions
+compiler()
+{
+	src_file="$1"
+	out_file="$2"
+	linkers="$3"
+	echo $src_file | entr -p "g++ $src_file -o $out_file $linkers" && notify-send "Compiled $src_file to $out_file"
+}
+
+# File Changes
+file_Changes()
+{
+	file=$1
+	echo $file | entr -p notify-send "$file updated."
+}
+
+# --- General
+
+autostart()
+{
+	file_Changes ~/.bashrc &
+}

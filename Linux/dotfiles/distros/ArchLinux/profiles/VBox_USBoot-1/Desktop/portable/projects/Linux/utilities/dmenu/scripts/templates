@@ -1,0 +1,13 @@
+#
+# Utility Scripts
+# Target Tool: Dmenu
+#
+
+function testbench()
+{
+	choices="Choice 1\nChoice 2"
+	echo -e $choices | dmenu
+}
+
+res="$(testbench)"
+echo "Result: $res"

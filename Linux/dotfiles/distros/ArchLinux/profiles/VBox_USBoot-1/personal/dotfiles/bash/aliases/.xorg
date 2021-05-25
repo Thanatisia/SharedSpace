@@ -1,0 +1,14 @@
+#
+# This Contains aliases for all linux commands
+# based on XOrg Sessions
+#
+
+# XOrg Sessions
+alias start_i3="startx ~/.xinitrc i3"
+alias start_bspwm="startx ~/.xinitrc bspwm"
+alias start_kde="startx ~/.xinitrc kde"
+alias start_xfce="startx ~/.xinitrc xfce"
+alias session_kill="pkill -15 Xorg"
+alias session_kill_curr_vm="pkill -15 -t tty\"$XDG_VTNR\" Xorg"
+
+

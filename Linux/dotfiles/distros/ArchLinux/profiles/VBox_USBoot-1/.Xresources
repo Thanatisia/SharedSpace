@@ -1,0 +1,34 @@
+!
+! Cursor Settings
+!
+
+! General
+xcursor.theme: ArchCursorComplete
+xcursor.size: 16
+
+!
+! URxvt Settings
+!
+
+! General
+! Default: white; black
+! Shading : Makes background opacity clearer/more opaque; 0 (Opaque) <-> 100 (Transparent)
+URxvt*foreground: white
+URxvt*background: black
+! URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=18
+URxvt*font: xft:Jetbrains Mono:pixelsize=18
+URxvt*scrollBar: false
+URxvt.transparent: true
+URxvt.shading: 40
+URxvt*allow_bold: true
+!
+! External Settings
+!
+
+! Set colorscheme to gruvbox-dark
+#include "personal/designs/XOrg/xresources/gruvbox-dark.xresources"
+! #include "personal/designs/XOrg/xresources/matrix-green.xresources"
+! #include "personal/designs/XOrg/xresources/wal-nature.xresources"
+
+! Fonts
+

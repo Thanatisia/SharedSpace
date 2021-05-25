@@ -1,0 +1,53 @@
+#
+# LemonBar Panels
+#
+
+# Variables
+panel_Items=()
+
+function Clock()
+{
+        date +"%d/%m/%Y %H:%M:%S"
+}
+
+function set_panel_Items()
+{
+        panel_Items=(
+                "$(hostname)"
+                "$(echo -n $(Clock))"
+                
+        )
+        seperator="|"
+        contents=""
+
+        # Get Items
+        for items in "${panel_Items[@]}"; do
+                contents+="$seperator $items "
+        done
+        echo "$contents"
+}
+
+# Kill lemonbar if still used
+if [ ! -z "$(pgrep bar)" ]; then
+        # Not Empty
+        # kill
+        pkill bar
+fi
+        
+# Display on Panel
+# echo "$contents"
+# echo "$contents" | lemonbar -p &
+while true; do
+        #
+        # Recursive
+        # - Display LemonBar in background
+        # - Sleep for 1 second
+        # - Kill the previous bar
+        # - Loop & Repeat point 1
+        #
+        contents="$(set_panel_Items)"
+        echo "$contents" | lemonbar -p &
+        sleep 1
+        pkill bar
+done
+

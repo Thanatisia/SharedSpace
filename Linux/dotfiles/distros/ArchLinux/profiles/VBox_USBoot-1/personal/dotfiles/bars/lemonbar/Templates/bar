@@ -1,0 +1,18 @@
+#
+# Start bar
+#
+
+# Input
+BAR_PATH=~/.config/bspwm/bars/lemonbar/
+
+# Process
+sleep 1s &&\
+    # Temporary: 
+    #   Change directory to path of bar script 
+    #   and run bar until
+    #   the problem has been fixed
+    cd $BAR_PATH
+    $BAR_PATH/lemonbar.sh | 
+    lemonbar -p -F#FFFFFFFF -B#FF222222 &
+
+cd ~
