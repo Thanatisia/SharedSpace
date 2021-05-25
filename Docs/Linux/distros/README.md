@@ -6,20 +6,27 @@
 
 * Authors: 
 
-  * <Author>
+  * Asura
 
-* Date Created: <yyyy-mm-dd> <HHMM>H, <Author>
+* Date Created: 2021-05-25 1657H, Asura
 
 * Folder background:
 
-  > Your background info here
-  
+  > This folder contains documentation related to Linux Distributions (aka Distros)
+  >
+  > - Documentations related to Linux Distros will be placed in here
+  >   - i.e. 
+  >     1. Distro installation guides
+
 * Contents:
 
-  > * What you plan on sharing
-  
+  > * Distro-related folders 
+  >   * ArchLinux
+  >   * Debian etc.
+
 * Last Update/Modified:
-  * <yyyy-mm-dd> <HHMM>H, <Author>
+
+  * 2021-05-25 1657H, Asura
 
 
 
@@ -31,11 +38,13 @@
 
 ## Getting Started
 
-### Dependencies
 
-### Installing
 
-### Executing
+## Folders
+
+1. ArchLinux
+
+   > Documents, Files and Folders related to ArchLinux
 
 
 
@@ -55,22 +64,20 @@
 
 > Contributors name, git ID, contact info
 
-
+1. Asura, <a href="https://github.com/Thanatisia">@Thanatisia</a>, NIL
 
 # Version History
 
 >  Changelogs
 
-* <yyyy-mm-dd> <HHMM>H, <Author>
+* 2021-05-25 1657H, Asura
   * Created 
     * README
     * Basic Information (Description)
     * To Note
     * Documentations
       * Getting Started
-        * Dependencies
-        * Installing
-        * Executing
+      * Folders
       * Usage
       * Help
     * Authors
