@@ -1,0 +1,40 @@
+## Ricing Guide
+
+#
+# -- Xresources
+#
+
+# Template
+!
+! XResources
+!
+
+!
+! URxvt Settings
+!
+
+! General
+! Default: white; black
+URxvt*foreground: white
+URxvt*background: black
+URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=18
+URxvt*scrollBar: false
+URxvt.transparent: true
+URxvt.shading: 60
+URxvt*allow_bold: true
+
+# Syntax
+# To Include a external resource file
+#include "path/to/xresource/file.xresources"
+
+
+# Getting default Xresources file
+xrdb -query -all | tee -a ~/.Xresources
+
+# Reloading xresources after edit
+1. Load a resource file (such as the conventional .Xresources), replacing any current settings: 
+	xrdb ~/.Xresources 
+2. Load a resource file, and merge with the current settings: 
+	xrdb -merge ~/.Xresources
+
+

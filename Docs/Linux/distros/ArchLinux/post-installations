@@ -1,0 +1,158 @@
+## Post Installation (Things to do)
+
+# -- (First) Things to do after installation 
+# Install packages of the following categories:
++	[Audio]
+	#--- Terminal
+	alsa
+	#--- GUI
+	pulseaudio
+
++	[Terminals]
+	alacritty
+	rxvt-unicode (urxvt)
+
++ [Web Browsers]
+	chrome
+	firefox
+
++ [File Managers]
+	thunar
+	pcmanfm
+
++ [Utilities]
+	# --- Version Control
+	git
+	# ---Fetch
+	neofetch
+	# Readers
+	zathura: PDF Reader
+	pandoc : Document maker
+	# Image Control
+	pywal (https://github.com/dylanaraps/pywal)
+	imagemagick
+	nitrogen (Image Utility)
+	# --- Launcher
+	dmenu (suckless simple command line tool)
+	# --- Cronjob
+	cronie
+	# --- Screenshot
+	scrot
+	# --- System Monitor
+	conky
+	# --- Notifications
+	notify-send
+	dunst
+	# --- Media Player
+	mpv
+	
++ [Networking]
+	inetutils
+
++ [Compositor]
+	picom
+
++ [Fonts]
+	ttf-font-awesome
+
++ [screenlocker]
+	xautolocker
+	i3-lock
+
++ [Resources]
+	# --- Wallpaper packs
+	gnome-backgrounds
+	mate-backgrounds
+	deepin-backgrounds
+	elementary-wallpapers
+	plasma-workspace-wallpapers
+	archlinux-wallpaper
+
+# Install Git 
+# This is for git repository controls
+sudo pacman -S git
+
+# Install AUR
+
+# Install XOrg
+# programs like .xinitrc (autostart on login)
+sudo pacman -S xorg-server xorg-apps
+
+# Install Display Manager 
+# Examples
+#		SDDM
+#		GDM			: Gnome DM
+#		LightDM
+
+#
+# Install Window Manager / Desktop Environment
+#
+# [Desktop Environment]
++		* KDE
+
+#	[Window Managers]
++		* bspWM
+ 		Packages required:
+			bspwm : The Window Manager
+			sxhkd : Keybinding Daemon
+			xorg-xinit: XOrg program that runs xinit(rc)
+			rxvt-unicode: Terminal
+		Installation:
+			sudo pacman -S bspwm sxhkd xorg-xinit rxvt-unicode
+		Setup:
+			mkdir ~/.config
+			(OPTIONL) echo export XDG_CONFIG_HOME="$HOME/.config" >> ~/.zshrc
+			mkdir ~/.config/bspwm
+			cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
+			mkdir ~/.config/sxhkd
+			cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
+			chmod +x ~/.config/bspwm/bspwmrc
+			chmod +x ~/.config/sxhkd/sxhkdrc
+		Startup: 
+			# Look at ~/.config/sxhkd/sxhkdrc and learn the key bindings. To start bspwm on login, add the following to ~/.xinitrc
+			exec bspwm
+
+# Install Compositors
+# This will allow you to create stuff like shadows
+# Examples:
+#		picom
+
+# -- Setups
+
+#
+# Audio
+# Different types of Audio Packages:
+#		1. PulseMixer
+#		2. ALSA
+#
+
+#
+# Samba
+#
+
+# 1. Install package [samba]
+sudo pacman -S samba
+
+# 2. Create samba configuration file in /etc/samba/smb.conf
+copy from [
+	https://git.samba.org/samba.git/?p=samba.git;a=blob_plain;f=examples/smb.conf.default;hb=HEAD
+]
+
+# -- Ricing
+
+# Xresources
+
+
+# Colorscheme
+# Install pywal for color scheme autopicker
+sudo pacman -S pywal
+
+
+
+# -- Utilities Installations
+
+# [PDF Readers]
+# Zathura
+	sudo pacman -Sy zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-cb
+
+
