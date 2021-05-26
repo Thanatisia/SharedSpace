@@ -25,6 +25,9 @@ URxvt*allow_bold: true
 ! External Settings
 !
 
+! Allow Resizing of fonts on the fly
+urxvt.perl-ext-common: default,tabbed,matcher,resize-font,-tabbed
+
 ! Set colorscheme to gruvbox-dark
 #include "personal/designs/XOrg/xresources/gruvbox-dark.xresources"
 ! #include "personal/designs/XOrg/xresources/matrix-green.xresources"
