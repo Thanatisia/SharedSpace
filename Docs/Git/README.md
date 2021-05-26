@@ -21,6 +21,7 @@
 * Last Update/Modified:
   * 2021-05-24 0044H, Asura
   * 2021-05-24 2026H, Asura
+  * 2021-05-26 0959H, Asura
 
 
 
@@ -50,8 +51,10 @@
 12. Pull changes.txt
 13. EX1. create new repository.txt
 14. EX2. push existing repository.txt
-15. README.md
-16. Glossary.txt
+15. Issues-1. Bypass - Untracked working tree files overwriting warning.txt
+16. Issues-2. Bypass - Filename too long.txt
+17. README.md
+18. Glossary.txt
 
 
 
@@ -102,6 +105,11 @@
         * Seperated keywords to categories
           * Added categories [Terminology] and [Commands].
         * Added new definitions of commands and terminology.
+* 2021-05-26 0959H, Asura
+  * Created
+    * Files
+      * Issues-1. Bypass - Untracked working tree files overwriting warning.txt
+      * Issues-2. Bypass - Filename too long.txt
 
 
 

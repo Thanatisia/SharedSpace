@@ -1,0 +1,6 @@
+#
+# Git guide - Bypassing Filename too long
+#
+
+1. Set git system config 'core.longpaths' to true
+	git config --system core.longpaths true

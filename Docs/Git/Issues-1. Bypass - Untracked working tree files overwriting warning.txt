@@ -1,0 +1,11 @@
+#
+# Git guide - Bypassing 'The following untracked working tree files would be overwritten by merge' error message
+#
+
+1. Add all files to be tracked
+	git add *
+2. Remove all local changes made to those files
+	git stash
+3. Pull and get all files from the server
+	git pull
+
