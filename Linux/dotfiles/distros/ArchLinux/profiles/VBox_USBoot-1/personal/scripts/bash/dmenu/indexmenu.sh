@@ -6,6 +6,7 @@
 #   2021-05-08 1835H, Asura
 #   2021-05-08 1848H, Asura
 #	2021-05-10 1028H, Asura
+#	2021-05-26 1037H, Asura
 # Features: 
 # Background Information: 
 # Changelog:
@@ -19,6 +20,9 @@
 #		2. Modified dmenu_Designer() to join array into string with '\n' delimiter immediately in the function
 #		3. Modified dmenu_Exe() to remove array inputs and change into string inputs
 #		4. Fixed sanitize()
+#	2021-05-26 1037H :
+#		1. Created dmenu_git.sh
+#		2. Updated dmenu_Template.sh
 #
 
 # --- Variables

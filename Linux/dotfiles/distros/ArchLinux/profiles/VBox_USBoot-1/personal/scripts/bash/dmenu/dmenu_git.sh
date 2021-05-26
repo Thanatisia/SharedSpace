@@ -1,33 +1,18 @@
 #
-# Dmenu script template file
+# Dmenu - Git Controller
 # Author: Asura
-# Created: 2021-05-08 1010H, Asura
+# Created: 2021-05-26 1008H, Asura
 # Modified: 
-#   2021-05-08 1010H, Asura
-#   2021-05-08 1848H, Asura
-#	2021-05-10 1031H, Asura
-#	2021-05-26 1013H, Asura
+#   2021-05-26 1008H, Asura
 # Features: 
 # Background Information: 
 # Changelog:
 #   2021-05-08 1010H : 
 #		Created script
-#   2021-05-08 1848H : 
-#		Created functions (
-#       	dmenu_Designer()
-#       	dmenu_Exe()
-#   	)
-#	2021-05-10 1028H : 
-#		1. Created functions [join_newline(), sanitize()]
-#		2. Modified dmenu_Designer() to join array into string with '\n' delimiter immediately in the function
-#		3. Modified dmenu_Exe() to remove array inputs and change into string inputs
-#		4. Fixed sanitize()
-#	2021-05-26 1013H :
-#		1. Added 'number_of_Arrays' which is the size of the array
 #
 
 # --- Variables
-PROGRAM_NAME="NIL"
+PROGRAM_NAME="Dmenu Git"
 
 # --- General Functions
 join_newline()
@@ -132,16 +117,112 @@ function for_template_only()
 function main()
 {
 	arr=(
-		"Hello World"
-		"Hello World 2"
-		"Hello World 3"
+		"status"
+		"config"
+		"init"
+		"add"
+		"commit"
+		"push"
+		"fetch"
+		"merge"
+		"pull"
 	)
-	number_of_Arrays="${#arr[@]}" # Putting '#' in front of the array signifies the size instead of values
+	number_of_Arr="${#arr[@]}"
 	options="$(dmenu_Designer "${arr[@]}")"
 	ret="$(dmenu_Exe "$options")"
-	echo $ret
+	echo -e "Option Selected: $ret\n"
 
-	# for_template_only
+	case "$ret" in
+		"status")
+			# Example
+			# git status
+			git status
+			ret_code="$?"
+			if [[ "$ret_code" == "0" ]]; then
+				# Return code == 0 : Success
+				echo "[$ret_code] : Success"
+			else
+				# Return code == 1 or higher : Error
+				echo -e "\n[$ret_code]:"
+				case "$ret_code" in
+					"128")
+						echo "	Generic Exit code"
+						echo "	1. Try to initialize a repository"
+						;;
+					*);;
+				esac
+			fi
+			;;
+		"config")
+			# Syntax
+			#	git config (--global | --system) <options>
+			# Examples
+			#	git config (--global) user.name
+			#	git config (--global) user.email
+			#	git config (--system) core.longpaths <true | false (default: Empty)>
+			echo "git config"
+			;;
+		"init")
+			# Syntax
+			#	git init
+			# Examples
+			#	git init
+			echo "git init"
+			;;
+		"add")
+			# Syntax 
+			#	git add <files/directories to add (default : * for all>
+			# Examples
+			#	git add *
+			echo "git add"
+			;;
+		"commit")
+			# Syntax
+			#	git commit <options> # Options: { -m <message> }
+			# Examples
+			#	git commit -m "Hello World, these are my changes"
+			echo "git commit"
+			;;
+		"push")
+			# Syntax
+			#	git push 
+			#		<options> 
+			#		<remote-repository-url (default: origin)> 
+			#		<branch-name (default: main)>
+			# Options: { -u : upstream } 
+			# Examples
+			#	git push -u origin main
+			echo "git push"
+			;;
+		"fetch")
+			# Syntax
+			#	git fetch <options>
+			# Examples
+			#	git fetch
+			echo "git fetch"
+			;;
+		"merge")
+			# Syntax
+			#	git merge <options>
+			# Examples
+			#	git merge
+			echo "git merge"
+			;;
+		"pull")
+			# Syntax
+			#	git pull <options>
+			# Examples
+			#	git pull
+			# Effectively just git fetch + git merge
+			echo "git pull"
+			;;
+		*)
+			echo "Options:"
+			for(( i=1; i <= $number_of_Arr; i++ )); do
+				echo "[$((i))] : [${arr[$((i-1))]}]"
+			done
+			;;
+	esac
 }
 
 function START()
