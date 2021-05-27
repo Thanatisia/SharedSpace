@@ -1,0 +1,51 @@
+Windows - Git production workflow
+
+#
+# Tools
+#
+PortableGit : For git-bash
+Typora : For README.md markup design
+ArchLinux Bootabe USB : For Linux Testing
+
+#
+# Process
+# 
+
+1. Make Changes
+2. Update README.md
+	- Typora
+3. Git
+	# Check git to add
+	git status
+
+	# Add all
+	git add *
+
+	# Commit all
+	git commit -m "<message>"
+
+	# (OPTIONAL): If havent state the target remote repository
+	git remote add origin <remote-repository-URL>
+
+	# Push to remote repository
+	git push -u origin <branch>
+
+
+
+
+#
+# Example Git workflow
+#
+
+# --- If new updates / before starting editing
+git fetch && git merge 
+OR
+git pull
+
+# --- When you want to push to repository
+git status 				# To check if git recognises your changes
+git add *				# To add all files that has been changes
+git commit -m "<changes>"		# To commit all changes added into the links
+git push -n <repository-url> <branch> 	# Push commit to github remote repository; Default = <repository-url> : origin, <branch> : main
+
+
