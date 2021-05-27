@@ -1,6 +1,6 @@
 # README
 
-<h6> Page/script/project name here </h6>
+<h6> Linux Distros </h6>
 
 ## Basic Information
 
@@ -27,7 +27,7 @@
 * Last Update/Modified:
 
   * 2021-05-25 1657H, Asura
-
+  * 2021-05-27 2125H, Asura
 
 
 ## To Note
@@ -44,8 +44,15 @@
 
 1. ArchLinux
 
-   > Documents, Files and Folders related to ArchLinux
+   > Documents, Files and Folders related to Arch Linux
 
+2. Gentoo
+
+   > Documents, Files and Folders related to Gentoo
+
+3. VoidLinux
+
+   > Documents, Files and Folders related to Void Linux
 
 
 ## Usage
@@ -84,7 +91,11 @@
     * Version History (Changelogs)
     * License
     * Acknowledgements
-
+* 2021-05-27 2126H, Asura
+  * Created
+  	* Folders
+		* Gentoo
+		* VoidLinux
 
 
 # License

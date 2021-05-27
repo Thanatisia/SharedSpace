@@ -1,0 +1,12 @@
+#
+# Package Manager Documentation: pacman
+# Base Distro: Arch Linux
+#
+
+pacman -S  	<package-name> : To Install a package
+pacman -Ss 	<package-name> : To search for a package in the repository
+pacman -Q  	<package-name> : To search for a package in the installed list; Leave empty to print all installed packages
+pacman -Qq 	<package-name> : To search for a package in the installed list formatted without version; Leave empty to print all installed packages without version
+pacman -R	<package-name> : To remove a package installed without removing any other dependencies
+pacman -Rsu <package-name> : To remove a package alongside all dependencies; recommended for uninstallations.
+

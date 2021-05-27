@@ -23,7 +23,7 @@
   
 * Last Update/Modified:
   * 2021-05-25 1652H, Asura
-
+  * 2021-05-27 2127H, Asura
 
 
 ## To Note
@@ -42,7 +42,9 @@
 
    > All document files/directories related to Linux distributions (i.e. ArchLinux, Debian, Gentoo etc.)
 
+2. package-manager
 
+   > Documentation about package managers (i.e. emerge, pacman etc.)
 
 ## Usage
 
@@ -82,8 +84,15 @@
     * Version History (Changelogs)
     * License
     * Acknowledgements
-
-
+* 2021-05-27 2128H, Asura
+  * Created
+  	* Folder
+		* package-manager
+			* Files
+				* aptitude
+				* emerge
+				* pacman
+				* xbps
 
 # License
 
