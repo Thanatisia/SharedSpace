@@ -1,0 +1,1207 @@
+#
+# Installation Guide
+#
+
+# [Pre-Requisite]
+
+# -- User design : Partitioning and File Systems
+# NOTE:
+# 1. Reference: https://askubuntu.com/questions/118199/how-do-i-change-file-permissions-on-a-fat32-drive#118200
+#		* The /home partition needs to be ext4, FAT32 formatted drives do not support file permissions. The permissions for everything are determined by how the drive is mounted.
+#		* So, you can change the permissions on all the files on the drive by mounting it differently, but not dynamically like you are describing.
+# 2. Boot Record Types
+#		* Master boot Record (MSDOS)
+#		* GPT Partition Table
+#		* UEFI Boot
+
+[MBR (MSDOS)]
+Device Specifications:
+	Device ID: 
+	Device Type: MicroSD
+	Device Name: /dev/sdb
+	Device Size: 256.0GB
+	Device UUID: 
+	Device Boot: Master Boot Record (MBR)
+
+fstab Definitions:
+	# <partition/device ID>	<mount-point>	<filesystem-type>	<mount-options>	<to be dumped or not;default:0 (dump)> <order-to-check (fsck); default - root:1; 0 if filesystem check is unnecessary>
+	
+
+File System (No Swap):
+	Partition ID: 1
+	Partition Name: Boot
+	Partition File Type: EXT4
+	Partition Start Size: 1MiB
+	Partition End Size: 1024MiB
+	Bootable: True
+	Command: 
+		parted $device_Name mkpart primary $partition_fileType 0% 1024MiB
+		mkfs.ext4 /dev/sdb1
+
+		# To set bootable on 
+		parted $device_Name set <partition> boot on
+
+	Partition ID: 2
+	Partition Name: Root
+	Partition File Type: ext4
+	Partition Start Size: 1024MiB
+	Partition End Size: 51200MiB
+	Bootable: False
+	Command: 
+		parted $device_Name mkpart primary $partition_fileType 1024MiB 51200MiB
+		mkfs.ext4 /dev/sdb2
+
+	Partition ID: 3
+	Partition Name: Home
+	Partition File Type: ext4
+	Partition Start Size: 51200MiB
+	Partition End Size: 100%
+	Bootable: False
+	Command: 
+		parted $device_Name mkpart primary $partition_fileType 51200MiB 100%
+		mkfs.ext4 /dev/sdb3
+
+File System (Swap):
+	Partition ID: 1
+	Partition Name: Boot
+	Partition File Type: ext4
+	Partition Start Size: 1MiB
+	Partition End Size: 1024MiB
+	Bootable: True
+	Command: 
+		parted $device_Name mkpart primary $partition_fileType 0% 1024MiB
+		mkfs.ext4 /dev/sdb1
+
+	Partition ID: 2
+	Partition Name: Swap
+	Partition File Type: swap
+	Partition Start Size: 1024MiB
+	Partition End Size: 8192MiB
+	Bootable: False
+	Command: 
+		parted $device_Name mkpart primary $partition_fileType 1024MiB 8192MiB
+		mkswap /dev/sdb2
+		swapon /dev/sdb2
+		echo "# -- Swap Partition 1" | tee -a /etc/fstab
+		echo "UUID=device_UUID none swap defaults 0 0" | tee -a /etc/fstab
+		
+	Partition ID: 3
+	Partition Name: Root
+	Partition File Type: ext4
+	Partition Start Size: 1024MiB
+	Partition End Size: 51200MiB
+	Bootable: False
+	Command: 
+		parted $device_Name mkpart primary $partition_fileType 1024MiB 51200MiB
+		mkfs.ext4 /dev/sdb3
+
+	Partition ID: 4
+	Partition Name: Home
+	Partition File Type: ext4
+	Partition Start Size: 51200MiB
+	Partition End Size: 100%
+	Bootable: False
+	Command: 
+		parted $device_Name mkpart primary $partition_fileType 51200MiB 100%
+		mkfs.ext4 /dev/sdb4
+
+## Step 1: Network
+ip a s : To get network
+or
+ip link
+
+# If no internet, temporary fix [1]: dhcpcd
+sudo dhcpcd
+
+# To Test
+ping 8.8.8.8
+
+## Step 2:
+# -- Verify Boot Mode (i.e. UEFI/BIOS)
+
+# List efivars directory
+# if it displays without error - booted in UEFI mode; 
+# if it displays with error - booted in BIOS or CSM mode
+ls /sys/firmware/efi/efivars 
+
+## Step 3: 
+# -- Partition the Disks
+# Please refer to [Pre-Requisite] for your design
+
+# Verify disk block
+#
+# Note the device name
+#	- /dev/sdX
+#	i.e.
+#		/dev/sdb
+#		/dev/sdc
+lsblk / sudo fdisk -l
+
+# Partition Disks
+#
+# NOTES:
+#	> Multiple Tools for Partitioning
+#	parted
+		- To clean the disk
+		parted $device_Name mklabel <msdos/efi>
+		- To Partition
+		parted $device_Name mkpart primary $partition_fileType $start_Size $end_Size
+		mkfs.<type> <device_Name><partition_Number>
+		- For Bootable Partition
+		parted $device_Name set <partition> boot on
+
+		Syntax:
+			parted $device_Name mklabel <msdos/gpt>
+
+			# Partition 1 : ext4
+			parted $device_Name mkpart primary $partition_fileType 0% 1024MiB
+			mkfs.ext4 /dev/sdb1
+			parted /dev/sdb set 1 boot on
+
+			# Partition 2 : ext4
+			parted $device_Name mkpart primary $partition_fileType 1024MiB 51200MiB
+			mkfs.ext4 /dev/sdb2		
+
+			# Partition 3 : ext4
+			parted $device_Name mkpart primary $partition_fileType 51200MiB 100%
+			mkfs.ext4 /dev/sdb3
+
+		Examples:
+			# device_Name = /dev/sdb
+			# label type = msdos
+			parted /dev/sdb mklabel msdos
+
+			# Partition 1 : ext4
+			parted /dev/sdb mkpart primary ext4 0% 1024MiB
+			mkfs.ext4 /dev/sdb1
+			parted /dev/sdb set 1 boot on
+
+			# Partition 2 : ext4
+			parted /dev/sdb mkpart primary ext4 1024MiB 51200MiB
+			mkfs.ext4 /dev/sdb2		
+
+			# Partition 3 : ext4
+			parted /dev/sdb mkpart primary ext4 51200MiB 100%
+			mkfs.ext4 /dev/sdb3
+
+# fdisk
+# cgdisk
+#
+
+## Step 4:
+# -- Mount Disks
+
+# Mount the root volume to /mnt. For example, if the root volume is /dev/sdX2: 
+mount /dev/sdX2 /mnt/gentoo
+cd /mnt/gentoo
+
+## Step 5:
+# -- Installing a stage tarball
+
+# Setting the date and time
+date
+# If date and time is wrong: 
+# Automatic fixes
+ntpd -q -g
+# Manual fixes
+# set date manually via [date <second>]
+date 100313162016 # October 3rd, 13:16 in the year 2016
+
+# NOTES:
+# For some reason, formatting your root partition (/dev/sdX2) as FAT32 has issues with some packages, thus - please try to 
+* Format /dev/sdX2 (your root partition) to ext4 and continue forth
+
+# Download stage tarball
+# NOTES:
+#	- Multilib (32-bit & 64-bit) or 
+#	- No-multilib (pure 64-bit)
+#	- You need to select a init system 
+#		Types:
+#			OpenRC  : https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20210331T214503Z/stage3-amd64-20210331T214503Z.tar.xz
+#			Systemd : https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20210331T214503Z/stage3-amd64-systemd-20210331T214503Z.tar.xz
+
+# Using a Graphical Browser
+# Using wget
+# Note to get the PASTED_STAGE_URL from the Gentoo downloads
+# https://www.gentoo.org/downloads/#other-arches
+# wget <PASTED_STAGE_URL>
+wget https://www.gentoo.org/downloads/mirrors/
+
+# Using a Command-line Browser
+# IF you are using a Virtual Machine 
+# - use 'links <tarball-mirror-url>'
+# Using links
+# Surf to the gentoo mirror list
+# Select your country, select a mirror
+# Go to 'releases'
+# Go to 'amd64'
+# Go to 'autobuilds'
+# Pick the latest date
+# Select a tarball 
+#	i.e. 
+#	stage3-amd64-.....tar.xz
+# Press 'Save'
+# Hit Enter to save
+# After downloading tarball : 
+# Hit 'Escape' and exit links
+links https://www.gentoo.org/downloads/mirrors/
+# To use an HTTP Proxy with links, pass on the URL with the -http-proxy option
+links -http-proxy proxy.server.com:8080 https://www.gentoo.org/downloads/mirrors/
+# Next to links there is also the lynx browser. Like links it is a non-graphical browser but it is not menu-driven. 
+lynx https://www.gentoo.org/downloads/mirrors/
+
+# Verify the file exists
+ls
+
+# Unpack tarball
+# When typing your tarball file name 
+# You can just type 'stage3' and press tab
+# It should now be extracted
+tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+
+
+## Step 6:
+# -- Configure Compile Options
+
+# Alter the optimization variables
+# in portgage's (Package Manager for Gentoo) 'make.conf'
+# NOTES:
+#	Please check your flags here:https://wiki.gentoo.org/wiki/Safe_CFLAGS
+#	Flags: For tuning the compiler to make it work as fast as possible based off the processor
+#	Options:
+#		CHOST
+#		CFLAGS
+#		CXXFLAGS
+#		USE='' # All libraries that we dont want to use and force exclude (dont want)
+#	Examples:
+#		Ryzen: 
+#			CHOST="x86_64-pc-linux-gnu"
+#			CFLAGS="-02 -march=znver2 -pipe"
+#			CXXFLAGS="${CFLAGS}"
+#	Recommendations:
+#		CHOST="x86_64-pc-linux-gnu"
+#		CFLAGS="-march=native -02 -pipe"
+nano /mnt/gentoo/etc/portage/make.conf
+
+# When done with optimization
+# Save and exit
+
+## Step 7: 
+# REFERENCE: https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base
+# -- Install base systems
+# Select Mirrors
+# select what mirrors you want to use from the internet 
+# and get the fastest ones possible
+# select a mirror from the list
+# The selected mirrors will append to the make.conf file
+mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+
+# Make a Gentoo ebuild repository
+# If repos.conf doesnt exist; create the repos.conf directory
+mkdir --parents /mnt/gentoo/etc/portage/repos.conf
+# Copy the Gentoo repository configuration file provided by 
+# Portage to the (newly created) repos.conf directory
+cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
+# (OPTIONAL) Look at the gentoo.conf file via cat
+cat /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
+
+# Copy DNS info 
+# Allows chrooted system to be able to reach the internet once the 
+# system has been chrooted
+cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+
+# Mount the necessary filesystems
+#    /proc/ which is a pseudo-filesystem (it looks like regular files, but is actually generated on-the-fly) from which the Linux kernel exposes information to the environment
+#    /sys/ which is a pseudo-filesystem, like /proc/ which it was once meant to replace, and is more structured than /proc/
+#    /dev/ is a regular file system, partially managed by the Linux device manager (usually udev), which contains all device files
+# The /proc/ location will be mounted on /mnt/gentoo/proc/ whereas the other two are bind-mounted. The latter means that, for instance, /mnt/gentoo/sys/ will actually be /sys/ (it is just a second entry point to the same filesystem) whereas /mnt/gentoo/proc/ is a new mount (instance so to speak) of the filesystem
+mount --types proc /proc /mnt/gentoo/proc
+mount --rbind /sys /mnt/gentoo/sys
+mount --make-rslave /mnt/gentoo/sys
+mount --rbind /dev /mnt/gentoo/dev
+mount --make-rslave /mnt/gentoo/dev 
+# (OPTIONAL)
+# 	IF using non-Gentoo installation media
+# 	Some distributions make /dev/shm a symbolic link to /run/shm/ which, after the chroot, becomes invalid. Making /dev/shm/ a proper tmpfs mount up front can fix this: 
+# 	Also ensure that mode 1777 is set: 
+test -L /dev/shm && rm /dev/shm && mkdir /dev/shm 
+mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm 
+chmod 1777 /dev/shm
+
+# Enter the new environment
+# Use chroot
+# /bin/bash is Optional
+chroot /mnt/gentoo /bin/bash
+# Load variable Environment Variables for Bash
+source /etc/profile
+# Modify PS1
+(OPTIONAL) export PS1="(chroot) ${PS1}"
+
+# Mount the boot partition & Other partitions (if any)
+# Make other directories (i.e. home)
+# Home directory
+mkdir -p /home
+# Boot directory
+mkdir -p /boot/grub
+# Mount remaining directories
+mount /dev/sdX1 /boot
+mount /dev/sdX3 /home
+
+# Install a Gentoo ebuild repository snapshot from the web
+# Next step is to install a snapshot of the Gentoo ebuild repository. This snapshot contains a collection of files that informs Portage about available software titles (for installation), which profiles the system administrator can select, package or profile specific news items, etc.
+# The use of emerge-webrsync is recommended for those who are behind restrictive firewalls (it uses HTTP/FTP protocols for downloading the snapshot) and saves network bandwidth. Readers who have no network or bandwidth restrictions can happily skip down to the next section.
+# This will fetch the latest snapshot (which is released on a daily basis) from one of Gentoo's mirrors and install it onto the system: 
+# NOTE:
+#	- The sync might take awhile
+emerge-webrsync
+
+## NOTES
+From this point onward, Portage might mention that certain updates are recommended to be executed. This is because system packages installed through the stage file might have newer versions available; Portage is now aware of new packages because of the repository snapshot. Package updates can be safely ignored for now; updates can be delayed until after the Gentoo installation has finished. 
+##
+
+# (OPTIONAL) Update the Gentoo ebuild repository
+emerge --sync
+# On slow terminals, like some framebuffers or serial consoles, it is recommended to use the --quiet option to speed up the process: 
+emerge --sync --quiet
+
+# Read news items
+# When the Gentoo ebuild repository is synchronized, Portage may output informational messages similar to the following: 
+# If you want to list an overview of the available news items 
+eselect news list
+# If you want to read the news items that can be read
+eselect news read
+# If you want to remove news items once they have been read and will not be reread anymore
+eselect news purge
+# Manual page
+man news.eselect
+
+# Choosing the right profile
+# NOTE: 
+#	If you are using Systemd, please make sure the profile name contains systemd. If you are using OpenRC, please make sure the profile name does not contain systemd.
+# A profile is what is being used as a base for the system
+# a building block for any Gentoo system. 
+# Not only does it specify default values for USE, CFLAGS, and other important variables, it also locks the system to a certain range of package versions. These settings are all maintained by Gentoo's Portage developers.
+# You can see what profile the system is currently using with eselect, now using the profile module:
+eselect profile list
+# Select profile of choice
+eselect profile set <profile_Number>
+
+# IF using No-multilib
+# In order to select a pure 64-bit environment, with no 32-bit applications or libraries, use a no-multilib profile
+# Check profiles
+eselect profile list
+# select no-multilib profile
+eselect profile set 5
+
+# IF using OpenRC (RECOMMENDED for starters)
+eselect profile set 
+
+# IF using Systemd
+eselect profile set 
+
+# Updating the @world set
+# aka Compilation of packages & Installation of base systems
+# So that the system can apply any updates or use flag changes which have appeared since the stage 3 tarball was built
+# --ask : Show you what you are going to use, and continues when answered
+emerge --ask --verbose --update --deep --newuse @world
+# NOTE:
+#	If there is an error -
+#	ERROR 1: Circular dependencies
+#	- You can break the cycle by applying the stated changes
+#	Examples:
+#		- Change USE: -bluetooth means to edit portage's make.conf and temporarily add '-bluetooth' to the USE: option
+#			USE: -bluetooth
+#			etc.
+#	You can remove this once the package has been installed
+#	Once you edit, you can rerun the command
+#	ERROR 2: Installation/Compilation error
+#	- Check the build.log debug file
+#	If it is a command execution error, rebuild the package:
+#		emerge <package_name>
+#	Retry
+
+# (OPTIONAL) Configure the USE variable
+# USE is one of the most powerful variables Gentoo provides to its users
+emerge --info | grep ^USE
+# A full description on the available USE flags can be found on the system in /var/db/repos/gentoo/profiles/use.desc. 
+less /var/db/repos/gentoo/profiles/use.desc
+
+# (OPTIONAL) Configure the ACCEPT_LICENSE variable
+# All of the Gentoo packages are tagged with the license(s) the package falls under. 
+# This allows users to select software by specific licenses or groups of licenses prior to installing it.
+nano /etc/portage/make.conf
+ACCEPT_LICENSE=
+
+# (OPTIONAL) Using Systemd as the init system
+# The remainder of the Gentoo Handbook focuses on OpenRC (the traditional Gentoo init system) as the default init system. If systemd is desired, please consult the systemd article. It contains instructions equivalent to the instructions in the following sections of this Handbook. Specifically, it will walk the reader through various init system commands (systemctl) and systemd-specific services (such as timedatectl, hostnamectl, etc.) needed to establish a working systemd environment
+# 	https://wiki.gentoo.org/wiki/Systemd
+
+## Step 8:
+# -- Setting OpenRC as the init system
+
+# Select the timezone for the system
+# Look for all available timezones (Region)
+ls /usr/share/zoneinfo
+# Look for City
+ls /usr/share/zoneinfo/<Region>
+# Write timezone name into the /etc/timezone file
+echo "Region/City" >> /etc/timezone
+# Reconfigure sys-libs/timezone-data
+emerge --config sys-libs/timezone-data
+# Create symbolic link for the region
+ln -sf /usr/share/zoneinfo/<Region>/<City> /etc/localtime
+
+### NOTES
+#	Later, when systemd is running, we can configure the timezone and related settings with the timedatectl command. 
+###
+
+# Configure Locales
+# Locale generation
+# Edit locale.gen
+$EDITOR /etc/locale.gen
+# Type into first line of /etc/locale.gen : <your_locale code>	<your_text_format (i.e. UTF-8)>
+# i.e.
+#	en_US.UTF-8	UTF-8
+#	en_SG.UTF-8 UTF-8
+en_SG.UTF-8	UTF-8
+# Generate locale
+locale-gen
+# Verify selected locales are now available 
+locale -a
+
+# Select Locale
+# [AUTOMATIC]
+# List all locales
+eselect locale list
+# Select locale number
+eselect locale set <locale NUMBER>
+# [MANUAL]
+# OpenRC
+$EDITOR /etc/env.d/02locale 
+# Systemd
+$EDITOR /etc/locale.conf
+# Type in:
+#	LANG="en_SG.UTF-8"
+#	LC_COLLATE="C.UTF-8"
+# Reload the Environment
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
+### NOTES:
+If you need to remount / debug:
+# Mount mnt partition
+mount /dev/sdX2 /mnt/gentoo
+# Mount other partitions
+mount --types proc /proc /mnt/gentoo/proc
+mount --rbind /sys /mnt/gentoo/sys
+mount --make-rslave /mnt/gentoo/sys
+mount --rbind /dev /mnt/gentoo/dev
+mount --make-rslave /mnt/gentoo/dev 
+# Change root (chroot)
+chroot /mnt/gentoo /bin/bash
+# Load variable Environment Variables for Bash
+source /etc/profile
+# (OPTIONAL) Mount other partitions
+mount /dev/sdX1 /boot
+mount /dev/sdX3 /home
+###
+
+
+## Step 9: 
+# REFERENCE: https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel
+# -- Configure Linux Kernel (Main)
+
+# Installing the sources
+# Choose an appropriate kernel source and install it using emerge
+# This command will install the Linux kernel sources in /usr/src in which
+# a symbolic link called "linux" will be pointing to the installed kernel source
+emerge --ask sys-kernel/gentoo-sources
+# To check the link
+ls -l /usr/src/linux
+
+# Configure & Compile Kernel sources
+# [Method 1: Manual config and build]
+# Background Information: The kernel is manually configured and built.
+# Manually configuring a kernel is often seen as the most difficult procedure a Linux user ever has to perform. Nothing is less true - after configuring a couple of kernels no-one even remembers that it was difficult
+# it is vital to know the system when a kernel is configured manually
+# Most information can be gathered by emerging sys-apps/pciutils which contains the lspci command
+# 1.1. Install pci utils package
+emerge --ask sys-apps/pciutils
+# Another source of system information is to run lsmod to see what kernel modules the installation CD uses as it might provide a nice hint on what to enable.
+# 1.2. Go to the kernel source directory and execute make menuconfig. This will fire up menu-driven configuration screen. 
+cd /usr/src/linux
+make menuconfig
+# The Linux kernel configuration has many, many sections. 
+# Let's first list some options that must be activated 
+#	(otherwise Gentoo will not function, or not function properly without additional tweaks). 
+# There's also have a [Gentoo kernel configuration guide : https://wiki.gentoo.org/wiki/Kernel/Gentoo_Kernel_Configuration_Guide] on the Gentoo wiki that might help out further. 
+# 1.3. Activating required options
+# 1.3.1. Using sys-kernel/gentoo-sources
+#  we strongly recommend you enable the Gentoo-specific configuration options. These ensure that a minimum of kernel features required for proper functioning is available: 
+# <in menuconfig>
+# 1.3.1.1. Enabling Gentoo-specific options
+Gentoo Linux --->
+  Generic Driver Options --->
+    [*] Gentoo Linux support
+    [*]   Linux dynamic and persistent device naming (userspace devfs) support
+    [*]   Select options required by Portage features
+        Support for init systems, system and service managers  --->
+          [*] OpenRC, runit and other script based systems and managers
+          [*] systemd
+# Naturally your choice in the last two lines depends on your choice of init system (OpenRC vs. Systemd). 
+# 1.3.1.ALT.1. Using sys-kernel/vanilla-sources
+# 	you will have to find the required options on your own.
+# 1.3.2.
+# Make sure that every driver that is vital to the booting of the system 
+#	(such as SCSI controller, etc.) 
+#	is compiled in the kernel and not as a module, 
+#	otherwise the system will not be able to boot completely
+# Next select the exact processor type. 
+#	It is also recommended to enable MCE features (if available) so that users are able to be notified of any hardware problems. 
+#	On some architectures (such as x86_64), these errors are not printed to dmesg, but to /dev/mcelog. 
+#	This requires the app-admin/mcelog package. 
+# Also select Maintain a devtmpfs file system to mount at /dev so that critical device files are already available early in the boot process (CONFIG_DEVTMPFS and CONFIG_DEVTMPFS_MOUNT): 
+# 1.3.2.1. Enabling devtmpfs support
+Device Drivers --->
+  Generic Driver Options --->
+    [*] Maintain a devtmpfs filesystem to mount at /dev
+    [*]   Automount devtmpfs at /dev, after the kernel mounted the rootfs
+# 1.3.2.2. Enabling SCSI Disk support
+# Verify SCSI disk support has been activated (CONFIG_BLK_DEV_SD): 
+Device Drivers --->
+   SCSI device support  --->
+      <*> SCSI disk support
+# Now go to File Systems and select support for the filesystems you use.
+# NOTE:
+#	Don't compile the file system that is used for the root filesystem as module, 
+#	otherwise the Gentoo system will not be able to mount the partition. 
+# Also select Virtual memory and /proc file system
+# Select one or more of the following options as needed by the system (CONFIG_EXT2_FS, CONFIG_EXT3_FS, CONFIG_EXT4_FS, CONFIG_MSDOS_FS, CONFIG_VFAT_FS, CONFIG_PROC_FS, and CONFIG_TMPFS): 
+# 1.3.2.3. Selecting necessary file systems
+File systems --->
+  <*> Second extended fs support
+  <*> The Extended 3 (ext3) filesystem
+  <*> The Extended 4 (ext4) filesystem
+  <*> Reiserfs support
+  <*> JFS filesystem support
+  <*> XFS filesystem support
+  <*> Btrfs filesystem support
+  DOS/FAT/NT Filesystems  --->
+    <*> MSDOS fs support
+    <*> VFAT (Windows-95) fs support
+Pseudo Filesystems --->
+    [*] /proc file system support
+    [*] Tmpfs virtual memory file system support (former shm fs)
+# (OPTIONAL) If PPPoE is used to connect to the Internet, or a dial-up modem
+# then enable the following options (CONFIG_PPP, CONFIG_PPP_ASYNC, and CONFIG_PPP_SYNC_TTY)
+# 1.3.2.4.OPT.1. Selecting PPPoE necessary drivers
+Device Drivers --->
+  Network device support --->
+    <*> PPP (point-to-point protocol) support
+    <*>   PPP support for async serial ports
+    <*>   PPP support for sync tty ports
+# The two compression options won't harm but are not definitely needed, 
+#	neither does the PPP over Ethernet option, 
+#	that might only be used by ppp when configured to do kernel mode PPPoE. 
+# Don't forget to include 
+#	support in the kernel for the network (Ethernet or wireless) cards. 
+# 1.3.2.4. Activating SMP Support
+# Most systems also have multiple cores at their disposal, so it is important to activate Symmetric multi-processing support (CONFIG_SMP)
+# NOTE: In multi-core systems, each core counts as one processor.
+Processor type and features  --->
+  [*] Symmetric multi-processing support
+# 1.3.2.5. Activating USB support for input devices
+# If USB input devices (like keyboard or mouse) or other USB devices will be used, do not forget to enable those as well (CONFIG_HID_GENERIC and CONFIG_USB_HID, CONFIG_USB_SUPPORT, CONFIG_USB_XHCI_HCD, CONFIG_USB_EHCI_HCD, CONFIG_USB_OHCI_HCD): 
+Device Drivers --->
+  HID support  --->
+    -*- HID bus support
+    <*>   Generic HID driver
+    [*]   Battery level reporting for HID devices
+      USB HID support  --->
+        <*> USB HID transport layer
+  [*] USB support  --->
+    <*>     xHCI HCD (USB 3.0) support
+    <*>     EHCI HCD (USB 2.0) support
+    <*>     OHCI HCD (USB 1.1) support
+# 1.4. Architecture-specific kernel configuration
+# (IMPORTANT)
+# Make sure to select IA32 Emulation IF 32-bit programs should be supported (CONFIG_IA32_EMULATION). 
+# Gentoo installs a multilib system (mixed 32-bit/64-bit computing) by default, 
+#	so unless a no-multilib profile is used, this option is required.
+# 1.4.1. Selecting processor types and features
+Processor type and features  --->
+   [ ] Machine Check / overheating reporting 
+   [ ]   Intel MCE Features
+   [ ]   AMD MCE Features
+   Processor family (AMD-Opteron/Athlon64)  --->
+      ( ) Opteron/Athlon64/Hammer/K8
+      ( ) Intel P4 / older Netburst based Xeon
+      ( ) Core 2/newer Xeon
+      ( ) Intel Atom
+      ( ) Generic-x86-64
+Executable file formats / Emulations  --->
+   [*] IA32 Emulation
+# 1.4.2.OPT.1. (OPTIONAL) Enable support for GPT
+# Enable GPT partition label support if that was used previously when partitioning the disk (CONFIG_PARTITION_ADVANCED and CONFIG_EFI_PARTITION): 
+-*- Enable the block layer --->
+   Partition Types --->
+      [*] Advanced partition selection
+      [*] EFI GUID Partition support
+# 1.4.2.OPT.2. (OPTIONAL) Enable support for UEFI
+# Enable EFI stub support and EFI variables in the Linux kernel if UEFI is used to boot the system (CONFIG_EFI, CONFIG_EFI_STUB, CONFIG_EFI_MIXED, and CONFIG_EFI_VARS): 
+Processor type and features  --->
+    [*] EFI runtime service support 
+    [*]   EFI stub support
+    [*]     EFI mixed-mode support
+Firmware Drivers  --->
+    EFI (Extensible Firmware Interface) Support  --->
+        <*> EFI Variable Support via sysfs
+# CONFIGURATION COMPLETED.
+# 1.5. Compiling & Installing
+# With the configuration now done, it is time to compile and install the kernel. Exit the configuration and start the compilation process:
+# NOTES: It is possible to enable parallel builds using make -jX with X being an integer number of parallel tasks that the build process is allowed to launch. This is similar to the instructions about /etc/portage/make.conf earlier, with the MAKEOPTS variable.
+# 1.5.1 Compile Kernel
+make && make modules_install
+# 1.5.2. Install Kernel (copy the kernel image to /boot/)
+# When the kernel has finished compiling, copy the kernel image to /boot/. 
+# This is handled by the make install command: make install
+# This will copy the kernel image into /boot/ together with the System.map file and the kernel configuration file. 
+make install
+# [Method 2: Using genkernel]
+# Background Information: A tool called genkernel is used to automatically build and install the Linux kernel.
+# If a manual configuration looks too daunting, then using genkernel is recommended. It will configure and build the kernel automatically.
+# genkernel works by configuring a kernel nearly identically to the way the installation CD kernel is configured. This means that when genkernel is used to build the kernel, the system will generally detect all hardware at boot-time, just like the installation CD does. Because genkernel doesn't require any manual kernel configuration, it is an ideal solution for those users who may not be comfortable compiling their own kernels. 
+# Now, let's see how to use genkernel. 
+# First, emerge the sys-kernel/genkernel ebuild:
+emerge --ask sys-kernel/genkernel
+# Next, edit the /etc/fstab file so that the line containing /boot/ as second field has the first field pointing to the right device. 
+#	If the partitioning example from the handbook is followed, 
+#	then this device is most likely /dev/sda1 with the ext2 file system. 
+#	This would make the entry in the file look like so: 
+$EDITOR /etc/fstab
+# 2.1. Configuring the /boot mountpoint
+/dev/<boot-partition>	/boot	<filesystem-type>	defaults	0 <boot-partition-number>
+# 2.1.EXAMPLE-1
+/dev/sda2	/boot	ext4	defaults	0 2
+# NOTE: 
+#	Further in the Gentoo installation, /etc/fstab will be configured again. 
+#	The /boot setting is needed right now as the genkernel application reads in this configuration.
+# Now, compile the kernel sources by running genkernel all. 
+# Be aware though, as genkernel compiles a kernel that supports almost all hardware, this compilation will take quite a while to finish! 
+# NOTE:
+#	If the root partition/volume doesn't use ext2 or ext3 or ext4 as filesystem:
+#		it might be necessary to manually configure the kernel using 
+#		genkernel --menuconfig all 
+#		and add support for this particular filesystem in the kernel (i.e. not as a module). 
+#		Users of LVM2 will probably want to add --lvm as an argument as well.
+genkernel all
+# Once genkernel completes, 
+#	a kernel, 
+#	full set of modules and 
+#	initial ram disk (initramfs) 
+#	will be created. 
+# We will use the kernel and initrd when configuring a boot loader later in this document. 
+#	Write down the names of the kernel and initrd as this information is used when the boot loader configuration file is edited. 
+#	The initrd will be started immediately after booting to perform hardware autodetection (just like on the installation CD) before the "real" system starts up. 
+ls /boot/vmlinu* /boot/initramfs*
+
+# ALTERNATIVE - 1: Using distribution kernels
+# Background Information: Distribution Kernels are ebuilds that cover the complete process of unpacking, configuring, compiling, and installing the kernel. The primary advantage of this method is that the kernels are upgraded to new versions as part of @world upgrade without a need for manual action. Distribution kernels default to a configuration supporting the majority of hardware but they can be customized via /etc/portage/savedconfig. 
+# References: https://wiki.gentoo.org/wiki/Project:Distribution_Kernel
+# [Installing correct installkernel]
+# Before using the distribution kernels, please verify that you are using the correct installkernel package for your system. When using systemd-boot (formerly gummiboot), install: 
+emerge --ask sys-kernel/installkernel-systemd-boot
+# When using a traditional /boot layout (e.g. GRUB, LILO, etc.), the gentoo variant should be installed by default. If in doubt:
+emerge --ask sys-kernel/installkernel-gentoo
+# [Installing a distribution kernel]
+# To build a kernel with Gentoo patches from source, type: 
+emerge --ask sys-kernel/gentoo-kernel
+# System administrators who want to avoid compiling the kernel sources locally can instead use precompiled kernel images: 
+emerge --ask sys-kernel/gentoo-kernel-bin
+# [Upgrading & Cleaning up]
+# Once the kernel is installed, the package manager will automatically upgrade it to newer versions. 
+#	The previous versions will be kept until the package manager is requested to clean up stale packages. 
+# Please remember to periodically run: emerge --depclean to save space
+emerge --depclean
+# Alternatively; to specifically clean up old kernel versions
+emerge --prune sys-kernel/gentoo-kernel sys-kernel/gentoo-kernel-bin
+# [Post-install/Upgrade tasks]
+# Due to technical limitations, distribution kernels can not automatically rebuild kernel modules installed by other packages. 
+# Therefore, after kernel upgrade manually execute: 
+emerge --ask @module-rebuild
+# If any of these modules (e.g. ZFS) are needed at early boot, rebuild initramfs afterward: 
+emerge --config sys-kernel/gentoo-kernel
+emerge --config sys-kernel/gentoo-kernel-bin
+
+
+# (OPTIONAL; IMPORTANT) Building an initramfs
+# initramfs : Initial RAM-based File system
+# In certain cases it is necessary to build an initramfs - an initial ram-based file system. 
+#	The most common reason is when important file system locations (like /usr/ or /var/) are on separate partitions. 
+#	With an initramfs, these partitions can be mounted using the tools available inside the initramfs. 
+# Without an initramfs, there is a huge risk that the system will not boot up properly as the tools that are responsible for mounting the file systems need information that resides on those file systems. 
+#	An initramfs will pull in the necessary files into an archive which is used right after the kernel boots, 
+#	but before the control is handed over to the init tool. 
+#	Scripts on the initramfs will then make sure that the partitions are properly mounted before the system continues booting. 
+# NOTE:
+#	It is recommended to use genkernel for both, building kernel and initramfs. 
+#	If you decide to use genkernel only for generating initramfs it is crucial to pass --kernel-config=/path/to/kernel.config to genkernel or generated initramfs may not work with your manually built kernel
+# [To Install an initramfs]
+# - Install sys-kernel/genkernel
+emerge --ask sys-kernel/genkernel
+# NOTE:
+#	If you get an error: All Ebuilds That Could Satisfy "sys-kernel/linux-firmware" Have Been Masked
+#		while installing genkernel
+#	Reference: https://www.reddit.com/r/Gentoo/comments/lxsovz/all_ebuilds_that_could_satisfy/
+#	echo "sys-kernel/linux-firmware @BINARY-REDISTRIBUTABLE" | tee -a /etc/portage/package.license
+# - Use genkernel to generate an initramfs
+genkernel --install --kernel-config=/path/to/used/kernel.config initramfs
+# In order to enable specific support in the initramfs, 
+#	such as LVM or RAID, 
+#		add in the appropriate options to genkernel. See genkernel --help for more information. In the next example support is enabled for LVM and software RAID (mdadm)
+genkernel --lvm --mdadm --install --kernel-config=/path/to/used/kernel.config initramfs
+# The initramfs will be stored in /boot/. 
+# The resulting file can be found by simply listing the files starting with initramfs: 
+ls /boot/initramfs*
+
+# Kernel Modules
+# Background Information: 
+# NOTE: Hardware modules are optional to be listed manually. udev will normally load all hardware modules that are detected to be connected in most cases. However, it is not harmful for automatically detected modules to be listed. Sometimes exotic hardware requires help to load their drivers.
+# Configuring the modules
+# List the modules that need to be loaded automatically in /etc/modules-load.d/*.conf files one module per line. Extra options for the modules, if necessary, should be set in /etc/modprobe.d/*.conf files. 
+# To view all available modules, run the following find command. Don't forget to substitute "<kernel version>" with the version of the kernel just compiled: 
+find /lib/modules/<kernel version>/ -type f -iname '*.o' -or -iname '*.ko' | less
+# For instance, to automatically load the 3c59x.ko module (which is the driver for a specific 3Com network card family), edit the /etc/modules-load.d/network.conf file and enter the module name in it. 
+# 	The actual file name is insignificant to the loader
+mkdir -p /etc/modules-load.d
+$EDITOR /etc/modules-load.d/network.conf
+
+# (OPTIONAL) Installing firmware
+# Some drivers require additional firmware to be installed on the system before they work. This is often the case for network interfaces, especially wireless network interfaces. 
+#	Also, modern video chips, from vendors like AMD, NVidia, and Intel when using open source drivers, often need external firmware files. 
+# Most of the firmware is packaged in sys-kernel/linux-firmware: 
+emerge --ask sys-kernel/linux-firmware
+
+## Step 10: 
+# REFERENCE: https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System
+# -- Configuring the System
+# Tools:
+#	Gentoo genfstab : https://www.google.com/search?client=firefox-b-d&q=Gentoo+genfstab
+#	Gentoo genfstab tool : https://github.com/YangMame/Gentoo-Installer/blob/master/genfstab
+
+### Setup Filesystem Table file (fstab)
+# About fstab : Under Linux, all partitions used by the system must be listed in /etc/fstab. This file contains the mount points of those partitions (where they are seen in the file system structure), how they should be mounted and with what special options (automatically or not, whether users can mount them or not, etc.) 
+# Background Information:
+The /etc/fstab file uses a table-like syntax. Every line consists of six fields, separated by whitespace (space(s), tabs or a mixture). Each field has its own meaning:
+    1. The first field shows the block special device or remote filesystem to be mounted. Several kinds of device identifiers are available for block special device nodes, including paths to device files, filesystem labels and UUIDs, and partition labels and UUIDs.
+    2. The second field shows the mount point at which the partition should be mounted.
+    3. The third field shows the filesystem used by the partition.
+    4. The fourth field shows the mount options used by mount when it wants to mount the partition. As every filesystem has its own mount options, users are encouraged to read the mount man page (man mount) for a full listing. Multiple mount options are comma-separated.
+    5. The fifth field is used by dump to determine if the partition needs to be dumped or not. This can generally be left as 0 (zero).
+    6. The sixth field is used by fsck to determine the order in which filesystems should be checked if the system wasn't shut down properly. The root filesystem should have 1 while the rest should have 2 (or 0 if a filesystem check isn't necessary).
+# Syntax:
+<partition/device ID>	<mount-point>	<filesystem-type>	<mount-options>	<to be dumped or not;default:0 (dump)> <order-to-check (fsck); default - root:1; 0 if filesystem check is unnecessary>
+# NOTE:
+#	The default /etc/fstab file provided by Gentoo is not a valid fstab file but instead more of a template.
+###
+# Generate/Create a fstab file 
+# [Manual]
+# Edit /etc/fstab
+$EDITOR /etc/fstab
+# In the remainder of the text, we use the default /dev/sd* block device files as partition.
+# [Filesystem labels & UUIDs]
+# Both MBR (BIOS) and GPT include support for filesystem labels and filesystem UUIDs. 
+# These attributes can be defined in /etc/fstab as alternatives for the mount command to use when attempting to find and mount block devices. 
+# Filesystem labels and UUIDs are identified by the LABEL and UUID prefix and can be viewed with the blkid command:
+blkid
+# NOTE:
+#	If the filesystem inside a partition is wiped, then the filesystem label and the UUID values will be subsequently altered or removed.
+# Because of uniqueness, readers that are using an MBR-style partition table are recommended to use UUIDs over labels to define mountable volumes in /etc/fstab. 
+# [Partition labels & UUIDs]
+# Users who have gone the GPT route have a couple more 'robust' options available to define partitions in /etc/fstab. 
+# Partition labels and partition UUIDs can be used to identify the block device's individual partition(s), 
+#	regardless of what filesystem has been chosen for the partition itself. 
+# Partition labels and UUIDs are identified by the PARTLABEL and PARTUUID prefixes respectively and can be viewed nicely in the terminal by running the blkid command: 
+blkid
+# While not always true for partition labels, using a UUID to identify a partition in fstab provides a guarantee that the bootloader will not be confused when looking for a certain volume, even if the filesystem would be changed in the future. Using the older default block device files (/dev/sd*N) for defining the partitions in fstab is risky for systems that are restarted often and have SATA block devices added and removed regularly.
+# The naming for block device files depends on a number of factors, including how and in what order the disks are attached to the system. They also could show up in a different order depending on which of the devices are detected by the kernel first during the early boot process. With this being stated, unless one intends to constantly fiddle with the disk ordering, using default block device files is a simple and straightforward approach. 
+# 1.1. EXAMPLE: /boot line for /etc/fstab
+# Let us take a look at how to write down the options for the /boot/ partition. 
+# This is just an example, and should be modified according to the partitioning decisions made earlier in the installation. 
+# In our amd64 partitioning example, /boot/ is usually the /dev/sda1 partition, with ext2 as filesystem. 
+# It needs to be checked during boot, so we would write down: 
+/dev/sda1   /boot     ext2    defaults        0 2
+# NOTE:
+# 	Some users don't want their /boot/ partition to be mounted automatically to improve their system's security. 
+# 	Those people should substitute defaults with noauto. 
+# 		This does mean that those users will need to manually mount this partition every time they want to use it.
+# 	Add the rules that match the previously decided partitioning scheme and append rules for devices such as CD-ROM drive(s), and of course, if other partitions or drives are used, for those too. 
+# 1.2. EXAMPLE: Full /etc/fstab
+/dev/sda1   /boot        ext2    defaults,noatime     0 2
+/dev/sda2   none         swap    sw                   0 0
+/dev/sda3   /            ext4    noatime              0 1  
+/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
+# When auto is used in the third field, 
+#	it makes the mount command guess what the filesystem would be. 
+# This is recommended for removable media as they can be created with one of many filesystems. The user option in the fourth field makes it possible for non-root users to mount the CD. 
+# To improve performance, most users would want to add the noatime mount option, which results in a faster system since access times aren't registered (those are not needed generally anyway). This is also recommended for solid state drive (SSD) users, who should also enable the discard mount option (ext4 and btrfs only for now) which makes the TRIM command work. 
+# [Using genfstab (external file)]
+# use -U or -L to define by UUID or labels, respectively: 
+genfstab -U /mnt >> /mnt/etc/fstab
+
+### Networking Information
+# [Host and Domain information]
+# One of the choices the user has to make is name his/her PC. This seems to be quite easy, but lots of users are having difficulties finding the appropriate name for their Linux PC
+#  To speed things up, know that the decision is not final - it can be changed afterwards. In the examples below, the hostname tux is used within the domain homenetwork. 
+# Edit /etc/conf.d/hostname
+$EDITOR /etc/conf.d/hostname
+# Set the hostname variable to the selected hostname
+hostname="$your_host_name"
+# Second, if a domain name is needed, set it in /etc/conf.d/net. 
+# 	This is only necessary if the ISP or network administrator says so, or if the network has a DNS server but not a DHCP server. Don't worry about DNS or domain names if the system uses DHCP for dynamic IP address allocation and network configuration
+# NOTE:
+#	The /etc/conf.d/net file does not exist by default, so needs to be created.
+# Create /etc/conf.d/net
+$EDITOR /etc/conf.d/net
+# Set the dns_domain_lo variable to the selected domain name
+dns_domain_lo="$your_domain_name"
+# NOTE:
+#	If no domain name is configured, 
+#	then users will notice they get "This is hostname.(none)" messages at their login screen. 
+#	This should then be fixed by editing /etc/issue and deleting the string .\O from that file.
+# If a NIS domain is needed (users that do not know this will not need one), 
+# define that one too: 
+# Edit /etc/conf.d/net
+$EDITOR /etc/conf.d/net
+# Set the nis_domain_lo variable to the selected NIS domain name
+nis_domain_lo="my-nisdomain"
+# NOTE:
+# 	For more information on configuring DNS and NIS, please read the examples provided in /usr/share/doc/netifrc-*/net.example.bz2 which can be read using bzless. Also, it might be interesting to install net-dns/openresolv to help manage the DNS/NIS setup.
+# [Configuring the Network]
+# During the Gentoo Linux installation, networking was already configured. However, that was for the installation CD itself and not for the installed environment. Right now, the network configuration is made for the installed Gentoo Linux system. 
+# NOTE:
+#	More detailed information about networking, including advanced topics like bonding, bridging, 802.1Q VLANs or wireless networking is covered in the Gentoo Network Configuration section.
+# All networking information is gathered in /etc/conf.d/net. It uses a straightforward yet perhaps not intuitive syntax. But don't fear, everything is explained below. A fully commented example that covers many different configurations is available in /usr/share/doc/netifrc-*/net.example.bz2. 
+# Install net-misc/netifrc
+emerge --ask --noreplace net-misc/netifrc
+# DHCP is used by default. For DHCP to work, a DHCP client needs to be installed. This is described later in Installing Necessary System Tools. 
+# If the network connection needs to be configured because of specific DHCP options or because DHCP is not used at all, then open /etc/conf.d/net: 
+# Edit /etc/conf.d/net
+$EDITOR /etc/conf.d/net
+# 1.1. Static IP Definition
+# Set both config_eth0 and routes_eth0 to enter IP address information and routing information: 
+# NOTE:
+#	This assumes that the network interface will be called eth0. This is, however, very system dependent. It is recommended to assume that the interface is named the same as the interface name when booted from the installation media if the installation media is sufficiently recent. More information can be found in Network Interface Naming.
+config_eth0="192.168.0.2 netmask 255.255.255.0 brd 192.168.0.255"
+routes_eth0="default via 192.168.0.1"
+# 1.2. DHCP Definition
+# To use DHCP, define config_eth0
+config_eth0="dhcp"
+# NOTE:
+# 	Please read /usr/share/doc/netifrc-*/net.example.bz2 for a list of all available options. Be sure to also read up on the DHCP client man page if specific DHCP options need to be set. 
+#	If the system has several network interfaces, then repeat the above steps for config_eth1, config_eth2, etc. 
+# Save config and exit to continue
+# [Automatically start networking at boot]
+# To have the network interfaces activated at boot, they need to be added to the default runlevel. 
+cd /etc/init.d
+ln -s net.lo net.eth0
+# This is assuming you are using Open-RC
+rc-update add net.eth0 default
+# If the system has several network interfaces, then the appropriate net.* files need to be created just like we did with net.eth0.
+# If after booting the system we find out that the assumption about the network interface name (which is currently documented as eth0) was wrong, then execute the following steps to rectify this:
+    1. Update the /etc/conf.d/net file with the correct interface name (like enp3s0 instead of eth0).
+    2. Create new symbolic link (like /etc/init.d/net.enp3s0).
+    3. Remove the old symbolic link (rm /etc/init.d/net.eth0).
+    4. Add the new one to the default runlevel.
+    5. Remove the old one using rc-update del net.eth0 default
+# [The hosts file]
+# Next inform Linux about the network environment. This is defined in /etc/hosts and helps in resolving host names to IP addresses for hosts that aren't resolved by the nameserver. 
+# Edit /etc/hosts
+$EDITOR /etc/hosts
+# 2.1. Filling in the network information
+# This defines the current system and must be set
+127.0.0.1	localhost
+::1			localhost
+127.0.1.1	<host_name>.localdomain	<host_name>
+# Save and Exit
+# (OPTIONAL) [Get PCMCIA working]
+# PCMCIA users should now install the sys-apps/pcmciautils package. 
+emerge --ask sys-apps/pcmciautils
+
+### System Information
+# [Root Password]
+# Set the root password using the passwd command. 
+passwd
+# NOTE:
+#	The root Linux account is an all-powerful account, so pick a strong password. Later an additional regular user account will be created for daily operations. 
+# [User Account]
+Syntax: 
+	useradd -m -G wheel -d <custom_home_dir> <username>
+	passwd <username>
+# [Init and boot configuration]
+# Gentoo (at least when using OpenRC) uses /etc/rc.conf to configure the services, startup, and shutdown of a system
+# Open up /etc/rc.conf and enjoy all the comments in the file. Review the settings and change where needed
+# Edit /etc/rc.conf
+# Review settings
+$EDITOR /etc/rc.conf
+# Next, open /etc/conf.d/keymaps to handle keyboard configuration. 
+# Edit it to configure and select the right keyboard. 
+# Edit /etc/conf.d/keymaps
+# Take special care with the keymap variable. 
+# If the wrong keymap is selected, 
+#	then weird results will come up when typing on the keyboard. 
+$EDITOR /etc/conf.d/keymaps
+# Finally, edit /etc/conf.d/hwclock to set the clock options. 
+# Edit it according to personal preference. 
+# Edit /etc/conf.d/hwclock
+# NOTE:
+#	If the hardware clock is not using UTC, then it is necessary to set clock="local" in the file. Otherwise the system might show clock skew behavior. 
+$EDITOR /etc/conf.d/hwclock
+
+## Step 11: 
+# REFERENCE: https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Tools
+# -- Installing system tools
+
+# [Install System Logger]
+# Some tools are missing from the stage3 archive because several packages provide the same functionality. It is now up to the user to choose which ones to install. 
+# The first tool to decide on has to provide logging facilities for the system. Unix and Linux have an excellent history of logging capabilities - if needed, everything that happens on the system can be logged in log files. This happens through the system logger
+# Gentoo offers several system logger utilities. A few of these include:
+    app-admin/sysklogd - Offers the traditional set of system logging daemons. The default logging configuration works well out of the box which makes this package a good option for beginners.
+    app-admin/syslog-ng - An advanced system logger. Requires additional configuration for anything beyond logging to one big file. More advanced users may choose this package based on its logging potential; be aware additional configuration is a necessity for any kind of smart logging.
+    app-admin/metalog - A highly-configurable system logger.
+# Others are available through Portage as well - the number of available packages increases on a daily basis. 
+# TIPS:
+#	If sysklogd or syslog-ng are going to be used, it is recommended to install and configure logrotate afterwards as those system loggers don't provide any rotation mechanism for the log files.
+#	systemd provides its own logging facility called the "journal". Installing a separate syslog provider is optional on systems running systemd, and may require additional configuration to have the syslog daemon read messages from the journal.
+# To install the system logger of choice, 
+# emerge it and have it added to the default runlevel using rc-update. 
+# The following example installs app-admin/sysklogd
+emerge --ask app-admin/sysklogd
+rc-update add sysklogd default
+
+# (OPTIONAL) [Install Cron daemon]
+# Next is the cron daemon. 
+#	Although it is optional and not required for every system, it is wise to install one.
+# A cron daemon executes scheduled commands. 
+#	It is very handy if some command needs to be executed regularly (for instance daily, weekly or monthly).
+# Gentoo offers several possible cron daemons, 
+#	including 
+#		sys-process/bcron, 
+#		sys-process/dcron, 
+#		sys-process/fcron, and 
+#		sys-process/cronie. 
+# Installing one of them is similar to installing a system logger.
+# The following example uses sys-process/cronie: 
+# Install
+emerge --ask sys-process/cronie
+# Start on Boot
+rc-update add cronie default
+# If dcron or fcron are used, 
+#	an additional initialization command needs to be executed: 
+crontab /etc/crontab
+
+# (OPTIONAL) [Install File Indexing]
+# In order to index the file system to provide faster file location capabilities, 
+#	install sys-apps/mlocate. 
+emerge --ask sys-apps/mlocate
+
+# (OPTIONAL) [Install Remote Access]
+# To be able to access the system remotely after installation, 
+#	add the sshd init script to the default runlevel: 
+rc-update add sshd default
+# If serial console access is needed (which is possible in case of remote servers), 
+# uncomment the serial console section in /etc/inittab: 
+# Edit /etc/inittab
+# Uncomment the serial console section
+$EDITOR /etc/inittab
+
+# [Install Filesystem tools]
+# Depending on the filesystems used, it is necessary to install the required file system utilities (for checking the filesystem integrity, creating additional file systems etc.). 
+#	Note that tools for managing ext2, ext3, or ext4 filesystems (sys-fs/e2fsprogs) are already installed as a part of the @system set. 
+Filesystem 			Package
+Ext2, 3, and 4 		sys-fs/e2fsprogs
+XFS 				sys-fs/xfsprogs
+ReiserFS 			sys-fs/reiserfsprogs
+JFS 				sys-fs/jfsutils
+VFAT (FAT32, ...) 	sys-fs/dosfstools
+Btrfs 				sys-fs/btrfs-progs
+ZFS 				sys-fs/zfs
+# TIP:
+#	For more information on filesystems in Gentoo see the filesystem article.
+#	filesystem article: https://wiki.gentoo.org/wiki/Filesystem
+# Install
+emerge --ask sys-fs/e2fsprogs sys-fs/xfsprogs sys-fs/reiserfsprogs sys-fs/jfsutils sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/zfs
+
+# [Networking Tools]
+# If there is no need for any additional networking tools, 
+# continue immediately with the section on Configuring a bootloader. 
+# Installing a DHCP client
+# NOTE:
+#	Although optional, the majority of users will find that they need a DHCP client to connect to the DHCP server on their network. Please take this opportunity to install a DHCP client. If this step is forgotten, then the system might not be able to get on the network thus making it impossible to download a DHCP client afterward.
+# In order for the system to automatically obtain an IP address for one or more network interface(s) using netifrc scripts, 
+#	it is necessary to install a DHCP client. 
+# We recommend the use of net-misc/dhcpcd although many other DHCP clients are available through the Gentoo repository: 
+emerge --ask net-misc/dhcpcd
+# (OPTIONAL) Installing a PPPoE client
+# If PPP is used to connect to the internet, install the net-dialup/ppp package: 
+emerge --ask net-dialup/ppp
+# (OPTIONAL) Installing wireless networking tools
+# If the system will be connecting to wireless networks, 
+#	install the 
+#		net-wireless/iw package : for Open or WEP networks and/or the 
+#		net-wireless/wpa_supplicant package : for WPA or WPA2 networks. 
+# iw is also a useful basic diagnostic tool for scanning wireless networks. 
+emerge --ask net-wireless/iw net-wireless/wpa_supplicant
+
+## Step 12: 
+# REFERENCE: https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Bootloader
+# -- Configuring the bootloader
+# Bootloader Types:
+#	GRUB2
+#	Syslinux
+
+# [GRUB2]
+# By default, the majority of Gentoo systems now rely upon GRUB (found in the sys-boot/grub package), 
+#	which is the direct successor to GRUB Legacy. 
+# With no additional configuration, GRUB2 gladly supports older BIOS ("pc") systems. 
+# With a small amount of configuration, necessary before build time, GRUB2 can support more than a half a dozen additional platforms. 
+# For more information, consult the Prerequisites section of the GRUB2 article
+# 1. Emerge & Install package
+# When using an older BIOS system supporting only MBR partition tables, no additional configuration is needed in order to emerge GRUB: 
+emerge --ask --verbose sys-boot/grub:2
+# A note for UEFI users: running the above command will output the enabled GRUB_PLATFORMS values before emerging. 
+# When using UEFI capable systems, users will need to ensure GRUB_PLATFORMS="efi-64" is enabled (as it is the case by default). 
+# If that is not the case for the setup, GRUB_PLATFORMS="efi-64" will need to be added to the /etc/portage/make.conf file before emerging GRUB2 so that the package will be built with EFI functionality: 
+echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
+emerge --ask sys-boot/grub:2
+# If GRUB2 was somehow emerged without enabling GRUB_PLATFORMS="efi-64", the line (as shown above) can be added to make.conf then and dependencies for the world package set re-calculated by passing the --update --newuse options to emerge:
+emerge --ask --update --newuse --verbose sys-boot/grub:2
+# The GRUB2 software has now been merged to the system, but not yet installed. 
+# 2. Install Bootloader
+# Next, install the necessary GRUB2 files to the /boot/grub/ directory via the grub-install command. 
+# Presuming the first disk (the one where the system boots from) is /dev/sda, one of the following commands will do: 
+# 2.1. When using BIOS:
+# NOTES:
+#	device_ID : Your device name; i.e. /dev/sda, /dev/sdb etc.; No partition number, is the disk itself
+grub-install --target=i386-pc --debug (optionals) $device_ID
+# 2.2. When using UEFI:
+# NOTES:
+#	- Make sure the EFI system partition has been mounted before running grub-install. It is possible for grub-install to install the GRUB EFI file (grubx64.efi) into the wrong directory without providing any indication the wrong directory was used.
+#	- Modify the --efi-directory option to the root of the EFI System Partition. This is necessary if the /boot partition was not formatted as a FAT variant.
+#	- If grub_install returns an error like Could not prepare Boot variable: Read-only file system, it may be necessary to remount the efivars special mount as read-write in order to succeed: 
+#		mount -o remount,rw /sys/firmware/efi/efivars
+grub-install --target=x86_64-efi --efi-directory=/boot
+# Some motherboard manufacturers seem to only support the /efi/boot/ directory location for the .EFI file in the EFI System Partition (ESP). The GRUB installer can perform this operation automatically with the --removable option. Verify the ESP is mounted before running the following commands. Presuming the ESP is mounted at /boot (as suggested earlier), execute: 
+grub-install --target=x86_64-efi --efi-directory=/boot --removable
+# This creates the default directory defined by the UEFI specification, and then copies the grubx64.efi file to the 'default' EFI file location defined by the same specification. 
+# 3. Configure grub2 config
+# Next, generate the GRUB2 configuration based on the user configuration specified in the /etc/default/grub file and /etc/grub.d scripts. In most cases, no configuration is needed by users as GRUB2 will automatically detect which kernel to boot (the highest one available in /boot/) and what the root file system is. It is also possible to append kernel parameters in /etc/default/grub using the GRUB_CMDLINE_LINUX variable. 
+# To generate the final GRUB2 configuration, run the grub-mkconfig command: 
+grub-mkconfig -o /boot/grub/grub.cfg
+# The output of the command must mention that at least one Linux image is found, as those are needed to boot the system. If an initramfs is used or genkernel was used to build the kernel, the correct initrd image should be detected as well. If this is not the case, go to /boot/ and check the contents using the ls command. If the files are indeed missing, go back to the kernel configuration and installation instructions. 
+# NOTES:
+#	- The os-prober utility can be used in conjunction with GRUB2 to detect other operating systems from attached drives. Windows 7, 8.1, 10, and other distributions of Linux are detectable. Those desiring dual boot systems should emerge the sys-boot/os-prober package then re-run the grub-mkconfig command (as seen above). If detection problems are encountered be sure to read the GRUB2 article in its entirety before asking the Gentoo community for support.
+#		emerge --ask sys-boot/os-prober
+# Short Form:
+	NOTE: 
+		* /dev/sdX = your disk name; NOT a partition; i.e. /dev/sdb
+	# Install Grub Package
+	sudo pacman -S grub
+
+	# Install Grub Bootloader
+	# OPTIONALS:
+	#		--boot-directory=/boot/
+	grub-install --target=i386-pc --debug (optionals) /dev/sdX
+
+	# Create Grub Config
+	grub-mkconfig -o /boot/grub/grub.cfg
+
+# [Syslinux]
+
+
+# Rebooting System
+# Exit the chrooted environment and unmount all mounted partitions. Then type in that one magical command that initiates the final, true test: reboot. 
+exit
+cd
+umount -l /mnt/gentoo/dev{/shm,/pts,}
+umount -R /mnt/gentoo
+reboot
+
+## Step 13: 
+# REFERENCE: https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Finalizing
+# -- Finalizing
+
+
+
+
+
+# -- ARCHLINUX -- 
+# Set sudo priviledges
+# use 'visudo' to enter the sudo file safely
+# Uncomment to allow members of group wheel to execute any command
+visudo
+# uncomment: %wheel ALL=(ALL) ALL
+
+# -- Administrative Stuff
+# Create user account
+useradd -m -G <groups (default: wheel)> -d <custom-profile-directory-path> <username>
+	EXAMPLE:
+		useradd -m -g wheel -d /home/profiles/admin admin
+
+		useradd -m -g users -G wheel -d /home/profiles/admin admin
+
+# Set password to username
+passwd <username>
+
+# Test user
+su - <username>
+sudo whoami
+
+# -- System Maintenance
+# [Swap]
+# Create Swap file
+# The “fallocate” program can create swap files faster than “dd”. As an added perk, its syntax is also easier to remember
+# NOTE:
+#	the swapfile/swap partition size is generally about 2x your pc/laptop's RAM - minimum 4GB as a rule of thumb
+fallocate -l <size> /swapfile
+# Change permission of swapfile to read+write
+chmod 600 /swapfile
+# Make swap file
+mkswap /swapfile
+# Enable swap file to begin using it
+swapon /swapfile
+#  The operating system needs to know that it is safe to use this file for swap every time it boots up
+echo "# /swapfile" | tee -a /etc/fstab
+echo "/swapfile none swap defaults 0 0" | tee -a /etc/fstab
+# EXAMPLE
+	swapfile size = 4GB 
+	fallocate -l 4G /swapfile
+	chmod 600 /swapfile
+	mkswap /swapfile
+	swapon /swapfile
+	echo "# /swapfile" | tee -a /etc/fstab
+	echo "/swapfile none swap defaults 0 0" | tee -a /etc/fstab
+
+# Verify Swap file
+ls -lh /swapfile
+
+# Remove Swap file
+swapoff /swapfile
+rm -f /swapfile
+remove "/swapfile none swap defaults 0 0" from /etc/fstab
+
+## Final
+# After installation - unmount
+umount -l /mnt
+
+# After this point, you can choose to exit or 
+#		Install another distro or
+# 	Modify
+
+### Extras ###
+
+[Custom Passwords]
+root: admin
+asura: @rchsur@
+
+
+
