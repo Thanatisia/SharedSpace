@@ -8,6 +8,7 @@
 #	2021-05-23 2004H, Asura
 #	2021-05-24 0233H, Asura
 #	2021-05-25 0834H, Asura
+#	2021-05-29 2209H, Asura
 # Background Info:
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
 #	such as installing window managers/desktop environment, terminals, file browsers etc.
@@ -131,7 +132,30 @@ for(( i=0; i < $number_of_Values; i++ )); do
 	echo "Installing [ $curr_Key --> $curr_Pkg ] : $res" | tee -a ${log_Files["status"]}
 done
 
+### M3. Setup Window Managers ###
+case "${pkgs["wm"]}" in
+	"i3")
+		echo "i3"
+		;;
+	"qtile")
+		echo "Qtile"
+		;;
+	"bspwm")
+		echo "BSPWM"
+		;;
+	"herbstluftwm")
+		echo "herbstlufwm"
+		;;
+	"")
+		echo "No Window Manager stated/installed"
+		;;
+	*)
+		echo "Invalid Window Manager"
+		;;
+esac
+
 # --- Output
+
 
 #================= Finishing Touches ================#
 

@@ -24,7 +24,7 @@
   * 2021-05-24 0154H, Asura
   * 2021-05-24 0233H, Asura
   * 2021-05-25 0824H, Asura
-
+  * 2021-05-29 2228H, Asura
 
 
 ## To Note
@@ -159,7 +159,10 @@
       * Line 45 : Changed 'default_Files' to 'custom_Files'
     * postinstallations.sh
       * Added empty spaces after each packages are installed
-
+* 2021-05-29 2228H, Asura
+  * Modified
+    * postinstallations.sh
+	  * Added new part: [M3: Window Manager setup]
 
 
 # License
