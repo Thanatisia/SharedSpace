@@ -9,6 +9,7 @@
 #	2021-05-25 0831H, Asura
 #	2021-05-30 1000H, Asura
 #	2021-05-30 1218H, Asura
+#	2021-05-30 1228H, Asura
 # Background Info:
 #	A basic setup script that will setup the basic requirements after a complete/minimal installation such as making default directories, 
 #	installing basic packages if they were not installed during setup
@@ -85,37 +86,6 @@ for d in "${default_Dir[@]}"; do
 done
 
 #================= 2. Setups ===================#
-network_Management()
-{
-	### 1. networking ###
-	# Check if NetworkManager is installed
-	network_pkg="networkmanager"
-	pkg_check="$(pacman -Qq | grep $network_pkg)"
-	if [[ "$pkg_check" == "" ]]; then
-		# Does not exists
-		sudo pacman -S $network_pkg
-		
-		# Verify installation
-		pkg_check="$(pacman -Qq | grep $network_pkg)"
-		if [[ ! "$pkg_check" == "" ]]; then
-			install_Token="Success"
-		else
-			install_Token="Error"
-		fi
-		echo "Installed: [$network_pkg] : $install_Token"
-	fi
-	# Check if package is running
-	networkmgr_status="$(systemctl status NetworkManager | grep running)"
-	if [[ -z "$networkmgr_status" ]]; then
-		# Empty; Not Activated
-		echo "Network is not activated."
-		echo "Activating network..."
-		sudo systemctl start NetworkManager |& tee -a ~/.logs/svc-networkmgr.log &&
-			echo "Network successfully activated." ||
-			echo "Error activating network"
-	fi
-}
-
 audio_Management()
 {
 	### 2. Audio ###
@@ -154,7 +124,6 @@ swap_Management()
 	echo "/swapfile none swap defaults 0 0" | tee -a /etc/fstab
 }
 # Process
-network_Management
 audio_Management
 swap_Management
 

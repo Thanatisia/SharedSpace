@@ -74,6 +74,37 @@ user_Management()
 	fi
 }
 
+network_Management()
+{
+	### 1. networking ###
+	# Check if NetworkManager is installed
+	network_pkg="networkmanager"
+	pkg_check="$(pacman -Qq | grep $network_pkg)"
+	if [[ "$pkg_check" == "" ]]; then
+		# Does not exists
+		sudo pacman -S $network_pkg
+		
+		# Verify installation
+		pkg_check="$(pacman -Qq | grep $network_pkg)"
+		if [[ ! "$pkg_check" == "" ]]; then
+			install_Token="Success"
+		else
+			install_Token="Error"
+		fi
+		echo "Installed: [$network_pkg] : $install_Token"
+	fi
+	# Check if package is running
+	networkmgr_status="$(systemctl status NetworkManager | grep running)"
+	if [[ -z "$networkmgr_status" ]]; then
+		# Empty; Not Activated
+		echo "Network is not activated."
+		echo "Activating network..."
+		sudo systemctl start NetworkManager |& tee -a ~/.logs/svc-networkmgr.log &&
+			echo "Network successfully activated." ||
+			echo "Error activating network"
+	fi
+}
+
 
 # --- Processing
 
@@ -84,6 +115,7 @@ user_Management()
 #
 # Main
 #
+network_Management
 user_Management
 
 # --- Output
