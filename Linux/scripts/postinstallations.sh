@@ -163,6 +163,20 @@ case "${pkgs["wm"]}" in
 		;;
 	"bspwm")
 		echo "BSPWM"
+		# Check if config folders exist
+		if [[ ! -d ~/.config/bspwm ]]; then
+			# Does not exist
+			mkdir -p ~/.config/bspwm
+		fi
+
+		if [[ ! -d ~/.config/sxhkd ]]; then
+			# Does not exist
+			mkdir -p ~/.config/sxhkd
+		fi
+
+		# Copy default bspwmrc and sxhkdrc config to folders
+		cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
+		cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
 		;;
 	"herbstluftwm")
 		echo "herbstlufwm"
@@ -175,7 +189,72 @@ case "${pkgs["wm"]}" in
 		;;
 esac
 
-
+### M4. Setup XOrg(-server) : xinitrc ###
+xinitrc_File=~/.xinitrc
+default_wmde="${pkgs["wm"]}" 
+contents=(
+	"#"
+	"# X initialization Resource Control (XinitRC) File"
+	"#"
+	""
+	"# Switch XOrg"
+	"session=${1:-$default_wmde} # Default: $default_wmde"
+	"case '$session' in" 
+	"         # Window Managers" 
+	"         i3 | i3wm )" 	
+	"                 exec i3" 	
+	"                 ;;"  				
+	"         bspwm )"
+	"                 exec bspwm"
+	"                 ;;"
+	"         herbstluftwm )"
+	"                 exec herbstluftwm"
+	"                 ;;"
+	"         # Desktop Environment"
+	"         kde )"
+	"                 exec startplasma-x11"
+	"                 ;;"
+	"         xfce | xfce-4 )"
+	"                 exec startxfce4"
+	"                 ;;"
+	"         # No known session, try to run it as command"
+	"         * )"
+	"                 exec $1"
+	"                 ;;"
+	"esac"
+)
+if [[ ! -f $xinitrc_File ]]; then
+	# If file doesnt exist
+	echo "#" 													| tee -a $xinitrc_File
+	echo "# X initialization Resource Control (XinitRC) File" 	| tee -a $xinitrc_File
+	echo "#" 													| tee -a $xinitrc_File
+	echo "" 													| tee -a $xinitrc_File
+	echo "# Switch XOrg" 										| tee -a $xinitrc_File
+	echo "session=${1:-$default_wmde} # Default: $default_wmde" | tee -a $xinitrc_File
+	echo "case '$session' in" 									| tee -a $xinitrc_File
+	echo "         # Window Managers" 							| tee -a $xinitrc_File
+	echo "         i3 | i3wm )" 								| tee -a $xinitrc_File
+	echo "                 exec i3" 							| tee -a $xinitrc_File
+	echo "                 ;;"  								| tee -a $xinitrc_File
+	echo "         bspwm )"          							| tee -a $xinitrc_File
+	echo "                 exec bspwm" 							| tee -a $xinitrc_File
+	echo "                 ;;"								 	| tee -a $xinitrc_File	
+	echo "         herbstluftwm )"								| tee -a $xinitrc_File
+	echo "                 exec herbstluftwm"					| tee -a $xinitrc_File
+	echo "                 ;;"									| tee -a $xinitrc_File
+	echo "         # Desktop Environment"						| tee -a $xinitrc_File
+	echo "         kde )"										| tee -a $xinitrc_File
+	echo "                 exec startplasma-x11"				| tee -a $xinitrc_File
+	echo "                 ;;"									| tee -a $xinitrc_File
+	echo "         xfce | xfce-4 )"								| tee -a $xinitrc_File
+	echo "                 exec startxfce4"						| tee -a $xinitrc_File
+	echo "                 ;;"									| tee -a $xinitrc_File
+	echo "         # No known session, try to run it as command"| tee -a $xinitrc_File
+	echo "         * )"											| tee -a $xinitrc_File
+	echo "                 exec $1"								| tee -a $xinitrc_File
+	echo "                 ;;"									| tee -a $xinitrc_File
+	echo "esac"													| tee -a $xinitrc_File
+fi
 
 # --- Output
 

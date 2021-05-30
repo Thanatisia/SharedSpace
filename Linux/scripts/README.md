@@ -29,6 +29,7 @@
   * 2021-05-30 1218H, Asura
   * 2021-05-30 1228H, Asura
   * 2021-05-30 1815H, Asura
+  * 2021-05-30 1848H, Asura
 
 ## To Note
 
@@ -195,6 +196,12 @@
     * postinstallations.sh
 	  * Updated [user_Management.sh]
 	  * Added "X" packages to essential packages
+* 2021-05-30 1848H, Asura
+  * Modified
+    * postinstallations.sh
+	  * Added function to copy bspwmrc and sxhkdrc IF bspwm is installed as wm
+	  * Added function create create a .xinitrc template if doesnt exist
+
 
 # License
 
