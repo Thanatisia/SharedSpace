@@ -26,7 +26,7 @@
   * 2021-05-25 0824H, Asura
   * 2021-05-29 2228H, Asura
   * 2021-05-30 1038H, Asura
-
+  * 2021-05-30 1218H, Asura
 
 ## To Note
 
@@ -39,9 +39,10 @@
 ### Pre-Requisites
 
 1. chmod +x setup.sh
-2. chmod +x postinstallations.sh
-3. chmod +x good-aliases.sh
-4. chmod +x customs.sh
+2. chmod +x postinstallations-root.sh
+3. chmod +x postinstallations.sh
+4. chmod +x good-aliases.sh
+5. chmod +x customs.sh
 
 ### Dependencies
 
@@ -59,17 +60,23 @@
    >
    > installing basic packages if they were not installed during setup
 
-2. postinstallations.sh
+2. postinstallations-root.sh
+
+   > A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation on a root level
+   >
+   > such as making new user
+
+3. postinstallations.sh
 
    > A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
    >
    > such as installing window managers/desktop environment, terminals, file browsers etc.
 
-3. good-aliases.sh
+4. good-aliases.sh
 
    > This contains a library of aliases to source into your dotfiles for use
 
-4. customs.sh
+5. customs.sh
 
    > A script with commands that are what I consider essential custom folders to create, use etc.
    >
@@ -170,6 +177,14 @@
 	  * Added new setup checks [Network, Audio, Swapfile, User Account]
 	* postinstallations.sh
       * New packages
+* 2021-05-30 1217H, Asura
+  * Created
+  	* postinstallations-root.sh 
+	  * Moved [user_Management] from postinstallations.sh to postinstallations-root.sh
+  * Modified
+  	* postinstallations.sh
+	* customs.sh
+
 
 # License
 

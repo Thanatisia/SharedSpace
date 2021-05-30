@@ -10,11 +10,14 @@
 #	2021-05-25 0834H, Asura
 #	2021-05-29 2209H, Asura
 #	2021-05-30 0958H, Asura
+#	2021-05-30 1217H, Asura
 # Background Info:
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
 #	such as installing window managers/desktop environment, terminals, file browsers etc.
 #	- These are the "must do" after any basic/minimal installations to any distro, not just ArchLinux
-#	- Use this alongside [setup.sh] to install/create a complete fundamental Out-of-the-Box (OOTB) linux experience with the basic requirements such as
+#	- Use this alongside [postinstalltions-root.sh, setup.sh] to install/create a complete fundamental Out-of-the-Box (OOTB) linux experience with the basic requirements such as
+#		[postinstallations-root.sh]
+#		1. Creating user etc.
 #		[postinstallations.sh]
 #		1. Window Managers/Desktop Environment
 #		2. File Browser

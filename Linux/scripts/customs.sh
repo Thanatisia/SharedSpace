@@ -4,11 +4,14 @@
 # Created by: 2021-05-25 0821H, Asura
 # Modified by: 
 #	2021-05-25 0821H, Asura
+#	2021-05-30 1217H, Asura
 # Background Info:
 #	A simple post installation script much like [postinstallations.sh] but it contains commands of what I consider are essential folders to create or commands to execute after 
 #	any post installations
 #	- You can modify this script to adjust it to what you consider are essential custom paths, files or folders
 #	- Use this alongside [setup.sh] and [postinstallations.sh] to install/create a complete fundamental Out-of-the-Box (OOTB) linux experience with the basic requirements such as
+#		[postinstallations-root.sh]
+#		1. Creating user etc.
 #		[postinstallations.sh]
 #		1. Window Managers/Desktop Environment
 #		2. File Browser
