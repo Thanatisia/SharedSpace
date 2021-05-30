@@ -11,6 +11,7 @@
 #	2021-05-29 2209H, Asura
 #	2021-05-30 0958H, Asura
 #	2021-05-30 1217H, Asura
+#	2021-05-30 1814H, Asura
 # Background Info:
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
 #	such as installing window managers/desktop environment, terminals, file browsers etc.
@@ -47,6 +48,14 @@ pkgmgr="${argv[1]:-pacman}"
 dirs=(
 	~/.logs
 )
+
+## Arrays
+x_Pkgs=(
+	"xorg"
+	"xorg-server"
+	"xorg-server"
+)
+
 ## Declare Associative Array variable
 declare -A pkgs=(
 	# NOTE: 
@@ -68,6 +77,7 @@ declare -A pkgs=(
 	[clipboard-manager]="xclip" # Clipboard Manager
 	[screenlocker]=""           # Screenlocker
 	[wm]="bspwm"			    # Window Manager
+	[x]="${x_Pkgs[@]}"			# X packages
 	[others-1]="sxhkd"		    # Other packages : Can be removed if NIL; not mandatory for a less-bloat starting build; put 'sxhkd' if you are using bspwm because you need bspwm and sxhkd for BSPWM
 	[others-2]="xautolock"
 )

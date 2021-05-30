@@ -28,6 +28,7 @@
   * 2021-05-30 1038H, Asura
   * 2021-05-30 1218H, Asura
   * 2021-05-30 1228H, Asura
+  * 2021-05-30 1815H, Asura
 
 ## To Note
 
@@ -189,6 +190,11 @@
   * Modified
     * setup.sh
 	  * Moved [network_Management] from setup.sh to postinstallations-root.sh
+* 2021-05-30 1816H, Asura
+  * Modified
+    * postinstallations.sh
+	  * Updated [user_Management.sh]
+	  * Added "X" packages to essential packages
 
 # License
 
