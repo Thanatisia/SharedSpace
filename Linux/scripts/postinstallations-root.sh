@@ -51,7 +51,9 @@ user_Management()
 	if [[ "$create_user_Confirmation" == "Y" ]]; then
 		# Create user
 		read -p "User Name: " user_Name	
-		read -p "Create in Custom Directory?[Y|N]: " custom_directory_Confirmation
+		read -p "Create in Custom Directory? [Y|N]: " custom_directory_Confirmation
+		read -p "Primary Group (Seperate with ','): " primary_Group
+		read -p "Secondary Groups (Seperate with ','): " secondary_Groups
 		if [[ "$custom_directory_Confirmation" == "Y" ]]; then
 			read -p "Custom Directory [Leave empty for no custom directory]: " custom_Directory
 			if [[ ! "$custom_Directory" == "" ]]; then
