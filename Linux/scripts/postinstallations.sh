@@ -53,6 +53,7 @@ dirs=(
 x_Pkgs=(
 	"xorg"
 	"xorg-server"
+	"xorg-xinit"
 )
 
 ## Declare Associative Array variable
