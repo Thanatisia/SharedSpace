@@ -192,6 +192,7 @@ esac
 ### M4. Setup XOrg(-server) : xinitrc ###
 xinitrc_File=~/.xinitrc
 default_wmde="${pkgs["wm"]}" 
+url_git_xinitrc_Template="raw.githubusercontent.com/Thanatisia/SharedSpace/main/Linux/dotfiles/distros/ArchLinux/profiles/VBox_USBoot-1/.xinitrc" # Edit this to other links
 contents=(
 	"#"
 	"# X initialization Resource Control (XinitRC) File"
@@ -223,37 +224,45 @@ contents=(
 	"                 ;;"
 	"esac"
 )
+
+# Create own xinitrc file
 if [[ ! -f $xinitrc_File ]]; then
-	# If file doesnt exist
-	echo "#" 													| tee -a $xinitrc_File
-	echo "# X initialization Resource Control (XinitRC) File" 	| tee -a $xinitrc_File
-	echo "#" 													| tee -a $xinitrc_File
-	echo "" 													| tee -a $xinitrc_File
-	echo "# Switch XOrg" 										| tee -a $xinitrc_File
-	echo "session=${1:-$default_wmde} # Default: $default_wmde" | tee -a $xinitrc_File
-	echo "case '$session' in" 									| tee -a $xinitrc_File
-	echo "         # Window Managers" 							| tee -a $xinitrc_File
-	echo "         i3 | i3wm )" 								| tee -a $xinitrc_File
-	echo "                 exec i3" 							| tee -a $xinitrc_File
-	echo "                 ;;"  								| tee -a $xinitrc_File
-	echo "         bspwm )"          							| tee -a $xinitrc_File
-	echo "                 exec bspwm" 							| tee -a $xinitrc_File
-	echo "                 ;;"								 	| tee -a $xinitrc_File	
-	echo "         herbstluftwm )"								| tee -a $xinitrc_File
-	echo "                 exec herbstluftwm"					| tee -a $xinitrc_File
-	echo "                 ;;"									| tee -a $xinitrc_File
-	echo "         # Desktop Environment"						| tee -a $xinitrc_File
-	echo "         kde )"										| tee -a $xinitrc_File
-	echo "                 exec startplasma-x11"				| tee -a $xinitrc_File
-	echo "                 ;;"									| tee -a $xinitrc_File
-	echo "         xfce | xfce-4 )"								| tee -a $xinitrc_File
-	echo "                 exec startxfce4"						| tee -a $xinitrc_File
-	echo "                 ;;"									| tee -a $xinitrc_File
-	echo "         # No known session, try to run it as command"| tee -a $xinitrc_File
-	echo "         * )"											| tee -a $xinitrc_File
-	echo "                 exec $1"								| tee -a $xinitrc_File
-	echo "                 ;;"									| tee -a $xinitrc_File
-	echo "esac"													| tee -a $xinitrc_File
+	# Generate xinitrc file
+	if [[ "$url_git_xinitrc_Template" == "" ]]; then
+		# If file doesnt exist and no previous reference point
+		echo "#" 													| tee -a $xinitrc_File
+		echo "# X initialization Resource Control (XinitRC) File" 	| tee -a $xinitrc_File
+		echo "#" 													| tee -a $xinitrc_File
+		echo "" 													| tee -a $xinitrc_File
+		echo "# Switch XOrg" 										| tee -a $xinitrc_File
+		echo "session=${1:-$default_wmde} # Default: $default_wmde" | tee -a $xinitrc_File
+		echo "case '$session' in" 									| tee -a $xinitrc_File
+		echo "         # Window Managers" 							| tee -a $xinitrc_File
+		echo "         i3 | i3wm )" 								| tee -a $xinitrc_File
+		echo "                 exec i3" 							| tee -a $xinitrc_File
+		echo "                 ;;"  								| tee -a $xinitrc_File
+		echo "         bspwm )"          							| tee -a $xinitrc_File
+		echo "                 exec bspwm" 							| tee -a $xinitrc_File
+		echo "                 ;;"								 	| tee -a $xinitrc_File	
+		echo "         herbstluftwm )"								| tee -a $xinitrc_File
+		echo "                 exec herbstluftwm"					| tee -a $xinitrc_File
+		echo "                 ;;"									| tee -a $xinitrc_File
+		echo "         # Desktop Environment"						| tee -a $xinitrc_File
+		echo "         kde )"										| tee -a $xinitrc_File
+		echo "                 exec startplasma-x11"				| tee -a $xinitrc_File
+		echo "                 ;;"									| tee -a $xinitrc_File
+		echo "         xfce | xfce-4 )"								| tee -a $xinitrc_File
+		echo "                 exec startxfce4"						| tee -a $xinitrc_File
+		echo "                 ;;"									| tee -a $xinitrc_File
+		echo "         # No known session, try to run it as command"| tee -a $xinitrc_File
+		echo "         * )"											| tee -a $xinitrc_File
+		echo "                 exec $1"								| tee -a $xinitrc_File
+		echo "                 ;;"									| tee -a $xinitrc_File
+		echo "esac"													| tee -a $xinitrc_File
+	else
+		# Download xinitrc file
+		curl -L -O $url_git_xinitrc_Template
+	fi
 fi
 
 # --- Output
