@@ -89,21 +89,28 @@ done
 audio_Management()
 {
 	### 2. Audio ###
-	audio_pkg="alsa"
-	pkg_check="$(pacman -Qq | grep $audio_pkg)"
-	if [[ "$pkg_check" == "" ]]; then
-		# Does not exists
-		sudo pacman -S $audio_pkg
+	audio_pkg=(
+		"alsa"
+		"alsa-utils"
+	)
+	number_of_Pkgs="${#audio_pkg[@]}"
+	for pkg in ${audio_pkg[@]}; do
+		echo "Current Package: $pkg"
+		# DEBUG: echo "Package Check: $pkg_check"
+		
+		sudo pacman -S "$pkg"
 		
 		# Verify installation
-		pkg_check="$(pacman -Qq | grep $audio_pkg)"
+		pkg_check="$(pacman -Qq | grep $pkg)"
 		if [[ ! "$pkg_check" == "" ]]; then
 			install_Token="Success"
 		else
 			install_Token="Error"
 		fi
-		echo "Installed: [$audio_pkg] : $install_Token"
-	fi
+		echo "Installed: [$pkg] : $install_Token"
+
+		echo ""
+	done
 }
 
 swap_Management()
