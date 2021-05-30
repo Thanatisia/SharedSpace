@@ -7,6 +7,7 @@
 #	2021-05-23 1942H, Asura
 #	2021-05-23 2004H, Asura
 #	2021-05-25 0831H, Asura
+#	2021-05-30 1000H, Asura
 # Background Info:
 #	A basic setup script that will setup the basic requirements after a complete/minimal installation such as making default directories, 
 #	installing basic packages if they were not installed during setup
@@ -26,6 +27,9 @@
 #	- Creating default directories
 #	- Creating default files
 #	- Linking ~/.bashrc with .bashrc-personal
+#	- Networking
+#	- Audio
+#	- User Account
 #
 
 #
@@ -77,6 +81,118 @@ for d in "${default_Dir[@]}"; do
 	fi
 done
 
+#================= 2. Setups ===================#
+network_Management()
+{
+	### 1. networking ###
+	# Check if NetworkManager is installed
+	network_pkg="networkmanager"
+	pkg_check="$(pacman -Qq | grep $network_pkg)"
+	if [[ "$pkg_check" == "" ]]; then
+		# Does not exists
+		sudo pacman -S $network_pkg
+		
+		# Verify installation
+		pkg_check="$(pacman -Qq | grep $network_pkg)"
+		if [[ ! "$pkg_check" == "" ]]; then
+			install_Token="Success"
+		else
+			install_Token="Error"
+		fi
+		echo "Installed: [$network_pkg] : $install_Token"
+	fi
+	# Check if package is running
+	networkmgr_status="$(systemctl status NetworkManager | grep running)"
+	if [[ -z "$networkmgr_status" ]]; then
+		# Empty; Not Activated
+		echo "Network is not activated."
+		echo "Activating network..."
+		sudo systemctl start NetworkManager |& tee -a ~/.logs/svc-networkmgr.log &&
+			echo "Network successfully activated." ||
+			echo "Error activating network"
+	fi
+}
+
+audio_Management()
+{
+	### 2. Audio ###
+	audio_pkg="alsa"
+	pkg_check="$(pacman -Qq | grep $audio_pkg)"
+	if [[ "$pkg_check" == "" ]]; then
+		# Does not exists
+		sudo pacman -S $audio_pkg
+		
+		# Verify installation
+		pkg_check="$(pacman -Qq | grep $audio_pkg)"
+		if [[ ! "$pkg_check" == "" ]]; then
+			install_Token="Success"
+		else
+			install_Token="Error"
+		fi
+		echo "Installed: [$audio_pkg] : $install_Token"
+	fi
+}
+
+swap_Management()
+{
+	### 3. Swapfile ###
+	swap_Size=""
+	read -p "Swap Size [n {MiB | MB | GiB | GB}]: " swap_Size
+	# i. Create swap file
+	fallocate -l $swap_Size /swapfile
+	# ii. Change permission of swpafile to read-write
+	chmod 600 /swapfile
+	# iii. Make swap file
+	mkswap /swapfile
+	# iv. Enable swap file to begin using it
+	swapon /swapfile
+	# v. The Operating system need to know it is safe to use this file for swap everytime it boots up
+	echo "# /swapfile" | tee -a /etc/fstab
+	echo "/swapfile none swap defaults 0 0" | tee -a /etc/fstab
+}
+
+user_Management()
+{
+	### 4. User account ###
+	create_user_Confirmation=""
+	custom_directory_Confirmation=""
+	user_Name=""
+	primary_Group=""
+	secondary_Groups=""
+	custom_Directory="" # For creating user in a custom directory; useradd -m -d $custom_Directory
+	cmd_user_Create="useradd"
+	read -p "Create user now? [Y|N]: " create_user_Confirmation
+	if [[ "$create_user_Confirmation" == "Y" ]]; then
+		# Create user
+		read -p "User Name: " user_Name	
+		read -p "Create in Custom Directory?[Y|N]: " custom_directory_Confirmation
+		if [[ "$custom_directory_Confirmation" == "Y" ]]; then
+			read -p "Custom Directory [Leave empty for no custom directory]: " custom_Directory
+			if [[ ! "$custom_Directory" == "" ]]; then
+				# Custom Directory
+				custom_Directory="/home/profiles/$user_Name"
+				useradd -m -g $primary_Group -G $secondary_Groups -d $custom_Directory $user_Name
+			fi
+		else
+			# No Custom Directory
+			if [[ ! "$primary_Group" == "" ]]; then
+				$cmd_user_Create+="-g $primary_Group"
+			fi
+
+			if [[ ! "$secondary_Groups" == "" ]]; then
+				$cmd_user_Create+="-G $secondary_Groups"
+			fi
+
+			$cmd_user_Create $user_Name 
+		fi
+	fi
+}
+
+# Process
+network_Management
+audio_Management
+swap_Management
+user_Management
 
 #
 # Output

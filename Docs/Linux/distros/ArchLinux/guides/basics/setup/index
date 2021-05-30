@@ -1,0 +1,26 @@
+#
+# Basic ArchLinux setup guide
+#
+
+[Table of Contents]
+1. Setup Networking
+2. Setup Audio
+3. (OPTIONAL) Setup Swapfile
+4. Basic Installations
+	4.i. Terminal
+	4.ii. Browser
+	4.iii. Text Editor
+	4.iv. Compositor
+	4.v. Fonts
+	4.vi. Clipboard Manager
+	4.vii. File Manager
+	4.viii. Screen Locker
+5. Setup user account
+6. Setup Samba filesystem capabilities
+7. Decide XOrg or Wayland
+8. Installing Desktop Environment or Window Manager
+9. (OPTIONAL) Install Desktop Manager
+10. Post-WM/DE Installations:
+	10.i. Status Bar
+	10.ii. Context/Application Menu
+

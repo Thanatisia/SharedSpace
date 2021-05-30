@@ -9,6 +9,7 @@
 #	2021-05-24 0233H, Asura
 #	2021-05-25 0834H, Asura
 #	2021-05-29 2209H, Asura
+#	2021-05-30 0958H, Asura
 # Background Info:
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
 #	such as installing window managers/desktop environment, terminals, file browsers etc.
@@ -47,18 +48,25 @@ dirs=(
 declare -A pkgs=(
 	# NOTE: 
 	# Please feel free to change the values for whichever you deem important
-	# Just append to the value corresponding to the key with a space delimiter
+	# Just add a new key and append '-n' and add the value for easy understanding
 	# i.e.
-	# (OLD) : [terminal]="urxvt"
-	# (NEW) : [terminal]="urxvt alacritty"
-	[editor-1]="nano"		# Text Editors
-	[editor-2]="vim"
+	# (OLD) : [editor]="nano"
+	# (NEW) : 	[editor-1]="nano"
+	#			[editor-2]="vim"
+	[audio]="alsa"			    # Audio Driver
 	[terminal]="rxvt-unicode"	# Terminal Emulator
-	[browser]="firefox"		# Browser
+	[browser]="firefox"		    # Browser
+	[editor-1]="nano"		    # Text Editors
+	[editor-2]="vim"
 	[file_manager]="pcmanfm"	# File Manager
-	[wm]="bspwm"			# Window Manager
-	[audio]="alsa"			# Audio Driver
-	[others]="sxhkd"		# Other packages : Can be removed if NIL; not mandatory for a less-bloat starting build; put 'sxhkd' if you are using bspwm because you need bspwm and sxhkd for BSPWM
+	[compositor]="picom"	    # Compositor
+	[fonts-1]="Jetbrains Mono"  # Fonts
+	[fonts-2]="Hack"
+	[clipboard-manager]="xclip" # Clipboard Manager
+	[screenlocker]=""           # Screenlocker
+	[wm]="bspwm"			    # Window Manager
+	[others-1]="sxhkd"		    # Other packages : Can be removed if NIL; not mandatory for a less-bloat starting build; put 'sxhkd' if you are using bspwm because you need bspwm and sxhkd for BSPWM
+	[others-2]="xautolock"
 )
 declare -A log_Files=(
 	[changelog]=~/.logs/postinstaller.log
@@ -153,6 +161,8 @@ case "${pkgs["wm"]}" in
 		echo "Invalid Window Manager"
 		;;
 esac
+
+
 
 # --- Output
 

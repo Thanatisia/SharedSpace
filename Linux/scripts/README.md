@@ -25,6 +25,7 @@
   * 2021-05-24 0233H, Asura
   * 2021-05-25 0824H, Asura
   * 2021-05-29 2228H, Asura
+  * 2021-05-30 1038H, Asura
 
 
 ## To Note
@@ -163,7 +164,12 @@
   * Modified
     * postinstallations.sh
 	  * Added new part: [M3: Window Manager setup]
-
+* 2021-05-30 1038H, Asura
+  * Modified
+    * setup.sh
+	  * Added new setup checks [Network, Audio, Swapfile, User Account]
+	* postinstallations.sh
+      * New packages
 
 # License
 

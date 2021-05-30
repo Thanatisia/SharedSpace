@@ -26,11 +26,17 @@
   > * ricing
   > * installguide
   > * customization
+  > * guides
+  >   * basics
+  >		* setup
+  >       * manual
+  >			* 3. Setup Swapfile
+  >		  * index
 
 * Last Update/Modified:
 
   * 2021-05-25 1700H, Asura
-
+  * 2021-05-30 1043H, Asura
 
 
 ## To Note
@@ -75,8 +81,23 @@
    > 2. Using widgets (i.e. EWW) to make bars
    > 3. Typical FOSS like Status Bars
 
-   
+## Folders
 
+1. guides
+
+   > To include all guides for ArchLinux
+
+2. guides/basics/
+
+   > Basic Guides for starting
+
+3. guides/basics/setup
+
+   > Setup guides 
+
+4. guides/basics/setup/manual
+
+   > Manuals for specific topics
 
 
 ## Usage
@@ -118,7 +139,13 @@
     * License
     * Acknowledgements
 
-
+* 2021-05-30 1048H, Asura
+  * Created
+    * Folders 
+		* [guides/basics/setup/manual]
+	* Files
+		* guides/basics/setup/index
+		* guides/basics/setup/manual/3. Setup Swapfile
 
 # License
 
