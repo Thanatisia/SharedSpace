@@ -27,6 +27,7 @@
 # Features:
 #	- Fundamental root post-installation setups
 #		- Create new user, groups etc.
+#		- visudo (allow wheel to use sudo)
 #
 
 # --- Input
@@ -54,6 +55,8 @@ user_Management()
 		read -p "Create in Custom Directory? [Y|N]: " custom_directory_Confirmation
 		read -p "Primary Group (Seperate with ','): " primary_Group
 		read -p "Secondary Groups (Seperate with ','): " secondary_Groups
+		
+		# Create custom directory & add user
 		if [[ "$custom_directory_Confirmation" == "Y" ]]; then
 			read -p "Custom Directory [Leave empty for no custom directory]: " custom_Directory
 			if [[ ! "$custom_Directory" == "" ]]; then
@@ -73,6 +76,9 @@ user_Management()
 
 			$cmd_user_Create $user_Name 
 		fi
+
+		# Set user password
+		passwd $user_Name
 	fi
 }
 
@@ -107,6 +113,10 @@ network_Management()
 	fi
 }
 
+allow_sudo()
+{
+	visudo
+}
 
 # --- Processing
 
