@@ -1,0 +1,7 @@
+#
+# General Variables
+#
+
+EDITOR="vim"
+PKGMGR="pacman"
+TERMINAL="urxvt"

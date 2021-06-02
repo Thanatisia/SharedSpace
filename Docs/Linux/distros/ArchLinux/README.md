@@ -37,7 +37,7 @@
 
   * 2021-05-25 1700H, Asura
   * 2021-05-30 1043H, Asura
-
+  * 2021-06-02 2227H, Asura
 
 ## To Note
 
@@ -146,6 +146,9 @@
 	* Files
 		* guides/basics/setup/index
 		* guides/basics/setup/manual/3. Setup Swapfile
+
+* 2021-06-02 2227H, Asura
+  * Added [neomutt, ascii-image-converter, nyxt web browser] into packagelist
 
 # License
 

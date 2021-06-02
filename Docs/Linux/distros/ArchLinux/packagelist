@@ -11,6 +11,9 @@
 + [Web Browsers]
 	chrome
 	firefox
+	# --- Minimal
+	surf (suckless minimal browser)
+	nyxt (keyboard/vim based browser)
 
 + [File Managers]
 	thunar
@@ -42,6 +45,8 @@
 	figlet
 	# --- Firewall
 	ufw
+	# --- Email
+	(neo)mutt (Terminal Email Client)
 
 + [Networking]
 	inetutils
@@ -82,4 +87,8 @@
 	steam (proton)
 	lutris
 	wine
+
++ [Fun] 
+	ascii-image-converter
+
 
