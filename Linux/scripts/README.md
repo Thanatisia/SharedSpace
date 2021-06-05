@@ -30,6 +30,7 @@
   * 2021-05-30 1228H, Asura
   * 2021-05-30 1815H, Asura
   * 2021-05-30 1848H, Asura
+  * 2021-06-05 2315H, Asura
 
 ## To Note
 
@@ -46,6 +47,7 @@
 3. chmod +x postinstallations.sh
 4. chmod +x good-aliases.sh
 5. chmod +x customs.sh
+6. chmod +x makefile.sh
 
 ### Dependencies
 
@@ -85,6 +87,11 @@
    >
    > - Please edit this and adjust it to fit what you would consider essential for you
 
+6. makefile.sh
+
+   > A Linux (shell) Makefile script reminiscent of C/C++'s make;makefile;cmake system
+   > Run this if you would like to run all the other files in 1 place 
+   > Please edit this file to include/remove the scripts of your choice. (or your own custom multi-script run layout; place the scripts accordingly)
    
 
 ## Usage
@@ -98,7 +105,7 @@
      * . good-aliases.sh
      * source good-aliases.sh
 4. ./customs.sh
-
+5. ./makefile.sh
 
 
 ## Help
@@ -201,7 +208,12 @@
     * postinstallations.sh
 	  * Added function to copy bspwmrc and sxhkdrc IF bspwm is installed as wm
 	  * Added function create create a .xinitrc template if doesnt exist
-
+* 2021-06-05 2318H, Asura
+  * Created
+  	* makefile.sh
+  * modified
+  	* postinstallations-root.sh
+	  * Added sudo to user management functions
 
 # License
 

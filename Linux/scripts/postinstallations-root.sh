@@ -4,6 +4,7 @@
 # Created by: 2021-05-30 1211H, Asura
 # Modified by: 
 #	2021-05-30 1211H, Asura
+#	2021-06-05 2326H, Asura
 # Background Info:
 #	/* Please run this first - must be ran on root level */
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation 
@@ -62,7 +63,7 @@ user_Management()
 			if [[ ! "$custom_Directory" == "" ]]; then
 				# Custom Directory
 				custom_Directory="/home/profiles/$user_Name"
-				useradd -m -g $primary_Group -G $secondary_Groups -d $custom_Directory $user_Name
+				sudo useradd -m -g $primary_Group -G $secondary_Groups -d $custom_Directory $user_Name
 			fi
 		else
 			# No Custom Directory
@@ -74,11 +75,11 @@ user_Management()
 				$cmd_user_Create+="-G $secondary_Groups"
 			fi
 
-			$cmd_user_Create $user_Name 
+			sudo $cmd_user_Create $user_Name 
 		fi
 
 		# Set user password
-		passwd $user_Name
+		sudo passwd $user_Name
 	fi
 }
 

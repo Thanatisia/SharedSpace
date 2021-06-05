@@ -1,0 +1,25 @@
+#
+# Linux Command Documentation: su
+#
+
+[Background]
+Command Name: su
+Abbreviation: Switch User
+Command Summary: A command that allows a user to switch to / execute commands as another user
+General Syntax: su [OPTIONS] [ USER [ARGUMENTS...] ]
+
+[Parameters]
+-c : Execute a command as another user / super user
+	Syntax:
+		su <user_name> -c <command>
+
+[Use-Cases]
+1. Executing a command as another user
+	Syntax:
+		(sudo) su <user_name> -c <command>
+	Examples:
+		Command:
+			(sudo) su <user_name> -c echo "Hello World, $(whoami)"
+		Output:
+			Hello World, <user_name>
+
