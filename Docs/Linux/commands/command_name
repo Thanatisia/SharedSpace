@@ -7,8 +7,19 @@ Command Name:
 Abbreviation: 
 Command Summary: 
 General Syntax: 
+General Parameters: 
 
 [Parameters]
+<parameter> : <description of parameter>
+	Syntax:
+		<syntax/structure of parameter in command>
+	Examples:
+		[1] An example of command with <parameter>
+			Command:
+				<The example command with parameter>
+			Output:
+				<intended output>	
+
 
 [Use-Cases]
 
