@@ -33,6 +33,7 @@
   * 2021-06-05 2315H, Asura
   * 2021-06-06 1230H, Asura
   * 2021-06-06 2304H, Asura
+  * 2021-06-07 0013H, Asura
 
 ## To Note
 
@@ -50,6 +51,7 @@
 4. chmod +x good-aliases.sh
 5. chmod +x customs.sh
 6. chmod +x makefile.sh
+7. chmod +x clipkger.sh
 
 ### Dependencies
 
@@ -94,21 +96,26 @@
    > A Linux (shell) Makefile script reminiscent of C/C++'s make;makefile;cmake system
    > Run this if you would like to run all the other files in 1 place 
    > Please edit this file to include/remove the scripts of your choice. (or your own custom multi-script run layout; place the scripts accordingly)
-   
+  
+7. clipkger.sh
+	
+   > Short for 'CLI Packager', a command line interface/terminal package control utility
+   > Please edit the array [pkgs] to add / remove packages of your choice
 
 ## Usage
 
 > How to use
 
 1. ./setup.sh
-2. ./postinstallations.sh
-3. good-aliases.sh
+2. ./postinstallations-root.sh
+3. ./postinstallations.sh
+4. good-aliases.sh
    * Source alias
      * . good-aliases.sh
      * source good-aliases.sh
-4. ./customs.sh
-5. ./makefile.sh
-
+5. ./customs.sh
+6. ./makefile.sh
+7. ./clipkger.sh {options} <package-name>
 
 ## Help
 
@@ -223,6 +230,15 @@
 * 2021-06-06 2304H, Asura
   * Created
   	* pkg_installer.sh
+* 2021-06-06 2312H, Asura
+  * Modified
+  	* renamed [pkg_installer.sh] -> [clipkger.sh]
+* 2021-06-07 0016H, Asura
+  * Modified
+    * clipkger.sh
+	  > Added Help function
+	  > Added Command Line Features
+
 
 # License
 

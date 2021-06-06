@@ -6,6 +6,7 @@
 #	- 2021-06-06 2110H, Asura
 #	- 2021-06-06 2313H, Asura
 #	- 2021-06-06 2320H, Asura
+#	- 2021-06-07 0011H, Asura
 # Features: 
 #	- Allows user to 
 #		> add packages of their choice into the list
@@ -21,6 +22,9 @@
 #		- Made file portable & modular
 #	2021-06-06 2320H, Asura
 #		- Renamed script from [pkg_installer.sh] -> [clipkger.sh]
+#	2021-06-07 0011H, Asura
+#		- Added help function
+#		- Added Command Line features
 #
 
 # --- Variables
@@ -57,6 +61,9 @@ case "$PKGMGR" in
 			[install]="sudo pacman -S $selected_pkg_Name"
 			[remove]="sudo pacman -R $selected_pkg_Name"
 			[uninstall]="sudo pacman -Rsu $selected_pkg_Name"
+			[update]="sudo pacman -Sy"
+			[upgrade]="sudo pacman -Su"
+			[update-and-upgrade]="sudo pacman -Syu"
 			[exit]="exit"
 		)
 		;;
@@ -65,6 +72,9 @@ case "$PKGMGR" in
 			[install]="sudo apt-get install $selected_pkg_Name"
 			[remove]="sudo apt-get"
 			[uninstall]="sudo apt-get uninstall "
+			[update]="sudo apt-get update"
+			[upgrade]="sudo apt-get upgrade"
+			[update-and-upgrade]="sudo apt-get update upgrade"
 			[exit]="exit"
 		)
 		;;
@@ -154,57 +164,67 @@ menu_package_Control()
 			selected_Command=${pkg_controls[$cmd]}
 			# echo "Selected Command: $selected_Command"
 
-			if [[ "$selected_Command" == "exit" ]]; then
-				break
-			elif [[ ! "$selected_Command" == "" ]]; then
-				while true; do
-					echo "[ Select Package(s) ]"
-					PS3="Please enter your option [Enter the option number]: "
-					for(( i=1; i <= $number_of_Packages; i++ )); do
-						echo "[$i] : ${pkgs[$((i-1))]}"
-					done
-					read -p "$PS3" opt
-					
-					if [[ ! "$opt" == "" ]]; then
-						# Data Validation: Entered option is NOT empty
-						selected_pkg_Name="${pkgs[$((opt-1))]}"
-						if [[ "$selected_pkg_Name" == "select-end" ]]; then
-							# End Selection
-							# Data Validation: Empty/Null Value
-							if [[ ! "$selected_Packages" == "" ]]; then
-								selected_Command+="$selected_Packages"
-								echo "Command: $selected_Command"
-								$selected_Command
+			# Check selected command
+			case "$cmd" in
+				"update" | "upgrade" | "update-and-upgrade")
+					# If is either Update, Upgrade or Update & Upgrade
+					# Just activate
+					$selected_Command
+					break
+					;;
+				*)
+					if [[ "$selected_Command" == "exit" ]]; then
+						break
+					elif [[ ! "$selected_Command" == "" ]]; then
+						while true; do
+							echo "[ Select Package(s) ]"
+							PS3="Please enter your option [Enter the option number]: "
+							for(( i=1; i <= $number_of_Packages; i++ )); do
+								echo "[$i] : ${pkgs[$((i-1))]}"
+							done
+							read -p "$PS3" opt
+							
+							if [[ ! "$opt" == "" ]]; then
+								# Data Validation: Entered option is NOT empty
+								selected_pkg_Name="${pkgs[$((opt-1))]}"
+								if [[ "$selected_pkg_Name" == "select-end" ]]; then
+									# End Selection
+									# Data Validation: Empty/Null Value
+									if [[ ! "$selected_Packages" == "" ]]; then
+										selected_Command+="$selected_Packages"
+										echo "Command: $selected_Command"
+										$selected_Command
+									else
+										echo "No Packages selected"
+									fi
+									break
+								elif [[ "$selected_pkg_Name" == "select-show" ]]; then
+									echo "Packages: $selected_Packages"
+								elif [[ ! "$selected_pkg_Name" == "" ]]; then
+									# Not Exit / Quit && Data Validation: Not Empty
+									# Check if string contains substring
+									if [[ ! "$selected_Packages" == *"$selected_pkg_Name"* ]]; then
+										# selected_Command+="$selected_pkg_Name "
+										selected_Packages+="$selected_pkg_Name "
+									else
+										echo "Package is already selected."
+									fi
+								else
+									echo "Invalid Value"
+								fi
+								echo ""
 							else
-								echo "No Packages selected"
+								echo ""
+								echo "No Input"
+								echo ""
 							fi
-							break
-						elif [[ "$selected_pkg_Name" == "select-show" ]]; then
-							echo "Packages: $selected_Packages"
-						elif [[ ! "$selected_pkg_Name" == "" ]]; then
-							# Not Exit / Quit && Data Validation: Not Empty
-							# Check if string contains substring
-							if [[ ! "$selected_Packages" == *"$selected_pkg_Name"* ]]; then
-								# selected_Command+="$selected_pkg_Name "
-								selected_Packages+="$selected_pkg_Name "
-							else
-								echo "Package is already selected."
-							fi
-						else
-							echo "Invalid Value"
-						fi
-						echo ""
+						done
 					else
-						echo ""
-						echo "No Input"
-						echo ""
+						# Validation : Null/Empty Value checker
+						echo "Invalid Option"
 					fi
-				done
-			else
-				# Validation : Null/Empty Value checker
-				echo "Invalid Option"
-			fi
-			
+					;;
+			esac
 			selected_Command=""
 			selected_Packages=""
 		else
@@ -212,6 +232,25 @@ menu_package_Control()
 			echo ""
 		fi
 	done
+}
+
+prog_Help()
+{
+	#
+	# Help function
+	#	Edit Accordingly
+	#
+	echo "[Syntax]"
+	echo " > $0 { -i | -r | -u | -Upd | -Upg | -Updg | -h } <package_name>"
+	echo " > $0 { --install | --remove | --uninstall | --update | --upgrade | --update-and-upgrade | --help } <package_name>"
+	echo "[Parameters]"
+	echo "	{ --install           	| -i    } : Install package"
+	echo "	{ --remove   	        | -r    } : Remove package"
+	echo "	{ --uninstall           | -u    } : Uninstall package"
+	echo "	{ --update              | -Upd  } : Update system"
+	echo "	{ --upgrade             | -Upg  } : Upgrade system"
+	echo "	{ --update-and-upgrade	| -Updg	} : Update and Upgrade system"
+	echo "	{ --help                | -h    } : Help"
 }
 
 # General Functions
@@ -231,8 +270,101 @@ body()
 	argv=("$@")
 	argc="${#argv[@]}"
 
+	# --- Command Line Interface Feature Implementation
 	# Generate Menu using the package array
-	menu_package_Control
+	option="${argv[0]}"
+	package_Name="${argv[1]}"
+	package_Controls=""
+	if [[ ! "$option" == "" ]]; then # &&
+		echo "Option: $option"
+
+		# Switch case option
+		case "$option" in
+			"--install" | "-i" )
+				# Install
+				echo "Install [$package_Name]"
+				package_Controls="${pkg_controls["install"]}"
+				
+				if [[ ! "$package_Name" == "" ]]; then
+					# Data Validation: (Option AND package name) NOT Null/Empty Value
+					package_Controls+="$package_Name"
+					echo "Command: $package_Controls"
+					$package_Controls
+					ret_code="$?"
+					echo "Return Code: $ret_code"
+				else
+					echo "	Package name not provided."
+				fi
+				;;
+			"--remove" | "-r" )
+				# Remove Package
+				echo "Remove [$package_Name]"
+				package_Controls="${pkg_controls["remove"]}"
+				if [[ ! "$package_Name" == "" ]]; then
+					# Data Validation: (Option AND package name) NOT Null/Empty Value
+					package_Controls+="$package_Name"
+					echo "Command: $package_Controls"
+					$package_Controls
+					ret_code="$?"
+					echo "Return Code: $ret_code"
+				else
+					echo "	Package name not provided."
+				fi
+				;;
+			"--uninstall" | "-u" )
+				# Uninstall Package
+				echo "Uninstall [$package_Name]"
+				package_Controls="${pkg_controls["uninstall"]}"
+				if [[ ! "$package_Name" == "" ]]; then
+					# Data Validation: (Option AND package name) NOT Null/Empty Value
+					package_Controls+="$package_Name"
+					echo "Command: $package_Controls"
+					$package_Controls
+					ret_code="$?"
+					echo "Return Code: $ret_code"
+				else
+					echo "	Package name not provided."
+				fi
+				;;
+			"--update" | "-Upd" )
+				# Update System
+				echo "Update System"
+				package_Controls="${pkg_controls["update"]}"
+				$package_Controls
+				echo "Command: $package_Controls"
+				ret_code="$?"
+				echo "Return Code: $ret_code"
+				;;
+			"--upgrade" | "-Upg" )
+				# Upgrade System
+				echo "Upgrade System"
+				package_Controls="${pkg_controls["upgrade"]}"
+				$package_Controls
+				echo "Command: $package_Controls"
+				ret_code="$?"
+				echo "Return Code: $ret_code"
+				;;
+			"--update_and_upgrade" | "-Updg" )
+				# Upgrade System
+				echo "Update and Upgrade System"
+				package_Controls="${pkg_controls["update-and-upgrade"]}"
+				$package_Controls
+				echo "Command: $package_Controls"
+				ret_code="$?"
+				echo "Return Code: $ret_code"
+				;;
+			"--help" | "-H")
+				# Help
+				echo "Help"
+				prog_Help
+				;;
+			*)
+				echo "Invalid Option"
+				;;
+		esac
+	else
+		menu_package_Control
+	fi
 }
 
 function END()
