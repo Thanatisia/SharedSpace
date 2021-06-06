@@ -123,7 +123,7 @@ menu_Select()
 	done
 }
 
-menu_Test1()
+menu_package_Control()
 {
 	# Manage Package
 	PS3="Please enter your option: "
@@ -222,7 +222,7 @@ body()
 	argc="${#argv[@]}"
 
 	# Generate Menu using the package array
-	menu_Test1
+	menu_package_Control
 }
 
 function END()
