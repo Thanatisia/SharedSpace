@@ -4,13 +4,16 @@
 # Created: 2021-06-05 2312H, Asura
 # Modified: 
 #	2021-06-05 2312H, Asura
+#	2021-06-06 1230H, Asura
 # Features: 
 # Background Information: 
 #	[Purpose]
 #	For Post-installation ArchLinux setup. Installation scripts WIP
 # Changelog:
 #	2021-06-05 2312H, Asura:
-#		Created script file
+#		- Created script file
+#	2021-06-06 1230H, Asura:
+#		- Added self-deletion code at the end
 #
 
 # --- Variables
@@ -82,6 +85,18 @@ function END()
 {
     line=""
     read -p "Pause" line
+
+	confirm_Delete=""
+	read -p "Would you like to delete this file?: " confirm_Delete
+	case "$confirm_Delete" in
+		"Y" | "y" )
+			# Delete itself
+			sudo rm $0
+			;;
+		*)
+			# Do nothing, just end
+			;;
+	esac
 }
 
 function main()

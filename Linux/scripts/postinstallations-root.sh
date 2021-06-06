@@ -5,6 +5,7 @@
 # Modified by: 
 #	2021-05-30 1211H, Asura
 #	2021-06-05 2326H, Asura
+#	2021-06-06 1230H, Asura
 # Background Info:
 #	/* Please run this first - must be ran on root level */
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation 
@@ -140,3 +141,15 @@ user_Management
 ### Finish ###
 complete_uInput=""
 read -p "Setup is complete, please run setup.sh for a complete OOTB experience if you have time :)" complete_uInput
+
+confirm_Delete=""
+read -p "Would you like to delete this file?: " confirm_Delete
+case "$confirm_Delete" in
+	"Y" | "y" )
+		# Delete itself
+		sudo rm $0
+		;;
+	*)
+		# Do nothing, just end
+		;;
+esac

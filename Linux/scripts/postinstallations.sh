@@ -12,6 +12,7 @@
 #	2021-05-30 0958H, Asura
 #	2021-05-30 1217H, Asura
 #	2021-05-30 1814H, Asura
+#	2021-06-06 1230H, Asura
 # Background Info:
 #	A simple post installation script that will run basic essential TODO stuff after a complete/minimal installation
 #	such as installing window managers/desktop environment, terminals, file browsers etc.
@@ -209,6 +210,11 @@ contents=(
 	"                 exec bspwm"
 	"                 ;;"
 	"         herbstluftwm )"
+	"				  if [[ ! -d ~/.config/herbstluftwm ]]; then"
+	"					# Create config file if doesnt exist"
+	"				  	mkdir -p ~/.config/herbstluftwm"
+	"				  fi"
+	"				  sudo cp /etc/xdg/herbstluftwm/autostart ~/.config/herbstluftwm/autostart"
 	"                 exec herbstluftwm"
 	"                 ;;"
 	"         # Desktop Environment"
@@ -245,6 +251,11 @@ if [[ ! -f $xinitrc_File ]]; then
 		echo "                 exec bspwm" 							| tee -a $xinitrc_File
 		echo "                 ;;"								 	| tee -a $xinitrc_File	
 		echo "         herbstluftwm )"								| tee -a $xinitrc_File
+		echo "				  if [[ ! -d ~/.config/herbstluftwm ]]; then"								| tee -a $xinitrc_File
+		echo "					# Create config file if doesnt exist"									| tee -a $xinitrc_File
+		echo "				  	mkdir -p ~/.config/herbstluftwm"										| tee -a $xinitrc_File
+		echo "				  fi"																		| tee -a $xinitrc_File
+		echo "				  sudo cp /etc/xdg/herbstluftwm/autostart ~/.config/herbstluftwm/autostart"	| tee -a $xinitrc_File
 		echo "                 exec herbstluftwm"					| tee -a $xinitrc_File
 		echo "                 ;;"									| tee -a $xinitrc_File
 		echo "         # Desktop Environment"						| tee -a $xinitrc_File
@@ -274,3 +285,16 @@ fi
 ### Finish ###
 complete_uInput=""
 read -p "Setup is complete, please run setup.sh for a complete OOTB experience if you have time :)" complete_uInput
+
+confirm_Delete=""
+read -p "Would you like to delete this file?: " confirm_Delete
+case "$confirm_Delete" in
+	"Y" | "y" )
+		# Delete itself
+		sudo rm $0
+		;;
+	*)
+		# Do nothing, just end
+		;;
+esac
+

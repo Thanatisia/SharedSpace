@@ -31,6 +31,7 @@
   * 2021-05-30 1815H, Asura
   * 2021-05-30 1848H, Asura
   * 2021-06-05 2315H, Asura
+  * 2021-06-06 1230H, Asura
 
 ## To Note
 
@@ -214,6 +215,11 @@
   * modified
   	* postinstallations-root.sh
 	  * Added sudo to user management functions
+* 2021-06-06 1230H, Asura
+  * Modified
+  	* postinstallations.sh, postinstallations-root.sh, customs.sh, makefile.sh, setup.sh
+	  * Added self-deletion code at the end
+
 
 # License
 

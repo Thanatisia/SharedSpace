@@ -10,6 +10,7 @@
 #	2021-05-30 1000H, Asura
 #	2021-05-30 1218H, Asura
 #	2021-05-30 1228H, Asura
+#	2021-06-06 1230H, Asura
 # Background Info:
 #	A basic setup script that will setup the basic requirements after a complete/minimal installation such as making default directories, 
 #	installing basic packages if they were not installed during setup
@@ -144,3 +145,14 @@ swap_Management
 complete_uInput=""
 read -p "Setup is complete, please run postinstallations.sh for a complete OOTB experience if you have time :)" complete_uInput
 
+confirm_Delete=""
+read -p "Would you like to delete this file?: " confirm_Delete
+case "$confirm_Delete" in
+	"Y" | "y" )
+		# Delete itself
+		sudo rm $0
+		;;
+	*)
+		# Do nothing, just end
+		;;
+esac

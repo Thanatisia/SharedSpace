@@ -5,6 +5,7 @@
 # Modified by: 
 #	2021-05-25 0821H, Asura
 #	2021-05-30 1217H, Asura
+#	2021-06-06 1230H, Asura
 # Background Info:
 #	A simple post installation script much like [postinstallations.sh] but it contains commands of what I consider are essential folders to create or commands to execute after 
 #	any post installations
@@ -115,3 +116,15 @@ source ~/.bashrc
 ### Finish ###
 complete_uInput=""
 read -p "Setup is complete, please run setup.sh and/or postinstallations.sh for a complete OOTB experience if you have time and have not done so :)" complete_uInput
+
+confirm_Delete=""
+read -p "Would you like to delete this file?: " confirm_Delete
+case "$confirm_Delete" in
+	"Y" | "y" )
+		# Delete itself
+		sudo rm $0
+		;;
+	*)
+		# Do nothing, just end
+		;;
+esac
