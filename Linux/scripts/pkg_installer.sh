@@ -4,6 +4,7 @@
 # Created: 2021-06-06 2110H, Asura 
 # Modified: 
 #	- 2021-06-06 2110H, Asura
+#	- 2021-06-06 2313H, Asura
 # Features: 
 #	- Allows user to 
 #		> add packages of their choice into the list
@@ -14,6 +15,9 @@
 # Changelog:
 #	2021-06-06 2110H, Asura
 #		- Created script file
+#	2021-06-06 2313H, Asura
+#		- Edited structure of code
+#		- Made file portable & modular
 #
 
 # --- Variables
@@ -28,6 +32,8 @@ selected_Packages=""
 
 # [Arrays]
 pkgs=(
+	# Edit this
+	# - Place your files here
 	"xterm"
 	"select-end"
 	"select-show"
