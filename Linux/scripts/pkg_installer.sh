@@ -35,8 +35,9 @@ pkgs=(
 	# Edit this
 	# - Place your files here
 	"xterm"
-	"select-end"
-	"select-show"
+	# Key Options
+	"select-end"	# To end the selection
+	"select-show"	# To show all selected packages
 )
 
 # [Associative Array]
