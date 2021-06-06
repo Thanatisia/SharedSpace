@@ -5,6 +5,7 @@
 # Modified: 
 #	- 2021-06-06 2110H, Asura
 #	- 2021-06-06 2313H, Asura
+#	- 2021-06-06 2320H, Asura
 # Features: 
 #	- Allows user to 
 #		> add packages of their choice into the list
@@ -18,6 +19,8 @@
 #	2021-06-06 2313H, Asura
 #		- Edited structure of code
 #		- Made file portable & modular
+#	2021-06-06 2320H, Asura
+#		- Renamed script from [pkg_installer.sh] -> [clipkger.sh]
 #
 
 # --- Variables
