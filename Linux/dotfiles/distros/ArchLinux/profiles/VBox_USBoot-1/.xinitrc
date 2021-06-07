@@ -91,6 +91,7 @@ function set_autostarters()
 	# Applications
 	conky -c ~/.config/conky/conky-TODOList.conf &   # ToDo List etc.
 	conky -c ~/.config/conky/conky-middle_right.conf & 	# System Monitoring
+	conky -c ~/.config/conky/conky-keybindings.conf &	# To display keybindings
 	$HOME/.scripts/screenlocker.sh	&					# Screenlocking
 	dunst -conf ~/.config/dunst/dunstrc &				# Notification-Daemon lightweight replacement
 }
@@ -111,6 +112,8 @@ function get_starting_Information()
 	export LAST_CHECKED_DAY="$STARTUP_DAY"
 	export LAST_CHECKED_TIME="$STARTUP_TIME"
 	export LAST_CHECKED_DATE_numberOnly="$(date +'%d')"
+	export LAST_CHECKED_MONTH_numberOnly="$(date +'%m')"
+	export LAST_CHECKED_YEAR_numberOnly="$(date +'%y')"
 
 	# --- Environment Variables
 	export TERMINAL="urxvt"
