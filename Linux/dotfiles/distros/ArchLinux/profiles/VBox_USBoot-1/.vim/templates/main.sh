@@ -167,8 +167,11 @@ function main()
 	if [[ "$ret_code" == "1" ]]; then
 		# Success
 		# Your body here
-		res="$(body "$@")"
+		# res="$(body "$@")"
 		# echo "Return Result: $res"
+		# echo "$res"
+		body "$@"
+		res="$?"
 		echo "$res"
 	else
 		echo -e "Error: \n$ret_code"
