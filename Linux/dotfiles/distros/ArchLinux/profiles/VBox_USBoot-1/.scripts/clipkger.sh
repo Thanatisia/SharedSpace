@@ -7,6 +7,7 @@
 #	- 2021-06-06 2313H, Asura
 #	- 2021-06-06 2320H, Asura
 #	- 2021-06-07 0011H, Asura
+#	- 2021-06-10 1026H, Asura
 # Features: 
 #	- Allows user to 
 #		> add packages of their choice into the list
@@ -25,13 +26,19 @@
 #	2021-06-07 0011H, Asura
 #		- Added help function
 #		- Added Command Line features
+#	2021-06-10 1026H, Asura
+#		- Added logging feature
 #
 
 # --- Variables
 
 # [Program]
+PROGRAM_SCRIPTNAME="clipkger"
 PROGRAM_NAME="Command-Terminal Interface (CTI) Package Installer"
 PROGRAM_TYPE="Main"
+
+# [Default]
+logging_filePath=~/.logs/clipkger
 
 # [Global]
 PKGMGR="pacman"
@@ -259,6 +266,13 @@ init()
 	#
 	# On Runtime initialization
 	#
+
+	# Check If folder exists; 
+	# If not: Create
+	if [[ ! -d $logging_filePath ]]; then
+		mkdir -p $logging_filePath
+	fi
+
 	echo "Program Name: $PROGRAM_NAME"
 }
 
@@ -292,6 +306,7 @@ body()
 					$package_Controls
 					ret_code="$?"
 					echo "Return Code: $ret_code"
+					echo "$(date +'%y/%m/%d %H_%M_%S')" : $package_Name >> $logging_filePath/packages_installed.log
 				else
 					echo "	Package name not provided."
 				fi
@@ -307,6 +322,7 @@ body()
 					$package_Controls
 					ret_code="$?"
 					echo "Return Code: $ret_code"
+					echo "$(date +'%y/%m/%d %H_%M_%S')" : $package_Name >> $logging_filePath/packages_removed.log
 				else
 					echo "	Package name not provided."
 				fi
@@ -322,6 +338,7 @@ body()
 					$package_Controls
 					ret_code="$?"
 					echo "Return Code: $ret_code"
+					echo "$(date +'%y/%m/%d %H_%M_%S')" : $package_Name >> $logging_filePath/packages_uninstalled.log
 				else
 					echo "	Package name not provided."
 				fi
@@ -334,11 +351,13 @@ body()
 				echo "Command: $package_Controls"
 				ret_code="$?"
 				echo "Return Code: $ret_code"
+				echo "$(date +'%y/%m/%d %H_%M_%S')" : $(pacman -Qu) >> $logging_filePath/packages_updated.log
 				;;
 			"--upgrade" | "-Upg" )
 				# Upgrade System
 				echo "Upgrade System"
 				package_Controls="${pkg_controls["upgrade"]}"
+				echo "$(date +'%y/%m/%d %H_%M_%S')" : $(pacman -Qu) >> $logging_filePath/packages_upgraded.log
 				$package_Controls
 				echo "Command: $package_Controls"
 				ret_code="$?"
@@ -352,6 +371,7 @@ body()
 				echo "Command: $package_Controls"
 				ret_code="$?"
 				echo "Return Code: $ret_code"
+				echo "$(date +'%y/%m/%d %H_%M_%S')" : $(pacman -Qu) >> $logging_filePath/packages_updated_and_upgraded.log
 				;;
 			"--help" | "-H")
 				# Help
