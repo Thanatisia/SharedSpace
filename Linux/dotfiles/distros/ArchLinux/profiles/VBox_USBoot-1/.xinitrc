@@ -137,11 +137,22 @@ function autostart()
 	#--- Autostart programs
 }
 
+# Associative Arrays
+declare -A sessions=(
+	[1]="bspwm"
+	[2]="herbstluftwm"
+	[3]="qtile"
+)
+
+# Default Variables
+default_Sessions="${sessions[1]}"
+
 # Startup 
 autostart 
 
 # Switch XOrg
-session=${1:-bspwm} # Default: bspwm
+# session=${1:-bspwm} # Default: bspwm
+session=${1:-$default_Sessions}
 case $session in
 	# Window Managers
 	i3 | i3wm )	
@@ -162,7 +173,8 @@ case $session in
 		;;
 	# No known session, try to run it as command
 	* )
-		exec $1
+		# exec $1
+		exec $session
 		;;
 esac
 

@@ -48,8 +48,8 @@ declare -A git_config_Params=(
 
 declare -A git_local_Commands=(
 	[create-repo]="git init"
-	[add-files]="git add $local_Files"
-	[commit-files]="git commit -m $local_commit_Message"
+	[add-files]="git add"
+	[commit-files]="git commit -m"
 	[config]="git config"
 )
 
@@ -61,7 +61,8 @@ declare -A git_config_Commands=(
 )
 
 declare -A git_remote_Commands=(
-	[push-remote_server]="git push -u $remote_repository_URL $remote_repository_Branch"
+	# [push-remote_server]="git push -u $remote_repository_URL $remote_repository_Branch"
+	[push-remote-server]="git push -u"
 	[get-changes]="git fetch"
 	[merge-changes]="git merge"
 	[fetch-and-merge]="git pull"
@@ -84,6 +85,52 @@ number_of_Commands="${#git_Commands[@]}"
 
 # General Functions
 
+# Git Functions
+set_remote_Information()
+{
+	#
+	# Set Remote config 
+	#	- username
+	#	- email
+	#
+
+	# Local Variables
+
+	# Layer 1: Check global
+	while true; do		
+		# User Input - Global / individual
+		read -p "Global? [Y|N]: " conf_Global
+		if [[ "$conf_Global" == "" ]]; then
+			conf_Global="N"
+		fi
+	done
+
+	# Get username and emai
+	while true; do
+		read -p "Username: " uName
+		read -p "Email: " uEmail
+
+		# Process
+		if [[ ! "$uName" == "" ]] && [[ ! "$uEmail" == "" ]]; then
+			# If Username AND Emai are both not empty
+			if [[ "$conf_Global" == "Y" ]]; then
+				config_Uname="${git_config_Commands["config-global-add-username"]} $uName"	
+				config_Email="${git_config_Commands["config-global-add-email"]} $uEmail"
+			else
+				config_Uname="${git_config_Commands["config-add-username"]} $uName"
+				config_Email="${git_config_Commands["config-add-email"]} $uEmail"
+			fi
+		elif [[ "$uName" == "" ]]; then
+			echo "Username is empty"
+		elif [[ "$uEmail" == "" ]]; then
+			echo "Email is empty"
+		fi
+	done
+
+	# Process
+	echo "Executing $config_Uname..."
+	echo "Executing $config_Email..."
+}
 
 # Pre-Requisite Functions
 initial_check()
@@ -225,8 +272,33 @@ print_Help()
 				*)
 					;;
 			esac
-			echo " [ $k -> $v ]"
+			echo " |> $k -> $v "
 		done
+	done
+}
+
+print_assoc_array_Value()
+{
+	#
+	# Print Individual associative array elements based on Keys
+	#
+	uCommand="$1"
+	
+	for k in ${git_Commands[$uCommand]}; do
+		case "$uCommand" in
+			"local")
+				v="${git_local_Commands[$k]}"
+				;;
+			"remote")
+				v="${git_remote_Commands[$k]}"
+				;;
+			"config")
+				v="${git_config_Commands[$k]}"
+				;;
+			*)
+				;;
+		esac
+		echo " [ $k -> $v ]"
 	done
 }
 
@@ -255,6 +327,8 @@ menu_Git()
 	# while true; do
 	while sleep 1; do
 		echo "[ Select Command ]"
+		echo "- Type 'exit' to return to previus page"
+		
 		# Display options
 		for s in "${!git_Commands[@]}"; do
 			echo "	> $s"
@@ -274,28 +348,45 @@ menu_Git()
 					uCommand="Empty"
 					;;
 				*)
-					echo "Selected:"
 					# echo "	[$uCommand] -> ["${git_Commands[$uCommand]}"]"
-					for k in ${git_Commands[$uCommand]}; do
-						case "$uCommand" in
-							"local")
-								echo " [ $k -> ${git_local_Commands[$k]} ]"
-								;;
-							"remote")
-								echo " [ $k -> ${git_remote_Commands[$k]} ]"
-								;;
-							"config")
-								echo " [ $k -> ${git_config_Commands[$k]} ]"
-								;;
-							*)
-								;;
-						esac
+					# Get user input
+					while true; do
+						echo "[ $uCommand Commands ]"
+						print_assoc_array_Value "$uCommand"
+						echo "- Type 'exit' to return to previus page"
+						read -p "$PS3" comm
+						if [[ "$comm" == "exit" ]]; then
+							break
+						elif [[ ! "$comm" == "" ]]; then
+							# Data Validation: NOT Empty or NULL value
+							
+							# Process User Input
+							echo "Key: $comm"	
+							case "$uCommand" in
+								"local")
+									v="${git_local_Commands[$comm]}"
+									;;
+								"remote")
+									v="${git_remote_Commands[$comm]}"
+									;;
+								"config")
+									v="${git_config_Commands[$comm]}"
+									;;
+								*)
+									;;
+							esac
+
+							# Process System Output
+							echo "Command to execute: $v"
+						fi
+						echo ""
 					done
-					;;
 			esac
+			echo ""
 		else
 			echo "No Selection"
 			# break
+			echo ""
 		fi
 	done
 
