@@ -1,0 +1,12 @@
+#
+# --- VirtualBox Guest Additions
+#
+
+[Operating System: Linux]
+1. Install the following packages (the naming may defer)
+	virtualbox-guest-utils (For VBox service)
+2. Run vboxservice.service
+	sudo systemctl start virtualbox-guest-utils (Temporary)
+	sudo systemctl enable virtualbox-guest-utils (Automatic startup)
+
+
