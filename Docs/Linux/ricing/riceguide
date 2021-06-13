@@ -4,6 +4,7 @@
 #	Created: 2021-06-14 0024H, Asura
 # 	Modified:
 #		2021-06-14 0024H, Asura
+#		2021-06-14 0126H, Asura
 
 # [Table of Contents]
 + Table of Contents
@@ -24,7 +25,76 @@ $HOME/
 	.xinitrc		: The X initialization RC file for startx; To run if using startx
 	.Xresources		: xresources file for XOrg
 
+# [Package Categories]
+# - Any new build should have packages from one of every category below
+Components:
+* Terminal Emulator
+* File Browser
+* Web Browser
+* Text Editor
+* Status Bar
+* Window Manager
+* Compositor
+* Desktop Wallpaper Setter
+* Application Launcher
+* Volume Manager
+* Network Manager
+* Clipboard Manager
+* Notification Daemon
+* Screenlocker
+* Others
+
+Optionals:
+* Bluetooth Manager
+
+# [Package List]
+* Terminal Emulator
+	> alacritty
+	> urxvt
+* File Browser
+	> pcmanfm
+* Web Browser
+	> firefox
+	> google chrome
+	> chromium
+* Text Editor
+	> vim
+	> nano
+* Status Bar
+	> polybar
+	> lemonbar
+* Window Manager
+	> i3
+	> bspwm
+	> Qtile
+	> herbstluftwm
+* Compositor
+	> picom
+* Desktop Wallpaper Setter
+	> nitrogen
+	> feh
+* Application Launcher
+	> dmenu
+	> rofi
+* Volume Manager
+	> alsa-utils
+* Network Manager
+	> NetworkManager
+* Clipboard Manager
+	> clipman
+* Bluetooth Manager
+	> Bluez
+* Notification Daemon
+	> dunst
+* Screenlocker
+	> slock
+* Others
+	> xautolock (Autolocker)
+
 # [Changelogs]
 1. 2021-06-14 0024H, Asura:
-	- Created script file
-
+	- Created 
+		* script file
+2. 2021-06-14 0126H, Asura:
+	- Added
+		* [Package Categories]
