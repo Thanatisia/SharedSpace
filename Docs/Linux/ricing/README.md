@@ -22,16 +22,18 @@
 			Managers
 				i. Clipboard Manager	
 				ii. Network Manager
-  
+ > File Structure & Hierarchy
+
 * Contents:
 
   * Ricing guides
   * Window Manager guides / essentials
   * Desktop Environment guides / essentials
-  
+  * File Structure / Hierarchy
+
 * Last Update/Modified:
   * 2021-06-10 1759H, Asura
-
+  * 2021-06-14 0022H, Asura
 
 
 ## To Note
@@ -89,6 +91,9 @@
     * License
     * Acknowledgements
 
+* 2021-06-14 0023H, Asura
+ * Modified
+	* Added 'File Hierarchy & Structure' in README.md
 
 
 # License
