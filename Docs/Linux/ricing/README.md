@@ -42,15 +42,14 @@
 
 # Documentation
 
-## Getting Started
+## Files
 
-### Dependencies
+> file-structure
+> riceguide
 
-### Installing
+## Folders
 
-### Executing
-
-
+> GTK
 
 ## Usage
 
@@ -92,9 +91,17 @@
     * Acknowledgements
 
 * 2021-06-14 0023H, Asura
- * Modified
-	* Added 'File Hierarchy & Structure' in README.md
+ 	* Modified
+		* Added 'File Hierarchy & Structure' in README.md
+	* Created
+		* Files
+			* file-structure
+			* riceguide
 
+* 2021-06-14 0101H, Asura
+	* Created
+		* Folder
+			* GTK
 
 # License
 
