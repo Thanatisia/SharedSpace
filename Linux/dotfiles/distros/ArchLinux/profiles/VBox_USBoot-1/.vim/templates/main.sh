@@ -12,6 +12,7 @@
 PROGRAM_SCRIPTNAME="main"
 PROGRAM_NAME="NIL"
 PROGRAM_TYPE="Main | Library"
+MODE="DEBUG" # { DEBUG | RELEASE }
 
 # --- Functions
 
