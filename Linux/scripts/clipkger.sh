@@ -8,6 +8,7 @@
 #	- 2021-06-06 2320H, Asura
 #	- 2021-06-07 0011H, Asura
 #	- 2021-06-10 1026H, Asura
+#	- 2021-06-15 0055H, Asura
 # Features: 
 #	- Allows user to 
 #		> add packages of their choice into the list
@@ -28,6 +29,9 @@
 #		- Added Command Line features
 #	2021-06-10 1026H, Asura
 #		- Added logging feature
+#	2021-06-15 0055H, Asura
+#		- Added Documentations
+#		- Fixed install function
 #
 
 # --- Variables
@@ -50,6 +54,7 @@ pkgs=(
 	# - Place your files here
 	"xterm"
 	# Key Options
+	"select-others" # Other Packages outside of the stated
 	"select-end"	# To end the selection
 	"select-show"	# To show all selected packages
 )
@@ -112,6 +117,7 @@ menu_Select()
 				select opt in "${pkgs[@]}"; do
 					selected_pkg_Name="$opt"
 
+					# Handle the selected package
 					case "$selected_pkg_Name" in
 						"select-end" )
 							# End Select
@@ -128,6 +134,15 @@ menu_Select()
 						"select-show")
 							# Show packages
 							echo "Packages: $selected_Packages"
+							;;
+						"select-others")
+							# Other packages
+							read -p "Package Name: " other_Pkgs
+							if [[ ! "$selected_Packages" == *"$other_Pkgs"* ]]; then
+								selected_Packages+="$other_Pkgs "
+							else
+								echo "Package is already selected."
+							fi
 							;;
 						*)
 							# Not Exit / Quit
@@ -207,6 +222,13 @@ menu_package_Control()
 									break
 								elif [[ "$selected_pkg_Name" == "select-show" ]]; then
 									echo "Packages: $selected_Packages"
+								elif [[ "$selected_pkg_Name" == "select-others" ]]; then
+									read -p "Package Name: " other_pkgs
+									if [[ ! "$selected_Packages" == *"$other_pkgs"* ]]; then
+										selected_Packages+="$other_pkgs "
+									else
+										echo "Package is already selected."
+									fi
 								elif [[ ! "$selected_pkg_Name" == "" ]]; then
 									# Not Exit / Quit && Data Validation: Not Empty
 									# Check if string contains substring
@@ -301,9 +323,9 @@ body()
 				
 				if [[ ! "$package_Name" == "" ]]; then
 					# Data Validation: (Option AND package name) NOT Null/Empty Value
-					package_Controls+="$package_Name"
+					package_Controls+="--noconfirm --needed $package_Name"
 					echo "Command: $package_Controls"
-					$package_Controls
+					$package_Controls | tee -a $logging_filePath/packages_installation.log
 					ret_code="$?"
 					echo "Return Code: $ret_code"
 					echo "$(date +'%y/%m/%d %H_%M_%S')" : $package_Name >> $logging_filePath/packages_installed.log
