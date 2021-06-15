@@ -1,0 +1,14 @@
+#
+# Programming Guides and Documentations - Best Practices
+#
+
++ This document contains as much best practices for note, please append here if you have anymore
+
+
+1. Create a individual library/script/file/module
+	- This file will be imported to a source file for use as a storage for each categories as stated below
+	[Categories]
+	'global' 	: Global Variables
+	'functions' : Functions for use by project
+
+
