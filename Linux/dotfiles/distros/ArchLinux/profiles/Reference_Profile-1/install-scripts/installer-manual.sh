@@ -42,6 +42,7 @@ PROGRAM_SCRIPTNAME="installer"
 PROGRAM_NAME="ArchLinux Profile Setup Installer"
 PROGRAM_TYPE="Main"
 MODE="DEBUG" # { DEBUG | RELEASE }
+DISTRO="ArchLinux"
 
 # [Associative Array]
 
@@ -544,6 +545,7 @@ installer()
 	echo "Stage 2: Verify Boot Mode (i.e. UEFI/BIOS)"
 	echo "=========================================="
 	boot_Mode="$(verify_boot_Mode)"
+	echo "Boot Mode: $boot_Mode"
 
 	echo ""
 
@@ -609,6 +611,15 @@ installer()
 	postinstallation
 
 	echo ""
+}
+
+init()
+{
+	#
+	# Initialization
+	#
+	echo "PROGRAM NAME: $PROGRAM_NAME"
+	echo "DISTRO      : $DISTRO"
 }
 
 

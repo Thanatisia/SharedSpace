@@ -11,6 +11,8 @@
 "       2021-05-08 23:13H
 "		2021-05-17 18:02H, ME:
 "			- Added a new template - "minimal" for bash
+"		2021-06-16 00:02H, ME:
+"			- Added new keybinding for Ctrl + A for selecting all
 "
 
 " Set Variables
@@ -166,6 +168,8 @@ set mouse=a
         nnoremap <C-Y> <C-R>
 " Find; Ctrl + f
         inoremap <C-f> <Esc>/
+" Select All; Ctrl + a; v (Visual Mode) -> :G (Go to the bottom) -> Escape (Go back to normal)
+		nnoremap <C-a> v<S-g>
 " [Movement]
 " [Tabs]
 " Create a new tab in vim when in insert mode and put vim into Normal mode; Ctrl + t 
