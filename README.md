@@ -49,7 +49,7 @@
   * 2021-05-23 2220H, Asura
   * 2021-05-23 2302H, Asura
   * 2021-05-23 2322H, Asura
-
+  * 2021-06-15 2003H, Asura
 
 
 # To Note
@@ -58,7 +58,12 @@
 
    >  git clone 
 
-2. Each folder will have its own README like this
+2. To download a individual file, use wget or curl
+   
+   >  wget https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
+   >  curl -L -O https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
+
+3. Each folder will have its own README like this
 
 
 
@@ -126,6 +131,10 @@
     * Indentation of [Documentations]
       * "<h3></h3>" to "###" 
 
+* 2021-06-15 2004H, Asura
+
+  * Modified
+    * Added new method to download individual files
   
 
 # License
