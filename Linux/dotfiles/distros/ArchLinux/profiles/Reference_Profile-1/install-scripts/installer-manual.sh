@@ -7,6 +7,7 @@
 #	- 2021-06-15 0154H, Asura
 #	- 2021-06-15 1836H, Asura
 #	- 2021-06-17 0123H, Asura
+#	- 2021-06-17 0141H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -23,6 +24,8 @@
 #		- Now focusing on postinstallation recommendations
 #	- 2021-06-17 0123H, Asura
 #		- Fixed some bugs: { mounting partitions boot, home and root didnt include the device name }
+#	- 2021-06-17 0141H, Asura
+#		- Added read -p if MODE == DEBUG
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -394,18 +397,23 @@ arch_chroot_Exec()
 
 	# Associative Array
 	chroot_commands=(
-		"ln -sf /usr/share/zoneinfo/$region/$city /etc/localtime"						# Step 10: Set time zone
-		"hwclock --systohc"																# Step 10: Generate /etc/adjtime via hwclock
+		"echo ======= Time Zones ======"												# Step 10: Time Zones
+		"ln -sf /usr/share/zoneinfo/$region/$city /etc/localtime"						# Step 10: Time Zones; Set time zone
+		"hwclock --systohc"																# Step 10: Time Zones; Generate /etc/adjtime via hwclock
+		"echo ======= Location ======"													# Step 11: Localization;
 		"vim /etc/locale.gen"															# Step 11: Localization; Edit /etc/locale.gen and uncomment language (ie. en_US.UTF-8 UTF-8; en_SG.UTF-8 UTF-8;)
 		"locale-gen"																	# Step 11: Localization; Generate the locales by running
 		"echo \"LANG=$language\" | tee -a /etc/locale.conf"								# Step 11: Localization; Set LANG variable according to your locale
+		"echo ======= Network Configuration ======"										# step 12: Network Configuration;
 		"echo \"$hostname\" | tee -a /etc/hostname"										# Step 12: Network Configuration; Set Network Hostname Configuration; Create hostname file
 		"echo \"127.0.0.1	localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
 		"echo \"::1			localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
 		"echo \"127.0.1.1	$hostname.localdomain	$hostname\" | tee -a /etc/hosts"	# Step 12: Network Configuration; Add matching entries to hosts file
+		"echo ======= Make Initial Ramdisk ======="										# Step 13: Initialize RAM file system;
 		"mkinitcpio -P linux"															# Step 13: Initialize RAM file system; Create initramfs image (linux kernel)
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
-		"passwd"																		# Step 14: User Inforation; Set Root Password
+		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
+		"passwd"																		# Step 14: User Information; Set Root Password
 	)
 
 	# --- Extra Information
@@ -580,12 +588,20 @@ installer()
 	echo "============================"
 	update_system_Clock
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
+
 	echo ""
 
 	echo "============================"
 	echo "Stage 4: Partition the Disks"
 	echo "============================"
 	device_partition_Manager
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
 
 	echo ""
 
@@ -594,12 +610,20 @@ installer()
 	echo "===================="
 	mount_Disks
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
+
 	echo ""
 
 	echo "======================="
 	echo "Stage 6: Select Mirrors"
 	echo "======================="
 	echo $EDITOR /etc/pacman.d/mirrorlist
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
 
 	echo ""
 
@@ -608,12 +632,20 @@ installer()
 	echo "==================================="
 	pacstrap_Install
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
+
 	echo ""
 
 	echo "==========================================="
 	echo "Stage 8: Generate fstab (File System Table)"
 	echo "==========================================="
 	fstab_Generate
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
 
 	echo ""
 
