@@ -33,21 +33,6 @@ folders_to_create=(
 	$config_Path
 )
 
-pkgs=(
-	# EDIT: Place your packages to install here
-	"qtile"				# Window Manager
-	"alacritty"			# Terminal Emulator
-	"pcmanfm"			# File Browser
-	"brave"				# Web Browser
-	"sublime-text-dev"	# Graphial Text/Code Editor
-	"nitrogen"			# Image Setter
-	"picom"				# Compositor
-	"conky"				# System Monitor
-	"bluez"				# Bluetooth Manager
-	"lxappearance-gtk3"	# Others : Ricing Utility (GTK-3.0)
-	"neofetch"			# Others : Fetch Utility
-)
-
 base_distros=(
 	"ArchLinux"
 	"Debian"
@@ -64,14 +49,27 @@ declare -A install_commands=(
 	[ArchLinux]="sudo pacman -S --noconfirm --needed"
 	[Debian]="sudo apt-get install"
 )
-declare -A de_pkgs=(
+declare -A pkgs=(
 	# Place all your packages you want to be in the 
 	# Desktop Environment here
 	# according to category
 	# - Please seperate each package with ';'
 	# Syntax:
 	#	[<category>]="
-	[file-browser]="package-1;package-2;package-n"
+	# Examples:
+	#	[file-browser]="package-1;package-2;package-n"
+	[file-browser]="pcmanfm"
+	[window-manager]="qtile"
+	[terminal-emualator]="alacritty"
+	[web-browser]="brave"
+	[graphical-text-editor]="sublime-text-dev"
+	[image-setter]="nitrogen"
+	[compositor]="picom"
+	[system-monitor]="conky"
+	[bluetooth-manager]="bluez"
+	[ricing]="lxappearance-gtk3"
+	[fetch]="neofetch"
+	[others]=""
 )
 
 # [Derivatives]
@@ -130,6 +128,15 @@ pkg_install()
 	# Install relevant/required Packages
 	#
 
+	# Local Variables
+	str="${pkgs[@]}"
+
+
+	# Split value string into container
+	arr=("$(seperate_by_Delim ';' "$str")")
+
+	echo "Array: ${arr[@]}"
+
 	# Confirm installation
 	for p in "${!pkgs[@]}"; do
 		echo "[$p] : [${pkgs[$p]}]"
@@ -144,10 +151,14 @@ pkg_install()
 
 	if [[ "$conf" == "Y" ]]; then
 		for p in "${pkgs[@]}"; do
-			if [[ "$MODE" == "DEBUG" ]]; then
-				echo $install_Command $p | tee -a $logging_filepath/installed-packages.log 
-			else
-				$install_Command $p | tee -a $logging_filepath/installed-packages.log
+			if [[ ! "$p" == "" ]]; then
+				# Do if NOT empty
+				# else skip
+				if [[ "$MODE" == "DEBUG" ]]; then
+					echo $install_Command $p | tee -a $logging_filepath/installed-packages.log
+				else
+					$install_Command $p | tee -a $logging_filepath/installed-packages.log
+				fi
 			fi
 		done
 	fi
