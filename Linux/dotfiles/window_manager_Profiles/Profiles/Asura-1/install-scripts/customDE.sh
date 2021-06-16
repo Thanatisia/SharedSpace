@@ -64,6 +64,15 @@ declare -A install_commands=(
 	[ArchLinux]="sudo pacman -S --noconfirm --needed"
 	[Debian]="sudo apt-get install"
 )
+declare -A de_pkgs=(
+	# Place all your packages you want to be in the 
+	# Desktop Environment here
+	# according to category
+	# - Please seperate each package with ';'
+	# Syntax:
+	#	[<category>]="
+	[file-browser]="package-1;package-2;package-n"
+)
 
 # [Derivatives]
 number_of_Packages="${#pkgs[@]}"
@@ -84,6 +93,34 @@ create_directories()
 			mkdir -p $d
 		fi
 	done
+}
+
+seperate_by_Delim()
+{
+	#
+	# Seperate a string into an array by the delimiter
+	#
+
+	# --- Input
+	
+	# Command Line Argument
+	delim="${1:-';'}"	# Delimiter to split
+	str="$2"			# String to be seperated
+
+	# Local Variables
+
+	# Array
+	content=()			# Array container to store results
+	char=''				# Single character for splitting element of a string
+
+	# Associative Array
+
+	# --- Processing
+	# Split string into individual characters
+	IFS=$delim read -r -a content <<< "$str"
+	
+	# --- Output
+	echo "${content[@]}"
 }
 
 # Installation Stages

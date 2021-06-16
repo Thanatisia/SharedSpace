@@ -91,6 +91,34 @@ function seperate_key_Value()
 	echo "$res"
 }
 
+seperate_by_Delim()
+{
+	#
+	# Seperate a string into an array by the delimiter
+	#
+
+	# --- Input
+	
+	# Command Line Argument
+	delim="${1:-';'}"	# Delimiter to split
+	str="$2"			# String to be seperated
+
+	# Local Variables
+
+	# Array
+	content=()			# Array container to store results
+	char=''				# Single character for splitting element of a string
+
+	# Associative Array
+
+	# --- Processing
+	# Split string into individual characters
+	IFS=$delim read -r -a content <<< "$str"
+	
+	# --- Output
+	echo "${content[@]}"
+}
+
 function get_Key()
 {
 	#

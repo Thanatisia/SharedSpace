@@ -1,0 +1,63 @@
+#
+# Programming Guide
+# Language: <Programming|Scripting Language>
+#
+# Author: <Author>
+# Created by: <yyyy-mm-dd> <HHMM>H, <Author>
+# Modified by:
+#	- <yyyy-mm-dd> <HHMM>H, <Author>:
+# Changelogs:
+#	- <yyyy-mm-dd> <HHMM>H, <Author>:
+#		- Created script file
+#
+
+
+
+
+# [Description]
+
+Topic: <Topic Header>
+
+<Topic header>
+
+# [Syntax]
+
+
+# [Example]
+
+# Code
+seperate_by_Delim()
+{
+	#
+	# Seperate a string into an array by the delimiter
+	#
+
+	# --- Input
+	
+	# Command Line Argument
+	delim="${1:-';'}"	# Delimiter to split
+	str="$2"			# String to be seperated
+
+	# Local Variables
+
+	# Array
+	content=()			# Array container to store results
+	char=''				# Single character for splitting element of a string
+
+	# Associative Array
+
+	# --- Processing
+	# Split string into individual characters
+	IFS=$delim read -r -a content <<< "$str"
+	
+	# --- Output
+	echo "${content[@]}"
+}
+
+# Usage
+Terminal:
+$ . script.ext	# This is to import (Linux: source) the file
+$ seperate_by_Delim ";" "Hello;World;5;4;3;2;1"
+
+# Intended Output
+Hello World 5 4 3 2 1
