@@ -468,6 +468,7 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
+		"echo ======= Bootloader : Grub ======"											# Step 15: Bootloader
 	)
 
 	# --- Extra Information
