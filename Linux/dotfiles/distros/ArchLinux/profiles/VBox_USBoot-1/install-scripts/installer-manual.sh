@@ -50,7 +50,7 @@
 PROGRAM_SCRIPTNAME="installer"
 PROGRAM_NAME="ArchLinux Profile Setup Installer"
 PROGRAM_TYPE="Main"
-MODE="DEBUG" # { DEBUG | RELEASE }
+MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux"
 
 # [Associative Array]
