@@ -8,6 +8,7 @@
 #	- 2021-06-15 1836H, Asura
 #	- 2021-06-17 0123H, Asura
 #	- 2021-06-17 0201H, Asura
+#	- 2021-06-17 0233H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -26,6 +27,8 @@
 #		- Fixed some bugs: { mounting partitions boot, home and root didnt include the device name }
 #	- 2021-06-17 0201H, Asura
 #		- Added read -p if MODE == DEBUG
+#	- 2021-06-17 0233H, Asura
+#		- Added Debug features
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -180,10 +183,18 @@ verify_boot_Mode()
 update_system_Clock()
 {
 	# Sync NTP
-	echo timedatect set-ntp true
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo timedatectl set-ntp true
+	else
+		timedatectl set-ntp true
+	fi
 
 	# To check system clock
-	echo timedatectl status
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo timedatectl status
+	else
+		timedatectl status
+	fi
 }
 
 device_partition_Manager()
@@ -206,7 +217,12 @@ device_partition_Manager()
 		echo "=============================================="
 		echo " Formatting [$device_Name] to [$device_Label] "
 		echo "=============================================="
-		echo parted $device_Name mklabel $device_Label
+		
+		if [[ "$MODE" == "DEBUG" ]]; then
+			echo parted $device_Name mklabel $device_Label
+		else
+			parted $device_Name mklabel $device_Label
+		fi
 	fi
 
 	for(( i=0; i <= "${#partition_Configuration[@]}"; i++)); do
@@ -242,14 +258,27 @@ device_partition_Manager()
 			echo "==============================="
 
 			# Create Partition
-			echo parted $device_Name mkpart $part_Type $part_file_Type $part_start_Size $part_end_Size
+			if [[ "$MODE" == "DEBUG" ]]; then
+				echo parted $device_Name mkpart $part_Type $part_file_Type $part_start_Size $part_end_Size
+			else
+				parted $device_Name mkpart $part_Type $part_file_Type $part_start_Size $part_end_Size
+			fi
+
 			## Format file system
 			case "$part_file_Type" in 
 				"fat32")
-					echo mkfs.fat -F32 $device_Name$part_ID
+					if [[ "$MODE" == "DEBUG" ]]; then
+						echo mkfs.fat -F32 $device_Name$part_ID
+					else
+						mkfs.fat -F32 $device_Name$part_ID
+					fi
 					;;
 				"ext4")
-					echo mkfs.ext4 $device_Name$part_ID
+					if [[ "$MODE" == "DEBUG" ]]; then
+						echo mkfs.ext4 $device_Name$part_ID
+					else
+						mkfs.ext4 $device_Name$part_ID
+					fi
 					;;
 				*)
 					echo "Unknown File System: [$part_file_Type]"
@@ -257,7 +286,11 @@ device_partition_Manager()
 			esac
 			## Check bootable
 			if [[ "$part_Bootable" == "True" ]]; then
-				echo parted $device_Name set $part_ID boot on
+				if [[ "$MODE" == "DEBUG" ]]; then
+					echo parted $device_Name set $part_ID boot on
+				else
+					parted $device_Name set $part_ID boot on
+				fi
 			fi
 		fi
 	done
@@ -287,17 +320,34 @@ mount_Disks()
 
 	# --- Processing
 	# Mount the root volume to /mnt
-	echo mount "$device_Name"2 $dir_Mount
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo mount "$device_Name"2 $dir_Mount
+	else
+		mount "$device_Name"2 $dir_Mount
+	fi
 
 	# Make other directories (i.e. home)
 	# Home Directory
-	echo mkdir -p $dir_Home
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo mkdir -p $dir_Home
+	else
+		mkdir -p $dir_Home
+	fi
 	# Boot Directory
-	echo mkdir -p $dir_Boot
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo mkdir -p $dir_Boot
+	else
+		mkdir -p $dir_Boot
+	fi
 
 	# Mount remaining directories
-	echo mount "$device_Name"3 $dir_Home
-	echo mount "$device_Name"1 $dir_Boot
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo mount "$device_Name"3 $dir_Home
+		echo mount "$device_Name"1 $dir_Boot
+	else
+		mount "$device_Name"3 $dir_Home
+		mount "$device_Name"1 $dir_Boot
+	fi
 
 	# --- Output
 	echo "==============="
@@ -329,11 +379,15 @@ pacstrap_Install()
 		"linux"
 		"linux-firmware"
 		"linux-lts"
-		"linux-ts-headers"
+		"linux-lts-headers"
 	)
 
 	# --- Processing
-	echo pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+	else
+		pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+	fi
 
 	# --- Output
 }
@@ -349,7 +403,11 @@ fstab_Generate()
 	dir_Mount="${mount_Group["2"]}"
 
 	# Generate an fstab file (use -U or -L to define by UUID or labels, respectively):
-	echo "genfstab -U $dir_Mount >> $dir_Mount/etc/fstab"
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo "genfstab -U $dir_Mount >> $dir_Mount/etc/fstab"
+	else
+		genfstab -U $dir_Mount >> $dir_Mount/etc/fstab
+	fi
 }
 
 arch_chroot_Exec()
@@ -425,7 +483,11 @@ arch_chroot_Exec()
 
 	# --- Processing
 	for c in "${chroot_commands[@]}"; do
-		echo arch-chroot $dir_Mount $c
+		if [[ "$MODE" == "DEBUG" ]]; then
+			echo arch-chroot $dir_Mount $c
+		else
+			arch-chroot $dir_Mount $c
+		fi
 	done
 
 	# --- Output
