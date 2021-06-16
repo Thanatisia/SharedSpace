@@ -1,0 +1,68 @@
+#
+# Profile Design Tracking List
+#
+# - Place your profile specifications, packages etc. here
+#
+
+[Table of Contents]
+(C)ategories
+(P)ackages
+(R)esources
+(T)emplates
+
+[(C)ategories]
+- Window Manager
+- Terminal Emulator
+- File Browser
+- Web Browser
+- Graphical/Terminal Text/Code Editor
+- Image Setter
+- Compositor
+- Launcher
+- System Monitor
+- Bluetooth Manager
+- Others
+	- Ricing Utility
+	- Fetch Utility
+
+[(P)ackages]
+
+# --- All
+
+
+# --- Profile List
+
+### User : <username> ###
+
+## Packages - compiled
+# software_Name, package_Name, package_Category, installation_Method, package_Description
+
+
+## Packages - Categorised
+# <package_Category>
+#	- <software_Name>; <package_Name>
+
+
+
+[(R)esources]
+
+
+[(T)emplates]
+# [Packages]
+
+# --- All
+
+# --- Profile List
+
+### User : <username> ###
+
+# Packages - compiled
+# software_Name, package_Name, package_Category, installation_Method [ { package-manager | compilation | aur | python-pip } ], package_Description
+
+# Packages - Categorised
+# <package_Category>
+#	- <software_Name>; <package_Name>
+
+# --- <Package Category>
+
+
