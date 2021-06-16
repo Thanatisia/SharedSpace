@@ -6,6 +6,7 @@
 #	- 2021-06-15 0104H, Asura
 #	- 2021-06-15 0154H, Asura
 #	- 2021-06-15 1836H, Asura
+#	- 2021-06-17 0123H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -20,6 +21,8 @@
 #	- 2021-06-15 1836H, Asura
 #		- Completed main install structure
 #		- Now focusing on postinstallation recommendations
+#	- 2021-06-17 0123H, Asura
+#		- Fixed some bugs: { mounting partitions boot, home and root didnt include the device name }
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -173,11 +176,30 @@ verify_boot_Mode()
 
 update_system_Clock()
 {
+	comms=(
+		# Sync NTP
+		"timedatectl set-ntp true"
+		# To check system clock
+		"timedatectl status"
+	)
+
+	case "$MODE" in
+		"DEBUG")
+			for c in "${comms[@]}"; do
+				echo $c
+			done
+			;;
+		*)
+			# Default: RELEASE
+
+			;;
+	esac
+
 	# Sync NTP
-	echo timedatect set-ntp true
+	#echo timedatect set-ntp true
 
 	# To check system clock
-	echo timedatectl status
+	#echo timedatectl status
 }
 
 device_partition_Manager()
@@ -189,6 +211,9 @@ device_partition_Manager()
 	echo "Get User Input - Device Information"
 	device_Name="${device_Parameters["device_Name"]}"
 	device_Label="${device_Parameters["device_Label"]}"
+
+	echo "Device Name : $device_Name"
+	echo "Device Label: $device_Label"
 
 	echo ""
 
@@ -237,6 +262,7 @@ device_partition_Manager()
 
 			# Create Partition
 			echo parted $device_Name mkpart $part_Type $part_file_Type $part_start_Size $part_end_Size
+			
 			## Format file system
 			case "$part_file_Type" in 
 				"fat32")
@@ -281,7 +307,7 @@ mount_Disks()
 
 	# --- Processing
 	# Mount the root volume to /mnt
-	echo mount $device_Name2 $dir_Mount
+	echo mount "$device_Name"2 $dir_Mount
 
 	# Make other directories (i.e. home)
 	# Home Directory
@@ -290,8 +316,8 @@ mount_Disks()
 	echo mkdir -p $dir_Boot
 
 	# Mount remaining directories
-	echo mount $device_Name3 $dir_Home
-	echo mount $device_Name1 $dir_Boot
+	echo mount "$device_Name"3 $dir_Home
+	echo mount "$device_Name"1 $dir_Boot
 
 	# --- Output
 	echo "==============="

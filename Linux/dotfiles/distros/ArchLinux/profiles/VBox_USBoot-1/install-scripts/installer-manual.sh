@@ -6,6 +6,7 @@
 #	- 2021-06-15 0104H, Asura
 #	- 2021-06-15 0154H, Asura
 #	- 2021-06-15 1836H, Asura
+#	- 2021-06-17 0123H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -20,6 +21,8 @@
 #	- 2021-06-15 1836H, Asura
 #		- Completed main install structure
 #		- Now focusing on postinstallation recommendations
+#	- 2021-06-17 0123H, Asura
+#		- Fixed some bugs: { mounting partitions boot, home and root didnt include the device name }
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -281,7 +284,7 @@ mount_Disks()
 
 	# --- Processing
 	# Mount the root volume to /mnt
-	echo mount $device_Name2 $dir_Mount
+	echo mount "$device_Name"2 $dir_Mount
 
 	# Make other directories (i.e. home)
 	# Home Directory
@@ -290,8 +293,8 @@ mount_Disks()
 	echo mkdir -p $dir_Boot
 
 	# Mount remaining directories
-	echo mount $device_Name3 $dir_Home
-	echo mount $device_Name1 $dir_Boot
+	echo mount "$device_Name"3 $dir_Home
+	echo mount "$device_Name"1 $dir_Boot
 
 	# --- Output
 	echo "==============="
