@@ -527,7 +527,7 @@ arch_chroot_Exec()
 	# Combine into a string
 	cmd_str=""
 	for c in "${chroot_commands[@]}"; do
-		cmd_str="$c;"
+		cmd_str+="\n$c;"
 	done
 	
 	# Execute in arch-chroot
@@ -545,7 +545,7 @@ arch_chroot_Exec()
 	#	fi
 	# done
 	if [[ "$MODE" == "DEBUG" ]]; then
-		echo "arch-chroot $dir_Mount <<- EOF\
+		echo -e "arch-chroot $dir_Mount <<- EOF\
 			$cmd_str
 		EOF"
 	else
