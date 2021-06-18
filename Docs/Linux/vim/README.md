@@ -21,7 +21,7 @@
   
 * Last Update/Modified:
   * 2021-06-12 2213H, Asura
-
+  * 2021-06-18 1148H, Asura
 
 
 ## To Note
@@ -35,6 +35,9 @@
 # Files
 
 > README.md
+> fullguide
+> controls
+
 
 ## Usage
 

@@ -1,0 +1,8 @@
+# --- Basics : Vim Controls 
+
+# Basic Information
+Delimiter/Seperator: ':'
+
+# keybind : Description : Examples
+gi : Starts Insert mode in the last place where you have inserted text before : Escape, move to other places, 'gi', you are back at the original place
+
