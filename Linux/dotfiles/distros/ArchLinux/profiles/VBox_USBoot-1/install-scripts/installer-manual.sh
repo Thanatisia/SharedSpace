@@ -10,6 +10,7 @@
 #	- 2021-06-17 0201H, Asura
 #	- 2021-06-17 0233H, Asura
 #	- 2021-06-18 1228H, Asura
+#	- 2021-06-18 2011H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -33,6 +34,9 @@
 #	- 2021-06-18 1228H, Asura
 #		- Modified arch-chroot /mnt <commands> install scripts
 #		- Added a [Reference] section for reference sites
+#	- 2021-06-18 2011H, Asura
+#		- Added 'check network'
+#		- Added pauses to after arch-chroot_exec
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -173,6 +177,18 @@ debug_printAll()
 }
 
 # Installation stages
+verify_network()
+{
+	ping -c 5 8.8.8.8
+	ret_code="$?"
+	res=False
+	if [[ "$res" == "0" ]]; then
+		# Success
+		res=True
+	fi
+	echo "$res"
+}
+
 verify_boot_Mode()
 {
 	boot_Mode="bios"
@@ -219,7 +235,7 @@ device_partition_Manager()
 
 	# Format & Create Label
 	read -p "Would you like to format? [Y|N]: " format_conf
-	if [[ "$format_conf" == "Y" ]]; then
+	if [[ "$format_conf" == "Y" ]] || [[ "$format_conf" == "" ]]; then
 		echo "=============================================="
 		echo " Formatting [$device_Name] to [$device_Label] "
 		echo "=============================================="
@@ -632,7 +648,12 @@ installer()
 	echo "========================"
 	echo "Stage 1: Prepare Network"
 	echo "========================"
-	
+	echo "Testing Network..."
+	network_Enabed="$(verify_network)"
+	if [[ "$network_Enabled" == "False" ]]; then
+		sudo dhcpcd
+	fi
+
 	echo ""
 
 	echo "=========================================="
@@ -713,6 +734,10 @@ installer()
 	echo "Stage 9: Chroot and execute"
 	echo "==========================="
 	arch_chroot_Exec # Execute commands in arch-chroot
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
 
 	echo ""
 
