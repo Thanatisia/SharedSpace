@@ -536,15 +536,23 @@ arch_chroot_Exec()
 	#	fi
 	#done
 	
-	if [[ "$MODE" == "DEBUG" ]]; then
-		echo -e "arch-chroot $dir_Mount <<- EOF\
-			$cmd_str
-		EOF"
-	else
-		arch-chroot $dir_Mount <<-EOF
-			$cmd_str
-		EOF
-	fi
+	#if [[ "$MODE" == "DEBUG" ]]; then
+	#	echo -e "arch-chroot $dir_Mount <<- EOF\
+	#		$cmd_str
+	#	EOF"
+	#else
+	#	arch-chroot $dir_Mount <<-EOF
+	#		$cmd_str
+	#	EOF
+	#fi
+
+	for c in "${chroot_commands[@]}"; do
+		if [[ "$MODE" == "DEBUG" ]]; then
+			echo -e "arch-chroot $dir_Mount $c"
+		else
+			arch-chroot $dir_Mount $c
+		fi
+	done
 
 	# --- Output
 }
