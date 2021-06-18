@@ -9,6 +9,7 @@
 #	- 2021-06-17 0123H, Asura
 #	- 2021-06-17 0201H, Asura
 #	- 2021-06-17 0233H, Asura
+#	- 2021-06-18 1228H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -29,6 +30,9 @@
 #		- Added read -p if MODE == DEBUG
 #	- 2021-06-17 0233H, Asura
 #		- Added Debug features
+#	- 2021-06-18 1228H, Asura
+#		- Modified arch-chroot /mnt <commands> install scripts
+#		- Added a [Reference] section for reference sites
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -42,6 +46,8 @@
 #					Swap File
 # NOTES:
 #	- Please modify all [EDIT: Modify this] and confirm before running this file
+# References:
+#	1. Multiline-scripting in Arch-chroot : https://www.reddit.com/r/archlinux/comments/bssbze/scripting_into_chroot/
 #
 
 # --- Variables
@@ -483,14 +489,28 @@ arch_chroot_Exec()
 	esac
 
 	# --- Processing
+	# ====== RETAIN THIS PIECE OF CODE FOR LEGACY DEBUGGING, THX FUTURE ME ====== #
+	#for c in "${chroot_commands[@]}"; do
+	#	if [[ "$MODE" == "DEBUG" ]]; then
+	#		echo arch-chroot $dir_Mount $c
+	#	else
+	#		arch-chroot $dir_Mount $c
+	#	fi
+	#done
+	# ====== RETAIN THIS PIECE OF CODE FOR LEGACY DEBUGGING, THX FUTURE ME ====== #
 	for c in "${chroot_commands[@]}"; do
-		if [[ "$MODE" == "DEBUG" ]]; then
-			echo arch-chroot $dir_Mount $c
+		if [[ "$MODE" == "DEBUG" ]]; then	
+			# echo arch-chroot $dir_Mount $c
+			echo "arch-chroot $dir_Mount <<-EOF\
+				$c\
+			EOF"
 		else
-			arch-chroot $dir_Mount $c
+			# arch-chroot $dir_Mount $c
+			arch-chroot $dir_Mount <<-EOF
+				$c
+			EOF
 		fi
 	done
-
 	# --- Output
 }
 
