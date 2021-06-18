@@ -466,9 +466,9 @@ arch_chroot_Exec()
 		"echo \"LANG=$language\" | tee -a /etc/locale.conf"								# Step 11: Localization; Set LANG variable according to your locale
 		"echo ======= Network Configuration ======"										# step 12: Network Configuration;
 		"echo \"$hostname\" | tee -a /etc/hostname"										# Step 12: Network Configuration; Set Network Hostname Configuration; Create hostname file
-		"echo \"127.0.0.1	localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
-		"echo \"::1			localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
-		"echo \"127.0.1.1	$hostname.localdomain	$hostname\" | tee -a /etc/hosts"	# Step 12: Network Configuration; Add matching entries to hosts file
+		"echo \"127.0.0.1   localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
+		"echo \"::1         localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
+		"echo \"127.0.1.1   $hostname.localdomain   $hostname\" | tee -a /etc/hosts"	# Step 12: Network Configuration; Add matching entries to hosts file
 		"echo ======= Make Initial Ramdisk ======="										# Step 13: Initialize RAM file system;
 		"mkinitcpio -P linux"															# Step 13: Initialize RAM file system; Create initramfs image (linux kernel)
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
