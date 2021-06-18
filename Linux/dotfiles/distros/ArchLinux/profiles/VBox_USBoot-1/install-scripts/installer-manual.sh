@@ -519,7 +519,7 @@ arch_chroot_Exec()
 	mount_Root=$dir_Mount/root
 	script_to_exe=chroot-comms.sh
 	if [[ "$MODE" == "DEBUG" ]]; then
-		echo "echo -e "$cmd_str" > $mount_Root/$script_to_exe"
+		echo -e "$cmd_str"
 	else
 		echo -e "$cmd_str" > $mount_Root/$script_to_exe
 	fi
