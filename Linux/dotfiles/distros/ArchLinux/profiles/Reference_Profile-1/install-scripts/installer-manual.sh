@@ -523,19 +523,36 @@ arch_chroot_Exec()
 	esac
 
 	# --- Processing
+
+	# Combine into a string
+	cmd_str=""
 	for c in "${chroot_commands[@]}"; do
-		if [[ "$MODE" == "DEBUG" ]]; then	
-			# echo arch-chroot $dir_Mount $c
-			echo "arch-chroot $dir_Mount <<-EOF\
-				$c\
-			EOF"
-		else
-			# arch-chroot $dir_Mount $c
-			arch-chroot $dir_Mount <<-EOF
-				$c
-			EOF
-		fi
+		cmd_str="$c;"
 	done
+	
+	# Execute in arch-chroot
+	#for c in "${chroot_commands[@]}"; do
+	#	if [[ "$MODE" == "DEBUG" ]]; then	
+	#		# echo arch-chroot $dir_Mount $c
+	#		echo "arch-chroot $dir_Mount <<-EOF\
+	#			$c\
+	#		EOF"
+	#	else
+	#		# arch-chroot $dir_Mount $c
+	#		arch-chroot $dir_Mount <<-EOF
+	#			$c
+	#		EOF
+	#	fi
+	# done
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo "arch-chroot $dir_Mount <<- EOF\
+			$cmd_str
+		EOF"
+	else
+		arch-chroot $dir_Mount <<-EOF
+			$cmd_str
+		EOF
+	fi
 
 	# --- Output
 }
