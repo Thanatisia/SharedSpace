@@ -1,0 +1,32 @@
+# If you need to remount for debugging in ArchLinux
+
+[Example Device Design]
+Swap file?: NIL
+Device Name: /dev/sdb
+Partitions: 
+	/dev/sdb1 : Boot Partition (/boot; /mnt/boot)
+	/dev/sdb2 : Root Partition (Mount Partition) (/; /mnt)
+	/dev/sdb3 : Home Partition (/home; /mnt/home)		
+
+[Syntax]
+1. Mounting
+	mount <device_Name><device_Partition> /mnt
+
+[Examples]
+1. Mounting
+	mount /dev/sdX2 /mnt
+
+[Remounting Processes]
+1. mount 'mount' partition (aka Root partition)
+	mount /dev/sdb2 /mnt
+
+2. mount 'boot' partition (typically partition number 1)
+	mount /dev/sdb1 /mnt/boot
+
+3. mount other partitions (3,4...)
+	mount /dev/sdb3 /mnt/home
+
+4. Change to root after mounting
+	arch-chroot /mnt
+
+
