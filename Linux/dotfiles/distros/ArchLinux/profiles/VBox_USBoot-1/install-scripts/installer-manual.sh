@@ -11,6 +11,7 @@
 #	- 2021-06-17 0233H, Asura
 #	- 2021-06-18 1228H, Asura
 #	- 2021-06-18 2011H, Asura
+#	- 2021-06-18 2256H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -37,6 +38,8 @@
 #	- 2021-06-18 2011H, Asura
 #		- Added 'check network'
 #		- Added pauses to after arch-chroot_exec
+#	- 2021-06-18 2256H, Asura
+#		- Modified arch-chroot method to create a file inside root partition to execute for the time being
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -511,7 +514,16 @@ arch_chroot_Exec()
 	for c in "${chroot_commands[@]}"; do
 		cmd_str+="\n$c;"
 	done
-	
+
+	# Cat commands into script file in mount root
+	mount_Root=$dir_Mount/root
+	script_to_exe=chroot-comms.sh
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo "echo -e "$cmd_str" > $mount_Root/$script_to_exe"
+	else
+		echo -e "$cmd_str" > $mount_Root/$script_to_exe
+	fi
+
 	# Execute in arch-chroot
 	# ====== RETAIN THIS PIECE OF CODE FOR LEGACY DEBUGGING, THX FUTURE ME ====== #
 	#for c in "${chroot_commands[@]}"; do
@@ -546,14 +558,18 @@ arch_chroot_Exec()
 	#	EOF
 	#fi
 
-	for c in "${chroot_commands[@]}"; do
-		if [[ "$MODE" == "DEBUG" ]]; then
-			echo -e "arch-chroot $dir_Mount $c"
-		else
-			arch-chroot $dir_Mount $c
-		fi
-	done
+	#for c in "${chroot_commands[@]}"; do
+	#	if [[ "$MODE" == "DEBUG" ]]; then
+	#		echo -e "arch-chroot $dir_Mount $c"
+	#	else
+	#		arch-chroot $dir_Mount $c
+	#	fi
+	#done
 
+	if [[ ! "$MODE" == "DEBUG" ]]; then
+		chmod +x $mount_Root/$script_to_exe
+		arch-chroot $dir_Mount $mount_Root/$script_to_exe
+	fi
 	# --- Output
 }
 
