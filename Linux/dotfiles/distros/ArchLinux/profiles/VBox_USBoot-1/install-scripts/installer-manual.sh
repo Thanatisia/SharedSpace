@@ -568,7 +568,7 @@ arch_chroot_Exec()
 
 	if [[ ! "$MODE" == "DEBUG" ]]; then
 		chmod +x $mount_Root/$script_to_exe
-		arch-chroot $dir_Mount $mount_Root/$script_to_exe
+		arch-chroot $dir_Mount /root/$script_to_exe
 	fi
 	# --- Output
 }
