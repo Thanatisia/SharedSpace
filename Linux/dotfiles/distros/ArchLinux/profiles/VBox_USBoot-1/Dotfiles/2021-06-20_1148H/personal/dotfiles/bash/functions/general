@@ -57,4 +57,37 @@ function mkdef()
 	done
 }
 
+random_message()
+{
+	#
+	# Print a random message in the specific list of messages in the Array
+	#
+	
+	# --- Input
+	# Arrays
+	messages=(
+		"Learn to just ignore life, say ok and FUCK IT ALL"
+	)
 
+	# Local Variables
+	size_of_Array="${#messages[@]}"
+	element_ID=0
+	
+	# --- Processing
+	# Randomize element_ID based on size of array
+	element_ID=$(( RANDOM % $size_of_Array ))
+	
+	# Get element from array based on randomize element
+	message="${messages[$element_ID]}"
+
+	# --- Output
+	echo "$message"
+}
+
+message_of_the_day()
+{
+	#
+	# Print Message of the Day
+	#
+	echo "Hello World"
+}

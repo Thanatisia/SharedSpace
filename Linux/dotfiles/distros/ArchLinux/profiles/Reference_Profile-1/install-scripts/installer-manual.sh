@@ -12,6 +12,7 @@
 #	- 2021-06-18 1228H, Asura
 #	- 2021-06-18 1739H, Asura
 #	- 2021-06-18 2256H, Asura
+#	- 2021-06-20 1136H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -39,6 +40,8 @@
 #		- Added 'check network'
 #	- 2021-06-18 2256H, Asura
 #		- Modified arch-chroot method to create a file inside root partition to execute for the time being
+#	- 2021-06-20 1137H, Asura
+#		- Added Comments
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -79,7 +82,10 @@ declare -A device_Parameters=(
 
 declare -A partition_Configuration=(
 	# EDIT: Modify this
+	# [Background Information]
 	# Compilation of all partitions
+	# Please append according to your needs
+	# [Syntax]
 	# ROW_ID="<partition_ID>;<partition_Name>;<partition_file_Type>;<partition_start_Size>;<partition_end_Size>;<partition_Bootable>;<partition_Others>
 	[1]="1;Boot;primary;ext4;0%;1024MiB;True;NIL"
 	[2]="2;Root;primary;ext4;1024MiB;<x1MiB>;False;NIL"
@@ -99,6 +105,10 @@ declare -A partition_Parameters=(
 
 ### Mounts
 declare -A mount_Group=(
+	# Place all your partition path
+	#	corresponding to the partition number
+	# [Syntax]
+	# [partition-n]="/partition/mount/path"
 	[1]="/mnt/boot"	# Boot
 	[2]="/mnt"		# Root
 	[3]="/mnt/home"	# Home
@@ -106,6 +116,8 @@ declare -A mount_Group=(
 
 ### Region & Location
 declare -A location=(
+	# Regional & Location
+	# Your Region, Your City etc.
 	# EDIT: Modify this
 	[region]="<Your Region>"
 	[city]="<Your City>"
@@ -116,7 +128,7 @@ declare -A location=(
 ### User Control
 declare -A user_Info=(
 	# EDIT: Modify this
-	# User Information
+	# User Profile Information
 	# [Delimiters]
 	# , : For Parameter seperation
 	# ; : For Subparameter seperation (seperation within a parameter itself)
@@ -143,8 +155,11 @@ declare -A network_config=(
 ### Operating System Definitions
 declare -A osdef=(
 	# EDIT: Modify this
-	[bootloader]="grub"			# Your Bootloader
-	[optional-parameters]=""	# Your Bootloader's additional parameters outside of the main important ones
+	# Operating System Definitions
+	# - Bootloader, Kernels (to be added) etc.
+	[bootloader]="grub"				# Your Bootloader
+	[optional-parameters]=""		# Your Bootloader's additional parameters outside of the main important ones
+	[target_device_Type]="i386-pc"	# Your Target Device Type
 )
 
 # --- Functions
@@ -401,7 +416,7 @@ mount_Disks()
 pacstrap_Install()
 {
 	#
-	# Pacstrap essentia and must have packaes to mount (/mnt) before arch-chroot
+	# Pacstrap essential and must have packaes to mount (/mnt) before arch-chroot
 	#
 	# [Essential Package Categories]
 	#	Text Editor
@@ -414,6 +429,8 @@ pacstrap_Install()
 
 	# Arrays
 	pkgs=(
+		# EDIT: MODIFY THIS
+		# Add the packages you want to strap in here
 		"nano"
 		"vim"
 		"base-devel"
@@ -470,6 +487,7 @@ arch_chroot_Exec()
 	hostname="${network_config["hostname"]}"
 	bootloader="${osdef["bootloader"]}"
 	bootloader_optional_Params="${osdef["optional-parameters"]}"
+	bootloader_target_device_Type="${osdef["target_device_Type"]}"
 
 	# Array
 
@@ -513,7 +531,7 @@ arch_chroot_Exec()
 		"grub")
 			chroot_commands+=(
 				"sudo pacman -S grub"																# Install Grub Package
-				"grub-install --target=i386-pc --debug $bootloader_optional_Params $device_Name"	# Install Grub Bootloader
+				"grub-install --target=$bootloader_target_device_Type --debug $bootloader_optional_Params $device_Name"	# Install Grub Bootloader
 				"mkdir -p /boot/grub"																# Create grub folder
 				"grub-mkconfig -o /boot/grub/grub.cfg"												# Create grub config
 			)

@@ -12,6 +12,7 @@
 #	- 2021-06-18 1228H, Asura
 #	- 2021-06-18 2011H, Asura
 #	- 2021-06-18 2256H, Asura
+#	- 2021-06-20 1349H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -40,6 +41,8 @@
 #		- Added pauses to after arch-chroot_exec
 #	- 2021-06-18 2256H, Asura
 #		- Modified arch-chroot method to create a file inside root partition to execute for the time being
+#	- 2021-06-20 1349H, Asura
+#		- Added comments
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -66,25 +69,73 @@ PROGRAM_TYPE="Main"
 MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux"
 
+# [Must change edits]
+# Aka for those labelled with 'EDIT: MODIFY THIS'
+# - For people who refuses to learn or understand the code because it is too long
+#	and are too lazy to use it because it is long, therefore looking like 'legacy code'
+# - To those that would like to use it the way it is intended, 
+#	Thank you, and please edit all parameters with 'EDIT: Modify this'
+# 
+deviceParams_devType="microSD"
+deviceParams_Name="/dev/sdb"
+deviceParams_Size="256.0GB"
+deviceParams_Boot="mbr"
+deviceParams_Label="msdos"
+boot_Partition=(
+	# Append this and append a [n]="${boot_Partition[<n-1>]}" in
+	#	partition_Configuration
+	"1;Boot;primary;ext4;0%;1024MiB;True;NIL"
+	"2;Root;primary;ext4;1024MiB;51200MiB;False;NIL"
+	"3;Home;primary;ext4;51200MiB;100%;False;NIL"
+)
+mount_Paths=(
+	# Append this and append a [n]="${mount_Paths[<n-1>]}" in
+	"/mnt/boot"	# Boot
+	"/mnt"		# Root
+	"/mnt/home"	# Home
+)
+location_Region="Asia"
+location_City="Singapore"
+location_Language="en_SG.UTF-8"
+location_KeyboardMapping="en_UTF-8"
+user_ProfileInfo=(
+	# Append this and append a [n]="${user_ProfileInfo[<n-1>]}" in
+	# 	user_Info
+	# "
+	#	<username>,
+	#	<primary_group>,
+	#	<secondary_group (put NIL if none),
+	#	<custom_directory (Put 'True' for yes and 'False' for no)>,
+	#	<custom_directory_path (if custom_directory is True)>
+	# "
+	"asura,wheel,NIL,True,/home/profiles/asura"
+)
+networkConfig_hostname="ArchLinux"
+bootloader="grub"
+bootloader_Params=""
+
 # [Associative Array]
 
 ### Device and Partitions
 declare -A device_Parameters=(
 	# EDIT: Modify this
-	[device_Type]="microSD"
-	[device_Name]="/dev/sdb"
-	[device_Size]="256.0GB"
-	[device_Boot]="mbr"
-	[device_Label]="msdos"
+	[device_Type]="$deviceParams_devType"
+	[device_Name]="$deviceParams_Name"
+	[device_Size]="$deviceParams_Size"
+	[device_Boot]="$deviceParams_Boot"
+	[device_Label]="$deviceParams_Label"
 )
 
 declare -A partition_Configuration=(
 	# EDIT: Modify this
+	# [Background Information]
 	# Compilation of all partitions
+	# Please append according to your needs
+	# [Syntax]
 	# ROW_ID="<partition_ID>;<partition_Name>;<partition_file_Type>;<partition_start_Size>;<partition_end_Size>;<partition_Bootable>;<partition_Others>
-	[1]="1;Boot;primary;ext4;0%;1024MiB;True;NIL"
-	[2]="2;Root;primary;ext4;1024MiB;51200MiB;False;NIL"
-	[3]="3;Home;primary;ext4;51200MiB;100%;False;NIL"
+	[1]="${boot_Partition[0]}"
+	[2]="${boot_Partition[1]}"
+	[3]="${boot_Partition[2]}"
 )
 
 declare -A partition_Parameters=(
@@ -100,24 +151,30 @@ declare -A partition_Parameters=(
 
 ### Mounts
 declare -A mount_Group=(
-	[1]="/mnt/boot"	# Boot
-	[2]="/mnt"		# Root
-	[3]="/mnt/home"	# Home
+	# Place all your partition path 
+	#	corresponding to the partition number
+	# [Syntax]
+	# [partition-n]="/partition/mount/path"
+	[1]="${mount_Paths[0]}"	# Boot
+	[2]="${mount_Paths[1]}"	# Root
+	[3]="${mount_Paths[2]}"	# Home
 )
 
 ### Region & Location
 declare -A location=(
+	# Regional & Location
+	# Your Region, Your City etc.
 	# EDIT: Modify this
-	[region]="Asia"
-	[city]="Singapore"
-	[language]="en_SG.UTF-8"
-	[keymap]="en_UTF-8"
+	[region]="$location_Region"
+	[city]="$location_City"
+	[language]="$location_Language"
+	[keymap]="$location_KeyboardMapping"
 )
 
 ### User Control
 declare -A user_Info=(
 	# EDIT: Modify this
-	# User Information
+	# User Profile Information
 	# [Delimiters]
 	# , : For Parameter seperation
 	# ; : For Subparameter seperation (seperation within a parameter itself)
@@ -131,21 +188,24 @@ declare -A user_Info=(
 	# "
 	# [Examples]
 	# [1]="username,wheel,NIL,True,/home/profiles/username"
-	[1]="asura,wheel,NIL,True,/home/profiles/asura"
+	[1]="${user_ProfileInfo[0]}"
 )
 
 ### Network Configurations
 declare -A network_config=(
 	# EDIT: Modify this
 	# Network Configuration info
-	[hostname]="ArchLinux"
+	[hostname]="$networkConfig_hostname"
 )
 
 ### Operating System Definitions
 declare -A osdef=(
 	# EDIT: Modify this
-	[bootloader]="grub"			# Your Bootloader
-	[optional-parameters]=""	# Your Bootloader's additional parameters outside of the main important ones
+	# Operating System Definitions 
+	# - Bootloader, Kernels (to be added) etc.
+	[bootloader]="$bootloader"					# Your Bootloader
+	[optional-parameters]="$bootloader_Params"	# Your Bootloader's additional parameters outside of the main important ones
+	[target_device_Type]="i386-pc"				# Your Target Device Type
 )
 
 # --- Functions
@@ -383,7 +443,7 @@ mount_Disks()
 pacstrap_Install()
 {
 	#
-	# Pacstrap essentia and must have packaes to mount (/mnt) before arch-chroot
+	# Pacstrap essential and must have packaes to mount (/mnt) before arch-chroot
 	#
 	# [Essential Package Categories]
 	#	Text Editor
@@ -396,6 +456,8 @@ pacstrap_Install()
 
 	# Arrays
 	pkgs=(
+		# EDIT: MODIFY THIS
+		# Add the packages you want to strap in here
 		"nano"
 		"vim"
 		"base-devel"
@@ -452,6 +514,7 @@ arch_chroot_Exec()
 	hostname="${network_config["hostname"]}"
 	bootloader="${osdef["bootloader"]}"
 	bootloader_optional_Params="${osdef["optional-parameters"]}"
+	bootloader_target_device_Type="${osdef["target_device_Type"]}"
 
 	# Array
 
@@ -495,7 +558,7 @@ arch_chroot_Exec()
 		"grub")
 			chroot_commands+=(
 				"sudo pacman -S grub"																# Install Grub Package
-				"grub-install --target=i386-pc --debug $bootloader_optional_Params $device_Name"	# Install Grub Bootloader
+				"grub-install --target=$bootloader_target_device_Type --debug $bootloader_optional_Params $device_Name"	# Install Grub Bootloader
 				"mkdir -p /boot/grub"																# Create grub folder
 				"grub-mkconfig -o /boot/grub/grub.cfg"												# Create grub config
 			)

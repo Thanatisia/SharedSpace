@@ -13,7 +13,7 @@
 #	2021-05-19 2251H, Asura
 #	2021-06-02 2142H, Asura
 #	2021-06-02 2221H, Asura
-#	2021-06-06 1258H, Asura
+#	2021-06-20 1137H, Asura
 # Changelogs:
 #	2020-XX-XX XXXXH, Asura
 #		Created bashrc
@@ -36,8 +36,8 @@
 #		- pacman : Added validation for autoupdater's date, month, year
 #	2021-06-02 2220H, Asura
 #		- Modified and moved all variables,arrays,functions into individual files
-#	2021-06-06 1258H, Asura
-#		- Added 'alias startx="startx ~/.xinitrc"' for easy startx choose
+#	2021-06-20 1137H, Asura
+#		- Added 'message-of-the-day'
 #
 
 # -- Functions
@@ -355,6 +355,8 @@ function autostart()
         *);;
     esac
 	echo "===== Update Check Complete ====="
+
+	random_message
 }
 
 # -- Autostarts
