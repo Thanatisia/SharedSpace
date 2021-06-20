@@ -593,9 +593,12 @@ arch_chroot_Exec()
 	#		arch-chroot $dir_Mount $c
 	#	fi
 	#done
-	if [[ ! "$MODE" == "DEBUG" ]]; then
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo "chmod +x $mount_Root/$script_to_exe"
+		echo "arch-chroot $dir_Mount /bin/bash -c \"$PWD/$script_to_exe\""
+	else
 		chmod +x $mount_Root/$script_to_exe
-		arch-chroot $dir_Mount /root/$script_to_exe
+		arch-chroot $dir_Mount /bin/bash -c "$PWD/$script_to_exe"
 	fi
 	# --- Output
 }

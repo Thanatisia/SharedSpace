@@ -42,7 +42,7 @@
 #	- 2021-06-18 2256H, Asura
 #		- Modified arch-chroot method to create a file inside root partition to execute for the time being
 #	- 2021-06-20 1349H, Asura
-#		- Added comments
+#		- Added more comments
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -629,9 +629,12 @@ arch_chroot_Exec()
 	#	fi
 	#done
 
-	if [[ ! "$MODE" == "DEBUG" ]]; then
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo "chmod +x $mount_Root/$script_to_exe"
+		echo "arch-chroot $dir_Mount /bin/bash -c \"$PWD/$script_to_exe\""
+	else
 		chmod +x $mount_Root/$script_to_exe
-		arch-chroot $dir_Mount /root/$script_to_exe
+		arch-chroot $dir_Mount /bin/bash -c "$PWD/$script_to_exe"
 	fi
 	# --- Output
 }
