@@ -5,6 +5,7 @@
 # Modified: 
 #	- 2021-06-22 1607H, Asura
 #	- 2021-06-22 2112H, Asura
+#	- 2021-06-22 2136H, Asura
 # Features: 
 # Background Information: 
 #	Example script
@@ -16,6 +17,8 @@
 #	- 2021-06-22 2112H, Asura :
 #		- Added quotation marks in line 127 - 131
 #		- Fixed typo : ' timedatct -> timedatectl '
+#	- 2021-06-22 2136H, Asura :
+#		- Added completion comments
 # NOTE:
 #	- Please do not run this without verifying very carefully, the following details
 #		1. Device name (i.e. /dev/sdX)
@@ -84,11 +87,15 @@ body()
 			;;
 	esac
 
+	echo ""
+
 	echo "# ========================== #"
 	echo "# Stage 3 : Set System Clock #"
 	echo "# ========================== #"
 	timedatectl set-ntp true
 	timedatectl status
+
+	echo ""
 
 	echo "# ====================== #"
 	echo "# Stage 4 : Partitioning #"
@@ -96,11 +103,19 @@ body()
 	parted /dev/sdb mklabel msdos
 	parted /dev/sdb mkpart primary ext4 0% 1024MiB
 	mkfs.ext4 /dev/sdb1
+	echo "Partition 1 Completed."
 	parted /dev/sdb set 1 boot on
 	parted /dev/sdb mkpart primary ext4 1024MiB 32768MiB
 	mkfs.ext4 /dev/sdb2
+	echo "Partition 2 Completed."
 	parted /dev/sdb mkpart primary ext4 32768MiB 100%
 	mkfs.ext4 /dev/sdb3
+	echo "Partition 3 Completed."
+	echo "======================="
+	echo "Partitioning Completed."
+	echo "======================="
+
+	echo ""
 
 	echo "# ===================== #"
 	echo "# Stage 5 : Mount Disks #"
@@ -110,16 +125,34 @@ body()
 	mkdir -p /mnt/boot/grub
 	mount /dev/sdb1 /mnt/home
 	mount /dev/sdb3 /mnt/boot
+	echo "======================"
+	echo "Disk Mounted"
+	echo " /dev/sdb1 : /mnt/boot"
+	echo " /dev/sdb2 : /mnt"
+	echo " /dev/sdb3 : /mnt/home"
+	echo "======================"
+
+	echo ""
 
 	echo "# ================== #"
 	echo "# Stage 6 : pacstrap #"
 	echo "# ================== #"
 	pacstrap /mnt base linux linux-firmware nano vim base-devel networkmanager linux-lts linux-lts-headers
+	echo "==============================="
+	echo "Package strapped to mount point"
+	echo "==============================="
+	
+	echo ""
 
 	echo "# ======================== #"
 	echo "# Stage 7 : Generate Fstab #"
 	echo "# ======================== #"
 	genfstab -U /mnt >> /mnt/etc/fstab
+	echo "============================"
+	echo "File Systems Table Generate."
+	echo "============================"
+
+	echo ""
 
 	echo "# ================ #"
 	echo "# Stage 8 : Chroot #"
@@ -138,11 +171,23 @@ body()
 	arch-chroot /mnt /bin/bash -c "sudo pacman -S grub"
 	arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc --debug /dev/sdb"
 	arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
+	echo "==========================="
+	echo "Chroot processes completed."
+	echo "==========================="
+
+	echo ""
 
 	echo "# =========================== #"
 	echo "# Stage 9 : Post-Installation #"
 	echo "# =========================== #"
 	# TBC
+
+	echo ""
+
+	echo "================================"
+	echo "ArchLinux Installation Complete."
+	echo "Please Restart your Computer."
+	echo "================================"
 }
 
 function END()
