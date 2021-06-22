@@ -52,9 +52,9 @@ body()
 	argc="${#argv[@]}"
 
 
-	echo # ======================== #
-	echo # Stage 1 : Check internet #
-	echo # ======================== #
+	echo "# ======================== #"
+	echo "# Stage 1 : Check internet #"
+	echo "# ======================== #"
 	ping -c 5 8.8.8.8 # Make 5 connections, if successful - return 0
 	res="$?"
 	case "$res" in
@@ -69,9 +69,9 @@ body()
 			;;
 	esac
 
-	echo # ========================== #
-	echo # Stage 2 : Verify boot mode #
-	echo # ========================== #
+	echo "# ========================== #"
+	echo "# Stage 2 : Verify boot mode #"
+	echo "# ========================== #"
 	efivars="$(ls /sys/firmware/efi/efivars)"
 	case "$efivars" in
 		"0")
@@ -84,15 +84,15 @@ body()
 			;;
 	esac
 
-	echo # ========================== #
-	echo # Stage 3 : Set System Clock #
-	echo # ========================== #
+	echo "# ========================== #"
+	echo "# Stage 3 : Set System Clock #"
+	echo "# ========================== #"
 	timedatectl set-ntp true
 	timedatectl status
 
-	echo # ====================== #
-	echo # Stage 4 : Partitioning #
-	echo # ====================== #
+	echo "# ====================== #"
+	echo "# Stage 4 : Partitioning #"
+	echo "# ====================== #"
 	parted /dev/sdb mklabel msdos
 	parted /dev/sdb mkpart primary ext4 0% 1024MiB
 	mkfs.ext4 /dev/sdb1
@@ -102,28 +102,28 @@ body()
 	parted /dev/sdb mkpart primary ext4 32768MiB 100%
 	mkfs.ext4 /dev/sdb3
 
-	echo # ===================== #
-	echo # Stage 5 : Mount Disks #
-	echo # ===================== #
+	echo "# ===================== #"
+	echo "# Stage 5 : Mount Disks #"
+	echo "# ===================== #"
 	mount /dev/sdb2 /mnt
 	mkdir -p /mnt/home
 	mkdir -p /mnt/boot/grub
 	mount /dev/sdb1 /mnt/home
 	mount /dev/sdb3 /mnt/boot
 
-	echo # ================== #
-	echo # Stage 6 : pacstrap #
-	echo # ================== #
+	echo "# ================== #"
+	echo "# Stage 6 : pacstrap #"
+	echo "# ================== #"
 	pacstrap /mnt base linux linux-firmware nano vim base-devel networkmanager linux-lts linux-lts-headers
 
-	echo # ======================== #
-	echo # Stage 7 : Generate Fstab #
-	echo # ======================== #
+	echo "# ======================== #"
+	echo "# Stage 7 : Generate Fstab #"
+	echo "# ======================== #"
 	genfstab -U /mnt >> /mnt/etc/fstab
 
-	echo # ================ #
-	echo # Stage 8 : Chroot #
-	echo # ================ #
+	echo "# ================ #"
+	echo "# Stage 8 : Chroot #"
+	echo "# ================ #"
 	arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime"
 	arch-chroot /mnt /bin/bash -c "hwclock --systohc"
 	arch-chroot /mnt /bin/bash -c "vim /etc/locale.gen"
@@ -139,9 +139,9 @@ body()
 	arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc --debug /dev/sdb"
 	arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
 
-	echo # =========================== #
-	echo # Stage 9 : Post-Installation #
-	echo # =========================== #
+	echo "# =========================== #"
+	echo "# Stage 9 : Post-Installation #"
+	echo "# =========================== #"
 	# TBC
 }
 
