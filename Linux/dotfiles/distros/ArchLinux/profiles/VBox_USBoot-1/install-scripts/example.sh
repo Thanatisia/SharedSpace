@@ -4,6 +4,7 @@
 # Created: 2021-06-22 1607H, Asura
 # Modified: 
 #	- 2021-06-22 1607H, Asura
+#	- 2021-06-22 2112H, Asura
 # Features: 
 # Background Information: 
 #	Example script
@@ -12,6 +13,9 @@
 # Changelog:
 #	- 2021-06-22 1607H, Asura : 
 #		- Created script file
+#	- 2021-06-22 2112H, Asura :
+#		- Added quotation marks in line 127 - 131
+#		- Fixed typo : ' timedatct -> timedatectl '
 # NOTE:
 #	- Please do not run this without verifying very carefully, the following details
 #		1. Device name (i.e. /dev/sdX)
@@ -48,9 +52,9 @@ body()
 	argc="${#argv[@]}"
 
 
-	# ======================== #
-	# Stage 1 : Check internet #
-	# ======================== #
+	echo # ======================== #
+	echo # Stage 1 : Check internet #
+	echo # ======================== #
 	ping -c 5 8.8.8.8 # Make 5 connections, if successful - return 0
 	res="$?"
 	case "$res" in
@@ -65,9 +69,9 @@ body()
 			;;
 	esac
 
-	# ========================== #
-	# Stage 2 : Verify boot mode #
-	# ========================== #
+	echo # ========================== #
+	echo # Stage 2 : Verify boot mode #
+	echo # ========================== #
 	efivars="$(ls /sys/firmware/efi/efivars)"
 	case "$efivars" in
 		"0")
@@ -80,15 +84,15 @@ body()
 			;;
 	esac
 
-	# ========================== #
-	# Stage 3 : Set System Clock #
-	# ========================== #
+	echo # ========================== #
+	echo # Stage 3 : Set System Clock #
+	echo # ========================== #
 	timedatectl set-ntp true
-	timedatect status
+	timedatectl status
 
-	# ====================== #
-	# Stage 4 : Partitioning #
-	# ====================== #
+	echo # ====================== #
+	echo # Stage 4 : Partitioning #
+	echo # ====================== #
 	parted /dev/sdb mklabel msdos
 	parted /dev/sdb mkpart primary ext4 0% 1024MiB
 	mkfs.ext4 /dev/sdb1
@@ -98,28 +102,28 @@ body()
 	parted /dev/sdb mkpart primary ext4 32768MiB 100%
 	mkfs.ext4 /dev/sdb3
 
-	# ===================== #
-	# Stage 5 : Mount Disks #
-	# ===================== #
+	echo # ===================== #
+	echo # Stage 5 : Mount Disks #
+	echo # ===================== #
 	mount /dev/sdb2 /mnt
 	mkdir -p /mnt/home
 	mkdir -p /mnt/boot/grub
 	mount /dev/sdb1 /mnt/home
 	mount /dev/sdb3 /mnt/boot
 
-	# ================== #
-	# Stage 6 : pacstrap #
-	# ================== #
+	echo # ================== #
+	echo # Stage 6 : pacstrap #
+	echo # ================== #
 	pacstrap /mnt base linux linux-firmware nano vim base-devel networkmanager linux-lts linux-lts-headers
 
-	# ======================== #
-	# Stage 7 : Generate Fstab #
-	# ======================== #
+	echo # ======================== #
+	echo # Stage 7 : Generate Fstab #
+	echo # ======================== #
 	genfstab -U /mnt >> /mnt/etc/fstab
 
-	# ================ #
-	# Stage 8 : Chroot #
-	# ================ #
+	echo # ================ #
+	echo # Stage 8 : Chroot #
+	echo # ================ #
 	arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime"
 	arch-chroot /mnt /bin/bash -c "hwclock --systohc"
 	arch-chroot /mnt /bin/bash -c "vim /etc/locale.gen"
@@ -135,9 +139,9 @@ body()
 	arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc --debug /dev/sdb"
 	arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
 
-	# =========================== #
-	# Stage 9 : Post-Installation #
-	# =========================== #
+	echo # =========================== #
+	echo # Stage 9 : Post-Installation #
+	echo # =========================== #
 	# TBC
 }
 
