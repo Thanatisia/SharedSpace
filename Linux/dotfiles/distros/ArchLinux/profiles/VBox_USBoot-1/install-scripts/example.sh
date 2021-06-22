@@ -6,6 +6,7 @@
 #	- 2021-06-22 1607H, Asura
 #	- 2021-06-22 2112H, Asura
 #	- 2021-06-22 2136H, Asura
+# 	- 2021-06-22 2153H, Asura
 # Features: 
 # Background Information: 
 #	Example script
@@ -19,6 +20,8 @@
 #		- Fixed typo : ' timedatct -> timedatectl '
 #	- 2021-06-22 2136H, Asura :
 #		- Added completion comments
+#	- 2021-06-22 2153H, Asura : 
+#		- Begin to sanitize and make the program modular
 # NOTE:
 #	- Please do not run this without verifying very carefully, the following details
 #		1. Device name (i.e. /dev/sdX)
@@ -51,9 +54,19 @@ body()
 	#
 	# Main function to run
 	#
+
+	# --- Input
+
+	# Command Line Arguments
 	argv=("$@")
 	argc="${#argv[@]}"
 
+	# Local Variables
+	dev_Name=/dev/sdb
+	architecture="i386-pc"
+	bootloader="grub"
+
+	# --- Processes
 
 	echo "# ======================== #"
 	echo "# Stage 1 : Check internet #"
@@ -100,16 +113,16 @@ body()
 	echo "# ====================== #"
 	echo "# Stage 4 : Partitioning #"
 	echo "# ====================== #"
-	parted /dev/sdb mklabel msdos
-	parted /dev/sdb mkpart primary ext4 0% 1024MiB
-	mkfs.ext4 /dev/sdb1
+	parted $dev_Name mklabel msdos
+	parted $dev_Name mkpart primary ext4 0% 1024MiB
+	mkfs.ext4 "$dev_Name"1
 	echo "Partition 1 Completed."
-	parted /dev/sdb set 1 boot on
-	parted /dev/sdb mkpart primary ext4 1024MiB 32768MiB
-	mkfs.ext4 /dev/sdb2
+	parted $dev_Name set 1 boot on
+	parted $dev_Name mkpart primary ext4 1024MiB 32768MiB
+	mkfs.ext4 "$dev_Name"2
 	echo "Partition 2 Completed."
-	parted /dev/sdb mkpart primary ext4 32768MiB 100%
-	mkfs.ext4 /dev/sdb3
+	parted $dev_Name mkpart primary ext4 32768MiB 100%
+	mkfs.ext4 "$dev_Name"3
 	echo "Partition 3 Completed."
 	echo "======================="
 	echo "Partitioning Completed."
@@ -120,16 +133,16 @@ body()
 	echo "# ===================== #"
 	echo "# Stage 5 : Mount Disks #"
 	echo "# ===================== #"
-	mount /dev/sdb2 /mnt
+	mount "$dev_Name"2 /mnt
 	mkdir -p /mnt/home
 	mkdir -p /mnt/boot/grub
-	mount /dev/sdb1 /mnt/home
-	mount /dev/sdb3 /mnt/boot
+	mount "$dev_Name"1 /mnt/home
+	mount "$dev_Name"3 /mnt/boot
 	echo "======================"
 	echo "Disk Mounted"
-	echo " /dev/sdb1 : /mnt/boot"
-	echo " /dev/sdb2 : /mnt"
-	echo " /dev/sdb3 : /mnt/home"
+	echo " "$dev_Name"1 : /mnt/boot"
+	echo " "$dev_Name"2 : /mnt"
+	echo " "$dev_Name"3 : /mnt/home"
 	echo "======================"
 
 	echo ""
@@ -168,9 +181,16 @@ body()
 	arch-chroot /mnt /bin/bash -c "echo \"127.0.1.1 ArchLinux.localdomain ArchLinux\" | tee -a /etc/hosts"
 	arch-chroot /mnt /bin/bash -c "mkinitcpio -P"
 	arch-chroot /mnt /bin/bash -c "passwd"
-	arch-chroot /mnt /bin/bash -c "sudo pacman -S grub"
-	arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc --debug /dev/sdb"
-	arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
+	case "$bootloader" in
+		"grub")
+			arch-chroot /mnt /bin/bash -c "sudo pacman -S grub"
+			arch-chroot /mnt /bin/bash -c "grub-install --target=architecture --debug $dev_Name"
+			arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
+			;;
+		*)
+			echo "Invalid Bootloader"
+			;;
+	esac
 	echo "==========================="
 	echo "Chroot processes completed."
 	echo "==========================="
@@ -188,6 +208,8 @@ body()
 	echo "ArchLinux Installation Complete."
 	echo "Please Restart your Computer."
 	echo "================================"
+
+	# --- Output
 }
 
 function END()
