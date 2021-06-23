@@ -14,6 +14,8 @@
 #	- 2021-06-18 2256H, Asura
 #	- 2021-06-20 1136H, Asura
 #	- 2021-06-23 1529H, Asura
+#	- 2021-06-23 2103H, Asura
+#	- 2021-06-23 2125H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -45,6 +47,11 @@
 #		- Added Comments
 #	- 2021-06-23 1529H, Asura
 #		- Added test use-case for auto-uncommenting /etc/locale.gen using sed
+#	- 2021-06-23 2103H, Asura
+#		- Added package 'base' into arraylist of packages to install
+#		- Added syslinux bootloader install
+#	- 2021-06-23 2125H, Asura
+#		- Moved local variable 'pkgs' from pacstrap_Install() -> Global Array variable 'pacstrap_Pkgs'
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -115,6 +122,27 @@ declare -A mount_Group=(
 	[1]="/mnt/boot"	# Boot
 	[2]="/mnt"		# Root
 	[3]="/mnt/home"	# Home
+)
+
+### Pacstrap
+declare -A pacstrap_Pkgs=(
+	# EDIT: MODIFY THIS
+	# Place your pacstrap packages here
+	# - Ensure 'base' is inside
+	# - Otherwise, there will be issues loading after installation
+	# - Error examples:
+	#	1. 'root mounted, but /sbin/init not found, have fun'
+	# Add the packages you want to strap in here
+	"base"
+	"linux"
+	"linux-firmware"
+	"linux-lts"
+	"linux-lts-headers"
+	"base-devel"
+	"nano"
+	"vim"
+	"networkmanager"
+	"os-prober"
 )
 
 ### Region & Location
@@ -431,25 +459,15 @@ pacstrap_Install()
 	# --- Input
 
 	# Arrays
-	pkgs=(
-		# EDIT: MODIFY THIS
-		# Add the packages you want to strap in here
-		"nano"
-		"vim"
-		"base-devel"
-		"networkmanager"
-		"os-prober"
-		"linux"
-		"linux-firmware"
-		"linux-lts"
-		"linux-lts-headers"
-	)
+	# pkgs=()
+
+	mount_Point="${mount_Group["2"]}"
 
 	# --- Processing
 	if [[ "$MODE" == "DEBUG" ]]; then
-		echo pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		echo pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
 	else
-		pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
 	fi
 
 	# --- Output
@@ -514,7 +532,6 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
-		"echo ======= Bootloader : Grub ======"											# Step 15: Bootloader
 	)
 
 	# --- Extra Information
@@ -534,6 +551,7 @@ arch_chroot_Exec()
 	case "$bootloader" in
 		"grub")
 			chroot_commands+=(
+				"echo ======= Bootloader : Grub ======"											# Step 15: Bootloader
 				"sudo pacman -S grub"																# Install Grub Package
 				"grub-install --target=$bootloader_target_device_Type --debug $bootloader_optional_Params $device_Name"	# Install Grub Bootloader
 				"mkdir -p /boot/grub"																# Create grub folder
@@ -541,6 +559,10 @@ arch_chroot_Exec()
 			)
 			;;
 		"syslinux")
+			chroot_commands+=(
+				"echo ======= Bootloader : Syslinux ======"											# Step 15: Bootloader
+				"sudo pacman -S syslinux"
+			)
 			;;
 		*)
 			# Default to grub
@@ -564,39 +586,8 @@ arch_chroot_Exec()
 	else
 		echo -e "$cmd_str" > $mount_Root/$script_to_exe
 	fi
+
 	# Execute in arch-chroot
-	# Method 1
-	#for c in "${chroot_commands[@]}"; do
-	#	if [[ "$MODE" == "DEBUG" ]]; then	
-	#		# echo arch-chroot $dir_Mount $c
-	#		echo "arch-chroot $dir_Mount <<-EOF\
-	#			$c\
-	#		EOF"
-	#	else
-	#		# arch-chroot $dir_Mount $c
-	#		arch-chroot $dir_Mount <<-EOF
-	#			$c
-	#		EOF
-	#	fi
-	# done
-	# Method 2
-	#if [[ "$MODE" == "DEBUG" ]]; then
-	#	echo -e "arch-chroot $dir_Mount <<- EOF\
-	#		$cmd_str
-	#	EOF"
-	#else
-	#	arch-chroot $dir_Mount <<-EOF
-	#		$cmd_str
-	#	EOF
-	#fi
-	# Method 3
-	#for c in "${chroot_commands[@]}"; do
-	#	if [[ "$MODE" == "DEBUG" ]]; then
-	#		echo -e "arch-chroot $dir_Mount $c"
-	#	else
-	#		arch-chroot $dir_Mount $c
-	#	fi
-	#done
 	if [[ "$MODE" == "DEBUG" ]]; then
 		echo "chmod +x $mount_Root/$script_to_exe"
 		echo "arch-chroot $dir_Mount /bin/bash -c \"$PWD/$script_to_exe\""

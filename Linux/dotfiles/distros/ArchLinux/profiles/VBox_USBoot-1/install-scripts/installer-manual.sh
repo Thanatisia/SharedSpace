@@ -14,6 +14,7 @@
 #	- 2021-06-18 2256H, Asura
 #	- 2021-06-20 1349H, Asura
 #	- 2021-06-23 1524H, Asura
+#	- 2021-06-23 2059H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -46,6 +47,9 @@
 #		- Added more comments
 #	- 2021-06-23 1525H, Asura
 #		- Added test use-case for auto-uncommenting /etc/locale.gen using sed
+#	- 2021-06-23 2059H, Asura
+#		- Added package 'base' into arraylist of packages to install
+#		- Added syslinux bootloader install
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -74,10 +78,9 @@ DISTRO="ArchLinux"
 
 # [Must change edits]
 # Aka for those labelled with 'EDIT: MODIFY THIS'
-# - For people who refuses to learn or understand the code because it is too long
-#	and are too lazy to use it because it is long, therefore looking like 'legacy code'
-# - To those that would like to use it the way it is intended, 
-#	Thank you, and please edit all parameters with 'EDIT: Modify this'
+#	- This is a test 'UX' design variant of the program whereby its meant to be user-friendly
+#	- If you want to use this as intended,
+#		Please edit all parameters with 'EDIT: Modify this'
 # 
 deviceParams_devType="microSD"
 deviceParams_Name="/dev/sdb"
@@ -96,6 +99,20 @@ mount_Paths=(
 	"/mnt/boot"	# Boot
 	"/mnt"		# Root
 	"/mnt/home"	# Home
+)
+pkgs=(
+		# EDIT: MODIFY THIS
+		# Add the packages you want to strap in here
+		"base"
+		"linux"
+		"linux-firmware"
+		"linux-lts"
+		"linux-lts-headers"
+		"base-devel"
+		"nano"
+		"vim"
+		"networkmanager"
+		"os-prober"
 )
 location_Region="Asia"
 location_City="Singapore"
@@ -172,6 +189,11 @@ declare -A location=(
 	[city]="$location_City"
 	[language]="$location_Language"
 	[keymap]="$location_KeyboardMapping"
+)
+
+### Pacstrap Packages
+declare -A pacstrap_Pkgs=(
+	"${pkgs[@]}"
 )
 
 ### User Control
@@ -458,25 +480,18 @@ pacstrap_Install()
 	# --- Input
 
 	# Arrays
-	pkgs=(
-		# EDIT: MODIFY THIS
-		# Add the packages you want to strap in here
-		"nano"
-		"vim"
-		"base-devel"
-		"networkmanager"
-		"os-prober"
-		"linux"
-		"linux-firmware"
-		"linux-lts"
-		"linux-lts-headers"
-	)
+
+	# Local Variables
+	mount_Point=${mount_Group["2"]}
+	
 
 	# --- Processing
 	if [[ "$MODE" == "DEBUG" ]]; then
-		echo pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		# echo pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		echo pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
 	else
-		pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		# pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
 	fi
 
 	# --- Output
@@ -541,7 +556,6 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
-		"echo ======= Bootloader : Grub ======"											# Step 15: Bootloader
 	)
 
 	# --- Extra Information
@@ -561,6 +575,7 @@ arch_chroot_Exec()
 	case "$bootloader" in
 		"grub")
 			chroot_commands+=(
+				"echo ======= Bootloader : Grub ======"											# Step 15: Bootloader
 				"sudo pacman -S grub"																# Install Grub Package
 				"grub-install --target=$bootloader_target_device_Type --debug $bootloader_optional_Params $device_Name"	# Install Grub Bootloader
 				"mkdir -p /boot/grub"																# Create grub folder
@@ -568,6 +583,10 @@ arch_chroot_Exec()
 			)
 			;;
 		"syslinux")
+			chroot_commands+=(
+				"echo ======= Bootloader : Syslinux ======"											# Step 15: Bootloader
+				"sudo pacman -S syslinux"
+			)
 			;;
 		*)
 			# Default to grub
