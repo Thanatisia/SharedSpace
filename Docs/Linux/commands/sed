@@ -1,0 +1,37 @@
+#
+# Linux Command Documentation: sed
+#
+
+[Background]
+Command Name: sed
+Abbreviation: Stream Editor
+Command Summary: Take in a stream of text / open a file and edit it  with regular expressions
+General Syntax: sed -i '<regular-expression' <filename>
+General Parameters: 
+	-i
+	-h
+
+[Parameters]
+<parameter> : <description of parameter>
+	Syntax:
+		<syntax/structure of parameter in command>
+	Examples:
+		[1] An example of command with <parameter>
+			Command:
+				<The example command with parameter>
+			Output:
+				<intended output>	
+
+
+[Use-Cases]
+1. Comment a line containing a specific string with sed
+	[Syntax]
+	sed -i '/<pattern_keyword>/s/^/#/g' <filename>
+	[Example]
+	i. sed -i '/en_SG.UTF-8/s/^/#/g' /etc/locale.gen
+
+2. Uncomment a line containing a specific string with sed
+	[Syntax]
+	sed -i '/<pattern_keyword>/s/^#//g' <filename>
+	[Example]
+	i. sed -i '/en_SG.UTF-8/s/^#//g' /etc/locale.gen
