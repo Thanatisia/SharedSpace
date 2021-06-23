@@ -49,9 +49,11 @@
 #		- Added test use-case for auto-uncommenting /etc/locale.gen using sed
 #	- 2021-06-23 2103H, Asura
 #		- Added package 'base' into arraylist of packages to install
-#		- Added syslinux bootloader install
 #	- 2021-06-23 2125H, Asura
 #		- Moved local variable 'pkgs' from pacstrap_Install() -> Global Array variable 'pacstrap_Pkgs'
+#		- Added syslinux bootloader install
+#		- Created new associative array 'pkg' to store all packages
+#		- Appended 'pacstrap_Pkgs' to 'pkg' associative array
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -77,6 +79,29 @@ PROGRAM_NAME="ArchLinux Profile Setup Installer"
 PROGRAM_TYPE="Main"
 MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux"
+
+# [Array]
+
+### Pacstrap
+pacstrap_Pkgs=(
+	# EDIT: MODIFY THIS
+	# Place your pacstrap packages here
+	# - Ensure 'base' is inside
+	# - Otherwise, there will be issues loading after installation
+	# - Error examples:
+	#	1. 'root mounted, but /sbin/init not found, have fun'
+	# Add the packages you want to strap in here
+	"base"
+	"linux"
+	"linux-firmware"
+	"linux-lts"
+	"linux-lts-headers"
+	"base-devel"
+	"nano"
+	"vim"
+	"networkmanager"
+	"os-prober"
+)
 
 # [Associative Array]
 
@@ -124,25 +149,14 @@ declare -A mount_Group=(
 	[3]="/mnt/home"	# Home
 )
 
-### Pacstrap
-declare -A pacstrap_Pkgs=(
-	# EDIT: MODIFY THIS
-	# Place your pacstrap packages here
-	# - Ensure 'base' is inside
-	# - Otherwise, there will be issues loading after installation
-	# - Error examples:
-	#	1. 'root mounted, but /sbin/init not found, have fun'
-	# Add the packages you want to strap in here
-	"base"
-	"linux"
-	"linux-firmware"
-	"linux-lts"
-	"linux-lts-headers"
-	"base-devel"
-	"nano"
-	"vim"
-	"networkmanager"
-	"os-prober"
+### Packages
+declare -A pkgs=(
+	# EDIT: Modify this 
+	# All Packages
+	#	- pacstrap packages etc.
+	# Please append all new categories below in the key while
+	#	the array for the category in the values
+	[pacstrap]="${pacstrap_Pkgs[@]}"
 )
 
 ### Region & Location
@@ -460,14 +474,16 @@ pacstrap_Install()
 
 	# Arrays
 	# pkgs=()
+	pkg=${pkgs["pacstrap"]}
 
+	# Local Variables
 	mount_Point="${mount_Group["2"]}"
 
 	# --- Processing
 	if [[ "$MODE" == "DEBUG" ]]; then
-		echo pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
+		echo pacstrap $mount_Point ${pkg[@]}
 	else
-		pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
+		pacstrap $mount_Point ${pkg[@]}
 	fi
 
 	# --- Output

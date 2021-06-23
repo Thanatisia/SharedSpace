@@ -50,6 +50,8 @@
 #	- 2021-06-23 2059H, Asura
 #		- Added package 'base' into arraylist of packages to install
 #		- Added syslinux bootloader install
+#		- Created new associative array 'pkg' to store all packages
+#		- Appended 'pacstrap_Pkgs' to 'pkg' associative array
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -100,7 +102,7 @@ mount_Paths=(
 	"/mnt"		# Root
 	"/mnt/home"	# Home
 )
-pkgs=(
+pacstrap_pkgs=(
 		# EDIT: MODIFY THIS
 		# Add the packages you want to strap in here
 		"base"
@@ -191,9 +193,13 @@ declare -A location=(
 	[keymap]="$location_KeyboardMapping"
 )
 
-### Pacstrap Packages
-declare -A pacstrap_Pkgs=(
-	"${pkgs[@]}"
+### Packages
+declare -A pkgs=(
+	# All Packages
+	#	- pacstrap packages etc.
+	# Please append all new categories below in the key while
+	#	the array for the category in the values
+	[pacstrap]="${pacstrap_pkgs[@]}"
 )
 
 ### User Control
@@ -480,18 +486,19 @@ pacstrap_Install()
 	# --- Input
 
 	# Arrays
+	pacstrap_Pkgs=${pkgs["pacstrap"]}
 
 	# Local Variables
 	mount_Point=${mount_Group["2"]}
-	
+
 
 	# --- Processing
 	if [[ "$MODE" == "DEBUG" ]]; then
 		# echo pacstrap ${mount_Group["2"]} "${pkgs[@]}"
-		echo pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
+		echo pacstrap $mount_Point ${pacstrap_Pkgs[@]}
 	else
 		# pacstrap ${mount_Group["2"]} "${pkgs[@]}"
-		pacstrap $mount_Point "${pacstrap_Pkgs[@]}"
+		pacstrap $mount_Point ${pacstrap_Pkgs[@]}
 	fi
 
 	# --- Output
