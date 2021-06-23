@@ -7,6 +7,7 @@
 #	- 2021-06-22 2112H, Asura
 #	- 2021-06-22 2136H, Asura
 # 	- 2021-06-22 2153H, Asura
+#	- 2021-06-23 1403H, Asura
 # Features: 
 # Background Information: 
 #	Example script
@@ -22,6 +23,8 @@
 #		- Added completion comments
 #	- 2021-06-22 2153H, Asura : 
 #		- Begin to sanitize and make the program modular
+#	- 2021-06-23 1404H, Asura :
+#		- Fixed typo in bootloader - grub
 # NOTE:
 #	- Please do not run this without verifying very carefully, the following details
 #		1. Device name (i.e. /dev/sdX)
@@ -185,7 +188,7 @@ body()
 	case "$bootloader" in
 		"grub")
 			arch-chroot /mnt /bin/bash -c "sudo pacman -S grub"
-			arch-chroot /mnt /bin/bash -c "grub-install --target=architecture --debug $dev_Name"
+			arch-chroot /mnt /bin/bash -c "grub-install --target=$architecture --debug $dev_Name"
 			arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
 			;;
 		*)
