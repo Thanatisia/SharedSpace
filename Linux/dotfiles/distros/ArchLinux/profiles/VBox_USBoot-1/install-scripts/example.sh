@@ -172,7 +172,8 @@ body()
 	echo "# ================ #"
 	arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Asia/Singapore /etc/localtime"
 	arch-chroot /mnt /bin/bash -c "hwclock --systohc"
-	arch-chroot /mnt /bin/bash -c "vim /etc/locale.gen"
+	# arch-chroot /mnt /bin/bash -c "vim /etc/locale.gen" # --- Removed to Test out line 176
+	arch-chroot /mnt /bin/bash -c "sed -i '/en_SG.UTF-8/s/^#//g' /etc/locale.gen"
 	arch-chroot /mnt /bin/bash -c "locale-gen"
 	arch-chroot /mnt /bin/bash -c "echo \"LANG=en_SG.UTF-8\" | tee -a /etc/locale.conf"
 	arch-chroot /mnt /bin/bash -c "echo \"ArchLinux\" | tee -a /etc/hostname"
