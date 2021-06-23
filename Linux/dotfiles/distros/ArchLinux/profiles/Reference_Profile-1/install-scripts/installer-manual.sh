@@ -13,6 +13,7 @@
 #	- 2021-06-18 1739H, Asura
 #	- 2021-06-18 2256H, Asura
 #	- 2021-06-20 1136H, Asura
+#	- 2021-06-23 1529H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -42,6 +43,8 @@
 #		- Modified arch-chroot method to create a file inside root partition to execute for the time being
 #	- 2021-06-20 1137H, Asura
 #		- Added Comments
+#	- 2021-06-23 1529H, Asura
+#		- Added test use-case for auto-uncommenting /etc/locale.gen using sed
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -497,7 +500,8 @@ arch_chroot_Exec()
 		"ln -sf /usr/share/zoneinfo/$region/$city /etc/localtime"						# Step 10: Time Zones; Set time zone
 		"hwclock --systohc"																# Step 10: Time Zones; Generate /etc/adjtime via hwclock
 		"echo ======= Location ======"													# Step 11: Localization;
-		"vim /etc/locale.gen"															# Step 11: Localization; Edit /etc/locale.gen and uncomment language (ie. en_US.UTF-8 UTF-8; en_SG.UTF-8 UTF-8;)
+		# "vim /etc/locale.gen"															# Step 11: Localization; Edit /etc/locale.gen and uncomment language (ie. en_US.UTF-8 UTF-8; en_SG.UTF-8 UTF-8;)
+		"sed -i '/$location/s/^#//g' /etc/locale.gen"									# Step 11: Localization; Uncomment the locale region language
 		"locale-gen"																	# Step 11: Localization; Generate the locales by running
 		"echo \"LANG=$language\" | tee -a /etc/locale.conf"								# Step 11: Localization; Set LANG variable according to your locale
 		"echo ======= Network Configuration ======"										# step 12: Network Configuration;
