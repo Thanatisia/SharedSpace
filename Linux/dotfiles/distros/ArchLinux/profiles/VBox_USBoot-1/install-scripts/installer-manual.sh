@@ -15,6 +15,7 @@
 #	- 2021-06-20 1349H, Asura
 #	- 2021-06-23 1524H, Asura
 #	- 2021-06-23 2059H, Asura
+#	- 2021-06-23 2233H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -52,6 +53,8 @@
 #		- Added syslinux bootloader install
 #		- Created new associative array 'pkg' to store all packages
 #		- Appended 'pacstrap_Pkgs' to 'pkg' associative array
+#	- 2021-06-23 2233H, Asura
+#		- Added syslinux install - To be tested
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -593,7 +596,26 @@ arch_chroot_Exec()
 			chroot_commands+=(
 				"echo ======= Bootloader : Syslinux ======"											# Step 15: Bootloader
 				"sudo pacman -S syslinux"
+				"mkdir -p /boot/syslinux"
+				"cp -r /usr/lib/syslinux/bios/*.c32 /boot/syslinux"
+				"extlinux --install /boot/syslinux"
 			)
+			case "$device_Label" in
+				"mbr")
+					chroot_commands+=(
+						"dd bs=440 count=1 conv=notrunc if=/usr/lib/syslinux/bios/mbr.bin of=$device_Name"
+					)
+					;;
+				"gpt")
+					chroot_commands+=(
+						"sgdisk $device_Name --attributes=1:set:2"
+						"dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/bios/gptmbr.bin of=$device_Name"
+					)
+					;;
+				*)
+					# Default to MBR
+					;;
+			esac
 			;;
 		*)
 			# Default to grub

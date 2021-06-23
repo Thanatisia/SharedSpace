@@ -7,15 +7,14 @@
 #	- 2021-06-15 0154H, Asura
 #	- 2021-06-15 1836H, Asura
 #	- 2021-06-17 0123H, Asura
-#	- 2021-06-17 0141H, Asura
-#	- 2021-06-17 0232H, Asura
+#	- 2021-06-17 0201H, Asura
+#	- 2021-06-17 0233H, Asura
 #	- 2021-06-18 1228H, Asura
-#	- 2021-06-18 1739H, Asura
+#	- 2021-06-18 2011H, Asura
 #	- 2021-06-18 2256H, Asura
-#	- 2021-06-20 1136H, Asura
-#	- 2021-06-23 1529H, Asura
-#	- 2021-06-23 2103H, Asura
-#	- 2021-06-23 2125H, Asura
+#	- 2021-06-20 1349H, Asura
+#	- 2021-06-23 1524H, Asura
+#	- 2021-06-23 2059H, Asura
 #	- 2021-06-23 2233H, Asura
 # Features: 
 #	- Full minimal user input install script
@@ -33,25 +32,24 @@
 #		- Now focusing on postinstallation recommendations
 #	- 2021-06-17 0123H, Asura
 #		- Fixed some bugs: { mounting partitions boot, home and root didnt include the device name }
-#	- 2021-06-17 0141H, Asura
+#	- 2021-06-17 0201H, Asura
 #		- Added read -p if MODE == DEBUG
-#	- 2021-06-17 0232H, Asura
-#		- Added DEBUG features
+#	- 2021-06-17 0233H, Asura
+#		- Added Debug features
 #	- 2021-06-18 1228H, Asura
 #		- Modified arch-chroot /mnt <commands> install scripts
 #		- Added a [Reference] section for reference sites
-#	- 2021-06-18 1739H, Asura
+#	- 2021-06-18 2011H, Asura
 #		- Added 'check network'
+#		- Added pauses to after arch-chroot_exec
 #	- 2021-06-18 2256H, Asura
 #		- Modified arch-chroot method to create a file inside root partition to execute for the time being
-#	- 2021-06-20 1137H, Asura
-#		- Added Comments
-#	- 2021-06-23 1529H, Asura
+#	- 2021-06-20 1349H, Asura
+#		- Added more comments
+#	- 2021-06-23 1525H, Asura
 #		- Added test use-case for auto-uncommenting /etc/locale.gen using sed
-#	- 2021-06-23 2103H, Asura
+#	- 2021-06-23 2059H, Asura
 #		- Added package 'base' into arraylist of packages to install
-#	- 2021-06-23 2125H, Asura
-#		- Moved local variable 'pkgs' from pacstrap_Install() -> Global Array variable 'pacstrap_Pkgs'
 #		- Added syslinux bootloader install
 #		- Created new associative array 'pkg' to store all packages
 #		- Appended 'pacstrap_Pkgs' to 'pkg' associative array
@@ -83,39 +81,74 @@ PROGRAM_TYPE="Main"
 MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux"
 
-# [Array]
-
-### Pacstrap
-pacstrap_Pkgs=(
-	# EDIT: MODIFY THIS
-	# Place your pacstrap packages here
-	# - Ensure 'base' is inside
-	# - Otherwise, there will be issues loading after installation
-	# - Error examples:
-	#	1. 'root mounted, but /sbin/init not found, have fun'
-	# Add the packages you want to strap in here
-	"base"
-	"linux"
-	"linux-firmware"
-	"linux-lts"
-	"linux-lts-headers"
-	"base-devel"
-	"nano"
-	"vim"
-	"networkmanager"
-	"os-prober"
+# [Must change edits]
+# Aka for those labelled with 'EDIT: MODIFY THIS'
+#	- This is a test 'UX' design variant of the program whereby its meant to be user-friendly
+#	- If you want to use this as intended,
+#		Please edit all parameters with 'EDIT: Modify this'
+# 
+deviceParams_devType="<hdd|ssd|flashdrive|microSD>"
+deviceParams_Name="</dev/sdX>"
+deviceParams_Size="<x {GB | GiB | MB | MiB}"
+deviceParams_Boot="<mbr|uefi>"
+deviceParams_Label="<msdos|gpt>"
+boot_Partition=(
+	# Append this and append a [n]="${boot_Partition[<n-1>]}" in
+	#	partition_Configuration
+	"1;Boot;primary;ext4;0%;1024MiB;True;NIL"
+	"2;Root;primary;ext4;1024MiB;<x1MiB>;False;NIL"
+	"3;Home;primary;ext4;<x1MiB>;100%;False;NIL"
 )
+mount_Paths=(
+	# Append this and append a [n]="${mount_Paths[<n-1>]}" in
+	"/mnt/boot"	# Boot
+	"/mnt"		# Root
+	"/mnt/home"	# Home
+)
+pacstrap_pkgs=(
+		# EDIT: MODIFY THIS
+		# Add the packages you want to strap in here
+		"base"
+		"linux"
+		"linux-firmware"
+		"linux-lts"
+		"linux-lts-headers"
+		"base-devel"
+		"nano"
+		"vim"
+		"networkmanager"
+		"os-prober"
+)
+location_Region="Asia"
+location_City="Singapore"
+location_Language="en_SG.UTF-8"
+location_KeyboardMapping="en_UTF-8"
+user_ProfileInfo=(
+	# Append this and append a [n]="${user_ProfileInfo[<n-1>]}" in
+	# 	user_Info
+	# "
+	#	<username>,
+	#	<primary_group>,
+	#	<secondary_group (put NIL if none),
+	#	<custom_directory (Put 'True' for yes and 'False' for no)>,
+	#	<custom_directory_path (if custom_directory is True)>
+	# "
+	"asura,wheel,NIL,True,/home/profiles/asura"
+)
+networkConfig_hostname="ArchLinux"
+bootloader="grub"
+bootloader_Params=""
 
 # [Associative Array]
 
 ### Device and Partitions
 declare -A device_Parameters=(
 	# EDIT: Modify this
-	[device_Type]="<hdd|ssd|flashdrive|microSD>"
-	[device_Name]="</dev/sdX>"
-	[device_Size]="<x {GB | GiB | MB | MiB}>"
-	[device_Boot]="<mbr|uefi>"
-	[device_Label]="<msdos|gpt>"
+	[device_Type]="$deviceParams_devType"
+	[device_Name]="$deviceParams_Name"
+	[device_Size]="$deviceParams_Size"
+	[device_Boot]="$deviceParams_Boot"
+	[device_Label]="$deviceParams_Label"
 )
 
 declare -A partition_Configuration=(
@@ -125,9 +158,9 @@ declare -A partition_Configuration=(
 	# Please append according to your needs
 	# [Syntax]
 	# ROW_ID="<partition_ID>;<partition_Name>;<partition_file_Type>;<partition_start_Size>;<partition_end_Size>;<partition_Bootable>;<partition_Others>
-	[1]="1;Boot;primary;ext4;0%;1024MiB;True;NIL"
-	[2]="2;Root;primary;ext4;1024MiB;<x1MiB>;False;NIL"
-	[3]="3;Home;primary;ext4;<x1MiB>;100%;False;NIL"
+	[1]="${boot_Partition[0]}"
+	[2]="${boot_Partition[1]}"
+	[3]="${boot_Partition[2]}"
 )
 
 declare -A partition_Parameters=(
@@ -143,23 +176,13 @@ declare -A partition_Parameters=(
 
 ### Mounts
 declare -A mount_Group=(
-	# Place all your partition path
+	# Place all your partition path 
 	#	corresponding to the partition number
 	# [Syntax]
 	# [partition-n]="/partition/mount/path"
-	[1]="/mnt/boot"	# Boot
-	[2]="/mnt"		# Root
-	[3]="/mnt/home"	# Home
-)
-
-### Packages
-declare -A pkgs=(
-	# EDIT: Modify this 
-	# All Packages
-	#	- pacstrap packages etc.
-	# Please append all new categories below in the key while
-	#	the array for the category in the values
-	[pacstrap]="${pacstrap_Pkgs[@]}"
+	[1]="${mount_Paths[0]}"	# Boot
+	[2]="${mount_Paths[1]}"	# Root
+	[3]="${mount_Paths[2]}"	# Home
 )
 
 ### Region & Location
@@ -167,10 +190,19 @@ declare -A location=(
 	# Regional & Location
 	# Your Region, Your City etc.
 	# EDIT: Modify this
-	[region]="<Your Region>"
-	[city]="<Your City>"
-	[language]="en_SG.UTF-8"
-	[keymap]="en_UTF-8"
+	[region]="$location_Region"
+	[city]="$location_City"
+	[language]="$location_Language"
+	[keymap]="$location_KeyboardMapping"
+)
+
+### Packages
+declare -A pkgs=(
+	# All Packages
+	#	- pacstrap packages etc.
+	# Please append all new categories below in the key while
+	#	the array for the category in the values
+	[pacstrap]="${pacstrap_pkgs[@]}"
 )
 
 ### User Control
@@ -190,24 +222,24 @@ declare -A user_Info=(
 	# "
 	# [Examples]
 	# [1]="username,wheel,NIL,True,/home/profiles/username"
-	[1]="asura,wheel,NIL,True,/home/profiles/asura"
+	[1]="${user_ProfileInfo[0]}"
 )
 
 ### Network Configurations
 declare -A network_config=(
 	# EDIT: Modify this
 	# Network Configuration info
-	[hostname]="ArchLinux"
+	[hostname]="$networkConfig_hostname"
 )
 
 ### Operating System Definitions
 declare -A osdef=(
 	# EDIT: Modify this
-	# Operating System Definitions
+	# Operating System Definitions 
 	# - Bootloader, Kernels (to be added) etc.
-	[bootloader]="grub"				# Your Bootloader
-	[optional-parameters]=""		# Your Bootloader's additional parameters outside of the main important ones
-	[target_device_Type]="i386-pc"	# Your Target Device Type
+	[bootloader]="$bootloader"					# Your Bootloader
+	[optional-parameters]="$bootloader_Params"	# Your Bootloader's additional parameters outside of the main important ones
+	[target_device_Type]="i386-pc"				# Your Target Device Type
 )
 
 # --- Functions
@@ -269,30 +301,19 @@ verify_boot_Mode()
 
 update_system_Clock()
 {
-	comms=(
-		# Sync NTP
-		"timedatectl set-ntp true"
-		# To check system clock
-		"timedatectl status"
-	)
-
-	for c in "${comms[@]}"; do
-		case "$MODE" in
-			"DEBUG")
-				echo $c
-				;;
-			*)
-				# Default: RELEASE
-				$c
-				;;
-		esac
-	done
-
 	# Sync NTP
-	#echo timedatectl set-ntp true
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo timedatectl set-ntp true
+	else
+		timedatectl set-ntp true
+	fi
 
 	# To check system clock
-	#echo timedatectl status
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo timedatectl status
+	else
+		timedatectl status
+	fi
 }
 
 device_partition_Manager()
@@ -304,9 +325,6 @@ device_partition_Manager()
 	echo "Get User Input - Device Information"
 	device_Name="${device_Parameters["device_Name"]}"
 	device_Label="${device_Parameters["device_Label"]}"
-
-	echo "Device Name : $device_Name"
-	echo "Device Label: $device_Label"
 
 	echo ""
 
@@ -434,7 +452,6 @@ mount_Disks()
 	else
 		mkdir -p $dir_Home
 	fi
-
 	# Boot Directory
 	if [[ "$MODE" == "DEBUG" ]]; then
 		echo mkdir -p $dir_Boot
@@ -445,13 +462,9 @@ mount_Disks()
 	# Mount remaining directories
 	if [[ "$MODE" == "DEBUG" ]]; then
 		echo mount "$device_Name"3 $dir_Home
-	else
-		mount "$device_Name"3 $dir_Home
-	fi
-
-	if [[ "$MODE" == "DEBUG" ]]; then
 		echo mount "$device_Name"1 $dir_Boot
 	else
+		mount "$device_Name"3 $dir_Home
 		mount "$device_Name"1 $dir_Boot
 	fi
 
@@ -476,17 +489,19 @@ pacstrap_Install()
 	# --- Input
 
 	# Arrays
-	# pkgs=()
-	pkg=${pkgs["pacstrap"]}
+	pacstrap_Pkgs=${pkgs["pacstrap"]}
 
 	# Local Variables
-	mount_Point="${mount_Group["2"]}"
+	mount_Point=${mount_Group["2"]}
+
 
 	# --- Processing
 	if [[ "$MODE" == "DEBUG" ]]; then
-		echo pacstrap $mount_Point ${pkg[@]}
+		# echo pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		echo pacstrap $mount_Point ${pacstrap_Pkgs[@]}
 	else
-		pacstrap $mount_Point ${pkg[@]}
+		# pacstrap ${mount_Group["2"]} "${pkgs[@]}"
+		pacstrap $mount_Point ${pacstrap_Pkgs[@]}
 	fi
 
 	# --- Output
@@ -538,14 +553,14 @@ arch_chroot_Exec()
 		"hwclock --systohc"																# Step 10: Time Zones; Generate /etc/adjtime via hwclock
 		"echo ======= Location ======"													# Step 11: Localization;
 		# "vim /etc/locale.gen"															# Step 11: Localization; Edit /etc/locale.gen and uncomment language (ie. en_US.UTF-8 UTF-8; en_SG.UTF-8 UTF-8;)
-		"sed -i '/$location/s/^#//g' /etc/locale.gen"									# Step 11: Localization; Uncomment the locale region language
+		"sed -i '/$language/s/^#//g' /etc/locale.gen" 									# Step 11: Localization; Uncomment locale using sed
 		"locale-gen"																	# Step 11: Localization; Generate the locales by running
 		"echo \"LANG=$language\" | tee -a /etc/locale.conf"								# Step 11: Localization; Set LANG variable according to your locale
 		"echo ======= Network Configuration ======"										# step 12: Network Configuration;
 		"echo \"$hostname\" | tee -a /etc/hostname"										# Step 12: Network Configuration; Set Network Hostname Configuration; Create hostname file
 		"echo \"127.0.0.1   localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
 		"echo \"::1         localhost\" | tee -a /etc/hosts"							# Step 12: Network Configuration; Add matching entries to hosts file
-		"echo \"127.0.1.1   $hostname.localdomain   $hostname\" | tee -a /etc/hosts"	# Step 12: Network Configuration; Add matching entries to hosts file
+		"echo \"127.0.1.1   $hostname.localdomain	$hostname\" | tee -a /etc/hosts"	# Step 12: Network Configuration; Add matching entries to hosts file
 		"echo ======= Make Initial Ramdisk ======="										# Step 13: Initialize RAM file system;
 		"mkinitcpio -P linux"															# Step 13: Initialize RAM file system; Create initramfs image (linux kernel)
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
@@ -614,18 +629,58 @@ arch_chroot_Exec()
 	for c in "${chroot_commands[@]}"; do
 		cmd_str+="\n$c;"
 	done
-	
+
 	# Cat commands into script file in mount root
 	mount_Root=$dir_Mount/root
 	script_to_exe=chroot-comms.sh
 	if [[ "$MODE" == "DEBUG" ]]; then
-		# echo "echo -e "$cmd_str" > $mount_Root/$script_to_exe"
 		echo -e "$cmd_str"
 	else
 		echo -e "$cmd_str" > $mount_Root/$script_to_exe
 	fi
 
 	# Execute in arch-chroot
+	# ====== RETAIN THIS PIECE OF CODE FOR LEGACY DEBUGGING, THX FUTURE ME ====== #
+	#for c in "${chroot_commands[@]}"; do
+	#	if [[ "$MODE" == "DEBUG" ]]; then
+	#		echo arch-chroot $dir_Mount $c
+	#	else
+	#		arch-chroot $dir_Mount $c
+	#	fi
+	#done
+	# ====== RETAIN THIS PIECE OF CODE FOR LEGACY DEBUGGING, THX FUTURE ME ====== #
+	#for c in "${chroot_commands[@]}"; do
+	#	if [[ "$MODE" == "DEBUG" ]]; then	
+	#		# echo arch-chroot $dir_Mount $c
+	#		echo "arch-chroot $dir_Mount <<-EOF\
+	#			$c\
+	#		EOF"
+	#	else
+	#		# arch-chroot $dir_Mount $c
+	#		arch-chroot $dir_Mount <<-EOF
+	#			$c
+	#		EOF
+	#	fi
+	#done
+	
+	#if [[ "$MODE" == "DEBUG" ]]; then
+	#	echo -e "arch-chroot $dir_Mount <<- EOF\
+	#		$cmd_str
+	#	EOF"
+	#else
+	#	arch-chroot $dir_Mount <<-EOF
+	#		$cmd_str
+	#	EOF
+	#fi
+
+	#for c in "${chroot_commands[@]}"; do
+	#	if [[ "$MODE" == "DEBUG" ]]; then
+	#		echo -e "arch-chroot $dir_Mount $c"
+	#	else
+	#		arch-chroot $dir_Mount $c
+	#	fi
+	#done
+
 	if [[ "$MODE" == "DEBUG" ]]; then
 		echo "chmod +x $mount_Root/$script_to_exe"
 		echo "arch-chroot $dir_Mount /bin/bash -c \"$PWD/$script_to_exe\""
@@ -755,7 +810,7 @@ installer()
 	echo "Stage 1: Prepare Network"
 	echo "========================"
 	echo "Testing Network..."
-	network_Enabled="$(verify_network)"
+	network_Enabed="$(verify_network)"
 	if [[ "$network_Enabled" == "False" ]]; then
 		sudo dhcpcd
 	fi
@@ -866,11 +921,11 @@ init()
 {
 	#
 	# Initialization
-	#
-	echo "PROGRAM NAME: $PROGRAM_NAME"
-	echo "DISTRO      : $DISTRO"
+	# 
+	echo "Program Name: $PROGRAM_NAME"
+	echo "Program Type: $PROGRAM_TYPE"
+	echo "Distro: $DISTRO"
 }
-
 
 body()
 {
