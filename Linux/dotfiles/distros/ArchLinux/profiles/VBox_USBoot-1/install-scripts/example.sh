@@ -206,16 +206,16 @@ body()
 	arch-chroot /mnt /bin/bash -c "echo \"# ==================================== #\""
 	arch-chroot /mnt /bin/bash -c "mkinitcpio -P"
 
-	arch-chroot /mnt /bin/bash -c "echo ""# ========================== #\""
-	arch-chroot /mnt /bin/bash -c "echo ""# 8.vi. Change Root Password #\""
-	arch-chroot /mnt /bin/bash -c "echo ""# ========================== #\""
+	arch-chroot /mnt /bin/bash -c "echo \"# ========================== #\""
+	arch-chroot /mnt /bin/bash -c "echo \"# 8.vi. Change Root Password #\""
+	arch-chroot /mnt /bin/bash -c "echo \"# ========================== #\""
 	arch-chroot /mnt /bin/bash -c "passwd"
 	
 	case "$bootloader" in
 		"grub")
-			arch-chroot /mnt /bin/bash -c "echo ""# ========================= #\""
-			arch-chroot /mnt /bin/bash -c "echo ""# echo \"Bootloader: Grub\" #\""
-			arch-chroot /mnt /bin/bash -c "echo ""# ========================= #\""
+			arch-chroot /mnt /bin/bash -c "echo \"# ========================= #\""
+			arch-chroot /mnt /bin/bash -c "echo \"# echo \"Bootloader: Grub\" #\""
+			arch-chroot /mnt /bin/bash -c "echo \"# ========================= #\""
 			arch-chroot /mnt /bin/bash -c "sudo pacman -S grub"
 			arch-chroot /mnt /bin/bash -c "grub-install --target=$architecture --debug $dev_Name"
 			arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
