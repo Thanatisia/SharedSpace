@@ -116,25 +116,35 @@ body()
 	echo "# ====================== #"
 	echo "# Stage 4 : Partitioning #"
 	echo "# ====================== #"
+	echo ""
 	parted $dev_Name mklabel msdos
 	echo "Disk Label: [msdos] Created"
+	echo ""
 	parted $dev_Name mkpart primary ext4 0% 1024MiB
 	echo "Partition 1: Created."
+	echo ""
 	mkfs.ext4 "$dev_Name"1
 	echo "Partition 1: Formatted to ext4"
+	echo ""
 	parted $dev_Name set 1 boot on
 	echo "Partition 1: Bootable Enabled"
+	echo ""
 	echo "Partition 1 Completed."
 	parted $dev_Name mkpart primary ext4 1024MiB 32768MiB
 	echo "Partition 2: Created."
+	echo ""
 	mkfs.ext4 "$dev_Name"2
 	echo "Partition 2: Formatted to ext4"
+	echo ""
 	echo "Partition 2 Completed."
 	parted $dev_Name mkpart primary ext4 32768MiB 100%
 	echo "Partition 3: Created." 
+	echo ""
 	mkfs.ext4 "$dev_Name"3
 	echo "Partition 3: Formatted to ext4"
+	echo ""
 	echo "Partition 3 Completed."
+	echo ""
 	echo "======================="
 	echo "Partitioning Completed."
 	echo "======================="
