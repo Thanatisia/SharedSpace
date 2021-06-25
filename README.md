@@ -51,6 +51,7 @@
   * 2021-05-23 2302H, Asura
   * 2021-05-23 2322H, Asura
   * 2021-06-15 2003H, Asura
+  * 2021-06-25 1245H, Asura
 
 
 # To Note
@@ -137,6 +138,11 @@
   * Modified
     * Added new method to download individual files
   
+* 2021-06-25 1245H, Asura
+
+  * Modified
+    * Seperated 'wget' and 'curl'
+
 
 # License
 
