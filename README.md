@@ -2,6 +2,7 @@
 
 <h6> Index Page </h6>
 
+
 # Basic Information
 
 * Authors: 
@@ -56,12 +57,12 @@
 
 1. To download the repository, you can just clone it:
 
-   >  git clone 
+   +  git clone 
 
 2. To download a individual file, use wget or curl
    
-   >  wget https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
-   >  curl -L -O https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
+   +  wget https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
+   +  curl -L -O https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
 
 3. Each folder will have its own README like this
 
