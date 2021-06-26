@@ -9,6 +9,7 @@
 #	- 2021-06-07 0011H, Asura
 #	- 2021-06-10 1026H, Asura
 #	- 2021-06-15 0055H, Asura
+#	- 2021-06-26 1614H, Asura
 # Features: 
 #	- Allows user to 
 #		> add packages of their choice into the list
@@ -32,6 +33,8 @@
 #	2021-06-15 0055H, Asura
 #		- Added Documentations
 #		- Fixed install function
+#	2021-06-26 1614H, Asura
+#		- Changed 'aptitude' to use apt instead of apt-get
 #
 
 # --- Variables
@@ -81,12 +84,12 @@ case "$PKGMGR" in
 		;;
 	"aptitude")
 		declare -A pkg_controls=(
-			[install]="sudo apt-get install $selected_pkg_Name"
-			[remove]="sudo apt-get"
-			[uninstall]="sudo apt-get uninstall "
-			[update]="sudo apt-get update"
-			[upgrade]="sudo apt-get upgrade"
-			[update-and-upgrade]="sudo apt-get update upgrade"
+			[install]="sudo apt install $selected_pkg_Name"
+			[remove]="sudo apt"
+			[uninstall]="sudo apt uninstall "
+			[update]="sudo apt update"
+			[upgrade]="sudo apt upgrade"
+			[update-and-upgrade]="sudo apt update upgrade"
 			[exit]="exit"
 		)
 		;;
