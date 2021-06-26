@@ -1,0 +1,30 @@
+#
+# This Contains aliases for all linux commands
+# based on Package manager commands
+#
+
+case "$PKGMGR" in
+	"pacman")
+		# Package Manager - pacman
+		if [[ -f $HOME/personal/dotfiles/bash/package_manager/.pacman ]]; then
+			# If file exists
+			. $HOME/personal/dotfiles/bash/package_manager/.pacman
+		else
+			echo "	file [$HOME/personal/dotfiles/bash/package_manager/.pacman] does not exist"
+		fi
+		;;
+	"apt")
+		# Package Manager - apt
+		if [[ -f $HOME/personal/dotfiles/bash/package_manager/.apt ]]; then
+			# If file exists
+			. $HOME/personal/dotfiles/bash/package_manager/.apt
+		else
+			echo "	file [$HOME/personal/dotfiles/bash/package_manager/.apt] does not exist"
+		fi
+		;;
+	*)
+		echo "Invalid Package Manager: $PKGMGR"
+		;;
+esac
+
+

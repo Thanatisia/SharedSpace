@@ -1,0 +1,120 @@
+#
+# Variables & Aliases for custom installed programs
+#
+
+
+# -- feh
+# Variables
+DEFAULT_BG_TYPE="--bg-fill"
+
+# Aliases
+alias set_bg="feh $DEFAULT_BG_TYPE"
+alias set_bg_center="feh --bg-center"
+alias set_bg_fill="feh --bg-fill"
+alias set_bg_scale="feh --bg-scale"
+alias set_bg_tile="feh --bg-tile"
+alias set_bg_max="feh --bg-max"
+
+# -- PyWal
+# Variables
+
+# Aliases
+alias wal="python3 -m pywal"
+alias wal_clear_Cache="python3 -m pywal -c"
+alias gen_light_colorscheme="python3 -m pywal -l"
+alias set_color_LastUsed="cat ~/.cache/wal/sequences"
+alias set_color_LastUsed_background="python3 -m pywal -R"
+alias reload_xrdb_keep_termColor="xrdb ~/.Xresources && python3 -m pywal -R"
+
+# -- Rofi
+# Variables
+# Aliases
+alias run="rofi -show drun"
+
+# -- Lemonbar
+# Variables
+# Aliases
+alias lemonbar_start="~/.config/bspwm/bars/lemonbar/bar &"
+alias lemonbar_restart="pkill bar && ~/.config/bspwm/bars/lemonbar/bar &"
+
+# -- LibreOffice
+# Variables
+# Aliases
+alias excel="libreoffice --calc"
+alias word="libreoffice --writer"
+alias word_master="libreoffice --global"
+alias draw="libreoffice --draw"
+alias impress="libreoffice --impress"
+alias database="libreoffice --base"
+alias math="libreoffice --math"
+alias html="libreoffice --web"
+
+# -- xsetroot (Root properties)
+# Variables
+# Aliases
+alias set_root_cursorIcon="xsetroot -cursor_name "
+
+# -- Cmatrix
+# Variables
+# Aliases
+alias lock="cmatrix -a -b -u 5; vlock"
+
+#
+# -- xautolock Autolocker
+# Variables
+screenlocker="slock"
+# Functions
+function set_Screenlocker()
+{
+	#
+	# Screenlocker & Autolockers
+	#
+	timeout_min=1
+	other_options=-detectsleep
+	xautolock -time $timeout_min $other_options -locker "$screenlocker" # Screen Locker and Autolockers 
+}
+# Aliases
+alias restart_xautolock="pkill $screenlocker && set_Screenlocker &"
+alias stop_xautolock="pkill $screenlocker"
+alias start_xautolock="set_Screenlocker &"
+
+#
+# -- conky
+# Variables
+# Aliases
+alias edit_Conky="$EDITOR ~/.config/conky"
+
+#
+# entr
+#
+
+#
+# Personal scripts
+#
+# Functions
+read_todo()
+{
+	#
+	# Read TODO file
+	#
+	todo_filepath=~/personal/docs
+	todo_filename=TODO
+	todo_file=$todo_filepath/$todo_filename
+
+	# Create folder
+	if [[ ! -d $todo_filepath ]]; then
+		mkdir -p $todo_filepath
+	fi
+
+	# Create file if doesnt exist
+	if [[ ! -f $todo_file ]]; then
+		touch $todo_file
+		echo "==== TODO here ====" >> $todo_file
+	fi
+	$EDITOR $todo_file
+}
+
+# Aliases
+alias dirch=". shlib.sh && dir_change"
+alias gitclone=". gitlib.sh && git_clone"
+alias todo="read_todo" # Read TODO file

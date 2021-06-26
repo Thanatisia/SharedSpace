@@ -1,0 +1,15 @@
+#
+# Alias for Runners
+# 
+# ### NOTE
+# Not all languages use a runner; especially compilation-based languages
+# - Typically 'scripting languages' like Python use a runner, however
+# - Programming languages that requires compilation generates an output executable file; 
+# - Thereby removing the need for a runner
+##########
+#
+
+alias run_Java="java"
+alias run_Python="python"
+alias run_python_Module="python -m"
+

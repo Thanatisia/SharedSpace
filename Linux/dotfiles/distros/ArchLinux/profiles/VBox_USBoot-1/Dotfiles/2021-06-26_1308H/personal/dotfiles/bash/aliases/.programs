@@ -1,0 +1,10 @@
+#
+# This Contains aliases for all linux commands
+# based on Programs
+#
+
+# Programs
+alias chrome="${browsers[0]}"
+alias ff="${browsers[1]}"
+alias filemanager="${filemanagers[0]}"
+

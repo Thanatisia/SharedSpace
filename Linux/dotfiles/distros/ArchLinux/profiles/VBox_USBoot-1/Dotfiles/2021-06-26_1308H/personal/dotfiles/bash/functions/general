@@ -1,0 +1,93 @@
+#
+# General Functions
+#
+
+function massmake()
+{
+    #
+    # Wrapper for mkdir/touch
+    # A mass file/folder maker with
+    #   'touch' for files and 
+    #   'mkdir -p' for folders
+    #
+    folders=($1)
+	files=()
+    for fldrs in "${folders[@]}"; do
+		# DEBUGGING: echo "Folder: $fldrs"
+        if [ ! -d $fldrs ]; then
+			# Check if folder exists
+			# If folder does not exist: Make directory
+			mkdir -p $fldrs
+		fi
+	done 
+
+	for file in "${files[@]}"; do
+		if [ -f $file ]; then
+			# Check if file exists
+			touch $file
+		fi
+	done
+}
+
+function mkdef()
+{
+	# Make Defaults
+	# mkdef
+	folders=(
+		~/.tmp
+		~/.logs
+		~/.scripts/libraries
+		~/Media/Screenshot
+		~/Templates
+	)
+	files=()
+	for fldrs in "${folders[@]}"; do
+		if [ ! -d $fldrs ]; then
+			# Check if folder exists
+			# If folder does not exist: Make directory
+			mkdir -p $fldrs
+		fi
+	done 
+
+	for file in "${files[@]}"; do
+		if [ -f $file ]; then
+			# Check if file exists
+			touch $file
+		fi
+	done
+}
+
+random_message()
+{
+	#
+	# Print a random message in the specific list of messages in the Array
+	#
+	
+	# --- Input
+	# Arrays
+	messages=(
+		"Learn to just ignore life, say ok and FUCK IT ALL"
+	)
+
+	# Local Variables
+	size_of_Array="${#messages[@]}"
+	element_ID=0
+	
+	# --- Processing
+	# Randomize element_ID based on size of array
+	element_ID=$(( RANDOM % $size_of_Array ))
+	
+	# Get element from array based on randomize element
+	message="${messages[$element_ID]}"
+
+	# --- Output
+	echo "$message"
+}
+
+message_of_the_day()
+{
+	#
+	# Print Message of the Day
+	#
+	echo "Hello World"
+}
