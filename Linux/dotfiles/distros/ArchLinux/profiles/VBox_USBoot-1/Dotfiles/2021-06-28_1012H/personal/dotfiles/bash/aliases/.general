@@ -1,0 +1,14 @@
+#
+# This Contains aliases for all linux commands
+# based on General use-cases
+#  - basically all
+#
+
+# General
+alias echo="echo -e"			# echo but recognizes newline
+alias view="cat"
+alias ls="ls -la -colour"
+alias dir="dir --all"
+alias mkdir="mkdir -v -p"
+alias edit_last_command="fc"
+alias startx="startx ~/.xinitrc"

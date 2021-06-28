@@ -1,0 +1,76 @@
+#
+# pacman-specific dotfile containing
+# Alias, Variables, Functions etc
+#
+
+# --- Functions
+pkgsearch_Exact()
+{
+	#
+	# Search package exactly
+	#
+	
+	# --- Input
+	
+	# Command Line Variables
+	src="$1"
+
+	# Local Variables
+	
+	# --- Processing
+	res="$(pacman -Ss ^$src$)"
+
+	# --- Output
+	echo "$res"
+}
+
+record_Update()
+{
+
+	# Update last checked
+	# if [[ -f $HOME/personal/dotfiles/bash/.custom-variables ]]; then
+	#	source $HOME/personal/dotfiles/bash/.custom-variables
+	# fi
+	export LAST_CHECKED_DATE="$(date +'%d-%m-%y')"
+	export LAST_CHECKED_DAY="$(date +'%h')"
+	export LAST_CHECKED_TIME="$(date +'%H:%M:%S')"
+	export LAST_CHECKED_DATE_numberOnly="$(date +'%d')"
+
+	# Write to file
+	echo "Last Checked Date (Full)=$LAST_CHECKED_DATE" > $HOME/.tmp/env
+	echo "Last Checked Day=$LAST_CHECKED_DATE" >> $HOME/.tmp/env
+	echo "Last Checked Time=$LAST_CHECKED_TIME" >> $HOME/.tmp/env
+	echo "Last Checked Date (Number Only)=$LAST_CHECKED_DATE_numberOnly" >> $HOME/.tmp/env
+}
+
+# --- Variables
+
+# --- Aliases
+# alias pacinstall="sudo pacman -S" # Install package from install
+# alias pacinstall_Local="sudo pacman -U" # Install package from AUR
+# alias pacupd="sudo pacman -Sy |& tee -a ~/.logs/pacman-update.log" # Update only
+# alias pacupdg="sudo pacman -Syu |& tee -a ~/.logs/pacman-update_upgrade.log" # Update & Upgrade
+# alias pacupdg_force="sudo pacman -Syyu |& tee -a ~/.logs/pacman-update_upgrade_Forced.log" # Update & Upgrade Force
+# alias pacrefresh="sudo pacman -Syy |& tee -a ~/.logs/pacman-refresh.log" # Refresh Pacman
+# alias paclist="pacman -Ss |& tee -a ~/.logs/pacman-List_pkgs.log" # List all packages
+# alias pacinstalled_with_vers="pacman -Q |& tee -a ~/.logs/pacman-List_installed_pkgs_with_vers.log" # List all installed packages with version
+# alias pacinstalled="pacman -Qq |& tee -a ~/.logs/pacman-List_installed_pkgs.log" # List all installed packages
+# alias pacsearch_pkgs="pacman -Ss | grep"
+# alias pacsearch_existing="pacman -Qq | grep"
+# alias pacbackup="pacman -Qq | sort | tee ~/pacman_backup_list-$(date +"%y-%m-%d_%H-%M-%S").log"
+# alias pacrestore="pacman_package_restore"
+
+alias pkginstall="sudo pacman -S" # Install package from install
+alias pkginstall_Local="sudo pacman -U" # Install package from AUR
+alias pkgupd="sudo pacman -Sy |& tee -a ~/.logs/pacman-update.log && record_Update" # Update only
+alias pkgupdg="sudo pacman -Syu |& tee -a ~/.logs/pacman-update_upgrade.log && record_Update"
+alias pkgupdg_force="sudo pacman -Syyu |& tee -a ~/.logs/pacman-update_upgrade_Forced.log && record_Update" # Update & Upgrade Force
+alias pkgrefresh="sudo pacman -Syy |& tee -a ~/.logs/pacman-refresh.log" # Refresh Pacman
+alias pkglist="pacman -Ss |& tee -a ~/.logs/pacman-List_pkgs.log" # List all packages
+alias pkginstalled_with_vers="pacman -Q |& tee -a ~/.logs/pacman-List_installed_pkgs_with_vers.log" # List all installed packages with version
+alias pkginstalled="pacman -Qq |& tee -a ~/.logs/pacman-List_installed_pkgs.log" # List all installed packages
+alias pkgsearch_pkgs="pacman -Ss | grep"
+alias pkgsearch_existing="pacman -Qq | grep"
+alias pkgbackup="pacman -Qq | sort | tee ~/pacman_backup_list-$(date +"%y-%m-%d_%H-%M-%S").log"
+alias pkgrestore="pacman_package_restore"
+

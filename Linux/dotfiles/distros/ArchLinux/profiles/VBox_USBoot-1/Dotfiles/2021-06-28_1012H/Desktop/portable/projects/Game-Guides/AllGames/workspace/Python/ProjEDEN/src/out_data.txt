@@ -1,0 +1,125 @@
+Game Guides
+[Digivolution]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Next Digimon Rank: Details:
+ Name: Test
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+===
+[Degeneration]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+Game Guides
+[Digivolution]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Next Digimon Rank: Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+===
+[Degeneration]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+
+Game Guides
+[Digivolution]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Next Digimon Rank: Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+===
+[Degeneration]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+
+Game Guides
+[Digivolution]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Next Digimon Rank: Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+===
+[Degeneration]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+
+Game Guides
+[Digivolution]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Next Digimon Rank: Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+===
+[Degeneration]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+
+Game Guides
+[Digivolution]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Next Digimon Rank: Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+===
+[Degeneration]
+Digimon Name: Digimon Rank: Digimon Level: Digimon Change Type (Digivolve | Degeneration): Details:
+ Name: 
+ Current Level: 
+ Rank Change:  -> 
+ Change Status: 
+Results:
+ status : N/A
+ bonus : 1
+
