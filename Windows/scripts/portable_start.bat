@@ -157,16 +157,12 @@ goto :main
 
     EXIT /B 0
 
-
-:main
+:postcompletion
     ::
-    :: Main Function
+    :: Execute after program is completed.
     ::
 
-    :: Open Program
-    call :check_prog_Empty
-    
-    call :prog_start ret_code
+    SET ret_code=%~d1
 
     if "%ret_code%" == "1" (
         :: Success
@@ -184,6 +180,19 @@ goto :main
             echo Program already registered.
         )
     )
+
+    :: --- Output
+    EXIT /B 0
+
+:main
+    ::
+    :: Main Function
+    ::
+
+    :: Open Program
+    call :check_prog_Empty 
+    call :prog_start ret_code
+    call :postcompletion %ret_code%
 
     goto :end
 
