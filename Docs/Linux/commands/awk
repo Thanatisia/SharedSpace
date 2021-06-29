@@ -1,0 +1,53 @@
+#
+# Linux Command Documentation: awk
+#
+
+[Background]
+Command Name: awk
+Abbreviation: Aho, Weiberger and Kernighan (of Brian Kernighan fame) 
+Command Summary: 
+	- awk is a programming language-like program that is useful for data analysis etc.
+	- awk has the capability to read a file and format it with C-like syntax to retrieve data and/or
+	- run a awk script for efficient processing and/or retrieval of data
+General Syntax: awk '$format' $input_file_Name
+General Parameters: -f
+Seperators: ','
+
+[Notes]
+1. The command seperates each field with comma (comma-delimited)
+
+[Variables]
+# --- Awk script Variables
+$0 : All fields
+${1 - n} : field-1 to field-n
+
+[Parameters]
+-f : Run an awk script file
+	Syntax:
+		awk -f <awk_script_Name> <parameters/arguments>
+	Examples:
+		[1] Print a file
+			Contents:
+				awk_script_Name="awk_print_Test.awk"
+				args="test.txt"
+				script_Contents=""
+					{print $0}
+				""
+				file_Contents=""
+					field_1 field_2 field_3
+					field_4 field_5 field_6
+				""
+			Command:
+				awk -f $awk_script_Name $file_Contents
+			Output:
+				field_1 field_2 field_3
+				field_4 field_5 field_6
+
+
+[Use-Cases]
+Example [1] : To print a file
+	format="{print}"
+	filename="test.txt"
+	awk '$format' $filename
+
+
