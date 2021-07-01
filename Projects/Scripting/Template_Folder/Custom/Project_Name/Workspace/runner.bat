@@ -1,5 +1,18 @@
-:: C Compiler 
-:: using gcc (Mingw-w64)
+:: Script Runners
+:: For 'Programming' Languages (aka Scripting Languages)
+:: that does not compile before being able to run
+::	Compilation:
+::		Java:
+::			javac main.java -o main.o
+::			java main.o
+::		C/C++:
+::			gcc/g++ main.c(pp) -o main.exe
+::			main.exe
+::	Runners:
+::		Python:
+::			python main.py
+::		Javascript:
+::			npm main.js
 @echo off
 SETLOCAL EnableDelayedExpansion
 
@@ -11,7 +24,7 @@ SET argv=%~d1
 :: Environment Variables
 
 :: Global Variables
-SET LANGUAGE=c
+SET LANGUAGE=
 
 :: --- Processing
 goto :main "%~1" "%~2" "%~3"
@@ -28,20 +41,22 @@ goto :end
 
 	:: Arguments
 	SET src_file=%~1
-	SET exe_file=%~2
-	SET options=%~3
+	SET options=%~2
+	SET exe_file=%~3
 
 	:: Local Variables
-	IF "%LANGUAGE%" == "c" (
-		SET COMPILER=gcc
-	) ELSE IF "%LANGUAGE" == "cpp" (
-		SET COMPILER=g++
+	IF "%LANGUAGE%" == "python" (
+		SET RUNNER=python
+	) ELSE IF "%LANGUAGE%" == "bash" (
+		SET RUNNER=/bin/bash
+	) ELSE IF "%LANGUAGE%" == "batch" (
+		SET RUNNER=cmd
 	)
-	SET compile_proc=%COMPILER% %src_file% -o %exe_file% %options%
+	SET run_proc=%RUNNER% %src_file%
 
-	echo Compilation Process: %compile_proc%
+	echo Running Process: %run_proc%
 	:: --- Processing
-	%compile_proc% && (
+	%run_proc% && (
 		echo "Compilation Success"
 	) || (
 		echo "Compilation Error"
