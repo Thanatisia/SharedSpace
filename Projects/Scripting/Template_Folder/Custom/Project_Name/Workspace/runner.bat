@@ -12,7 +12,7 @@
 ::		Python:
 ::			python main.py
 ::		Javascript:
-::			npm main.js
+::			node main.js
 @echo off
 SETLOCAL EnableDelayedExpansion
 
@@ -47,6 +47,8 @@ goto :end
 	:: Local Variables
 	IF "%LANGUAGE%" == "python" (
 		SET RUNNER=python
+	) ELSE IF "%LANGUAGE%" == "javascript" (
+		SET RUNNER=node
 	) ELSE IF "%LANGUAGE%" == "bash" (
 		SET RUNNER=/bin/bash
 	) ELSE IF "%LANGUAGE%" == "batch" (
