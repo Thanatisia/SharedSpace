@@ -6,6 +6,7 @@
 # Modified: 
 #	- 2021-06-15 2342H, Asura
 #	- 2021-07-02 1349H, Asura
+#	- 2021-07-02 2325H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -15,6 +16,8 @@
 #		- Created script file
 #	- 2021-07-02 1349H, Asura:
 #		- Added 'EDIT THIS' indicators to the variables intended for editing
+#	- 2021-07-02 2324H, Asura
+#		- Documentation changes
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -301,7 +304,6 @@ init()
 	#
 	echo "Program Name: $PROGRAM_NAME"
 	echo "Running on  : $DISTRO"
-	create_directories "${folders_to_create[@]}"
 }
 
 body()
