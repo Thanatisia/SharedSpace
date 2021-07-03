@@ -8,6 +8,7 @@
 #	- 2021-07-02 1349H, Asura
 #	- 2021-07-02 2324H, Asura
 #	- 2021-07-03 1246H, Asura
+#	- 2021-07-03 1543H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -23,6 +24,8 @@
 #		- Added extra stages before creating dotfiles
 #			- Created function 'user_mgmt'
 #			- Added 'su - $TARGET_USER' to execute command as user
+#	- 2021-07-03 1543H, Asura
+#		- Modified 'user' to 'user_profiles'
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -136,7 +139,7 @@ declare -A pkgs=(
 	[fetch]="neofetch"
 	[others]=""
 )
-declare -A files_to_edit(
+declare -A files_to_edit=(
 	#
 	# EDIT THIS
 	#
@@ -158,7 +161,7 @@ declare -A files_to_edit(
 	# --- BashRC [Personal] \
 	#"
 )
-declare -A users=(
+declare -A user_profiles=(
 	#
 	# EDIT THIS
 	#
@@ -295,14 +298,14 @@ user_mgmt()
 	echo "i. Create User "
 	echo "==============="
 
-	# Loop through the $users associative array
+	# Loop through the $user_profiles associative array
 	# And create
 	#	i. Keys : Username
 	#	ii. Values : Individual parameters 
 	#		primary group, secondary group, home_dir
-	for user in "${!users[@]}"; do
+	for user in "${!user_profiles[@]}"; do
 		# Get all parameters of current user
-		curr_val="${users[$user]}"
+		curr_val="${user_profiles[$user]}"
 		# Seperate retrieved parameter by delimiter
 		curr_user_Params=($(seperate_by_Delim ";" "$curr_val"))
 		# Retrieve individual Parameters
