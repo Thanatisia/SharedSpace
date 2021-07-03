@@ -9,6 +9,7 @@
 #	- 2021-07-02 2324H, Asura
 #	- 2021-07-03 1246H, Asura
 #	- 2021-07-03 1625H, Asura
+#	- 2021-07-03 1645H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -28,6 +29,8 @@
 #		- Modified 'user' to 'user_profiles'
 #	- 2021-07-03 1625H, Asura
 #		- Changed 'MODE' to be the first command line argument with the default value set to 'DEBUG'
+#	- 2021-07-03 1645H, Asura
+#		- Added function 'enable_sudo' and 'comment/uncomment_lines'
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -234,6 +237,27 @@ log_datetime()
 	echo "$(date +'%d-%m-%y %H-%M-%S')"
 }
 
+comment_line()
+{
+	#
+	# Uncomment line that contains a keyword using
+	#	sed : Regular Expression
+	#
+	regex_Pattern="$1"
+	filename="$2"
+	sed -i '/$regex_Pattern/s/^/#/g' $filename
+}
+uncomment_line()
+{
+	#
+	# Uncomment line that contains a keyword using
+	#	sed : Regular Expression
+	#
+	regex_Pattern="$1"
+	filename="$2"
+	sed -i '/$regex_Pattern/s/^#//g' $filename
+}
+
 # Pre-Requisite Stages
 # Execute in Root
 verify_network()
@@ -246,6 +270,18 @@ verify_network()
 	ping -c 5 8.8.8.8
 	res=$?
 	echo "$res"
+}
+enable_sudo()
+{
+	#
+	# Uncomment '%wheel ALL=(ALL) ALL' in /etc/sudoers
+	#	via
+	#		1. visudo
+	#		2. sed 
+	#
+	regex_Pattern="%wheel ALL=(ALL) ALL"
+	filename=/etc/sudoers
+	`uncomment_line $regex_Pattern $filename` 
 }
 user_mgmt()
 {
@@ -263,6 +299,13 @@ user_mgmt()
 	useradd_default_Params="-m"
 	useradd_Command="useradd $useradd_default_Params "
 
+	# Associative Arrays (aka Dictionaries)
+	declare -A useradd_Params=(
+		[create-home-directory-if-not-exist]="-m"
+		[primary-group]="-g"
+		[secondary-group]="-G"
+		[home-directory]="-d"
+	)
 
 	# --- Processing
 	echo "==============="
@@ -290,13 +333,13 @@ user_mgmt()
 		if [[ ! "$u_primary_Group" == "" ]]; then
 			# Primary Group
 			# Not Empty
-			useradd_Command+=" -G $u_primary_Group "
+			useradd_Command+=" -g $u_primary_Group "
 		fi
 
 		if [[ ! "$u_secondary_Groups" == "" ]]; then
 			# Secondary Groups
 			# Not Empty
-			useradd_Command+=" -g $u_secondary_Groups "
+			useradd_Command+=" -G $u_secondary_Groups "
 		fi
 		
 		if [[ ! "$u_home_Dir" == "" ]]; then
@@ -304,6 +347,9 @@ user_mgmt()
 			# Not Empty
 			useradd_Command+=" -d $u_home_Dir "
 		fi
+		
+		# Append Username to confirm user
+		useradd_Command+="$user"
 
 		if [[ "$MODE" == "DEBUG" ]]; then
 			echo "$useradd_Command" 
@@ -483,8 +529,13 @@ body()
 		systemctl start NetworkManager
 	fi
 
+	echo "=================================="
+	echo "Pre-Req 2: Enable Sudo in sudoers "
+	echo "=================================="
+	enable_sudo
+
 	echo "==========================="
-	echo "Pre-Req 2: User Management "
+	echo "Pre-Req 3: User Management "
 	echo "==========================="
 	user_mgmt
 

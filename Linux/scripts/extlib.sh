@@ -53,6 +53,27 @@ seperate_by_Delim()
 	echo "${content[@]}"
 }
 
+comment_line()
+{
+	#
+	# Uncomment line that contains a keyword using
+	#	sed : Regular Expression
+	#
+	regex_Pattern="$1"
+	filename="$2"
+	sed -i '/$regex_Pattern/s/^/#/g' $filename
+}
+uncomment_line()
+{
+	#
+	# Uncomment line that contains a keyword using
+	#	sed : Regular Expression
+	#
+	regex_Pattern="$1"
+	filename="$2"
+	sed -i '/$regex_Pattern/s/^#//g' $filename
+}
+
 # Main functions
 init()
 {
