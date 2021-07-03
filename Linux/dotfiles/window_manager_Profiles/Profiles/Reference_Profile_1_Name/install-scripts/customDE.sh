@@ -22,6 +22,7 @@
 #	- 2021-07-03 1246H, Asura
 #		- Added extra stages before creating dotfiles
 #			- Created function 'user_mgmt'
+#			- Added 'su - $TARGET_USER' to execute command as user
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -41,7 +42,7 @@ MODE="DEBUG" # { DEBUG | RELEASE }
 DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
 # [General]
-MAIN_USER=""
+TARGET_USER="admin"
 
 # [Path]
 #
@@ -54,6 +55,11 @@ MAIN_USER=""
 # EDIT THIS
 # Please write all your folder variables in this section
 #
+logging_filepath=~/.logs
+logging_filepath_Stages=$logging_filepath/$PROGRAM_SCRIPTNAME # "Custom Window Manager to Desktop Environment setup script"
+config_Path=~/.config
+script_Path=~/.script
+tmp_Path=~/.tmp
 
 # [Files]
 #
@@ -203,6 +209,7 @@ log_datetime()
 }
 
 # Pre-Requisite Stages
+# Execute in Root
 pkg_install()
 {
 	#
@@ -313,12 +320,29 @@ user_mgmt()
 		passwd $user
 	done
 
+	echo "===================="
+	echo "ii. Set target user "
+	echo "===================="
+
+	# Check if a target user is selected
+	if [[ "$TARGET_USER" == "" ]]; then
+		# Empty
+		while true; do
+			read -p "Select a user to setup: " TARGET_USER
+			if [[ ! "$TARGET_USER" == "" ]]; then
+				# If not empty
+				break 
+			fi
+		done
+	fi
+
 	# --- Output
 
 }
 
 
 # Setup Stages
+# Execute in user
 create_dotfiles()
 {
 	#
@@ -335,10 +359,10 @@ create_dotfiles()
 	for d in ${folders_to_create[@]}; do 
 		if [[ ! -d $d ]]; then
 			# If directory does not exist
-			create_directories $f
-			echo "$(log_datetime) > Directory has been created : $d" | tee -a $logging_filepath/stage-2-i.log
+			su - $TARGET_USER -c create_directories $d
+			su - $TARGET_USER -c echo "$(log_datetime) > Directory has been created : $d" | tee -a $logging_filepath/stage-2-i.log
 		else
-			echo "$(log_datetime) > Directory already exists : $d" | tee -a $logging_filepath/stage-2-i.log
+			su - $TARGET_USER -c echo "$(log_datetime) > Directory already exists : $d" | tee -a $logging_filepath/stage-2-i.log
 		fi
 	done
 
@@ -349,10 +373,10 @@ create_dotfiles()
 	for f in ${files_to_create[@]}; do
 		if [[ ! -f $f ]]; then
 			# If file does not exist
-			touch $f
-			echo "$(log_datetime) > File has been created : $f" | tee -a $logging_filepath/stage-2-ii.log
+			su - $TARGET_USER -c touch $f
+			su - $TARGET_USER -c echo "$(log_datetime) > File has been created : $f" | tee -a $logging_filepath/stage-2-ii.log
 		else
-			echo "$(log_datetime) > File already exists : $f" | tee -a $logging_filepath/stage-2-ii.log
+			su - $TARGET_USER -c echo "$(log_datetime) > File already exists : $f" | tee -a $logging_filepath/stage-2-ii.log
 		fi
 	done
 }
@@ -373,12 +397,12 @@ setup_dotfiles()
 		curr_val=${files_to_edit[$file]}
 		if [[ ! -f $file ]]; then
 			# If does not exist, create
-			touch $file
-			echo "$(log_datetime) > File has been created : $file" | tee -a $logging_filepath/stage-3-i.log
+			su - $TARGET_USER -c touch $file
+			su - $TARGET_USER -c echo "$(log_datetime) > File has been created : $file" | tee -a $logging_filepath/stage-3-i.log
 		fi
 		# Append to file
-		echo "$curr_val" | tee -a $file
-		echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a $logging_filepath/stage-3-i.log
+		su - $TARGET_USER -c echo "$curr_val" | tee -a $file
+		su - $TARGET_USER -c echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a $logging_filepath/stage-3-i.log
 	done
 
 }
