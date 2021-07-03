@@ -7,6 +7,7 @@
 #	- 2021-06-15 2342H, Asura
 #	- 2021-07-02 1349H, Asura
 #	- 2021-07-02 2325H, Asura
+#	- 2021-07-03 1246H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -18,6 +19,9 @@
 #		- Added 'EDIT THIS' indicators to the variables intended for editing
 #	- 2021-07-02 2324H, Asura
 #		- Documentation changes
+#	- 2021-07-03 1246H, Asura
+#		- Added extra stages before creating dotfiles
+#			- Created function 'user_mgmt'
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -37,6 +41,7 @@ MODE="DEBUG" # { DEBUG | RELEASE }
 DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
 # [General]
+MAIN_USER=""
 
 # [Path]
 #
@@ -70,7 +75,6 @@ files_to_create=(
 	# EDIT THIS
 	# Please place all the files you would like to create
 	#
-	$bashrc_personal
 )
 
 base_distros=(
@@ -126,6 +130,18 @@ declare -A files_to_edit(
 	#	[folder_path]="line 1\
 	# line 2 \
 	# line 3"
+)
+declare -A users=(
+	#
+	# EDIT THIS
+	#
+	# Place all your users and their roles here
+	# Parameter Seperator/Delimiter: ';'
+	# Subparameter Seperator/Delimiter: ','
+	# [Syntax]
+	# [username]="$primary_Group;$secondary_group_element_1,$secondary_group_element_n;$home_dir"
+	# [username]="$primary_Group;$secondary_Group;$home_dir"
+	[admin]="wheel;admin;/home/profiles/"
 )
 
 # [Derivatives]
@@ -186,7 +202,7 @@ log_datetime()
 	echo "$(date +'%d-%m-%y %H-%M-%S')"
 }
 
-# Installation Stages
+# Pre-Requisite Stages
 pkg_install()
 {
 	#
@@ -228,6 +244,79 @@ pkg_install()
 		done
 	fi
 }
+
+user_mgmt()
+{
+	#
+	# Create User 
+	#
+
+	# --- Input
+	# Local Variables
+	# -m | --create-home : 
+	#	- Create the user's home directory if it doesnt exist
+	#		The files and directories contained in the skeleton directory (which can be defined with the -k option)
+	#		will be copied to the home directory
+	#	- useradd will create the home directory unless CREATE_HOME in /etc/login.defs is set to no
+	useradd_default_Params="-m"
+	useradd_Command="useradd $useradd_default_Params"
+
+
+	# --- Processing
+	echo "==============="
+	echo "i. Create User "
+	echo "==============="
+
+	# Loop through the $users associative array
+	# And create
+	#	i. Keys : Username
+	#	ii. Values : Individual parameters 
+	#		primary group, secondary group, home_dir
+	for user in "${!users[@]}"; do
+		# Get all parameters of current user
+		curr_val="${users[$user]}"
+		# Seperate retrieved parameter by delimiter
+		curr_user_Params=($(seperate_by_Delim ";" "$curr_val"))
+		# Retrieve individual Parameters
+		u_primary_Group="${curr_user_Params[0]}"
+		u_secondary_Groups="${curr_user_Params[1]}"
+		u_home_Dir=${curr_user_Params[2]}
+
+		#
+		# Make user
+		#
+		if [[ ! "$u_primary_Group" == "" ]]; then
+			# Primary Group
+			# Not Empty
+			useradd_Command+="-G $u_primary_Group"
+		if [[ ! "$u_secondary_Groups" == "" ]]; then
+			# Secondary Groups
+			# Not Empty
+			useradd_Command+="-g $u_secondary_Groups"
+		fi
+		if [[ ! "$u_home_Dir" == "" ]]; then
+			# Home Directory
+			# Not Empty
+			useradd_Command+="-d $u_home_Dir"
+		fi
+
+		if [[ "$MODE" == "DEBUG" ]]; then
+			echo "$useradd_Command" 
+		else
+			# Create User
+			$useradd_Command
+		fi
+
+		#
+		# Change Password
+		#
+		passwd $user
+	done
+
+	# --- Output
+
+}
+
 
 # Setup Stages
 create_dotfiles()
@@ -329,15 +418,22 @@ body()
 
 	echo ""
 
+	echo "========================="
+	echo "Stage 2: User Management "
+	echo "========================="
+	user_mgmt
+
+	echo ""
+
 	echo "================"
-	echo "Stage 2: Create "
+	echo "Stage 3: Create "
 	echo "================"
 	setup_dotfiles
 
 	echo ""
 
 	echo "==============="
-	echo "Stage 3: Setup "
+	echo "Stage 4: Setup "
 	echo "==============="
 	setup_dotfiles
 
