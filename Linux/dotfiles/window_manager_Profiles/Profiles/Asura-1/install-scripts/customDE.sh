@@ -365,9 +365,9 @@ user_mgmt()
 			$useradd_Command
 		fi
 
-		#
-		# Change Password
-		#
+		echo "==========================="
+		echo " Password Change for $user "
+		echo "==========================="
 		passwd $user
 	done
 
@@ -551,7 +551,7 @@ body()
 	echo "========================================="
 	echo "Setup Stage 1: Create Dotfiles / Folders "
 	echo "========================================="
-	setup_dotfiles
+	create_dotfiles
 
 	echo ""
 
