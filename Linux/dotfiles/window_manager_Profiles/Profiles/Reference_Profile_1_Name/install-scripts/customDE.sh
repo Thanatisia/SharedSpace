@@ -270,7 +270,7 @@ user_mgmt()
 	#		will be copied to the home directory
 	#	- useradd will create the home directory unless CREATE_HOME in /etc/login.defs is set to no
 	useradd_default_Params="-m"
-	useradd_Command="useradd $useradd_default_Params"
+	useradd_Command="useradd $useradd_default_Params "
 
 
 	# --- Processing
@@ -299,19 +299,19 @@ user_mgmt()
 		if [[ ! "$u_primary_Group" == "" ]]; then
 			# Primary Group
 			# Not Empty
-			useradd_Command+="-G $u_primary_Group"
+			useradd_Command+="-G $u_primary_Group "
 		fi
 
 		if [[ ! "$u_secondary_Groups" == "" ]]; then
 			# Secondary Groups
 			# Not Empty
-			useradd_Command+="-g $u_secondary_Groups"
+			useradd_Command+="-g $u_secondary_Groups "
 		fi
 		
 		if [[ ! "$u_home_Dir" == "" ]]; then
 			# Home Directory
 			# Not Empty
-			useradd_Command+="-d $u_home_Dir"
+			useradd_Command+="-d $u_home_Dir "
 		fi
 
 		if [[ "$MODE" == "DEBUG" ]]; then
