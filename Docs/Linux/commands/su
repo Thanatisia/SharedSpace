@@ -9,6 +9,9 @@ Command Summary: A command that allows a user to switch to / execute commands as
 General Syntax: su [OPTIONS] [ USER [ARGUMENTS...] ]
 General Parameters: -c, -s
 
+[NOTES]
+1. 
+
 [Parameters]
 -c : Execute a command as another user / super user
 	Syntax:
@@ -30,5 +33,24 @@ General Parameters: -c, -s
 			Output:
 				<shell in zsh>
 
+[Examples]
+
+[Issues]
+1. sudo su - $username -c "echo $HOME" shows the previous user's home directory instead
+	- the variable $HOME gets expanded before the shell executes the command
+	i. Use single quotes to prevent variable expansion in the first shell
+		sudo su - $username -c '$echo $HOME'
+	ii. Escape the '$' to prevent execution
+		sudo su - $username -c "echo \$HOME"
+		- \$ to tell the shell to ignore the special character '$' in the current shell and 
+			pass '$HOME' to the new user's shell
+		- "tell the shell that you want to ignore the special meaning of the $ character and send it down to the su command to execute"
+
 [Use-Cases]
 
+
+[Functions]
+
+
+[References]
+bash - su and $HOME : https://unix.stackexchange.com/questions/357913/bash-su-and-home

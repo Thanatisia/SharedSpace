@@ -178,7 +178,7 @@ declare -A user_profiles=(
 	# [Syntax]
 	# [username]="$primary_Group;$secondary_group_element_1,$secondary_group_element_n;$home_dir"
 	# [username]="$primary_Group;$secondary_Group;$home_dir"
-	[admin]="wheel;NIL;/home/profiles/"
+	[admin]="wheel;NIL;/home/profiles/admin"
 )
 
 # [Derivatives]
@@ -396,11 +396,16 @@ user_mgmt()
 create_dotfiles()
 {
 	#
-	# Create : Dotfiles
+	# Create : Dotfiles and Folders
 	# [Stages]
 	#	1 : Folders
 	#	2 : Dotfiles / Configs
 	#
+
+	# --- Input
+
+
+	# --- Processing
 
 	echo "================="
 	echo "i. Create Folders"
@@ -410,9 +415,9 @@ create_dotfiles()
 		if [[ ! -d $d ]]; then
 			# If directory does not exist
 			su - $TARGET_USER -c create_directories $d
-			su - $TARGET_USER -c echo "$(log_datetime) > Directory has been created : $d" | tee -a $logging_filepath/stage-2-i.log
+			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a $logging_filepath/stage-1-i.log"
 		else
-			su - $TARGET_USER -c echo "$(log_datetime) > Directory already exists : $d" | tee -a $logging_filepath/stage-2-i.log
+			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a $logging_filepath/stage-1-i.log"
 		fi
 	done
 
@@ -424,9 +429,9 @@ create_dotfiles()
 		if [[ ! -f $f ]]; then
 			# If file does not exist
 			su - $TARGET_USER -c touch $f
-			su - $TARGET_USER -c echo "$(log_datetime) > File has been created : $f" | tee -a $logging_filepath/stage-2-ii.log
+			su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
 		else
-			su - $TARGET_USER -c echo "$(log_datetime) > File already exists : $f" | tee -a $logging_filepath/stage-2-ii.log
+			su - $TARGET_USER -c "echo \"$(log_datetime) > File already exists : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
 		fi
 	done
 }
@@ -463,11 +468,11 @@ pkg_install()
 				# Do if NOT empty
 				# else skip
 				if [[ "$MODE" == "DEBUG" ]]; then
-					echo $install_Command $p | tee -a $logging_filepath/installed-packages.log
+					su - $TARGET_USER -c "echo $install_Command $p | tee -a \$HOME/.logs/installed-packages.log"
 				else
 					# $install_Command $p | tee -a $logging_filepath/installed-packages.log
 					$install_Command $p
-					echo "$(log_datetime) > Package Installed : $p" | tee -a $logging_filepath/installed-packages.log
+					su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
 				fi
 			fi
 		done
@@ -482,6 +487,13 @@ setup_dotfiles()
 	#	2. Uncomment / comment any settings files 
 	#
 
+	# --- Input
+
+	# Local Variables
+	cmd_str=""
+
+	# --- Processing
+
 	echo "================="
 	echo "i. Edit Dotfiles "
 	echo "================="
@@ -490,11 +502,11 @@ setup_dotfiles()
 		if [[ ! -f $file ]]; then
 			# If does not exist, create
 			su - $TARGET_USER -c touch $file
-			su - $TARGET_USER -c echo "$(log_datetime) > File has been created : $file" | tee -a $logging_filepath/stage-3-i.log
+			su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
 		fi
 		# Append to file
-		su - $TARGET_USER -c echo "$curr_val" | tee -a $file
-		su - $TARGET_USER -c echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a $logging_filepath/stage-3-i.log
+		su - $TARGET_USER -c "echo \"$curr_val\" | tee -a $file"
+		su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
 	done
 
 }
