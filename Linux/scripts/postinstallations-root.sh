@@ -117,7 +117,21 @@ network_Management()
 
 allow_sudo()
 {
-	visudo
+	# visudo
+	#
+	# Uncomment '%wheel ALL=(ALL) ALL' in /etc/sudoers
+	#	via
+	#		1. visudo
+	#		2. sed 
+	#
+	# [Regular Expression]
+	#	\s : Any whitespaces
+	#	\s* : Zero or more whispaces
+	#	\s\+ : One or more whitespaces
+	regex_Pattern="s/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/"
+	filename=/etc/sudoers
+	# `uncomment_line $regex_Pattern $filename` 
+	sed -i $regex_Pattern $filename
 }
 
 # --- Processing
