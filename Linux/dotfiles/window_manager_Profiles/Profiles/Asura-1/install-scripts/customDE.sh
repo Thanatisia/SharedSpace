@@ -320,11 +320,14 @@ user_mgmt()
 			# Primary Group
 			# Not Empty
 			useradd_Command+="-G $u_primary_Group"
+		fi
+
 		if [[ ! "$u_secondary_Groups" == "" ]]; then
 			# Secondary Groups
 			# Not Empty
 			useradd_Command+="-g $u_secondary_Groups"
 		fi
+		
 		if [[ ! "$u_home_Dir" == "" ]]; then
 			# Home Directory
 			# Not Empty
