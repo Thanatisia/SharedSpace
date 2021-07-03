@@ -214,46 +214,16 @@ log_datetime()
 
 # Pre-Requisite Stages
 # Execute in Root
-pkg_install()
+verify_network()
 {
 	#
-	# Install relevant/required Packages
+	# Verify network is active
+	#	0 : Success
+	#	1 : Error
 	#
-
-	# Local Variables
-	str="${pkgs[@]}"
-
-
-	# Split value string into container
-	arr=("$(seperate_by_Delim ';' "$str")")
-
-	echo "Array: ${arr[@]}"
-
-	# Confirm installation
-	for p in "${!pkgs[@]}"; do
-		echo "[$p] : [${pkgs[$p]}]"
-	done
-	read -p "Confirm installation of the above following packages? [Y|N]: " conf
-
-	echo ""
-	
-	echo "Installing..."
-	
-	echo ""
-
-	if [[ "$conf" == "Y" ]]; then
-		for p in "${pkgs[@]}"; do
-			if [[ ! "$p" == "" ]]; then
-				# Do if NOT empty
-				# else skip
-				if [[ "$MODE" == "DEBUG" ]]; then
-					echo $install_Command $p | tee -a $logging_filepath/installed-packages.log
-				else
-					$install_Command $p | tee -a $logging_filepath/installed-packages.log
-				fi
-			fi
-		done
-	fi
+	ping -c 5 8.8.8.8
+	res=$?
+	echo "$res"
 }
 
 user_mgmt()
@@ -353,7 +323,7 @@ user_mgmt()
 create_dotfiles()
 {
 	#
-	# Create : Dotfiles
+	# Create : Dotfiles and Folders
 	# [Stages]
 	#	1 : Folders
 	#	2 : Dotfiles / Configs
@@ -387,7 +357,49 @@ create_dotfiles()
 		fi
 	done
 }
+pkg_install()
+{
+	#
+	# Install relevant/required Packages
+	#
 
+	# Local Variables
+	str="${pkgs[@]}"
+
+
+	# Split value string into container
+	arr=("$(seperate_by_Delim ';' "$str")")
+
+	echo "Array: ${arr[@]}"
+
+	# Confirm installation
+	for p in "${!pkgs[@]}"; do
+		echo "[$p] : [${pkgs[$p]}]"
+	done
+	read -p "Confirm installation of the above following packages? [Y|N]: " conf
+
+	echo ""
+	
+	echo "Installing..."
+	
+	echo ""
+
+	if [[ "$conf" == "Y" ]]; then
+		for p in "${pkgs[@]}"; do
+			if [[ ! "$p" == "" ]]; then
+				# Do if NOT empty
+				# else skip
+				if [[ "$MODE" == "DEBUG" ]]; then
+					echo $install_Command $p | tee -a $logging_filepath/installed-packages.log
+				else
+					# $install_Command $p | tee -a $logging_filepath/installed-packages.log
+					$install_Command $p
+					echo "$(log_datetime) > Package Installed : $p" | tee -a $logging_filepath/installed-packages.log
+				fi
+			fi
+		done
+	fi
+}
 setup_dotfiles()
 {
 	#
@@ -441,31 +453,40 @@ body()
 	echo "========================================================"
 
 	echo ""
-	
-	echo "=================================="
-	echo "Stage 1: Install Relevant Packages"
-	echo "=================================="
-	pkg_install
 
-	echo ""
+	echo "========================"
+	echo "Pre-Req 1: Network Setup"
+	echo "========================"
+	res=`verify_network`
+	if [[ ! "$res" == 0 ]]; then
+		# Error
+		systemctl start NetworkManager
+	fi
 
-	echo "========================="
-	echo "Stage 2: User Management "
-	echo "========================="
+	echo "==========================="
+	echo "Pre-Req 2: User Management "
+	echo "==========================="
 	user_mgmt
 
 	echo ""
 
-	echo "================"
-	echo "Stage 3: Create "
-	echo "================"
+	echo "========================================="
+	echo "Setup Stage 1: Create Dotfiles / Folders "
+	echo "========================================="
 	setup_dotfiles
 
 	echo ""
 
-	echo "==============="
-	echo "Stage 4: Setup "
-	echo "==============="
+	echo "========================================="
+	echo "Setup Stage 2: Install Relevant Packages "
+	echo "========================================="
+	pkg_install
+
+	echo ""
+
+	echo "=============================="
+	echo "Setup Stage 3: Setup Dotfiles "
+	echo "=============================="
 	setup_dotfiles
 
 
