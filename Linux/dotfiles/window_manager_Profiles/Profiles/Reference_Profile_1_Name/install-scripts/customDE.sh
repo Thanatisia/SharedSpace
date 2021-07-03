@@ -264,9 +264,10 @@ enable_sudo()
 	#	\s : Any whitespaces
 	#	\s* : Zero or more whispaces
 	#	\s\+ : One or more whitespaces
-	regex_Pattern="s/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/"
+	regex_Pattern="'s/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/'"
 	filename=/etc/sudoers
-	`uncomment_line $regex_Pattern $filename` 
+	# `uncomment_line $regex_Pattern $filename` 
+	sed -i "$regex_Pattern" $filename
 }
 user_mgmt()
 {
