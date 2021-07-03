@@ -8,7 +8,7 @@
 #	- 2021-07-02 1349H, Asura
 #	- 2021-07-02 2324H, Asura
 #	- 2021-07-03 1246H, Asura
-#	- 2021-07-03 1543H, Asura
+#	- 2021-07-03 1625H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -26,6 +26,8 @@
 #			- Added 'su - $TARGET_USER' to execute command as user
 #	- 2021-07-03 1543H, Asura
 #		- Modified 'user' to 'user_profiles'
+#	- 2021-07-03 1625H, Asura
+#		- Changed 'MODE' to be the first command line argument with the default value set to 'DEBUG'
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -41,7 +43,7 @@
 PROGRAM_SCRIPTNAME="customDE"
 PROGRAM_NAME="Window Manager to Desktop Environment Custom Setup Script"
 PROGRAM_TYPE="Main"
-MODE="DEBUG" # { DEBUG | RELEASE }
+MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
 # [General]
