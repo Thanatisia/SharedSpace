@@ -173,10 +173,12 @@ declare -A user_profiles=(
 	# Place all your users and their roles here
 	# Parameter Seperator/Delimiter: ';'
 	# Subparameter Seperator/Delimiter: ','
+	# 
+	# Type 'NIL' if none to that parameter
 	# [Syntax]
 	# [username]="$primary_Group;$secondary_group_element_1,$secondary_group_element_n;$home_dir"
 	# [username]="$primary_Group;$secondary_Group;$home_dir"
-	[admin]="wheel;admin;/home/profiles/"
+	[admin]="wheel;NIL;/home/profiles/"
 )
 
 # [Derivatives]
@@ -335,19 +337,19 @@ user_mgmt()
 		#
 		# Make user
 		#
-		if [[ ! "$u_primary_Group" == "" ]]; then
+		if [[ ! "$u_primary_Group" == "NIL" ]]; then
 			# Primary Group
 			# Not Empty
 			useradd_Command+=" -g $u_primary_Group "
 		fi
 
-		if [[ ! "$u_secondary_Groups" == "" ]]; then
+		if [[ ! "$u_secondary_Groups" == "NIL" ]]; then
 			# Secondary Groups
 			# Not Empty
 			useradd_Command+=" -G $u_secondary_Groups "
 		fi
 		
-		if [[ ! "$u_home_Dir" == "" ]]; then
+		if [[ ! "$u_home_Dir" == "NIL" ]]; then
 			# Home Directory
 			# Not Empty
 			useradd_Command+=" -d $u_home_Dir "
