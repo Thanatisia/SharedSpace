@@ -363,12 +363,12 @@ user_mgmt()
 		else
 			# Create User
 			$useradd_Command
+		
+			echo "==========================="
+			echo " Password Change for $user "
+			echo "==========================="
+			passwd $user
 		fi
-
-		echo "==========================="
-		echo " Password Change for $user "
-		echo "==========================="
-		passwd $user
 	done
 
 	echo "===================="
@@ -501,12 +501,14 @@ setup_dotfiles()
 		curr_val=${files_to_edit[$file]}
 		if [[ ! -f $file ]]; then
 			# If does not exist, create
-			su - $TARGET_USER -c touch $file
+			su - $TARGET_USER -c "touch $file"
 			su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
 		fi
 		# Append to file
 		su - $TARGET_USER -c "echo \"$curr_val\" | tee -a $file"
 		su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
+
+		echo ""
 	done
 
 }
