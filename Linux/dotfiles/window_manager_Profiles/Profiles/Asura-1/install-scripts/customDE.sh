@@ -10,6 +10,7 @@
 #	- 2021-07-03 1246H, Asura
 #	- 2021-07-03 1625H, Asura
 #	- 2021-07-03 1645H, Asura
+#	- 2021-07-04 0135H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -31,6 +32,8 @@
 #		- Changed 'MODE' to be the first command line argument with the default value set to 'DEBUG'
 #	- 2021-07-03 1645H, Asura
 #		- Added function 'enable_sudo' and 'comment/uncomment_lines'
+#	- 2021-07-04 0135H, Asura
+#		- Created 'get_users_Home()' and Debugging
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -70,7 +73,8 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 TARGET_USER="admin"
 
 # [Dotfiles]
-bashrc_personal=$(su - $TARGET_USER -c "echo \$HOME")
+bashrc=$(get_users_Home $TARGET_USER)/.bashrc
+bashrc_personal=$(su - $TARGET_USER -c "echo \$HOME")/personal/dotfiles/bash/.bashrc-personal
 
 # [Arrays]
 folders_to_create=(
@@ -96,7 +100,7 @@ files_to_create=(
 	# [For Home Directory]
 	#	$(get_users_Home $TARGET_USER)/path/to/file
 	#
-	$(get_users_home $TARGET_USER)/personal/dotfiles/bash/.bashrc-personal
+	$(get_users_Home $TARGET_USER)/personal/dotfiles/bash/.bashrc-personal
 )
 
 base_distros=(
