@@ -52,55 +52,28 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 # [General]
 TARGET_USER=""
 
-# [Path]
-#
-# EDIT THIS
-# Please write all your path variables in this section
-#
-ROOT=~
-
-# [Folders]
-#
-# EDIT THIS
-# Please write all your folder variables in this section
-#
-logging_filepath=\$HOME/.logs
-logging_filepath_Stages=$logging_filepath/$PROGRAM_SCRIPTNAME # "Custom Window Manager to Desktop Environment setup script"
-config_Path=\$HOME/.config
-script_Path=\$HOME/.script
-tmp_Path=\$HOME/.tmp
-personal_Path=\$HOME/personal
-personal_path_Dotfiles=$personal_Path/dotfiles
-personal_path_dotfiles_Bash=$personal_path_Dotfiles/bash
-
-# [Files]
-#
-# EDIT THIS
-# Please write all your file variables in this section
-#
-bashrc=$ROOT/.bashrc
-bashrc_personal=$personal_path_dotfiles_Bash/.bashrc-personal
-
 # [Arrays]
 folders_to_create=(
 	#
 	# EDIT THIS
 	# Please place all the folders you would like to create
+	# - Please backslash all environment variables that will change when running in the new shell from 'su'
 	#
-	$logging_filepath
-	$logging_filepath_Stages
-	$config_Path
-	$script_Path
-	$tmp_Path
-	$personal_path_dotfiles_Bash
+	\$HOME/.logs/$PROGRAM_SCRIPTNAME
+	\$HOME/.config
+	\$HOME/.script
+	\$HOME/.tmp
+	\$HOME/personal
+	\$HOME/personal/dotfiles/bash
 )
 
 files_to_create=(
 	#
 	# EDIT THIS
 	# Please place all the files you would like to create
+	# - Please backslash all environment variables that will change when running in the new shell from 'su'
 	#
-	$bashrc_personal
+	\$HOME/personal/dotfiles/bash/.bashrc-personal
 )
 
 base_distros=(
@@ -415,9 +388,9 @@ create_dotfiles()
 		if [[ ! -d $d ]]; then
 			# If directory does not exist
 			su - $TARGET_USER -c $(create_directories $d)
-			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a $logging_filepath/stage-1-i.log"
+			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
 		else
-			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a $logging_filepath/stage-1-i.log"
+			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
 		fi
 	done
 

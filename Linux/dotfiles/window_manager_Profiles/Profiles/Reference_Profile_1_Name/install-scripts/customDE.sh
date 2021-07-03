@@ -53,35 +53,12 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 # [General]
 TARGET_USER="admin"
 
-# [Path]
-#
-# EDIT THIS
-# Please write all your path variables in this section
-#
-
-# [Folders]
-#
-# EDIT THIS
-# Please write all your folder variables in this section
-#
-logging_filepath=$HOME/.logs
-logging_filepath_Stages=$logging_filepath/$PROGRAM_SCRIPTNAME # "Custom Window Manager to Desktop Environment setup script"
-config_Path=$HOME/.config
-script_Path=$HOME/.script
-tmp_Path=$HOME/.tmp
-
-# [Files]
-#
-# EDIT THIS
-# Please write all your file variables in this section
-#
-
-
 # [Arrays]
 folders_to_create=(
 	#
 	# EDIT THIS
 	# Please place all the folders you would like to create
+	# - Please backslash all environment variables that will change when running in the new shell from 'su'
 	#
 )
 
@@ -89,6 +66,7 @@ files_to_create=(
 	#
 	# EDIT THIS
 	# Please place all the files you would like to create
+	# - Please backslash all environment variables that will change when running in the new shell from 'su'
 	#
 )
 
