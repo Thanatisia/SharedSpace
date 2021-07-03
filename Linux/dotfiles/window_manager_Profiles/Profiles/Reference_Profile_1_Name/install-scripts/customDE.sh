@@ -41,6 +41,23 @@
 #		i. Convert sections [Folders], [Files] and all the loose variables into Associative Array for easy handling
 #
 
+# --- Functions [1]
+
+# [User Management]
+get_users_Home()
+{
+	#
+	# Get the home directory of a user
+	#
+	USER_NAME=$1
+	HOME_DIR=""
+	if [[ ! "$USER_NAME"  == "" ]]; then
+		# Not Empty
+		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
+	fi
+	echo "$HOME_DIR"
+}
+
 # --- Variables
 
 # [Program]
@@ -53,12 +70,17 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 # [General]
 TARGET_USER="admin"
 
+# [Dotfiles]
+bashrc_personal=$(su - $TARGET_USER -c "echo \$HOME")
+
 # [Arrays]
 folders_to_create=(
 	#
 	# EDIT THIS
 	# Please place all the folders you would like to create
 	# - Please backslash all environment variables that will change when running in the new shell from 'su'
+	# [For Home Directory]
+	#	$(get_users_Home $TARGET_USER)/path/to/folder
 	#
 )
 
@@ -67,6 +89,8 @@ files_to_create=(
 	# EDIT THIS
 	# Please place all the files you would like to create
 	# - Please backslash all environment variables that will change when running in the new shell from 'su'
+	# [For Home Directory]
+	#	$(get_users_Home $TARGET_USER)/path/to/file
 	#
 )
 
@@ -146,7 +170,7 @@ number_of_Packages="${#pkgs[@]}"
 # [Essentials]
 install_Command="${install_commands["$DISTRO"]}"
 
-# --- Functions
+# --- Functions [2]
 
 # General Functions
 create_directories()
@@ -378,9 +402,9 @@ create_dotfiles()
 		if [[ ! -d $d ]]; then
 			# If directory does not exist
 			su - $TARGET_USER -c $(create_directories $d)
-			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a $logging_filepath/stage-1-i.log"
+			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
 		else
-			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a $logging_filepath/stage-1-i.log"
+			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
 		fi
 	done
 

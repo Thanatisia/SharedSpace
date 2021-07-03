@@ -74,6 +74,20 @@ uncomment_line()
 	sed -i '/$regex_Pattern/s/^#//g' $filename
 }
 
+get_users_Home()
+{
+	#
+	# Get the home directory of a user
+	#
+	USER_NAME=$1
+	HOME_DIR=""
+	if [[ ! "$USER_NAME"  == "" ]]; then
+		# Not Empty
+		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
+	fi
+	echo "$HOME_DIR"
+}
+
 # Main functions
 init()
 {

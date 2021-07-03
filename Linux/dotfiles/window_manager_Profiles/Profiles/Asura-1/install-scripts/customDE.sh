@@ -40,6 +40,23 @@
 #		i. Convert sections [Folders], [Files] and all the loose variables into Associative Array for easy handling
 #
 
+# --- Functions [1]
+
+# [User Management]
+get_users_Home()
+{
+	#
+	# Get the home directory of a user
+	#
+	USER_NAME=$1
+	HOME_DIR=""
+	if [[ ! "$USER_NAME"  == "" ]]; then
+		# Not Empty
+		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
+	fi
+	echo "$HOME_DIR"
+}
+
 # --- Variables
 
 # [Program]
@@ -50,7 +67,10 @@ MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
 # [General]
-TARGET_USER=""
+TARGET_USER="admin"
+
+# [Dotfiles]
+bashrc_personal=$(su - $TARGET_USER -c "echo \$HOME")
 
 # [Arrays]
 folders_to_create=(
@@ -58,13 +78,14 @@ folders_to_create=(
 	# EDIT THIS
 	# Please place all the folders you would like to create
 	# - Please backslash all environment variables that will change when running in the new shell from 'su'
+	# [For Home Directory]
+	#	$(get_users_Home $TARGET_USER)/path/to/folder
 	#
-	\$HOME/.logs/$PROGRAM_SCRIPTNAME
-	\$HOME/.config
-	\$HOME/.script
-	\$HOME/.tmp
-	\$HOME/personal
-	\$HOME/personal/dotfiles/bash
+	$(get_users_Home $TARGET_USER)/.logs/$PROGRAM_SCRIPTNAME
+	$(get_users_Home $TARGET_USER)/.config
+	$(get_users_Home $TARGET_USER)/.script
+	$(get_users_Home $TARGET_USER)/.tmp
+	$(get_users_Home $TARGET_USER)/personal/dotfiles/bash
 )
 
 files_to_create=(
@@ -72,8 +93,10 @@ files_to_create=(
 	# EDIT THIS
 	# Please place all the files you would like to create
 	# - Please backslash all environment variables that will change when running in the new shell from 'su'
+	# [For Home Directory]
+	#	$(get_users_Home $TARGET_USER)/path/to/file
 	#
-	\$HOME/personal/dotfiles/bash/.bashrc-personal
+	$(get_users_home $TARGET_USER)/personal/dotfiles/bash/.bashrc-personal
 )
 
 base_distros=(
@@ -160,7 +183,7 @@ number_of_Packages="${#pkgs[@]}"
 # [Essentials]
 install_Command="${install_commands["$DISTRO"]}"
 
-# --- Functions
+# --- Functions [2]
 
 # General Functions
 create_directories()
