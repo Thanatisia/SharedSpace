@@ -64,12 +64,12 @@ ROOT=~
 # EDIT THIS
 # Please write all your folder variables in this section
 #
-logging_filepath=~/.logs
+logging_filepath=\$HOME/.logs
 logging_filepath_Stages=$logging_filepath/$PROGRAM_SCRIPTNAME # "Custom Window Manager to Desktop Environment setup script"
-config_Path=~/.config
-script_Path=~/.script
-tmp_Path=~/.tmp
-personal_Path=~/personal
+config_Path=\$HOME/.config
+script_Path=\$HOME/.script
+tmp_Path=\$HOME/.tmp
+personal_Path=\$HOME/personal
 personal_path_Dotfiles=$personal_Path/dotfiles
 personal_path_dotfiles_Bash=$personal_path_Dotfiles/bash
 
@@ -414,7 +414,7 @@ create_dotfiles()
 	for d in ${folders_to_create[@]}; do 
 		if [[ ! -d $d ]]; then
 			# If directory does not exist
-			su - $TARGET_USER -c create_directories $d
+			su - $TARGET_USER -c $(create_directories $d)
 			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a $logging_filepath/stage-1-i.log"
 		else
 			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a $logging_filepath/stage-1-i.log"

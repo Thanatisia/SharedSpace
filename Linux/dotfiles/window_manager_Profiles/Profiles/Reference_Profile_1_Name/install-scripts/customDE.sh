@@ -399,7 +399,7 @@ create_dotfiles()
 	for d in ${folders_to_create[@]}; do 
 		if [[ ! -d $d ]]; then
 			# If directory does not exist
-			su - $TARGET_USER -c create_directories $d
+			su - $TARGET_USER -c $(create_directories $d)
 			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a $logging_filepath/stage-1-i.log"
 		else
 			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a $logging_filepath/stage-1-i.log"
