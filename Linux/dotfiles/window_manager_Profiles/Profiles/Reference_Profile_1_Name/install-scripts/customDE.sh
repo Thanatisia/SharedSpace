@@ -226,7 +226,7 @@ comment_line()
 	#
 	regex_Pattern="$1"
 	filename="$2"
-	sed -i '/$regex_Pattern/s/^/#/g' $filename
+	sed -i '$regex_Pattern/s/^/#/g' $filename
 }
 uncomment_line()
 {
@@ -236,7 +236,7 @@ uncomment_line()
 	#
 	regex_Pattern="$1"
 	filename="$2"
-	sed -i '/$regex_Pattern/s/^#//g' $filename
+	sed -i '$regex_Pattern/s/^#//g' $filename
 }
 
 # Pre-Requisite Stages
@@ -260,7 +260,11 @@ enable_sudo()
 	#		1. visudo
 	#		2. sed 
 	#
-	regex_Pattern="%wheel ALL=(ALL) ALL"
+	# [Regular Expression]
+	#	\s : Any whitespaces
+	#	\s* : Zero or more whispaces
+	#	\s\+ : One or more whitespaces
+	regex_Pattern="s/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/"
 	filename=/etc/sudoers
 	`uncomment_line $regex_Pattern $filename` 
 }
