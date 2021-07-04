@@ -11,6 +11,7 @@
 #	- 2021-07-03 1625H, Asura
 #	- 2021-07-03 1645H, Asura
 #	- 2021-07-04 0135H, Asura
+#	- 2021-07-04 2306H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -34,6 +35,9 @@
 #		- Added function 'enable_sudo' and 'comment/uncomment_lines'
 #	- 2021-07-04 0135H, Asura
 #		- Created 'get_users_Home()' and Debugging
+#	- 2021-07-04 2306H, Asura
+#		- Added MODE check for DEBUG support
+#		- Added Seperation of HEAD, Body and Footer
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -43,8 +47,8 @@
 #		i. Convert sections [Folders], [Files] and all the loose variables into Associative Array for easy handling
 #
 
-# --- Functions [1]
-
+# --- Head
+# Functions [1]
 # [User Management]
 get_users_Home()
 {
@@ -228,13 +232,14 @@ declare -A files_to_edit=(
 	# line 2 \
 	# line 3"
 	[$bashrc]="\
-# --- Adding external Bashrc personal file \n \
-if [[ -f $bashrc_personal ]]; then \n \
-	# If found \n \
-	. $bashrc_personal \n \
+# --- Adding external Bashrc personal file \n\
+if [[ -f $bashrc_personal ]]; then \n\
+	# If found \n\
+	. $bashrc_personal \n\
 fi"
-	[$bashrc_personal]="#\n \
-# --- BashRC [Personal] \n \
+
+	[$bashrc_personal]="#\n\
+# --- BashRC [Personal] \n\
 #"
 )
 declare -A user_profiles=(
@@ -258,7 +263,8 @@ number_of_Packages="${#pkgs[@]}"
 # [Essentials]
 install_Command="${install_commands["$DISTRO"]}"
 
-# --- Functions [2]
+# --- Body
+# Functions [2]
 
 # Pre-Requisite Stages
 # Execute in Root
