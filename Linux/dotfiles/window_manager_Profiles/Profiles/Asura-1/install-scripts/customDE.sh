@@ -363,11 +363,16 @@ user_mgmt()
 		else
 			# Create User
 			$useradd_Command
-		
-			echo "==========================="
-			echo " Password Change for $user "
-			echo "==========================="
-			passwd $user
+
+			#
+			# Change Password
+			#
+			if [[ "$?" == "0" ]]; then
+				echo "==========================="
+				echo " Password Change for $user "
+				echo "==========================="
+				passwd $user
+			fi
 		fi
 	done
 
@@ -412,12 +417,16 @@ create_dotfiles()
 	echo "================="
 
 	for d in ${folders_to_create[@]}; do 
-		if [[ ! -d $d ]]; then
-			# If directory does not exist
-			su - $TARGET_USER -c $(create_directories $d)
-			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+		if [[ "$MODE" == "DEBUG" ]]; then
+			echo "Folder: $d"
 		else
-			su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+			if [[ ! -d $d ]]; then
+				# If directory does not exist
+				su - $TARGET_USER -c $(create_directories $d)
+				su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+			else
+				su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+			fi
 		fi
 	done
 
@@ -426,12 +435,16 @@ create_dotfiles()
 	echo "==================="
 
 	for f in ${files_to_create[@]}; do
-		if [[ ! -f $f ]]; then
-			# If file does not exist
-			su - $TARGET_USER -c touch $f
-			su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
+		if [[ "$MODE" == "DEBUG" ]]; then
+			echo "File: $f"
 		else
-			su - $TARGET_USER -c "echo \"$(log_datetime) > File already exists : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
+			if [[ ! -f $f ]]; then
+				# If file does not exist
+				su - $TARGET_USER -c "touch $f"
+				su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
+			else
+				su - $TARGET_USER -c "echo \"$(log_datetime) > File already exists : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
+			fi
 		fi
 	done
 }
@@ -468,7 +481,8 @@ pkg_install()
 				# Do if NOT empty
 				# else skip
 				if [[ "$MODE" == "DEBUG" ]]; then
-					su - $TARGET_USER -c "echo $install_Command $p | tee -a \$HOME/.logs/installed-packages.log"
+					# u - $TARGET_USER -c "echo $install_Command $p | tee -a \$HOME/.logs/installed-packages.log"
+					echo -e "$install_Command $p"
 				else
 					# $install_Command $p | tee -a $logging_filepath/installed-packages.log
 					$install_Command $p
@@ -500,7 +514,7 @@ setup_dotfiles()
 	for file in ${!files_to_edit[@]}; do
 		curr_val=${files_to_edit[$file]}
 		if [[ "$MODE" == "DEBUG" ]]; then
-			echo "Content: $curr_val >> File: $file"
+			echo -e "Content: \n$curr_val >> File: $file"
 		else
 			if [[ ! -f $file ]]; then
 				# If does not exist, create
@@ -508,7 +522,7 @@ setup_dotfiles()
 				su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
 			fi
 			# Append to file
-			su - $TARGET_USER -c "echo \"$curr_val\" | tee -a $file"
+			su - $TARGET_USER -c "echo -e \"$curr_val\" | tee -a $file"
 			su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
 
 			echo ""
