@@ -12,6 +12,7 @@
 #	- 2021-07-03 1645H, Asura
 #	- 2021-07-04 0135H, Asura
 #	- 2021-07-04 2306H, Asura
+#	- 2021-07-04 2332H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -38,6 +39,8 @@
 #	- 2021-07-04 2306H, Asura
 #		- Added MODE check for DEBUG support
 #		- Added Seperation of HEAD, Body and Footer
+#	- 2021-07-04 2332H, Asura
+#		- Added a pause functionality after every section if mode is DEBUG
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -520,7 +523,7 @@ setup_dotfiles()
 	for file in ${!files_to_edit[@]}; do
 		curr_val=${files_to_edit[$file]}
 		if [[ "$MODE" == "DEBUG" ]]; then
-			echo -e "Content: \n$curr_val >> File: $file"
+			echo -e "Content: \n\"$curr_val\" >> File: $file"
 		else
 			if [[ ! -f $file ]]; then
 				# If does not exist, create
@@ -574,15 +577,31 @@ body()
 		systemctl start NetworkManager
 	fi
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
+
+	echo ""
+
 	echo "=================================="
 	echo "Pre-Req 2: Enable Sudo in sudoers "
 	echo "=================================="
 	enable_sudo
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
+
+	echo ""
+
 	echo "==========================="
 	echo "Pre-Req 3: User Management "
 	echo "==========================="
 	user_mgmt
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
 
 	echo ""
 
@@ -591,12 +610,20 @@ body()
 	echo "========================================="
 	create_dotfiles
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
+
 	echo ""
 
 	echo "========================================="
 	echo "Setup Stage 2: Install Relevant Packages "
 	echo "========================================="
 	pkg_install
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
 
 	echo ""
 
@@ -605,6 +632,11 @@ body()
 	echo "=============================="
 	setup_dotfiles
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
+
+	echo ""
 
 	echo "======"
 	echo " End  "
