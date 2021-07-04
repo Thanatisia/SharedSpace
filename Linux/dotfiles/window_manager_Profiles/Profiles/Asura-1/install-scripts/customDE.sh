@@ -228,14 +228,14 @@ declare -A files_to_edit=(
 	# line 2 \
 	# line 3"
 	[$bashrc]="\
-	# --- Adding external Bashrc personal file \
-	if [[ -f $bashrc_personal ]]; then \
-		# If found \
-		. $bashrc_personal \
-	fi"
-	[$bashrc_personal]="#\
-	# --- BashRC [Personal] \
-	#"
+# --- Adding external Bashrc personal file \n \
+if [[ -f $bashrc_personal ]]; then \n \
+	# If found \n \
+	. $bashrc_personal \n \
+fi"
+	[$bashrc_personal]="#\n \
+# --- BashRC [Personal] \n \
+#"
 )
 declare -A user_profiles=(
 	#
@@ -499,16 +499,20 @@ setup_dotfiles()
 	echo "================="
 	for file in ${!files_to_edit[@]}; do
 		curr_val=${files_to_edit[$file]}
-		if [[ ! -f $file ]]; then
-			# If does not exist, create
-			su - $TARGET_USER -c "touch $file"
-			su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
-		fi
-		# Append to file
-		su - $TARGET_USER -c "echo \"$curr_val\" | tee -a $file"
-		su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
+		if [[ "$MODE" == "DEBUG" ]]; then
+			echo "Content: $curr_val >> File: $file"
+		else
+			if [[ ! -f $file ]]; then
+				# If does not exist, create
+				su - $TARGET_USER -c "touch $file"
+				su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
+			fi
+			# Append to file
+			su - $TARGET_USER -c "echo \"$curr_val\" | tee -a $file"
+			su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
 
-		echo ""
+			echo ""
+		fi
 	done
 
 }
