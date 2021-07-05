@@ -69,6 +69,7 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 # [General]
 TARGET_USER="admin"
 TARGET_USER_HOME_DIR=/home/profiles/admin
+TARGET_USER_PRIMARY_GROUP=wheel
 
 # [Arrays]
 folders_to_create=(
@@ -428,8 +429,9 @@ create_dotfiles()
 		else
 			if [[ ! -d $d ]]; then
 				# If directory does not exist
-				su - $TARGET_USER -c $(create_directories $d)
+				su - $TARGET_USER -c "mkdir -p $d"
 				su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+				chown -R $TARGET_USER:$TARGET_USER_PRIMARY_GROUP $TARGET_USER_HOME_DIR
 			else
 				su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
 			fi
