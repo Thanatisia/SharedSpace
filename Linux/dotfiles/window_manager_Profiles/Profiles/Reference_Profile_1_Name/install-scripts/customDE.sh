@@ -508,7 +508,14 @@ pkg_install()
 				else
 					# $install_Command $p | tee -a $logging_filepath/installed-packages.log
 					$install_Command $p
-					su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+					# Check if package is installed
+					if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
+						# Found
+						su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+					else
+						# Not Found - Error installing
+						su - $TARGET_USER -c "echo \"$(log_datetime) > Package Install Failed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+					fi
 				fi
 				echo ""
 			fi
