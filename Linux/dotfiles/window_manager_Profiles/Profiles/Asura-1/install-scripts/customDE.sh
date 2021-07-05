@@ -579,7 +579,7 @@ create_dotfiles()
 		fi
 	done
 }
-install_AUR()
+setup_AUR()
 {
 	#
 	# Installs AUR of your choice
@@ -667,7 +667,7 @@ pkg_install()
 						fi
 					elif [[ "$in_aur" == "1" ]]
 						# Check if yay is installed
-						install_AUR "yay-git"
+						setup_AUR "yay-git"
 					
 					fi
 				fi
