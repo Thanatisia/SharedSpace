@@ -17,6 +17,7 @@
 #	- 2021-07-05 1044H, Asura
 #	- 2021-07-05 1244H, Asura
 #	- 2021-07-05 1349H, Asura
+#	- 2021-07-05 2107H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -52,6 +53,8 @@
 #		- Added a 'dotfile_Files' reference associative array
 #	- 2021-07-05 1349H, Asura
 #		- Added validation for TARGET_USER_HOME_DIR and TARGET_USER_PRIMARY_GROUP
+#	- 2021-07-05 2107H, Asura
+#		- Fixed AUR helper install
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -128,6 +131,20 @@ base_distros=(
 )
 
 # [Associative Array]
+declare -A sysinfo=(
+	# 
+	# EDIT THIS
+	#
+	# System Information here
+	# - Place all your system information defining the build such as
+	#	1. AUR Helper
+	# - Please seperate all values with ';' delimiter if your parameter has multiple values
+	# [Syntax]:
+	#	[parameter]="value"
+	# [Supported/Used Parameters]:
+	#	1. aur-helper : Your main AUR helper programs
+	[aur-helper]="yay-git"
+)
 declare -A reference_Distros=(
 	[ArchLinux]="ArtixLinux;"
 	[Debian]="Ubuntu"
@@ -172,7 +189,7 @@ declare -A git_aur_packages()
 	#	[package-name]="https://domain.com/package.git"
 	# Example:
 	#	[yay]="https://aur.archlinux.org/yay-git.git"
-	[yay]="https://aur.archlinux.org/yay-git.git"
+	[yay-git]="https://aur.archlinux.org/yay-git.git"
 }
 declare -A pkg_install_methods()
 {
@@ -650,9 +667,13 @@ pkg_install()
 							su - $TARGET_USER -c "echo \"$(log_datetime) > Package Install Failed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
 						fi
 					elif [[ "$in_aur" == "1" ]]
-						# Check if yay is installed
-						setup_AUR "yay-git"
+						aur_helper="${sysinfo["aur-helper"]}"
 
+						# Install AUR Helper
+						setup_AUR "$aur_helper"
+
+						# Install package
+						$aur_helper -S $p
 					fi
 				fi
 				echo ""
