@@ -14,6 +14,7 @@
 #	- 2021-07-04 2306H, Asura
 #	- 2021-07-04 2332H, Asura
 #	- 2021-07-05 1044H, Asura
+#	- 2021-07-05 1244H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -44,6 +45,9 @@
 #		- Added a pause functionality after every section if mode is DEBUG
 #	- 2021-07-05 1044H, Asura
 #		- Decided to convert and make directory using static path instead
+#	- 2021-07-05 1244H, Asura
+#		- Rearranged and changd variable names
+#		- Added a 'dotfile_Files' reference associative array
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -53,8 +57,18 @@
 #		i. Convert sections [Folders], [Files] and all the loose variables into Associative Array for easy handling
 #
 
-# --- Head
-
+#
+# Head
+#
+# --- References
+declare -A dotfile_Files=(
+	#
+	# List of used files in root and their use cases
+	#
+	[.Xresources]="For X(Org) resource supported features such as colours etc."
+	[.xinitrc]="X initialization Resource Control file; runs when 'startx' is ran."
+	[.bash_profile]="Commands to run when bash is first initialized on startup."
+)
 
 # --- Variables
 
@@ -71,8 +85,8 @@ TARGET_USER_HOME_DIR=/home/profiles/admin
 TARGET_USER_PRIMARY_GROUP=wheel
 
 # [Dotfiles]
-bashrc=\$HOME/.bashrc
-bashrc_personal=\$HOME/personal/dotfiles/bash/.bashrc-personal
+bashrc=$TARGET_USER_HOME_DIR/.bashrc
+bashrc_personal=$TARGET_USER_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
 
 # [Arrays]
 folders_to_create=(
@@ -102,7 +116,7 @@ files_to_create=(
 	# [Syntax]
 	#	i. /home/profiles/$user_name/{folder_1,folder_2,...folder_n}
 	#	ii. /path/to/folder/{folder_1,folder_2,...folder_n}
-	$TARGET_USER_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
+	$bashrc_personal
 )
 
 base_distros=(
@@ -158,7 +172,7 @@ declare -A files_to_edit=(
 	#	[folder_path]="line 1\
 	# line 2 \
 	# line 3"
-	[$bashrc]="\
+	[$bashrc]="\n\
 # --- Adding external Bashrc personal file \n\
 if [[ -f $bashrc_personal ]]; then \n\
 	# If found \n\
@@ -168,6 +182,8 @@ fi"
 	[$bashrc_personal]="#\n\
 # --- BashRC [Personal] \n\
 #"
+
+	[$xresources]=""
 )
 declare -A user_profiles=(
 	#

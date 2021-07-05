@@ -15,6 +15,7 @@
 #	- 2021-07-04 2306H, Asura
 #	- 2021-07-04 2332H, Asura
 #	- 2021-07-05 1044H, Asura
+#	- 2021-07-05 1244H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -45,6 +46,9 @@
 #		- Added a pause functionality after every section if mode is DEBUG
 #	- 2021-07-05 1044H, Asura
 #		- Decided to convert and make directory using static path instead
+#	- 2021-07-05 1244H, Asura
+#		- Rearranged and changd variable names
+#		- Added a 'dotfile_Files' reference associative array
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -54,8 +58,18 @@
 #		i. Convert sections [Folders], [Files] and all the loose variables into Associative Array for easy handling
 #
 
-# --- Head
-
+#
+# Head
+#
+# --- References
+declare -A dotfile_Files=(
+	#
+	# List of used files in root and their use cases
+	#
+	[.Xresources]="For X(Org) resource supported features such as colours etc."
+	[.xinitrc]="X initialization Resource Control file; runs when 'startx' is ran."
+	[.bash_profile]="Commands to run when bash is first initialized on startup."
+)
 
 # --- Variables
 
