@@ -86,6 +86,7 @@ TARGET_USER_PRIMARY_GROUP=wheel
 
 # [Dotfiles]
 bashrc=$TARGET_USER_HOME_DIR/.bashrc
+xresources=$TARGET_USER_HOME_DIR/.Xresources
 bashrc_personal=$TARGET_USER_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
 
 # [Arrays]
