@@ -51,92 +51,7 @@
 #
 
 # --- Head
-# Functions [1]
-# [User Management]
-get_users_Home()
-{
-	#
-	# Get the home directory of a user
-	#
-	USER_NAME=$1
-	HOME_DIR=""
-	if [[ ! "$USER_NAME"  == "" ]]; then
-		# Not Empty
-		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
-	fi
-	echo "$HOME_DIR"
-}
 
-# General Functions
-create_directories()
-{
-	folders=("$1")
-	
-	# Create folders if doesnt exist
-	for d in "${folders[@]}"; do
-		if [[ ! -d $d ]]; then
-			mkdir -p $d
-		fi
-	done
-}
-
-seperate_by_Delim()
-{
-	#
-	# Seperate a string into an array by the delimiter
-	#
-
-	# --- Input
-	
-	# Command Line Argument
-	delim="${1:-';'}"	# Delimiter to split
-	str="$2"			# String to be seperated
-
-	# Local Variables
-
-	# Array
-	content=()			# Array container to store results
-	char=''				# Single character for splitting element of a string
-
-	# Associative Array
-
-	# --- Processing
-	# Split string into individual characters
-	IFS=$delim read -r -a content <<< "$str"
-	
-	# --- Output
-	echo "${content[@]}"
-}
-
-log_datetime()
-{
-	#
-	# Return datetime as of setting
-	#
-	format=${1:-'%d-%m-%y %H-%M-%S'}
-	echo "$(date +'%d-%m-%y %H-%M-%S')"
-}
-
-comment_line()
-{
-	#
-	# Uncomment line that contains a keyword using
-	#	sed : Regular Expression
-	#
-	regex_Pattern="$1"
-	filename="$2"
-	sed -i '$regex_Pattern/s/^/#/g' $filename
-}
-uncomment_line()
-{
-	#
-	# Uncomment line that contains a keyword using
-	#	sed : Regular Expression
-	#
-	regex_Pattern="$1"
-	filename="$2"
-	sed -i '$regex_Pattern/s/^#//g' $filename
-}
 
 # --- Variables
 
@@ -267,6 +182,94 @@ number_of_Packages="${#pkgs[@]}"
 install_Command="${install_commands["$DISTRO"]}"
 
 # --- Body
+
+# Functions [1]
+# [User Management]
+get_users_Home()
+{
+	#
+	# Get the home directory of a user
+	#
+	USER_NAME=$1
+	HOME_DIR=""
+	if [[ ! "$USER_NAME"  == "" ]]; then
+		# Not Empty
+		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
+	fi
+	echo "$HOME_DIR"
+}
+
+# General Functions
+create_directories()
+{
+	folders=("$1")
+	
+	# Create folders if doesnt exist
+	for d in "${folders[@]}"; do
+		if [[ ! -d $d ]]; then
+			mkdir -p $d
+		fi
+	done
+}
+
+seperate_by_Delim()
+{
+	#
+	# Seperate a string into an array by the delimiter
+	#
+
+	# --- Input
+	
+	# Command Line Argument
+	delim="${1:-';'}"	# Delimiter to split
+	str="$2"			# String to be seperated
+
+	# Local Variables
+
+	# Array
+	content=()			# Array container to store results
+	char=''				# Single character for splitting element of a string
+
+	# Associative Array
+
+	# --- Processing
+	# Split string into individual characters
+	IFS=$delim read -r -a content <<< "$str"
+	
+	# --- Output
+	echo "${content[@]}"
+}
+
+log_datetime()
+{
+	#
+	# Return datetime as of setting
+	#
+	format=${1:-'%d-%m-%y %H-%M-%S'}
+	echo "$(date +'%d-%m-%y %H-%M-%S')"
+}
+
+comment_line()
+{
+	#
+	# Uncomment line that contains a keyword using
+	#	sed : Regular Expression
+	#
+	regex_Pattern="$1"
+	filename="$2"
+	sed -i '$regex_Pattern/s/^/#/g' $filename
+}
+uncomment_line()
+{
+	#
+	# Uncomment line that contains a keyword using
+	#	sed : Regular Expression
+	#
+	regex_Pattern="$1"
+	filename="$2"
+	sed -i '$regex_Pattern/s/^#//g' $filename
+}
+
 # Functions [2]
 
 # Pre-Requisite Stages
