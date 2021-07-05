@@ -197,7 +197,7 @@ declare -A git_aur_packages=(
 	# Example:
 	#	[yay]="https://aur.archlinux.org/yay-git.git"
 	[yay-git]="https://aur.archlinux.org/yay-git.git"
-}
+)
 declare -A pkg_install_methods=(
 	#
 	# EDIT THIS
@@ -207,7 +207,7 @@ declare -A pkg_install_methods=(
 	# according to category
 	# - Please seperate each package with ';'
 	# Syntax:
-	#	[<install-method>]="
+	#	[<install-method>]=""
 	# Examples:
 	#	[pacman]="package-1;package-2;package-n"
 	#	[aur]="package-1;package-2;package-n"

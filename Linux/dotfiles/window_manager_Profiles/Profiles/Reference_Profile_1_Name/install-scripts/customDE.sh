@@ -199,7 +199,7 @@ declare -A pkg_install_methods=(
 	# according to category
 	# - Please seperate each package with ';'
 	# Syntax:
-	#	[<install-method>]="
+	#	[<install-method>]=""
 	# Examples:
 	#	[pacman]="package-1;package-2;package-n"
 	#	[aur]="package-1;package-2;package-n"
