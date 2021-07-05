@@ -187,8 +187,7 @@ declare -A pkgs=(
 	[x]="xorg;xorg-server"
 	[others]=""
 )
-declare -A git_aur_packages()
-{
+declare -A git_aur_packages=(
 	#
 	# EDIT THIS
 	#
@@ -199,8 +198,7 @@ declare -A git_aur_packages()
 	#	[yay]="https://aur.archlinux.org/yay-git.git"
 	[yay-git]="https://aur.archlinux.org/yay-git.git"
 }
-declare -A pkg_install_methods()
-{
+declare -A pkg_install_methods=(
 	#
 	# EDIT THIS
 	#
@@ -217,7 +215,7 @@ declare -A pkg_install_methods()
 	[pacman]="pcmanfm;qtile;alacritty;nitrogen;picom;conky;bluez;lxappearance-gtk3;neofetch;xorg;xorg-server"
 	# AUR
 	[yay]="brave;sublime-text-dev"
-}
+)
 declare -A files_to_edit=(
 	#
 	# EDIT THIS
