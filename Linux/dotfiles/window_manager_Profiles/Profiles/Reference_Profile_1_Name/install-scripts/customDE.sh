@@ -664,7 +664,7 @@ pkg_install()
 							# Not Found - Error installing
 							su - $TARGET_USER -c "echo \"$(log_datetime) > Package Install Failed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
 						fi
-					elif [[ "$in_aur" == "1" ]]
+					elif [[ "$in_aur" == "1" ]]; then
 						aur_helper="${sysinfo["aur-helper"]}"
 
 						# Install AUR Helper
