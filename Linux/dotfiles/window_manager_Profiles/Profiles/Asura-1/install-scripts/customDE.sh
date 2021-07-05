@@ -500,6 +500,7 @@ pkg_install()
 					$install_Command $p
 					su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
 				fi
+				echo ""
 			fi
 		done
 	fi
