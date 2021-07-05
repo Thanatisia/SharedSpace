@@ -13,6 +13,7 @@
 #	- 2021-07-04 0135H, Asura
 #	- 2021-07-04 2306H, Asura
 #	- 2021-07-04 2332H, Asura
+#	- 2021-07-05 1044H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -41,6 +42,8 @@
 #		- Added Seperation of HEAD, Body and Footer
 #	- 2021-07-04 2332H, Asura
 #		- Added a pause functionality after every section if mode is DEBUG
+#	- 2021-07-05 1044H, Asura
+#		- Decided to convert and make directory using static path instead
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -64,6 +67,7 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
 # [General]
 TARGET_USER="admin"
+TARGET_USER_HOME_DIR=/home/profiles/admin
 
 # [Dotfiles]
 bashrc=\$HOME/.bashrc
@@ -74,26 +78,30 @@ folders_to_create=(
 	#
 	# EDIT THIS
 	# Please place all the folders you would like to create
-	# - Please backslash all environment variables that will change when running in the new shell from 'su'
-	# [For Home Directory]
-	#	$(get_users_Home $TARGET_USER)/path/to/folder
-	#
-	\$HOME/.logs/$PROGRAM_SCRIPTNAME
-	\$HOME/.config
-	\$HOME/.script
-	\$HOME/.tmp
-	\$HOME/personal/dotfiles/bash
+	# - Please state the full path at the moment OR use a static environment variable
+	#	- Relative Path is a WIP
+	#	- Unable to figure out how to pass a dynamic environment variable like $HOME to su - $TARGET_USER
+	# [Syntax]
+	#	i. /home/profiles/$user_name/{folder_1,folder_2,...folder_n}
+	#	ii. /path/to/folder/{folder_1,folder_2,...folder_n}
+	$TARGET_USER_HOME_DIR/.logs/$PROGRAM_SCRIPTNAME
+	$TARGET_USER_HOME_DIR/.config
+	$TARGET_USER_HOME_DIR/.script
+	$TARGET_USER_HOME_DIR/.tmp
+	$TARGET_USER_HOME_DIR/personal/dotfiles/bash
 )
 
 files_to_create=(
 	#
 	# EDIT THIS
 	# Please place all the files you would like to create
-	# - Please backslash all environment variables that will change when running in the new shell from 'su'
-	# [For Home Directory]
-	#	$(get_users_Home $TARGET_USER)/path/to/file
-	#
-	\$HOME/personal/dotfiles/bash/.bashrc-personal
+	# - Please state the full path at the moment OR use a static environment variable
+	#	- Relative Path is a WIP
+	#	- Unable to figure out how to pass a dynamic environment variable like $HOME to su - $TARGET_USER
+	# [Syntax]
+	#	i. /home/profiles/$user_name/{folder_1,folder_2,...folder_n}
+	#	ii. /path/to/folder/{folder_1,folder_2,...folder_n}
+	$TARGET_USER_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
 )
 
 base_distros=(
