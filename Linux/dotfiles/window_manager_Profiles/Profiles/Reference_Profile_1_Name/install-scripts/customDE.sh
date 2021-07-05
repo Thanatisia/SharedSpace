@@ -16,6 +16,7 @@
 #	- 2021-07-04 2332H, Asura
 #	- 2021-07-05 1044H, Asura
 #	- 2021-07-05 1244H, Asura
+#	- 2021-07-05 1349H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -49,6 +50,8 @@
 #	- 2021-07-05 1244H, Asura
 #		- Rearranged and changd variable names
 #		- Added a 'dotfile_Files' reference associative array
+#	- 2021-07-05 1349H, Asura
+#		- Added validation for TARGET_USER_HOME_DIR and TARGET_USER_PRIMARY_GROUP
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -81,6 +84,11 @@ MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
 # [General]
+
+### EDIT THIS: 
+###	TARGET_USER: this is the user you want to use
+### TARGET_USER_HOME_DIR: this is the home directory of the user
+### TARGET_USER_PRIMARY_GROUP: This is the primary group of the user
 TARGET_USER="admin"
 TARGET_USER_HOME_DIR=/home/profiles/admin
 TARGET_USER_PRIMARY_GROUP=wheel
@@ -408,6 +416,39 @@ user_mgmt()
 			if [[ ! "$TARGET_USER" == "" ]]; then
 				# If not empty
 				break 
+			else
+				# Default
+				TARGET_USER="root"
+			fi
+		done
+	fi
+
+	# Check if a target user's home directory is stated
+	if [[ "$TARGET_USER_HOME_DIR" == "" ]]; then
+		# Empty
+		while true; do
+			read -p "Specify the selected user's home directory: " TARGET_USER_HOME_DIR
+			if [[ ! "$TARGET_USER_HOME_DIR" == "" ]]; then
+				# If not empty
+				break 
+			else
+				# Default
+				TARGET_USER_HOME_DIR="$(get_users_Home $TARGET_USER)"
+			fi
+		done
+	fi
+
+	# Check if a target user's primary group is stated
+	if [[ "$TARGET_USER_PRIMARY_GROUP" == "" ]]; then
+		# Empty
+		while true; do
+			read -p "Specify the selected user's primary group: " TARGET_USER_PRIMARY_GROUP
+			if [[ ! "$TARGET_USER_PRIMARY_GROUP" == "" ]]; then
+				# If not empty
+				break 
+			else
+				# Default
+				TARGET_USER_PRIMARY_GROUP="wheel"
 			fi
 		done
 	fi
