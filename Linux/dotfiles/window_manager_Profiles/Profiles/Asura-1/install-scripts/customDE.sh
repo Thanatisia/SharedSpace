@@ -167,8 +167,40 @@ declare -A pkgs=(
 	[bluetooth-manager]="bluez"
 	[ricing]="lxappearance-gtk3"
 	[fetch]="neofetch"
+	[x]="xorg;xorg-server"
 	[others]=""
 )
+declare -A pkg_install_methods()
+{
+	#
+	# EDIT THIS
+	#
+	# Place all your packages (value) and the method of installation (key) you want to be in the 
+	# Desktop Environment here
+	# according to category
+	# - Please seperate each package with ';'
+	# Syntax:
+	#	[<install-method>]="
+	# Examples:
+	#	[pacman]="package-1;package-2;package-n"
+	#	[aur]="package-1;package-2;package-n"
+	# Official
+	[pacman]="pcmanfm;qtile;alacritty;nitrogen;picom;conky;bluez;lxappearance-gtk3;neofetch;xorg;xorg-server"
+	# AUR
+	[yay]="brave;sublime-text-dev"
+}
+declare -A git_aur_packages()
+{
+	#
+	# EDIT THIS
+	#
+	# Place all your AUR packages (aka git packages) here alongside the links
+	# Syntax:
+	#	[package-name]="https://domain.com/package.git"
+	# Example:
+	#	[yay]="https://aur.archlinux.org/yay-git.git"
+	[yay-git]="https://aur.archlinux.org/yay-git.git"
+}
 declare -A files_to_edit=(
 	#
 	# EDIT THIS
@@ -302,6 +334,25 @@ uncomment_line()
 	regex_Pattern="$1"
 	filename="$2"
 	sed -i '$regex_Pattern/s/^#//g' $filename
+}
+if_in_Arr()
+{
+	#
+	# Check if element is in array
+	#
+	str="$1"
+	arr=("$2")
+	found="0"
+
+	for e in "${arr[@]}"; do
+		if [[ "$e" == "$str" ]]; then
+			# Element is string
+			found="1"
+			break
+		fi
+	done
+
+	echo "$found"
 }
 
 # Functions [2]
@@ -528,6 +579,39 @@ create_dotfiles()
 		fi
 	done
 }
+install_AUR()
+{
+	#
+	# Installs AUR of your choice
+	#	1. yay
+	#
+	helper="${1:-yay}"
+	user_name="${2:-$TARGET_USER}"
+
+	# Check if git is installed
+	if [[ "$(pacman -Qq | grep git)" == "" ]]; then
+		# Git not installed
+		$install_Command "git"
+	fi
+
+	# Check AUR Helper
+	case "$helper" in
+		"yay")
+			# Install if not
+			aur_pkg="yay-git"
+			dependencies=(
+				"go"
+			)
+			for dep in "${dependencies[@]}"; do
+				if [[ "$(pacman -Qq | grep $dep)" == "" ]]; then
+					pacman -S --noconfirm --needed $dep
+				fi
+			done
+			su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
+			su - $user_name -c "cd $aur_pkg && makepkg -si"
+			;;
+	esac
+}
 pkg_install()
 {
 	#
@@ -556,23 +640,35 @@ pkg_install()
 	echo ""
 
 	if [[ "$conf" == "Y" ]]; then
-		for p in "${pkgs[@]}"; do
+		for p in ${arr[@]}; do
+			echo "Package: $p"
 			if [[ ! "$p" == "" ]]; then
 				# Do if NOT empty
 				# else skip
 				if [[ "$MODE" == "DEBUG" ]]; then
-					# u - $TARGET_USER -c "echo $install_Command $p | tee -a \$HOME/.logs/installed-packages.log"
+					# su - $TARGET_USER -c "echo $install_Command $p | tee -a \$HOME/.logs/installed-packages.log"
 					echo -e "$install_Command $p"
 				else
-					# $install_Command $p | tee -a $logging_filepath/installed-packages.log
-					$install_Command $p
-					# Check if package is installed
-					if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
+					# Check installation method
+					packages_to_check=("$(seperate_by_Delim ';' "${pkg_install_Methods["pacman"]}")")
+					in_pacman="$(if_in_Arr $p ${packages_to_check[@]})"
+					packages_to_check=("$(seperate_by_Delim ';' "${pkg_install_Methods["yay"]}")")
+					in_aur="$(if_in_Arr $p ${packages_to_check[@]})"
+					if [[ "$in_pacman" == "1" ]]; then
 						# Found
-						su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
-					else
-						# Not Found - Error installing
-						su - $TARGET_USER -c "echo \"$(log_datetime) > Package Install Failed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+						$install_Command $p
+						# Check if package is installed
+						if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
+							# Found
+							su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+						else
+							# Not Found - Error installing
+							su - $TARGET_USER -c "echo \"$(log_datetime) > Package Install Failed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+						fi
+					elif [[ "$in_aur" == "1" ]]
+						# Check if yay is installed
+						install_AUR "yay-git"
+					
 					fi
 				fi
 				echo ""
