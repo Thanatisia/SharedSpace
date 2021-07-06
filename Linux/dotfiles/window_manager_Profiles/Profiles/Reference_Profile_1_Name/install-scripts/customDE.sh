@@ -297,7 +297,7 @@ check_user_Exists()
 	delimiter=":"
 	res_Existence="$(getent passwd $user_name)"
 
-	if [[ ! "$res" == "" ]]; then
+	if [[ ! "$res_Existence" == "" ]]; then
 		# Something is found
 		# Check if is the user
 		res_is_User="$(echo $res_Existence | grep \"^$user_name:\" | cut -d '$delimiter' -f1)"
