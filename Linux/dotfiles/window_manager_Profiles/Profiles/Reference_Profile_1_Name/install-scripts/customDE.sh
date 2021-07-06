@@ -19,6 +19,7 @@
 #	- 2021-07-05 1349H, Asura
 #	- 2021-07-05 2107H, Asura
 #	- 2021-07-06 1049H, Asura
+#	- 2021-07-06 1522H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -63,6 +64,8 @@
 #		- Massive overhaul, changing all 'su' to 
 #		- You must now have a user before using this for security purposes
 #			- WIP: at least until i figure out how to use su to execute most of the commands here and commented
+#	- 2021-07-06 1522H, Asura
+#		- Fixed function 'check_user_Exists'
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
@@ -300,7 +303,7 @@ check_user_Exists()
 	if [[ ! "$res_Existence" == "" ]]; then
 		# Something is found
 		# Check if is the user
-		res_is_User="$(echo $res_Existence | grep \"^$user_name:\" | cut -d '$delimiter' -f1)"
+		res_is_User=$(echo "$res_Existence" | grep "^$user_name:" | cut -d ':' -f1)
 
 		if [[ "$res_is_User" == "$user_name" ]]; then
 			exist_Token="1"
