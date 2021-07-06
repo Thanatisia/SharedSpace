@@ -117,7 +117,7 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 ### TARGET_USER_PRIMARY_GROUP: This is the primary group of the user; default: $(id -gn $USER)
 TARGET_USER="$USER"
 TARGET_USER_HOME_DIR="$HOME"
-TARGET_USER_PRIMARY_GROUP="$(id -gn $USER)"
+TARGET_USER_PRIMARY_GROUP="$(id -gn $TARGET_USER)"
 
 # [Dotfiles]
 bashrc=$TARGET_USER_HOME_DIR/.bashrc
@@ -313,12 +313,13 @@ check_user_Exists()
 	#
 	user_name="$1"
 	exist_Token="0"
-	res_Existance="$(getent passwd $user_name)"
+	delimiter=":"
+	res_Existence="$(getent passwd $user_name)"
 
 	if [[ ! "$res" == "" ]]; then
 		# Something is found
 		# Check if is the user
-		res_is_User="$(echo $res_Existence | grep \"^$user_name:\" | cut -d '' -f1)"
+		res_is_User="$(echo $res_Existence | grep \"^$user_name:\" | cut -d '$delimiter' -f1)"
 
 		if [[ "$res_is_User" == "$user_name" ]]; then
 			exist_Token="1"
@@ -350,8 +351,8 @@ seperate_by_Delim()
 	# --- Input
 	
 	# Command Line Argument
-	delim="${1:-';'}"	# Delimiter to split
-	str="$2"			# String to be seperated
+	str="$1"			# String to be seperated
+	delim="${2:-';'}"	# Delimiter to split
 
 	# Local Variables
 
@@ -488,7 +489,7 @@ user_mgmt()
 		# Get all parameters of current user
 		curr_val="${user_profiles[$user]}"
 		# Seperate retrieved parameter by delimiter
-		curr_user_Params=($(seperate_by_Delim ";" "$curr_val"))
+		curr_user_Params=($(seperate_by_Delim "$curr_val" ";" ))
 		# Retrieve individual Parameters
 		u_primary_Group="${curr_user_Params[0]}"
 		u_secondary_Groups="${curr_user_Params[1]}"
@@ -777,7 +778,7 @@ pkg_install()
 
 
 	# Split value string into container
-	arr=("$(seperate_by_Delim ';' "$str")")
+	arr=("$(seperate_by_Delim "$str" ';')")
 
 	echo "Array: ${arr[@]}"
 
@@ -804,9 +805,9 @@ pkg_install()
 					echo -e "$install_Command $p"
 				else
 					# Check installation method
-					packages_to_check=("$(seperate_by_Delim ';' "${pkg_install_Methods["pacman"]}")")
+					packages_to_check=("$(seperate_by_Delim "${pkg_install_methods["pacman"]}" ';')")
 					in_pacman="$(if_in_Arr $p ${packages_to_check[@]})"
-					packages_to_check=("$(seperate_by_Delim ';' "${pkg_install_Methods["yay"]}")")
+					packages_to_check=("$(seperate_by_Delim "${pkg_install_methods["yay"]}" ';')")
 					in_aur="$(if_in_Arr $p ${packages_to_check[@]})"
 					if [[ "$in_pacman" == "1" ]]; then
 						# Found
@@ -1015,13 +1016,13 @@ if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
 		main "$@"
 	else
 		# Check if user exists
-		if [[ "$(check_user_Exists)" == "1" ]]; then
+		if [[ "$(check_user_Exists $TARGET_USER)" == "1" ]]; then
 			# Exists
 			echo "User is not the one specified, please login to the new user"
 			# If user exists, get home directory
 			TARGET_USER_HOME_DIR=$(su - $TARGET_USER -c "echo \$HOME")
 			cp $0 $TARGET_USER_HOME_DIR/$PROGRAM_SCRIPTNAME
-			chown -R $TARGET_USER:$TARGET_USER_PRIMARY_GROUP
+			chown -R $TARGET_USER:$TARGET_USER_PRIMARY_GROUP $TARGET_USER_HOME_DIR/$PROGRAM_SCRIPTNAME
 
 			echo "> Script has been copied to the user's home directory"
 			echo "> Please execute inside that folder"
