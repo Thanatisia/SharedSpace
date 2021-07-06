@@ -76,7 +76,7 @@
 #	1. 2021-07-02 1352H
 #		i. Convert sections [Folders], [Files] and all the loose variables into Associative Array for easy handling
 #	2. 2021-07-06 1058H
-#		i. Plan how to remove TARGET_USER, TARGET_USER_HOMEDIR, TARGET_USER_PRIMARY_GROUP
+#		i. Plan how to remove TARGET_USER, TARGET_USER_HOME_DIR, TARGET_USER_PRIMARY_GROUP
 #			> Default to '$USER', '$HOME', '$(id -gn $USER)' respectively
 # Security Design:
 #	- User must have a user to setup on
@@ -305,6 +305,27 @@ get_users_Home()
 		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
 	fi
 	echo "$HOME_DIR"
+}
+check_user_Exists()
+{
+	#
+	# Check if user exists
+	#
+	user_name="$1"
+	exist_Token="0"
+	res_Existance="$(getent passwd $user_name)"
+
+	if [[ ! "$res" == "" ]]; then
+		# Something is found
+		# Check if is the user
+		res_is_User="$(echo $res_Existence | grep \"^$user_name:\" | cut -d '' -f1)"
+
+		if [[ "$res_is_User" == "$user_name" ]]; then
+			exist_Token="1"
+		fi
+	fi
+
+	echo "$exist_Token"
 }
 
 # General Functions
@@ -993,7 +1014,24 @@ if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
 	if [[ "$TARGET_USER" == "$USER" ]]; then
 		main "$@"
 	else
-		echo "User is not the one specified, please login to the new user"
+		# Check if user exists
+		if [[ "$(check_user_Exists)" == "1" ]]; then
+			# Exists
+			echo "User is not the one specified, please login to the new user"
+			# If user exists, get home directory
+			TARGET_USER_HOME_DIR=$(su - $TARGET_USER -c "echo \$HOME")
+			cp $0 $TARGET_USER_HOME_DIR/$PROGRAM_SCRIPTNAME
+			chown -R $TARGET_USER:$TARGET_USER_PRIMARY_GROUP
+
+			echo "> Script has been copied to the user's home directory"
+			echo "> Please execute inside that folder"
+			echo "Thank you!"
+			exit
+		else
+			# Doesnt exist
+			echo "This user does not exist"
+			user_mgmt
+		fi
 	fi
     END
 fi
