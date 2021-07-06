@@ -17,6 +17,8 @@
 #	- 2021-07-05 1244H, Asura
 #	- 2021-07-05 1349H, Asura
 #	- 2021-07-05 2107H, Asura
+#	- 2021-07-06 0915H, Asura
+#	- 2021-07-06 1049H, Asura
 # Features: 
 # Background Information: 
 #	- This script aims to allow user to turn a window manager of your choice into your very own
@@ -54,13 +56,35 @@
 #		- Added validation for TARGET_USER_HOME_DIR and TARGET_USER_PRIMARY_GROUP
 #	- 2021-07-05 2107H, Asura
 #		- Fixed AUR helper install
+#	- 2021-07-06 0916H, Asura
+#		- Added security checking for
+#			i. User Validation: Ensure that at least 1 user exists at all time
+#	- 2021-07-06 1049H, Asura
+#		- Massive overhaul, changing all 'su' to 
+#		- You must now have a user before using this for security purposes
+#			- WIP: at least until i figure out how to use su to execute most of the commands here and commented
 # Notes:
 #	1. As of 2021-07-02 1348H
 #		- Please run this only AFTER you have done a base installation as
 #		- I have yet to integrate the base installation functions
+#	2. As of 2021-07-06 1049H
+#		- Please run this in the user you want to setup on
+#			> if you dont have a user, system will ask for you to create a user
+#			> after creating, the script will be copied to your specified user's home directory 
+#				> Please relogin and execute using the new character
 # TODO:
 #	1. 2021-07-02 1352H
 #		i. Convert sections [Folders], [Files] and all the loose variables into Associative Array for easy handling
+#	2. 2021-07-06 1058H
+#		i. Plan how to remove TARGET_USER, TARGET_USER_HOMEDIR, TARGET_USER_PRIMARY_GROUP
+#			> Default to '$USER', '$HOME', '$(id -gn $USER)' respectively
+# Security Design:
+#	- User must have a user to setup on
+#		- No using root for some insane reason that led me to making this policy change
+# Project Design:
+#	1. This script is ran after installation is competed.
+#	2. Assume user has already created a user as per security design (be it during installation and/or post installation)
+# Program Flow:
 #
 
 #
@@ -88,12 +112,12 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 # [General]
 
 ### EDIT THIS: 
-###	TARGET_USER: this is the user you want to use
-### TARGET_USER_HOME_DIR: this is the home directory of the user
-### TARGET_USER_PRIMARY_GROUP: This is the primary group of the user
-TARGET_USER="admin"
-TARGET_USER_HOME_DIR=/home/profiles/admin
-TARGET_USER_PRIMARY_GROUP=wheel
+###	TARGET_USER: this is the user you want to use; default: $USER
+### TARGET_USER_HOME_DIR: this is the home directory of the user; default: $HOME
+### TARGET_USER_PRIMARY_GROUP: This is the primary group of the user; default: $(id -gn $USER)
+TARGET_USER="$USER"
+TARGET_USER_HOME_DIR="$HOME"
+TARGET_USER_PRIMARY_GROUP="$(id -gn $USER)"
 
 # [Dotfiles]
 bashrc=$TARGET_USER_HOME_DIR/.bashrc
@@ -150,7 +174,10 @@ declare -A sysinfo=(
 	# [Syntax]:
 	#	[parameter]="value"
 	# [Supported/Used Parameters]:
-	#	1. aur-helper : Your main AUR helper programs
+	#	1. for ArchLinux
+	#		i. aur-helper : Your main AUR helper programs
+	#	2. Others
+	#		i. package-manager etc.
 	[aur-helper]="yay-git"
 )
 declare -A reference_Distros=(
@@ -159,7 +186,7 @@ declare -A reference_Distros=(
 )
 declare -A install_commands=(
 	[ArchLinux]="sudo pacman -S --noconfirm --needed"
-	[Debian]="sudo apt-get install"
+	[Debian]="sudo apt install"
 )
 declare -A pkgs=(
 	#
@@ -488,21 +515,104 @@ user_mgmt()
 		fi
 	done
 
-	echo "===================="
-	echo "ii. Set target user "
-	echo "===================="
-
 	# Check if a target user is selected
 	if [[ "$TARGET_USER" == "" ]]; then
-		# Empty
+		# Emp
 		while true; do
 			read -p "Select a user to setup: " TARGET_USER
 			if [[ ! "$TARGET_USER" == "" ]]; then
 				# If not empty
 				break 
 			else
-				# Default
-				TARGET_USER="root"
+				# Security Design : Force user to create a user
+				# A user must always exist for use
+				while true; do
+					useradd_Command="useradd"
+					home_dir=""
+				
+					echo "======================================================"
+					echo "For Security Reasons, please create a user to setup on"
+					echo "======================================================"
+					read -p "User Name: " user_name
+					read -p "Primary Group: " primary_group
+					read -p "Secondary Groups: " secondary_groups
+					read -p "Set Custom Home Directory? [Y|N]: " custom_homedir_conf
+
+					# Data Input Validation
+					if [[ ! "$custom_homedir_conf" == "" ]]; then
+						if [[ "$custom_homedir_conf" == "Y" ]]; then
+							useradd_Command+=" -m "
+							read -p "Home Directory [leave empty for default home directory]: " home_dir
+
+							if [[ ! "$home_dir" == "" ]]; then
+								# Specified home directory
+								useradd+=" -d $home_dir "
+							fi
+						fi
+					fi
+					if [[ ! "$primary_group" == "" ]]; then
+						# Primary Group is empty
+						useradd+=" -g $primary_group "
+					fi
+					if [[ ! "$secondary_groups" == "" ]]; then
+						# Secondary Group is empty
+						useradd+=" -G $secondary_groups "
+					fi
+
+					if [[ ! "$user_name" == "" ]]; then
+						useradd_Command+="$user_name"
+					fi
+
+
+					if [[ ! "$useradd_Command" == "useradd" ]]; then
+						# If changes are found
+						
+						if [[ ! "$user_name" == "" ]]; then
+							# Execute command
+							$useradd_Command
+
+							if [[ "$?" == "0" ]]; then
+								# Success
+								# Change Password for user
+								passwd "$user_name"
+							
+								# Set target user to user
+								TARGET_USER="$user_name"
+
+								# Write this script into $user_name
+								this_script="$0"
+								if [[ "$primary_group" == "" ]]; then
+									# If no primary group, default to its own name
+									primary_group="$user_name"
+								fi
+
+								if [[ "$home_dir" == "" ]]; then
+									home_dir="$(su - $user_name -c \"echo \$HOME\")"
+								fi
+
+								# Copy this script to home directory
+								cp $this_script $home_dir/$this_script
+
+								# Check if file is created 
+								if [[ -f $home_dir/$this_script ]]; then
+									# File is created
+
+									# Change ownership to user
+									chown -R $user_name:$primary_group $home_dir/$this_script
+
+									echo "File has been created in the new user's home directory"
+								fi
+
+								# Restart Script
+								echo "- Please ensure that the following are in your home directories"
+								echo "	1. $0 | script"
+								echo "- Please login to the new user [$user_name] and rerun the script, thank you!"
+								read -p "Press anything to exit..." exit_conf
+								exit
+							fi
+						fi
+					fi
+				done
 			fi
 		done
 	fi
@@ -538,7 +648,6 @@ user_mgmt()
 	fi
 
 	# --- Output
-
 }
 
 # Setup Stages
@@ -567,11 +676,15 @@ create_dotfiles()
 		else
 			if [[ ! -d $d ]]; then
 				# If directory does not exist
-				su - $TARGET_USER -c "mkdir -p $d"
-				su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+				# su - $TARGET_USER -c "mkdir -p $d"
+				# su - $TARGET_USER -c "echo \"$(log_datetime) > Directory has been created : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+				# chown -R $TARGET_USER:$TARGET_USER_PRIMARY_GROUP $TARGET_USER_HOME_DIR
+				mkdir -p $d
+				echo "$(log_datetime) > Directory has been created : $d" | tee -a ~/.logs/stage-1-i.log
 				chown -R $TARGET_USER:$TARGET_USER_PRIMARY_GROUP $TARGET_USER_HOME_DIR
 			else
-				su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+				# su - $TARGET_USER -c "echo \"$(log_datetime) > Directory already exists : $d\" | tee -a \$HOME/.logs/stage-1-i.log"
+				echo "$(log_datetime) > Directory already exists : $d" | tee -a ~/.logs/stage-1-i.log
 			fi
 		fi
 	done
@@ -586,10 +699,12 @@ create_dotfiles()
 		else
 			if [[ ! -f $f ]]; then
 				# If file does not exist
-				su - $TARGET_USER -c "touch $f"
-				su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
+				# su - $TARGET_USER -c "touch $f"
+				# su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
+				touch $f
+				echo "$(log_datetime) > File has been created : $f" | tee -a ~/.logs/stage-1-ii.log
 			else
-				su - $TARGET_USER -c "echo \"$(log_datetime) > File already exists : $f\" | tee -a \$HOME/.logs/stage-1-ii.log"
+				echo "$(log_datetime) > File already exists : $f" | tee -a ~/.logs/stage-1-ii.log
 			fi
 		fi
 	done
@@ -611,19 +726,27 @@ setup_AUR()
 
 	# Check AUR Helper
 	case "$helper" in
-		"yay")
+		"yay-git")
+			git clone "${git_aur_packages["$helper"]}"
+			cd $aur_pkg
+			makepkg -si
+			;;
+		"yay-git")
 			# Install if not
-			aur_pkg="yay-git"
-			dependencies=(
-				"go"
-			)
-			for dep in "${dependencies[@]}"; do
-				if [[ "$(pacman -Qq | grep $dep)" == "" ]]; then
-					pacman -S --noconfirm --needed $dep
-				fi
-			done
-			su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
-			su - $user_name -c "cd $aur_pkg && makepkg -si"
+			# aur_pkg="yay-git"
+			# dependencies=(
+			# 	"go"
+			# )
+			# for dep in "${dependencies[@]}"; do
+			# 	if [[ "$(pacman -Qq | grep $dep)" == "" ]]; then
+			# 		pacman -S --noconfirm --needed $dep
+			# 	fi
+			# done
+			# su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
+			# su - $user_name -c "cd $aur_pkg && makepkg -si"
+			git clone "${git_aur_packages["$helper"]}"
+			cd $aur_pkg
+			makepkg -si
 			;;
 	esac
 }
@@ -721,13 +844,16 @@ setup_dotfiles()
 		else
 			if [[ ! -f $file ]]; then
 				# If does not exist, create
-				su - $TARGET_USER -c "touch $file"
-				su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
+				# su - $TARGET_USER -c "touch $file"
+				# su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
+				touch $file
+				echo "$(log_datetime) > File has been created : $file" | tee -a \$HOME/.logs/stage-3-i.log
 			fi
 			# Append to file
-			su - $TARGET_USER -c "echo -e \"$curr_val\" | tee -a $file"
-			su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
-
+			# su - $TARGET_USER -c "echo -e \"$curr_val\" | tee -a $file"
+			# su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
+			echo -e "$curr_val" | tee -a $file
+			echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a \$HOME/.logs/stage-3-i.log
 			echo ""
 		fi
 	done
@@ -760,6 +886,13 @@ body()
 	echo "   Turning Window Managers into a Desktop Environment   "
 	echo "========================================================"
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo "=============="
+		echo " DEBUG NOTES: "
+		echo "=============="
+		echo "i. I am assuming that the user has created a user as per security design and protocol."
+	fi
+
 	echo ""
 
 	echo "========================"
@@ -788,9 +921,10 @@ body()
 
 	echo ""
 
-	echo "==========================="
-	echo "Pre-Req 3: User Management "
-	echo "==========================="
+	echo "================================================"
+	echo "Pre-Req 3:"
+	echo " Security Protocol Design [1] : User Management "
+	echo "================================================"
 	user_mgmt
 
 	if [[ "$MODE" == "DEBUG" ]]; then
