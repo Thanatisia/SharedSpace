@@ -707,12 +707,7 @@ setup_AUR()
 
 	# Check AUR Helper
 	case "$helper" in
-		"yay-git")
-			git clone "${git_aur_packages["$helper"]}"
-			cd $aur_pkg
-			makepkg -si
-			;;
-		"yay-git")
+		"yay" | "yay-git")
 			# Install if not
 			# aur_pkg="yay-git"
 			# dependencies=(
@@ -779,10 +774,12 @@ pkg_install()
 						# Check if package is installed
 						if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
 							# Found
-							su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+							# su - $TARGET_USER -c "echo \"$(log_datetime) > Package Installed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+							echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
 						else
 							# Not Found - Error installing
-							su - $TARGET_USER -c "echo \"$(log_datetime) > Package Install Failed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+							# su - $TARGET_USER -c "echo \"$(log_datetime) > Package Install Failed : $p\" | tee -a \$HOME/.logs/installed-packages.log"
+							echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
 						fi
 					elif [[ "$in_aur" == "1" ]]; then
 						aur_helper="${sysinfo["aur-helper"]}"
@@ -828,13 +825,13 @@ setup_dotfiles()
 				# su - $TARGET_USER -c "touch $file"
 				# su - $TARGET_USER -c "echo \"$(log_datetime) > File has been created : $file\" | tee -a \$HOME/.logs/stage-3-i.log"
 				touch $file
-				echo "$(log_datetime) > File has been created : $file" | tee -a \$HOME/.logs/stage-3-i.log
+				echo "$(log_datetime) > File has been created : $file" | tee -a ~/.logs/stage-3-i.log
 			fi
 			# Append to file
 			# su - $TARGET_USER -c "echo -e \"$curr_val\" | tee -a $file"
 			# su - $TARGET_USER -c "echo \"$(log_datetime) > $curr_val append to file [ $file ]\" | tee -a \$HOME/.logs/stage-3-i.log"
 			echo -e "$curr_val" | tee -a $file
-			echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a \$HOME/.logs/stage-3-i.log
+			echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a ~/.logs/stage-3-i.log
 			echo ""
 		fi
 	done
