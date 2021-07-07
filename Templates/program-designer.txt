@@ -1,0 +1,42 @@
+# --- Project Title Here
+
+# Project
+[Project Design Information]
+Title: 
+Author: 
+Created By: yyyy-mm-dd HHMMH, <Author>
+Modified By: 
+    i. yyyy-mm-dd HHMMH, <Author>
+        - Created documentation
+
+[Background Information]
+- <Background Information>
+
+[Features]
+
+
+[Mission Statement]
+- <Main Outcome>
+
+[Design Statement]
+
+
+# Program, Design & Security
+[Program Information]
+
+[Unified Modelling Language]
+* Use Case Description
+* Use Case Design
+* Use Case Diagram
+* Program Design
+* Database Design
+* Class Diagram
+* Activity Diagram
+* GUI Design
+
+
+[Security Design & Protocols]
+1. <Security Protocol 1>
+
+[Workflow]
+1. <Flow>

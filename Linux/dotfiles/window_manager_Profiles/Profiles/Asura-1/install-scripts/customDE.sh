@@ -331,6 +331,58 @@ check_user_Exists()
 
 	echo "$exist_Token"
 }
+useradd_get_default_Params()
+{
+    #
+    # Useradd
+    #   - Get Default Parameters
+    #
+    declare -A params=(
+        [group]="$(useradd -D | grep GROUP | cut -d '=' -f2)"
+        [home]="$(useradd -D | grep HOME | cut -d '=' -f2)"
+        [inactive]="$(useradd -D | grep INACTIVE | cut -d '=' -f2)"
+        [expire]="$(useradd -D | grep EXPIRE | cut -d '=' -f2)"
+        [shell]="$(useradd -D | grep SHELL | cut -d '=' -f2)"
+        [skeleton-path]="$(useradd -D | grep SKEL | cut -d '=' -f2)"
+        [create-mail-spool]="$(useradd -D | grep CREATE_MAIL_SPOOL | cut -d '=' -f2)"
+    )
+    default_Params=()
+
+    keywords=(
+        "GROUP"
+        "HOME"
+        "INACTIVE"
+        "EXPIRE"
+        "SHELL"
+        "SKEL"
+        "CREATE_MAIL_SPOOL"
+    )
+    for k in "${keywords[@]}"; do
+        # Put all keywords with the default values
+        # default_Params[$k]="$(useradd -D | grep $k | cut -d '=' -f2)"
+        default_Params+=("$(useradd -D | grep $k | cut -d '=' -f2)")
+    done
+
+    echo "${default_Params[@]}"
+}
+get_all_users()
+{
+	#
+	# Check if user exists
+	#
+	exist_Token="0"
+	delimiter=":"
+	res_Existence="$(getent passwd)"
+    all_users=($(cut -d ':' -f1 /etc/group | tr '\n' ' '))
+
+	echo "${all_users[@]}"
+}
+get_user_primary_group()
+{
+    user_name="$1"
+    primary_group="$(id -gn $user_name)"
+    echo "$primary_group"
+}
 
 # General Functions
 create_directories()
@@ -421,6 +473,27 @@ if_in_Arr()
 
 	echo "$found"
 }
+
+### Data Structures ###
+arr_append()
+{
+    #
+    # Append to Array
+    #
+    arr=("$1")
+    str=${@:2}  # Start taking all arguments from index 2 onwards
+    strlen="${#str[@]}"
+
+    # Loop through all the strings and 
+    # append into array one by one
+    for ((i=0; i < $strlen; i++)); do
+        arr+=("${str[$i]}")
+    done
+}
+
+### Algorithms ###
+
+
 
 # Functions [2]
 
@@ -764,8 +837,12 @@ setup_AUR()
 			# done
 			# su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
 			# su - $user_name -c "cd $aur_pkg && makepkg -si"
-			git clone "${git_aur_packages["$helper"]}"
-			cd $aur_pkg
+			helper_url="${git_aur_packages["$helper"]}"
+			if [[ ! -d $helper ]]; then
+				# Clone if doesnt exist
+				git clone "$helper_url"
+			fi
+			cd $helper
 			makepkg -si
 			;;
 	esac
@@ -793,11 +870,9 @@ pkg_install()
 
 	echo ""
 	
-	echo "Installing..."
-	
-	echo ""
-
 	if [[ "$conf" == "Y" ]]; then
+		echo "Installing..."	
+		echo ""
 		for p in ${arr[@]}; do
 			echo "Package: $p"
 			if [[ ! "$p" == "" ]]; then
@@ -832,6 +907,10 @@ pkg_install()
 						setup_AUR "$aur_helper"
 
 						# Install package
+						if [[ "$aur_helper" == "yay-git" ]]; then
+							# Git version checker
+							aur_helper="yay"
+						fi
 						$aur_helper -S $p
 					fi
 				fi

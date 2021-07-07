@@ -1,0 +1,55 @@
+# --- Custom Window Manager to Desktop Environment Setup Script
+
+# Project
+[Project Design Information]
+Title: CustomDE
+Author: Asura
+Created By: 2021-07-06 2132H, Asura
+Modified By: 
+    i. 2021-07-06 2132H, Asura
+        - Created documentation
+
+[Background Information]
+- This script aims to allow user to turn a window manager of your choice into your very own
+	Custom Desktop Environment
+
+[Features]
+
+
+[Mission Statement]
+- Turning Window Managers into your own Custom Desktop Environment
+
+[Design Statement]
+
+
+# Program, Design & Security
+[Program Information]
+
+[Unified Modelling Language]
+* Use Case Description
+* Use Case Design
+* Use Case Diagram
+* Program Design
+* Database Design
+* Class Diagram
+* Activity Diagram
+* GUI Design
+
+
+[Security Design & Protocols]
+1. All user must have a user created before using it
+2. User cannot run this on root
+
+[Workflow]
+1. Verify Network Connection
+2. Enable sudo (sudoers)
+3. User Management - Ensure at least 1 character is created
+    i. Force user to create one for use if dont have
+4. Create files, folders (Dotfiles, Dotfolders etc.)
+5. Install packages
+    i. Different Package Managers
+        > Official (pacman, apt etc)
+        > Custom (AUR)
+            > AUR
+                * yay
+5. Setup files, folders (Dotfiles etc.)
