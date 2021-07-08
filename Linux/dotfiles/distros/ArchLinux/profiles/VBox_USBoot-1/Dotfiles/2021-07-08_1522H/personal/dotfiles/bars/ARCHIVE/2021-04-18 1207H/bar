@@ -1,0 +1,53 @@
+#
+# Start bar
+# Created: 2021-04-18 08:00H
+# Modified:
+#   2021-04-19 12:06H
+#
+
+#
+# Input
+#
+
+# General Variables
+BAR_TYPE=lemonbar
+
+# Import Libraries
+case "$BAR_TYPE" in
+    "lemonbar")
+        . $(dirname "${BASH_SOURCE[0]}")/lemonbar/lemonbar_Desc.sh
+        ;;
+    *)
+        echo "Invalid bar." | tee -a ~/.logs/bar_Runner.log
+        ;;
+esac
+
+#
+# Process
+#
+# echo $BAR_RUNNER_PATH/$BAR_RUNNER_NAME
+sleep 1s &&\
+    # Temporary: 
+    #   Change directory to path of bar script 
+    #   and run bar until
+    #   the problem has been fixed
+    
+    # -- Uncomment if not in path OR 
+    #    if bar is glitching
+    cd $BAR_RUNNER_PATH
+
+    $BAR_RUNNER_PATH/$BAR_RUNNER_NAME |\
+    case "$BAR_TYPE" in
+        "lemonbar")
+            # lemonbar -f "$lemonbar_Fonts" -p -F#$lemonbar_color_FG -B#$lemonbar_color_BG &
+            lemonbar -f "$lemonbar_Fonts" -p -F$lemonbar_color_FG -B$lemonbar_color_BG &
+            ;;
+        *)
+            ;;
+    esac
+# -- Uncomment if not in path
+cd ~
+
+#
+# Output
+#

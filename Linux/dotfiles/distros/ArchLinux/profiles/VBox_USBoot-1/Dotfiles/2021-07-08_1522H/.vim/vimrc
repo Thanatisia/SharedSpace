@@ -1,0 +1,208 @@
+"
+" VimRC
+" Author: ME
+" Created: 2021-03-28 22:34H
+" Modified: 
+"       2021-03-28 22:35H
+"       2021-04-13 13:37H
+"       2021-04-14 15:29H
+"       2021-04-19 11:22H
+"       2021-04-21 13:20H
+"       2021-05-08 23:13H
+"		2021-05-17 18:02H, ME:
+"			- Added a new template - "minimal" for bash
+"		2021-06-16 00:02H, ME:
+"			- Added new keybinding for Ctrl + A for selecting all
+"
+
+" Set Variables
+let mapleader=" "
+let g:fldr_Templates="~/.vim/templates/"
+
+" Plugins
+" Make sure you use single quotes
+
+" 1. Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
+" 2. Plugs
+" Syntax:
+"       Plug '<author-name>/<repository-name>'
+" Gruvbox by Morhetz - colorscheme
+        Plug 'morhetz/gruvbox'
+" vim-airline by vim-airline - Status Line/Bar
+        Plug 'vim-airline/vim-airline'
+" NERDTree by preservim - Menu
+        Plug 'preservim/nerdtree'
+" fzf.vim by junegunn - Fuzzy Finder
+"       fzf#install() makes sure you have the latest binary
+        Plug 'junegunn/fzf', { 'do' : { -> fzf#install() } }
+        Plug 'junegunn/fzf.vim'
+" vim-floaterm by voldikss - Terminal Manager
+        Plug 'voldikss/vim-floaterm'
+" bat.vim by jamespwillias - Syntax Highlighting & Colorscheme
+        Plug 'jamespwilliams/bat.vim'
+" completor.vim by maralla - C/C++ Autocompletor
+        Plug 'maralla/completor.vim'
+" jedi-vim by davidhalter - Python Autocompletor
+        Plug 'davidhalter/jedi-vim'
+" supertab by ervandew - Allows user to use Tab in custom keybindings
+        Plug 'ervandew/supertab'
+" 3. Initialize the plugin system
+call plug#end()
+
+"
+" Plugin Settings
+"
+" --- NERDTree
+let NERDTreeShowHidden=1
+" --- fzf
+let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'window' : {'width' : 0.9,'height' : 0.6} }
+" --- floaterm
+" Defaults:
+" let g:floaterm_autoclose = 2
+let g:floaterm_keymap_new = '<F9>'
+let g:floaterm_keymap_prev = '<F10>'
+let g:floaterm_keymap_next = '<F11>'
+let g:floaterm_keymap_toggle = '<F12>'
+" let g:floaterm_width = <percentage in decimal format; 0.9 = 90% of the Vim's screen size etc.
+" let g:floaterm_height = <percentage in decimal format; 0.9 = 90% of the Vim's screen size etc.
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
+let g:floaterm_autoclose = 2
+" let g:floaterm_keymap_new = '<Leader>ftn'
+" let g:floaterm_keymap_prev = '<Leader>ftp'
+" let g:floaterm_keymap_next = '<Leader>ftx'
+" let g:floaterm_keymap_toggle = '<Leader>ftt'
+" --- completor.vim
+" Remove completion delay
+    let g:completor_completion_delay=0
+" --- C/C++ autocomplete
+" Path to clang : /usr/bin/clang-<version>
+    let g:completor_clang_binary="/usr/bin/clang-11"
+" --- supertab (To allow user to reassign tab)
+	let g:SuperTabMappingForward='<C-@>'
+	let g:SuperTabMappingBackward='<S-C-@>'
+" --- jedi-vim
+    "default: let g:jedi#completions_command = "<tab>"
+	let g:jedi#completions_command = ',.'
+" --- Airline
+let g:airline_powerline_fonts=1
+
+" Settings
+" set term=cons25
+
+"
+" General
+"
+" When shifting, indent using 4 spces
+set shiftwidth=4
+" Insert 'tabstop' number of spaces when the tab key is pressed
+" set smarttab
+" Indent using four spaces
+set tabstop=4
+set backspace=indent,eol,start
+set confirm
+set noswapfile
+
+" Syntax Highlighting
+syntax on
+syntax enable
+set autoindent
+" set expandtab!
+set nowrap
+"set termguicolors
+
+" Search options
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
+
+" UI Options
+set ruler
+set noerrorbells
+set number
+set relativenumber
+set title
+set background=dark
+set clipboard=unnamedplus
+set wildmenu
+set cursorline
+set mouse=a
+
+" Colors
+
+" Use 256 colors
+        set t_Co=256
+          
+
+" ### 
+" Keybindings
+" C: Ctrl
+" S: Shift
+" ###
+" [General]
+" Cut; Ctrl + x; dd = Delete selected Line
+" (Visual Mode)
+        vnoremap <C-x> d
+" (Normal Mode)
+        nnoremap <C-x> dd
+" Copy; Ctrl + c; yy = Yank/Copy selected line
+" (Visual Mode)
+        vnoremap <C-c> y
+" (Normal Mode)
+        nnoremap <C-c> yy
+" Paste; Ctrl + v
+" (Visual Mode)
+        vnoremap <C-v> p
+" (Normal Mode)
+        nnoremap <C-v> p
+" Save File; Ctrl + s
+        nnoremap <C-s> :w<Enter>
+" Quit File; Ctrl + q
+        nnoremap <C-q> :q!<Enter>
+" Undo; Ctrl + z
+        nnoremap <C-z> u
+" Redo; Ctrl + Shift + z
+        nnoremap <C-Y> <C-R>
+" Find; Ctrl + f
+        inoremap <C-f> <Esc>/
+" Select All; Ctrl + a; v (Visual Mode) -> :G (Go to the bottom) -> Escape (Go back to normal)
+		nnoremap <C-a> v<S-g>
+" [Movement]
+" [Tabs]
+" Create a new tab in vim when in insert mode and put vim into Normal mode; Ctrl + t 
+        imap <C-t> <Esc>:tabnew<CR>
+" Switch to next tab; 
+        "imap <S-Tab> <Esc>:tabn<CR>
+" Switch to previous tab; Ctrl + Shift + Tab
+        "imap <S-p> <Esc>:tabp<CR>
+" [Program]
+" --- NERDTree
+        map <F5> :NERDTreeToggle<CR>
+" --- jedi-vim
+        
+
+" Autocommands
+
+" -- Copy skeleton codes when new empty files of the following extensions are opened
+"  Type '<file>.min.sh' to get the minimal template; temporary measure
+autocmd BufNewFile *.sh   0r ~/.vim/templates/main.sh
+autocmd BufNewFile *.html 0r ~/.vim/templates/index.html
+autocmd BufNewFile *.css  0r ~/.vim/templates/main.css
+autocmd BufNewFile *.js   0r ~/.vim/templates/main.js
+autocmd BufNewFile *.c    0r ~/.vim/templates/main.c
+autocmd BufNewFile *.cpp  0r ~/.vim/templates/main.cpp
+autocmd BufNewFile *.h    0r ~/.vim/templates/main.h
+autocmd BufNewFile *.cs   0r ~/.vim/templates/main.cs
+autocmd BufNewFile *.py   0r ~/.vim/templates/main.py
+autocmd BufNewFile *.java 0r ~/.vim/templates/main.java
+autocmd BufNewFile *.md   0r ~/.vim/templates/README.md
+
+" -- BufWritePre
+
+
+" -- BufWritePost
+
+

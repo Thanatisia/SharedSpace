@@ -1,0 +1,10 @@
+#
+# This Contains aliases for all linux commands
+# based on Customization & Ricing
+#
+
+# Customization
+alias findicondir="massmake \"${iconfolders[@]}\" && find ${iconfolders[@]} -type d"
+alias findiconfiles="massmake \"${iconfolders[@]}\" && find ${iconfolders[@]} -type f"
+alias findcursors="massmake \"${iconfolders[@]}\" && find ${iconfolders[@]} -type d -name 'cursors'"
+
