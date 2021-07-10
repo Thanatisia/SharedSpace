@@ -20,6 +20,9 @@ bashrc_personal=~/personal/dotfiles/bash/.bashrc-personal
 TARGET_USER=""
 TARGET_USER_HOME_DIR=""
 TARGET_USER_PRIMARY_GROUP=""
+# This contains all users that the user will need to choose to setup on; 
+# Please specify all users you want to choose from by default in here
+USER_SET=()
 
 ############# EDIT THIS #############
 # Edit everything placed under here #
@@ -238,6 +241,8 @@ uncomment_line()
 	filename="$2"
 	sed -i '$regex_Pattern/s/^#//g' $filename
 }
+
+### Data Structures ###
 if_in_Arr()
 {
 	#
@@ -257,8 +262,48 @@ if_in_Arr()
 
 	echo "$found"
 }
+slice()
+{
+    # Slice an array according to a format
+    # [Syntax]
+    #   format:
+    #   when taking a slice,
+    #       * if left to right
+    #       :n(1):n(2)
+    #           n(1) is the Starting Index
+    #           n(2) is the slice length (how many elements from the starting index you want to slice)
+    #       * if counting reverse
+    #       -n(1):n(2)
+    #           n(1) is the Starting Index counting backwards (index '0' is the last element in the array, '1' is the second last etc.)
+    #           n(2) is the slice length (how many elements from the starting index you want to slice - backwards)
+    #       * Individual elements
+    #       n(x)
+    #           x is the index you want to take
+    #       * All elements (array)
+    #       n(@)
+    #           @ is taking all elements in array format
+    #       * All elements (string)
+    #       n(*)
+    #           * is taking all elements in string format
+    # [Examples]
+    #   let arr=("Hello world" 54 32 12 "Hello!")
+    #   slice "${arr[@]}" ":3"  # Starts taking a slice at index 3
 
-### Data Structures ###
+    # --- Input
+    arr=("$1")
+    format=""
+    res=()
+
+    # --- Processing
+    if [[ ! "$format" == "" ]]; then
+        # Format not empty
+        res=("${arr[@]$format}")   
+    fi
+
+    # --- Output
+    # Return Array
+    echo "${res[@]}"
+}
 arr_append()
 {
     #
@@ -472,7 +517,7 @@ user_mgmt()
     # [3.1]
     # Loop through all users in user_profiles and
     # See if it exists, follow above documentation
-    for u_name in "${!user_profiles[@]}"
+    for u_name in "${!user_profiles[@]}"; do
         # Check if user exists
         u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
         
@@ -485,7 +530,7 @@ user_mgmt()
         u_primary_Group="${u_params_Arr[0]}"        # Primary Group
         u_secondary_Groups="${u_params_Arr[1]}"     # Secondary Groups
         u_home_Dir="${u_params_Arr[2]}"             # Home Directory
-        u_other_Params="${u_params_Arr[@:3]}"       # Any other parameters after the first 3
+        u_other_Params="${u_params_Arr[@]:3}"       # Any other parameters after the first 3
 
         if [[ ! "$u_Exists" == "1" ]]; then
             # 0 : Does not exist
@@ -529,8 +574,16 @@ user_mgmt()
                     echo "==========================="
                     passwd $user
                 fi
-            fi
 
+                # Append user to userset
+                # Verify: Duplicates exists
+                #   - Do not append if exists
+                u_Duplicates="$(if_in_Arr $u_name ${USER_SET[@]})"
+                if [[ ! "$u_Duplicates" == "1" ]]; then
+                    # Does not Exists
+                    USER_SET+=("$u_name")
+                fi
+            fi
         fi
     done
 
@@ -547,19 +600,26 @@ user_mgmt()
     #       a. check if user is this
     #       b. If not, copy the files and ask user to login to the new user
     selected_uname=""
-    all_users=("$(get_all_users[@]})")
+    tmp=("$(get_all_users)")
+    all_users=(${tmp[@]})
     number_of_users="${#all_users[@]}"
     while [[ "$selected_uname" == "" ]]; do
-        for ((i=0; i < $number_of_users; i++)); do
-            # Print all users
-            echo "[$i] : [${all_users[$i]}]"
+        # for ((i=0; i < $number_of_users; i++)); do
+        #     # Print all users
+        #     echo "[$i] : [${all_users[$i]}]"
+        # done
+        for ((i=0; i < ${#USER_SET[@]}; i++)); do
+            # Print all users created
+            echo "[$i] : [${USER_SET[@]}]"
         done
-        read -p "Select a user: " selected_uname
+        read -p "Select a user [Please enter the username, not the number (WIP: selection by ID)]: " selected_uname
 
         # user entered a user
         # validate user
         if [[ ! "$selected_uname" == "" ]]; then
             # if not empty
+            echo "Selected User: $selected_uname"
+            echo "Current  User: $USER"
 
             if [[ ! "$USER" == "$selected_uname" ]]; then
                 echo "User is not the one specified, please login to the new user"
@@ -585,7 +645,9 @@ user_mgmt()
             else
                 # Is the same user, to continue next stage
                 TARGET_USER=$selected_uname
+                echo "Getting selected user [$TARGET_USER]'s home directory..."
                 TARGET_USER_HOME_DIR=$(su - $selected_uname -c "echo \$HOME")
+                echo "Getting selected user [$TARGET_USER]'s primary group..."
                 TARGET_USER_PRIMARY_GROUP="$(id -gn $selected_uname)"
                 break
             fi
@@ -671,7 +733,8 @@ pkg_install()
 
     # Local Variables
     log_contents=()
-	str="${pkgs[@]}"
+    pkg_category=("${!pkgs[@]}")    # Default package manager categories (pkgs variable)
+    pkg_names=("${pkgs[@]}")        # Default packages to install (pkgs variable)
     arr_pkg_names=()
 	arr_pkg_install_method=()
     declare -A TARGET_PKGS=()
@@ -679,26 +742,30 @@ pkg_install()
 
     # --- Processing
     # Split value string into container
-	arr=("$(seperate_by_Delim "$str" ';')") # ( "package-1,method-1" "package-2,method-2")
-    # Loop through split elements and get
-    #   all elements in each string
-    #       [0] : Package Name
-    #       [1] : Install Method
-    for elements in "${arr[@]}"; do
-        tmp=("$(seperate_by_Delim "$elements" ',')")
-        # Get package names
-        pkg_name="${tmp[0]}"
-        arr_pkg_names+=("$pkg_name") # 1st Parameter
-        # Get package install methods
-        install_method="${tmp[1]}"
-        arr_pkg_install_method+=("$install_method")   # 2nd Parameter
-        # Map target packages to install
-        #   with its install method
-        TARGET_PKGS[$pkg_name]="$install_method"
+    # ( "package-1,method-1" "package-2,method-2")
+    for v in "${pkg_names[@]}"; do
+        if [[ ! "$v" == "" ]]; then
+            # If not empty; Ignore all empties
+            tmp=($(seperate_by_Delim $v ','))   # Seperate the subvalues by delimiter ',' to get 2 items: [0] - Package Name and [1] - Package installation method
+            
+            # Loop through split elements and get
+            #   all elements in each string
+            #       [0] : Package Name
+            #       [1] : Install Method
+
+            # Get package names
+            pkg_name="${tmp[0]}"
+            arr_pkg_names+=("$pkg_name")    # 1st Parameter
+            # Get package install methods
+            install_method="${tmp[1]}"
+            arr_pkg_install_method+=("$install_method") # 2nd Parameter
+            # Map target packages to install
+            #   with its install method
+            TARGET_PKGS[$pkg_name]="$install_method"
+        fi
     done
     number_of_pkgs="${#TARGET_PKGS[@]}" # Get Number of Packages
-    
-	echo "Array: ${arr[@]}"
+
 	# Confirm installation
 	for p in "${!TARGET_PKGS[@]}"; do
         # [package-name] : [install-method]
@@ -786,6 +853,7 @@ pkg_install()
                             else
                                 echo "Distro is not Arch-based, please change the installation method"
                             fi
+                            ;;
                         *)
                             echo "Method is invalid / not implemented yet."
                             ;;
