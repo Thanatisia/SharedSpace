@@ -1,0 +1,19 @@
+#
+# Variable, Alias for package Installation
+#
+
+# -- Variables
+general_Arch="build-devel"
+java_Arch="jre-openjdk jdk-openjdk"
+python_Arch="python"
+c_Arch="gcc"
+cpp_Arch="g++"
+csharp_Arch="mono"
+
+# -- Aliases
+alias install_buildtools="sudo pacman -S $general_Arch"
+alias install_Java="sudo pacman -S $java_Arch"
+alias install_Python="sudo pacman -S $python_Arch"
+alias install_C="sudo pacman -S $c_Arch"
+alias install_CPP="sudo pacman -S $cpp_Arch"
+alias install_CSharp="sudo pacman -S $csharp_Arch"
