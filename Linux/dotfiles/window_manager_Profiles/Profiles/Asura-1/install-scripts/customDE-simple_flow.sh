@@ -15,6 +15,7 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 bashrc=~/.bashrc
 xresources=~/.Xresources
 bashrc_personal=~/personal/dotfiles/bash/.bashrc-personal
+bash_profile=~/.bash_profile
 
 ### User Details ###
 TARGET_USER=""
@@ -96,6 +97,8 @@ fi"
 	[$bashrc_personal]="#\n\
 # --- BashRC [Personal] \n\
 #"
+
+    [$bash_profile]=""
 )
 declare -A pkgs=(
 	# Place all your packages you want to be in the 
@@ -423,12 +426,12 @@ create_user()
 
     # --- Head
     ### Parameters ###
-    u_name="$0"                 # User Name
+    u_name="$1"                 # User Name
     # Get individual parameters
-    u_primary_Group="$1"        # Primary Group
-    u_secondary_Groups="$2"     # Secondary Groups
-    u_home_Dir="$3"             # Home Directory
-    u_other_Params="$4"         # Any other parameters after the first 3
+    u_primary_Group="$2"        # Primary Group
+    u_secondary_Groups="$3"     # Secondary Groups
+    u_home_Dir="$4"             # Home Directory
+    u_other_Params="$5"         # Any other parameters after the first 3
 
     # Local variables
     u_create_Command="useradd"
@@ -461,16 +464,16 @@ create_user()
 
     # Create users
     if [[ "$MODE" == "DEBUG" ]]; then
-        echo "$useradd_Command"
+        echo "$u_create_Command"
     else
-        $useradd_Command
+        $u_create_Command
 
         # Change Password of user
         if [[ "$?" == "0" ]]; then
-            echo "==========================="
-            echo " Password change for $user "
-            echo "==========================="
-            passwd $user
+            echo "============================="
+            echo " Password change for $u_name "
+            echo "============================="
+            passwd $u_name
 
             # Set token to created (1)
             create_Token="1"
@@ -572,7 +575,7 @@ enable_sudo()
 	regex_Pattern="s/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/"
 	filename=/etc/sudoers
 	# `uncomment_line $regex_Pattern $filename` 
-	sed -i $regex_Pattern $filename
+	sudo sed -i $regex_Pattern $filename            # Warning, remove sudo if is an issue
 }
 user_mgmt()
 {
@@ -610,7 +613,7 @@ user_mgmt()
         # Get all parameters
         u_Params=("${user_profiles[$u_name]}")  # User Parameters
         # Split all parameters from string into arr
-        u_params_Arr=("$(seperate_by_Delim $u_Params)")
+        u_params_Arr=($(seperate_by_Delim ${u_Params[@]} ','))
     
         # Get individual parameters
         u_primary_Group="${u_params_Arr[0]}"        # Primary Group
@@ -649,16 +652,16 @@ user_mgmt()
 
             # Create users
             if [[ "$MODE" == "DEBUG" ]]; then
-                echo "$useradd_Command"
+                echo "$u_create_Command"
             else
-                $useradd_Command
+                $u_create_Command
 
                 # Change Password of user
                 if [[ "$?" == "0" ]]; then
-                    echo "==========================="
-                    echo " Password change for $user "
-                    echo "==========================="
-                    passwd $user
+                    echo "============================="
+                    echo " Password change for $u_name "
+                    echo "============================="
+                    passwd $u_name
                 fi
 
                 # Append user to userset
@@ -696,7 +699,7 @@ user_mgmt()
         # done
         for ((i=0; i < ${#USER_SET[@]}; i++)); do
             # Print all users created
-            echo "[$i] : [${USER_SET[@]}]"
+            echo "[$i] : [${USER_SET[$i]}]"
         done
         read -p "Select a user [Please enter the username, not the number (WIP: selection by ID)]: " selected_uname
 
@@ -708,19 +711,23 @@ user_mgmt()
             echo "Current  User: $USER"
 
             # Check if user exists
-            tmp_u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
-            if [[ ! "$u_Exists" == "1" ]]; then
+            tmp_u_Exists="$(check_user_Exists $selected_uname)" # Check if user exists; 0 : Does not exist | 1 : Exists
+            if [[ ! "$tmp_u_Exists" == "1" ]]; then
                 # Create user if does not exist
                 # 0 : Does not exist
                 # 1 : Exists
-                echo "User [$u_name] does not exist"
-
-                read -p "Primary Group: " u_primary_Group                                                                       # Primary Group
-                read -p "Secondary Group: " u_secondary_Groups                                                                  # Secondary Groups
-                read -p "Home Directory: " u_home_Dir                                                                           # Home Directory
-                read -p "Any other parameters? [Just type the commands (i.e. -d <home directory>)]: " u_other_Params            # Any other parameters after the first 3
-
-                create_user $u_name $u_primary_Group $u_secondary_Groups $u_home_Dir $u_other_Params
+                # WIP : to fix
+                # echo "User [$selected_uname] does not exist"
+                # read -p "Primary Group: " u_primary_Group                                                                       # Primary Group
+                # read -p "Secondary Group: " u_secondary_Groups                                                                  # Secondary Groups
+                # read -p "Home Directory: " u_home_Dir                                                                           # Home Directory
+                # read -p "Any other parameters? [Just type the commands (i.e. -d <home directory>)]: " u_other_Params            # Any other parameters after the first 3
+                # create_user $selected_uname $u_primary_Group $u_secondary_Groups $u_home_Dir $u_other_Params
+                # Temporary Bypass - fill up the variables under 'EDIT THIS' as how its done
+                echo "Please add the user you want to use into user_profiles under [EDIT THIS]"
+                echo "and Rerun the script after specifying the required details as designed."
+                echo "Thank you!"
+                exit
             fi
 
             if [[ ! "$USER" == "$selected_uname" ]]; then
@@ -894,8 +901,6 @@ pkg_install()
 
     if [[ ! "$conf" == "N" ]]; then
         # default: Yes
-        echo "Installing..."
-
         # Install Packages
         target_pkg="${!TARGET_PKGS[@]}"
         for p in ${target_pkg[@]}; do
@@ -903,6 +908,7 @@ pkg_install()
             if [[ ! "$p" == "" ]]; then
                 # If not empty
                 # - Install
+                echo "Installing..."
                 if [[ "$MODE" == "DEBUG" ]]; then
                     echo -e "$install_Command $p"
                 else
