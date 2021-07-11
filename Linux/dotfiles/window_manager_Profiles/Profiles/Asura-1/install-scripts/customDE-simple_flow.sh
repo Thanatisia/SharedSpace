@@ -406,10 +406,90 @@ get_all_users()
 }
 get_user_primary_group()
 {
+    #
+    # Just retrieves the user's primary group (-g)
+    #
     user_name="$1"
     primary_group="$(id -gn $user_name)"
     echo "$primary_group"
 }
+create_user()
+{
+    # =========================================
+    # :: Function to create user lol
+    #   1. Append all arguments into the command
+    #   2. Execute command and create
+    # =========================================
+
+    # --- Head
+    ### Parameters ###
+    u_name="$0"                 # User Name
+    # Get individual parameters
+    u_primary_Group="$1"        # Primary Group
+    u_secondary_Groups="$2"     # Secondary Groups
+    u_home_Dir="$3"             # Home Directory
+    u_other_Params="$4"         # Any other parameters after the first 3
+
+    # Local variables
+    u_create_Command="useradd"
+    create_Token="0"            # 0 : not Created; 1 : Created
+
+    # --- Processing
+    # Get Parameters
+    if [[ ! "$u_home_Dir" == "NIL" ]]; then
+        # If Home Directory is not Empty
+        u_create_Command+=" -m "
+        u_create_Command+=" -d $u_home_Dir "
+    fi
+
+    if [[ ! "$u_primary_Group" == "NIL" ]]; then
+        # If Primary Group is Not Empty
+        u_create_Command+=" -g $u_primary_Group "
+    fi
+
+    if [[ ! "$u_secondary_Groups" == "NIL" ]]; then
+        # If Primary Group is Not Empty
+        u_create_Command+=" -G $u_secondary_Groups "
+    fi
+
+    if [[ ! "$u_other_Params" == "NIL" ]]; then
+        # If there are any miscellenous parameters
+        u_create_Command+=" $u_other_Params "
+    fi
+
+    u_create_Command+="$u_name"
+
+    # Create users
+    if [[ "$MODE" == "DEBUG" ]]; then
+        echo "$useradd_Command"
+    else
+        $useradd_Command
+
+        # Change Password of user
+        if [[ "$?" == "0" ]]; then
+            echo "==========================="
+            echo " Password change for $user "
+            echo "==========================="
+            passwd $user
+
+            # Set token to created (1)
+            create_Token="1"
+        fi
+
+        # Append user to userset
+        # Verify: Duplicates exists
+        #   - Do not append if exists
+        u_Duplicates="$(if_in_Arr $u_name ${USER_SET[@]})"
+        if [[ ! "$u_Duplicates" == "1" ]]; then
+            # Does not Exists
+            USER_SET+=("$u_name")
+        fi
+    fi
+
+    # --- Output
+    echo "$create_Token"
+}
+
 
 ### Distro-Specified Functions ###
 if [[ "$DISTRO" == "ArchLinux" ]]; then
@@ -626,6 +706,22 @@ user_mgmt()
             # if not empty
             echo "Selected User: $selected_uname"
             echo "Current  User: $USER"
+
+            # Check if user exists
+            tmp_u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
+            if [[ ! "$u_Exists" == "1" ]]; then
+                # Create user if does not exist
+                # 0 : Does not exist
+                # 1 : Exists
+                echo "User [$u_name] does not exist"
+
+                read -p "Primary Group: " u_primary_Group                                                                       # Primary Group
+                read -p "Secondary Group: " u_secondary_Groups                                                                  # Secondary Groups
+                read -p "Home Directory: " u_home_Dir                                                                           # Home Directory
+                read -p "Any other parameters? [Just type the commands (i.e. -d <home directory>)]: " u_other_Params            # Any other parameters after the first 3
+
+                create_user $u_name $u_primary_Group $u_secondary_Groups $u_home_Dir $u_other_Params
+            fi
 
             if [[ ! "$USER" == "$selected_uname" ]]; then
                 echo "User is not the one specified, please login to the new user"
@@ -849,6 +945,7 @@ pkg_install()
 
                             # Install if not installed
                             if [[ "$pkg_installed" == "0" ]]; then
+                                echo "Package does not exist, installing..."
                                 $install_Command $p
                             fi
                             
