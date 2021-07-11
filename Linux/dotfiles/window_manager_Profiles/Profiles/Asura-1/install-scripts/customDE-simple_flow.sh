@@ -98,7 +98,13 @@ fi"
 # --- BashRC [Personal] \n\
 #"
 
-    [$bash_profile]=""
+    [$bash_profile]="# --- Bash Profile\n\
+# This file runs when bash is first initialized (ie in the terminal's first startup) \n\
+\n\
+if [[ \"$(tty)\" = \"/dev/tty2\" ]]; then \n \
+    startx ~/.xinitrc \n\
+fi
+"
 )
 declare -A pkgs=(
 	# Place all your packages you want to be in the 
@@ -908,7 +914,6 @@ pkg_install()
             if [[ ! "$p" == "" ]]; then
                 # If not empty
                 # - Install
-                echo "Installing..."
                 if [[ "$MODE" == "DEBUG" ]]; then
                     echo -e "$install_Command $p"
                 else
@@ -927,7 +932,7 @@ pkg_install()
                             # Official
                             # Check if package is installed
                             pkg_installed="0"   # 0: Not Installed; 1: Installed
-                            pkg_group_Check=$(pacman -Ss $p | grep "(")    # if search is founded with brackets
+                            pkg_group_Check=$(pacman -Ss $p | grep "($p)")    # if search is founded with brackets
                             if [[ "$pkg_group_Check" == "" ]]; then
                                 # If no bracket; Not a package group
                                 # Check if individual is installed
@@ -938,7 +943,7 @@ pkg_install()
                                 fi
                             else
                                 # Get first item in the group list
-                                pkg_group_first_Pkg=($(pacman -Ss $p | grep "("))
+                                pkg_group_first_Pkg=($(pacman -Ss $p | grep "($p)"))
                                 first_pkg_Name=$(echo "${pkg_group_first_Pkg[0]}" | cut -d '/' -f2) # Get only the nmae (remove utilities library i.e. core)
 
                                 # Check if item exists
@@ -953,19 +958,19 @@ pkg_install()
                             if [[ "$pkg_installed" == "0" ]]; then
                                 echo "Package does not exist, installing..."
                                 $install_Command $p
-                            fi
                             
-                            # Check if package is installed
-                            if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
-                                # Found
-                                # echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
-                                echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/install-changelogs.log
-                                echo "$(log_datetime) > $p" | tee -a ~/.logs/package-installed.log
-                            else
-                                # Not Found - Error installing
-                                # echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
-                                echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/install-changelogs.log
-                                echo "$(log_datetime) > $p" | tee -a ~/.logs/package-failed-installs.log
+                                # Check if package is installed
+                                if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
+                                    # Found
+                                    # echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
+                                    echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/install-changelogs.log
+                                    echo "$(log_datetime) > $p" | tee -a ~/.logs/package-installed.log
+                                else
+                                    # Not Found - Error installing
+                                    # echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
+                                    echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/install-changelogs.log
+                                    echo "$(log_datetime) > $p" | tee -a ~/.logs/package-failed-installs.log
+                                fi
                             fi
                             ;;
                         "yay" | "yay-git")
@@ -988,19 +993,26 @@ pkg_install()
                                 # Parameters:
                                 #   --needed : Download all required dependencies
                                 #   --noconfirm : Download with asking anything
-                                $aur_helper --needed --noconfirm -S $p
-                                
-                                # Check if package is installed
-                                if [[ ! "$($aur_helper -Qq | grep $p)" == "" ]]; then
-                                    # Found
-                                    # echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
-                                    echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/install-changelogs.log
-                                    echo "$(log_datetime) > $p" | tee -a ~/.logs/package-installed.log
+                                aur_pkg_installed="$($aur_helper -Qq | grep $p)"
+                                if [[ "$aur_pkg_installed" == "" ]]; then
+                                    # Not Found
+                                    # Install
+                                    $aur_helper --needed --noconfirm -S $p
+                                    
+                                    # Check if package is installed
+                                    if [[ ! "$($aur_helper -Qq | grep $p)" == "" ]]; then
+                                        # Found
+                                        # echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
+                                        echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/install-changelogs.log
+                                        echo "$(log_datetime) > $p" | tee -a ~/.logs/package-installed.log
+                                    else
+                                        # Not Found - Error installing
+                                        # echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
+                                        echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/install-changelogs.log
+                                        echo "$(log_datetime) > $p" | tee -a ~/.logs/package-failed-installs.log
+                                    fi
                                 else
-                                    # Not Found - Error installing
-                                    # echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
-                                    echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/install-changelogs.log
-                                    echo "$(log_datetime) > $p" | tee -a ~/.logs/package-failed-installs.log
+                                    echo "Package [$p] has been installed before."
                                 fi
                             else
                                 echo "Distro is not Arch-based, please change the installation method"
