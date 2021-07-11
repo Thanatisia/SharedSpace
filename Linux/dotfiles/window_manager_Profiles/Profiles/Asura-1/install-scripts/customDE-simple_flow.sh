@@ -22,7 +22,7 @@ TARGET_USER_HOME_DIR=""
 TARGET_USER_PRIMARY_GROUP=""
 # This contains all users that the user will need to choose to setup on; 
 # Please specify all users you want to choose from by default in here
-USER_SET=()
+USER_SET=("admin")
 
 ############# EDIT THIS #############
 # Edit everything placed under here #
@@ -444,13 +444,19 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
                 # done
                 # su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
                 # su - $user_name -c "cd $aur_pkg && makepkg -si"
-                helper_url="${git_aur_packages["$helper"]}"
-                if [[ ! -d $helper ]]; then
-                    # Clone if doesnt exist
-                    git clone "$helper_url"
+
+                # Check if yay exists
+                helper_Exists="$(pacman -Qq | grep yay)"
+                if [[ "$helper_Exists" == "" ]]; then
+                    # Clone and install if yay does not exists
+                    helper_url="${git_aur_packages["$helper"]}"
+                    if [[ ! -d $helper ]]; then
+                        # Clone if doesnt exist
+                        git clone "$helper_url"
+                    fi
+                    cd $helper
+                    makepkg -si
                 fi
-                cd $helper
-                makepkg -si
                 ;;
         esac
     }
@@ -646,7 +652,8 @@ user_mgmt()
                 # Is the same user, to continue next stage
                 TARGET_USER=$selected_uname
                 echo "Getting selected user [$TARGET_USER]'s home directory..."
-                TARGET_USER_HOME_DIR=$(su - $selected_uname -c "echo \$HOME")
+                # TARGET_USER_HOME_DIR=$(su - $selected_uname -c "echo \$HOME")
+                TARGET_USER_HOME_DIR="$HOME"
                 echo "Getting selected user [$TARGET_USER]'s primary group..."
                 TARGET_USER_PRIMARY_GROUP="$(id -gn $selected_uname)"
                 break
@@ -746,22 +753,33 @@ pkg_install()
     for v in "${pkg_names[@]}"; do
         if [[ ! "$v" == "" ]]; then
             # If not empty; Ignore all empties
-            tmp=($(seperate_by_Delim $v ','))   # Seperate the subvalues by delimiter ',' to get 2 items: [0] - Package Name and [1] - Package installation method
+            tmp_val=($(seperate_by_Delim $v))   # Seperate the subvalues by delimiter ';' to get the subvalues
+            for subvalues in "${tmp_val[@]}"; do
+                tmp=($(seperate_by_Delim $subvalues ','))   # Seperate the subvalues by delimiter ',' to get 2 items: [0] - Package Name and [1] - Package installation method
             
-            # Loop through split elements and get
-            #   all elements in each string
-            #       [0] : Package Name
-            #       [1] : Install Method
+                # Loop through split elements and get
+                #   all elements in each string
+                #       [0] : Package Name
+                #       [1] : Install Method
 
-            # Get package names
-            pkg_name="${tmp[0]}"
-            arr_pkg_names+=("$pkg_name")    # 1st Parameter
-            # Get package install methods
-            install_method="${tmp[1]}"
-            arr_pkg_install_method+=("$install_method") # 2nd Parameter
-            # Map target packages to install
-            #   with its install method
-            TARGET_PKGS[$pkg_name]="$install_method"
+                # DEBUG: Get package names
+                if [[ "$MODE" == "DEBUG" ]]; then
+                    for t in "${tmp[@]}"; do
+                        echo "Subvalues: $t"
+                    done
+                    read -p "   Paused. " pause
+                fi
+
+                # Get package names
+                pkg_name="${tmp[0]}"
+                arr_pkg_names+=("$pkg_name")    # 1st Parameter
+                # Get package install methods
+                install_method="${tmp[1]}"
+                arr_pkg_install_method+=("$install_method") # 2nd Parameter
+                # Map target packages to install
+                #   with its install method
+                TARGET_PKGS[$pkg_name]="$install_method"
+            done
         fi
     done
     number_of_pkgs="${#TARGET_PKGS[@]}" # Get Number of Packages
@@ -805,7 +823,35 @@ pkg_install()
                     case "$method" in
                         "pacman")
                             # Official
-                            $install_Command $p
+                            # Check if package is installed
+                            pkg_installed="0"   # 0: Not Installed; 1: Installed
+                            pkg_group_Check=$(pacman -Ss $p | grep "(")    # if search is founded with brackets
+                            if [[ "$pkg_group_Check" == "" ]]; then
+                                # If no bracket; Not a package group
+                                # Check if individual is installed
+                                pkg_install_Check=$(pacman -Qq | grep $p)
+                                if [[ ! "$pkg_install_Check" == "" ]]; then
+                                    # Installed
+                                    pkg_installed="1"
+                                fi
+                            else
+                                # Get first item in the group list
+                                pkg_group_first_Pkg=($(pacman -Ss $p | grep "("))
+                                first_pkg_Name=$(echo "${pkg_group_first_Pkg[0]}" | cut -d '/' -f2) # Get only the nmae (remove utilities library i.e. core)
+
+                                # Check if item exists
+                                pkg_install_Check=$(pacman -Qq | grep $first_pkg_Name)
+                                if [[ ! "$pkg_install_Check" == "" ]]; then
+                                    # Installed
+                                    pkg_installed="1"
+                                fi
+                            fi
+
+                            # Install if not installed
+                            if [[ "$pkg_installed" == "0" ]]; then
+                                $install_Command $p
+                            fi
+                            
                             # Check if package is installed
                             if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
                                 # Found
@@ -836,7 +882,10 @@ pkg_install()
                                 fi
                                 
                                 # Install Package
-                                $aur_helper -S $p
+                                # Parameters:
+                                #   --needed : Download all required dependencies
+                                #   --noconfirm : Download with asking anything
+                                $aur_helper --needed --noconfirm -S $p
                                 
                                 # Check if package is installed
                                 if [[ ! "$($aur_helper -Qq | grep $p)" == "" ]]; then
