@@ -135,14 +135,18 @@ location_KeyboardMapping="en_UTF-8"
 user_ProfileInfo=(
 	# Append this and append a [n]="${user_ProfileInfo[<n-1>]}" in
 	# 	user_Info
+	# Note:
+	#	- Please seperate all parameters with delimiter ','
+	#	- Please seperate all subvalues with delimiter ';'
+	# Syntax:
 	# "
 	#	<username>,
 	#	<primary_group>,
 	#	<secondary_group (put NIL if none),
-	#	<custom_directory (Put 'True' for yes and 'False' for no)>,
-	#	<custom_directory_path (if custom_directory is True)>
+	#	<custom_directory_path (put NIL if none)>,
+	#	<any_other_Parameters>
 	# "
-	"asura,wheel,NIL,True,/home/profiles/asura"
+	"asura,wheel,NIL,/home/profiles/asura,NIL"
 )
 networkConfig_hostname="ArchLinux"
 bootloader="grub"
@@ -221,16 +225,17 @@ declare -A user_Info=(
 	# [Delimiters]
 	# , : For Parameter seperation
 	# ; : For Subparameter seperation (seperation within a parameter itself)
+	# [Notes]
+	# Please put 'NIL' for empty space
 	# [Syntax]
 	# ROW_ID="
 	#	<username>,
 	#	<primary_group>,
 	#	<secondary_group (put NIL if none),
-	#	<custom_directory (Put 'True' for yes and 'False' for no)>,
 	#	<custom_directory_path (if custom_directory is True)>
 	# "
 	# [Examples]
-	# [1]="username,wheel,NIL,True,/home/profiles/username"
+	# [1]="username,wheel,NIL,/home/profiles/username"
 	[1]="${user_ProfileInfo[0]}"
 )
 
@@ -280,6 +285,33 @@ debug_printAll()
 		*)
 			;;
 	esac
+}
+seperate_by_Delim()
+{
+	#
+	# Seperate a string into an array by the delimiter
+	#
+
+	# --- Input
+	
+	# Command Line Argument
+	str="$1"			# String to be seperated
+	delim="${2:-';'}"	# Delimiter to split
+
+	# Local Variables
+
+	# Array
+	content=()			# Array container to store results
+	char=''				# Single character for splitting element of a string
+
+	# Associative Array
+
+	# --- Processing
+	# Split string into individual characters
+	IFS=$delim read -r -a content <<< "$str"
+	
+	# --- Output
+	echo "${content[@]}"
 }
 
 # Installation stages
@@ -575,8 +607,6 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
-		"echo ======= Enable sudo ======="												# Step 15: Enable sudo for group 'wheel'
-		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# Step 15: Enable sudo for group 'wheel'
 	)
 
 	# --- Extra Information
@@ -702,6 +732,153 @@ arch_chroot_Exec()
 	# --- Output
 }
 
+
+# =========================== #
+# Post-Installation Functions #
+# =========================== #
+# User Management
+get_users_Home()
+{
+	#
+	# Get the home directory of a user
+	#
+	USER_NAME=$1
+	HOME_DIR=""
+	if [[ ! "$USER_NAME"  == "" ]]; then
+		# Not Empty
+		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
+	fi
+	echo "$HOME_DIR"
+}
+check_user_Exists()
+{
+	#
+	# Check if user exists
+	#
+	user_name="$1"
+	exist_Token="0"
+	delimiter=":"
+	res_Existence="$(getent passwd $user_name)"
+
+	if [[ ! "$res_Existence" == "" ]]; then
+		# Something is found
+		# Check if is the user
+		res_is_User=$(echo "$res_Existence" | grep "^$user_name:" | cut -d ':' -f1)
+
+		if [[ "$res_is_User" == "$user_name" ]]; then
+			exist_Token="1"
+		fi
+	fi
+
+	echo "$exist_Token"
+}
+useradd_get_default_Params()
+{
+    #
+    # Useradd
+    #   - Get Default Parameters
+    #
+    declare -A params=(
+        [group]="$(useradd -D | grep GROUP | cut -d '=' -f2)"
+        [home]="$(useradd -D | grep HOME | cut -d '=' -f2)"
+        [inactive]="$(useradd -D | grep INACTIVE | cut -d '=' -f2)"
+        [expire]="$(useradd -D | grep EXPIRE | cut -d '=' -f2)"
+        [shell]="$(useradd -D | grep SHELL | cut -d '=' -f2)"
+        [skeleton-path]="$(useradd -D | grep SKEL | cut -d '=' -f2)"
+        [create-mail-spool]="$(useradd -D | grep CREATE_MAIL_SPOOL | cut -d '=' -f2)"
+    )
+    default_Params=()
+
+    keywords=(
+        "GROUP"
+        "HOME"
+        "INACTIVE"
+        "EXPIRE"
+        "SHELL"
+        "SKEL"
+        "CREATE_MAIL_SPOOL"
+    )
+    for k in "${keywords[@]}"; do
+        # Put all keywords with the default values
+        # default_Params[$k]="$(useradd -D | grep $k | cut -d '=' -f2)"
+        default_Params+=("$(useradd -D | grep $k | cut -d '=' -f2)")
+    done
+
+    echo "${default_Params[@]}"
+}
+get_all_users()
+{
+	#
+	# Check if user exists
+	#
+	exist_Token="0"
+	delimiter=":"
+	res_Existence="$(getent passwd)"
+    all_users=($(cut -d ':' -f1 /etc/group | tr '\n' ' '))
+
+	echo "${all_users[@]}"
+}
+get_user_primary_group()
+{
+    #
+    # Just retrieves the user's primary group (-g)
+    #
+    user_name="$1"
+    primary_group="$(id -gn $user_name)"
+    echo "$primary_group"
+}
+create_user()
+{
+    # =========================================
+    # :: Function to create user lol
+    #   1. Append all arguments into the command
+    #   2. Execute command and create
+    # =========================================
+
+    # --- Head
+    ### Parameters ###
+    u_name="$1"                 # User Name
+    # Get individual parameters
+    u_primary_Group="$2"        # Primary Group
+    u_secondary_Groups="$3"     # Secondary Groups
+    u_home_Dir="$4"             # Home Directory
+    u_other_Params="$5"         # Any other parameters after the first 3
+
+    # Local variables
+    u_create_Command="useradd"
+    create_Token="0"            # 0 : not Created; 1 : Created
+
+    # --- Processing
+    # Get Parameters
+    if [[ ! "$u_home_Dir" == "NIL" ]]; then
+        # If Home Directory is not Empty
+        u_create_Command+=" -m "
+        u_create_Command+=" -d $u_home_Dir "
+    fi
+
+    if [[ ! "$u_primary_Group" == "NIL" ]]; then
+        # If Primary Group is Not Empty
+        u_create_Command+=" -g $u_primary_Group "
+    fi
+
+    if [[ ! "$u_secondary_Groups" == "NIL" ]]; then
+        # If Primary Group is Not Empty
+        u_create_Command+=" -G $u_secondary_Groups "
+    fi
+
+    if [[ ! "$u_other_Params" == "NIL" ]]; then
+        # If there are any miscellenous parameters
+        u_create_Command+=" $u_other_Params "
+    fi
+
+    u_create_Command+="$u_name"
+
+    # --- Output
+    # Return Create Command
+	echo "$u_create_Command"
+}
+
+# Post-Installation Stages
 postinstallation()
 {
 	#
@@ -709,12 +886,90 @@ postinstallation()
 	# - To be seperated into its own individual scripts for running
 	# 
 
-	postinstall_commands=(
+	### Header ###
+
+	# Local Variable
+	postinstall_commands=()
+
+	### Body ###
+	# =========== #
+	# Enable Sudo #
+	# =========== #
+	postinstall_commands+=(
 		"echo ======= Enable sudo ======="												# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'
-		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'		
+		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'
 	)
 
+	# =============== #
+	# User Management #
+	# =============== #
+	postinstall_commands+=(
+		"echo ======= User Management ======="
+	)
+    # Loop through all users in user_profiles and
+    # See if it exists, follow above documentation
+    for u_ID in "${!user_Info[@]}"; do
+		curr_user="${user_Info[$u_ID]}"
+		curr_user_Params=($(seperate_by_Delim $curr_user ','))
+    
+        # Get individual parameters
+		u_name="${curr_user_Params[0]}"					# User Name
+        u_primary_Group="${curr_user_Params[1]}"        # Primary Group
+        u_secondary_Groups="${curr_user_Params[2]}"     # Secondary Groups
+        u_home_Dir="${u_params_Arr[3]}"             	# Home Directory
+        u_other_Params="${u_params_Arr[@]:4}"       	# Any other parameters after the first 3
+
+		# Check if user exists
+        u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
+
+        if [[ ! "$u_Exists" == "1" ]]; then
+            # 0 : Does not exist
+            echo "User [$u_name] does not exist"
+
+            u_create_Command="useradd"
+            # Get Parameters
+            if [[ ! "$u_home_Dir" == "NIL" ]]; then
+                # If Home Directory is not Empty
+                u_create_Command+=" -m "
+                u_create_Command+=" -d $u_home_Dir "
+            fi
+
+            if [[ ! "$u_primary_Group" == "NIL" ]]; then
+                # If Primary Group is Not Empty
+                u_create_Command+=" -g $u_primary_Group "
+            fi
+
+            if [[ ! "$u_secondary_Groups" == "NIL" ]]; then
+                # If Primary Group is Not Empty
+                u_create_Command+=" -G $u_secondary_Groups "
+            fi
+
+            if [[ ! "$u_other_Params" == "NIL" ]]; then
+                # If there are any miscellenous parameters
+                u_create_Command+=" $u_other_Params "
+            fi
+
+            u_create_Command+="$u_name"
+
+			postinstall_commands+=(
+				"$u_create_Command"
+			    "echo \"=============================\""
+                "echo \" Password change for $u_name \""
+                "echo \"=============================\""
+				"if [[ \"$?\" == \"0\" ]]; then"
+                "	passwd $u_name"
+				"fi"
+			)
+        fi
+    done
 	
+	
+	### Footer ###
+
+	# =============== #
+	# Execute Command #
+	# =============== #
+
 	# Combine into a string
 	cmd_str=""
 	for c in "${chroot_commands[@]}"; do
