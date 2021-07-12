@@ -18,6 +18,7 @@
 #	- 2021-06-23 2125H, Asura
 #	- 2021-06-23 2233H, Asura
 #	- 2021-07-12 0925H, Asura
+#	- 2021-07-12 1223H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -60,6 +61,9 @@
 #		- Added syslinux install - To be tested
 #	- 2021-07-12 0925H, Asura
 #		- Added line to uncomment sudoers using sed in arch-chroot
+#	- 2021-07-12 1223H, Asura
+#		- Added simple postinstallation basic commands such as enabling sudo and user management
+#		- no installation (to do in postinstallation setup script)
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -71,6 +75,8 @@
 #					Create User Account
 #				'System Maintenance' : 
 #					Swap File
+#		- Post installation: 
+#			> Get user to create a user
 # NOTES:
 #	- Please modify all [EDIT: Modify this] and confirm before running this file
 # References:
@@ -554,8 +560,6 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
-		"echo ======= Enable sudo ======="												# Step 15: Enable sudo for group 'wheel'
-		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# Step 15: Enable sudo for group 'wheel'
 	)
 
 	# --- Extra Information
@@ -647,6 +651,37 @@ postinstallation()
 	# Post-Installation Recommendations and TODOs 
 	# - To be seperated into its own individual scripts for running
 	# 
+	postinstall_commands=(
+		"echo ======= Enable sudo ======="												# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'
+		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'		
+	)
+
+	
+	# Combine into a string
+	cmd_str=""
+	for c in "${chroot_commands[@]}"; do
+		cmd_str+="\n$c;"
+	done
+	
+	# Cat commands into script file in mount root
+	mount_Root=$dir_Mount/root
+	script_to_exe=postinstall-comms.sh
+	if [[ "$MODE" == "DEBUG" ]]; then
+		# echo "echo -e "$cmd_str" > $mount_Root/$script_to_exe"
+		echo -e "$cmd_str"
+	else
+		echo -e "$cmd_str" > $mount_Root/$script_to_exe
+	fi
+
+	# Change Permission and Execute command
+	if [[ "$MODE" == "DEBUG" ]]; then
+		echo "chmod +x $mount_Root/$script_to_exe"
+		echo "arch-chroot $dir_Mount /bin/bash -c \"$PWD/$script_to_exe\""
+	else
+		chmod +x $mount_Root/$script_to_exe
+		arch-chroot $dir_Mount /bin/bash -c "$PWD/$script_to_exe"
+	fi
+	
 	echo "- Please proceed to follow the 'Post-Installation' series of guides"
 	echo "and/or"
 	echo "- Follow this list of recommendations:"
