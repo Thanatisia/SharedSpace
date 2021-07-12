@@ -356,6 +356,8 @@ vim|nano /etc/pacman.conf
 # Uncomment to allow members of group wheel to execute any command
 visudo
 # uncomment: %wheel ALL=(ALL) ALL
+# OR using command: 
+sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers
 
 # -- Administrative Stuff
 # Create user account

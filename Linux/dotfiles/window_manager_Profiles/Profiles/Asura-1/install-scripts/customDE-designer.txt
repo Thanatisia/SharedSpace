@@ -14,7 +14,8 @@ Modified By:
 	Custom Desktop Environment
 
 [Features]
-
+1. Automatically uncomment sudoers using sed [To move to install script (in arch-chroot)]
+2. 
 
 [Mission Statement]
 - Turning Window Managers into your own Custom Desktop Environment
