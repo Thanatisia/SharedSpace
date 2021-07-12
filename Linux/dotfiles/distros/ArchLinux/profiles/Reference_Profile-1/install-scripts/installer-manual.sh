@@ -554,6 +554,7 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
+		"echo ======= Enable sudo ======="												# Step 15: Enable sudo for group 'wheel'
 		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# Step 15: Enable sudo for group 'wheel'
 	)
 

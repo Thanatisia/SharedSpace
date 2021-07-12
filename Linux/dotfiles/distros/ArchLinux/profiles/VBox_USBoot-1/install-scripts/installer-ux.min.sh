@@ -16,6 +16,7 @@
 #	- 2021-06-23 1524H, Asura
 #	- 2021-06-23 2059H, Asura
 #	- 2021-06-23 2233H, Asura
+#	- 2021-07-12 0925H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -55,6 +56,8 @@
 #		- Appended 'pacstrap_Pkgs' to 'pkg' associative array
 #	- 2021-06-23 2233H, Asura
 #		- Added syslinux install - To be tested
+#	- 2021-07-12 0925H, Asura
+#		- Added line to uncomment sudoers using sed in arch-chroot
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -566,6 +569,8 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
+		"echo ======= Enable sudo ======="												# Step 15: Enable sudo for group 'wheel'
+		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# Step 15: Enable sudo for group 'wheel'
 	)
 
 	# --- Extra Information
