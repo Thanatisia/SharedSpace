@@ -1,6 +1,6 @@
 # === CustomDE simple query structured redesign === #
 # For visualization of the project flow             #
-# ================================================= #
+#                                                   #
 # Author: Asura                                     #
 # Created By: 2021-07-13 1127H, Asura               #
 # Modified By:                                      #
@@ -19,12 +19,6 @@ PROGRAM_TYPE="Main"
 MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
-### Constants ###
-bashrc=~/.bashrc
-xresources=~/.Xresources
-bashrc_personal=~/personal/dotfiles/bash/.bashrc-personal
-bash_profile=~/.bash_profile
-
 ### User Details ###
 TARGET_USER=""
 TARGET_USER_HOME_DIR=""
@@ -32,6 +26,14 @@ TARGET_USER_PRIMARY_GROUP=""
 # This contains all users that the user will need to choose to setup on; 
 # Please specify all users you want to choose from by default in here
 USER_SET=("admin")
+
+### Constants ###
+const_HOME_DIR=$PWD     # User's Home Directory
+bashrc=$const_HOME_DIR/.bashrc
+xresources=$const_HOME_DIR/.Xresources
+bashrc_personal=$const_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
+bash_profile=$const_HOME_DIR/.bash_profile
+
 
 ############# EDIT THIS #############
 # Edit everything placed under here #
@@ -69,11 +71,11 @@ folders_to_create=(
     #   iv. $HOME/{folder_1,folder_2,....}
     #   v. ~/folder
     #   vi. $HOME/folder
-    ~/.logs/$PROGRAM_SCRIPTNAME
-    ~/.config
-    ~/.script
-    ~/.tmp
-    ~/personal/dotfiles/bash
+    $const_HOME_DIR/.logs/$PROGRAM_SCRIPTNAME
+    $const_HOME_DIR/.config
+    $const_HOME_DIR/.script
+    $const_HOME_DIR/.tmp
+    $const_HOME_DIR/personal/dotfiles/bash
 )
 files_to_create=(
     # ==============================================
@@ -109,7 +111,7 @@ fi"
     [$bash_profile]="# --- Bash Profile\n\
 # This file runs when bash is first initialized (ie in the terminal's first startup) \n\
 \n\
-if [[ \"$(tty)\" = \"/dev/tty2\" ]]; then \n \
+if [[ \"\$(tty)\" = \"/dev/tty1\" ]]; then \n \
     startx ~/.xinitrc \n\
 fi
 "
@@ -736,7 +738,7 @@ create_dotfiles()
 
     # Write logs to file
     for line in "${log_contents[@]}"; do
-        echo "$line" | tee -a ~/.logs/stage-1-i.log
+        echo "$line" | tee -a $const_HOME_DIR/.logs/stage-1-i.log
     done
     log_contents=()
 	
@@ -762,7 +764,7 @@ create_dotfiles()
 
     # Write logs to file
     for line in "${log_contents[@]}"; do
-        echo "$line" | tee -a ~/.logs/stage-1-ii.log
+        echo "$line" | tee -a $const_HOME_DIR/.logs/stage-1-ii.log
     done
 }
 pkg_install()
@@ -777,6 +779,8 @@ pkg_install()
 	arr_pkg_install_method=()
     declare -A TARGET_PKGS=()
     number_of_Packages=""
+    pkginstall_Success=()               # Records all installed packages
+    pkginstall_Failed=()                  # Failed installations
 
     # --- Processing
     # Split value string into container
@@ -885,13 +889,15 @@ pkg_install()
                                 if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
                                     # Found
                                     # echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
-                                    echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/install-changelogs.log
-                                    echo "$(log_datetime) > $p" | tee -a ~/.logs/package-installed.log
+                                    echo "$(log_datetime) > Package Installed : $p" | tee -a $const_HOME_DIR/.logs/install-changelogs.log
+                                    echo "$(log_datetime) > $p" | tee -a $const_HOME_DIR/.logs/package-installed.log
+                                    pkginstall_Success+=("$p")
                                 else
                                     # Not Found - Error installing
                                     # echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
-                                    echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/install-changelogs.log
-                                    echo "$(log_datetime) > $p" | tee -a ~/.logs/package-failed-installs.log
+                                    echo "$(log_datetime) > Package Install Failed : $p" | tee -a $const_HOME_DIR/.logs/install-changelogs.log
+                                    echo "$(log_datetime) > $p" | tee -a $const_HOME_DIR/.logs/package-failed-installs.log
+                                    pkginstall_Failed+=("$p")
                                 fi
                             fi
                             ;;
@@ -925,13 +931,15 @@ pkg_install()
                                     if [[ ! "$($aur_helper -Qq | grep $p)" == "" ]]; then
                                         # Found
                                         # echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
-                                        echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/install-changelogs.log
-                                        echo "$(log_datetime) > $p" | tee -a ~/.logs/package-installed.log
+                                        echo "$(log_datetime) > Package Installed : $p" | tee -a $const_HOME_DIR/.logs/install-changelogs.log
+                                        echo "$(log_datetime) > $p" | tee -a $const_HOME_DIR/.logs/package-installed.log
+                                        pkginstall_Success+=("$p")
                                     else
                                         # Not Found - Error installing
                                         # echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
-                                        echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/install-changelogs.log
-                                        echo "$(log_datetime) > $p" | tee -a ~/.logs/package-failed-installs.log
+                                        echo "$(log_datetime) > Package Install Failed : $p" | tee -a $const_HOME_DIR/.logs/install-changelogs.log
+                                        echo "$(log_datetime) > $p" | tee -a $const_HOME_DIR/.logs/package-failed-installs.log
+                                        pkginstall_Failed+=("$p")
                                     fi
                                 else
                                     echo "Package [$p] has been installed before."
@@ -952,6 +960,15 @@ pkg_install()
             fi
         done
     fi
+
+    echo "Packages Install Successful:"
+    for succ in "${pkgInstall_Success[@]}"; do
+        echo "$succ"
+    done
+    echo "Packages Install Failed"
+    for err in "${pkgInstall_Failed[@]}"; do
+        echo "$err"
+    done
 }
 setup_dotfiles()
 {
@@ -982,11 +999,11 @@ setup_dotfiles()
 			if [[ ! -f $file ]]; then
 				# If does not exist, create
 				touch $file
-				echo "$(log_datetime) > File has been created : $file" | tee -a ~/.logs/stage-3-i.log
+				echo "$(log_datetime) > File has been created : $file" | tee -a $const_HOME_DIR/.logs/stage-3-i.log
 			fi
 			# Append to file
 			echo -e "$curr_val" | tee -a $file
-			echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a ~/.logs/stage-3-i.log
+			echo "$(log_datetime) > $curr_val append to file [ $file ]" | tee -a $const_HOME_DIR/.logs/stage-3-i.log
 		fi
         echo ""
 	done

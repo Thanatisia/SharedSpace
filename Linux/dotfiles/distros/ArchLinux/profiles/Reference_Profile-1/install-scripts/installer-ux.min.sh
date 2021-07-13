@@ -1291,6 +1291,8 @@ installer()
 		read -p "Press anything to continue..." tmp
 	fi
 
+	echo ""
+
 	echo "========================"
 	echo "Sanitization and Cleanup"
 	echo "========================"
