@@ -1146,19 +1146,18 @@ postinstall_sanitize()
 		"S" | "Select")
 			# Let user choose
 			# Seperate all options with delimiter ','
-			echo -e "Please enter all files you wish to delete\n\
-			(Seperate all options with delimiter ',')"
+			echo -e "Please enter all files you wish to delete\n	(Seperate all options with delimiter ',')"
 			read -p "> : " del_selections
 			# Seperate selected options with ',' delimited
 			arr_Selected=($(seperate_by_Delim "$del_selections" ','))
 			# Delete selected files if not empty
-			if [[ ! "$del_selections" ]]; then
+			if [[ ! "$del_selections" == "" ]]; then
 				for sel in "${arr_Selected[@]}"; do
 					# Delete selected files
 					if [[ "$MODE" == "DEBUG" ]]; then
-						echo "rm -r $sel"
+						echo "rm -r ${external_scripts[$sel]}"
 					else
-						rm - r $sel
+						rm -r ${external_scripts[$sel]}
 					fi
 				done
 			fi
@@ -1166,6 +1165,7 @@ postinstall_sanitize()
 		*)
 			;;
 	esac
+	echo "Sanitization Completed."
 }
 
 installer()
