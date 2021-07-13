@@ -12,6 +12,8 @@
 #       i. Realised using $PWD in sudo retains the  #
 #           working directory of user               #
 #       ii. Added function 'change_owner'           #
+#   - 2021-07-13 2336H, Asura                       #
+#       i. Added a check for sudo privileges        #
 # ================================================= #
 
 # --- NOTES
@@ -29,12 +31,12 @@ MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 
 ### User Details ###
-TARGET_USER=""
-TARGET_USER_HOME_DIR=""
-TARGET_USER_PRIMARY_GROUP=""
+TARGET_USER="asura"
+TARGET_USER_HOME_DIR="$PWD"
+TARGET_USER_PRIMARY_GROUP="wheel"
 # This contains all users that the user will need to choose to setup on; 
 # Please specify all users you want to choose from by default in here
-USER_SET=("admin")
+USER_SET=("asura")
 
 ### Constants ###
 # User's Home Directory; Realised that using $PWD in sudo retained the working directory of user instead of the root
@@ -524,7 +526,7 @@ change_owner()
     # [Syntax]
     #   Change owner of folder (recursively) to new owner and primary group
     #   chown -R $u_name:$primary_group $directory/file
-    target="$1" # Can be either folder or file
+    target=$1 # Can be either folder or file
     new_owner_uname="${2:-$TARGET_USER}"
     new_owner_primary_group="${3:-$TARGET_USER_PRIMARY_GROUP}"
 
@@ -584,8 +586,10 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
                         # Clone if doesnt exist
                         git clone "$helper_url"
                     fi
-                    cd $helper
-                    makepkg -si
+                    
+                    #cd $helper
+                    #makepkg -si
+                    su - $TARGET_USER -c /bin/bash -c "$PWD/$helper && makepkg -si"
                 fi
                 ;;
         esac
@@ -1186,6 +1190,13 @@ function main()
 if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
     # START
     init
-    main "$@"
+    if [[ ! "$(whoami)" == "root" ]]; then
+        echo -e "Please run this script from root user or with sudo priviledges\
+This is for the following features:\
+    i. Enabling sudoers (if you have not done so during the install process / did not use the install script)\
+    ii. Installing Packages"
+    else
+        main "$@"
+    fi
     END
 fi
