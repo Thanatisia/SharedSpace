@@ -18,6 +18,7 @@
 #	- 2021-06-23 2233H, Asura
 #	- 2021-07-12 0925H, Asura
 #	- 2021-07-12 1223H, Asura
+#	- 2021-07-13 0928H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -62,6 +63,11 @@
 #	- 2021-07-12 1223H, Asura
 #		- Added simple postinstallation basic commands such as enabling sudo and user management
 #		- no installation (to do in postinstallation setup script)
+#	- 2021-07-13 0928H, Asura
+#		- Fixed user management feature in post installation and uncommenting sudoers
+#			- To be tested
+#		- Added sanitization function after postinstallation
+#			- Remove files after completion to clean up the account for use
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -151,6 +157,7 @@ user_ProfileInfo=(
 networkConfig_hostname="ArchLinux"
 bootloader="grub"
 bootloader_Params=""
+external_scripts=()
 
 # [Associative Array]
 
@@ -721,6 +728,10 @@ arch_chroot_Exec()
 	#		arch-chroot $dir_Mount $c
 	#	fi
 	#done
+	external_scripts+=(
+		### Append all external scripts used ###
+		$mount_Root/$script_to_exe
+	)
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		echo "chmod +x $mount_Root/$script_to_exe"
@@ -917,7 +928,7 @@ postinstallation()
         u_primary_Group="${curr_user_Params[1]}"        # Primary Group
         u_secondary_Groups="${curr_user_Params[2]}"     # Secondary Groups
         u_home_Dir="${curr_user_Params[3]}"             # Home Directory
-        u_other_Params="${curr_user_Params[@]:4}"       # Any other parameters after the first 3
+        u_other_Params="${curr_user_Params[@]:3}"       # Any other parameters after the first 3
 
 		# Check if user exists
         u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
@@ -994,6 +1005,11 @@ postinstallation()
 		chmod +x $mount_Root/$script_to_exe
 		arch-chroot $dir_Mount /bin/bash -c "$PWD/$script_to_exe"
 	fi
+	
+	external_scripts+=(
+		### Append all external scripts used ###
+		$mount_Root/$script_to_exe
+	)
 
 	read -p "Finished, press anything to quit." finish
 
@@ -1098,6 +1114,44 @@ postinstall_user_create()
 	echo "			su - <username>"
 	echo "			sudo whoami"
 	echo "		iv. If part iii works : User has been created."
+}
+
+postinstall_sanitize()
+{
+	# ========================== #
+	#        Sanitize user       #
+	#   To sanitize the account  #
+	# from any unnecessary files #
+	# ========================== #
+	number_of_external_scripts="${#external_scripts[@]}"
+	echo -e "External Scripts created:"
+	for ((i=0; i < $number_of_external_scripts; i++)); do
+		echo "[$i] : [${external_scripts[$i]}]"
+	done
+	read -p "Delete the scripts? [(Y)es|(N)o|(S)elect]" del_conf
+	# Yes - Delete
+	# No - Nothing
+	# Select - Allow user to choose
+	case "$del_conf" in
+		"Y" | "Yes") 
+			# Delete all
+			;;
+		"S" | "Select")
+			# Let user choose
+			# Seperate all options with delimiter ','
+			echo -e "Please enter all files you wish to delete\n\
+			(Seperate all options with delimiter ',')"
+			read -p "> : " del_selections
+			# Seperate selected options with ',' delimited
+			arr_Selected=($(seperate_by_Delim "$del_selections" ','))
+			# Delete selected files if not empty
+			if [[ ! "$del_selections" ]]; then
+				for sel in "${arr_Selected[@]}"; do
+					# Delete selected files
+					rm - r $sel
+				done
+			fi
+	esac
 }
 
 installer()
@@ -1213,6 +1267,19 @@ installer()
 	echo "Post-Installation"
 	echo "================="
 	postinstallation
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
+
+	echo "========================"
+	echo "Sanitization and Cleanup"
+	echo "========================"
+	postinstall_sanitize
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
 
 	echo ""
 }
