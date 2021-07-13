@@ -928,7 +928,7 @@ postinstallation()
         u_primary_Group="${curr_user_Params[1]}"        # Primary Group
         u_secondary_Groups="${curr_user_Params[2]}"     # Secondary Groups
         u_home_Dir="${curr_user_Params[3]}"             # Home Directory
-        u_other_Params="${curr_user_Params[@]:3}"       # Any other parameters after the first 3
+        u_other_Params="${curr_user_Params[@]:4}"       # Any other parameters after the first 3
 
 		# Check if user exists
         u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
@@ -1128,13 +1128,20 @@ postinstall_sanitize()
 	for ((i=0; i < $number_of_external_scripts; i++)); do
 		echo "[$i] : [${external_scripts[$i]}]"
 	done
-	read -p "Delete the scripts? [(Y)es|(N)o|(S)elect]" del_conf
+	read -p "Delete the scripts? [(Y)es|(N)o|(S)elect]: " del_conf
 	# Yes - Delete
 	# No - Nothing
 	# Select - Allow user to choose
 	case "$del_conf" in
 		"Y" | "Yes") 
 			# Delete all
+			for ((i=0; i < $number_of_external_scripts; i++)); do
+				if [[ "$MODE" == "DEBUG" ]]; then
+					echo "rm -r ${external_scripts[$i]}"
+				else
+					rm -r ${external_scripts[$i]}
+				fi
+			done
 			;;
 		"S" | "Select")
 			# Let user choose
@@ -1148,9 +1155,16 @@ postinstall_sanitize()
 			if [[ ! "$del_selections" ]]; then
 				for sel in "${arr_Selected[@]}"; do
 					# Delete selected files
-					rm - r $sel
+					if [[ "$MODE" == "DEBUG" ]]; then
+						echo "rm -r $sel"
+					else
+						rm - r $sel
+					fi
 				done
 			fi
+			;;
+		*)
+			;;
 	esac
 }
 
