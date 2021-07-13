@@ -1,6 +1,6 @@
 # === CustomDE simple query structured redesign === #
 # For visualization of the project flow             #
-#                                                   #
+# ================================================= #
 # Author: Asura                                     #
 # Created By: 2021-07-13 1127H, Asura               #
 # Modified By:                                      #
