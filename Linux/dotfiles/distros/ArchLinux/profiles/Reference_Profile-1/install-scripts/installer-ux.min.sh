@@ -81,6 +81,8 @@
 #					Swap File
 #		- Post installation: 
 #			> Get user to create a user
+# Security Design:
+#				- If user is empty : while true and get user to create until user is created
 # NOTES:
 #	- Please modify all [EDIT: Modify this] and confirm before running this file
 # References:
@@ -96,12 +98,13 @@ PROGRAM_TYPE="Main"
 MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux"
 
+########## EDIT THIS ##########
 # [Must change edits]
 # Aka for those labelled with 'EDIT: MODIFY THIS'
 #	- This is a test 'UX' design variant of the program whereby its meant to be user-friendly
 #	- If you want to use this as intended,
 #		Please edit all parameters with 'EDIT: Modify this'
-# 
+
 deviceParams_devType="<hdd|ssd|flashdrive|microSD>"
 deviceParams_Name="</dev/sdX>"
 deviceParams_Size="<x {GB | GiB | MB | MiB}"
@@ -157,6 +160,8 @@ user_ProfileInfo=(
 networkConfig_hostname="ArchLinux"
 bootloader="grub"
 bootloader_Params=""
+
+# [Empty Data Storage]
 external_scripts=()
 
 # [Associative Array]
