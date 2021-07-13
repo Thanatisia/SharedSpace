@@ -8,7 +8,16 @@
 # Changelogs:                                       #
 #   - 2021-07-13 1127H, Asura                       #
 #       i. Copied from 'customDE-simple_flow.sh'    #
+#   - 2021-07-13 2250H, Asura                       #
+#       i. Realised using $PWD in sudo retains the  #
+#           working directory of user               #
+#       ii. Added function 'change_owner'           #
 # ================================================= #
+
+# --- NOTES
+# 1. Please run this with sudo to maximize the output because this includes some features
+#   not limited to
+#   i. Installation
 
 # --- Variables
 
@@ -28,7 +37,8 @@ TARGET_USER_PRIMARY_GROUP=""
 USER_SET=("admin")
 
 ### Constants ###
-const_HOME_DIR=$PWD     # User's Home Directory
+# User's Home Directory; Realised that using $PWD in sudo retained the working directory of user instead of the root
+const_HOME_DIR=$PWD    
 bashrc=$const_HOME_DIR/.bashrc
 xresources=$const_HOME_DIR/.Xresources
 bashrc_personal=$const_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
@@ -508,6 +518,27 @@ create_user()
     # --- Output
     echo "$create_Token"
 }
+change_owner()
+{
+    ###  Change the owner of a folder ###
+    # [Syntax]
+    #   Change owner of folder (recursively) to new owner and primary group
+    #   chown -R $u_name:$primary_group $directory/file
+    target="$1" # Can be either folder or file
+    new_owner_uname="${2:-$TARGET_USER}"
+    new_owner_primary_group="${3:-$TARGET_USER_PRIMARY_GROUP}"
+
+    if [[ ! "$target" == "" ]]; then
+        # if a target is stated
+        if [[ "$MODE" == "DEBUG" ]]; then
+            echo -e "chown -R $new_owner_uname:$new_owner_primary_group $target"
+        else
+            chown -R $new_owner_uname:$new_owner_primary_group $target
+        fi
+    else
+        echo "No file/folder specified."
+    fi
+}
 
 
 ### Distro-Specified Functions ###
@@ -729,6 +760,7 @@ create_dotfiles()
 				# echo "$(log_datetime) > Directory has been created : $d" | tee -a ~/.logs/stage-1-i.log
 				log_contents+=("$(log_datetime) > Directory has been created : $d")
                 # chown -R $TARGET_USER:$TARGET_USER_PRIMARY_GROUP $TARGET_USER_HOME_DIR
+                change_owner $d $TARGET_USER $TARGET_USER_PRIMARY_GROUP
 			else
 				# echo "$(log_datetime) > Directory already exists : $d" | tee -a ~/.logs/stage-1-i.log
                 log_contents+=("$(log_datetime) > Directory already exists : $d")
@@ -755,6 +787,7 @@ create_dotfiles()
 				touch $f
 				# echo "$(log_datetime) > File has been created : $f" | tee -a ~/.logs/stage-1-ii.log
                 log_contents+=("$(log_datetime) > File has been created : $f")
+                change_owner $f $TARGET_USER $TARGET_USER_PRIMARY_GROUP
 			else
 				# echo "$(log_datetime) > File already exists : $f" | tee -a ~/.logs/stage-1-ii.log
                 log_contents+=("$(log_datetime) > File already exists : $f")
@@ -961,14 +994,23 @@ pkg_install()
         done
     fi
 
-    echo "Packages Install Successful:"
-    for succ in "${pkgInstall_Success[@]}"; do
-        echo "$succ"
-    done
-    echo "Packages Install Failed"
-    for err in "${pkgInstall_Failed[@]}"; do
-        echo "$err"
-    done
+    if [[ "$MODE" == "DEBUG" ]]; then
+        if [[ ! "$pkgInstall_Success" == "" ]]; then
+            # Not Empty
+            echo "Packages Install Successful:"
+            for succ in "${pkgInstall_Success[@]}"; do
+                echo "$succ"
+            done
+        fi
+
+        if [[ ! "$pkgInstall_Failed" == "" ]]; then
+            # Not Empty
+            echo "Packages Install Failed"
+            for err in "${pkgInstall_Failed[@]}"; do
+                echo "$err"
+            done
+        fi
+    fi
 }
 setup_dotfiles()
 {
@@ -999,6 +1041,7 @@ setup_dotfiles()
 			if [[ ! -f $file ]]; then
 				# If does not exist, create
 				touch $file
+                change_owner $file $TARGET_USER $TARGET_USER_PRIMARY_GROUP
 				echo "$(log_datetime) > File has been created : $file" | tee -a $const_HOME_DIR/.logs/stage-3-i.log
 			fi
 			# Append to file
