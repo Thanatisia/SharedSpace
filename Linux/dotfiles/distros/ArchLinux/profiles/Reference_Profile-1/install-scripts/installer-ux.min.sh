@@ -916,8 +916,8 @@ postinstallation()
 		u_name="${curr_user_Params[0]}"					# User Name
         u_primary_Group="${curr_user_Params[1]}"        # Primary Group
         u_secondary_Groups="${curr_user_Params[2]}"     # Secondary Groups
-        u_home_Dir="${u_params_Arr[3]}"             	# Home Directory
-        u_other_Params="${u_params_Arr[@]:4}"       	# Any other parameters after the first 3
+        u_home_Dir="${curr_user_Params[3]}"             # Home Directory
+        u_other_Params="${curr_user_Params[@]:4}"       # Any other parameters after the first 3
 
 		# Check if user exists
         u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
@@ -953,10 +953,10 @@ postinstallation()
 
 			postinstall_commands+=(
 				"$u_create_Command"
-			    "echo \"=============================\""
-                "echo \" Password change for $u_name \""
-                "echo \"=============================\""
-				"if [[ \"$?\" == \"0\" ]]; then"
+			    "echo ==========================="
+                "echo Password change for $u_name"
+                "echo ==========================="
+				"if [[ \"\$?\" == \"0\" ]]; then"
                 "	passwd $u_name"
 				"fi"
 			)
@@ -972,8 +972,8 @@ postinstallation()
 
 	# Combine into a string
 	cmd_str=""
-	for c in "${chroot_commands[@]}"; do
-		cmd_str+="\n$c;"
+	for c in "${postinstall_commands[@]}"; do
+		cmd_str+="\n$c"
 	done
 	
 	# Cat commands into script file in mount root
@@ -994,6 +994,8 @@ postinstallation()
 		chmod +x $mount_Root/$script_to_exe
 		arch-chroot $dir_Mount /bin/bash -c "$PWD/$script_to_exe"
 	fi
+
+	read -p "Finished, press anything to quit." finish
 
 	echo "- Please proceed to follow the 'Post-Installation' series of guides"
 	echo "and/or"
