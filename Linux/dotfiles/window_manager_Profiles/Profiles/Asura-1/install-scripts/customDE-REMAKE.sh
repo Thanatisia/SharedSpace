@@ -6,6 +6,7 @@
 # Modified By:                                      #
 #   - 2021-07-13 1127H, Asura                       #
 #   - 2021-07-14 0934H, Asura                       #
+#   - 2021-07-14 2211H, Asura                       #
 # Changelogs:                                       #
 #   - 2021-07-13 1127H, Asura                       #
 #       i. Copied from 'customDE-simple_flow.sh'    #
@@ -18,12 +19,23 @@
 #   - 2021-07-14 0934H, Asura                       #
 #       i. Added delays to startx in .bash_profile  #
 #       ii. Modified setup_AUR()                    #
+#   - 2021-07-14 2211H, Asura                       #
+#       i. Added 'sudo' (temporarily) to all        #
+#           functions that requires sudo as a       #
+#           bypass to get the script to work as a   #
+#           Proof-of-Concept                        #
+#           - To find out how to                    #
+#               install AUR helpers when i sudo the #
+#               script file                         # 
 # ================================================= #
 
 # --- NOTES
 # 1. Please run this with sudo to maximize the output because this includes some features
 #   not limited to
 #   i. Installation
+#   EDIT 2021-07-14 1007H : Temporarily added sudo into all functions that requires sudo
+#       - Currently you do not need to use sudo on the script
+#           - WIP
 
 # --- Variables
 
@@ -986,6 +998,8 @@ pkg_install()
                                     echo "$(log_datetime) > $p" | tee -a $const_HOME_DIR/.logs/package-failed-installs.log
                                     pkginstall_Failed+=("$p")
                                 fi
+                            else
+                                echo "Package $p is installed."
                             fi
                             ;;
                         "yay" | "yay-git")
@@ -1148,7 +1162,7 @@ body()
 	res=`verify_network`
 	if [[ ! "$res" == 0 ]]; then
 		# Error
-		systemctl start NetworkManager
+		sudo systemctl start NetworkManager
 	fi
 
 	if [[ "$MODE" == "DEBUG" ]]; then
