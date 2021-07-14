@@ -1,10 +1,11 @@
 # === CustomDE simple query structured redesign === #
 # For visualization of the project flow             #
-#                                                   #
+# ================================================= #
 # Author: Asura                                     #
 # Created By: 2021-07-13 1127H, Asura               #
 # Modified By:                                      #
 #   - 2021-07-13 1127H, Asura                       #
+#   - 2021-07-14 0934H, Asura                       #
 # Changelogs:                                       #
 #   - 2021-07-13 1127H, Asura                       #
 #       i. Copied from 'customDE-simple_flow.sh'    #
@@ -14,6 +15,9 @@
 #       ii. Added function 'change_owner'           #
 #   - 2021-07-13 2336H, Asura                       #
 #       i. Added a check for sudo privileges        #
+#   - 2021-07-14 0934H, Asura                       #
+#       i. Added delays to startx in .bash_profile  #
+#       ii. Modified setup_AUR()                    #
 # ================================================= #
 
 # --- NOTES
@@ -124,6 +128,11 @@ fi"
 # This file runs when bash is first initialized (ie in the terminal's first startup) \n\
 \n\
 if [[ \"\$(tty)\" = \"/dev/tty1\" ]]; then \n \
+    echo \"Starting in 3 seconds...\"\n\
+    for (( i=0; i < 3; i++ )); do\n\
+        sleep 1s    # Startx with delay \n\
+        echo \$i\n\
+    done\n\
     startx ~/.xinitrc \n\
 fi
 "
@@ -149,7 +158,7 @@ declare -A pkgs=(
 	[bluetooth-manager]="bluez,pacman"
 	[ricing]="lxappearance-gtk3,pacman"
 	[fetch]="neofetch,pacman"
-	[x]="xorg,pacman;xorg-server,pacman"
+	[x]="xorg-xinit,pacman;xorg,pacman;xorg-server,pacman"
 	[others]=""
 )
 declare -A sysinfo=(
@@ -168,11 +177,14 @@ declare -A sysinfo=(
 )
 declare -A git_aur_packages=(
 	# Place all your AUR packages (aka git packages) here alongside the links
+    # - Please seperate all column values with delimiter ','
+    # - Please seperate all subvalues with delimiter ';'
 	# Syntax:
-	#	[package-name]="https://domain.com/package.git"
+	#	[package-name]="filename,https://domain.com/package.git"
 	# Example:
-	#	[yay]="https://aur.archlinux.org/yay-git.git"
-	[yay-git]="https://aur.archlinux.org/yay-git.git"
+	#	[yay]="yay-git,https://aur.archlinux.org/yay-git.git"
+	#   [yay-git]="git,https://aur.archlinux.org/yay-git.git"
+    [yay-git]="yay_*_x86_64,https://api.github.com/repos/Jguer/yay/releases/latest"
 )
 declare -A pkg_install_methods=(
 	# Place all your packages (value) and the method of installation (key) you want to be in the 
@@ -193,8 +205,8 @@ declare -A pkg_install_methods=(
 
 ### General ###
 declare -A install_commands=(
-	[ArchLinux]="pacman -S --noconfirm --needed"
-	[Debian]="apt install"
+	[ArchLinux]="sudo pacman -S --noconfirm --needed"
+	[Debian]="sudo apt install"
 )
 
 ### Essentials ###
@@ -533,9 +545,9 @@ change_owner()
     if [[ ! "$target" == "" ]]; then
         # if a target is stated
         if [[ "$MODE" == "DEBUG" ]]; then
-            echo -e "chown -R $new_owner_uname:$new_owner_primary_group $target"
+            echo -e "chown -R $new_owner_uname:$new_owner_primary_group \"$target\""
         else
-            chown -R $new_owner_uname:$new_owner_primary_group $target
+            chown -R $new_owner_uname:$new_owner_primary_group "$target"
         fi
     else
         echo "No file/folder specified."
@@ -561,6 +573,12 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
             $install_Command "git"
         fi
 
+        # Check if wget is installed
+        if [[ "$(pacman -Qq | grep wget)" == "" ]]; then
+            # Git not installed
+            $install_Command "wget"
+        fi
+
         # Check AUR Helper
         case "$helper" in
             "yay" | "yay-git")
@@ -577,20 +595,52 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
                 # su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
                 # su - $user_name -c "cd $aur_pkg && makepkg -si"
 
+                # References:
+                #   1. https://gist.github.com/macchaberrycream/dacb5aa930c600db335845ffa448f5c7
+                # Repo for yay latest : https://api.github.com/repos/Jguer/yay/releases/latest
+                
                 # Check if yay exists
                 helper_Exists="$(pacman -Qq | grep yay)"
                 if [[ "$helper_Exists" == "" ]]; then
+                    # Seperate 'git_aur_packages' string to array with delimiter ','
+                    helper_properties="${git_aur_packages["$helper"]}"
+                    arr_Helper=($(seperate_by_Delim "$helper_properties" ','))
+
                     # Clone and install if yay does not exists
-                    helper_url="${git_aur_packages["$helper"]}"
-                    if [[ ! -d $helper ]]; then
+                    helper_filename="${arr_Helper[0]}"
+                    helper_url="${arr_Helper[1]}"
+
+                    if [[ ! -d $helper_filename ]]; then
                         # Clone if doesnt exist
-                        git clone "$helper_url"
+                        # git clone "$helper_url"
+                        # change_owner $PWD/$helper $TARGET_USER $TARGET_USER_PRIMARY_GROUP
+
+                        # Get URL of the helper's latest tar file
+                        dl_url="$(curl -sfLS \'$helper_url\' | grep 'browser_download_url' | tail -1 | cut -d '"' -f 4 )"
+                        # Download latest .tar.gz file of the AUR
+                        wget "$dl_url"
+                        # Untar tar file
+                        tar xzvf $PWD/$helper_filename.tar.gz
                     fi
+
+                    # Change Directory to helper directory
+                    cd $PWD/$helper_filename
+                    ./yay -Sy yay-bin
                     
                     #cd $helper
                     #makepkg -si
-                    su - $TARGET_USER -c /bin/bash -c "$PWD/$helper && makepkg -si"
+#                     if [[ ! -f $PWD/setup_aur.sh ]]; then
+#                         # Echo in if the script doesnt exist
+#                         echo -e "cd $PWD/$helper\n\
+# makepkg -si" | tee -a $PWD/setup_aur.sh
+#                         chmod +x $PWD/setup_aur.sh
+#                         change_owner $PWD/setup_aur.sh $TARGET_USER $TARGET_USER_PRIMARY_GROUP
+#                     fi
+#                     rm $PWD/setup_AUR.sh
                 fi
+                ;;
+            *)
+                echo "Invalid helper : $helper"
                 ;;
         esac
     }
@@ -873,7 +923,6 @@ pkg_install()
         # Install Packages
         target_pkg="${!TARGET_PKGS[@]}"
         for p in ${target_pkg[@]}; do
-            echo "Package: $p"
             if [[ ! "$p" == "" ]]; then
                 # If not empty
                 # - Install
@@ -920,6 +969,7 @@ pkg_install()
                             # Install if not installed
                             if [[ "$pkg_installed" == "0" ]]; then
                                 echo "Package does not exist, installing..."
+                                echo "Package: $p"
                                 $install_Command $p
                             
                                 # Check if package is installed
@@ -962,6 +1012,7 @@ pkg_install()
                                 if [[ "$aur_pkg_installed" == "" ]]; then
                                     # Not Found
                                     # Install
+                                    echo "Package: $p"
                                     $aur_helper --needed --noconfirm -S $p
                                     
                                     # Check if package is installed
@@ -1190,13 +1241,15 @@ function main()
 if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
     # START
     init
-    if [[ ! "$(whoami)" == "root" ]]; then
-        echo -e "Please run this script from root user or with sudo priviledges\
-This is for the following features:\
-    i. Enabling sudoers (if you have not done so during the install process / did not use the install script)\
-    ii. Installing Packages"
-    else
-        main "$@"
-    fi
+#     if [[ ! "$(whoami)" == "root" ]]; then
+#         echo -e "Please run this script from root user or with sudo priviledges\n\
+# This is for the following features:\n\
+#     i. Enabling sudoers (if you have not done so during the install process / did not use the install script)\n\
+#     ii. Installing Packages\n\
+#     iii. Installing AUR"
+#     else
+#         main "$@"
+#     fi
+    main "$@"
     END
 fi
