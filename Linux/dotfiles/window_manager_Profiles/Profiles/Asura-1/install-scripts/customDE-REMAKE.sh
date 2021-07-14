@@ -64,6 +64,9 @@ xresources=$const_HOME_DIR/.Xresources
 bashrc_personal=$const_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
 bash_profile=$const_HOME_DIR/.bash_profile
 
+### Defaults ###
+default_wmde="qtile"    # Default Window Manager or Desktop Environment
+
 
 ############# EDIT THIS #############
 # Edit everything placed under here #
@@ -149,6 +152,19 @@ if [[ \"\$(tty)\" = \"/dev/tty1\" ]]; then \n \
     done\n\
     startx ~/.xinitrc \n\
 fi
+"
+
+    [$xinitrc]="# --- X Initialization Resource Control     \n\
+# This file executes whenever you run 'startx ~/.xinitrc'   \n\
+\n\
+wmde=\${1:-$default_wmde} \n \
+case \"\$wmde\" in \n \
+    \"$default_wmde\") \n\
+        ;;\n\
+    *)\n\
+        echo Invalid Window Manager or Desktop Environment
+        ;;\n\
+esac
 "
 )
 declare -A pkgs=(
