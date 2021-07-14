@@ -27,6 +27,8 @@
 #           - To find out how to                    #
 #               install AUR helpers when i sudo the #
 #               script file                         # 
+#   - 2021-07-14 2224H, Asura                       #
+#       i. Added sleep after every function         #
 # ================================================= #
 
 # --- NOTES
@@ -1165,6 +1167,8 @@ body()
 		sudo systemctl start NetworkManager
 	fi
 
+    sleep 1s
+
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
 	fi
@@ -1175,6 +1179,8 @@ body()
 	echo "Pre-Req 2: Enable Sudo in sudoers "
 	echo "=================================="
 	enable_sudo
+
+    sleep 1s
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1188,6 +1194,7 @@ body()
 	echo "================================================"
     user_mgmt
 
+    sleep 1s
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1200,6 +1207,7 @@ body()
 	echo "========================================="
 	create_dotfiles
 
+    sleep 1s
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1212,6 +1220,8 @@ body()
 	echo "========================================="
 	pkg_install
 
+    sleep 1s
+
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
 	fi
@@ -1222,6 +1232,8 @@ body()
 	echo "Setup Stage 3: Setup Dotfiles "
 	echo "=============================="
 	setup_dotfiles
+
+    sleep 1s
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
