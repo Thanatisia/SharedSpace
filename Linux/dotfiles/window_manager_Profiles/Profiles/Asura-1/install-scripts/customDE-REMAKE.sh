@@ -466,81 +466,41 @@ sleep_with_message()
         fi
     else
         if [[ "$increment" == "1" ]]; then
-            if [[ "$min" == "0" ]]; then
-                # Start from 0
-                for (( i=$min; i < $max; i-- )); do
-                    # sleep 1s
-                    sleep $sleep_duration
-                    case "$msg" in
-                        # Special Messages
-                        "loadingbar")
-                            echo -n "=" # Append character to the same line
-                            ;;
-                        "index")
-                            echo "$i"
-                            ;;
-                        *)
-                            echo "$msg"
-                            ;;
-                    esac
-                done
-            else
-                # Start from non-0
-                for (( i=$min; i <= $max; i-- )); do
-                    # sleep 1s
-                    sleep $sleep_duration
-                    case "$msg" in
-                        # Special Messages
-                        "loadingbar")
-                            echo -n "=" # Append character to the same line
-                            ;;
-                        "index")
-                            echo "$i"
-                            ;;
-                        *)
-                            echo "$msg"
-                            ;;
-                    esac
-                done
-            fi
+            # Start from non-0
+            for (( i=$min; i > 0; i-- )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "=" # Append character to the same line
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
         else
-            if [[ "$min" == "0" ]]; then
-                # Start from 0
-                for (( i=$min; i < $max; i-=$increment )); do
-                    # sleep 1s
-                    sleep $sleep_duration
-                    case "$msg" in
-                        # Special Messages
-                        "loadingbar")
-                            echo -n "="
-                            ;;
-                        "index")
-                            echo "$i"
-                            ;;
-                        *)
-                            echo "$msg"
-                            ;;
-                    esac
-                done
-            else
-                # Start from non-0
-                for (( i=$min; i <= $max; i-=$increment )); do
-                    # sleep 1s
-                    sleep $sleep_duration
-                    case "$msg" in
-                        # Special Messages
-                        "loadingbar")
-                            echo -n "="
-                            ;;
-                        "index")
-                            echo "$i"
-                            ;;
-                        *)
-                            echo "$msg"
-                            ;;
-                    esac
-                done
-            fi
+            # Start from non-0
+            for (( i=$min; i > 0; i-=$increment )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "="
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
         fi
     fi
 
