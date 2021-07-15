@@ -747,7 +747,10 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
         out_fldr_path="${4:-$PWD}"              # Output folder where you want to clone to
 
         # --- Processing
-        git_clone "$git_url" "$out_fldr_path"   # Change directory to the intended output folder and clone into it
+        if [[ ! -d $out_fldr_path/$git_fldrname ]]; then
+            # if folder doesnt exist
+            git_clone "$git_url" "$out_fldr_path"   # Change directory to the intended output folder and clone into it
+        fi
         cd $git_fldrname                        # Jump into cloned git folder
         makepkg -si                             # Compile and build package and Install
         echo "$?"
@@ -1117,16 +1120,47 @@ pkg_install()
                                 aur_url="${arr_aurpkg_params[1]}"
                                 pkg_fldrname="$pkgname"
                                 out_fldr_path="$PWD"
-                                ret_code=`aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldrpath"`
-                                cd $const_HOME_DIR  # Change back to home page
-                                if [[ "$ret_code" == "0" ]]; then
-                                    # Success
-                                    records_aur_links[$pkgname]="$aur_url"  # Append to AUR links records; used to git pull
-                                    # Write to '.aur-installs'
-                                    for name in "${!records_aur_links[@]}"; do
-                                        tmp_link="${records_aur_links[$name]}"
-                                        echo -e "$name,$tmp_link" | tee -a $aur_install_Logs
-                                    done
+                                pkg_install_Check=$(pacman -Qq | grep $p)
+                                if [[ ! "$pkg_install_Check" == "" ]]; then
+                                    # Installed
+                                    pkg_installed="1"
+                                fi
+
+                                # Install if not installed
+                                if [[ "$pkg_installed" == "0" ]]; then
+                                    echo "Package does not exist, installing..."
+                                    echo "Package Link: $aur_url"
+                                    echo "Package File   Name: $pkgname"
+                                    echo "Package Folder Name: $pkg_fldrname"
+                                    echo "Package Output Path: $out_fldrpath"
+                                    # Install AUR
+                                    ret_code=`aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldrpath"`
+                                    cd $const_HOME_DIR  # Change back to home page
+                                    if [[ "$ret_code" == "0" ]]; then
+                                        # Success
+                                        records_aur_links[$pkgname]="$aur_url"  # Append to AUR links records; used to git pull
+                                        # Write to '.aur-installs'
+                                        for name in "${!records_aur_links[@]}"; do
+                                            tmp_link="${records_aur_links[$name]}"
+                                            echo -e "$name,$tmp_link" | tee -a $aur_install_Logs
+                                        done
+                                    fi
+                                    # Check if package is installed
+                                    if [[ ! "$(pacman -Qq | grep $p)" == "" ]]; then
+                                        # Found
+                                        # echo "$(log_datetime) > Package Installed : $p" | tee -a ~/.logs/installed-packages.log
+                                        echo "$(log_datetime) > Package Installed : $p" | tee -a $const_HOME_DIR/.logs/install-changelogs.log
+                                        echo "$(log_datetime) > $p" | tee -a $const_HOME_DIR/.logs/package-installed.log
+                                        pkginstall_Success+=("$p")
+                                    else
+                                        # Not Found - Error installing
+                                        # echo "$(log_datetime) > Package Install Failed : $p" | tee -a ~/.logs/installed-packages.log
+                                        echo "$(log_datetime) > Package Install Failed : $p" | tee -a $const_HOME_DIR/.logs/install-changelogs.log
+                                        echo "$(log_datetime) > $p" | tee -a $const_HOME_DIR/.logs/package-failed-installs.log
+                                        pkginstall_Failed+=("$p")
+                                    fi
+                                else
+                                    echo "Package $p is installed."
                                 fi
                             else
                                 echo "Distro is not Arch-based, please change the installation method"
