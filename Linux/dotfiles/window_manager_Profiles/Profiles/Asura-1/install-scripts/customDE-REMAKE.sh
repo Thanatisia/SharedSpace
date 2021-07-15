@@ -72,7 +72,7 @@ xinitrc=$const_HOME_DIR/.xinitrc
 xresources=$const_HOME_DIR/.Xresources
 bashrc_personal=$const_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
 bash_profile=$const_HOME_DIR/.bash_profile
-aur_install_Logs=$const_HOME_DIR/.aur-installs
+aur_install_Logs=$const_HOME_DIR/personal/dotfiles/bash/.aur-installs
 declare -A records_aur_links=()
 
 ### Defaults ###
@@ -205,7 +205,7 @@ declare -A pkgs=(
 	[file-browser]="pcmanfm,pacman"
 	[window-manager]="qtile,pacman"
 	[terminal-emualator]="alacritty,pacman"
-	[web-browser]="brave,aur"
+	[web-browser]="brave-bin,aur"
 	[graphical-text-editor]="sublime-text-dev,aur"
 	[image-setter]="nitrogen,pacman"
 	[compositor]="picom,pacman"
@@ -240,7 +240,7 @@ declare -A git_aur_packages_manual=(
 	# Example:
 	#	[yay]="yay-git,https://aur.archlinux.org/yay-git.git"
 	#   [yay-git]="git,https://aur.archlinux.org/yay-git.git"
-    [brave]="brave,https://aur.archlinux.org/brave.git"
+    [brave-bin]="brave-bin,https://aur.archlinux.org/brave-bin.git"
     [subime-text-dev]="subime-text-dev,https://aur.archlinux.org/sublime-text-dev.git"
 )
 declare -A git_aur_packages_aur_Helper=(
@@ -270,7 +270,7 @@ declare -A pkg_install_methods=(
 	# Official
 	[pacman]="pcmanfm;qtile;alacritty;nitrogen;picom;conky;bluez;lxappearance-gtk3;neofetch;xorg;xorg-server"
 	# AUR
-    [aur]="brave;sublime-text-dev"
+    [aur]="brave-bin;sublime-text-dev"
     # AUR Helpers
 	[yay]=""
 )
@@ -743,9 +743,10 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
         #       - pacman -U <pkgname>
         git_url="$1"                            # URL of git
         git_project="$2"                        # Output Git project name
-        git_fldrname="${3:-$git_filename}"      # Git's folder name; default: git file name
+        git_fldrname="${3:-$git_project}"       # Git's folder name; default: git file name
         out_fldr_path="${4:-$PWD}"              # Output folder where you want to clone to
 
+        # --- Processing
         git_clone "$git_url" "$out_fldr_path"   # Change directory to the intended output folder and clone into it
         cd $git_fldrname                        # Jump into cloned git folder
         makepkg -si                             # Compile and build package and Install
@@ -1116,8 +1117,9 @@ pkg_install()
                                 aur_url="${arr_aurpkg_params[1]}"
                                 pkg_fldrname="$pkgname"
                                 out_fldr_path="$PWD"
-                                aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldrpath"
-                                if [[ "$?" == "0" ]]; then
+                                ret_code=`aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldrpath"`
+                                cd $const_HOME_DIR  # Change back to home page
+                                if [[ "$ret_code" == "0" ]]; then
                                     # Success
                                     records_aur_links[$pkgname]="$aur_url"  # Append to AUR links records; used to git pull
                                     # Write to '.aur-installs'
