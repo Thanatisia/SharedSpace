@@ -9,7 +9,8 @@
 #   - 2021-07-14 2211H, Asura                                                           #
 #   - 2021-07-15 0925H, Asura                                                           #
 #   - 2021-07-15 1129H, Asura                                                           #
-#   - 2021-07-15 1156H, Asura
+#   - 2021-07-15 1156H, Asura                                                           #
+#   - 2021-07-15 1221H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -43,6 +44,10 @@
 #               i.e.                                                                    #
 #                   normal: 0,1...--> n                                                 #
 #                   reverse: n,n-1,n-2...->0                                            #
+#   - 2021-07-15 1221H, Asura                                                           #
+#       i. Fixed countdown                                                              #
+#           - Changed 'max' to 0                                                        #
+#           - Fixed typos                                                               #
 # ===================================================================================== #
 
 # --- NOTES
@@ -465,6 +470,9 @@ sleep_with_message()
             fi
         fi
     else
+        # Reverse
+        # Trim 'reverse' from the text
+        msg="$(echo $msg | cut -d '-' -f1)"
         if [[ "$increment" == "1" ]]; then
             # Start from non-0
             for (( i=$min; i > 0; i-- )); do
@@ -518,10 +526,14 @@ countdown()
 {
     # Countdown Timer
     # Count from n --> 0
-    max=$1
-    min=${2:-0}
-    increment=${3:-1}
-    sleep_duration=${4:-1}
+    # max=$1
+    # min=${2:-0}
+    # increment=${3:-1}
+    # sleep_duration=${4:-1}
+    min=$1
+    max=0
+    increment=${2:-1}
+    sleep_duration=${3:-1}
     message="index-reverse"
     sleep_with_message $max $min $increment $sleep_duration "$message"
 }
