@@ -7,6 +7,7 @@
 #   - 2021-07-13 1127H, Asura                       #
 #   - 2021-07-14 0934H, Asura                       #
 #   - 2021-07-14 2211H, Asura                       #
+#   - 2021-07-15 0925H, Asura
 # Changelogs:                                       #
 #   - 2021-07-13 1127H, Asura                       #
 #       i. Copied from 'customDE-simple_flow.sh'    #
@@ -29,6 +30,13 @@
 #               script file                         # 
 #   - 2021-07-14 2224H, Asura                       #
 #       i. Added sleep after every function         #
+#   - 2021-07-15 0925H, Asura                       #
+#       i. Seperated yay from aur                   #
+#           - yay refers to the installation of     #
+#               aur packages with the use of an     #
+#               aur helper                          #
+#           - aur refers to the installation of     #
+#               aur packages via manual methodolgy  #
 # ================================================= #
 
 # --- NOTES
@@ -167,30 +175,6 @@ case \"\$wmde\" in \n \
 esac
 "
 )
-declare -A pkgs=(
-	# Place all your packages you want to be in the 
-	# Desktop Environment here
-	# according to category
-	# - Please seperate each package with ';'
-    # - Please seperate each package sub-value with ','
-	# Syntax:
-	#	[<category>]="package_name,installation_Method;package_name,installation_Method"
-	# Examples:
-	#	[file-browser]="package-1,pacman;package-2,yay;package-n,method-n"
-	[file-browser]="pcmanfm,pacman"
-	[window-manager]="qtile,pacman"
-	[terminal-emualator]="alacritty,pacman"
-	[web-browser]="brave,yay"
-	[graphical-text-editor]="sublime-text-dev,yay"
-	[image-setter]="nitrogen,pacman"
-	[compositor]="picom,pacman"
-	[system-monitor]="conky,pacman"
-	[bluetooth-manager]="bluez,pacman"
-	[ricing]="lxappearance-gtk3,pacman"
-	[fetch]="neofetch,pacman"
-	[x]="xorg-xinit,pacman;xorg,pacman;xorg-server,pacman"
-	[others]=""
-)
 declare -A sysinfo=(
 	# System Information here
 	# - Place all your system information defining the build such as
@@ -205,31 +189,87 @@ declare -A sysinfo=(
 	#		i. package-manager etc.
 	[aur-helper]="yay-git"
 )
-declare -A git_aur_packages=(
+declare -A pkgs=(
+	# Place all your packages you want to be in the 
+	# Desktop Environment here
+	# according to category
+	# - Please seperate each package with ';'
+    # - Please seperate each package sub-value with ','
+	# Syntax:
+	#	[<category>]="package_name,installation_Method;package_name,installation_Method"
+	# Examples:
+	#	[file-browser]="package-1,pacman;package-2,yay;package-n,method-n"
+	[file-browser]="pcmanfm,pacman"
+	[window-manager]="qtile,pacman"
+	[terminal-emualator]="alacritty,pacman"
+	[web-browser]="brave,aur"
+	[graphical-text-editor]="sublime-text-dev,aur"
+	[image-setter]="nitrogen,pacman"
+	[compositor]="picom,pacman"
+	[system-monitor]="conky,pacman"
+	[bluetooth-manager]="bluez,pacman"
+	[ricing]="lxappearance-gtk3,pacman"
+	[fetch]="neofetch,pacman"
+	[x]="xorg-xinit,pacman;xorg,pacman;xorg-server,pacman"
+	[others]=""
+)
+declare -A aur_helpers=(
+    # Please place all your AUR helpers here alongside the links of their tar files
+    # - Please seperate all column values with delimiter ','
+    # - Please seperate all subvalues with delimiter ';'
+	# Notes:
+    # - This is for aur helpers only
+    # - This is for all aur helpers with regards to installing aur helpers
+    # Syntax:
+	#	[helper-name]="filename,https://domain.com/package.git"
+	# Example:
+	#	[yay]="yay_*_x86_64,https://api.github.com/repos/Jguer/yay/releases/latest"
+    [yay-git]="yay_*_x86_64,https://api.github.com/repos/Jguer/yay/releases/latest"
+)
+declare -A git_aur_packages_manual=(
 	# Place all your AUR packages (aka git packages) here alongside the links
     # - Please seperate all column values with delimiter ','
     # - Please seperate all subvalues with delimiter ';'
+    # Notes:
+    # - This is for all AUR packages and manually installation without the use of an AUR helper
 	# Syntax:
 	#	[package-name]="filename,https://domain.com/package.git"
 	# Example:
 	#	[yay]="yay-git,https://aur.archlinux.org/yay-git.git"
 	#   [yay-git]="git,https://aur.archlinux.org/yay-git.git"
-    [yay-git]="yay_*_x86_64,https://api.github.com/repos/Jguer/yay/releases/latest"
+    [brave]="brave,https://aur.archlinux.org/brave.git"
+    [subime-text-dev]="subime-text-dev,https://aur.archlinux.org/sublime-text-dev.git"
+)
+declare -A git_aur_packages_aur_Helper=(
+	# Place all your AUR packages (aka git packages) here alongside the links
+    # - Please seperate all column values with delimiter ','
+    # - Please seperate all subvalues with delimiter ';'
+    # Notes:
+    # - This is for all AUR packages to be installed via an AUR helper
+	# Syntax:
+	#	[package-name]="filename,https://domain.com/package.git"
+	# Example:
+	#	[yay]="yay-git,https://aur.archlinux.org/yay-git.git"
+	#   [yay-git]="git,https://aur.archlinux.org/yay-git.git"
 )
 declare -A pkg_install_methods=(
 	# Place all your packages (value) and the method of installation (key) you want to be in the 
 	# Desktop Environment here
 	# according to category
 	# - Please seperate each package with ';'
+    # - Please note that aur and yay are seperated because yay is the helper while aur means manually cloning without the use of an AUR helper
 	# Syntax:
 	#	[<install-method>]=""
 	# Examples:
 	#	[pacman]="package-1;package-2;package-n"
 	#	[aur]="package-1;package-2;package-n"
+    #   [yay]="package-1;package-2;package-n"
 	# Official
 	[pacman]="pcmanfm;qtile;alacritty;nitrogen;picom;conky;bluez;lxappearance-gtk3;neofetch;xorg;xorg-server"
 	# AUR
-	[yay]="brave;sublime-text-dev"
+    [aur]="brave;sublime-text-dev"
+    # AUR Helpers
+	[yay]=""
 )
 
 
@@ -313,6 +353,19 @@ uncomment_line()
 	regex_Pattern="$1"
 	filename="$2"
 	sed -i '$regex_Pattern/s/^#//g' $filename
+}
+### Git ###
+git_clone()
+{
+    git_url="$1"
+    out_path=${2:-$PWD}
+
+    # Change Directory if got different output
+    if [[ ! "$out_path" == "$PWD" ]]; then
+        cd "$out_path"
+    fi
+
+    git clone "$git_url"
 }
 
 ### Data Structures ###
@@ -633,7 +686,7 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
                 helper_Exists="$(pacman -Qq | grep yay)"
                 if [[ "$helper_Exists" == "" ]]; then
                     # Seperate 'git_aur_packages' string to array with delimiter ','
-                    helper_properties="${git_aur_packages["$helper"]}"
+                    helper_properties="${aur_helpers["$helper"]}"
                     arr_Helper=($(seperate_by_Delim "$helper_properties" ','))
 
                     # Clone and install if yay does not exists
@@ -673,6 +726,27 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
                 echo "Invalid helper : $helper"
                 ;;
         esac
+    }
+    aur_install()
+    {
+        # Manual Installation from AUR without helper
+        # Installation methodology
+        #   i. git clone <link-to-aur-git>
+        #   ii. cd <aur-folder>
+        #   iiia. makepkg -si        # Compile and build pakage and install
+        #       or
+        #   iiib. Compile and Install
+        #       - makepkg -s         # Compile
+        #       - pacman -U <pkgname>
+        git_url="$1"                            # URL of git
+        git_project="$2"                        # Output Git project name
+        git_fldrname="${3:-$git_filename}"      # Git's folder name; default: git file name
+        out_fldr_path="${4:-$PWD}"              # Output folder where you want to clone to
+
+        git_clone "$git_url" "$out_fldr_path"   # Change directory to the intended output folder and clone into it
+        cd $git_fldrname                        # Jump into cloned git folder
+        makepkg -si                             # Compile and build package and Install
+        echo "$?"
     }
 fi
 
@@ -1020,8 +1094,33 @@ pkg_install()
                                 echo "Package $p is installed."
                             fi
                             ;;
+                        # AUR
+                        "aur")
+                            # AUR itself
+                            # Arch-only feature
+                            # Installation methodology
+                            #   i. git clone <link-to-aur-git>
+                            #   ii. cd <aur-folder>
+                            #   iiia. makepkg -si        # Compile and build pakage and install
+                            #       or
+                            #   iiib. Compile and Install
+                            #       - makepkg -s         # Compile
+                            #       - pacman -U <pkgname>
+                            if [[ "$DISTRO" == "ArchLinux" ]]; then
+                                aurpkg_params="${git_aur_packages_manual[$p]}"
+                                arr_aurpkg_params=($(seperate_by_Delim $aurpkg_params ','))
+                                pkgname="${arr_aurpkg_params[0]}"
+                                aur_url="${arr_aurpkg_params[1]}"
+                                pkg_fldrname="$pkgname"
+                                out_fldr_path="$PWD"
+                                aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldrpath"
+                            else
+                                echo "Distro is not Arch-based, please change the installation method"
+                            fi
+                            ;;
+                        # AUR Helpers
                         "yay" | "yay-git")
-                            # AUR
+                            # An AUR helper
                             # Arch-only feature
                             if [[ "$DISTRO" == "ArchLinux" ]]; then
                                 aur_helper="${sysinfo["aur-helper"]}"
