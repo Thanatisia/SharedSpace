@@ -1,0 +1,352 @@
+# ========================================================================= #
+# Template Generator														#
+# Project Name: Proj. Template Control										#
+# Program Name: template-generator											#
+# Code Name: Code Gen														#
+# Author: Asura																#
+# Background Information:													#
+#	A general template generator that will allow user to specify a 			#
+#		language of their choice and the system will generate				#
+#		a template file for that file type									#
+# Features:																	#
+#	- Polymorphic code														#
+#		- Dynamically updates this source file when 						#
+#			user clicks on the button "Add New Template (btn_new_Template)	#
+#			- automatically locate and appends itself directly into the 	#
+#				array 'assoc_Templates'										# 
+# Created By: 2021-07-15 2238H, Asura										#
+# Modified By:																#
+#	- 2021-07-15 2238H, Asura												#
+# Changelogs:																#
+#	- 2021-07-15 2238H, Asura												#
+#		i. Created Script File												#
+#		ii. Created program structure										#
+#			- To be tested and debugged										#
+#			- To add more templates											#
+#		iii. modified assoc_Templates associative array 					#
+#			- Removed all newline and backspaces							#
+#				- Apparently somehow bash shellscript allows '"' multiline	#
+#					to recognize newlines and do not need backslash for 	#
+#					newline?												#
+# ========================================================================= #
+
+### Variables ###
+
+# Data Storage Containers
+declare -A assoc_Templates=(
+	[c]="/* Project Name Here */
+#include <stdio.h>
+#include <cstdlib.h>
+
+int main(int argc, const char *argv[])
+{
+	// Program Here
+	printf(\"%s\", \"Hello World!\");
+	return 1;
+}"
+)
+
+
+### Functions ###
+
+# General
+sleep_with_message()
+{
+    # Sleeping with messages
+    # Special message types:
+    #   1. loadingbar : For Progress Bars
+    #   2. Print only the index
+    max=$1
+    min=${2:-0}
+    increment=${3:-1}
+    sleep_duration=${4:-1}
+    msg=${5:-""}  # Message you want to display every time it sleeps; special characters : 'loadingbar', 'index'
+
+    # Preparation of special messages
+    case "$msg" in
+        "loadingbar")
+            echo "|"
+            ;;
+        *)
+            ;;
+    esac
+
+    if [[ "$(echo $msg | grep 'reverse')" == "" ]]; then
+        # If message does not contain 'reverse'
+        if [[ "$increment" == "1" ]]; then
+            if [[ "$min" == "0" ]]; then
+                # Start from 0
+                for (( i=$min; i < $max; i++ )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "=" # Append character to the same line
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            else
+                # Start from non-0
+                for (( i=$min; i <= $max; i++ )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "=" # Append character to the same line
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            fi
+        else
+            if [[ "$min" == "0" ]]; then
+                # Start from 0
+                for (( i=$min; i < $max; i+=$increment )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "="
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            else
+                # Start from non-0
+                for (( i=$min; i <= $max; i+=$increment )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "="
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            fi
+        fi
+    else
+        # Reverse
+        # Trim 'reverse' from the text
+        msg="$(echo $msg | cut -d '-' -f1)"
+        if [[ "$increment" == "1" ]]; then
+            # Start from non-0
+            for (( i=$min; i > 0; i-- )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "=" # Append character to the same line
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
+        else
+            # Start from non-0
+            for (( i=$min; i > 0; i-=$increment )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "="
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
+        fi
+    fi
+
+    # Packing up and finishing of special messages
+    case "$msg" in
+        "loadingbar")
+            echo -n ">|" # Close off the loading bar
+            echo "" # New Line
+            ;;
+        *)
+            ;;
+    esac
+}
+countdown()
+{
+    # Countdown Timer
+    # Count from n --> 0
+    # max=$1
+    # min=${2:-0}
+    # increment=${3:-1}
+    # sleep_duration=${4:-1}
+    min=$1
+    max=0
+    increment=${2:-1}
+    sleep_duration=${3:-1}
+    message="index-reverse"
+    sleep_with_message $max $min $increment $sleep_duration "$message"
+}
+progressbar()
+{
+    # A progress bar
+    max=$1
+    min=${2:-0}
+    increment=${3:-1}
+    sleep_duration=${4:-1}
+    message="progressbar"
+    sleep_with_message $max $min $increment $sleep_duration "$message"
+}
+
+# Algorithms
+
+# Main
+gen()
+{
+	### Generate the templates here ###
+
+	# --- Head
+	file_type=${1:-""}
+	out_path="${2:-$PWD}"
+	# Determine default output filename 
+	# according to file type
+	# i.e.
+	#	html:index, others:main
+	case "$file_type" in
+		"html")
+			out_file="${3:-index.html}"
+			;;
+		*)
+			out_file="${4:-main.$file_type}"
+			;;
+	esac
+	
+	# To check if successful
+	generate_success=()
+	generate_error=()
+
+	# --- Body 
+	# Processing
+	if [[ "$file_type" == "" ]]; then
+		# Generate all if file type not defined
+		# Echo -e out to the output file path/output file Name
+		for lang in "${!assoc_Templates[@]}"; do
+			# Key : Language / file type
+			# Values : Template
+			content="${assoc_Templates[$lang]}"
+			echo -e "$content" | tee -a $out_path/$out_file
+
+			if [[ -f $out_path/$out_file ]]; then
+				# If successful
+				generate_success+=("$out_path/$out_file")
+			else
+				# if failed
+				generate_error+=("$out_path/$out_file)
+			fi
+		done
+	else
+		# Generate only that file type if defined
+		content="${assoc_Templates[$file_type]}"
+		echo -e "$content" | tee -a $out_path/$out_file
+
+		if [[ -f $out_path/$out_file ]]; then
+			# If successful
+			generate_success+=("$out_path/$out_file")
+		else
+			# if failed
+			generate_error+=("$out_path/$out_file)
+		fi
+	fi
+
+	# --- Footer
+	echo "Files generated successfully: "
+	for success in "${generate_success[@]}"; do
+		echo "File: $success"
+	done
+
+	echo ""
+	
+	echo "Files failed to generate: "
+	for err in "${generate_error[@]}"; do
+		echo "File: $err"
+	done
+}
+
+# Source Control / Body
+init()
+{
+	### Initialization ###
+	echo "Complete"
+}
+
+setup()
+{
+	### Post-Initialization Setup ###
+	echo "Complete"
+}
+
+bootup()
+{
+	### Boot-up processes after turning on such as
+	# Initialization
+	# Setting Up
+	### 
+	init
+	countdown 5
+	setup 
+	countdown 5
+}
+
+end()
+{
+	### End ###
+	end_msg="${1:-"Press anything to exit..."}
+	read -p "$end_msg" tmp
+	exit
+}
+
+main()
+{
+	argv="$@"
+	filetypes="${argv[@]}"
+	argc="${#filetypes[@]}"
+
+
+}
+
+if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
+	bootup
+	main "$@"
+	end
+fi
