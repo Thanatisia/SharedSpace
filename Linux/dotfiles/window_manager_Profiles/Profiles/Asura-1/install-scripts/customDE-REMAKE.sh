@@ -1,43 +1,42 @@
-# === CustomDE simple query structured redesign === #
-# For visualization of the project flow             #
-# ================================================= #
-# Author: Asura                                     #
-# Created By: 2021-07-13 1127H, Asura               #
-# Modified By:                                      #
-#   - 2021-07-13 1127H, Asura                       #
-#   - 2021-07-14 0934H, Asura                       #
-#   - 2021-07-14 2211H, Asura                       #
-#   - 2021-07-15 0925H, Asura
-# Changelogs:                                       #
-#   - 2021-07-13 1127H, Asura                       #
-#       i. Copied from 'customDE-simple_flow.sh'    #
-#   - 2021-07-13 2250H, Asura                       #
-#       i. Realised using $PWD in sudo retains the  #
-#           working directory of user               #
-#       ii. Added function 'change_owner'           #
-#   - 2021-07-13 2336H, Asura                       #
-#       i. Added a check for sudo privileges        #
-#   - 2021-07-14 0934H, Asura                       #
-#       i. Added delays to startx in .bash_profile  #
-#       ii. Modified setup_AUR()                    #
-#   - 2021-07-14 2211H, Asura                       #
-#       i. Added 'sudo' (temporarily) to all        #
-#           functions that requires sudo as a       #
-#           bypass to get the script to work as a   #
-#           Proof-of-Concept                        #
-#           - To find out how to                    #
-#               install AUR helpers when i sudo the #
-#               script file                         # 
-#   - 2021-07-14 2224H, Asura                       #
-#       i. Added sleep after every function         #
-#   - 2021-07-15 0925H, Asura                       #
-#       i. Seperated yay from aur                   #
-#           - yay refers to the installation of     #
-#               aur packages with the use of an     #
-#               aur helper                          #
-#           - aur refers to the installation of     #
-#               aur packages via manual methodolgy  #
-# ================================================= #
+# ===================== CustomDE simple query structured redesign ===================== #
+# For visualization of the project flow                                                 #
+# ===================================================================================== #
+# Author: Asura                                                                         #
+# Created By: 2021-07-13 1127H, Asura                                                   #
+# Modified By:                                                                          #
+#   - 2021-07-13 1127H, Asura                                                           #
+#   - 2021-07-14 0934H, Asura                                                           #
+#   - 2021-07-14 2211H, Asura                                                           #
+#   - 2021-07-15 0925H, Asura                                                           #
+#   - 2021-07-15 1129H, Asura                                                           #
+# Changelogs:                                                                           #
+#   - 2021-07-13 1127H, Asura                                                           #
+#       i. Copied from 'customDE-simple_flow.sh'                                        #
+#   - 2021-07-13 2250H, Asura                                                           #
+#       i. Realised using $PWD in sudo retains the working directory of user            #
+#       ii. Added function 'change_owner'                                               #
+#   - 2021-07-13 2336H, Asura                                                           #
+#       i. Added a check for sudo privileges                                            #
+#   - 2021-07-14 0934H, Asura                                                           #
+#       i. Added delays to startx in .bash_profile                                      #
+#       ii. Modified setup_AUR()                                                        #
+#   - 2021-07-14 2211H, Asura                                                           #
+#       i. Added 'sudo' (temporarily) to all functions that requires sudo as a bypass   #
+#           to get the script to work as a Proof-of-Concept                             #
+#           - To find out how to install AUR helpers when i sudo the script file        #
+#   - 2021-07-14 2224H, Asura                                                           #
+#       i. Added sleep after every function                                             #
+#   - 2021-07-15 0925H, Asura                                                           #
+#       i. Seperated yay from aur                                                       #
+#           - yay refers to the installation of                                         #
+#               aur packages with the use of an aur helper                              #
+#           - aur refers to the installation of aur packages via manual methodolgy      #
+#   - 2021-07-15 1129H, Asura                                                           #
+#	    i. Fixed installation of aur via manual method (makepkg -si)                    #
+#		    - appears to be stable                                                      #
+#	    ii. Added functions                                                             #
+#           - [countdown, progressbar and sleep_with_message]                           #
+# ===================================================================================== #
 
 # --- NOTES
 # 1. Please run this with sudo to maximize the output because this includes some features
@@ -157,6 +156,7 @@ fi"
 \n\
 if [[ \"\$(tty)\" = \"/dev/tty1\" ]]; then \n \
     echo \"Starting in 3 seconds...\"\n\
+    echo \" Please press 'Ctrl + c' to stop the launch...\"\n\
     for (( i=0; i < 3; i++ )); do\n\
         sleep 1s    # Startx with delay \n\
         echo \$i\n\
@@ -357,6 +357,137 @@ uncomment_line()
 	filename="$2"
 	sed -i '$regex_Pattern/s/^#//g' $filename
 }
+sleep_with_message()
+{
+    # Sleeping with messages
+    # Special message types:
+    #   1. loadingbar : For Progress Bars
+    #   2. Print only the index
+    max=$1
+    min=${2:-0}
+    incremenet=${3:-1}
+    sleep_duration=${4:-1}
+    msg=${5:-""}  # Message you want to display every time it sleeps; special characters : 'loadingbar', 'index'
+
+    # Preparation of special messages
+    case "$msg" in
+        "loadingbar")
+            echo "|"
+            ;;
+        *)
+            ;;
+    esac
+
+    if [[ "$increment" == "1" ]]; then
+        if [[ "$min" == "0" ]]; then
+            # Start from 0
+            for (( i=$min; i < $max; i++ )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "=" # Append character to the same line
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
+        else
+            # Start from non-0
+            for (( i=$min; i <= $max; i++ )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "=" # Append character to the same line
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
+        fi
+    else
+        if [[ "$min" == "0" ]]; then
+            # Start from 0
+            for (( i=$min; i < $max; i+=$increment )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "="
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
+        else
+            # Start from non-0
+            for (( i=$min; i <= $max; i+=$increment )); do
+                # sleep 1s
+                sleep $sleep_duration
+                case "$msg" in
+                    # Special Messages
+                    "loadingbar")
+                        echo -n "="
+                        ;;
+                    "index")
+                        echo "$i"
+                        ;;
+                    *)
+                        echo "$msg"
+                        ;;
+                esac
+            done
+        fi
+    fi
+
+    # Packing up and finishing of special messages
+    case "$msg" in
+        "loadingbar")
+            echo -n ">|" # Close off the loading bar
+            echo "" # New Line
+            ;;
+        *)
+            ;;
+    esac
+}
+countdown()
+{
+    # Countdown Timer
+    # Count from n --> 0
+    max=$1
+    min=${2:-0}
+    incremenet=${3:-1}
+    sleep_duration=${4:-1}
+    message="index"
+    sleep_with_message $max $min $increment $sleep_duration "$message"
+}
+progressbar()
+{
+    # A progress bar
+    max=$1
+    min=${2:-0}
+    increment=${3:-1}
+    sleep_duration=${4:-1}
+    message="progressbar"
+    sleep_with_message $max $min $increment $sleep_duration "$message"
+}
+
 ### Git ###
 git_clone()
 {
@@ -1330,7 +1461,7 @@ body()
 		sudo systemctl start NetworkManager
 	fi
 
-    sleep 1s
+    countdown 5
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1343,7 +1474,7 @@ body()
 	echo "=================================="
 	enable_sudo
 
-    sleep 1s
+    countdown 5
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1357,7 +1488,7 @@ body()
 	echo "================================================"
     user_mgmt
 
-    sleep 1s
+    countdown 5
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1370,7 +1501,7 @@ body()
 	echo "========================================="
 	create_dotfiles
 
-    sleep 1s
+    countdown 5
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1383,7 +1514,7 @@ body()
 	echo "========================================="
 	pkg_install
 
-    sleep 1s
+    countdown 5
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
@@ -1396,7 +1527,7 @@ body()
 	echo "=============================="
 	setup_dotfiles
 
-    sleep 1s
+    countdown 5
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		read -p "Paused."
