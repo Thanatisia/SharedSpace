@@ -68,9 +68,12 @@ USER_SET=("asura")
 # User's Home Directory; Realised that using $PWD in sudo retained the working directory of user instead of the root
 const_HOME_DIR=$PWD    
 bashrc=$const_HOME_DIR/.bashrc
+xinitrc=$const_HOME_DIR/.xinitrc
 xresources=$const_HOME_DIR/.Xresources
 bashrc_personal=$const_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
 bash_profile=$const_HOME_DIR/.bash_profile
+aur_install_Logs=$const_HOME_DIR/.aur-installs
+declare -A records_aur_links=()
 
 ### Defaults ###
 default_wmde="qtile"    # Default Window Manager or Desktop Environment
@@ -1114,6 +1117,15 @@ pkg_install()
                                 pkg_fldrname="$pkgname"
                                 out_fldr_path="$PWD"
                                 aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldrpath"
+                                if [[ "$?" == "0" ]]; then
+                                    # Success
+                                    records_aur_links[$pkgname]="$aur_url"  # Append to AUR links records; used to git pull
+                                    # Write to '.aur-installs'
+                                    for name in "${!records_aur_links[@]}"; do
+                                        tmp_link="${records_aur_links[$name]}"
+                                        echo -e "$name,$tmp_link" | tee -a $aur_install_Logs
+                                    done
+                                fi
                             else
                                 echo "Distro is not Arch-based, please change the installation method"
                             fi
