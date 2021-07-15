@@ -9,6 +9,7 @@
 #   - 2021-07-14 2211H, Asura                                                           #
 #   - 2021-07-15 0925H, Asura                                                           #
 #   - 2021-07-15 1129H, Asura                                                           #
+#   - 2021-07-15 1156H, Asura
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -36,6 +37,12 @@
 #		    - appears to be stable                                                      #
 #	    ii. Added functions                                                             #
 #           - [countdown, progressbar and sleep_with_message]                           #
+#   - 2021-07-15 1156H, Asura                                                           #
+#       i. Modified 'sleep_with_message' to contain special messages with 'reverse' in  #
+#           its name - these are for the order of display                               #
+#               i.e.                                                                    #
+#                   normal: 0,1...--> n                                                 #
+#                   reverse: n,n-1,n-2...->0                                            #
 # ===================================================================================== #
 
 # --- NOTES
@@ -365,7 +372,7 @@ sleep_with_message()
     #   2. Print only the index
     max=$1
     min=${2:-0}
-    incremenet=${3:-1}
+    increment=${3:-1}
     sleep_duration=${4:-1}
     msg=${5:-""}  # Message you want to display every time it sleeps; special characters : 'loadingbar', 'index'
 
@@ -378,81 +385,162 @@ sleep_with_message()
             ;;
     esac
 
-    if [[ "$increment" == "1" ]]; then
-        if [[ "$min" == "0" ]]; then
-            # Start from 0
-            for (( i=$min; i < $max; i++ )); do
-                # sleep 1s
-                sleep $sleep_duration
-                case "$msg" in
-                    # Special Messages
-                    "loadingbar")
-                        echo -n "=" # Append character to the same line
-                        ;;
-                    "index")
-                        echo "$i"
-                        ;;
-                    *)
-                        echo "$msg"
-                        ;;
-                esac
-            done
+    if [[ "$(echo $msg | grep 'reverse')" == "" ]]; then
+        # If message does not contain 'reverse'
+        if [[ "$increment" == "1" ]]; then
+            if [[ "$min" == "0" ]]; then
+                # Start from 0
+                for (( i=$min; i < $max; i++ )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "=" # Append character to the same line
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            else
+                # Start from non-0
+                for (( i=$min; i <= $max; i++ )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "=" # Append character to the same line
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            fi
         else
-            # Start from non-0
-            for (( i=$min; i <= $max; i++ )); do
-                # sleep 1s
-                sleep $sleep_duration
-                case "$msg" in
-                    # Special Messages
-                    "loadingbar")
-                        echo -n "=" # Append character to the same line
-                        ;;
-                    "index")
-                        echo "$i"
-                        ;;
-                    *)
-                        echo "$msg"
-                        ;;
-                esac
-            done
+            if [[ "$min" == "0" ]]; then
+                # Start from 0
+                for (( i=$min; i < $max; i+=$increment )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "="
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            else
+                # Start from non-0
+                for (( i=$min; i <= $max; i+=$increment )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "="
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            fi
         fi
     else
-        if [[ "$min" == "0" ]]; then
-            # Start from 0
-            for (( i=$min; i < $max; i+=$increment )); do
-                # sleep 1s
-                sleep $sleep_duration
-                case "$msg" in
-                    # Special Messages
-                    "loadingbar")
-                        echo -n "="
-                        ;;
-                    "index")
-                        echo "$i"
-                        ;;
-                    *)
-                        echo "$msg"
-                        ;;
-                esac
-            done
+        if [[ "$increment" == "1" ]]; then
+            if [[ "$min" == "0" ]]; then
+                # Start from 0
+                for (( i=$min; i < $max; i-- )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "=" # Append character to the same line
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            else
+                # Start from non-0
+                for (( i=$min; i <= $max; i-- )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "=" # Append character to the same line
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            fi
         else
-            # Start from non-0
-            for (( i=$min; i <= $max; i+=$increment )); do
-                # sleep 1s
-                sleep $sleep_duration
-                case "$msg" in
-                    # Special Messages
-                    "loadingbar")
-                        echo -n "="
-                        ;;
-                    "index")
-                        echo "$i"
-                        ;;
-                    *)
-                        echo "$msg"
-                        ;;
-                esac
-            done
+            if [[ "$min" == "0" ]]; then
+                # Start from 0
+                for (( i=$min; i < $max; i-=$increment )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "="
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            else
+                # Start from non-0
+                for (( i=$min; i <= $max; i-=$increment )); do
+                    # sleep 1s
+                    sleep $sleep_duration
+                    case "$msg" in
+                        # Special Messages
+                        "loadingbar")
+                            echo -n "="
+                            ;;
+                        "index")
+                            echo "$i"
+                            ;;
+                        *)
+                            echo "$msg"
+                            ;;
+                    esac
+                done
+            fi
         fi
     fi
 
@@ -472,9 +560,9 @@ countdown()
     # Count from n --> 0
     max=$1
     min=${2:-0}
-    incremenet=${3:-1}
+    increment=${3:-1}
     sleep_duration=${4:-1}
-    message="index"
+    message="index-reverse"
     sleep_with_message $max $min $increment $sleep_duration "$message"
 }
 progressbar()
