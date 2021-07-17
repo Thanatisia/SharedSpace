@@ -11,6 +11,7 @@
 #   - 2021-07-15 1129H, Asura                                                           #
 #   - 2021-07-15 1156H, Asura                                                           #
 #   - 2021-07-15 1221H, Asura                                                           #
+#   - 2021-07-18 0630H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -48,6 +49,8 @@
 #       i. Fixed countdown                                                              #
 #           - Changed 'max' to 0                                                        #
 #           - Fixed typos                                                               #
+#   - 2021-07-18 0630H, Asura                                                           #
+#       i. Added sudo to useradd (permission error)                                     #
 # ===================================================================================== #
 
 # --- NOTES
@@ -161,7 +164,11 @@ fi"
 
 	[$bashrc_personal]="#
 # --- BashRC [Personal]
-#"
+#
+
+### Alias ###
+alias ls=\"ls -l\"
+"
 
     [$bash_profile]="# --- Bash Profile
 # This file runs when bash is first initialized (ie in the terminal's first startup)
@@ -1057,14 +1064,14 @@ user_mgmt()
             if [[ "$MODE" == "DEBUG" ]]; then
                 echo "$u_create_Command"
             else
-                $u_create_Command
+                sudo $u_create_Command
 
                 # Change Password of user
                 if [[ "$?" == "0" ]]; then
                     echo "============================="
                     echo " Password change for $u_name "
                     echo "============================="
-                    passwd $u_name
+                    sudo passwd $u_name
                 fi
 
                 # Append user to userset
