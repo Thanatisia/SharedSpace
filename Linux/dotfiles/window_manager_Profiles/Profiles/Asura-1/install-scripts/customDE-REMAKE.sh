@@ -152,41 +152,41 @@ declare -A files_to_edit=(
     #       [folder_path]="line 1\
     # line 2 \
     # line 3"
-	[$bashrc]="\n\
-# --- Adding external Bashrc personal file \n\
-if [[ -f $bashrc_personal ]]; then \n\
-	# If found \n\
-	. $bashrc_personal \n\
+	[$bashrc]="
+# --- Adding external Bashrc personal file
+if [[ -f $bashrc_personal ]]; then
+	# If found
+	. $bashrc_personal
 fi"
 
-	[$bashrc_personal]="#\n\
-# --- BashRC [Personal] \n\
+	[$bashrc_personal]="#
+# --- BashRC [Personal]
 #"
 
-    [$bash_profile]="# --- Bash Profile\n\
-# This file runs when bash is first initialized (ie in the terminal's first startup) \n\
-\n\
-if [[ \"\$(tty)\" = \"/dev/tty1\" ]]; then \n \
-    echo \"Starting in 3 seconds...\"\n\
-    echo \" Please press 'Ctrl + c' to stop the launch...\"\n\
-    for (( i=0; i < 3; i++ )); do\n\
-        sleep 1s    # Startx with delay \n\
-        echo \$i\n\
-    done\n\
-    startx ~/.xinitrc \n\
+    [$bash_profile]="# --- Bash Profile
+# This file runs when bash is first initialized (ie in the terminal's first startup)
+
+if [[ \"\$(tty)\" = \"/dev/tty1\" ]]; then
+    echo \"Starting in 3 seconds...\"
+    echo \" Please press 'Ctrl + c' to stop the launch...\"
+    for (( i=0; i < 3; i++ )); do
+        sleep 1s    # Startx with delay
+        echo \$i
+    done
+    startx ~/.xinitrc
 fi
 "
 
-    [$xinitrc]="# --- X Initialization Resource Control     \n\
-# This file executes whenever you run 'startx ~/.xinitrc'   \n\
-\n\
-wmde=\${1:-$default_wmde} \n \
-case \"\$wmde\" in \n \
-    \"$default_wmde\") \n\
-        ;;\n\
-    *)\n\
+    [$xinitrc]="# --- X Initialization Resource Control
+# This file executes whenever you run 'startx ~/.xinitrc'
+
+wmde=\${1:-$default_wmde} 
+case \"\$wmde\" in
+    \"$default_wmde\")
+        ;;
+    *)
         echo Invalid Window Manager or Desktop Environment
-        ;;\n\
+        ;;
 esac
 "
 )
