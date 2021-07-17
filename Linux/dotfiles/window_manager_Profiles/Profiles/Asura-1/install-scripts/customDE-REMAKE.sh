@@ -51,6 +51,7 @@
 #           - Fixed typos                                                               #
 #   - 2021-07-18 0630H, Asura                                                           #
 #       i. Added sudo to useradd (permission error)                                     #
+#       ii. Added validation for 'aur_install()' --> Check if git is installed          #
 # ===================================================================================== #
 
 # --- NOTES
@@ -943,6 +944,13 @@ if [[ "$DISTRO" == "ArchLinux" ]]; then
         git_project="$2"                        # Output Git project name
         git_fldrname="${3:-$git_project}"       # Git's folder name; default: git file name
         out_fldr_path="${4:-$PWD}"              # Output folder where you want to clone to
+
+        ### Validation ###
+        # Check if 'git' is installed
+        if [[ "$(pacman -Qq | grep 'git')" == "" ]]; then
+            # If not installed
+            $install_Command "git"
+        fi
 
         # --- Processing
         if [[ ! -d $out_fldr_path/$git_fldrname ]]; then
