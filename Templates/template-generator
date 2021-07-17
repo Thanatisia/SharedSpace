@@ -272,7 +272,7 @@ gen()
 				generate_success+=("$out_path/$out_file")
 			else
 				# if failed
-				generate_error+=("$out_path/$out_file)
+				generate_error+=("$out_path/$out_file")
 			fi
 		done
 	else
@@ -285,7 +285,7 @@ gen()
 			generate_success+=("$out_path/$out_file")
 		else
 			# if failed
-			generate_error+=("$out_path/$out_file)
+			generate_error+=("$out_path/$out_file")
 		fi
 	fi
 
@@ -307,13 +307,13 @@ gen()
 init()
 {
 	### Initialization ###
-	echo "Complete"
+	echo "Initialization Completed"
 }
 
 setup()
 {
 	### Post-Initialization Setup ###
-	echo "Complete"
+	echo "Setup Completed"
 }
 
 bootup()
@@ -331,7 +331,7 @@ bootup()
 end()
 {
 	### End ###
-	end_msg="${1:-"Press anything to exit..."}
+	end_msg=${1:-"Press anything to exit..."}
 	read -p "$end_msg" tmp
 	exit
 }
@@ -342,7 +342,10 @@ main()
 	filetypes="${argv[@]}"
 	argc="${#filetypes[@]}"
 
-
+	for lang in "${filetypes[@]}"; do
+		# Generate All specified file types
+		gen $lang
+	done
 }
 
 if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
