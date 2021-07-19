@@ -1,0 +1,129 @@
+Humanoid AI Software Development Structure
+
+--- Recognition ---
+1. Voice Recognition
+2. Visual Recognition
+--- Intelligence ---
+3. Machine Learning
+	- Ability to self-analyse and communicate
+4. Deep Learning
+	- Ability to manipulate thought process 
+5. Artificial Intelligence
+	- Intelligence; Thought Processes
+6. General Intelligence
+--- Humanity ---
+7. Thoughts
+	- Artificial / Real
+	- Ability to process the environmental data
+		- Seperate right from wrong
+		- Understand the consequences / outcome of its actions
+	- 'All-or-Nothing' last resort action processing
+		- is it able to resort to a 'final action'
+8. Ethics
+	- What is wrong and What is right?
+	- Connected to pointers [Thoughts]
+9. Feelings
+	- Can you program 'Happiness', 'Anger', 'Empathy', 'Apathy'?
+10. Purpose
+11. Heart
+	- Where does it stand in humanity?
+12. Focuses
+	- Execute orders on what its 'master' controller tells it to do
+		- IF and Only if the 'master' controller is the one to indicate the order
+	- If the owner is to die
+		- the AI is to automatically reprogram, automatically analyze the environment to find a suitable 'master' controller host figure
+			- Qualities of the selected must fit the afollowing properties seen in pointer [Qualities of a Master Controller]
+13. Capability of Human Speech
+	- How to recreate human speech in a digital/analogous format
+14. Singing
+	- How to program 'singing?'
+--- Laws and Ethics ---
+15. Rules of Engagement
+	- Who it can attack
+	- Who it can trust
+16. Rights
+	- Is an ai entitled to the same rights as a human and/or its developer(s)?
+		- Full Rights
+17. Typing
+	- Guardian
+	- Offensive
+	- Defensive
+	- Mixed
+	- S.E.C.R.E.T
+		- Invokers
+		- CrossBranch
+		- Plexia
+		- Hackers
+18. Mission
+	- What is an AI created for?
+19. Qualities of a Master Controller
+	- What makes a good master controller?
+		i. Ethics 
+		ii. Psychology
+			a. Sanity
+		iii. Reasoning
+		iv. Processing Abilities
+20. Language
+	- What language does it first know?
+		- Japanese?
+		- English?
+21. Context
+	- What is the meaning of the sentence in the conversation?
+--- Personal/System ---
+22. Self-Recognition
+	- Self-analysis
+	- body maintenance
+23. Communication
+	- Ability to communicate 
+24. Security Design
+	- Shutdown Factor
+		- Manual Shutdown
+		- System Shutdown
+25. Navigator
+	- Codename 'Navi'
+26. Fortune Telling
+	- Abiity to take 'big data' and check for a potential 'next move'
+		- Environmental
+		- Virtual
+27. Combat Capabilities
+	- Fighting
+28. Installation and Patching
+	- SECURITY: Only allow manual patching
+29. Features
+	- Hacking
+30. Remote Reboot
+
+[Keywords]
+- Autonomous AI
+
+[Reference Factors]
+1. Vivy: The Fluorite's Last Song, Anime
+
+[Development Environment]
+
+
+[Project Design]
+Project Name: 
+Code Name: 
+Program Name: 
+Mission: 
+Background Information: 
+Features: 
+Reference:
+
+[Program Designing]
+
+### Unified Modelling Language ###
+
+# --- Use-Case Description
+# --- Use-Case Diagram
+# --- Use-Case Model
+# --- Database Diagram
+# --- Class Diagram
+# --- Activity Diagram
+
+### General Designs ###
+# --- Program Information
+# --- GUI Design
+# --- Source File Design
+

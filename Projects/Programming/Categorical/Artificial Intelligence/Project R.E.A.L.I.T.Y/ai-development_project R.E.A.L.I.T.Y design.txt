@@ -1,0 +1,13 @@
+AI Development Project: Project::R.E.A.L.I.T.Y
+
+[Development Environment]
+
+[Project Design]
+Project Name: Project::R.E.A.L.I.T.Y
+Code Name: Code Automata=Utopia
+Program Name: Diva
+Mission: To make the world happy even when I am gone, in the form of singing
+Background Information: 
+	- Humanity's first intelligent autonomous AI software and eventually - AI Hardware
+Features: 
+Reference:
