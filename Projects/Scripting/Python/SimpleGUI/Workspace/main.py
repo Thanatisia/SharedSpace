@@ -40,7 +40,12 @@ if not (setup.linux_distro == "N/A"):
     # ArchLinux
     setup = setup.Setup()
     try:
-        setup.install_pkg("tk")
+        pkg_name = "tk"
+        install_check = setup.pkg_installed(pkg_name)
+        if not (install_check):
+            # True = Installed
+            # False = Not Installed
+            setup.install_pkg(pkg_name)
     except:
         print("You need to install these packages to proceed, exitting.")
         exit()
