@@ -8,6 +8,33 @@ Setup Process
 import os
 import sys
 import subprocess
+import platform
+
+### Check OS ###
+os_platform = platform.system()
+os_release = platform.release()
+os_version = platform.version()
+
+if not (os_platform == "Windows"):
+	# Non-Windows, probably UNIX, Linux or MacOS
+
+	def get_linux_info():
+		# Get Linux Distro Information
+		proc = subprocess.Popen(['uname', '-a'], stdout=subprocess.PIPE)
+		out = proc.communicate()[0]
+		linux_info = out.decode().rstrip('\n').split(' ')
+		return linux_info
+	
+	def get_linux_distro():
+		# Get Linux Distro
+		linux_info = get_linux_info()
+		linux_distro = linux_info[1]
+		return linux_distro
+
+	linux_distro = get_linux_distro()
+else:
+	# Windows
+	linux_distro = "N/A"
 
 ### Pip ###
 class Setup():
@@ -32,7 +59,7 @@ class Setup():
 		Check if package exists
 		"""
 		# cmd="{} -c \"import {}\"".format(sys.executable, package_name)
-		cmd = [sys.executable, '-c', "import {}\"".format(package_name)]
+		cmd = [sys.executable, '-c', "import {}".format(package_name)]
 		child = subprocess.Popen(cmd, stdout=subprocess.PIPE)
 		streamdata = child.communicate()[0]
 		rc = child.returncode
@@ -43,6 +70,20 @@ class Setup():
 		Install package using pip
 		"""
 		subprocess.check_call([sys.executable], "-m", "pip", "install", package_name)
+
+	"""
+	Linux-specific functions
+	"""
+	if not (os_platform == "Windows"):
+		# Linux / UNIX / MacOS
+		if linux_distro == "ArchLinux":
+			# pacman
+			def install_pkg(self, package_name):
+				"""
+				Install package using package manager
+				"""
+				cmd = ["sudo", "pacman", "-S", package_name]
+				subprocess.check_call(cmd)
 
 setup = Setup()
 

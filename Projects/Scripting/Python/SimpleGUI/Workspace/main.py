@@ -35,7 +35,11 @@ import sqlite3 as sqlite
 ### External Modules ###
 import setup
 setup.install_pip()
-setup.install_if_not_exist("tkinter")
+setup.install_if_not_exist("tk")
+if not (setup.linux_distro == "N/A"):
+    # ArchLinux
+    setup = setup.Setup()
+    setup.install_pkg("tk")
 
 # GUI Modules
 import tkinter as tk
