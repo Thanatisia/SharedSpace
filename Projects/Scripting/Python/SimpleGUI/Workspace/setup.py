@@ -20,7 +20,8 @@ class Setup():
 			python get-pip.py
 		"""
 		# Get Return Code
-		cmd="{} -m pip --version".format(sys.executable)
+		# cmd="{} -m pip --version".format(sys.executable)
+		cmd = [sys.executable, "-m", "pip", "--version"]
 		child = subprocess.Popen(cmd, stdout=subprocess.PIPE)
 		streamdata = child.communicate()[0]
 		rc = child.returncode
@@ -31,7 +32,7 @@ class Setup():
 		Check if package exists
 		"""
 		# cmd="{} -c \"import {}\"".format(sys.executable, package_name)
-		cmd = [sys.executable, '-c', "\"import {}\"".format(package_name)]
+		cmd = [sys.executable, '-c', "import {}\"".format(package_name)]
 		child = subprocess.Popen(cmd, stdout=subprocess.PIPE)
 		streamdata = child.communicate()[0]
 		rc = child.returncode
