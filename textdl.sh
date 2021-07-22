@@ -1,18 +1,23 @@
 ######## Text File Download Manager #########
-#	Program Name: textdl  					#
-#	Program Version: v1.0.0					#
-#	Project Name: Proj DL					#
-#	Code Name: Code U.T.I.L.I.Z.E			#
-#	Author: Asura							#
-#	Created by: 2021-07-18 17:19H, Asura	#
-#	Modified by:							#
-#		- 2021-07-18 17:19H, Asura			#
-#	Changelogs:								#
-#		- 2021-07-18 17:19H, Asura			#
-#			- Created script file			#
-#		- 2021-07-19 14:45H, Asura			#
-#			- To test textdl				#
-#			- Added skeleton & functions	#
+#	Program Name: textdl                    #
+#	Program Version: v1.0.0                 #
+#	Project Name: Proj DL                   #
+#	Code Name: Code U.T.I.L.I.Z.E           #
+#	Author: Asura                           #
+#	Created by: 2021-07-18 17:19H, Asura    #
+#	Modified by:                            #
+#		- 2021-07-18 17:19H, Asura          #
+#	Changelogs:                             #
+#		- 2021-07-18 17:19H, Asura          #
+#			- Created script file           #
+#		- 2021-07-19 14:45H, Asura          #
+#			- To test textdl                #
+#			- Added skeleton & functions    #
+#		- 2021-07-21 09:11H, Asura          #
+#			- Modified                      #
+#			'if "__name__" == "__main__"''  # 
+#				condition to read success   #
+#				code                        # 
 #############################################
 
 # [Command Line Variables]
@@ -146,7 +151,7 @@ curl_git_rawtext()
 	if [[ "$path_to_file" == "" ]]; then
 		git_repo_raw_url+="$file_name"
 	else
-		git_repo_raw_url="$path_to_file/$file_name"
+		git_repo_raw_url+="$path_to_file/$file_name"
 	fi
 
 	# Curl the repo
@@ -227,7 +232,8 @@ main()
 
 # Curl 
 if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
-	if [[ `bootup` == "0" ]]; then
+	bootup
+	if [[ "$?" == "0" ]]; then
 		# No Error
 		main "$@"
 	fi
