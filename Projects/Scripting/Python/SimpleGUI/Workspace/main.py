@@ -39,7 +39,11 @@ setup.install_if_not_exist("tk")
 if not (setup.linux_distro == "N/A"):
     # ArchLinux
     setup = setup.Setup()
-    setup.install_pkg("tk")
+    try:
+        setup.install_pkg("tk")
+    except:
+        print("You need to install these packages to proceed, exitting.")
+        exit()
 
 # GUI Modules
 import tkinter as tk

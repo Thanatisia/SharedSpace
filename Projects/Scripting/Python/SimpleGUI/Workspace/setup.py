@@ -78,6 +78,21 @@ class Setup():
 		# Linux / UNIX / MacOS
 		if linux_distro == "ArchLinux":
 			# pacman
+			def pkg_installed(self, package_name):
+				"""
+				Checks if package is installed
+				| grep '^$package_name'
+				"""
+				rc = 0
+				cmd = ["pacman", "-Qq"]
+				child = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+				streamdata = child.communicate()[0]
+				decoded_streamdata = streamdata.decode()
+				list_installed_pkgs = decoded_streamdata.split('\n')[:-1]
+				# rc = child.returncode
+				rc = "package_name" in list_installed_pkgs
+				return rc
+
 			def install_pkg(self, package_name):
 				"""
 				Install package using package manager
