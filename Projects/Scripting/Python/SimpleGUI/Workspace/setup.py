@@ -90,7 +90,7 @@ class Setup():
 				decoded_streamdata = streamdata.decode()
 				list_installed_pkgs = decoded_streamdata.split('\n')[:-1]
 				# rc = child.returncode
-				rc = "package_name" in list_installed_pkgs
+				rc = package_name in list_installed_pkgs
 				return rc
 
 			def install_pkg(self, package_name):
