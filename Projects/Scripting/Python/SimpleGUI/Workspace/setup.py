@@ -122,3 +122,28 @@ def install_if_not_exist(package_name):
 		# If error, install
 		print("Module [{}] does not exist, installing...".format(package_name))
 		setup.install(package_name)
+
+
+def full_setup(*pkgs):
+	"""
+	:: Params
+		pkgs : The packages you want to check if exist
+			Type : argv (Tuple)
+	"""
+	install_pip()
+	install_if_not_exist("tk")
+	if not (linux_distro == "N/A"):
+		# ArchLinux
+		try:
+			# pkg_name = "tk"
+			number_of_pkgs = len(pkgs)
+			for i in range(number_of_pkgs):
+				pkg_name = pkgs[i]	# Current Package
+				install_check = setup.pkg_installed(pkg_name)
+				if not (install_check):
+					# True = Installed
+					# False = Not Installed
+					setup.install_pkg(pkg_name)
+		except:
+			print("You need to install these packages to proceed, exitting.")
+			exit()
