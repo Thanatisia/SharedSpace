@@ -74,7 +74,30 @@ class GeneralUtils():
                 Description: This is the arguments you want to pass to the function
                 Type: List
         """
-        return lambda lam : lambda_func(*lambda_args)
+        if not (lambda_args == None):
+            # return lambda lambda_args=lambda_args: lambda_func(*lambda_args)
+            return lambda x=lambda_args: lambda_func(*lambda_args)
+        else:
+            return None
+    def get_argv(self):
+        """ Get command line arguments 
+        - Returns a dictionary containing the key-value mapping of
+            "size"        : argc,         --> Total Arguments including the script name (index 0)
+            "script_name" : script_name,  --> The Script Name
+            "other_args"  : other_args,   --> Remaining Arguments excluding the script name
+        """
+        global args
+        
+        argv = sys.argv
+        argc = len(argv)
+        script_name = argv[0]
+        other_args = argv[1:]   # All other args except [0]
+        args = {
+            "size"          : argc,   # Total Arguments
+            "script_name"   : script_name, 
+            "other_args"    : other_args,
+        }
+        return args
 
 class GUIUtils():
     """ Python GUI utilities 
@@ -117,13 +140,13 @@ class GUIUtils():
             "hold-ctrl-press-up"    : "<Control-Up>",
             "changed-size"          : "<Configure>",
         }
-        def create_root(self, params=None):
+        def create_root(self, root_params=None):
             """
             Create a root / window (Top layer)
             using * will automatically convert variable-length argument to fit each parameter in function
             """
-            if not (params == None):
-                root = tk.Tk(**params)
+            if not (root_params == None):
+                root = tk.Tk(**root_params)
             else:
                 root = tk.Tk()
             return root
@@ -317,6 +340,12 @@ class GUIUtils():
             """
             widget.configure(**config_params)
         
+        def get_configure_keys(self, widget):
+            """
+            Returns the Keys for all .configure() can use
+            """
+            return widget.configure().keys()[0]
+        
         def start(self, window=None, params=None):
             """
             Start Window using mainloop
@@ -344,6 +373,47 @@ class GUIUtils():
             widget_info["widget_params"] = widget_params
             widget_info["pack_params"] = pack_params
             return widget_info
+
+        class Widgets():
+            """ Python GUI TKinter Widget-focused Utilities - wrappers etc. """
+            class Window():
+                """ TKInter Window Functions (root, TopLevel etc.) """
+                def set_geometry(self, window, width, height, x=0, y=0):
+                    window.geometry(f"{width}x{height}+{x}+{y}")
+                def set_title(self, window, title="tk"):
+                    window.title(title)
+                def design_root(self, root, root_design=None):
+                    """
+                    - Design the Root Window
+                    [Syntax]
+                    root_design = {
+                        "geometry" : {
+                            "width" : n,
+                            "height" : n,
+                            "x" : n,
+                            "y" : n
+                        },
+                        "title" : "tk"
+                    }
+                    """
+                    root_geometry = root_design["geometry"]
+                    root_title = root_design["title"]
+
+                    for k,v in root_design.items():
+                        # Key: Value
+                        # geometry : {
+                        #   "width" : n,
+                        #   "height" : n,
+                        #   "x" : n,
+                        #   "y" : n
+                        # },
+                        # title : <type string> 
+                        curr_param = root_design[k]
+
+                        if k == "geometry":
+                            tk_widget_windows_util.set_geometry(root, **curr_param) # Geometry takes Dictionary
+                        elif k == "title":
+                            tk_widget_windows_util.set_title(root, curr_param)      # Title is a string
 
         class Positions():
             """ Python GUI TKinter Utilities - Positioning (i.e. pack(), grid())"""
@@ -518,14 +588,6 @@ class GUIUtils():
                             curr_func_args = curr_event_map[1:] # Starting from index 1 onwards
                             tv.bind(curr_event, lambda x : curr_func_name(*curr_func_args))
 
-# Initialize Classes
-gen_utils = GeneralUtils()
-gui_utils = GUIUtils()
-tk_util = gui_utils.TKGUI()
-tk_pos_util = tk_util.Positions()
-ttk_util = tk_util.TTKUtil()
-tv_util = ttk_util.Tree()
-
 class ClassRoom():
     """ 
     This is a education-focused class which contains all the functions to test, learn and practice various topics im trying to read on
@@ -533,6 +595,71 @@ class ClassRoom():
     def __init__(self):
         # Initializer here
         print("Activating Class Room")
+
+    def Designer(self):
+        """
+        A DesignerCorner / DesignTable for users to make designs
+            - i.e.
+                thinking of project ideas & creating them for testing
+        """
+        print("Design Corner")
+
+        def filemanager():
+            """
+            A Simple File Manager GUI
+            """
+            # Functions
+            def test_click(msg="Hello World"):
+                print(msg)
+
+            # Create Root Window
+            root_params = {"screenName" : "Hello World"}
+            root = tk_util.create_root(root_params)
+
+            # Design Root Window
+            root_design = {
+                "title" : "File Manager",
+                "geometry" : {
+                    "width" : 640,
+                    "height" : 360,
+                    "x" : 300,
+                    "y" : 300
+                },
+            }
+            tk_widget_windows_util.design_root(root, root_design)
+                
+            # Create Widgets and Pack (Dynamically)
+            widget_params = {
+                "label" : [
+                    tk_util.create_widget_info(0, "lb_hello_world", {"text" : "Hello World"}, {"fill" : "x", "expand" : "1"}),
+                ],
+                "button" : [
+                    tk_util.create_widget_info(0, "btn_Click", {"text" : "Click Me!", "command" : gen_utils.map_func_arg(test_click, ["Clicked"])}, {"fill" : "y", "expand" : False})
+                ],
+                "frame" : [
+                    tk_util.create_widget_info(0, "frame_Main", None, {"fill" : "both", "expand" : True})
+                ]
+            }
+            # tk_util.set_widget(root, "label", widget_params)
+            # tk_util.set_widget(root, "frame", widget_params)
+            for k,v in widget_params.items():
+                tk_util.set_widget(root, f"{k}", widget_params)
+
+            # Start GUI main window
+            tk_util.start(root)
+
+
+        def run(RUN_ID=0):
+            """
+            Run Learning Room
+            """
+            RUN_ID = int(RUN_ID)    # Convert String input to integer
+            if RUN_ID == 1:
+                filemanager()
+            else:
+                print("Invalid Run ID")
+
+        run(sys.argv[1])
 
     def LearningRoom(self):
         print("Learning Room")
@@ -1017,7 +1144,7 @@ class ClassRoom():
             # Bind event
             tree.bind(
                 tk_util.widget_action_set["double-left-click"], 
-                gen_utils.map_func_arg(tv_util.on_tree_select, tree)
+                gen_utils.map_func_arg(tv_util.on_tree_select, [tree])
             )          
 
             # Set widget to grid position with {tree_grid_params} parameters
@@ -1060,6 +1187,7 @@ class ClassRoom():
             """
             Run Learning Room
             """
+            RUN_ID = int(RUN_ID)    # Convert String input to integer
             if RUN_ID == 1:
                 tk_1()
             elif RUN_ID == 2:
@@ -1069,7 +1197,7 @@ class ClassRoom():
             else:
                 print("Invalid Run ID")
 
-        run(2)
+        run(sys.argv[1])
 
     def PracticeGround(self):
         print("Practice Ground")
@@ -1077,17 +1205,31 @@ class ClassRoom():
     def TestBench(self):
         print("Test Bench")
 
+def init_classes():
+    global classroom, gen_utils, gui_utils, tk_util, tk_pos_util, tk_widget_util, tk_widget_windows_util, ttk_util, tv_util
+    # Initialize Classes
+    classroom = ClassRoom()
+    gen_utils = GeneralUtils()
+    gui_utils = GUIUtils()
+    tk_util = gui_utils.TKGUI()
+    tk_pos_util = tk_util.Positions()
+    tk_widget_util = tk_util.Widgets()
+    tk_widget_windows_util = tk_widget_util.Window()
+    ttk_util = tk_util.TTKUtil()
+    tv_util = ttk_util.Tree()
+
 def init():
     """ Initialization Function Here """
-    global classroom
-    print("Initializing...")
-    classroom = None
+    print("Initializing...")    
+    # Initialize all empty variables
+    # Initialize all classes
+    init_classes()
 
 def settings():
     """ Setup Function """
-    global classroom
     print("Setting up...")
-    classroom = ClassRoom()
+    # Setting / Getting command line arguments
+    gen_utils.get_argv()
 
 def bootup():
     """ Things to run after booting up
@@ -1099,7 +1241,8 @@ def bootup():
 
 def main():
     print("Hello World")
-    classroom.LearningRoom()
+    print(args)
+    classroom.Designer()
 
 if __name__ == "__main__":
     bootup()
