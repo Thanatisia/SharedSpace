@@ -245,6 +245,7 @@ declare -A user_Info=(
 	#	<primary_group>,
 	#	<secondary_group (put NIL if none),
 	#	<custom_directory_path (if custom_directory is True)>
+	#	<any other parameters>
 	# "
 	# [Examples]
 	# [1]="username,wheel,NIL,/home/profiles/username"

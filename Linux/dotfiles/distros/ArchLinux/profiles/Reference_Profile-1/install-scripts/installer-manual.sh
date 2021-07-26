@@ -19,6 +19,7 @@
 #	- 2021-06-23 2233H, Asura
 #	- 2021-07-12 0925H, Asura
 #	- 2021-07-12 1223H, Asura
+#	- 2021-07-26 1727H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -64,6 +65,9 @@
 #	- 2021-07-12 1223H, Asura
 #		- Added simple postinstallation basic commands such as enabling sudo and user management
 #		- no installation (to do in postinstallation setup script)
+#	- 2021-07-26 1727H, Asura
+#		- Transferred newest functions made in [installer-ux.min.sh]
+#			- Should now be working
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -194,12 +198,12 @@ declare -A user_Info=(
 	#	<username>,
 	#	<primary_group>,
 	#	<secondary_group (put NIL if none),
-	#	<custom_directory (Put 'True' for yes and 'False' for no)>,
 	#	<custom_directory_path (if custom_directory is True)>
+	#	<any other parameters>
 	# "
 	# [Examples]
 	# [1]="username,wheel,NIL,True,/home/profiles/username"
-	[1]="asura,wheel,NIL,True,/home/profiles/asura"
+	[1]="asura,wheel,NIL,/home/profiles/asura,NIL"
 )
 
 ### Network Configurations

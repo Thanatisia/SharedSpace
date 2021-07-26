@@ -31,6 +31,7 @@ import sys
 import subprocess
 # Database Modules
 import sqlite3 as sqlite
+import tkinter
 
 ### External Modules ###
 import setup
@@ -63,6 +64,14 @@ class GeneralUtils():
         Get a variable based off a string name
         """
         return eval(var_str)
+    def fstring(self, string="{}"):
+        """
+        Returns f-string
+        Syntax:
+            var = "Hello"
+            f"{var} world"
+        """
+        return f"{string}"
     def map_func_arg(self, lambda_func=None, lambda_args=None):
         """
         Generate a lambda function that will map a function with arguments in 1 line
@@ -587,6 +596,155 @@ class GUIUtils():
                             curr_func_name = curr_event_map[0]  # Starting from index 0
                             curr_func_args = curr_event_map[1:] # Starting from index 1 onwards
                             tv.bind(curr_event, lambda x : curr_func_name(*curr_func_args))
+                def def_col(self, window, tree=None, tree_params=None, columns=None, definitions=None, headings=None):
+                    """
+                    Define Tree Column Definition and Headers
+
+                    :: Params
+                        window:
+                            Description: The Main GUI (root, window etc)
+                            Type: tk.Tk() object
+                        tree (Optional):
+                            Description: The TreeView Object you want to define
+                            Type: ttk.TreeView() object
+                            Default: None
+                        columns:
+                            Description: The Columns in the Tree
+                            Type: List
+                            Default: None
+                        definitions:
+                            Description: The Definition of the Columns
+                            Type: List of Dictionaries
+                            Default: None
+                        headings:
+                            Description: The Heading of the Columns
+                            Type: List of Dictionarie
+                            Default: None
+                        tree_params (Optional):
+                            Description: TreeView Object Parameters; Not used if 'tree' is not None
+                            Type: Dictionary
+                            Default: None
+                    :: Syntax
+                    tree_columns = {
+                        "columns" : [],
+                        "definitions" : [
+                            {
+                                "column_id" : "col-name",
+                                "width" : n,
+                                "minwidth" : n,
+                                "others" : {
+                                    "stretch" : tk.NO
+                                }
+                            }
+                        ],
+                        "headings" : [
+                            {
+                                "column_id" : "col-name",
+                                "text" : "Name",
+                                "anchor" : {tk.N|tk.S|tk.E|tk.W,
+                                "others" : {
+
+                                }
+                            },
+                        ]
+                    }
+                    :: Examples
+                    tree_columns = {
+                        "columns" : ["one", "two"],
+                        "definitions" : [
+                            {
+                                "column_id" : "one",
+                                "width" : 270,
+                                "minwidth" : 270,
+                                "others" : {
+                                    "stretch" : tk.NO
+                                }
+                            },
+                            {
+                                "column_id" : "two",
+                                "width" : 150,
+                                "minwidth" : 150,
+                                "others" : {
+                                    "stretch" : tk.NO
+                                }
+                            },
+                        ],
+                        "headings" : [
+                            {
+                                "column_id" : "one",
+                                "text" : "Name",
+                                "anchor" : tk.W,
+                                "others" : {
+
+                                }
+                            },
+                            {
+                                "column_id" : "two",
+                                "text" : "Path",
+                                "anchor" : tk.W,
+                                "others" : {
+
+                                }
+                            },
+                        ]
+                    }
+                    """
+                    
+                    if tree == None:
+                        # Tree does not exist
+                        # ========================== #
+                        # Generate Tree(view) widget #
+                        # ========================== #
+                        # Create Tree Object
+                        if not (tree_params == None):
+                            # Params specified
+                            tree = ttk.Treeview(window, **tree_params)
+                        else:
+                            # No Params
+                            tree = ttk.Treeview(window)
+
+                    # Get Tree Information
+                    tree_col = columns
+                    tree_definitions = definitions
+                    tree_headers = headings
+                    
+                    # Set Tree Columns
+                    # tree["columns"] = ["one", "two", "three"]
+                    tree["columns"] = tree_col
+
+                    # ===================================================== #
+                    # Dynamically Define Tree Column Definition and Header  #
+                    # ===================================================== #
+
+                    # Define Tree Columns
+                    #   By defining stretch=tk.NO, the user cannot modify the width of the column
+                    # tree.column("#0", width=270, minwidth=270, stretch=tk.NO)
+                    # tree.column("one", width=150, minwidth=150, stretch=tk.NO)
+                    # tree.column("two", width=400, minwidth=200)
+                    # tree.column("three", width=80, minwidth=50, stretch=tk.NO)
+                    for defn_ID in range(len(tree_definitions)):
+                        curr_definition = tree_definitions[defn_ID]
+                        col_id = curr_definition["column_id"]
+                        col_def_width = curr_definition["width"],
+                        col_def_minwidth = curr_definition["minwidth"]
+                        col_other_params = curr_definition["others"]
+                        tree.column(col_id, width=col_def_width, minwidth=col_def_minwidth, **col_other_params)
+
+                    # Define Tree Headings
+                    # tree.heading("#0",text="Name",anchor=tk.W)
+                    # tree.heading("one", text="Date modified",anchor=tk.W)
+                    # tree.heading("two", text="Type",anchor=tk.W)
+                    # tree.heading("three", text="Size",anchor=tk.W)
+                    for header_ID in range(len(tree_headers)):
+                        curr_headings = tree_headers[header_ID]
+                        col_id = curr_headings["column_id"]
+                        col_text = curr_headings["text"],
+                        col_anchor = curr_headings["anchor"]
+                        col_other_params = curr_headings["others"]
+
+                        # Create tree heading
+                        tree.heading(col_id, text=col_text[0], anchor=col_anchor, **col_other_params) # col_text[0] : To bypass bug where curr_headings["text"] produces a tuple --> causes a column name with space to have '{}' surrounding it; Bypass : Take element 0 of the tuple (column text)
+                    return tree
 
 class ClassRoom():
     """ 
@@ -612,6 +770,111 @@ class ClassRoom():
             def test_click(msg="Hello World"):
                 print(msg)
 
+            def select_path():
+                """
+                Open File Dialog & Choose a Path to view
+
+                Search: 
+                    Python TKinter file dialog choose a path
+                        https://www.google.com/search?q=Python+TKinter+file+dialog+choose+a+path&oq=Python+TKinter+file+dialog+choose+a+path&aqs=chrome..69i57.3232j0j7&sourceid=chrome&ie=UTF-8
+
+                References:
+                    How to select a directory and store the location using tkinter in Python
+                        https://stackoverflow.com/questions/11295917/how-to-select-a-directory-and-store-the-location-using-tkinter-in-python
+                """
+                fdir = filedialog.askdirectory()
+                return fdir
+
+            def create_file(tv):
+                """
+                File Manager Function in {
+                    C : Create,
+                    R : Read,
+                    U : Update,
+                    D : Delete
+                ]
+                - Create file
+                """
+                new_files = {}  # To store all new files; syntax: { "file-name" : "file-path" }
+                curr_filename = ""
+                curr_filepath = ""
+
+                # Create New File
+                print("Creating new file...")
+
+                # Append file to new_files
+                new_files[curr_filename] = curr_filepath
+
+                return new_files
+
+            def open_path_in_treeview(window):
+                """
+                Opens the selected path and all its files in TreeView
+                """
+                fdir = select_path()
+                print(f"File Directory: {fdir}")
+
+                #############################
+                # GUI Page #2 : TreeView    #
+                #############################
+                tree_columns = {
+                    "columns" : ["one", "two", "three"],
+                    "definitions" : [
+                        {"column_id" : "#0" ,"width" : 50,"minwidth" : 50,"others" : {"stretch" : tk.NO}},
+                        {"column_id" : "one","width" : 270,"minwidth" : 270,"others" : {"stretch" : tk.NO}},
+                        {"column_id" : "two","width" : 150,"minwidth" : 150,"others" : {"stretch" : tk.NO}},
+                    ],
+                    "headings" : [
+                        {"column_id" : "#0" ,"text" : "ROW_ID"  ,"anchor" : tk.W,"others" : {}},
+                        {"column_id" : "one","text" : "Name"    ,"anchor" : tk.W,"others" : {}},
+                        {"column_id" : "two","text" : "Path"    ,"anchor" : tk.W,"others" : {}},
+                    ]
+                }
+                tree_param = {
+                    "columns" : tree_columns["columns"],
+                    "show" : "headings"
+                }
+                tree = tv_util.def_col(root, None, tree_param, **tree_columns)
+
+                # Populate Tree
+                """
+                - Get all files and folders in directory
+                """
+                tree_values = []
+                files = os.listdir(fdir)    # List
+                number_of_files = len(files)
+                for f_ID in range(number_of_files):
+                    # Populate Rows
+                    f = files[f_ID]
+                    new_row = [f_ID, f, fdir]
+                    tree_values.append(new_row)   # Append List because each row is a tuple / list
+
+                    # Insert data to TreeView
+                    number_of_values = len(tree_values)
+                    for v_ID in range(number_of_values):
+                        curr_val = tree_values[v_ID]
+                        print("Current Value: {}".format(curr_val))
+                        tree.insert("", index=tk.END, values=curr_val)
+
+                # Pack Tree Object
+                tree_pack = {
+                    "fill" : tk.BOTH,
+                    "expand" : True
+                }
+                tree.pack(**tree_pack)
+
+                # Create other Widgets
+                tv_widget_params = {
+                    "button" : [
+                        tk_util.create_widget_info(1, "btn_create_file", {"text" : "Add New Files", "command" : gen_utils.map_func_arg(create_file, [tree])}, {"fill" : "y", "expand" : False}),
+                    ]
+                }
+                for k,v in tv_widget_params.items():
+                    tk_util.set_widget(root, f"{k}", tv_widget_params)
+
+            #########################
+            # GUI Page #1 : Root    #
+            #########################
             # Create Root Window
             root_params = {"screenName" : "Hello World"}
             root = tk_util.create_root(root_params)
@@ -634,7 +897,7 @@ class ClassRoom():
                     tk_util.create_widget_info(0, "lb_hello_world", {"text" : "Hello World"}, {"fill" : "x", "expand" : "1"}),
                 ],
                 "button" : [
-                    tk_util.create_widget_info(0, "btn_Click", {"text" : "Click Me!", "command" : gen_utils.map_func_arg(test_click, ["Clicked"])}, {"fill" : "y", "expand" : False})
+                    tk_util.create_widget_info(0, "btn_Click", {"text" : "Click Me!", "command" : gen_utils.map_func_arg(open_path_in_treeview, [root])}, {"fill" : "y", "expand" : False}),
                 ],
                 "frame" : [
                     tk_util.create_widget_info(0, "frame_Main", None, {"fill" : "both", "expand" : True})

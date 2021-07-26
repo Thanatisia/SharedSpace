@@ -18,6 +18,7 @@
 #	- 2021-06-23 2233H, Asura
 #	- 2021-07-12 0925H, Asura
 #	- 2021-07-12 1223H, Asura
+#	- 2021-07-26 1727H, Asura
 # Features: 
 #	- Full minimal user input install script
 # Background Information: 
@@ -62,6 +63,9 @@
 #	- 2021-07-12 1223H, Asura
 #		- Added simple postinstallation basic commands such as enabling sudo and user management
 #		- no installation (to do in postinstallation setup script)
+#	- 2021-07-26 1727H, Asura
+#		- Transferred newest functions made in [installer-ux.min.sh]
+#			- Should now be working
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -88,12 +92,13 @@ PROGRAM_TYPE="Main"
 MODE="${1:-DEBUG}" # { DEBUG | RELEASE }
 DISTRO="ArchLinux"
 
+########## EDIT THIS ##########
 # [Must change edits]
 # Aka for those labelled with 'EDIT: MODIFY THIS'
 #	- This is a test 'UX' design variant of the program whereby its meant to be user-friendly
 #	- If you want to use this as intended,
 #		Please edit all parameters with 'EDIT: Modify this'
-# 
+
 deviceParams_devType="microSD"
 deviceParams_Name="/dev/sdb"
 deviceParams_Size="256.0GB"
@@ -133,18 +138,25 @@ location_KeyboardMapping="en_UTF-8"
 user_ProfileInfo=(
 	# Append this and append a [n]="${user_ProfileInfo[<n-1>]}" in
 	# 	user_Info
+	# Note:
+	#	- Please seperate all parameters with delimiter ','
+	#	- Please seperate all subvalues with delimiter ';'
+	# Syntax:
 	# "
 	#	<username>,
 	#	<primary_group>,
 	#	<secondary_group (put NIL if none),
-	#	<custom_directory (Put 'True' for yes and 'False' for no)>,
-	#	<custom_directory_path (if custom_directory is True)>
+	#	<custom_directory_path (put NIL if none)>,
+	#	<any_other_Parameters>
 	# "
-	"asura,wheel,NIL,True,/home/profiles/asura"
+	"asura,wheel,NIL,/home/profiles/asura,NIL"
 )
 networkConfig_hostname="ArchLinux"
 bootloader="grub"
 bootloader_Params=""
+
+# [Empty Data Storage]
+external_scripts=()
 
 # [Associative Array]
 
@@ -219,16 +231,18 @@ declare -A user_Info=(
 	# [Delimiters]
 	# , : For Parameter seperation
 	# ; : For Subparameter seperation (seperation within a parameter itself)
+	# [Notes]
+	# Please put 'NIL' for empty space
 	# [Syntax]
 	# ROW_ID="
 	#	<username>,
 	#	<primary_group>,
 	#	<secondary_group (put NIL if none),
-	#	<custom_directory (Put 'True' for yes and 'False' for no)>,
 	#	<custom_directory_path (if custom_directory is True)>
+	#	<any other parameters>
 	# "
 	# [Examples]
-	# [1]="username,wheel,NIL,True,/home/profiles/username"
+	# [1]="username,wheel,NIL,/home/profiles/username"
 	[1]="${user_ProfileInfo[0]}"
 )
 
@@ -278,6 +292,33 @@ debug_printAll()
 		*)
 			;;
 	esac
+}
+seperate_by_Delim()
+{
+	#
+	# Seperate a string into an array by the delimiter
+	#
+
+	# --- Input
+	
+	# Command Line Argument
+	str="$1"			# String to be seperated
+	delim="${2:-';'}"	# Delimiter to split
+
+	# Local Variables
+
+	# Array
+	content=()			# Array container to store results
+	char=''				# Single character for splitting element of a string
+
+	# Associative Array
+
+	# --- Processing
+	# Split string into individual characters
+	IFS=$delim read -r -a content <<< "$str"
+	
+	# --- Output
+	echo "${content[@]}"
 }
 
 # Installation stages
@@ -573,8 +614,6 @@ arch_chroot_Exec()
 		"mkinitcpio -P linux-lts"														# Step 13: Initialize RAM file system; Create initramfs image (linux-lts kernel)
 		"echo ======= Change Root Password ======="										# Step 14: User Information; Set Root Password
 		"passwd"																		# Step 14: User Information; Set Root Password
-		"echo ======= Enable sudo ======="												# Step 15: Enable sudo for group 'wheel'
-		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# Step 15: Enable sudo for group 'wheel'
 	)
 
 	# --- Extra Information
@@ -689,6 +728,10 @@ arch_chroot_Exec()
 	#		arch-chroot $dir_Mount $c
 	#	fi
 	#done
+	external_scripts+=(
+		### Append all external scripts used ###
+		$mount_Root/$script_to_exe
+	)
 
 	if [[ "$MODE" == "DEBUG" ]]; then
 		echo "chmod +x $mount_Root/$script_to_exe"
@@ -700,6 +743,153 @@ arch_chroot_Exec()
 	# --- Output
 }
 
+
+# =========================== #
+# Post-Installation Functions #
+# =========================== #
+# User Management
+get_users_Home()
+{
+	#
+	# Get the home directory of a user
+	#
+	USER_NAME=$1
+	HOME_DIR=""
+	if [[ ! "$USER_NAME"  == "" ]]; then
+		# Not Empty
+		HOME_DIR=$(su - $USER_NAME -c "echo \$HOME")
+	fi
+	echo "$HOME_DIR"
+}
+check_user_Exists()
+{
+	#
+	# Check if user exists
+	#
+	user_name="$1"
+	exist_Token="0"
+	delimiter=":"
+	res_Existence="$(getent passwd $user_name)"
+
+	if [[ ! "$res_Existence" == "" ]]; then
+		# Something is found
+		# Check if is the user
+		res_is_User=$(echo "$res_Existence" | grep "^$user_name:" | cut -d ':' -f1)
+
+		if [[ "$res_is_User" == "$user_name" ]]; then
+			exist_Token="1"
+		fi
+	fi
+
+	echo "$exist_Token"
+}
+useradd_get_default_Params()
+{
+    #
+    # Useradd
+    #   - Get Default Parameters
+    #
+    declare -A params=(
+        [group]="$(useradd -D | grep GROUP | cut -d '=' -f2)"
+        [home]="$(useradd -D | grep HOME | cut -d '=' -f2)"
+        [inactive]="$(useradd -D | grep INACTIVE | cut -d '=' -f2)"
+        [expire]="$(useradd -D | grep EXPIRE | cut -d '=' -f2)"
+        [shell]="$(useradd -D | grep SHELL | cut -d '=' -f2)"
+        [skeleton-path]="$(useradd -D | grep SKEL | cut -d '=' -f2)"
+        [create-mail-spool]="$(useradd -D | grep CREATE_MAIL_SPOOL | cut -d '=' -f2)"
+    )
+    default_Params=()
+
+    keywords=(
+        "GROUP"
+        "HOME"
+        "INACTIVE"
+        "EXPIRE"
+        "SHELL"
+        "SKEL"
+        "CREATE_MAIL_SPOOL"
+    )
+    for k in "${keywords[@]}"; do
+        # Put all keywords with the default values
+        # default_Params[$k]="$(useradd -D | grep $k | cut -d '=' -f2)"
+        default_Params+=("$(useradd -D | grep $k | cut -d '=' -f2)")
+    done
+
+    echo "${default_Params[@]}"
+}
+get_all_users()
+{
+	#
+	# Check if user exists
+	#
+	exist_Token="0"
+	delimiter=":"
+	res_Existence="$(getent passwd)"
+    all_users=($(cut -d ':' -f1 /etc/group | tr '\n' ' '))
+
+	echo "${all_users[@]}"
+}
+get_user_primary_group()
+{
+    #
+    # Just retrieves the user's primary group (-g)
+    #
+    user_name="$1"
+    primary_group="$(id -gn $user_name)"
+    echo "$primary_group"
+}
+create_user()
+{
+    # =========================================
+    # :: Function to create user lol
+    #   1. Append all arguments into the command
+    #   2. Execute command and create
+    # =========================================
+
+    # --- Head
+    ### Parameters ###
+    u_name="$1"                 # User Name
+    # Get individual parameters
+    u_primary_Group="$2"        # Primary Group
+    u_secondary_Groups="$3"     # Secondary Groups
+    u_home_Dir="$4"             # Home Directory
+    u_other_Params="$5"         # Any other parameters after the first 3
+
+    # Local variables
+    u_create_Command="useradd"
+    create_Token="0"            # 0 : not Created; 1 : Created
+
+    # --- Processing
+    # Get Parameters
+    if [[ ! "$u_home_Dir" == "NIL" ]]; then
+        # If Home Directory is not Empty
+        u_create_Command+=" -m "
+        u_create_Command+=" -d $u_home_Dir "
+    fi
+
+    if [[ ! "$u_primary_Group" == "NIL" ]]; then
+        # If Primary Group is Not Empty
+        u_create_Command+=" -g $u_primary_Group "
+    fi
+
+    if [[ ! "$u_secondary_Groups" == "NIL" ]]; then
+        # If Primary Group is Not Empty
+        u_create_Command+=" -G $u_secondary_Groups "
+    fi
+
+    if [[ ! "$u_other_Params" == "NIL" ]]; then
+        # If there are any miscellenous parameters
+        u_create_Command+=" $u_other_Params "
+    fi
+
+    u_create_Command+="$u_name"
+
+    # --- Output
+    # Return Create Command
+	echo "$u_create_Command"
+}
+
+# Post-Installation Stages
 postinstallation()
 {
 	#
@@ -707,16 +897,94 @@ postinstallation()
 	# - To be seperated into its own individual scripts for running
 	# 
 
-	postinstall_commands=(
+	### Header ###
+
+	# Local Variable
+	postinstall_commands=()
+
+	### Body ###
+	# =========== #
+	# Enable Sudo #
+	# =========== #
+	postinstall_commands+=(
 		"echo ======= Enable sudo ======="												# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'
-		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'		
+		"sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers"				# PostInstall Must Do | Step 1: Enable sudo for group 'wheel'
 	)
 
+	# =============== #
+	# User Management #
+	# =============== #
+	postinstall_commands+=(
+		"echo ======= User Management ======="
+	)
+    # Loop through all users in user_profiles and
+    # See if it exists, follow above documentation
+    for u_ID in "${!user_Info[@]}"; do
+		curr_user="${user_Info[$u_ID]}"
+		curr_user_Params=($(seperate_by_Delim $curr_user ','))
+    
+        # Get individual parameters
+		u_name="${curr_user_Params[0]}"					# User Name
+        u_primary_Group="${curr_user_Params[1]}"        # Primary Group
+        u_secondary_Groups="${curr_user_Params[2]}"     # Secondary Groups
+        u_home_Dir="${curr_user_Params[3]}"             # Home Directory
+        u_other_Params="${curr_user_Params[@]:4}"       # Any other parameters after the first 3
+
+		# Check if user exists
+        u_Exists="$(check_user_Exists $u_name)" # Check if user exists; 0 : Does not exist | 1 : Exists
+
+        if [[ ! "$u_Exists" == "1" ]]; then
+            # 0 : Does not exist
+            echo "User [$u_name] does not exist"
+
+            u_create_Command="useradd"
+            # Get Parameters
+            if [[ ! "$u_home_Dir" == "NIL" ]]; then
+                # If Home Directory is not Empty
+                u_create_Command+=" -m "
+                u_create_Command+=" -d $u_home_Dir "
+            fi
+
+            if [[ ! "$u_primary_Group" == "NIL" ]]; then
+                # If Primary Group is Not Empty
+                u_create_Command+=" -g $u_primary_Group "
+            fi
+
+            if [[ ! "$u_secondary_Groups" == "NIL" ]]; then
+                # If Primary Group is Not Empty
+                u_create_Command+=" -G $u_secondary_Groups "
+            fi
+
+            if [[ ! "$u_other_Params" == "NIL" ]]; then
+                # If there are any miscellenous parameters
+                u_create_Command+=" $u_other_Params "
+            fi
+
+            u_create_Command+="$u_name"
+
+			postinstall_commands+=(
+				"$u_create_Command"
+			    "echo ==========================="
+                "echo Password change for $u_name"
+                "echo ==========================="
+				"if [[ \"\$?\" == \"0\" ]]; then"
+                "	passwd $u_name"
+				"fi"
+			)
+        fi
+    done
 	
+	
+	### Footer ###
+
+	# =============== #
+	# Execute Command #
+	# =============== #
+
 	# Combine into a string
 	cmd_str=""
-	for c in "${chroot_commands[@]}"; do
-		cmd_str+="\n$c;"
+	for c in "${postinstall_commands[@]}"; do
+		cmd_str+="\n$c"
 	done
 	
 	# Cat commands into script file in mount root
@@ -737,6 +1005,13 @@ postinstallation()
 		chmod +x $mount_Root/$script_to_exe
 		arch-chroot $dir_Mount /bin/bash -c "$PWD/$script_to_exe"
 	fi
+	
+	external_scripts+=(
+		### Append all external scripts used ###
+		$mount_Root/$script_to_exe
+	)
+
+	read -p "Finished, press anything to quit." finish
 
 	echo "- Please proceed to follow the 'Post-Installation' series of guides"
 	echo "and/or"
@@ -753,7 +1028,7 @@ postinstallation()
 	echo "			- Automatic removal of comments in a file"
 	echo ""
 	# Command and Control
-	echo " 2. Set sudo priviledges"
+	echo " 2. [To validate if is done] Set sudo priviledges"
 	echo "		Summary:"
 	echo "			Ability to use 'sudo'"
 	echo "		i. Use 'visudo' to enter the sudo file safely"
@@ -839,6 +1114,58 @@ postinstall_user_create()
 	echo "			su - <username>"
 	echo "			sudo whoami"
 	echo "		iv. If part iii works : User has been created."
+}
+
+postinstall_sanitize()
+{
+	# ========================== #
+	#        Sanitize user       #
+	#   To sanitize the account  #
+	# from any unnecessary files #
+	# ========================== #
+	number_of_external_scripts="${#external_scripts[@]}"
+	echo -e "External Scripts created:"
+	for ((i=0; i < $number_of_external_scripts; i++)); do
+		echo "[$i] : [${external_scripts[$i]}]"
+	done
+	read -p "Delete the scripts? [(Y)es|(N)o|(S)elect]: " del_conf
+	# Yes - Delete
+	# No - Nothing
+	# Select - Allow user to choose
+	case "$del_conf" in
+		"Y" | "Yes") 
+			# Delete all
+			for ((i=0; i < $number_of_external_scripts; i++)); do
+				if [[ "$MODE" == "DEBUG" ]]; then
+					echo "rm -r ${external_scripts[$i]}"
+				else
+					rm -r ${external_scripts[$i]}
+				fi
+			done
+			;;
+		"S" | "Select")
+			# Let user choose
+			# Seperate all options with delimiter ','
+			echo -e "Please enter all files you wish to delete\n	(Seperate all options with delimiter ',')"
+			read -p "> : " del_selections
+			# Seperate selected options with ',' delimited
+			arr_Selected=($(seperate_by_Delim "$del_selections" ','))
+			# Delete selected files if not empty
+			if [[ ! "$del_selections" == "" ]]; then
+				for sel in "${arr_Selected[@]}"; do
+					# Delete selected files
+					if [[ "$MODE" == "DEBUG" ]]; then
+						echo "rm -r ${external_scripts[$sel]}"
+					else
+						rm -r ${external_scripts[$sel]}
+					fi
+				done
+			fi
+			;;
+		*)
+			;;
+	esac
+	echo "Sanitization Completed."
 }
 
 installer()
@@ -955,6 +1282,21 @@ installer()
 	echo "================="
 	postinstallation
 
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
+
+	echo ""
+
+	echo "========================"
+	echo "Sanitization and Cleanup"
+	echo "========================"
+	postinstall_sanitize
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Press anything to continue..." tmp
+	fi
+
 	echo ""
 }
 
@@ -1003,4 +1345,5 @@ if [[ "${BASH_SOURCE[@]}" == "${0}" ]]; then
 	main "$@"
     END
 fi
+
 
