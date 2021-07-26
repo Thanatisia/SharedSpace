@@ -12,6 +12,7 @@
 #   - 2021-07-15 1156H, Asura                                                           #
 #   - 2021-07-15 1221H, Asura                                                           #
 #   - 2021-07-18 0630H, Asura                                                           #
+#   - 2021-07-26 1839H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -52,6 +53,9 @@
 #   - 2021-07-18 0630H, Asura                                                           #
 #       i. Added sudo to useradd (permission error)                                     #
 #       ii. Added validation for 'aur_install()' --> Check if git is installed          #
+#   - 2021-07-26 1839H, Asura                                                           #
+#       i. Fixed typo error with package name 'subime-text-dev' --> 'sublime-text-dev'  #
+#       ii. Added sudo behind chown just in case                                        #
 # ===================================================================================== #
 
 # --- NOTES
@@ -261,7 +265,7 @@ declare -A git_aur_packages_manual=(
 	#	[yay]="yay-git,https://aur.archlinux.org/yay-git.git"
 	#   [yay-git]="git,https://aur.archlinux.org/yay-git.git"
     [brave-bin]="brave-bin,https://aur.archlinux.org/brave-bin.git"
-    [subime-text-dev]="subime-text-dev,https://aur.archlinux.org/sublime-text-dev.git"
+    [sublime-text-dev]="sublime-text-dev,https://aur.archlinux.org/sublime-text-dev.git"
 )
 declare -A git_aur_packages_aur_Helper=(
 	# Place all your AUR packages (aka git packages) here alongside the links
@@ -832,7 +836,7 @@ change_owner()
         if [[ "$MODE" == "DEBUG" ]]; then
             echo -e "chown -R $new_owner_uname:$new_owner_primary_group \"$target\""
         else
-            chown -R $new_owner_uname:$new_owner_primary_group "$target"
+            sudo chown -R $new_owner_uname:$new_owner_primary_group "$target"
         fi
     else
         echo "No file/folder specified."
@@ -1338,9 +1342,9 @@ pkg_install()
                                     echo "Package Link: $aur_url"
                                     echo "Package File   Name: $pkgname"
                                     echo "Package Folder Name: $pkg_fldrname"
-                                    echo "Package Output Path: $out_fldrpath"
+                                    echo "Package Output Path: $out_fldr_path"
                                     # Install AUR
-                                    ret_code=`aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldrpath"`
+                                    ret_code=`aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldr_path"`
                                     cd $const_HOME_DIR  # Change back to home page
                                     if [[ "$ret_code" == "0" ]]; then
                                         # Success
