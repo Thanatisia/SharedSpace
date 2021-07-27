@@ -874,6 +874,7 @@ case "$DISTRO" in
 
                 # --- Output
                 echo "$?"
+            fi
         }
         setup_AUR()
         {
