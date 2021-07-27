@@ -15,6 +15,7 @@
 #   - 2021-07-26 1839H, Asura                                                           #
 #   - 2021-07-27 1108H, Asura                                                           #
 #   - 2021-07-27 1233H, Asura                                                           #
+#   - 2021-07-27 1341H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -65,6 +66,9 @@
 #       i. Created function 'is_pkg_installed' to check if package is installed         #
 #       ii. Realized that the reason why package checking is screwed is because         #
 #           of binary bs, darn it, added '!' to the pack of if package is installed     #
+#   - 2021-07-27 1341H, Asura                                                           #
+#       i. Removed 'echo $?' from aur package install function to use "$?" after        #
+#           running the function                                                        #
 # ===================================================================================== #
 
 # --- NOTES
@@ -992,7 +996,7 @@ case "$DISTRO" in
             fi
             cd $git_fldrname                        # Jump into cloned git folder
             makepkg -si                             # Compile and build package and Install
-            echo "$?"
+            # echo "$?"
         }
         ;;
     *)
@@ -1386,9 +1390,10 @@ pkg_install()
                                     echo "Package Folder Name: $pkg_fldrname"
                                     echo "Package Output Path: $out_fldr_path"
                                     # Install AUR
-                                    ret_code=`aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldr_path"`
+                                    # ret_code=`aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldr_path"`
+                                    aur_install "$aur_url" "$pkgname" "$pkg_fldrname" "$out_fldr_path"
                                     cd $const_HOME_DIR  # Change back to home page
-                                    if [[ "$ret_code" == "0" ]]; then
+                                    if [[ "$?" == "0" ]]; then
                                         # Success
                                         records_aur_links[$pkgname]="$aur_url"  # Append to AUR links records; used to git pull
                                         # Write to '.aur-installs'

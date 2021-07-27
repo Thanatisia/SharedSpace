@@ -52,6 +52,7 @@
   * 2021-05-23 2322H, Asura
   * 2021-06-15 2003H, Asura
   * 2021-06-25 1245H, Asura
+  * 2021-07-27 1242H, Asura
 
 
 # To Note
@@ -63,10 +64,21 @@
 2. To download a individual file, use wget or curl
    
    +  wget https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
+  
    +  curl -L -O https://raw.githubusercontent.com/$author-name/$repository-name/$branch-name/path/to/file
 
 3. Each folder will have its own README like this
 
+4. Recommended workflow
+     + curl the curl_repositories.sh script
+        + curl -L -O https://raw.githubusercontent.com/Thanatisia/SharedSpace/main/curl_repositories.sh
+     + Change Permission to allow execution
+       + chmod +x curl_repositories.sh
+     + Edit and append any and all links + filename of your requirement.
+     + Run script
+       +  ./curl_repositories.sh
+       - Enter your file of choice
+       - Download
 
 
 # Documentations
