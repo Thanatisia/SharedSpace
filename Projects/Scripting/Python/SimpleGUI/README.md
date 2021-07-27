@@ -38,7 +38,7 @@
   * 2021-07-25 1458H, Asura
   * 2021-07-25 2302H, Asura
   * 2021-07-25 2351H, Asura
-
+  * 2021-07-26 2350H, Asura
 
 
 ## To Note
@@ -154,6 +154,11 @@
       * Added arguments checker and set an argument to variable 'x' in lambda function
       * Fixed lambda function by setting x to lambda_args (x=lambda_args)
 
+* 2021-07-26 2350H, Asura
+  * setup.py
+    * Added new function 'get_all_installed_pkgs_with_description' --> Returns all packages installed with description
+      * Every Even index : Package Name       (index % 2 == 0)
+      * Every Odd index : Package Description (index % 3 == 0)
 
 # License
 

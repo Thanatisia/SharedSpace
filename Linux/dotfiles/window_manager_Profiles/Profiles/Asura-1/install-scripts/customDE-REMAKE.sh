@@ -13,6 +13,7 @@
 #   - 2021-07-15 1221H, Asura                                                           #
 #   - 2021-07-18 0630H, Asura                                                           #
 #   - 2021-07-26 1839H, Asura                                                           #
+#   - 2021-07-27 1108H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -56,6 +57,9 @@
 #   - 2021-07-26 1839H, Asura                                                           #
 #       i. Fixed typo error with package name 'subime-text-dev' --> 'sublime-text-dev'  #
 #       ii. Added sudo behind chown just in case                                        #
+#   - 2021-07-27 1108H, Asura                                                           #
+#       i. DEBUGGING: using pacman -Qi $package_name > /dev/null instead of grep for    #
+#           package checking                                                            #
 # ===================================================================================== #
 
 # --- NOTES
@@ -292,7 +296,7 @@ declare -A pkg_install_methods=(
 	#	[aur]="package-1;package-2;package-n"
     #   [yay]="package-1;package-2;package-n"
 	# Official
-	[pacman]="pcmanfm;qtile;alacritty;nitrogen;picom;conky;bluez;lxappearance-gtk3;neofetch;xorg;xorg-server"
+	[pacman]="pcmanfm;qtile;alacritty;nitrogen;picom;conky;bluez;lxappearance-gtk3;neofetch;xorg;xorg-server;xorg-xinit"
 	# AUR
     [aur]="brave-bin;sublime-text-dev"
     # AUR Helpers
@@ -1269,22 +1273,26 @@ pkg_install()
                             if [[ "$pkg_group_Check" == "" ]]; then
                                 # If no bracket; Not a package group
                                 # Check if individual is installed
-                                pkg_install_Check=$(pacman -Qq | grep $p)
-                                if [[ ! "$pkg_install_Check" == "" ]]; then
-                                    # Installed
-                                    pkg_installed="1"
-                                fi
+                                pacman -Qi $p &> /dev/null
+                                pkg_install_Check="$?"
+                                # pkg_install_Check=$(pacman -Qq | grep $p)   # TBC To check for exact package name
+                                # if [[ ! "$pkg_install_Check" == "" ]]; then
+                                #     # Installed
+                                #     pkg_installed="1"
+                                # fi
                             else
                                 # Get first item in the group list
                                 pkg_group_first_Pkg=($(pacman -Ss $p | grep "($p)"))
                                 first_pkg_Name=$(echo "${pkg_group_first_Pkg[0]}" | cut -d '/' -f2) # Get only the nmae (remove utilities library i.e. core)
 
                                 # Check if item exists
-                                pkg_install_Check=$(pacman -Qq | grep $first_pkg_Name)
-                                if [[ ! "$pkg_install_Check" == "" ]]; then
-                                    # Installed
-                                    pkg_installed="1"
-                                fi
+                                # pkg_install_Check=$(pacman -Qq | grep $first_pkg_Name)
+                                pacman -Qi $first_pkg_Name &> /dev/null
+                                pkg_install_Check="$?"
+                                # if [[ ! "$pkg_install_Check" == "" ]]; then
+                                #     # Installed
+                                #     pkg_installed="1"
+                                # fi
                             fi
 
                             # Install if not installed

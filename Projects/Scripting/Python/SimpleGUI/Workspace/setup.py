@@ -78,6 +78,18 @@ class Setup():
 		# Linux / UNIX / MacOS
 		if linux_distro == "ArchLinux":
 			# pacman
+			def get_all_installed_pkgs_with_description(self):
+				"""
+				Return all packages with description
+				"""
+				rc = 0
+				cmd_all_pkgs_with_Description = ["pacman", "-Qs"]
+				child = subprocess.Popen(cmd_all_pkgs_with_Description, stdout=subprocess.PIPE)
+				streamdata = child.communicate()[0]
+				decoded_streamdata = streamdata.decode()
+				all_pkgs = decoded_streamdata.split('\n')[:-1]
+				return all_pkgs
+
 			def pkg_installed(self, package_name):
 				"""
 				Checks if package is installed
