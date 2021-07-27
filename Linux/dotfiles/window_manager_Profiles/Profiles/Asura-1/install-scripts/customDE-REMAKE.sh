@@ -849,127 +849,150 @@ change_owner()
 
 
 ### Distro-Specified Functions ###
-if [[ "$DISTRO" == "ArchLinux" ]]; then
-    ### AUR functions ###
-    setup_AUR()
-    {
-        #
-        # Installs AUR of your choice
-        #	1. yay
-        #
-        helper="${1:-yay}"
-        user_name="${2:-$TARGET_USER}"
+# if [[ "$DISTRO" == "ArchLinux" ]]; then
+case "$DISTRO" in
+    "ArchLinux")
+        ### AUR functions ###
+        is_pkg_installed()
+        {
+            # --- Input
+            # Command Line Arguments
+            package_name="${1:-""}"
 
-        # Check if git is installed
-        if [[ "$(pacman -Qq | grep git)" == "" ]]; then
-            # Git not installed
-            $install_Command "git"
-        fi
+            # ---  Processing
+            if [[ ! "$package_name" == "" ]]; then
+                : '
+                Is not empty
+                - Output
+                '
+                pacman -Qi "$package_name" &> /dev/null
 
-        # Check if wget is installed
-        if [[ "$(pacman -Qq | grep wget)" == "" ]]; then
-            # Git not installed
-            $install_Command "wget"
-        fi
+                # --- Output
+                echo "$?"
+        }
+        setup_AUR()
+        {
+            #
+            # Installs AUR of your choice
+            #	1. yay
+            #
+            helper="${1:-yay}"
+            user_name="${2:-$TARGET_USER}"
 
-        # Check AUR Helper
-        case "$helper" in
-            "yay" | "yay-git")
-                # Install if not
-                # aur_pkg="yay-git"
-                # dependencies=(
-                # 	"go"
-                # )
-                # for dep in "${dependencies[@]}"; do
-                # 	if [[ "$(pacman -Qq | grep $dep)" == "" ]]; then
-                # 		pacman -S --noconfirm --needed $dep
-                # 	fi
-                # done
-                # su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
-                # su - $user_name -c "cd $aur_pkg && makepkg -si"
+            # Check if git is installed
+            if [[ "$(pacman -Qq | grep git)" == "" ]]; then
+                # Git not installed
+                $install_Command "git"
+            fi
 
-                # References:
-                #   1. https://gist.github.com/macchaberrycream/dacb5aa930c600db335845ffa448f5c7
-                # Repo for yay latest : https://api.github.com/repos/Jguer/yay/releases/latest
-                
-                # Check if yay exists
-                helper_Exists="$(pacman -Qq | grep yay)"
-                if [[ "$helper_Exists" == "" ]]; then
-                    # Seperate 'git_aur_packages' string to array with delimiter ','
-                    helper_properties="${aur_helpers["$helper"]}"
-                    arr_Helper=($(seperate_by_Delim "$helper_properties" ','))
+            # Check if wget is installed
+            if [[ "$(pacman -Qq | grep wget)" == "" ]]; then
+                # Git not installed
+                $install_Command "wget"
+            fi
 
-                    # Clone and install if yay does not exists
-                    helper_filename="${arr_Helper[0]}"
-                    helper_url="${arr_Helper[1]}"
+            # Check AUR Helper
+            case "$helper" in
+                "yay" | "yay-git")
+                    # Install if not
+                    # aur_pkg="yay-git"
+                    # dependencies=(
+                    # 	"go"
+                    # )
+                    # for dep in "${dependencies[@]}"; do
+                    # 	if [[ "$(pacman -Qq | grep $dep)" == "" ]]; then
+                    # 		pacman -S --noconfirm --needed $dep
+                    # 	fi
+                    # done
+                    # su - $user_name -c "git clone \"${git_aur_packages["$aur_pkg"]}\"" # Clone yay
+                    # su - $user_name -c "cd $aur_pkg && makepkg -si"
 
-                    if [[ ! -d $helper_filename ]]; then
-                        # Clone if doesnt exist
-                        # git clone "$helper_url"
-                        # change_owner $PWD/$helper $TARGET_USER $TARGET_USER_PRIMARY_GROUP
-
-                        # Get URL of the helper's latest tar file
-                        dl_url="$(curl -sfLS \'$helper_url\' | grep 'browser_download_url' | tail -1 | cut -d '"' -f 4 )"
-                        # Download latest .tar.gz file of the AUR
-                        wget "$dl_url"
-                        # Untar tar file
-                        tar xzvf $PWD/$helper_filename.tar.gz
-                    fi
-
-                    # Change Directory to helper directory
-                    cd $PWD/$helper_filename
-                    ./yay -Sy yay-bin
+                    # References:
+                    #   1. https://gist.github.com/macchaberrycream/dacb5aa930c600db335845ffa448f5c7
+                    # Repo for yay latest : https://api.github.com/repos/Jguer/yay/releases/latest
                     
-                    #cd $helper
-                    #makepkg -si
-#                     if [[ ! -f $PWD/setup_aur.sh ]]; then
-#                         # Echo in if the script doesnt exist
-#                         echo -e "cd $PWD/$helper\n\
-# makepkg -si" | tee -a $PWD/setup_aur.sh
-#                         chmod +x $PWD/setup_aur.sh
-#                         change_owner $PWD/setup_aur.sh $TARGET_USER $TARGET_USER_PRIMARY_GROUP
-#                     fi
-#                     rm $PWD/setup_AUR.sh
-                fi
-                ;;
-            *)
-                echo "Invalid helper : $helper"
-                ;;
-        esac
-    }
-    aur_install()
-    {
-        # Manual Installation from AUR without helper
-        # Installation methodology
-        #   i. git clone <link-to-aur-git>
-        #   ii. cd <aur-folder>
-        #   iiia. makepkg -si        # Compile and build pakage and install
-        #       or
-        #   iiib. Compile and Install
-        #       - makepkg -s         # Compile
-        #       - pacman -U <pkgname>
-        git_url="$1"                            # URL of git
-        git_project="$2"                        # Output Git project name
-        git_fldrname="${3:-$git_project}"       # Git's folder name; default: git file name
-        out_fldr_path="${4:-$PWD}"              # Output folder where you want to clone to
+                    # Check if yay exists
+                    helper_Exists="$(pacman -Qq | grep yay)"
+                    if [[ "$helper_Exists" == "" ]]; then
+                        # Seperate 'git_aur_packages' string to array with delimiter ','
+                        helper_properties="${aur_helpers["$helper"]}"
+                        arr_Helper=($(seperate_by_Delim "$helper_properties" ','))
 
-        ### Validation ###
-        # Check if 'git' is installed
-        if [[ "$(pacman -Qq | grep 'git')" == "" ]]; then
-            # If not installed
-            $install_Command "git"
-        fi
+                        # Clone and install if yay does not exists
+                        helper_filename="${arr_Helper[0]}"
+                        helper_url="${arr_Helper[1]}"
 
-        # --- Processing
-        if [[ ! -d $out_fldr_path/$git_fldrname ]]; then
-            # if folder doesnt exist
-            git_clone "$git_url" "$out_fldr_path"   # Change directory to the intended output folder and clone into it
-        fi
-        cd $git_fldrname                        # Jump into cloned git folder
-        makepkg -si                             # Compile and build package and Install
-        echo "$?"
-    }
-fi
+                        if [[ ! -d $helper_filename ]]; then
+                            # Clone if doesnt exist
+                            # git clone "$helper_url"
+                            # change_owner $PWD/$helper $TARGET_USER $TARGET_USER_PRIMARY_GROUP
+
+                            # Get URL of the helper's latest tar file
+                            dl_url="$(curl -sfLS \'$helper_url\' | grep 'browser_download_url' | tail -1 | cut -d '"' -f 4 )"
+                            # Download latest .tar.gz file of the AUR
+                            wget "$dl_url"
+                            # Untar tar file
+                            tar xzvf $PWD/$helper_filename.tar.gz
+                        fi
+
+                        # Change Directory to helper directory
+                        cd $PWD/$helper_filename
+                        ./yay -Sy yay-bin
+                        
+                        #cd $helper
+                        #makepkg -si
+    #                     if [[ ! -f $PWD/setup_aur.sh ]]; then
+    #                         # Echo in if the script doesnt exist
+    #                         echo -e "cd $PWD/$helper\n\
+    # makepkg -si" | tee -a $PWD/setup_aur.sh
+    #                         chmod +x $PWD/setup_aur.sh
+    #                         change_owner $PWD/setup_aur.sh $TARGET_USER $TARGET_USER_PRIMARY_GROUP
+    #                     fi
+    #                     rm $PWD/setup_AUR.sh
+                    fi
+                    ;;
+                *)
+                    echo "Invalid helper : $helper"
+                    ;;
+            esac
+        }
+        aur_install()
+        {
+            # Manual Installation from AUR without helper
+            # Installation methodology
+            #   i. git clone <link-to-aur-git>
+            #   ii. cd <aur-folder>
+            #   iiia. makepkg -si        # Compile and build pakage and install
+            #       or
+            #   iiib. Compile and Install
+            #       - makepkg -s         # Compile
+            #       - pacman -U <pkgname>
+            git_url="$1"                            # URL of git
+            git_project="$2"                        # Output Git project name
+            git_fldrname="${3:-$git_project}"       # Git's folder name; default: git file name
+            out_fldr_path="${4:-$PWD}"              # Output folder where you want to clone to
+
+            ### Validation ###
+            # Check if 'git' is installed
+            if [[ "$(pacman -Qq | grep 'git')" == "" ]]; then
+                # If not installed
+                $install_Command "git"
+            fi
+
+            # --- Processing
+            if [[ ! -d $out_fldr_path/$git_fldrname ]]; then
+                # if folder doesnt exist
+                git_clone "$git_url" "$out_fldr_path"   # Change directory to the intended output folder and clone into it
+            fi
+            cd $git_fldrname                        # Jump into cloned git folder
+            makepkg -si                             # Compile and build package and Install
+            echo "$?"
+        }
+        ;;
+    *)
+        ;;
+# fi
+esac
 
 
 ### Pre-Requisite Stage ###
@@ -1273,8 +1296,9 @@ pkg_install()
                             if [[ "$pkg_group_Check" == "" ]]; then
                                 # If no bracket; Not a package group
                                 # Check if individual is installed
-                                pacman -Qi $p &> /dev/null
-                                pkg_install_Check="$?"
+                                # pacman -Qi "$p" &> /dev/null
+                                # pkg_install_Check="$?"
+                                pkg_install_Check=`is_package_installed $p`
                                 # pkg_install_Check=$(pacman -Qq | grep $p)   # TBC To check for exact package name
                                 # if [[ ! "$pkg_install_Check" == "" ]]; then
                                 #     # Installed
@@ -1287,8 +1311,9 @@ pkg_install()
 
                                 # Check if item exists
                                 # pkg_install_Check=$(pacman -Qq | grep $first_pkg_Name)
-                                pacman -Qi $first_pkg_Name &> /dev/null
-                                pkg_install_Check="$?"
+                                # pacman -Qi $first_pkg_Name &> /dev/null
+                                # pkg_install_Check="$?"
+                                pkg_install_Check=`is_package_installed $first_pkg_Name`
                                 # if [[ ! "$pkg_install_Check" == "" ]]; then
                                 #     # Installed
                                 #     pkg_installed="1"
@@ -1296,7 +1321,7 @@ pkg_install()
                             fi
 
                             # Install if not installed
-                            if [[ "$pkg_installed" == "0" ]]; then
+                            if [[ ! "$pkg_install_Check" == "0" ]]; then
                                 echo "Package does not exist, installing..."
                                 echo "Package: $p"
                                 $install_Command $p
@@ -1338,14 +1363,16 @@ pkg_install()
                                 aur_url="${arr_aurpkg_params[1]}"
                                 pkg_fldrname="$pkgname"
                                 out_fldr_path="$PWD"
-                                pkg_install_Check=$(pacman -Qq | grep $p)
-                                if [[ ! "$pkg_install_Check" == "" ]]; then
-                                    # Installed
-                                    pkg_installed="1"
-                                fi
+                                # pkg_install_Check=$(pacman -Qq | grep $p)
+                                # if [[ ! "$pkg_install_Check" == "" ]]; then
+                                #     # Installed
+                                #     pkg_installed="1"
+                                # fi
+                                pacman -Qi $p &> /dev/null
+                                pkg_install_Check="$?"
 
                                 # Install if not installed
-                                if [[ "$pkg_installed" == "0" ]]; then
+                                if [[ ! "$pkg_install_Check" == "0" ]]; then
                                     echo "Package does not exist, installing..."
                                     echo "Package Link: $aur_url"
                                     echo "Package File   Name: $pkgname"

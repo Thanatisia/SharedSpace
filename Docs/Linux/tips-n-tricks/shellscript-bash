@@ -1,0 +1,44 @@
+Tips n Tricks Guide : Linux Shellscript - Bash
+```
+This contains some Tips and Tricks for Bash that can be reused to make readability better
+
+[Searches]
+Linux bash multiline comment
+	https://www.google.com/search?q=Liux+bash+multiline+coment&oq=Liux+bash+multiline+coment&aqs=chrome..69i57j0i13j0i22i30l2.5120j0j7&sourceid=chrome&ie=UTF-8
+
+[References]
+Way to create multiline comments in Bash?
+	https://stackoverflow.com/questions/43158140/way-to-create-multiline-comments-in-bash
+```
+
+1. Multiline Comments
+	#############
+	#  Methods	#
+	#############
+	i. Using : ' '
+		Description
+		- ':' is shorthand for true and
+		- true does not process any parameters
+		- You can add a '#' on the last line behind the ' to enable and disable the comment
+		Syntax
+		[1]
+		: '
+			Line_1
+			Line_n
+		' 
+	ii. Using heredoc << redirect
+		Description:
+		- This is a heredoc (<<) redirected to a NOP command (:) as a multi-line string.
+		
+		- The single quotes around END_COMMENT are important,
+			- because it disables variable resolving and commands resolving within these lines. 
+			- Without the single-quotes around END_COMMENT, the commands in the comment would get executed
+		Syntax
+		[1]
+		: <<'END_COMMENT'
+		line_1 
+		line_n
+		END_COMMENT
+
+2. 
+

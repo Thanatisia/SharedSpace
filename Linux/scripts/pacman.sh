@@ -26,7 +26,7 @@ DISTRO="ArchLinux" # { ArchLinux | Debian | NixOS | Void Linux | Gentoo }
 case "$DISTRO" in
 	"ArchLinux")
 		# Pacman Variables
-		cmd_pkg_Find="pacman -Qs --color always"
+		cmd_pkg_Find="pacman -Qi --color always"
 		;;
 	"Debian")
 		# apt/apt-get Functions
@@ -53,6 +53,23 @@ find_pkg()
 	# --- Output
 	echo "Command: $cmd"
 	echo "$($cmd)"
+}
+
+is_package_installed()
+{
+	# --- Input
+	
+	# command line arguments
+	package_name="${1:-""}"
+
+	# --- Processing
+
+	# The usage of '-i' instead of '-s' ensures that you will check for exactly that package
+	# and not for the presence of a package containing the package name in its name
+	pacman -Qi "$package_name" &> /dev/null
+
+	# --- Output
+	echo "$?"
 }
 
 # General Functions
