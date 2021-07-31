@@ -3,6 +3,17 @@ SimpleGUI
 
 A simple GUI made in python with tkinter
 
+Author: Asura
+Created By: 2021-07-21 2338H, Asura
+Modified By: 
+    - 2021-07-21 2338H, Asura
+    - 2021-07-31 1857H, Asura
+Changelogs: 
+    - 2021-07-21 2338H, Asura
+        - Created Script File
+    - 2021-07-31 1857H, Asura
+        - Fixed 'read' function and functions in modules - to update changelogs
+
 :: Google Searches
 Python how to check if module is installed
     https://www.google.com/search?q=Python+how+to+check+if+module+is+installed&ei=yUb5YO7gAcLorQGLyIeABA&oq=Python+how+to+check+if+module+is+installed&gs_lcp=Cgdnd3Mtd2l6EAMyBggAEAcQHjIICAAQCBAHEB4yCAgAEAgQBxAeOgcIABBHELADSgQIQRgAUNobWPMgYMshaAJwAngAgAFfiAGaA5IBATaYAQCgAQGqAQdnd3Mtd2l6yAEIwAEB&sclient=gws-wiz&ved=0ahUKEwiu6ePCuvbxAhVCdCsKHQvkAUAQ4dUDCA4&uact=5
@@ -29,9 +40,10 @@ How To Package And Distribute Python Applications
 import os
 import sys
 import subprocess
+import math
 # Database Modules
 import sqlite3 as sqlite
-import tkinter
+from tkinter.constants import NW, SW, VERTICAL
 
 ### External Modules ###
 import setup
@@ -55,7 +67,11 @@ setup.full_setup(*modules)
 
 # GUI Modules
 import tkinter as tk
-from tkinter import filedialog, ttk
+from tkinter import Entry, YView, filedialog, ttk, messagebox
+
+########################
+# MODULE / CLASS START #
+########################
 
 class GeneralUtils():
     """ General functions and utilities for all use-cases """
@@ -107,6 +123,42 @@ class GeneralUtils():
             "other_args"    : other_args,
         }
         return args
+
+class PathUtils():
+    """
+    Path, Files and Folder Utilities
+    """
+    def get_pathtype(self, fpath=""):
+        """
+        Get Type of path
+
+        :: Parameters
+            fpath : The Path you want to check
+        """
+        pathtype = ""
+        if not (fpath == ""):
+            if os.path.isfile(fpath):
+                pathtype = "File"
+            elif os.path.isdir(fpath):
+                pathtype = "Folder"
+            else:
+                pathtype = "undef"
+        return pathtype
+    def get_extension(self, fname=""):
+        """
+        Get Extension of file
+
+        :: Parameters
+            fname : The File you want to retrieve
+
+        :: References
+
+            Extracting extension from filename in Python
+                https://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python
+        """
+        fext = "" # Extension to return
+        fext = os.path.splitext(fname)[1]
+        return fext
 
 class GUIUtils():
     """ Python GUI utilities 
@@ -249,6 +301,11 @@ class GUIUtils():
             """
             Create all widgets defined in {widget_params}
             - Currently supported widgets: label, button, treeview etc.
+            - Returns object of type Dictionary
+                {
+                    "widget_id_1" : <widget>,
+                    "widget_id_2" : <widget> ...
+                }
 
             :: Params
                 window:
@@ -296,7 +353,7 @@ class GUIUtils():
             """
             # Initialize
             pos_util = self.Positions()
-            label_obj = []
+            ret_obj = {}
             
             # Widget Lists
             widgets = widget_params["{}".format(widget)]
@@ -307,20 +364,29 @@ class GUIUtils():
                 # Get Current Widget object (List)
                 curr_Widget = widgets[i]
                 
+                # Get Variables
+                curr_widget_ID = curr_Widget["id"]
+
                 # Get Params (Dictionary)
                 curr_widget_param = curr_Widget["widget_params"]
                 curr_pack_param = curr_Widget["pack_params"]
 
                 # Create Object based on widget
-                if widget == "label":
+                if widget == "label":       # For Label
                     curr_obj = tk.Label(window, **curr_widget_param)
-                elif widget == "frame":
+                elif widget == "entry":     # For single-line textbox input
+                    curr_obj = tk.Entry(window, **curr_widget_param)
+                elif widget == "text":      # For multi-line textbox input
+                    curr_obj = tk.Text(window, **curr_widget_param)
+                elif widget == "frame":     # For Frame
                     curr_obj = tk.Frame(window, **curr_widget_param)
-                elif widget == "canvas":
+                elif widget == "canvas":    # For Canvas
                     curr_obj = tk.Canvas(window, **curr_widget_param)
-                elif widget == "button":
+                elif widget == "button":    # For Button
                     curr_obj = tk.Button(window, **curr_widget_param)
-                elif widget == "treeview":
+                elif widget == "scrollbar": # For ScrollBar
+                    curr_obj = tk.Scrollbar(window, **curr_widget_param)
+                elif widget == "treeview":  # For TreeView (displaying grids)
                     curr_obj = ttk.Treeview(window, **curr_widget_param)
 
                 # Set Widget Object
@@ -332,7 +398,111 @@ class GUIUtils():
                     pos_util.place_Widget(curr_obj, curr_pack_param)
 
                 # Append new label to list
-                label_obj.append(curr_obj)
+                # ret_obj.append(curr_obj)
+                print("Current Widget ID: {}".format(curr_widget_ID))
+                print("Current Widget Obj: {}".format(curr_obj))
+                ret_obj[curr_widget_ID] = curr_obj
+
+            # --- Output
+            print("All Widgets : {}".format(ret_obj))
+            for k,v in ret_obj.items():
+                print("Final Widgets [{} : {}]".format(k,v))
+
+            return ret_obj
+
+        def multiset_widget(self, windows=None):
+            """
+            Wrapper for function 'set_widget' to allow multisetting widgets in various window / widgets
+
+            :: Parameters
+
+                windows
+                    Description: Your window to link and its object / parameters (please refer to :: Syntax)
+                    Type: Dictionary
+                    Syntax:
+                        "<window/widget here>" : {
+                            "object" : <object>,                # Your window/widget object variable
+                            "params" : {                        # Your Parameter dictionary here 
+                                "widget-type" : [                   # widget information
+                                    {
+                                        "ROW_ID" : 0,               # Row ID
+                                        "id" : id,                  # Label ID - could be your variable name
+                                        "widget_params" : {},       # Your widget parameters
+                                        "pack_params" : {}          # Your .pack() / .grid() / .place() parameters here; not specifically .pack()
+                                    }
+                                ]
+                            }
+                        },
+                    Example:
+                        [1] Let widget_type be Label
+                        widget-type : "label"
+                        id : "lb_test"
+                        widget_params : {}
+                        pack_params : {}
+                        "root" : {
+                            "object" : root,                    # (retrieved from tk.Tk())
+                            "params" : {                        # Your Parameter dictionary here 
+                                "label" : [               # widget information
+                                    {
+                                        "ROW_ID" : 0,           # Row ID
+                                        "id" : "lb_test",              # Label ID - could be your variable name
+                                        "widget_params" : {},   # Your widget parameters
+                                        "pack_params" : {}      # Your .pack() / .grid() / .place() parameters here; not specifically .pack()
+                                    }
+                                ]
+                            }
+                        },
+
+            :: Syntax
+            windows = {
+                "root" : {
+                    "object" : root,                    # (retrieved from tk.Tk())
+                    "params" : {                        # Your Parameter dictionary here 
+                        "widget-type" : [               # widget information
+                            {
+                                "ROW_ID" : 0,           # Row ID
+                                "id" : id,              # Label ID - could be your variable name
+                                "widget_params" : {},   # Your widget parameters
+                                "pack_params" : {}      # Your .pack() / .grid() / .place() parameters here; not specifically .pack()
+                            }
+                        ]
+                    }
+                },
+                "<window/widget here>" : {
+                    "object" : <object>,                # Your window/widget object variable
+                    "params" : {                        # Your Parameter dictionary here 
+                        "widget-type" : [                   # widget information
+                            {
+                                "ROW_ID" : 0,               # Row ID
+                                "id" : id,                  # Label ID - could be your variable name
+                                "widget_params" : {},       # Your widget parameters
+                                "pack_params" : {}          # Your .pack() / .grid() / .place() parameters here; not specifically .pack()
+                            }
+                        ]
+                    }
+                },
+            }
+            """
+            widgets = {}
+            if not (windows == None):
+                for k_window, v_win_params in windows.items():
+                    # Key: widget_type
+                    # Value: widget parameter dictionaries
+                    curr_window_object = v_win_params["object"]
+                    curr_widget_params = v_win_params["params"]
+
+                    # Loop Parameters
+                    for k_widget_type, v_widgets in curr_widget_params.items():
+                        # Key: <widget-type>
+                        # Value: List of Widgets; 
+                        # [
+                        #   widget_info["ROW_ID"] = ROW_ID
+                        #   widget_info["id"] = id
+                        #   widget_info["widget_params"] = widget_params
+                        #   widget_info["pack_params"] = pack_params
+                        # ]
+                        widgets[k_widget_type] = tk_util.set_widget(curr_window_object, "{}".format(k_widget_type), curr_widget_params)
+            return widgets
 
         def widget_config(self, widget, config_params):
             """
@@ -383,6 +553,112 @@ class GUIUtils():
             widget_info["pack_params"] = pack_params
             return widget_info
 
+        def generate_stringvar(container_widget=None, stringvar_params=None):
+            """
+            Create StringVar for use
+
+            :: Params
+                container_widget
+                    Description: The Widget that the StringVar object is associated with / assigned to
+                        - Defaults to root window if you skip it
+                    Type: Widget
+                    Default: root tk.Tk()
+                stringvar_params
+                    Description: The StringVar Parameters
+                    Type: Dictionary
+            """
+            if container_widget == None:
+                if stringvar_params == None:
+                    string_var = tk.StringVar()
+                else:
+                    string_var = tk.StringVar(None, **stringvar_params)
+            else:
+                if stringvar_params == None:
+                    string_var = tk.StringVar(container_widget)
+                else:
+                    string_var = tk.StringVar(container_widget, **stringvar_params)
+            return string_var
+
+        def msgbox(self, category, title, message, options=None):
+            """
+            Create a messagebox of your choice
+                - Based on category
+                info : messagebox.showinfo(<title>, <contents>, <params>)
+                warning : messagebox.showwarning(<title>, <contents>, <params>)
+                error : messagebox.showerror(<title>, <contents>, <params>)
+                question : messagebox.askquestion(<title>, <contents>, <params>)
+                okcancel : messagebox.askokcancel(<title>, <contents>, <params>)
+                yesno : messagebox.askyesno(<title>, <contents>, <params>)
+                yesnocancel : messagebox.askyesnocancel(<title>, <contents>, <params>)
+                askretrycancel : messagebox.askretrycancel(<title>, <contents>, <params>)
+
+            :: References:
+                Python TKinter MessageBox widget
+                    https://www.geeksforgeeks.org/python-tkinter-messagebox-widget/
+
+            :: Params
+                category
+                    Description: The type of messagebox you want
+                    Type: String
+                title
+                    Description: Header of messagebox
+                    Type: String
+                message
+                    Description: Content to display in messagebox
+                    Type: String
+                options
+                    Description: Other options for messagebox
+                    Type: Dictionary
+            """
+            if category == "info":
+                if title == "":
+                    title = "showinfo"
+                if message == "":
+                    message = "Information"
+                messagebox.showinfo(title, message, **options)
+            elif category == "warning":
+                if title == "":
+                    title = "showwarning"
+                if message == "":
+                    message = "Information"
+                messagebox.showwarning(title, message, **options)
+            elif category == "error":
+                if title == "":
+                    title = "showerror"
+                if message == "":
+                    message = "Error"
+                messagebox.showerror(title, message, **options)
+            elif category == "question":
+                if title == "":
+                    title = "askquestion"
+                if message == "":
+                    message = "Are you sure?"
+                messagebox.askquestion(title, message, **options)
+            elif category == "okcancel":
+                if title == "":
+                    title = "askquestion"
+                if message == "":
+                    message = "Want to continue?"
+                messagebox.askokcancel(title, message, **options)
+            elif category == "yesno":
+                if title == "":
+                    title = "askyesno"
+                if message == "":
+                    message = "Find the value?"
+                messagebox.askyesno(title, message, **options)
+            elif category == "yesnocancel":
+                if title == "":
+                    title = "askyesnocancel"
+                if message == "":
+                    message = "Find the value?"
+                messagebox.askyesnocancel(title, message, **options)
+            elif category == "askretrycancel":
+                if title == "":
+                    title = "askretrycancel"
+                if message == "":
+                    message = "Try again?"
+                messagebox.askretrycancel(title, message, **options)
+
         class Widgets():
             """ Python GUI TKinter Widget-focused Utilities - wrappers etc. """
             class Window():
@@ -405,24 +681,293 @@ class GUIUtils():
                         "title" : "tk"
                     }
                     """
-                    root_geometry = root_design["geometry"]
-                    root_title = root_design["title"]
+                    if not (root_design == None):
+                        # If there are designs
+                        root_geometry = root_design["geometry"]
+                        root_title = root_design["title"]
 
-                    for k,v in root_design.items():
-                        # Key: Value
-                        # geometry : {
-                        #   "width" : n,
-                        #   "height" : n,
-                        #   "x" : n,
-                        #   "y" : n
-                        # },
-                        # title : <type string> 
-                        curr_param = root_design[k]
+                        for k,v in root_design.items():
+                            # Key: Value
+                            # geometry : {
+                            #   "width" : n,
+                            #   "height" : n,
+                            #   "x" : n,
+                            #   "y" : n
+                            # },
+                            # title : <type string> 
+                            curr_param = root_design[k]
 
-                        if k == "geometry":
-                            tk_widget_windows_util.set_geometry(root, **curr_param) # Geometry takes Dictionary
-                        elif k == "title":
-                            tk_widget_windows_util.set_title(root, curr_param)      # Title is a string
+                            if k == "geometry":
+                                tk_widget_windows_util.set_geometry(root, **curr_param) # Geometry takes Dictionary
+                            elif k == "title":
+                                tk_widget_windows_util.set_title(root, curr_param)      # Title is a string
+                                
+                def generate_window(self, root_params=None, root_design=None, widget_params=None):
+                    """
+                    Create Window Object
+                    - Design
+                    - Populate with Widgets
+                    - Return Window object
+
+                    :: Params
+                        root_params
+                            Description:
+
+                                - The root window parameters for tk.Tk()
+                                - Leave empty or type "None" for default
+
+                            Examples: 
+                                {
+                                    "screen_Name" : "",
+                                    "base_Name" : "",
+                                    "class_Name" : "",
+                                    "useTk" : False,
+                                    "sync" : False,
+                                    "use" : ""
+                                }
+
+                            Type: Dictionary
+
+                            Keys: screen_Name, base_Name, class_Name, useTk, sync, use
+
+                            Values: String, String, String, Bool, Bool, String
+
+                        root_design
+                            Description: 
+
+                                - The Design Specific for your root
+                                - i.e. title, geometry
+                                - Leave empty or type "None" for default
+
+                            Examples:
+                                {
+                                    "title" : "Hello World",
+                                    "geometry" : {
+                                        "width" : n1,
+                                        "height" : n2,
+                                        "x" : n3,
+                                        "y" : n4
+                                    }
+                                }
+
+                            Type: Dictionary
+
+                            Keys: title, geometry
+
+                            Values: String, Dictionary
+
+                        widget_params
+                            Description: 
+
+                                - Your widget type (label | button | frame etc) and 
+                                    - the widget objects you are putting into the window
+                                - Leave empty or type "None" for no widgets
+
+                            Type: Dictionary
+
+                            Keys: <widget_type> (small letters)
+                                i.e.
+                                    "label" => For Label
+                                    "button" => For Button
+                                    "frame" => For Frame
+
+                            Values: List of widget objects
+                    """
+
+                    # Create Root window object
+                    if root_params == None:
+                        ws = tk.Tk()
+                    else:
+                        ws = tk.Tk(**root_params)
+
+                    # Design Root window object (if any)
+                    if root_design == None:
+                        tk_widget_windows_util.design_root(ws)
+                    else:
+                        tk_widget_windows_util.design_root(ws, root_design)
+
+                    # Create Widgets and Pack (Dynamically) (if any)
+                    """
+                    {
+                        "widget-type" : [
+
+                        ],
+                        "widget-type" : [
+
+                        ]
+                    }
+                    """
+                    widgets = {}
+                    if not (widget_params == None):
+                        curr_widgets = {}
+                        for k,v in widget_params.items():
+                            # Key: widget-type
+                            # Value: List of widgets
+                            curr_widgets = tk_util.set_widget(ws, f"{k}", widget_params)
+                            widgets[k] = curr_widgets
+
+                    ret = {
+                        "window" : ws,
+                        "widgets" : widgets
+                    }
+                    return ret    # Return the Window and the Widgets created
+            class Entry():
+                """ TKinter Entry (Single-line TextBox) Functions """
+                def add_text(self, entry, insert_point=tk.INSERT, str="Enter a string here"):
+                    """
+                    Display / add text to Entry (Single-line TextBox)
+
+                    :: Params
+
+                        entry
+                            Description: The Entry() variable you want to use
+                            Type: tk.Entry()
+                        
+                        insert_point
+                            Description: 
+                                - The index you want to add to
+                                - Default: tk.INSERT
+                                - To insert to the end: tk.END
+                            Type: Integer
+
+                        str
+                            Description: The message you want to display
+                            Type: String
+                            
+                    """
+                    entry.insert(insert_point, str)
+
+                    tk.Entry().insert()
+            class Text():
+                """ TKinter Text (Multi-line TextBox) Functions """
+                def save_file(self, tb, fpath="", save_type="a+", read_start="1.0", read_end="end-1c"):
+                    """
+                    Test Save File when edited
+
+                    :: Params
+
+                        fpath
+                            Description: The File Path and Name
+                            Syntax:
+                                - os.path.join(file_path, file_name)
+                                - /path/to/file.extension
+                            Type: String
+
+                        save_type
+                            Description: The save permission you want to use
+                            Syntax:
+                                "w" : "Write to overwrite"
+                                "w+" : "Write + Read"
+                                "a" : "Append"
+                                "a+" : "Append + Read"
+                                "r" : "read"
+                                "r+" : "Read + Write"
+                            Type: String
+
+                        read_start
+                            Description: 
+                                - Input read's start point
+                            Syntax:
+                                - String should include 2 parts
+                                    - "line_number.character_number"
+                                        - line_number : The Line you want to read from (i.e - 1 : line 1)
+                                        - character_number : The character index of line_number to start from (i.e. 0 : Character Zero)
+                                    - Example:
+                                        - "1.0" : Input should be read from line 1, character 0 (i.e. the very first charater)
+                            Type: String
+
+                        read_end
+                            Description:
+                                - Input read's ending point
+                            Examples:
+                                - To read until end of text box with newline
+                                    - 'tk.END' to set the string to "end"
+                                        - END means to read until the end of the text box is reached, but it adds a newline to the input
+                                - To read until end of text box without newline
+                                    - change 'tk.END' to "end-(n)c"
+                                        - "-(n)c" : Deletes n characters; Empty lines means to delete n empty lines
+                                            - "-1c" : Deletes 1 character
+                            Type: String
+                    """
+                    print("Save File")
+
+                    # Get TextBox value
+                    new_val = tb.get(read_start, read_end)
+
+                    with open(fpath, save_type) as f_save:
+                        f_save.write(new_val)
+                        f_save.close()
+
+                def add_text(self, text, insert_point=tk.INSERT, str="Enter a string here", other_params=None):
+                    """
+                    Display / add text to Text (Multi-line TextBox)
+
+                    :: Params
+
+                        text
+                            Description: The Text() variable you want to use
+                            Type: tk.Text()
+                        
+                        insert_point
+                            Description: 
+                                - The index you want to add to
+                                - Default: tk.INSERT
+                                - To insert to the end: tk.END
+                            Type: Integer
+
+                        str
+                            Description: The message you want to display
+                            Type: String
+
+                        other_params
+                            Description: Other parameters you want to use
+                            Type: Dictionary
+
+                    """
+                    if other_params == None:
+                        text.insert(insert_point, str)
+                    else:
+                        text.insert(insert_point, str, **other_params)
+
+                def manage_tag(self, text, action, tag_name, tag_pos, options=None):
+                    """
+                    Manage tags on the tk.Text() object
+                    
+                    - Add : Add colours, tags to specific positions in the Text() workspace
+                    - Config : Configure tag options (i.e. index, background, foreground etc)
+
+                    :: Params
+
+                        text
+                            Description: The Text() variable you want to use
+                            Type: tk.Text()
+
+                        action
+                            Description: The action you want to take for the tag
+                                - i.e.
+                                    - Add
+                                    - Configure
+                            Type: String
+
+                        tag_name
+                            Description: Name of the Tag as identifier
+                            Type: String
+
+                        tag_pos
+                            Description: The Index/Position of the tag
+                            Type: Integer
+
+                        options
+                            Description: The Parameters you want to use for the tags
+                            Type: Dictionary
+                    """
+                    if action == "Add":
+                        # Add a tag to the Text() object
+                        text.tag_add(tag_name, tag_pos, **options)
+                    elif action == "Configure":
+                        # Configure the tag on the Text() object
+                        text.tag_config(tag_name, **options)
+                    # Append more actions here
 
         class Positions():
             """ Python GUI TKinter Utilities - Positioning (i.e. pack(), grid())"""
@@ -745,6 +1290,96 @@ class GUIUtils():
                         # Create tree heading
                         tree.heading(col_id, text=col_text[0], anchor=col_anchor, **col_other_params) # col_text[0] : To bypass bug where curr_headings["text"] produces a tuple --> causes a column name with space to have '{}' surrounding it; Bypass : Take element 0 of the tuple (column text)
                     return tree
+        class Custom():
+            """
+            Custom GUI Utilities / Windows wrappers
+            """
+            def inputbox(self, input_msg="Please enter an input: ", line="single", read_start="1.0", read_end='end-1c', root_init_params=None, root_configs=None):
+                """
+                InputBox (Window For User Input using tkinter)
+                """
+
+                #####################
+                # Input Functions   #
+                #####################
+
+                def submit(window, tb, read_start="1.0", read_end='end-1c'):
+                    """
+                    Submit reply
+                    
+                    - Take input from TextBox
+                    - write to global variable 'tmp_input'
+                    
+                    :: Params
+                        tb :
+                            Description: TextBox where user will input the reply
+                            Type: tk.Text()
+                    """  
+                    global inputbox_value
+
+                    # Reset
+                    inputbox_value = ""
+
+                    # Get value from TextBox
+                    inputbox_value = tb.get(read_start, read_end)
+
+                    print("Submit: {}".format(inputbox_value))
+
+                    # Destroy window
+                    window.destroy()
+
+
+                #####################
+                #  End Functions    #
+                #####################
+
+                if root_init_params == None:
+                    root = tk.Tk()
+                else:
+                    root = tk.Tk(**root_init_params)
+
+                # Design Root window object (if any)
+                if root_configs == None:
+                    tk_widget_windows_util.design_root(root)
+                else:
+                    tk_widget_windows_util.design_root(root, root_configs)
+
+                # Create other Widgets
+                lb_user_input = tk_util.create_widget_info(1, "lb_user_input", {"text" : input_msg}, {"side" : tk.LEFT})
+                tb_uInput = tk_util.create_widget_info(1, "tb_uInput", {}, {"side" : tk.LEFT, "fill" : "x", "expand" : True})
+                btn_submit = tk_util.create_widget_info(1, "btn_submit", {"text" : "Submit", "command" : gen_utils.map_func_arg(submit, [root, tb_uInput, read_start, read_end])}, {"side" : tk.RIGHT})
+
+                # Append Widget Objects
+                tv_widget_params = {
+                    "label" : [
+                        lb_user_input
+                    ],
+                    "button" : [
+                        btn_submit
+                    ]
+                }
+
+                # Add TextBox for User Input
+                if line == "single":
+                    # Single Line
+                    tv_widget_params["entry"] = [
+                        tb_uInput
+                    ]
+                elif line == "multi":
+                    # Multi Line
+                    tv_widget_params["text"] = [
+                        tb_uInput
+                    ]
+
+                for k,v in tv_widget_params.items():
+                    tk_util.set_widget(root, f"{k}", tv_widget_params)
+
+                # Start Window
+                root.mainloop()
+
+######################
+# MODULE / CLASS END #
+######################
 
 class ClassRoom():
     """ 
@@ -785,6 +1420,10 @@ class ClassRoom():
                 fdir = filedialog.askdirectory()
                 return fdir
 
+            ##################
+            # Test Functions #
+            ##################
+                
             def create_file(tv):
                 """
                 File Manager Function in {
@@ -802,10 +1441,217 @@ class ClassRoom():
                 # Create New File
                 print("Creating new file...")
 
+                inputbox_params = {
+                    "label" : {
+                        "text" : "File Name: ",
+                    },
+                    "root" : {
+                        "init" : {},
+                        "configs" : {"title" : "Input", "geometry" : {"width" : 200, "height" : 200, "x" : 0, "y" : 0}}
+                    }
+                }
+                tk_customs_GUI.inputbox(input_msg=inputbox_params["label"]["text"], root_init_params=inputbox_params["root"]["init"], root_configs=inputbox_params["root"]["configs"])
+                print("File name: {}".format(inputbox_value))
+
                 # Append file to new_files
                 new_files[curr_filename] = curr_filepath
 
                 return new_files
+
+            def read_file(tv):
+                """
+                File Manager Function in {
+                    C : Create,
+                    R : Read,
+                    U : Update,
+                    D : Delete
+                ]
+                - Read file
+                """
+
+                # Intrernal Functions 
+                
+                contents = []   # Content of File
+                selected_row_Items = tv_util.get_item(tv)
+                if len(selected_row_Items) != 0:
+                    # Have Items
+                    print("Selected Row items: {}".format(selected_row_Items))
+                    selected_fname = selected_row_Items[3]
+                    selected_fpath = selected_row_Items[4]
+
+                    print("Reading file...")
+
+                    fopen_params={
+                        "mode" : "r+"
+                    }
+                    # Open file to read
+                    # with open("{}/{}".format(selected_fpath, selected_fname), **fopen_params) as fread:
+                    with open(selected_fpath, **fopen_params) as fread:
+                        # Read file to content
+                        line = fread.readline()
+                        while line:
+                            contents.append(line)
+                            line = fread.readline()
+                        fread.close()
+
+                    msg = ""
+                    number_of_lines = len(contents)
+                    print("Number of Lines: {}".format(number_of_lines))
+                    for line in contents:
+                        msg+=line
+
+                    # Display contents in new window with labels
+                    returns = tk_widget_windows_util.generate_window(
+                        {}, 
+                        {
+                            "title" : "File Contents", 
+                            "geometry" : {
+                                "width" : 720, 
+                                "height" : 360, 
+                                "x" : 0, 
+                                "y" : 0
+                            }
+                        }, 
+                        {
+                            "label" : [
+                                tk_util.create_widget_info(1, "lb_Header", {"text" : selected_fname}, {"fill" : "x", "expand" : False}),
+                                tk_util.create_widget_info(2, "lb_fname", {"text" : "File Name: "}, {"side" : tk.TOP, "anchor" : tk.NW}),
+                            ],
+                            "entry" : [
+                                tk_util.create_widget_info(1, "tb_fname", {}, {"side" : tk.TOP, "anchor" : tk.NW, "fill" : "x", "expand" : True}),
+                            ],
+                            "button" : [
+                                tk_util.create_widget_info(1, "btn_save_changes", {"text" : "Save Changes"}, {"side" : "top"})
+                            ],
+                            "text" : [
+                                tk_util.create_widget_info(2, "tb_contents", {}, {"fill" : "both", "expand" : True})
+                            ]
+                        }
+                    )
+
+                    ws_display_Contents = returns["window"]
+                    widgets = returns["widgets"]
+
+                    for k,v in widgets.items():
+                        print("Widget: {} | {}".format(k,v))
+
+                    # Retrieve Widgets
+                    # lb_headers = widgets["lb_Header"]
+                    btn_save_changes = widgets["button"]["btn_save_changes"]
+                    tb_fname = widgets["entry"]["tb_fname"]
+                    tb_contents = widgets["text"]["tb_contents"]
+
+                    # Get Value of textbox
+                    fname = tb_fname.get()
+
+                    if fname == "":
+                        # Default
+                        fname = "New_file"
+
+                    #################################
+                    #   Set Features to Widgets     #
+                    #################################
+
+                    # Set Command for Button                    
+                    tk_util.widget_config(
+                        btn_save_changes, 
+                        {
+                            "command" : gen_utils.map_func_arg(
+                                tk_widget_text_util.save_file, 
+                                [
+                                    tb_contents, 
+                                    os.path.join(
+                                        selected_fpath, 
+                                        fname
+                                    )
+                                ]
+                            )
+                        }
+                    )
+
+                    # Set text
+                    tk_widget_text_util.add_text(tb_contents, tk.INSERT, msg)
+
+                    #################################
+                    #   Set ScrollBar to tk.Text()  #
+                    #################################
+
+                    # Set widget
+                    text_scrollbar_param = {
+                        "text" : {
+                            "object" : tb_contents,
+                            "params" : {
+                                "scrollbar" : [
+                                    tk_util.create_widget_info(0, "sb_text", {"orient" : tk.VERTICAL, "command" : tb_contents.yview}, {"side" : tk.RIGHT, "fill" : tk.BOTH})
+                                ]
+                            }
+                        }
+                    }
+                    widgets = tk_util.multiset_widget(text_scrollbar_param)
+
+                    # Get Required Objects
+                    scrollbar = widgets["scrollbar"]["sb_text"]
+
+                    # Set Scrollbar configuration to Text
+                    text_config_params = {
+                        "yscroll" : scrollbar.set
+                    }
+                    tk_util.widget_config(tb_contents, text_config_params)
+
+                    # Start Window
+                    tk_util.start(ws_display_Contents)
+                else:
+                    print("No row selected.")
+
+                return contents     
+
+            def update_file(tv):
+                """
+                File Manager Function in {
+                    C : Create,
+                    R : Read,
+                    U : Update,
+                    D : Delete
+                ]
+                - Update file
+                """
+
+                # Get path of selected file
+                selected_row_Items = tv_util.get_item(tv)
+                selected_fname = selected_row_Items[3]
+                selected_fpath = selected_row_Items[4]
+
+                # Update Selected File
+                print("Updating selected files...")
+
+                # Get new values
+                new_values = tk_customs_GUI.inputbox()
+                print("New Values: {new_values}")
+
+                # write contents into file
+
+
+            def delete_file(tv):
+                """
+                File Manager Function in {
+                    C : Create,
+                    R : Read,
+                    U : Update,
+                    D : Delete
+                ]
+                - Delete file
+                """
+                print("Delete selected file...")
+
+                # Get path of selected file
+                selected_row_Items = tv_util.get_item(tv)
+                selected_fname = selected_row_Items[3]
+                selected_fpath = selected_row_Items[4]
+
+                print("File Path: {}".format(selected_fpath))
+
+                # Delete selected file
+
 
             def open_path_in_treeview(window):
                 """
@@ -818,22 +1664,23 @@ class ClassRoom():
                 # GUI Page #2 : TreeView    #
                 #############################
                 tree_columns = {
-                    "columns" : ["one", "two", "three"],
+                    "columns" : ["one", "two", "three", "four", "five"],
                     "definitions" : [
-                        {"column_id" : "#0" ,"width" : 50,"minwidth" : 50,"others" : {"stretch" : tk.NO}},
-                        {"column_id" : "one","width" : 270,"minwidth" : 270,"others" : {"stretch" : tk.NO}},
-                        {"column_id" : "two","width" : 150,"minwidth" : 150,"others" : {"stretch" : tk.NO}},
+                        {"column_id" : "one" ,"width" : 60,"minwidth" : 60,"others" : {"stretch" : tk.NO}},
+                        {"column_id" : "two","width" : 150,"minwidth" : 10,"others" : {"stretch" : tk.NO}},
+                        {"column_id" : "three","width" : 60,"minwidth" : 10,"others" : {"stretch" : tk.NO}},
+                        {"column_id" : "four","width" : 150,"minwidth" : 10,"others" : {"stretch" : tk.NO}},
+                        {"column_id" : "five","width" : 250,"minwidth" : 10,"others" : {"stretch" : tk.YES}},
                     ],
                     "headings" : [
-                        {"column_id" : "#0" ,"text" : "ROW_ID"  ,"anchor" : tk.W,"others" : {}},
-                        {"column_id" : "one","text" : "Name"    ,"anchor" : tk.W,"others" : {}},
-                        {"column_id" : "two","text" : "Path"    ,"anchor" : tk.W,"others" : {}},
+                        {"column_id" : "one" ,      "text" : "ROW_ID",      "anchor" : tk.W,    "others" : {}},
+                        {"column_id" : "two",       "text" : "Type",        "anchor" : tk.W,    "others" : {}},
+                        {"column_id" : "three",     "text" : "Extension",   "anchor" : tk.W,    "others" : {}},
+                        {"column_id" : "four",      "text" : "Name",        "anchor" : tk.W,    "others" : {}},
+                        {"column_id" : "five",      "text" : "Path",        "anchor" : tk.W,    "others" : {}},
                     ]
                 }
-                tree_param = {
-                    "columns" : tree_columns["columns"],
-                    "show" : "headings"
-                }
+                tree_param = {"columns" : tree_columns["columns"],  "show" : "headings"}
                 tree = tv_util.def_col(root, None, tree_param, **tree_columns)
 
                 # Populate Tree
@@ -846,8 +1693,11 @@ class ClassRoom():
                 for f_ID in range(number_of_files):
                     # Populate Rows
                     f = files[f_ID]
-                    new_row = [f_ID, f, fdir]
-                    tree_values.append(new_row)   # Append List because each row is a tuple / list
+                    full_path = os.path.join(fdir, f)                       # Get full path of the file - selected file directory joint with the file name
+                    f_type = path_utils.get_pathtype(full_path)             # Check if path is file or folder
+                    f_ext = path_utils.get_extension(full_path)             # Get File extension
+                    new_row = [f_ID, f_type, f_ext, f, full_path]           # Design new row
+                    tree_values.append(new_row)                             # Append List because each row is a tuple / list
 
                     # Insert data to TreeView
                     number_of_values = len(tree_values)
@@ -856,21 +1706,70 @@ class ClassRoom():
                         print("Current Value: {}".format(curr_val))
                         tree.insert("", index=tk.END, values=curr_val)
 
+                    # Reset Tree Values
+                    tree_values = []
+
+
                 # Pack Tree Object
-                tree_pack = {
-                    "fill" : tk.BOTH,
-                    "expand" : True
-                }
+                tree_pack = {"fill" : tk.BOTH,"expand" : True}
                 tree.pack(**tree_pack)
 
                 # Create other Widgets
-                tv_widget_params = {
+                root_widget_params = {
+                    "label" : [
+                        tk_util.create_widget_info(1, "lb_fname", {"text" : "Path: "}, {"side" : tk.LEFT, "anchor" : tk.NW}),
+                        tk_util.create_widget_info(2, "lb_fname", {"text" : fdir}, {"side" : tk.LEFT, "anchor" : tk.NW})  
+                    ],
                     "button" : [
-                        tk_util.create_widget_info(1, "btn_create_file", {"text" : "Add New Files", "command" : gen_utils.map_func_arg(create_file, [tree])}, {"fill" : "y", "expand" : False}),
+                        tk_util.create_widget_info(1, "btn_create_file", {"text" : "Add New Files", "command" : gen_utils.map_func_arg(create_file, [tree])}, {"side" : tk.LEFT, "anchor" : tk.SW,}),
+                        tk_util.create_widget_info(2, "btn_read_file", {"text" : "Read File", "command" : gen_utils.map_func_arg(read_file, [tree])}, {"side" : tk.LEFT, "anchor" : tk.SW}),
+                        tk_util.create_widget_info(3, "btn_update_file", {"text" : "Update File", "command" : gen_utils.map_func_arg(update_file, [tree])}, {"side" : tk.LEFT, "anchor" : tk.SW}),
+                        tk_util.create_widget_info(4, "btn_delete_file", {"text" : "Delete File", "command" : gen_utils.map_func_arg(delete_file, [tree])}, {"side" : tk.LEFT, "anchor" : tk.SW}),
+                    ],
+                }
+
+                # Create Tree-linked widgets
+                tv_widget_params = {
+                    "scrollbar" : [
+                        tk_util.create_widget_info(1, "scroll_tree_main", {"orient" : tk.VERTICAL, "command" : tree.yview}, {"side" : tk.RIGHT, "fill" : tk.BOTH})
                     ]
                 }
-                for k,v in tv_widget_params.items():
-                    tk_util.set_widget(root, f"{k}", tv_widget_params)
+
+                # Set widgets
+                widgets = {}
+                windows = {
+                    "root" : {
+                        "object" : root, 
+                        "params" : root_widget_params
+                    },
+                    "tree" : {
+                        "object" : tree, 
+                        "params" : tv_widget_params
+                    },
+                }
+                number_of_windows = len(windows)
+                
+                ### MANUAL SET ###
+                # for k,v in root_widget_params.items():
+                #     widgets[k] = tk_util.set_widget(root, f"{k}", root_widget_params)
+
+                # # Set Tree-linked widgets
+                # for k,v in tv_widget_params.items():
+                #     widgets[k] = tk_util.set_widget(tree, f"{k}", tv_widget_params)
+                ##################
+
+                ### Automated set ###
+                widgets = tk_util.multiset_widget(windows)
+
+                # Get Required Objects
+                scrollbar = widgets["scrollbar"]["scroll_tree_main"]
+
+                # Set Scrollbar configuration to Tree
+                tree_config_params = {
+                    "yscroll" : scrollbar.set
+                }
+                tk_util.widget_config(tree, tree_config_params)
+
 
             #########################
             # GUI Page #1 : Root    #
@@ -883,21 +1782,33 @@ class ClassRoom():
             root_design = {
                 "title" : "File Manager",
                 "geometry" : {
-                    "width" : 640,
-                    "height" : 360,
+                    "width" : 800,
+                    "height" : 800,
                     "x" : 300,
                     "y" : 300
                 },
             }
             tk_widget_windows_util.design_root(root, root_design)
-                
+
+            # Design Individual Widget Parameters
+
+            ### Labels ###  
+            lb_hello_world_Params = {
+                0 : {
+                    "ROW_ID" : 0,
+                    "id" : "lb_hello_world",
+                    "widget_params" : {"text" : "Welcome! To start the file manager, please press the button to begin choosing a directory"},
+                    "pack_params" : {"side" : tk.TOP, "anchor" : tk.NW}, 
+                }
+            }
+
             # Create Widgets and Pack (Dynamically)
             widget_params = {
                 "label" : [
-                    tk_util.create_widget_info(0, "lb_hello_world", {"text" : "Hello World"}, {"fill" : "x", "expand" : "1"}),
+                    tk_util.create_widget_info(**lb_hello_world_Params[0]),
                 ],
                 "button" : [
-                    tk_util.create_widget_info(0, "btn_Click", {"text" : "Click Me!", "command" : gen_utils.map_func_arg(open_path_in_treeview, [root])}, {"fill" : "y", "expand" : False}),
+                    tk_util.create_widget_info(0, "btn_Click", {"text" : "Choose Directory!", "command" : gen_utils.map_func_arg(open_path_in_treeview, [root])}, {"fill" : "y", "expand" : False}),
                 ],
                 "frame" : [
                     tk_util.create_widget_info(0, "frame_Main", None, {"fill" : "both", "expand" : True})
@@ -1469,17 +2380,34 @@ class ClassRoom():
         print("Test Bench")
 
 def init_classes():
-    global classroom, gen_utils, gui_utils, tk_util, tk_pos_util, tk_widget_util, tk_widget_windows_util, ttk_util, tv_util
+    global classroom, \
+    gen_utils, \
+    path_utils, \
+    gui_utils, \
+    tk_util, \
+    tk_pos_util, \
+    tk_widget_util, \
+    tk_widget_entry_util, \
+    tk_widget_text_util, \
+    tk_widget_windows_util, \
+    ttk_util,\
+    tv_util, \
+    tk_customs_GUI
+
     # Initialize Classes
     classroom = ClassRoom()
     gen_utils = GeneralUtils()
+    path_utils = PathUtils()
     gui_utils = GUIUtils()
     tk_util = gui_utils.TKGUI()
     tk_pos_util = tk_util.Positions()
     tk_widget_util = tk_util.Widgets()
+    tk_widget_entry_util = tk_widget_util.Entry()
+    tk_widget_text_util = tk_widget_util.Text()
     tk_widget_windows_util = tk_widget_util.Window()
     ttk_util = tk_util.TTKUtil()
     tv_util = ttk_util.Tree()
+    tk_customs_GUI = tk_util.Custom()
 
 def init():
     """ Initialization Function Here """

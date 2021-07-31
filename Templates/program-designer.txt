@@ -26,7 +26,7 @@ Modified By:
 
 [Unified Modelling Language]
 * Use Case Description
-* Use Case Design
+* Use Case Model
 * Use Case Diagram
 * Program Design
 * Database Design

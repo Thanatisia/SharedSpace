@@ -1,0 +1,2 @@
+ContactID,FirstName,LastName,Title,Email,Email,Mobile,Phone,ProductID,CompanyID,GroupID,EntityStatusID,ContactDescription
+1,TestName,TestName,Test_Title,test@mail.com,Samsung,12345678,Prod1,Coy1,Group1,Entity1,ContactDescription

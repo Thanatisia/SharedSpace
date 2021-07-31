@@ -1,0 +1,40 @@
+Tips n Tricks Guide : Linux
+```
+This contains some Tips and Tricks for Linux in General
+
+[Searches]
+
+
+[References]
+ArchLinux - xinit
+	https://wiki.archlinux.org/title/Xinit
+
+Brodie Robertson - Eliminate Your Display Manager With Startx
+	https://www.youtube.com/watch?v=dtuy09mqBPI
+```
+
+1. Know the use for each file in the filesystem
+	[user dotfiles]
+	.bash_profile : 
+		- Put functions in here to load on the first startup of bash 
+			(if you are using tty - it's after the login)
+	.bashrc : 
+		- aka Bash Resource Control file
+		- What to run whenever bash starts up
+	.xinitrc :
+		- X Initialization Resource Control file 
+		- What to run when X first starts up (startx)
+	.Xresources : 
+		- X Resources file 
+		- A resource control file that stores colours, details 
+		- used by Xorg applications
+
+2. Recommendations
+	1. Put all initialization functions in .bash_profile (on startup) instead of .xinitrc
+		- This is so that there will not be any bottlenecks on startup of X 
+			- because it is initialized on startup 
+		- i.e.
+			- Network Setup
+			- Bluetooth Setup
+	
+

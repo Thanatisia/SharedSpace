@@ -16,6 +16,7 @@
 #   - 2021-07-27 1108H, Asura                                                           #
 #   - 2021-07-27 1233H, Asura                                                           #
 #   - 2021-07-27 1341H, Asura                                                           #
+#   - 2021-07-27 2257H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -69,15 +70,25 @@
 #   - 2021-07-27 1341H, Asura                                                           #
 #       i. Removed 'echo $?' from aur package install function to use "$?" after        #
 #           running the function                                                        #
+#   - 2021-07-27 2257H, Asura                                                           #
+#       i. Created functions [setup_swapfile] and [setup_audio] for swapfile and audio  #
+#           respectively                                                                #
+#       ii. Set [setup_swapfile] and [setup_audio] in body()                            #
+#       iii. Added variable 'swapfile_size' for setup_swapfile                          #
+#       iv. Created associative array 'audioinfo' -> to contain audio parameters        #
+#           - for use in audio setup & definitions such as unmute, mute and packages    #
 # ===================================================================================== #
 
-# --- NOTES
-# 1. Please run this with sudo to maximize the output because this includes some features
-#   not limited to
-#   i. Installation
-#   EDIT 2021-07-14 1007H : Temporarily added sudo into all functions that requires sudo
-#       - Currently you do not need to use sudo on the script
-#           - WIP
+: "--- NOTES
+1. Please run this with sudo to maximize the output because this includes some features
+not limited to
+    i. Installation
+    EDIT 2021-07-14 1007H : Temporarily added sudo into all functions that requires sudo
+        - Currently you do not need to use sudo on the script
+            - WIP
+
+2. 
+"
 
 # --- Variables
 
@@ -96,20 +107,32 @@ TARGET_USER_PRIMARY_GROUP="wheel"
 # Please specify all users you want to choose from by default in here
 USER_SET=("asura")
 
+### Defaults ###
+default_wmde="qtile"    # Default Window Manager or Desktop Environment
+
 ### Constants ###
 # User's Home Directory; Realised that using $PWD in sudo retained the working directory of user instead of the root
 const_HOME_DIR=$PWD    
+# Folders
+config_path=$const_HOME_DIR/.config
+# Files
 bashrc=$const_HOME_DIR/.bashrc
 xinitrc=$const_HOME_DIR/.xinitrc
 xresources=$const_HOME_DIR/.Xresources
 bashrc_personal=$const_HOME_DIR/personal/dotfiles/bash/.bashrc-personal
 bash_profile=$const_HOME_DIR/.bash_profile
 aur_install_Logs=$const_HOME_DIR/personal/dotfiles/bash/.aur-installs
+case "$default_wmde" in
+    "qtile")
+        default_wmde_config_fldr=$config_path/qtile
+        default_wmde_config_file=$config_fldr/config.py
+        ;;
+    *)
+        default_wmde_config_fldr=$config_path
+        default_wmde_config_file=""
+        ;;
+esac
 declare -A records_aur_links=()
-
-### Defaults ###
-default_wmde="qtile"    # Default Window Manager or Desktop Environment
-
 
 ############# EDIT THIS #############
 # Edit everything placed under here #
@@ -148,10 +171,11 @@ folders_to_create=(
     #   v. ~/folder
     #   vi. $HOME/folder
     $const_HOME_DIR/.logs/$PROGRAM_SCRIPTNAME
-    $const_HOME_DIR/.config
+    $config_path
     $const_HOME_DIR/.script
     $const_HOME_DIR/.tmp
     $const_HOME_DIR/personal/dotfiles/bash
+    $default_wmde_config_fldr
 )
 files_to_create=(
     # ==============================================
@@ -205,21 +229,27 @@ fi
     [$xinitrc]="# --- X Initialization Resource Control
 # This file executes whenever you run 'startx ~/.xinitrc'
 
-wmde=\${1:-$default_wmde} 
-case \"\$wmde\" in
+session=\${1:-$default_wmde} # wmde : Window Manager | Desktop Environment
+case \"\$session\" in
     \"$default_wmde\")
+        exec $default_wmde
         ;;
     *)
-        echo Invalid Window Manager or Desktop Environment
+        # echo Invalid Window Manager or Desktop Environment
+        # exec $1
+        exec \$session
         ;;
 esac
 "
+
+    [$default_wmde_config]="$(cat /usr/share/doc/qtile/default_config.py)"
 )
 declare -A sysinfo=(
 	# System Information here
 	# - Place all your system information defining the build such as
 	#	1. AUR Helper
 	# - Please seperate all values with ';' delimiter if your parameter has multiple values
+    # - Please seperate all subvalues with ',' delimiter if your parameter has subvalues
 	# [Syntax]:
 	#	[parameter]="value"
 	# [Supported/Used Parameters]:
@@ -239,6 +269,7 @@ declare -A pkgs=(
 	#	[<category>]="package_name,installation_Method;package_name,installation_Method"
 	# Examples:
 	#	[file-browser]="package-1,pacman;package-2,yay;package-n,method-n"
+    [audio]="alsa,pacman"
 	[file-browser]="pcmanfm,pacman"
 	[window-manager]="qtile,pacman"
 	[terminal-emualator]="alacritty,pacman"
@@ -311,7 +342,30 @@ declare -A pkg_install_methods=(
     # AUR Helpers
 	[yay]=""
 )
+# Your swapfile size ; 
+# Example: N {GB|GiB|MB|MiB} or N.0 {GB|GiB|MB|MiB} ; 
+# Example: 4 {GB|GiB|MB|MiB} or 4.0 {GB|GiB|MB|MiB}
+swapfile_size="4.0GiB"
+declare -A audioinfo=(
+    # Audio Info
+    #   - Please seperate all column values with delimiter ','
+    #   - Please seperate all column subvalues with delimiter ';'
+    # [Keywords]
+    #   audio-frameworks : The system you want to use for audio - ALSA or Pulseaudio or OSS
+    #   audio-pkgs : The Packages you want to use for audio - alsa-utils, pulseaudio
+    #   audio-unmute : Sections (Master, Speaker, Headphone) you want to unmute
+    #   audio-mute : Sections (Master, Speaker, Headphone) you want to mute
+    # [Syntax]
+    #   [audio-pkgs]="alsa,pulseaudio" 
+    [audio-frameworks]="alsa"
+    [audio-pkgs]="alsa-utils"
+    [audio-unmute]="Master,Speaker,Headphone"
+    [audio-mute]=""
+)
 
+########## END EDIT ##########
+# Edit variables stops here  #
+##############################
 
 ### General ###
 declare -A install_commands=(
@@ -864,6 +918,10 @@ case "$DISTRO" in
         ### AUR functions ###
         is_pkg_installed()
         {
+            #
+            # Check if package is installed
+            #
+
             # --- Input
             # Command Line Arguments
             package_name="${1:-""}"
@@ -1542,7 +1600,163 @@ setup_dotfiles()
         echo ""
 	done
 }
+setup_swapfiles()
+{
+    : "
+    Setup Swapfiles 
+    # EXAMPLE
+        swapfile size = 4GB 
+        fallocate -l 4G /swapfile
+        chmod 600 /swapfile
+        mkswap /swapfile
+        swapon /swapfile
+        echo # /swapfile | tee -a /etc/fstab
+        echo /swapfile none swap defaults 0 0 | tee -a /etc/fstab
+    "
 
+    # Create Swap file
+    # The “fallocate” program can create swap files faster than “dd”. As an added perk, its syntax is also easier to remember
+    # NOTE:
+    #	the swapfile/swap partition size is generally about 2x your pc/laptop's RAM - minimum 4GB as a rule of thumb
+    fallocate -l $swapfile_size /swapfile
+    # Change permission of swapfile to read+write
+    chmod 600 /swapfile
+    # Make swap file
+    mkswap /swapfile
+    # Enable swap file to begin using it
+    swapon /swapfile
+    #  The operating system needs to know that it is safe to use this file for swap every time it boots up
+    sudo echo "# /swapfile" | tee -a /etc/fstab
+    sudo echo "/swapfile none swap defaults 0 0" | tee -a /etc/fstab
+}
+setup_audio()
+{
+    : "
+    Setup Audio using either pulseaudio or ALSA
+    "
+    # Audioinfo Keys:   
+    # [audio-frameworks]
+    # [audio-pkgs]
+    # [audio-unmute]
+    # [audio-mute]
+    total_keys="${#audioinfo[@]}"
+
+    # Get String values from associative array
+    str_audio_frameworks="${audioinfo["audio-frameworks"]}"
+    str_audio_pkgs="${audioinfo["audio-pkgs"]}"
+    str_to_unmute="${audioinfo["audio-unmute"]}"
+    str_to_mute="${audioinfo["audio-mute"]}"
+
+    # Split strings into arrays
+    audio_frameworks=($(seperate_by_Delim $str_audio_frameworks ","))
+    audio_pkgs=($(seperate_by_Delim $str_audio_pkgs ","))
+    to_unmute=($(seperate_by_Delim $str_to_unmute ","))
+    to_mute=($(seperate_by_Delim $str_to_mute ","))
+
+    # Internal Functions
+    alsa_setup()
+    {
+        : "
+        Setup Audio using ALSA
+        "
+        
+        # Unmute 
+        for v in "${to_unmute[@]}"; do
+            curr_section=$v
+            amixer sset $curr_section unmute
+        done
+
+        # Mute 
+        for v in "${to_mute[@]}"; do
+            curr_section=$v
+            amixer sset $curr_section mute
+        done
+        echo "ALSA audio setup completed."
+        echo "Please test it via"
+        echo "speaker-test -c 2"
+    }
+    pulseaudio_setup()
+    {
+        : "
+        Setup Audio using Pulseaudio
+        "
+        echo "Pulseaudio still a WIP, if audio is not working
+        - Please try to fix it yourself, apologies!
+        "
+
+        echo "Pulseaudio audio setup completed."
+    }
+
+    # Check and install packages if not installed
+    for p in "${audio_pkgs[@]}"; do
+        # check if package is installed
+        rc=`is_pkg_installed $p`
+
+        # if package is not installed ( != "0" )
+        if [[ ! "$rc" == "0" ]]; then
+            # Return Code [0] : Found, else : Not Installed
+            echo "Audio package [$p] does not exist, installing..."
+            $install_Command $p
+
+            # Verify installation
+            rc=`is_pkg_installed $p`
+            if [[ "$rc" == "0" ]]; then
+                # If is installed
+                echo "  $p is installed."
+            else
+                # Install failed
+                echo "  $p installation failed."
+            fi
+        fi
+    done
+
+    # Setup audio
+    if [[ `is_pkg_installed "alsa-utils"` == "0" ]]; then
+        # ALSA is found and installed
+        if [[ `is_pkg_installed "pulseaudio"` == "0" ]]; then
+            # Both alsa-utils and pulseaudio are installed
+            read -p "Both alsa-utils and pulseaudio are found, 
+which would you like to setup?: {'(b)oth' | '(a)lsa' | '(p)ulseaudio' | Default: None (Leave empty)}" audio_conf
+
+            case "$audio_conf" in
+                "b" | "both")
+                    # Both ALSA and Pulseaudio
+
+                    # --- Pulseaudio
+                    pulseaudio_setup
+                    
+                    # --- ALSA
+                    alsa_setup
+                    ;;
+                "a" | "alsa-utils")
+                    # Alsa-utils setup
+                    alsa_setup
+                    ;;
+                "p" | "pulseaudio")
+                    # Pulseaudio setup
+                    pulseaudio_setup
+                    ;;
+                *)
+                    # Setup None
+                    echo "do refer to the following websites for setup"
+                    echo "  ALSA : https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture"
+                    echo "  Pulseaudio : "
+                    ;;
+            esac
+        else
+            # Only alsa-utils is found
+            # Alsa setup
+            alsa_setup
+        fi
+    else
+        # ALSA is not found
+        if [[ `is_pkg_installed "pulseaudio"` == "0" ]]; then
+            # Pulseaudio is found
+            # Pulseaudio setup
+            pulseaudio_setup
+        fi
+    fi
+}
 
 ### Main functions ###
 init()
@@ -1661,6 +1875,32 @@ body()
 
 	echo ""
 
+	echo "=============================="
+	echo "Setup Stage 4: Setup Swapfile "
+	echo "=============================="
+	setup_swapfiles
+
+    countdown 5
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
+
+	echo ""
+
+	echo "=============================="
+	echo "Setup Stage 5: Setup Audio    "
+	echo "=============================="
+	setup_audio
+
+    countdown 5
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
+
+	echo ""
+    
 	echo "======"
 	echo " End  "
 	echo "======"

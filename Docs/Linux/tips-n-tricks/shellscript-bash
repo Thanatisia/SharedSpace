@@ -15,7 +15,7 @@ Way to create multiline comments in Bash?
 	#############
 	#  Methods	#
 	#############
-	i. Using : ' '
+	i. Using ':'
 		Description
 		- ':' is shorthand for true and
 		- true does not process any parameters
@@ -26,6 +26,11 @@ Way to create multiline comments in Bash?
 			Line_1
 			Line_n
 		' 
+		[2]
+		: "
+			Line_1
+			Line_n
+		"
 	ii. Using heredoc << redirect
 		Description:
 		- This is a heredoc (<<) redirected to a NOP command (:) as a multi-line string.
