@@ -17,6 +17,7 @@
 #   - 2021-07-27 1233H, Asura                                                           #
 #   - 2021-07-27 1341H, Asura                                                           #
 #   - 2021-07-27 2257H, Asura                                                           #
+#   - 2021-08-01 0034H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -77,6 +78,10 @@
 #       iii. Added variable 'swapfile_size' for setup_swapfile                          #
 #       iv. Created associative array 'audioinfo' -> to contain audio parameters        #
 #           - for use in audio setup & definitions such as unmute, mute and packages    #
+#   - 2021-08-01 0034H, Asura                                                           #
+#       i. Added variable 'default_wmde_start_command'                                  #
+#           - Contains the exec command of the default window manager                   #
+#               to use when defining "exec" (if applicable)                             #
 # ===================================================================================== #
 
 : "--- NOTES
@@ -126,10 +131,12 @@ case "$default_wmde" in
     "qtile")
         default_wmde_config_fldr=$config_path/qtile
         default_wmde_config_file=$config_fldr/config.py
+        default_wmde_start_command="exec qtile start"
         ;;
     *)
         default_wmde_config_fldr=$config_path
         default_wmde_config_file=""
+        default_wmde_start_command="exec"
         ;;
 esac
 declare -A records_aur_links=()
@@ -232,7 +239,8 @@ fi
 session=\${1:-$default_wmde} # wmde : Window Manager | Desktop Environment
 case \"\$session\" in
     \"$default_wmde\")
-        exec $default_wmde
+        # exec $default_wmde
+        $default_wmde_start_command
         ;;
     *)
         # echo Invalid Window Manager or Desktop Environment
