@@ -81,7 +81,7 @@ Humanoid AI Software Development Structure
 		- System Shutdown
 25. Navigator
 	- Codename 'Navi'
-26. Fortune Telling
+26. Future Sight
 	- Abiity to take 'big data' and check for a potential 'next move'
 		- Environmental
 		- Virtual

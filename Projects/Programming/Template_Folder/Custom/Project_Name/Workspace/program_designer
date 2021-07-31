@@ -7,22 +7,12 @@ Program Planner
 #	Project Information		#
 #############################
 
-Project Name: 
-Code Name: 
-Program Name: 
-Author: 
-Background Information:
+Project Name: Proj TESTBENCH
+Code Name: Code Test
+Program Name: SimpleGUI
+Author: Asura
+Background Information: 
 Features:
-
-#################
-#	Changelogs	#
-#################
-Created By: yyyy-mm-dd HH:MMH, <Author>
-Modified By:
-	i. yyyy-mm-dd HH:MMH, <Author>
-Changelogs:
-	i. yyyy-mm-dd HH:MMH, <Author>
-		- Created documentation / source file
 
 
 #############

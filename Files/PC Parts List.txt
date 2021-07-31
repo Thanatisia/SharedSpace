@@ -1,0 +1,15 @@
+PC Parts List
+```
+[Template Information]
+Author: Asura
+Created By: 2021-07-31 21:11H, Asura
+Modified By:
+	- 2021-07-31 21:11H, Asura
+Changelogs:
+	- 2021-07-31 21:11H, Asura
+		- Created Template
+```
+
+==================================================================================================================================================================
+| ROW_ID | Case | Motherboard | CPU | GPU | I/O Devices | Memory Devices | Storage Devices | Cooling Device | Budget | Total Amount | Difference (Below / Above) |
+==================================================================================================================================================================
