@@ -135,6 +135,7 @@ aur_install_Logs=$const_HOME_DIR/personal/dotfiles/bash/.aur-installs
 case "$default_wmde" in
     "qtile")
         # Default Template Directory
+        # Requires sudo
         default_wmde_config_fldr="/usr/share/doc/qtile"
         default_wmde_config_file=default_config.py
         default_wmde_config_fullpath=$default_wmde_config_fldr/$default_wmde_config_file
@@ -194,7 +195,7 @@ folders_to_create=(
     $const_HOME_DIR/.script
     $const_HOME_DIR/.tmp
     $const_HOME_DIR/personal/dotfiles/bash
-    $default_wmde_config_fldr
+    $wmde_home_config_fldr
 )
 files_to_create=(
     # ==============================================
