@@ -1208,6 +1208,7 @@ postinstall_sanitize()
 				*)
 					;;
 			esac
+			;;
 		*)
 			echo "No action."
 			;;
