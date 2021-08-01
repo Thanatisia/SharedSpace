@@ -68,6 +68,8 @@
 #			- To be tested
 #		- Added sanitization function after postinstallation
 #			- Remove files after completion to clean up the account for use
+#	- 2021-08-01 1116H, Asura
+#		- Updated postinstall script to include option to copy script files to user
 # TODO:
 #		- Seperate and create script 'postinstallation-utilities.sh' for PostInstallation processes (non-installation focus)
 #			such as 
@@ -1134,41 +1136,88 @@ postinstall_sanitize()
 	for ((i=0; i < $number_of_external_scripts; i++)); do
 		echo "[$i] : [${external_scripts[$i]}]"
 	done
-	read -p "Delete the scripts? [(Y)es|(N)o|(S)elect]: " del_conf
-	# Yes - Delete
-	# No - Nothing
-	# Select - Allow user to choose
-	case "$del_conf" in
-		"Y" | "Yes") 
-			# Delete all
-			for ((i=0; i < $number_of_external_scripts; i++)); do
-				if [[ "$MODE" == "DEBUG" ]]; then
-					echo "rm -r ${external_scripts[$i]}"
-				else
-					rm -r ${external_scripts[$i]}
-				fi
-			done
+	read -p "What would you like to do to the root scripts? [(C)opy to user|(D)elete|<Leave empty to do nothing>]: " action
+	case "$action" in
+		"C" | "Copy")
+			read -p "Copy to which user? [(A)ll created users|(S)elect]: " users
+
+			# Copy to stated users
+			case "$users" in
+				"A" | "All")
+					# Loop through all users in user_profiles and
+					# See if it exists, follow above documentation
+					for u_ID in "${!user_Info[@]}"; do
+						curr_user="${user_Info[$u_ID]}"
+						curr_user_Params=($(seperate_by_Delim $curr_user ','))
+					
+						# Get individual parameters
+						u_name="${curr_user_Params[0]}"					# User Name
+
+						# Check if user exists
+						u_Exists="$(check_user_Exists $u_name)" 		# Check if user exists; 0 : Does not exist | 1 : Exists
+						u_home_Dir="${curr_user_Params[3]}"             # Home Directory
+
+						if [[ "$u_Exists" == "1" ]]; then
+							# 0 : Does not exist
+							# 1 : Exists
+							echo "Copying from [$PWD] : curl_repositories.sh => /mnt/$u_home_Dir"
+							cp curl_repositories.sh /mnt/$u_home_Dir/curl_repositories.sh
+						fi
+					done
+					;;
+				"S" | "Select")
+					read -p "User name: " sel_uhome
+					sel_uhome_dir=`arch-chroot $dir_Mount /bin/bash -c 'su - $sel_uhome -c "echo $HOME"'`
+					echo "Copying from [$PWD] : curl_repositories.sh => /mnt/$sel_uhome_dir/curl_repositories.sh"
+					cp curl_repositories.sh /mnt/$sel_uhome_dir/curl_repositories.sh
+					;;
+				*)
+					;;
+			esac
+
+			# Reset script to let user delete if they want to
+			postinstall_sanitize
 			;;
-		"S" | "Select")
-			# Let user choose
-			# Seperate all options with delimiter ','
-			echo -e "Please enter all files you wish to delete\n	(Seperate all options with delimiter ',')"
-			read -p "> : " del_selections
-			# Seperate selected options with ',' delimited
-			arr_Selected=($(seperate_by_Delim "$del_selections" ','))
-			# Delete selected files if not empty
-			if [[ ! "$del_selections" == "" ]]; then
-				for sel in "${arr_Selected[@]}"; do
-					# Delete selected files
-					if [[ "$MODE" == "DEBUG" ]]; then
-						echo "rm -r ${external_scripts[$sel]}"
-					else
-						rm -r ${external_scripts[$sel]}
+		"D" | "Delete")
+			read -p "Delete the scripts? [(Y)es|(N)o|(S)elect]: " del_conf
+			# Yes - Delete
+			# No - Nothing
+			# Select - Allow user to choose
+			case "$del_conf" in
+				"Y" | "Yes") 
+					# Delete all
+					for ((i=0; i < $number_of_external_scripts; i++)); do
+						if [[ "$MODE" == "DEBUG" ]]; then
+							echo "rm -r ${external_scripts[$i]}"
+						else
+							rm -r ${external_scripts[$i]}
+						fi
+					done
+					;;
+				"S" | "Select")
+					# Let user choose
+					# Seperate all options with delimiter ','
+					echo -e "Please enter all files you wish to delete\n	(Seperate all options with delimiter ',')"
+					read -p "> : " del_selections
+					# Seperate selected options with ',' delimited
+					arr_Selected=($(seperate_by_Delim "$del_selections" ','))
+					# Delete selected files if not empty
+					if [[ ! "$del_selections" == "" ]]; then
+						for sel in "${arr_Selected[@]}"; do
+							# Delete selected files
+							if [[ "$MODE" == "DEBUG" ]]; then
+								echo "rm -r ${external_scripts[$sel]}"
+							else
+								rm -r ${external_scripts[$sel]}
+							fi
+						done
 					fi
-				done
-			fi
-			;;
+					;;
+				*)
+					;;
+			esac
 		*)
+			echo "No action."
 			;;
 	esac
 	echo "Sanitization Completed."

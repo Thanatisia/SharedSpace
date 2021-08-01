@@ -18,6 +18,7 @@
 #   - 2021-07-27 1341H, Asura                                                           #
 #   - 2021-07-27 2257H, Asura                                                           #
 #   - 2021-08-01 0034H, Asura                                                           #
+#   - 2021-08-01 1034H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -82,6 +83,10 @@
 #       i. Added variable 'default_wmde_start_command'                                  #
 #           - Contains the exec command of the default window manager                   #
 #               to use when defining "exec" (if applicable)                             #
+#   - 2021-08-01 1034H, Asura                                                           #
+#       i. Removed $default_wmde_config from files to edit                              #
+#       ii. Added function 'setup_wm' => To setup window manager                        #
+#           - To remove in postinstllation script => Have both DE and WM                #
 # ===================================================================================== #
 
 : "--- NOTES
@@ -129,8 +134,15 @@ bash_profile=$const_HOME_DIR/.bash_profile
 aur_install_Logs=$const_HOME_DIR/personal/dotfiles/bash/.aur-installs
 case "$default_wmde" in
     "qtile")
-        default_wmde_config_fldr=$config_path/qtile
-        default_wmde_config_file=$config_fldr/config.py
+        # Default Template Directory
+        default_wmde_config_fldr="/usr/share/doc/qtile"
+        default_wmde_config_file=default_config.py
+        default_wmde_config_fullpath=$default_wmde_config_fldr/$default_wmde_config_file
+        # User's home directory
+        wmde_home_config_fldr=$config_path/qtile
+        wmde_home_config_file=config.py
+        wmde_home_config_fullpath=$wmde_home_config_fldr/$wmde_home_config_file
+        # Other WM Defaults
         default_wmde_start_command="exec qtile start"
         ;;
     *)
@@ -249,8 +261,6 @@ case \"\$session\" in
         ;;
 esac
 "
-
-    [$default_wmde_config]="$(cat /usr/share/doc/qtile/default_config.py)"
 )
 declare -A sysinfo=(
 	# System Information here
@@ -1765,6 +1775,20 @@ which would you like to setup?: {'(b)oth' | '(a)lsa' | '(p)ulseaudio' | Default:
         fi
     fi
 }
+setup_wm()
+{
+    : "
+        Setup Window Manager
+    "
+    if [[ -d $default_wmde_config_fldr ]]; then
+        # if directory exists
+        if [[ -f $default_wmde_config_fullpath ]]; then
+            # if file exists
+            # "$(cat /usr/share/doc/qtile/default_config.py)"
+            echo -e "$(cat $default_wmde_config_fullpath)" | tee -a $wmde_home_config_fullpath
+        fi
+    fi
+}
 
 ### Main functions ###
 init()
@@ -1900,6 +1924,19 @@ body()
 	echo "Setup Stage 5: Setup Audio    "
 	echo "=============================="
 	setup_audio
+
+    countdown 5
+
+	if [[ "$MODE" == "DEBUG" ]]; then
+		read -p "Paused."
+	fi
+
+	echo ""
+
+	echo "======================================="
+	echo "Setup Stage 6: Setup Window Manager    "
+	echo "======================================="
+	setup_wm
 
     countdown 5
 
