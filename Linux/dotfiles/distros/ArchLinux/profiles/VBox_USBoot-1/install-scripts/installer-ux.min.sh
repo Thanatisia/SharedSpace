@@ -1144,22 +1144,18 @@ postinstall_sanitize()
 					
 						# Get individual parameters
 						u_name="${curr_user_Params[0]}"					# User Name
-
-						# Check if user exists
-						u_Exists="$(check_user_Exists $u_name)" 		# Check if user exists; 0 : Does not exist | 1 : Exists
 						u_home_Dir="${curr_user_Params[3]}"             # Home Directory
 
-						if [[ "$u_Exists" == "1" ]]; then
-							# 0 : Does not exist
-							# 1 : Exists
-							echo "Copying from [$PWD] : curl_repositories.sh => /mnt/$u_home_Dir"
-							cp curl_repositories.sh /mnt/$u_home_Dir/curl_repositories.sh
-						fi
+						echo "Copying from [$PWD] : curl_repositories.sh => /mnt/$u_home_Dir"
+						cp curl_repositories.sh /mnt/$u_home_Dir/curl_repositories.sh
 					done
 					;;
 				"S" | "Select")
+					# Local Variables
+					dir_Mount="${mount_Group["2"]}"
+					# User Input
 					read -p "User name: " sel_uhome
-					sel_uhome_dir=`arch-chroot $dir_Mount /bin/bash -c 'su - $sel_uhome -c "echo $HOME"'`
+					sel_uhome_dir=$(arch-chroot $dir_Mount /bin/bash -c "su - $sel_uhome -c 'echo \$HOME'")
 					echo "Copying from [$PWD] : curl_repositories.sh => /mnt/$sel_uhome_dir/curl_repositories.sh"
 					cp curl_repositories.sh /mnt/$sel_uhome_dir/curl_repositories.sh
 					;;
