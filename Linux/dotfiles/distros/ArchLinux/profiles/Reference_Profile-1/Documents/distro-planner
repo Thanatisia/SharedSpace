@@ -1,0 +1,78 @@
+Linux Distro Planner
+```
+- To plan your Linux distro requirements before adding into the 'installer-ux.min.sh' and 'customDE-REMAKE.sh' and postinstallation custom setup scripts
+```
+
+[File Information]
+Date Created: 2021-08-02 0100H, Asura
+Date Modified: 
+	- 2021-08-02 0100H, Asura
+	- 2021-08-02 0223H, Asura
+Changelogs:
+	- 2021-08-02 0100H, Asura
+		- Created script file
+	- 2021-08-02 0223H, Asura
+		- Added some default values and templates
+
+[User Information]
+User: Asura
+
+[System Design]
+Device Hardware Type: 
+Device Name: 
+Device Size: 
+Device Boot: 
+Device Label: 
+Partitions:
+	# Note your partition and their specifications here
+	# [Syntax]
+	# ROW_ID;Partition Name;Partition Type;Partition FileType;Partition Start Size (MiB | MB | GiB | GB);Partition End Size (MiB | MB | GiB | GB);Partition Bootable;Other Options
+	1;Boot;primary;ext4;0%;1024MiB;True;NIL
+	2;Root;primary;ext4;1024MiB;x1MiB;False;NIL
+	3;Home;primary;ext4;x1MiB;100%;False;NIL
+Mount Paths:
+	# State all the paths you want to mount on install
+	/mnt/boot	# Boot
+	/mnt		# Root
+	/mnt/home	# Home
+Swap file size: 4.0GiB
+
+[Distro Design]
+Distro Name: 
+Distro Base: 
+Package Manager: 
+Window Manager / Desktop Environment: 
+Login (Display) Manager: 
+Packages (with Categories): 
+	# <Category> : <package_1>;<download_method>,<package_2>;<download_method>
+	# Please seperate each column with ',' delimiter
+	# Please seperate each subvalues with ';' delimiter
+	# <download_method> = downloading package via aur (makepkg -si), yay (aur helper), pacman etc.
+
+[Custom Window Manager -> Desktop Environment Design]
+Distro Name: 
+Distro Base: 
+Package Manager: 
+Window Manager:
+Login (Display) Manager: 
+Packages (with Categories): 
+	# These are the must-have categories generally found in a Desktop Environment
+	# <Category> : <package_1>;<download_method>,<package_2>;<download_method>
+	# Please seperate each column with ',' delimiter
+	# Please seperate each subvalues with ';' delimiter
+	# <download_method> = downloading package via aur (makepkg -si), yay (aur helper), pacman etc.
+    [audio]=
+	[file-browser]=
+	[window-manager]=
+	[terminal-emualator]=
+	[web-browser]=
+	[graphical-text-editor]=
+	[image-setter]=
+	[compositor]=
+	[system-monitor]=
+	[bluetooth-manager]=
+	[ricing]=
+	[fetch]=
+	[x]=
+	[others]=
+
