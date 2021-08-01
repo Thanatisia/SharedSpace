@@ -1152,10 +1152,14 @@ postinstall_sanitize()
 					
 						# Get individual parameters
 						u_name="${curr_user_Params[0]}"					# User Name
+						u_primary_Group="${curr_user_Params[1]}"        # Primary Group
+						u_secondary_Groups="${curr_user_Params[2]}"     # Secondary Groups
 						u_home_Dir="${curr_user_Params[3]}"             # Home Directory
+						u_other_Params="${curr_user_Params[@]:4}"       # Any other parameters after the first 3
 
 						echo "Copying from [$PWD] : curl_repositories.sh => /mnt/$u_home_Dir"
-						cp curl_repositories.sh /mnt/$u_home_Dir/curl_repositories.sh
+						cp curl_repositories.sh /mnt/$u_home_Dir/curl_repositories.sh				# Copy script from root to user
+						chown -R $u_name:$u_primary_Group /mnt/$u_home_Dir/curl_repositories.sh		# Change ownership of file to user
 					done
 					;;
 				"S" | "Select")
@@ -1163,9 +1167,11 @@ postinstall_sanitize()
 					dir_Mount="${mount_Group["2"]}"
 					# User Input
 					read -p "User name: " sel_uhome
+					sel_primary_group=$(arch-chroot $dir_Mount /bin/bash -c "su - $sel_uhome -c 'echo \$(id -gn $sel_uhome)'")
 					sel_uhome_dir=$(arch-chroot $dir_Mount /bin/bash -c "su - $sel_uhome -c 'echo \$HOME'")
 					echo "Copying from [$PWD] : curl_repositories.sh => /mnt/$sel_uhome_dir/curl_repositories.sh"
 					cp curl_repositories.sh /mnt/$sel_uhome_dir/curl_repositories.sh
+					chown -R $sel_uhome:$sel_primary_group /mnt/$sel_uhome_dir/curl_repositories.sh		# Change ownership of file to user
 					;;
 				*)
 					;;
