@@ -148,6 +148,35 @@ case "$default_wmde" in
         wmde_home_config_fullpath=$wmde_home_config_fldr/$wmde_home_config_file
         # Other WM Defaults
         default_wmde_start_command="exec qtile start"
+        # Required Packages
+        required_pkgs=(
+            "python-pip" 
+        )
+        ;;
+    "bspwm")
+        # Default Template Directory
+        # Requires sudo
+        default_wmde_config_fldr="/usr/share/doc/bspwm"
+        default_wmde_config_file=bspwmrc
+        default_wmde_config_fullpath=$default_wmde_config_fldr/$default_wmde_config_file
+        # Other Required default template directories
+        default_sxhkd_config_fldr="/usr/share/doc/sxhkd"
+        default_sxhkd_config_file=sxhkdrc
+        default_sxhkd_config_fullpath=$default_sxhkd_config_fldr/$default_sxhkd_config_file
+        # User's home directory
+        wmde_home_config_fldr=$config_path/bspwm
+        wmde_home_config_file=bspwmrc
+        wmde_home_config_fullpath=$wmde_home_config_fldr/$wmde_home_config_file
+        # User's additional config home directories
+        sxhkd_home_config_fldr=$config_path/sxhkd
+        sxhkd_home_config_file=sxhkdrc
+        sxhkd_home_config_fullpath=$sxhkd_home_config_fldr/$sxhkd_home_config_file
+        # Other WM Defaults
+        default_wmde_start_command="exec bspwm"
+        # Required Packages
+        required_pkgs=(
+            "sxhkd"
+        )
         ;;
     *)
         default_wmde_config_fldr=$config_path
@@ -1805,11 +1834,31 @@ setup_wm()
     : "
         Setup Window Manager
     "
+
+    # Install Required Packages
+    for p in "${required_pkgs[@]}"; do
+        # Loop array and install if not installed
+        if [[ `is_pkg_installed $p` == "1" ]]; then
+            # 1 : Not Installed
+            echo "$p does not exist, installing..."
+            echo ""
+            $install_Command "$p"
+        fi
+    done
+
+    # Create Configs folder and files (if any)
+    if [[ ! -d $wmde_home_config_fldr ]]; then
+        # Create user config folder
+        mkdir -p $wmde_home_config_fldr
+    fi
+
+    # Copy config default files (if any)
     if [[ -d $default_wmde_config_fldr ]]; then
         # if directory exists
         if [[ -f $default_wmde_config_fullpath ]]; then
             # if file exists
             # "$(cat /usr/share/doc/qtile/default_config.py)"
+            echo "Copying | [$default_wmde_config_fullpath] => [$wmde_home_config_fullpath]..."
             echo -e "$(cat $default_wmde_config_fullpath)" | tee -a $wmde_home_config_fullpath
         fi
     fi
