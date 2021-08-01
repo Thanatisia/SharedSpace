@@ -19,6 +19,7 @@
 #   - 2021-07-27 2257H, Asura                                                           #
 #   - 2021-08-01 0034H, Asura                                                           #
 #   - 2021-08-01 1034H, Asura                                                           #
+#   - 2021-08-01 1620H, Asura                                                           #
 # Changelogs:                                                                           #
 #   - 2021-07-13 1127H, Asura                                                           #
 #       i. Copied from 'customDE-simple_flow.sh'                                        #
@@ -87,6 +88,8 @@
 #       i. Removed $default_wmde_config from files to edit                              #
 #       ii. Added function 'setup_wm' => To setup window manager                        #
 #           - To remove in postinstllation script => Have both DE and WM                #
+#   - 2021-08-01 1620H, Asura                                                           #
+#       i. Fixed setup_audio                                                            #
 # ===================================================================================== #
 
 : "--- NOTES
@@ -1637,16 +1640,24 @@ setup_swapfiles()
     # The “fallocate” program can create swap files faster than “dd”. As an added perk, its syntax is also easier to remember
     # NOTE:
     #	the swapfile/swap partition size is generally about 2x your pc/laptop's RAM - minimum 4GB as a rule of thumb
-    fallocate -l $swapfile_size /swapfile
+    sudo fallocate -l $swapfile_size /swapfile
     # Change permission of swapfile to read+write
-    chmod 600 /swapfile
+    sudo chmod 600 /swapfile
     # Make swap file
-    mkswap /swapfile
+    sudo mkswap /swapfile
     # Enable swap file to begin using it
-    swapon /swapfile
+    sudo swapon /swapfile
     #  The operating system needs to know that it is safe to use this file for swap every time it boots up
-    sudo echo "# /swapfile" | tee -a /etc/fstab
-    sudo echo "/swapfile none swap defaults 0 0" | tee -a /etc/fstab
+    echo "# /swapfile" | sudo tee -a /etc/fstab
+    echo "/swapfile none swap defaults 0 0" | sudo tee -a /etc/fstab
+
+    # Check if swap is activated
+    swap_exists=`free -h | grep Swap`
+    if [[ ! "$swap_exists" == "" ]]; then
+        echo "Swap of size [$swapfile_size] successfully created."
+    else
+        echo "Error creating swap of size [$swapfile_size]."
+    fi
 }
 setup_audio()
 {
@@ -1666,11 +1677,24 @@ setup_audio()
     str_to_unmute="${audioinfo["audio-unmute"]}"
     str_to_mute="${audioinfo["audio-mute"]}"
 
-    # Split strings into arrays
-    audio_frameworks=($(seperate_by_Delim $str_audio_frameworks ","))
-    audio_pkgs=($(seperate_by_Delim $str_audio_pkgs ","))
-    to_unmute=($(seperate_by_Delim $str_to_unmute ","))
-    to_mute=($(seperate_by_Delim $str_to_mute ","))
+    # Split strings into arrays 
+    # If not empty
+    if [[ ! "$str_audio_frameworks" == "" ]]; then
+        # if not empty
+        audio_frameworks=($(seperate_by_Delim $str_audio_frameworks ","))
+    fi
+
+    if [[ ! "$str_audio_pkgs" == "" ]]; then
+        audio_pkgs=($(seperate_by_Delim $str_audio_pkgs ","))
+    fi
+
+    if [[ ! "$str_to_unmute" == "" ]]; then
+        to_unmute=($(seperate_by_Delim $str_to_unmute ","))
+    fi
+
+    if [[ ! "$str_to_mute" == "" ]]; then
+        to_mute=($(seperate_by_Delim $str_to_mute ","))
+    fi
 
     # Internal Functions
     alsa_setup()
