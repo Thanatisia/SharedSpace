@@ -1,0 +1,46 @@
+Accounting Financial Statement Book Database Management System (Balance Sheet DBMS)
+```
+> Background Information
+	Make a Financial Statement book Database manager with SQLite
+	- Cross Platform between
+		- Mobile Development (Android) (Java-XML) and
+		- PC (Windows / Linux) (Python-TKinter)
+	- Refer to financial balance sheet on mobile's list (YYYY - MM list)
+
+> Features
+	- Basics
+		C : [
+				Create a profile for user - 1 table for each user,
+		]
+		R : [
+				Read Database
+		]
+		U : [
+				Update Database - table according to current user
+		]
+		D : [
+				Delete Records
+		]
+	- For Mobile
+		- same as basics but includes the following because
+		Android creates the SQLite file in internal private storage (not visible unless rooted) 
+		B : [
+				Backup database file - export to android external root directory (Home directory)
+		],
+		R : [
+				Restore database file - import to android internal private storage directory where program will read the files from and,
+				Restart application
+		]
+
+[Database Structure]
+Root directory
+ |
+ |--> dbfile.db						# The Database File
+		|
+		|--> Tables					# Tables can be created in a database - They are basically partitions in a database file for specific uses
+				|
+				|--> Columns		# Each Table can have multiple columns defined that will determine what value each row should contain
+						|
+						|--> Rows	# Each Row represents a record added by the user
+```
+
