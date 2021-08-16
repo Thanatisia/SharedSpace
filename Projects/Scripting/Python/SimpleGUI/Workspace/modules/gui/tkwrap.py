@@ -199,7 +199,7 @@ class GUIUtils():
                     Description: This is the widget type you want to create
                     Type: String
                     Default: N/A
-                    Syntax: {'label' : Label, 'frame' : Frame, 'canvas' : Canvas, 'button' : Button, 'treeview' : TreeView} etc.
+                    Syntax: {'label' : Label, 'frame' : Frame, 'canvas' : Canvas, 'button' : Button, 'treeview' : TreeView, 'notebook' : Notebook} etc.
                 widget_params
                     Description: This is the parameters for all widgets you want to create
                     Type: Dictionary
@@ -229,6 +229,22 @@ class GUIUtils():
                         ]
                 placement_type
                     Description: This is the positioning style you want to place your widget - i.e. pack(), grid() and place()
+                    Options:
+                        - .pack():
+                            expand
+                            fill
+                        - .grid():
+                            column
+                            columnspan
+                            in
+                            ipadx
+                            ipady
+                            padx
+                            pady
+                            row
+                            rowspan
+                            sticky
+                        - .place()
                     Type: string
                     Default: pack
                     Syntax: {"pack" : widget.pack(), "grid" : widget.grid(), "place" : widget.place()}
@@ -254,22 +270,28 @@ class GUIUtils():
                 curr_pack_param = curr_Widget["pack_params"]
 
                 # Create Object based on widget
-                if widget == "label":       # For Label
-                    curr_obj = tk.Label(window, **curr_widget_param)
-                elif widget == "entry":     # For single-line textbox input
-                    curr_obj = tk.Entry(window, **curr_widget_param)
-                elif widget == "text":      # For multi-line textbox input
-                    curr_obj = tk.Text(window, **curr_widget_param)
-                elif widget == "frame":     # For Frame
-                    curr_obj = tk.Frame(window, **curr_widget_param)
-                elif widget == "canvas":    # For Canvas
-                    curr_obj = tk.Canvas(window, **curr_widget_param)
-                elif widget == "button":    # For Button
-                    curr_obj = tk.Button(window, **curr_widget_param)
-                elif widget == "scrollbar": # For ScrollBar
-                    curr_obj = tk.Scrollbar(window, **curr_widget_param)
-                elif widget == "treeview":  # For TreeView (displaying grids)
-                    curr_obj = ttk.Treeview(window, **curr_widget_param)
+                def create_widget_obj(widget, window, curr_widget_param=None):
+                    curr_obj = ""
+                    if widget == "label":       # For Label
+                        curr_obj = tk.Label(window, **curr_widget_param)
+                    elif widget == "entry":     # For single-line textbox input
+                        curr_obj = tk.Entry(window, **curr_widget_param)
+                    elif widget == "text":      # For multi-line textbox input
+                        curr_obj = tk.Text(window, **curr_widget_param)
+                    elif widget == "frame":     # For Frame
+                        curr_obj = tk.Frame(window, **curr_widget_param)
+                    elif widget == "canvas":    # For Canvas
+                        curr_obj = tk.Canvas(window, **curr_widget_param)
+                    elif widget == "button":    # For Button
+                        curr_obj = tk.Button(window, **curr_widget_param)
+                    elif widget == "scrollbar": # For ScrollBar
+                        curr_obj = tk.Scrollbar(window, **curr_widget_param)
+                    elif widget == "treeview":  # For TreeView (displaying grids)
+                        curr_obj = ttk.Treeview(window, **curr_widget_param)
+                    elif widget == "notebook":  # For Notebook (aka TabControl)
+                        curr_obj = ttk.Notebook(window, **curr_widget_param)
+                    return curr_obj
+                curr_obj = create_widget_obj(widget, window, curr_widget_param)
 
                 # Set Widget Object
                 if placement_type == "pack":
@@ -854,7 +876,6 @@ class GUIUtils():
                         # Configure the tag on the Text() object
                         text.tag_config(tag_name, **options)
                     # Append more actions here
-
         class Positions():
             """ Python GUI TKinter Utilities - Positioning (i.e. pack(), grid())"""
             def pack_Widget(self, widget, pack_params=None):
@@ -926,6 +947,67 @@ class GUIUtils():
                     else:
                         scrollbar = ttk.Scrollbar(window)
                 return scrollbar
+
+            class Notebook():
+                """ 
+                TKinter TTK Notebook (aka Tab Controls) Functions here 
+                
+                    - Tab Controls in TKinter are known as Tab Controls
+                """
+                def create_tabcontrol(self, window, tabcontrol_params=None):
+                    """
+                    Create a new TabControl (Notebook) object
+
+                    - Return Type: ttk.Notebook()
+                    """
+                    if not (tabcontrol_params == None):
+                        # If tabcontrol_params is not empty
+                        new_tabcontrol = ttk.Notebook(window, **tabcontrol_params)
+                    else:
+                        new_tabcontrol = ttk.Notebook(window)
+                    return new_tabcontrol
+
+
+                def create_tab(self, window, tab_control, tab_widget, tab_add_Params=None):
+                    """
+                    Create a tab in the Notebook (Tab Control)
+
+                    - Return Type: None
+
+                    :: Params
+
+                        window
+                            Description: The Window/Root of the Application
+                            Type: tk.Tk()
+                        
+                        tab_control
+                            Description: The Tab Control (Notebook) object you want to add tabs to
+                            Type: ttk.Notebook()
+                        
+                        tab_widget
+                            Description: The Tab widget you want to add to the tab
+                            Syntax: ttk.Frame() etc.
+                            Type: Widget
+
+                        tab_add_Params
+                            Description: The options supported by add() method
+                            Options:
+                                sticky
+                                state
+                                padding
+                                text
+                                image
+                                compound
+                                underline
+                            Type: Dictionary
+                    """
+                    if not (window == None):
+                        # If Window is not Empty
+                        if not (tab_control == None):
+                            # If tab_control is not Empty
+                            if not (tab_widget == None) and not (tab_add_Params == None):
+                                # If Tab you want to add is not Empty
+                                tab_control.add(tab_widget, **tab_add_Params)
 
             class Tree():
                 """ Python TKinter TTK: Tree(view) Utilities """

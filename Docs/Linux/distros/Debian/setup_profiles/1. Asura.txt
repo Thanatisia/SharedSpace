@@ -1,0 +1,236 @@
+[Setup Designs]
+
+1. Asura
+	Added: 2021-08-1 1625H
+Design:
+	- User Information:
+	Hostname: Debian
+	Region: Asia
+	City: Singapore
+	Locale: en_SG.UTF-8
+	- Device Information: 
+	Device Name: /dev/sdb
+	Device Size: 50GiB
+	- Partition Information:
+	Partition Scheme: mbr
+	Partition Table: msdos
+	- File Structure:
+	device_name	Description	partition_format	partition_type	Bootable	mount_Path					start_size	end_size
+	/dev/sdX1 	Boot partition	primary			ext4		True		/mnt/boot					0%		1024MiB
+	/dev/sdX2 	Root partition	primary			ext4				/mnt		(in debian : /mnt/debinst)	1024MiB		32768MiB
+	/dev/sdX3 	Home partition	primary			ext4				/mnt/home					32768MiB	100%
+	- Packages (to install):
+	Category: Program Name, Package Name
+	Boot Loader: Grub, 
+
+Code:
+	#######################
+	# Prepare File System #
+	#######################
+	- Reformat File System
+	parted /dev/sdb mklabel msdos
+	
+	- Create Partition	
+	parted /dev/sdb mkpart primary ext4 0% 1024MiB
+	mkfs.ext4 /dev/sdb1
+	parted /dev/sdb set 1 boot on
+
+	parted /dev/sdb mkpart primary ext4 1024MiB 32768MiB
+	mkfs.ext4 /dev/sdb2
+
+	parted /dev/sdb mkpart primary ext4 32768MiB 100%
+	mkfs.ext4 /dev/sdb3
+
+	- Mount root partition
+	mkdir -p /mnt/debinst
+	mount -t ext4 /dev/sdb2	/mnt/debinst 
+
+	- Make directories
+	mkdir -p /mnt/debinst/boot
+	mkdir -p /mnt/debinst/home
+
+	- Mount	
+	mount -t ext4 /dev/sdb1	/mnt/debinst/boot	
+	mount -t ext4 /dev/sdb3	/mnt/debinst/home	
+
+	- Make work directory in your base build
+	mkdir -p work
+	cd work
+
+	############################
+	# Setup Debian Debootstrap #
+	############################
+	- Search and download debian debootstrap
+	# wget http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.124_all.deb
+	arr=($(wget --no-remove-listing -O /tmp/deboot.html -q http://ftp.us.debian.org/debian/pool/main/d/debootstrap && grep 'all.deb' /tmp/deboot.html | awk -F 'href' '{print $2}' | cut -d '"' -f2))
+	
+	for row_id in "${!arr[@]}"; do
+		echo "[$row_id] : ${arr[$row_id]}"
+	done
+
+	read -p "Select version to use (please enter the id): " version_index
+	version="${arr[$version_index]}"
+	wget -P $PWD/debootstrap http://ftp.us.debian.org/debian/pool/main/d/debootstrap/$version
+
+	
+	- Extract the debootstrap archive file
+	ar -vx $version					# Verbose + Extract the archive
+	cd /
+	sudo zcat ~/work/data.tar.gz | sudo tar xv
+
+	- Append sbin to path
+	PATH+=:/usr/bin
+
+	- Run debootstrap
+	debootstrap 	--include linux-image-amd64,grub-pc,locales \	# Packages to strap
+		    	--arch amd64 \					# Architecture
+		    	unstable \					# Release
+			/mnt/debinst \					# Target partition / mount path
+			http://ftp.us.debian.org/debian			# Debian mirror
+
+
+	#############################
+	# Configure the base system #
+	#############################
+	- Prepare chroot environment
+	# Temporarily copy mounted fstab
+	cp /etc/mtab /mnt/debinst/etc/mtab
+	# Temporarily loan devices from host
+	mount -o bind /dev	/mnt/debinst/dev
+	mount -o bind /proc	/mnt/debinst/proc
+	mount -o bind /sys	/mnt/debinst/sys
+
+	- Chroot into debian system
+	sudo LANG=C.UTF-8 chroot /mnt/debinst /bin/bash
+
+		################
+		# Make Devices #
+		################
+		- Install makedev
+		apt install makedev
+
+		- Mount proc
+		mount non /proc -t proc
+
+		- Change Directory to devices directory
+		cd /dev
+
+		- Make Device
+		/usr/sbin/MAKEDEV generic
+
+		#############################
+		# Manage File Systems Table #
+		#############################
+		- Edit fstab
+		sudo echo "# /etc/fstab: static file system information.
+#
+# file system   mount point   	type    	options                 dump 	pass
+/dev/sdb1	/boot		ext4		defaults		0	2
+/dev/sdb2	/		ext4		ro,nosuid,nodev		0	1
+/dev/sdb3	/home		ext4		rw,nosuid,nodev		0	2
+" | tee -a /etc/fstab
+
+		- Mount all specified file systems
+		mount -a
+
+		####################
+		# Setting Timezone #
+		####################
+		- Edit /etc/adjtime
+		sudo echo "0.0 0 0.0" > /etc/adjtime
+		sudo echo "0" >> /etc/adjtime	
+		sudo echo "UTC" >> /etc/adjtime
+
+		- To symbolic link the zoneinfo to /etc/localtime
+		ln -fs /usr/share/zoneinfo/<Region>/<City> /etc/localtime	# Same as ArchLinux
+
+		- Set tzdata automatically based off the '/etc/localtime'
+		sudo dpkg-reconfigure -f noninteractive tzdata
+
+		########################
+		# Configure Networking #
+		########################
+
+		- Add Hostname
+		echo "Debian" > /etc/hostname
+
+		- Add hosts with IPv6 support
+		sudo echo -e "127.0.0.1 localhost
+127.0.1.1 <Hostname>
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts" >> /etc/hosts
+
+		- Add nameserver(s) and search directives in '/etc/resolv.conf'
+		echo -e "search google.com
+nameserver 8.8.8.8" >> /etc/resolv.conf
+
+		#################
+		# Configure APT #
+		#################
+		- Add Content
+		echo -e "deb-src http://ftp.us.debian.org/debian buster main
+deb http://security.debian.org/ buster/updates main
+deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.list
+	
+		- Run 'apt update' after you have made changes to the source list
+			- To update cache
+		apt update
+
+		####################
+		# Configure Locale #
+		####################
+		- Uncomment Locale
+		sed -i '/$locale/s/^#//g' /etc/locale.gen
+
+		- Generate locale
+		locale-gen
+
+		- Update /etc/locale.conf
+		echo "LANG=$locale" >> /etc/locale.conf	
+
+	####################	
+	# Install a Kernel #
+	####################
+	apt search linux-image			# To search in apt - get full details
+	apt-cache search linux-image		# To search in cache - get file name
+	apt install <apt search linux-image>
+	
+	######################
+	# Install Bootloader #
+	######################
+	apt install grub-pc
+	# [1] : /usr/sbin/grub-install --target=i386-pc --debug /dev/sdX
+	update-grub
+
+	##################
+	# Update Ramdisk #
+	##################
+	update-initramfs -u -k all
+
+	######################
+	# Post-Installations #
+	######################
+	- Create user
+	adduser <username>
+	passwd <username>
+
+	############################
+	# Sanitization and Cleanup #
+	############################
+	apt clean
+
+	##############
+	# To remount #
+	##############
+	# Temporarily copy mounted fstab
+	cp /etc/mtab /mnt/debinst/etc/mtab
+	# Temporarily loan devices from host
+	mount -o bind /dev	/mnt/debinst/dev
+	mount -o bind /proc	/mnt/debinst/proc
+	mount -o bind /sys	/mnt/debinst/sys

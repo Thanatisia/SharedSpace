@@ -1,0 +1,27 @@
+#############################
+#	Project Information		#
+#############################
+
+Project Name: Proj LIFESTYLE
+Code Name: Code dB
+Program Name: PersonalDBMS
+Author: Asura
+Background Information: 
+Features:
+
+#################
+#	Changelogs	#
+#################
+Created By: 2021-08-03 21:48H, Asura
+Modified By:
+	i. 2021-08-03 21:48H, Asura
+Changelogs:
+	i. 2021-08-03 21:48H, Asura
+		- Created documentation / source file
+		- Created folders
+			- modules/programs/FinanceDB
+			- modules/db
+		- Created files
+			- modules/programs/personal_db.py
+			- modules/programs/FinanceDB/finance_db.py
+		
