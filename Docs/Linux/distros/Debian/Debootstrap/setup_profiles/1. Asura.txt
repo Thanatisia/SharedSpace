@@ -103,6 +103,11 @@ Code:
 	- Chroot into debian system
 	sudo LANG=C.UTF-8 chroot /mnt/debinst /bin/bash
 
+		#####################
+		# Set Root Password #
+		#####################
+		passwd
+
 		################
 		# Make Devices #
 		################
@@ -201,6 +206,7 @@ deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.lis
 			- To update cache
 		apt update
 
+
 		####################
 		# Configure Locale #
 		####################
@@ -216,6 +222,7 @@ deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.lis
 	####################	
 	# Install a Kernel #
 	####################
+	# - Optional if not debootstrap-ped
 	# apt search linux-image			# To search in apt - get full details
 	# apt-cache search linux-image		# To search in cache - get file name
 	# apt install <apt search linux-image>
@@ -242,15 +249,21 @@ deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.lis
 	######################
 	# Post-Installations #
 	######################
-	- Create user
-	adduser <username>
-	passwd <username>
 
+	[User Management]
+	- Create user
+		adduser <username>
+		passwd <username>
+
+	[Install other essential packages]
 	- Install Display Server
-	apt install xserver-xorg
+		apt install xserver-xorg
 
 	- Install Window Managers
-	apt install bspwm sxhkd
+		apt install bspwm sxhkd
+
+	- Network Manager
+		apt install network-manager
 
 	############################
 	# Sanitization and Cleanup #

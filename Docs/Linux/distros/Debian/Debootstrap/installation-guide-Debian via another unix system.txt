@@ -406,7 +406,22 @@ ii. Chroot into Debian System
 	#	You need to finish the multi-stage boot strap
 	/debootstrap/debootstrap --second-stage
 
-4.1. Create device files
+4.1. Set Root Password
+"""
+Pre-Requisites: 
+	- passwd
+"""
+i. Set Password
+	"""
+	[Syntax]
+	passwd <user>
+
+	[Remarks]
+	- If user is left empty, you will set password for the root
+	"""
+	passwd
+
+4.2. Create device files
 """
 Pre-Requisites:
 	i. /usr/sbin/makedev
@@ -432,7 +447,7 @@ iv. Manually create only specific device files using MAKEDEV
 	/usr/sbin/MAKEDEV generic
 
 
-4.2. Mount partitions
+4.3. Mount partitions
 """
 Pre-Requisites:
 	i. editor
@@ -550,7 +565,7 @@ ii. Mount all the file systems specified in your '/etc/fstab' file
 
 
 
-4.3. Setting Timezone
+4.4. Setting Timezone
 """
 Pre-Requisites:
 	- dpkg-reconfigure
@@ -603,7 +618,7 @@ ii. Choose my timezone
 	- Set tzdata automatically based off the '/etc/localtime'
 	sudo dpkg-reconfigure -f noninteractive tzdata
 
-4.4. Configure Networking
+4.5. Configure Networking
 """
 Pre-Requisites:
 
@@ -823,7 +838,7 @@ iv. Add nameserver(s) and search directives in '/etc/resolv.conf'
 nameserver 8.8.8.8" >> /etc/resolv.conf
 
 
-4.5. Configure Apt
+4.6. Configure Apt
 """
 Pre-Requisite:
 	- deb 
@@ -956,6 +971,9 @@ ii. Configure Keyboard
 Pre-Requisites: 
 	- apt
 	- linux-image-arch-etc	# Package Name
+
+Remarks: 
+	- Optional if not debootstrap-ped
 """
 i. Identify available pre-packages kernels
 	apt search linux-image
@@ -1136,19 +1154,28 @@ ii. Setting up access
 8.2. Installing other packages
 """
 Pre-Requisites:
-	- apt
+	- apt(-get)
 
 Steps:
 	i. Updating aptitude
+
+Remarks: 
+	- Ensure that you run 
+		apt update &&
+		apt upgrade
+	before attempting to install, so as to be using the most up to date cache
 """
-i. Updating aptitude
-	apt update
+i. Update and Upgrade aptitude cache
+	"""
+	- to be using the most up to date cache
+	"""
+	apt update && apt upgrade
 
 ii. Installing packages
 	"""
 	- To install Packages using apt
 	[Syntax]
-	apt install <packages>
+	apt(-get) install <packages>
 	"""
 	apt install xserver-xorg	# For the X Display Server in general
 	apt install bspwm sxhkd		# Window Manager
