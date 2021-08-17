@@ -133,13 +133,18 @@ Code:
 		- Mount all specified file systems
 		mount -a
 
-		####################
-		# Setting Timezone #
-		####################
+		######################
+		# Set Hardware Clock #
+		######################
+
 		- Edit /etc/adjtime
 		sudo echo "0.0 0 0.0" > /etc/adjtime
 		sudo echo "0" >> /etc/adjtime	
 		sudo echo "UTC" >> /etc/adjtime
+
+		####################
+		# Setting Timezone #
+		####################
 
 		- To symbolic link the zoneinfo to /etc/localtime
 		ln -fs /usr/share/zoneinfo/<Region>/<City> /etc/localtime	# Same as ArchLinux
@@ -166,9 +171,23 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts" >> /etc/hosts
 
+		- Enable DHCP
+		echo "# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+autolo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug eth0
+iface eth0 inet dhcp" > /etc/network/interfaces
+
+
 		- Add nameserver(s) and search directives in '/etc/resolv.conf'
 		echo -e "search google.com
 nameserver 8.8.8.8" >> /etc/resolv.conf
+
 
 		#################
 		# Configure APT #
@@ -197,15 +216,22 @@ deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.lis
 	####################	
 	# Install a Kernel #
 	####################
-	apt search linux-image			# To search in apt - get full details
-	apt-cache search linux-image		# To search in cache - get file name
-	apt install <apt search linux-image>
-	
+	# apt search linux-image			# To search in apt - get full details
+	# apt-cache search linux-image		# To search in cache - get file name
+	# apt install <apt search linux-image>
+	- Search for package
+	kernel_pkg=$(apt search linux-image)
+	- Install package
+	apt install "$kernel_pkg"
+
 	######################
 	# Install Bootloader #
 	######################
-	apt install grub-pc
-	# [1] : /usr/sbin/grub-install --target=i386-pc --debug /dev/sdX
+	apt install grub-pc							# Optional: If not debootstrap-ped
+	# Scheme = mbr
+	#	- [1] : /usr/sbin/grub-install --target=i386-pc --debug /dev/sdX	# If debootstrap did not indicate target device architecture
+	#	- [2] : grub-install --debug /dev/sdb					# If debootstrap indicated target device architecture
+	grub-install --debug /dev/sdb
 	update-grub
 
 	##################
@@ -220,14 +246,22 @@ deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.lis
 	adduser <username>
 	passwd <username>
 
+	- Install Display Server
+	apt install xserver-xorg
+
+	- Install Window Managers
+	apt install bspwm sxhkd
+
 	############################
 	# Sanitization and Cleanup #
 	############################
 	apt clean
 
-	##############
-	# To remount #
-	##############
+	##########
+	# Others #
+	##########
+
+	- To remount
 	# Temporarily copy mounted fstab
 	cp /etc/mtab /mnt/debinst/etc/mtab
 	# Temporarily loan devices from host
