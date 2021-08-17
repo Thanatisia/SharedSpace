@@ -43,17 +43,17 @@ fi
 case "$distro" in
 	"Debian")
 		# Mount device partitions to mount path
-		mount $device2	/mnt/debinst
-		mount $device1	/mnt/debinst/boot
-		mount $device3	/mnt/debinst/home
+		sudo mount "$device"2		/mnt/debinst
+		sudo mount "$device"1		/mnt/debinst/boot
+		sudo mount "$device"3		/mnt/debinst/home
 
 		# Temporarily copy mounted fstab
-		cp /etc/mtab	/mnt/debinst/etc/mtab
+		sudo cp /etc/mtab		/mnt/debinst/etc/mtab
 
 		# Temporarily loan devices from host
-		mount -o bind /dev 	/mnt/debinst/dev
-		mount -o bind /proc	/mnt/debinst/proc
-		mount -o bind /sys	/mnt/debinst/sys
+		sudo mount -o bind /dev 	/mnt/debinst/dev
+		sudo mount -o bind /proc	/mnt/debinst/proc
+		sudo mount -o bind /sys		/mnt/debinst/sys
 		;;
 	"Arch")
 		# Mount in Arch ISO
