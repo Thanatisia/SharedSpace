@@ -1,65 +1,65 @@
 [Setup Designs]
 
-1. Asura
-	Added: 2021-08-1 1625H
+1. <username>
+	Added: yyyy-mm-dd HHMMH
 Design:
 	- System Information:
-	Base Distro: Debian
-	Child Distro: Base
+	Base Distro: 
+	Child Distro: <'Base' if no child distros>
 	- User Information:
-	Hostname: Debian
-	Region: Asia
-	City: Singapore
-	Locale: en_SG.UTF-8
+	Hostname: 
+	Region: 
+	City: 
+	Locale: <i.e. en_SG.UTF-8>
 	Users:
 		# Please seperate all column values with ',' delimiter
 		# Please seperate all subvalues with ';' delimiter
 		# ROW_ID, username, primary group, secondary groups, home directory
-		1, asura, sudo, users, /home/profiles/asura
+		
 	- Device Information: 
-	Device Name: /dev/sdb
-	Device Size: 50GiB
+	Device Name: /dev/sdX
+	Device Size: nGiB
 	- Partition Information:
 	Partition Scheme: mbr
 	Partition Table: msdos
 	- File Structure:
 	device_name	Description	partition_format	partition_type	Bootable	mount_Path					start_size	end_size
 	/dev/sdX1 	Boot partition	primary			ext4		True		/mnt/boot					0%		1024MiB
-	/dev/sdX2 	Root partition	primary			ext4				/mnt		(in debian : /mnt/debinst)	1024MiB		32768MiB
-	/dev/sdX3 	Home partition	primary			ext4				/mnt/home					32768MiB	100%
+	/dev/sdX2 	Root partition	primary			ext4				/mnt		(in debian : /mnt/debinst)	1024MiB		(x1)MiB
+	/dev/sdX3 	Home partition	primary			ext4				/mnt/home					(x1)MiB		100%
 	- Packages (to install):
 	Category: Program Name, Package Name
-	Boot Loader: Grub, 
+	Boot Loader: Grub
 
 Code:
 	#######################
 	# Prepare File System #
 	#######################
 	- Reformat File System
-	parted /dev/sdb mklabel msdos
+	parted <device-name> mklabel <partition-table>
 	
 	- Create Partition	
-	parted /dev/sdb mkpart primary ext4 0% 1024MiB
-	mkfs.ext4 /dev/sdb1
-	parted /dev/sdb set 1 boot on
+	parted <device-name> mkpart primary ext4 0% 1024MiB
+	mkfs.ext4 <device-name>1
+	parted <device-name> set 1 boot on
 
-	parted /dev/sdb mkpart primary ext4 1024MiB 32768MiB
-	mkfs.ext4 /dev/sdb2
+	parted <device-name> mkpart primary ext4 1024MiB (x1)MiB
+	mkfs.ext4 <device-name>2
 
-	parted /dev/sdb mkpart primary ext4 32768MiB 100%
-	mkfs.ext4 /dev/sdb3
+	parted <device-name> mkpart primary ext4 (x1)MiB 100%
+	mkfs.ext4 <device-name>3
 
 	- Mount root partition
 	mkdir -p /mnt/debinst
-	mount -t ext4 /dev/sdb2	/mnt/debinst 
+	mount -t ext4 <device-name>2	/mnt/debinst 
 
 	- Make directories
 	mkdir -p /mnt/debinst/boot
 	mkdir -p /mnt/debinst/home
 
 	- Mount	
-	mount -t ext4 /dev/sdb1	/mnt/debinst/boot	
-	mount -t ext4 /dev/sdb3	/mnt/debinst/home	
+	mount -t ext4 <device-name>1	/mnt/debinst/boot	
+	mount -t ext4 <device-name>3	/mnt/debinst/home	
 
 	- Make work directory in your base build
 	mkdir -p work
@@ -90,11 +90,12 @@ Code:
 	PATH+=:/usr/bin
 
 	- Run debootstrap
-	debootstrap 	--include linux-image-amd64,grub-pc,locales \	# Packages to strap
-		    	--arch amd64 \					# Architecture
-		    	unstable \					# Release
+	# Please seperate all column subvalues with delimiter ','
+	debootstrap 	--include <packages-to-strap> \			# Packages to strap
+		    	--arch <architecture> \				# Architecture
+		    	<release> \					# Release
 			/mnt/debinst \					# Target partition / mount path
-			http://ftp.us.debian.org/debian			# Distro Mirror
+			<distro-mirror>					# Distro Mirror
 
 
 	#############################
@@ -137,10 +138,10 @@ Code:
 		- Edit fstab
 		sudo echo "# /etc/fstab: static file system information.
 #
-# file system                   	mount point   	type    	options           	dump 	pass
-UUID=`findmnt -fn -o UUID /boot`	/boot		ext4		defaults		0	2
-UUID=`findmnt -fn -o UUID /`		/		ext4		ro,relatime		0	1
-UUID=`findmnt -fn -o UUID /home`	/home		ext4		rw,relatime		0	2
+# file system   mount point   	type    	options                 dump 	pass
+<device-name>1	/boot		ext4		defaults		0	2
+<device-name>2	/		ext4		ro,nosuid,nodev		0	1
+<device-name>3	/home		ext4		rw,nosuid,nodev		0	2
 " | tee -a /etc/fstab
 
 		- Mount all specified file systems
@@ -170,7 +171,7 @@ UUID=`findmnt -fn -o UUID /home`	/home		ext4		rw,relatime		0	2
 		########################
 
 		- Add Hostname
-		echo "Debian" > /etc/hostname
+		echo "<Hostname>" > /etc/hostname
 
 		- Add hosts with IPv6 support
 		sudo echo -e "127.0.0.1 localhost
@@ -244,9 +245,9 @@ deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.lis
 	######################
 	apt install grub-pc							# Optional: If not debootstrap-ped
 	# Scheme = mbr
-	#	- [1] : /usr/sbin/grub-install --target=i386-pc --debug /dev/sdX	# If debootstrap did not indicate target device architecture
-	#	- [2] : grub-install --debug /dev/sdb					# If debootstrap indicated target device architecture
-	grub-install --debug /dev/sdb
+	#	- [1] : /usr/sbin/grub-install --target=i386-pc --debug <device-name>	# If debootstrap did not indicate target device architecture
+	#	- [2] : grub-install --debug <device-name>				# If debootstrap indicated target device architecture
+	grub-install --debug <device-name>
 	update-grub
 
 	##################
@@ -268,18 +269,18 @@ deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.lis
 			useradd -m -d <home-directory> -g <primary-group> -G <secondary-groups> <username>	# Create new user
 			passwd <username>									# Change user password
 		"""
-		useradd -m -d /home/profiles/asura asura
-		passwd asura
+		useradd -m -d <home-directory-path> <username>
+		passwd <username>
 
 	- Add user to 'sudo' group (Equivalent to wheel as Debian-based distros do not use wheel)
 		"""
 		i. Existing user not in group
 			usermod -a -G sudo <username>
 		ii. New user
-			useradd -m -d /home/profiles/asura -g sudo -G users asura	# Create user
-			passwd asura							# Change user password
+			useradd -m -d <home-directory-path> -g sudo -G <secondary-groups> <username>		# Create user
+			passwd <username>										# Change user password
 		"""
-		usermod -a -G sudo asura
+		usermod -a -G sudo <username>
 
 
 	[Install other essential packages]

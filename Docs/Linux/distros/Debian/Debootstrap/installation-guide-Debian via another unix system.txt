@@ -50,6 +50,9 @@ O.4. Configure Locales & Keyboard
 8.1. Setup Remote Access : Installing SSH & Setting up Access
 O.5. Add an ssh key to the root account
 O.6. Add a non-root user and setting a password
+8.2. Installing other packages
+8.3. Create new users
+8.4. Allow sudo
 9. Sanitization & Clean-up
 10. Others
 
@@ -454,6 +457,13 @@ Pre-Requisites:
 
 Directories:
 	i. /etc/fstab : File System Table (fs tab)
+
+References:
+fstab
+	- https://wiki.archlinux.org/title/fstab
+	- https://man.archlinux.org/man/fstab.5#DESCRIPTION
+	- https://man.archlinux.org/man/mount.8#FILESYSTEM-INDEPENDENT_MOUNT_OPTIONS
+
 """
 i. Create /etc/fstab and add file system information
 	"""
@@ -465,12 +475,103 @@ i. Create /etc/fstab and add file system information
 	Directory/file : /etc/fstab
 	
 	[Columns]
-	<file_system>	<mount_point>	<file_type>	<options>	<first-bit (dump)>	<second-bit (pass)>
+	<device>	<mount_dir>	<filesystem_type>	<options>	<dump_conf_id>	<fsck_order>
+	- Usage:
+		device: describes the block special device or remote filesystem to be mounted (tl;dr The device (i.e. /dev/sdX)
+			- Physical Device: /dev/sdb<partition_number>
+			- UUID: UUID=<your_UUID>
+		mount_dir: The Mount directory
+			- /boot
+			- /
+			- /home
+		filesystem_type: The File System Type
+			- i.e. ext4
+		options: The associated mount options (see 'Mount Options' below)
+			- Comma-delimiter seperated
+			- Syntax: <mount-type>,<other-options>
+		dump_conf_id: Backup Operation Check
+			- Used by 'dump' to determine which filesystems need to be dumped; 
+				- Defaults to zero (dont dump) if not present
+			- Contains a '1' if the dump utility should backup a partition
+			- Contains a '0' if the dump utility should not backup a partition
+		fsck_order: Filesystem Check Order
+			- Used by 'fsck' to determine the order which filesystem checks are done at boot time;
+			- The root filesystem should be specified with '1'
+			- Other filesystems should be specified with '2'
+			- Filesystems within a drive will be checked sequentially, but filesystems only different drives will be checked at the same time to utilize parallelism available in the hardare
+			- Defaults to zero (don't check the filesystem) if not present
+
+	[Mount Options]
+		```
+		REMARKS:
+			- Please seperate all options with comma delimiter
+			- It contains at least the type of mount (ro or rw), 
+				- plus any additional options appropriate to the filesystem type (including performance-tuning options)
+			
+		Syntax:
+			<mount_type>,<other_options>
+
+		Recommended combinations:
+			/boot	: defaults 
+			/ 	: ro,relatime
+			/home	: rw,relatime
+		```
+		[mount_type]
+		- ro: Read-only
+		- rw: Read + Write
+		
+		[other_options]
+		- defaults: use default options - rw, suid, dev, exec, auto, nouser, async
+		- noauto  	: Do not mount when mount -a is given (eg at boot time)
+		- user    	: allow a user to mount
+		- owner   	: allow device owner to mount
+		- comment 	: aka x<name>; for use by fstab-maintaining programs
+		- nofail  	: Do not report errors for this device if it does not exist
+		- async  	: All I/O to the filesystems should be done asynchronously (see also the sync option)
+		- atime   	: Do not use the noatime feature, so the inode access time is controlled by kernel defaults (related: relatime, strictatime mount options)
+		- noatime 	: Do not update inode access times on this filesystem 
+			- for faster access on the news spool to speed up news servers)
+			- This work for all inode types (directories included), so it implies nodiratime
+		- auto   	: can be mounted with the -a option
+		- relatime	: 
+		- norelatime	: 
+		- diratime	: Update directory inode access times on this filesystem
+			- This is the default (Option is ignored when noatime is set)
+		- nodiratime	: Do not update directory inode access times on this file system (Option is implied when noatime is set)
+		- dirsync	: All directory updates within the file system should be done synchronously
+			- Affects the following system calls:
+				- creat
+				- link
+				- unlink
+				- symlink
+				- mkdir
+				- rmdir
+				- mknod
+				- rename
+		- exec		: Permit execution of binaries
+		- noexec	: Do not permit direct execution of any binaries on the mounted filesystem
+		- group
+		- iversion
+		- noiversion
+		- mand
+		- nomand
+		- _netdev
+		- nofail
+		- strictatime
+		- nostrictatime
+		- lazytime
+		- nolazytime
+		- suid
+		- nosuid
+		- silent
+		- loud
+		- owner
+		- remount
 
 	[Examples (1)]
 	/dev/sdb1	/boot		ext4		defaults		0	2
-	/dev/sdb2	/		ext4		ro,nosuid,nodev		0	1
-	/dev/sdb3	/home		ext4		rw,nosuid,nodev		0	2
+	/dev/sdb2	/		ext4		ro,relatime		0	1
+	/dev/sdb3	/home		ext4		rw,relatime		0	2
 
 	[Table Example]
 	# /etc/fstab: static file system information.
@@ -489,30 +590,25 @@ i. Create /etc/fstab and add file system information
 	/dev/XXX         /var          ext3    rw,nosuid,nodev          0    2
 	/dev/XXX         /usr          ext3    rw,nodev                 0    2
 	/dev/XXX         /home         ext3    rw,nosuid,nodev          0    2
-	"""
-	- 1. Using preset
-	sudo echo "# /etc/fstab: static file system information.
-#
-# file system   mount point   	type    	options                 dump 	pass
-/dev/sdb1	/boot		ext4		defaults		0	2
-/dev/sdb2	/		ext4		ro,nosuid,nodev		0	1
-/dev/sdb3	/home		ext4		rw,nosuid,nodev		0	2
-" | tee -a /etc/fstab
 
-	- 2. """ Append created partition UUIDS
+	[Remarks]
+	- Note the file system i used
+		- Use "$(findmnt -fn -o UUID <directory>)" to get the UUID of the partition to use in the file system
+			- This is so that you do not rely on a physical device path as a boot reference
+	"""
+	- 1. """ Append created partition UUIDS
 	# References
 	To get all elements in an array except the nth; Reference: https://www.google.com/search?q=Linux+Bash+array+how+to+get+all+elements+other+than+the+first&oq=Linux+Bash+array+how+to+get+all+elements+other+than+the+first&aqs=chrome..69i57j33i10i160l3.20191j0j7&sourceid=chrome&ie=UTF-8
 	# To split a multiline string into individual elements; Reference: https://stackoverflow.com/questions/11746071/how-to-split-a-multi-line-string-containing-the-characters-n-into-an-array-of
 	"""
-	# To get UUID of partitions
-	device=/dev/sdb
-	IFS=$'\n' read -d '' -r -a arr <<< "$(blkid $device*)"
-	arr="${arr[@]:1}"					
+	sudo echo "# /etc/fstab: static file system information.
+#
+# file system                      mount point   	type    	options                 dump 	pass
+UUID=`findmnt -fn -o UUID /boot`   /boot		ext4		defaults		0	2
+UUID=`findmnt -fn -o UUID /`       /			ext4		ro,relatime		0	1
+UUID=`findmnt -fn -o UUID /home`   /home		ext4		rw,relatime		0	2
+" | tee -a /etc/fstab
 
-	# Write to /etc/fstab
-	for uuid in "${arr[@]}"; do
-		echo 
-	done
 
 ii. Mount all the file systems specified in your '/etc/fstab' file
 	#################
@@ -1179,6 +1275,68 @@ ii. Installing packages
 	"""
 	apt install xserver-xorg	# For the X Display Server in general
 	apt install bspwm sxhkd		# Window Manager
+
+
+8.3. Create new users
+"""
+Pre-Requisites:
+	- groupadd	: To create a group
+	- usermod	: To add an existing user into a group/modify
+	- useradd	: To create a user, can also add into group
+
+[Options]
+useradd
+	-m 			: To specify specifically to create a home directory
+	-d <new-home-directory> : To indicate 
+	-g <primary-group>	: Puts the user in the specified group as his/her primary group
+	-G <secondary-groups>	: Adds the user to the specified supplementary/secondary groups
+groupadd
+usermod
+	-a 			: Appends the new group so that the user doesnt lose their previous groups
+	-g <primary-group>	: Puts the user in the specified group as his/her primary group
+	-G <secondary-groups> 	: Adds the user to supplementary/secondary groups
+
+Usage:
+	- useradd -m -d /home/profiles/<role>/<username> -g sudo -G users <username> && passwd <username>	# Create a new user with home directory '/home/profiles/<role>/<username>' and put into primary group 'sudo' and secondary groups 'users'
+	- usermod -a -g <primary-group> -G <secondary-groups> <username>					# Add <username> into <primary-group> as its primary group and <secondary-groups> as secondary
+"""
+i. Create sudo user
+	useradd -m -d /path/to/home/directory -g sudo -G <secondary-groups> <username>
+
+ii. Change user password
+	passwd <username>
+
+
+8.4. Allow Sudo
+"""
+Remarks
+- Debian-based distros do not use the wheel natively as it is technically a -BSD terminology
+	- however, some distros like Arch still uses it, so i'll mention it
+"""
+(OPTIONAL) O.6. Using wheel group
+	"""
+	- If you prefer the wheel group
+	"""
+	i. Create 'wheel' group
+		groupadd 
+
+	ii. Add user to group 'wheel'
+		usermod -a -G wheel <username>
+
+	iii. Update sudoers and allow 'wheel' group members to use sudo
+		"""
+		File: /etc/sudoers
+		"""
+		> EDITOR=vim sudo visudo
+		Content:
+			%wheel ALL=(ALL:ALL) ALL
+
+i. Add user to group 'sudo'
+	"""
+	- Natively, equivalent to 'wheel'
+	"""
+	usermod -a -G sudo <username>
+
 
 
 9. Sanitization & Clean-up

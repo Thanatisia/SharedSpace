@@ -28,8 +28,13 @@ distro=${2:-""}
 # Data Validation #
 ###################
 if [[ "$device" == "" ]]; then
-	# Empty, set to command line input
+	# Empty device, set to command line input
 	read -p "Device Name [ /dev/sdX ]: " device
+fi
+
+if [[ "$distro" == "" ]]; then
+	# Empty distro, set to command line input
+	read -p "Distro [Debian | Arch]: " distro
 fi
 
 #################
@@ -41,7 +46,7 @@ fi
 - mount according to distro
 "
 case "$distro" in
-	"Debian")
+	"debian" | "Debian")
 		# Mount device partitions to mount path
 		sudo mount "$device"2		/mnt/debinst
 		sudo mount "$device"1		/mnt/debinst/boot
@@ -55,7 +60,7 @@ case "$distro" in
 		sudo mount -o bind /proc	/mnt/debinst/proc
 		sudo mount -o bind /sys		/mnt/debinst/sys
 		;;
-	"Arch")
+	"arch" | "Arch")
 		# Mount in Arch ISO
 		mount $device2 /mnt
 		mount $device1 /mnt/boot
