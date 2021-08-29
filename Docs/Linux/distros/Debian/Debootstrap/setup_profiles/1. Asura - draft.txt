@@ -1,0 +1,284 @@
+Debootstrap Setup Designs - Asura
+```
+Remarks:
+	- Debootstrap is the officially-supported method used to install all Debian / Debian-based distros via terminal or another -NIX system
+
+Notes:
+	- Please create a copy of the setup design with reference to the installation guide for full accuracy
+		- This particular setup design has taken the 'automatic' functions
+			- If you wish to use the manual, the steps are also in the installation guide
+
+Keywords:
+	[1] Debootstrap 
+	[2] Arch
+References:
+	[1] https://myterminal.me/diary/20210724/(VIDEO)-Installing-a-Minimal-Debian-system-the-Arch-way
+	[2] https://wiki.archlinux.org/title/Installation_guide
+
+File Information: 
+	Author: Asura
+	Created On: 2021-08-28 10:00H, Asura
+	Modified On:
+		- 2021-08-28 10:00H, Asura
+	Changelogs:
+		- 2021-08-28 10:00H, Asura
+			- Created setup design
+		- 2021-08-28 22:00H, Asura
+			- Modified [Contents]
+				- Point [7. Post-Installation]
+					- Added step to create swapfile
+```
+
+[Table of Contents]
+0. Design
+1. Prepare File System
+2. Mount Partitions
+3. Obtain Debootstrap
+4. Prepare the chroot environment
+5. Generate File Systems Table (fstab)
+6. Configure Root
+7. Post-Installation
+FIN. Cleanup & Sanitize
+
+
+[Design]
+i. User Information
+	"""
+	- Please seperate all column values with ',' delimiter
+	- Please seperate all subvalues with ';' delimiter
+	"""
+	Users:
+		# Columns
+		# ROW_ID, user_name, primary_group, secondary_groups, home_dir, password
+		1, Asura, sudo, users, /home/profiles/admin/asura, @rchsur@
+	Hostname: Debian
+	Region: Asia
+	City: Singapore
+	Locale: en_SG.UTF-8
+ii. Base Installation System Information
+	Host Distribution: ArchLinux
+	Architecture: amd64
+	Boot Mode: bios
+	Release: unstable
+	Device Type: microSD
+	Device Name: /dev/sdb
+	Device Size: 51200MiB
+	Partition Table: msdos
+	Mount Paths:
+		{device_name}1, /mnt/boot
+		{device_name}2, /mnt
+		{device_name}3, /mnt/home
+	Partition Design:
+		:: Columns
+		ROW_ID, partition_name, description, partition_format, partition_type, bootable, mount_path, start_size, end_size
+		:: Default Example
+		1, {device_name}1, Boot Partition, primary, ext4, True, /mnt/boot, 0%, 1024MiB
+		2, {device_name}2, Root Partition, primary, ext4, False, /mnt, 1024MiB, 32768MiB
+		3, {device_name}3, Home Partition, primary, ext4, False, /mnt/home, 32768MiB, 100%
+	Packages (to include --include): 
+		linux-image-amd64
+		grub-efi
+		locales
+	Core Packages (to install): 
+		firmware-linux
+		sudo
+		vim
+		neofetch
+	Other Packages (to install): 
+		[network]
+		dhcpcd5
+		network-manager
+	Bootloader: grub
+	Bootloader Options: {
+		--target : i386-pc
+		--debug
+	}	
+
+iii. Post-Installation: 
+	SwapFile Size: 4.0GiB
+	Packages:
+		# Other Packages here
+		
+
+iv. Setup Recommendations
+	Custom Window Manager to Desktop Environment Setup:
+		"""
+		Package Categories in a typical Desktop Environment setup:
+			i. Window Manager
+					
+
+		Packages (with Categories): 
+		"""
+		[window-manager]="bspwm;sxhkd"
+
+
+v. Optional
+	File System Table (/etc/fstab):
+		:: Columns
+		device, mount_dir, filesystem_type, options, dump_conf_id, fsck_order		
+
+
+[Code]
+i. Prepare File System
+	- Format and create a new File System
+	parted /dev/sdb mklabel msdos
+	- Create Partitions
+	parted /dev/sdb mkpart primary ext4 0% 1024MiB
+	parted /dev/sdb mkpart primary ext4 1024MiB 32768MiB
+	parted /dev/sdb mkpart primary ext4 32768MiB 100%
+	- Format newly created Partitions
+	mkfs.ext4 /dev/sdb1
+	mkfs.ext4 /dev/sdb2
+	mkfs.ext4 /dev/sdb3	
+	- Optionals
+	parted /dev/sdb set 1 boot on	# Set Bootable
+
+ii. Mount Partitions
+	- Mount Root Partition
+	mount /dev/sdb2 /mnt
+	- Create Required Directories and Mount paths
+	mkdir -p \
+		/mnt/boot \
+		/mnt/home
+	- Mount Other Partitions
+	mount /dev/sdb1 /mnt/boot
+	mount /dev/sdb3 /mnt/home
+
+iii. Setup Debootstrap
+	- Search and download debian debootstrap
+	arr=($(wget --no-remove-listing -O /tmp/deboot.html -q http://ftp.us.debian.org/debian/pool/main/d/debootstrap && grep 'all.deb' /tmp/deboot.html | awk -F 'href' '{print $2}' | cut -d '"' -f2))
+	
+	for row_id in "${!arr[@]}"; do
+		echo "[$row_id] : ${arr[$row_id]}"
+	done
+
+	read -p "Select version to use (please enter the id): " version_index
+	version="${arr[$version_index]}"
+	wget -P $PWD/debootstrap http://ftp.us.debian.org/debian/pool/main/d/debootstrap/$version
+
+	- Change Directory to debootstrap
+	cd $PWD/debootstrap
+	
+	- Extract the debootstrap archive file
+	ar -vx $version					# Verbose + Extract the archive
+	cd /
+	sudo zcat ~/work/data.tar.gz | sudo tar xv
+
+	- (OPTIONAL) Append sbin to path
+	PATH+=:/usr/bin
+
+	- Run Debootstrap
+	debootstrap --include linux-image-amd64,grub-pc,locales --arch amd64 unstable /mnt		# Strap packages and Debian base files into root
+	
+iv. Prepare the chroot environment
+
+	- Copy host's mounted file system table
+	cp /etc/mtab /mnt/etc/mtab
+
+	- Bind virtual file systems
+	mount -o bind /dev /mnt/dev
+	mount -o bind /dev/pts /mnt/dev/pts
+	mount -o bind /proc /mnt/proc
+	mount -o bind /sys /mnt/sys
+
+v. Generate File Systems Table (fstab)
+	- Update and Upgrade your package manager first
+	pacman -Syu
+	- Install package
+	pacman -S arch-install-scripts
+	- Generate /etc/fstab via genfstab
+	genfstab -U /mnt | tee -a /mnt/etc/fstab
+
+vi. Configure Root
+	- Change root
+	chroot /mnt /bin/bash
+	- Set up apt sources
+	echo -e "deb http://deb.debian.org/debian bullseye main contrib non-free" | tee -a /etc/apt/sources.list
+	- Update package index
+	apt update	
+	
+	- Install core packages
+	apt install firmware-linux sudo vim neofetch
+
+	- Setting Timezone
+	ln -fs /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+	dpkg-reconfigure -f noninteractive tzdata
+
+	- Setting Locale
+	sed -i '/en_SG.UTF-8/s/^#//g' /etc/locale.gen		# Uncomment from locale.gen
+	locale-gen						# Generate locale
+	echo "LANG=en_SG.UTF-8" >> /etc/locale.conf		# Update /etc/locale.conf
+
+
+	- Configure network
+	echo "Debian" > /etc/hostname				# Setup Hostname
+		
+
+	- Configure hosts file
+	echo "127.0.0.1	localhost
+::1		localhost
+127.0.1.1	<Hostname>.localdomain	<Hostname>" >> /etc/hosts
+
+
+	- Configure network interfaces
+	echo -e "auto lo
+	iface lo inet loopback
+auto eth0
+	iface eth0 inet dhcp" >> /etc/network/interfaces
+	
+
+	- Install other packages
+	apt install dhcpcd5 network-manager
+
+
+	- User Management
+		- Set Root Password
+		passwd
+
+		- Create Users
+			- Create New User
+			useradd -m -d /home/profiles/admin/asura -g sudo -G users -s /bin/bash asura
+		
+			- Change user password
+			passwd asura
+
+	- Setting up Bootloader
+		- Install Bootloader
+			- If Boot Mode is MBR
+			grub-install --target=i386-pc --debug /dev/sdb
+			- If Boot Mode is UEFI
+			grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+		- Generate Bootloader configs
+		update-grub
+
+	- Exit Root
+	exit
+
+viii. Post-Installation
+	- Create Swapfile
+		- Allocate swapfile
+		sudo fallocate -l 8.0GiB /swapfile
+		- Change permission of swapfile
+		sudo chmod 600 /swapfile
+		- Format swapfile
+		sudo mkswap /swapfile
+		- Enable swapfile
+		sudo swapon /swapfile
+		- (OPTIONAL): Append swapfile entry - if not in file systems table (/etc/fstab)
+		echo "# Swapfile" | sudo tee -a /etc/fstab
+		echo "/swapfile none swap defaults 0 0" | sudo tee -a /etc/fstab
+
+
+
+FIN. Cleanup & Sanitize
+	- Safely unmount 
+		- all mounted systems
+		umount -a
+		- only mounted
+		umount -l /mnt
+
+
+####### ADDITIONAL TO-DO #######
+- set UTC
+################################
+

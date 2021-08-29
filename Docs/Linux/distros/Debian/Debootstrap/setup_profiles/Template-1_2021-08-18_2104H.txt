@@ -1,0 +1,320 @@
+[Setup Designs]
+
+1. <username>
+	Added: yyyy-mm-dd HHMMH
+Design:
+	- System Information:
+	Base Distro: 
+	Child Distro: <'Base' if no child distros>
+	- User Information:
+	Hostname: 
+	Region: 
+	City: 
+	Locale: <i.e. en_SG.UTF-8>
+	Users:
+		# Please seperate all column values with ',' delimiter
+		# Please seperate all subvalues with ';' delimiter
+		# ROW_ID, username, primary group, secondary groups, home directory
+		
+	- Device Information: 
+	Device Name: /dev/sdX
+	Device Size: nGiB
+	- Partition Information:
+	Partition Scheme: mbr
+	Partition Table: msdos
+	- File Structure:
+	device_name	Description	partition_format	partition_type	Bootable	mount_Path					start_size	end_size
+	/dev/sdX1 	Boot partition	primary			ext4		True		/mnt/boot					0%		1024MiB
+	/dev/sdX2 	Root partition	primary			ext4				/mnt		(in debian : /mnt/debinst)	1024MiB		(x1)MiB
+	/dev/sdX3 	Home partition	primary			ext4				/mnt/home					(x1)MiB		100%
+	- Packages (to install):
+	Category: Program Name, Package Name
+	Boot Loader: Grub
+
+Code:
+	#######################
+	# Prepare File System #
+	#######################
+	- Reformat File System
+	parted <device-name> mklabel <partition-table>
+	
+	- Create Partition	
+	parted <device-name> mkpart primary ext4 0% 1024MiB
+	mkfs.ext4 <device-name>1
+	parted <device-name> set 1 boot on
+
+	parted <device-name> mkpart primary ext4 1024MiB (x1)MiB
+	mkfs.ext4 <device-name>2
+
+	parted <device-name> mkpart primary ext4 (x1)MiB 100%
+	mkfs.ext4 <device-name>3
+
+	- Mount root partition
+	mkdir -p /mnt/debinst
+	mount -t ext4 <device-name>2	/mnt/debinst 
+
+	- Make directories
+	mkdir -p /mnt/debinst/boot
+	mkdir -p /mnt/debinst/home
+
+	- Mount	
+	mount -t ext4 <device-name>1	/mnt/debinst/boot	
+	mount -t ext4 <device-name>3	/mnt/debinst/home	
+
+	- Make work directory in your base build
+	mkdir -p work
+	cd work
+
+	############################
+	# Setup Debian Debootstrap #
+	############################
+	- Search and download debian debootstrap
+	# wget http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.124_all.deb
+	arr=($(wget --no-remove-listing -O /tmp/deboot.html -q http://ftp.us.debian.org/debian/pool/main/d/debootstrap && grep 'all.deb' /tmp/deboot.html | awk -F 'href' '{print $2}' | cut -d '"' -f2))
+	
+	for row_id in "${!arr[@]}"; do
+		echo "[$row_id] : ${arr[$row_id]}"
+	done
+
+	read -p "Select version to use (please enter the id): " version_index
+	version="${arr[$version_index]}"
+	wget -P $PWD/debootstrap http://ftp.us.debian.org/debian/pool/main/d/debootstrap/$version
+
+	
+	- Extract the debootstrap archive file
+	ar -vx $version					# Verbose + Extract the archive
+	cd /
+	sudo zcat ~/work/data.tar.gz | sudo tar xv
+
+	- Append sbin to path
+	PATH+=:/usr/bin
+
+	- Run debootstrap
+	# Please seperate all column subvalues with delimiter ','
+	debootstrap 	--include <packages-to-strap> \			# Packages to strap
+		    	--arch <architecture> \				# Architecture
+		    	<release> \					# Release
+			/mnt/debinst \					# Target partition / mount path
+			<distro-mirror>					# Distro Mirror
+
+
+	#############################
+	# Configure the base system #
+	#############################
+	- Prepare chroot environment
+	# Temporarily copy mounted fstab
+	cp /etc/mtab /mnt/debinst/etc/mtab
+	# Temporarily loan devices from host
+	mount -o bind /dev	/mnt/debinst/dev
+	mount -o bind /proc	/mnt/debinst/proc
+	mount -o bind /sys	/mnt/debinst/sys
+
+	- Chroot into debian system
+	sudo LANG=C.UTF-8 chroot /mnt/debinst /bin/bash
+
+		#####################
+		# Set Root Password #
+		#####################
+		passwd
+
+		################
+		# Make Devices #
+		################
+		- Install makedev
+		apt install makedev
+
+		- Mount proc
+		mount non /proc -t proc
+
+		- Change Directory to devices directory
+		cd /dev
+
+		- Make Device
+		/usr/sbin/MAKEDEV generic
+
+		#############################
+		# Manage File Systems Table #
+		#############################
+		- Edit fstab
+		sudo echo "# /etc/fstab: static file system information.
+#
+# file system   mount point   	type    	options                 dump 	pass
+<device-name>1	/boot		ext4		defaults		0	2
+<device-name>2	/		ext4		ro,nosuid,nodev		0	1
+<device-name>3	/home		ext4		rw,nosuid,nodev		0	2
+" | tee -a /etc/fstab
+
+		- Mount all specified file systems
+		mount -a
+
+		######################
+		# Set Hardware Clock #
+		######################
+
+		- Edit /etc/adjtime
+		sudo echo "0.0 0 0.0" > /etc/adjtime
+		sudo echo "0" >> /etc/adjtime	
+		sudo echo "UTC" >> /etc/adjtime
+
+		####################
+		# Setting Timezone #
+		####################
+
+		- To symbolic link the zoneinfo to /etc/localtime
+		ln -fs /usr/share/zoneinfo/<Region>/<City> /etc/localtime	# Same as ArchLinux
+
+		- Set tzdata automatically based off the '/etc/localtime'
+		sudo dpkg-reconfigure -f noninteractive tzdata
+
+		########################
+		# Configure Networking #
+		########################
+
+		- Add Hostname
+		echo "<Hostname>" > /etc/hostname
+
+		- Add hosts with IPv6 support
+		sudo echo -e "127.0.0.1 localhost
+127.0.1.1 <Hostname>
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts" >> /etc/hosts
+
+		- Enable DHCP
+		echo "# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+autolo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug eth0
+iface eth0 inet dhcp" > /etc/network/interfaces
+
+
+		- Add nameserver(s) and search directives in '/etc/resolv.conf'
+		echo -e "search google.com
+nameserver 8.8.8.8" >> /etc/resolv.conf
+
+
+		#################
+		# Configure APT #
+		#################
+		- Add Content
+		echo -e "deb-src http://ftp.us.debian.org/debian buster main
+deb http://security.debian.org/ buster/updates main
+deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.list
+	
+		- Run 'apt update' after you have made changes to the source list
+			- To update cache
+		apt update
+
+
+		####################
+		# Configure Locale #
+		####################
+		- Uncomment Locale
+		sed -i '/$locale/s/^#//g' /etc/locale.gen
+
+		- Generate locale
+		locale-gen
+
+		- Update /etc/locale.conf
+		echo "LANG=$locale" >> /etc/locale.conf	
+
+	####################	
+	# Install a Kernel #
+	####################
+	# - Optional if not debootstrap-ped
+	# apt search linux-image			# To search in apt - get full details
+	# apt-cache search linux-image		# To search in cache - get file name
+	# apt install <apt search linux-image>
+	- Search for package
+	kernel_pkg=$(apt search linux-image)
+	- Install package
+	apt install "$kernel_pkg"
+
+	######################
+	# Install Bootloader #
+	######################
+	apt install grub-pc							# Optional: If not debootstrap-ped
+	# Scheme = mbr
+	#	- [1] : /usr/sbin/grub-install --target=i386-pc --debug <device-name>	# If debootstrap did not indicate target device architecture
+	#	- [2] : grub-install --debug <device-name>				# If debootstrap indicated target device architecture
+	grub-install --debug <device-name>
+	update-grub
+
+	##################
+	# Update Ramdisk #
+	##################
+	update-initramfs -u -k all
+
+	######################
+	# Post-Installations #
+	######################
+
+	[User Management]
+	- Create user
+		"""
+		i. Native
+			adduser <username>
+			passwd <username>
+		ii. Full
+			useradd -m -d <home-directory> -g <primary-group> -G <secondary-groups> <username>	# Create new user
+			passwd <username>									# Change user password
+		"""
+		useradd -m -d <home-directory-path> <username>
+		passwd <username>
+
+	- Add user to 'sudo' group (Equivalent to wheel as Debian-based distros do not use wheel)
+		"""
+		i. Existing user not in group
+			usermod -a -G sudo <username>
+		ii. New user
+			useradd -m -d <home-directory-path> -g sudo -G <secondary-groups> <username>		# Create user
+			passwd <username>										# Change user password
+		"""
+		usermod -a -G sudo <username>
+
+
+	[Install other essential packages]
+	- Essentials
+		"""
+		- sudo : For super user
+		"""
+		apt install sudo
+
+	- Install Display Server
+		apt install xserver-xorg
+
+	- Install Window Managers
+		apt install bspwm sxhkd
+
+	- Network Manager
+		apt install network-manager
+
+	- Text Editor
+		apt install vim
+
+	############################
+	# Sanitization and Cleanup #
+	############################
+	apt clean
+
+	##########
+	# Others #
+	##########
+
+	- To remount
+	# Temporarily copy mounted fstab
+	cp /etc/mtab /mnt/debinst/etc/mtab
+	# Temporarily loan devices from host
+	mount -o bind /dev	/mnt/debinst/dev
+	mount -o bind /proc	/mnt/debinst/proc
+	mount -o bind /sys	/mnt/debinst/sys
