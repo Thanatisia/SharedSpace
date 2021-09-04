@@ -1,0 +1,932 @@
+Installation Guide - Debootstrap
+```
+Remarks:
+	- Debootstrap is the officially-supported method used to install all Debian / Debian-based distros via terminal or another -NIX system
+Keywords:
+	[1] Debootstrap 
+	[2] Arch
+References:
+	[1] https://myterminal.me/diary/20210724/(VIDEO)-Installing-a-Minimal-Debian-system-the-Arch-way
+	[2] https://wiki.archlinux.org/title/Installation_guide
+
+File Information: 
+	Author: Asura
+	Created On: 2021-08-27 08:00H, Asura
+	Modified On:
+		- 2021-08-27 08:00H, Asura
+		- 2021-08-27 13:00H, Asura
+		- 2021-08-27 17:00H, Asura
+		- 2021-08-27 21:24H, Asura
+		- 2021-08-28 01:35H, Asura
+		- 2021-08-28 02:09H, Asura
+		- 2021-08-28 21:58H, Asura
+		- 2021-08-29 17:15H, Asura
+	Changelogs:
+		- 2021-08-27 08:00H, Asura
+			- Created guide draft
+			- Created
+				- [Table of Contents]
+				- [Contents]
+			- Added to [Contents]
+				0. Pre-Requisites
+				1. Prepare File System
+		- 2021-08-27 13:00H, Asura
+			- Added to [Contents]
+				2. Mount Partitions
+				3. Obtain Debootstrap
+				4. Run Debootstrap
+				5. Prepare the chroot environment
+				6. Generate File Systems Table (fstab)
+		- 2021-08-27 17:00H, Asura
+			- Added to [Contents]
+				7. Configure Root
+				8. Cleanup & Sanitize
+		- 2021-08-27 21:24H, Asura
+			- Added new keywords
+			- Updated to
+				3.ii. Updated Syntax, Examples of Wget
+		- 2021-08-28 01:35H, Asura
+			- Updated some notes
+			- Added 8.i to [ 8. Cleanup & Sanitize ]
+			- Converted [Cleanup & Sanitize] to [FIN]
+			- Added to [Contents]
+				8. Post-Installation
+			- Tested Base Install Steps 1 to FIN
+				- Able to enter root login; to test further
+		- 2021-08-28 02:09H, Asura
+			- Modified [Contents]
+				7.viii. Added new shell option as requirement (as default is /bin/sh)
+			- Added [Contents]
+				7.viii.b. (OPTIONAL) Change shell
+			- Added archwiki installation guide to [References]
+		- 2021-08-28 21:58H, Asura
+			- Modified [Contents]
+				8. Post-Installed
+					- Added step to [enable swapfile]
+		- 2021-08-29 17:15H, Asura
+			- Modified [Contents]
+				7.ii
+					Added more deb-src sources
+```
+
+[Table of Contents]
+0. Pre-Requisites
+1. Prepare File System
+2. Mount Partitions
+3. Obtain Debootstrap
+4. Run Debootstrap
+5. Prepare the chroot environment
+6. Generate File Systems Table (fstab)
+7. Configure Root
+8. Post-Installation
+FIN. Cleanup & Sanitize
+
+[Contents]
+
+0. Pre-Requisites
+"""
+- Must like installation for Arch, Gentoo, Linux from Scratch or even Slackware
+- You need to self-prepare and plan out some things, hence the following info must be prepared before proceeding
+
+Requirements:
+	Users:
+		:: Columns
+		ROW_ID, user_name, primary_group, secondary_groups, home_dir, password
+	Hostname: {Debian|ArchLinux|Others}
+	Region: {Asia}
+	City: {Singapore}
+	Locale: {en_SG.UTF-8|en_US.UTF-8}
+	Host Distribution: {Debian|Arch|Gentoo|LFS|Slackware|Fedora|Others}
+	Architecture: {amd64|arm}
+	Boot Mode: {bios|uefi}
+	Release: {unstable|stable|bullseye}
+	Device Type: {microSD|HDD|SSD}
+	Device Name: /dev/{sdX|nvme}
+	Device Size: {MB|MiB|GB|GiB}
+	Partition Table: {msdos|gpt}
+	Mount Paths:
+		{device_name}1, /mnt/boot
+		{device_name}2, /mnt
+		{device_name}3, /mnt/home
+	Partition Design:
+		:: Columns
+		ROW_ID, partition_name, description, partition_format, partition_type, bootable, mount_path, start_size, end_size
+		:: Default Example
+		1, {device_name}1, Boot Partition, primary, ext4, True, /mnt/boot, 0%, 1024MiB
+		2, {device_name}2, Root Partition, primary, ext4, False, /mnt, 1024MiB, (x1)MiB
+		3, {device_name}3, Home Partition, primary, ext4, False, /mnt/home, (x1)MiB, 100%
+	Packages (to include --include): NIL
+	Core Packages (to install): NIL
+	Other Packages (to install): NIL
+	Bootloader: {Grub|Grub2|syslinux}
+	Bootloader Options: {
+		--target : {i386-pc (for amd64)|x86_64-efi (for UEFI)}
+	}
+
+Post-Installation: 
+	SwapFile Size: {MB|MiB|GB|GiB}
+	Packages: 
+		# Other packages to install after installation here
+		NIL
+
+Setup Recommendations:
+	Custom Window Manager to Desktop Environment Setup:
+		"""
+		Package Categories in a typical Desktop Environment setup:
+			i. Window Manager
+					
+
+		Packages (with Categories): 
+		"""
+
+Optional:
+	File System Table (/etc/fstab):
+		:: Columns
+		device, mount_dir, filesystem_type, options, dump_conf_id, fsck_order
+
+
+:: Remarks
+	- Please seperate all column values with delimiter ','
+	- Please seperate all subvalues with delimiter ';'
+		
+"""
+
+i. User Info
+	# ========================================================================== #
+	# Let
+	#	Users:
+	#		1, Asura, sudo, users, /home/profiles/admin/asura, @rchsur@
+	# ========================================================================== #
+
+ii. System Info
+	# ========================================================================== #
+	# Let
+	#	Hostname: Debian
+	#	region: Asia
+	#	city: Singapore
+	#	locale: en_SG.UTF-8
+	# ========================================================================== #
+
+iii. Base Installation Info
+	# ========================================================================== #
+	# Let 
+	#	distribution: ArchLinux
+	#	architecture: amd64
+	#	boot mode: bios
+	#	release: unstable
+	#	device_type: microSD
+	#	device_name: /dev/sdb
+	#	device_size: 51200MiB
+	#	partition_table: msdos
+	#	packages to include (--include): 
+	#		linux-image-amd64
+	#		grub-efi
+	#		locales
+	#	core packages to install:
+	#		firmware-linux
+	#		sudo
+	#		vim
+	#		neofetch
+	#	other packages to install:
+	#		[network]
+	#			dhcpcd5
+	#			network-manager
+	#	bootloader: grub
+	#	bootloader options:
+	#		--target : i386-pc
+	#		--debug
+	# ========================================================================== #
+
+iv. Post-Installation Info
+	# ========================================================================== #
+	# Let
+	#	swapfile size: 4.0GiB
+	#	packages:
+	#		#[Category]={package-name}
+	#		[window-manager]=bspwm;sxhkd
+	# ========================================================================== #
+
+
+1. Prepare File System
+"""
+- Prepare the File System to be used
+Requirements:
+	- Device Name
+	- Device Size
+	- Partition Table
+	- Partition Design
+"""
+i. Create Label
+	"""
+	- Format and create a new file system
+	:: Syntax
+		parted {device_name} mklabel {partition_table}
+	"""
+	parted /dev/sdb mklabel msdos
+	
+ii. Create Partitions
+	"""
+	- Create a new partition
+	:: Syntax
+		parted {device_name} mkpart {partition_format} {partition_type} {start_size} {end_size}
+
+	:: Notes
+		- You can use percentages to allocate approximate sizes
+			0% : Start completely from the beginning
+			50% : Use up 50% starting from the specified start_size
+			100% : Use up from the specified start_size all the way to the end
+	"""
+	parted /dev/sdb mkpart primary ext4 0% 1024MiB
+	parted /dev/sdb mkpart primary ext4 1024MiB 32768MiB
+	parted /dev/sdb mkpart primary ext4 32768MiB 100%
+
+iii. Format Partitions
+	"""
+	- Format newly created partitions
+	:: Syntax
+		if partition_type is:
+			ext3: mkfs.ext4 {partition_name}
+			ext4: mkfs.ext4 {partition_name}
+			fat32: mkfs.fat -F16 {partition_name}
+			fat32: mkfs.fat -F32 {partition_name}
+	"""
+	mkfs.ext4 /dev/sdb1
+	mkfs.ext4 /dev/sdb2
+	mkfs.ext4 /dev/sdb3
+
+iv. Optionals
+	iv.a. OPTIONAL: If Bootable
+		"""
+		- Typically only partition 1 as it is your bootloader
+		:: Syntax
+			parted {device_name} set 1 boot on
+		"""	
+		parted /dev/sdb set 1 boot on
+
+	iv.b. OPTIONAL: If Swap Partition
+		"""
+		- Swap Partition is optional, as most would recommend creating a swap file as it is 
+			i. easier to handle
+			ii. easier to create
+		"""
+	
+		iii.a.i. Make Swap Partition
+			"""
+			:: Syntax
+				mkswap {partition_name}		
+			"""
+			mkswap /dev/sdb{partition_number}
+	
+		iii.a.ii. Enable Swap
+			"""
+			:: Syntax
+				swapon {partition_name}
+			"""	
+			swapon /dev/sdb{partition_number}
+
+2. Mount Partitions
+"""
+- You need to mount the mount directories to its partitions to access 
+
+:: Syntax
+	mount {partition_name} {mount_path}
+
+Requirements: 
+	- Mount Paths
+"""
+
+i. Mount Root Partition
+	"""
+	- Creating the root partition first so it holds the root folder containing the other partition mount paths
+	"""
+	mount /dev/sdb2 /mnt
+
+ii. Create Required Directories and Mount paths
+	"""
+	:: Syntax
+		mkdir -p {mount_path_1} {mount_path_2}...
+	"""
+	mkdir -p /mnt/boot /mnt/home
+
+iii. Mount Other Partitions
+	mount /dev/sdb1 /mnt/boot
+	mount /dev/sdb3 /mnt/home
+
+
+3. Obtain Debootstrap
+"""
+- (Description) Debootstrap is the officially-supported method used to install all Debian / Debian-based distros via terminal or another -NIX system
+- If your distro 
+	- is not Debian-native (i.e. Ubuntu)
+		- You will need to seperately obtain/download Debootstrap and install it before proceeding to setup
+	- is Debian-native
+		- you can install directly via aptitude (apt) itself
+
+Requirements:
+	- Distribution
+"""
+i. Distribution is Debian-based
+	"""
+	- Install via Aptitude (apt)
+	:: Syntax
+		apt install debootstrap
+	"""
+	- Update your upt first
+		apt update
+	- Upgrade your apt on update
+		apt upgrade
+	- Install debootstrap
+		apt install debootstrap
+
+ii. Distribution is not Debian-based
+	"""
+	- Obtain from website
+	- Debootstrap is located in the url [http://ftp.debian.org/debian/pool/main/d/debootstrap/]
+	:: Syntax
+		wget
+	"""
+	- Search and download debian debootstrap
+		"""
+		:: Syntax
+			wget {options <parameters>} {file-url}
+
+		:: Options
+			-P : Indicate the output path
+
+		:: Example
+			wget http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.124_all.deb
+			wget -P {output_path} {url}
+		"""
+		arr=($(wget --no-remove-listing -O /tmp/deboot.html -q http://ftp.us.debian.org/debian/pool/main/d/debootstrap && grep 'all.deb' /tmp/deboot.html | awk -F 'href' '{print $2}' | cut -d '"' -f2))
+	
+		for row_id in "${!arr[@]}"; do
+			echo "[$row_id] : ${arr[$row_id]}"
+		done
+
+		read -p "Select version to use (please enter the id): " version_index
+		version="${arr[$version_index]}"
+		wget -P $PWD/debootstrap http://ftp.us.debian.org/debian/pool/main/d/debootstrap/$version
+
+	- Change Directory to debootstrap
+		"""
+		- Change directory to your debootstrap download path
+		"""
+		cd $PWD/debootstrap
+	
+	- Extract the debootstrap archive file
+		"""
+		- Exact the debootstrap system files into their respective folders
+		:: Syntax
+			Extract the archive with Verbose : ar -vx {archive-file}
+		"""
+		ar -vx $version					# Verbose + Extract the archive
+		cd /
+		sudo zcat ~/work/data.tar.gz | sudo tar xv
+
+	- (OPTIONAL) Append sbin to path
+		"""
+		- If /usr/bin and /usr/sbin is not in your path	
+		"""
+		PATH+=:/usr/bin
+
+
+4. Strap packages and Debian base files into root
+"""
+- Debootstrap will 
+	- take the debian base files and copy into the root directory and
+	- install all {packages_to_include} into the mount
+
+Ensure that:
+	- All partitions are mounted
+	- Debootstrap is installed
+
+Requirements:
+	- Packages (to include)
+	- Architecture
+	- Release
+	- Mount Path
+"""
+
+i. Run Debootstrap
+	"""
+	:: Remarks
+		- Please seperate all packages with delimiter ','
+	:: Syntax
+		debootstrap --include {packages} --arch {architecture} {release} {root_mount_path}
+
+	:: Examples
+		debootstrap 	--include linux-image-amd64,grub-pc,locales \	# Packages to strap
+		    		--arch amd64 \					# Architecture
+		    		unstable \					# Release
+				/mnt/debinst \					# Target partition / mount path
+				http://ftp.us.debian.org/debian			# Distro Mirror
+	"""
+	debootstrap --include linux-image-amd64,grub-pc,locales --arch amd64 unstable /mnt
+
+
+5. Prepare the chroot environment
+"""
+- Before rooting into the installed base system, you need to ensure a few things 
+	- 1. Copy a temporary copy of the host's mounted file systems table (/etc/mtab) into the root in directory [{root_mount_dir}/etc]
+	- 2. Temporarily bind several virtual file systems (vfs)
+
+- These are a few things 
+- that are automatically taken care of while installing Arch with pacstrap and 
+	- rooting into the system using arch-chroot
+		
+Ensure that:
+	- 
+	
+Requirements: 
+"""
+
+i. Copy host's mounted file system table
+	"""
+	- Copy a temporary copy of the host's mounted file systems table (/etc/mtab) into the root in directory [{root_mount_dir}/etc]
+	- This will be overwritten on restart
+	
+	:: Remarks
+		Source: /etc/mtab
+		Destination: {root_mount_dir}/etc/mtab
+	
+	:: Syntax
+		cp {source} {destination}
+	"""
+	cp /etc/mtab /mnt/etc/mtab
+
+ii. Bind virtual file systems
+	"""
+	- To avoid issues we might encounter otherwise during the installation
+
+	:: Binds
+		/dev -> /mnt/dev
+		/dev/pts -> /mnt/dev/pts
+		/proc -> /mnt/proc
+		/sys -> /mnt/sys
+
+	:: Syntax
+		mount -o bind {virtual_file_system} {mount_point}
+	"""
+	mount -o bind /dev /mnt/dev
+	mount -o bind /dev/pts /mnt/dev/pts
+	mount -o bind /proc /mnt/proc
+	mount -o bind /sys /mnt/sys
+
+
+6. Generate File Systems Table (fstab)
+"""
+- fstab = File Systems Table
+- 2 methods of creating a fstab file
+	- Automatic via genfstab (i.e. Arch)
+	- Manual
+
+Requirements:
+	- Distribution
+"""
+i. Automatic install via genfstab
+	"""
+	- genfstab is how Arch uses to create the /etc/fstab file
+
+	- Package: arch-install-scripts
+	"""
+	- Install package 
+		- If Distro is Debian
+			- Update your package manager first
+				apt update
+			- Upgrade your package manager on update
+				apt upgrade
+			- Install package
+				apt install arch-install-scripts
+		- Else If Distro is Arch
+			- Update and Upgrade your package manager first
+				pacman -Syu
+			- Install package
+				pacman -S arch-install-scripts
+
+	- Generate /etc/fstab via genfstab
+		"""
+		:: Syntax
+			- Generate file systems table from mount
+				genfstab -U {root_mount_dir}
+			- Output to mounted root filesystem
+				genfstab -U {root_mount_dir} >> {root_mount_dir}/etc/fstab
+
+		:: Examples
+			[1] If you are not root OR permission denied when trying to '>>' to {root_mount_dir}/etc/fstab:
+				sudo genfstab -U {root_mount_dir} | sudo tee -a {root_mount_dir}/etc/fstab
+		"""
+		[1] genfstab -U /mnt >> /mnt/etc/fstab
+		[2] genfstab -U /mnt | tee -a /mnt/etc/fstab
+
+ii. Manual
+	"""
+	- 
+	"""
+
+
+7. Configure Root
+"""
+- Change root to new system
+- Root will be the new workspace temporarily from point (1)
+
+Requirements: 
+	- Root Mount Path
+	- Region
+	- City
+	- Locales
+	- Hostname
+	- Core Packages (to install)
+	- Other Packages (to install)
+	- Users
+	- Bootloader
+	- Boot Mode
+"""
+
+i. Change root
+	"""
+	- This command is pretty similar to how we usually root into an Arch system using arch-chroot. 
+	- Once executed, the next commands we'll type will be run in the new system.
+	:: Syntax
+		chroot {root_mount_dir} {shell}
+	"""
+	chroot /mnt /bin/bash
+
+
+ii. Set up apt sources
+	"""
+	- Update /etc/apt/sources.list to include non-free software
+	- Optional
+	
+	Files : /etc/apt/sources.list
+
+	Lines to add:
+		- deb http://deb.debian.org/debian bullseye main contrib non-free
+		- deb-src http://ftp.us.debian.org/debian buster main
+		- deb http://security.debian.org/ buster/updates main
+		- deb-src http://security.debian.org/ buster/updates main
+	"""
+	- Add
+		ii.a. Manually
+			$EDITOR /etc/apt/sources.list
+			> deb http://deb.debian.org/debian bullseye main contrib non-free
+			exit
+
+		ii.b. via Terminal
+			echo -e "deb http://deb.debian.org/debian bullseye main contrib non-free" | tee -a /etc/apt/sources.list
+			echo -e "deb-src http://ftp.us.debian.org/debian buster main
+deb http://security.debian.org/ buster/updates main
+deb-src http://security.debian.org/ buster/updates main" >> /etc/apt/sources.list
+
+	- Update package index
+		apt update	
+	
+iii. Install core packages
+	"""
+	- Install core software we need
+	
+	:: Remarks
+		- Please seperate all packages with spaces
+
+	:: Syntax
+		apt install {core-packages}	
+
+	:: Requirements:
+		- Core Packages to install
+	"""
+	apt install firmware-linux sudo vim neofetch
+
+iv. Setting Timezone and Locale
+	"""
+	- Using dpkg-reconfigure to set
+
+	:: Syntax
+		dpkg-reconfigure -f noninteractive {options}
+
+	:: Options
+		tzdata : For Time Zone
+		locales : For Locale
+
+	- Requirements:
+		- Region
+		- City
+		- Locale
+	"""
+	- Setting Timezone
+		"""
+		- option: tzdata
+
+		Requirements:
+			- Region
+			- City
+		"""
+		iv.a. Manual
+			dpkg-reconfigure tzdata
+			> Select your timezone
+
+		iv.b. Automatic
+			"""
+			:: Syntax
+				- To symbolic link (symlink)
+					ln -fs {source-path} {target-path}
+					=> target-path = source-path
+				- Find your Region
+					ls /usr/share/zoneinfo
+
+				- Find your City
+					ls /usr/share/zoneinfo/<Region>
+
+				- Symlink the zoneinfo to /etc/localtime
+					ln -fs /usr/share/zoneinfo/<Region>/<City> /etc/localtime	# Same as ArchLinux
+			
+				- Set tzdata automatically based off the /etc/localtime
+					dpkg-reconfigure -f noninteractive tzdata	
+			"""
+			ln -fs /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+			dpkg-reconfigure -f noninteractive tzdata
+
+
+	- Setting Locale
+		"""
+		- Requirements: 
+			- Locales
+
+		- option: locales
+		"""
+		iv.c. Manual
+			dpkg-reconfigure locales
+			> Select your locale
+
+		iv.d. Automatic
+			"""
+			- To uncomment in file
+				sed -i '{regex}' <file>
+			- To comment in file
+				sed -i '{regex}' <file>
+
+			Target File: /etc/locale.gen
+
+			- To uncomment locale
+				sed -i '/en_SG.UTF-8/s/^#//g' <file>
+
+			- Update /etc/locale.conf with current locale language
+				echo "LANG={locale}" >> /etc/locale.conf
+			"""
+			- Uncomment from locale.gen
+				sed -i '/en_SG.UTF-8/s/^#//g' /etc/locale.gen
+
+			- Generate locale
+				locale-gen
+
+			- Update /etc/locale.conf
+				echo "LANG=en_SG.UTF-8" >> /etc/locale.conf
+
+v. Configure network
+	"""
+	Requirements:
+		- Hostname
+	"""
+	- Setup hostname
+		"""
+		- Setup hostname of new machine
+		
+		Target File: /etc/hostname
+		Content: <Hostname>
+		
+		:: Syntax
+			echo "<Hostname>" > /etc/hostname
+		"""
+		echo "Debian" > /etc/hostname
+		
+
+	- Configure hosts file
+		"""
+		Target File: /etc/hosts
+
+		Contents:
+			127.0.0.1	localhost
+			::1		localhost
+			127.0.1.1	<Hostname>.localdomain	<Hostname>
+		"""
+		v.a. Manual
+			$EDITOR /etc/hosts
+			> enter contents
+			exit
+
+		v.b. Automatic
+			"""
+			- Add ipv4 loopback addresses
+			"""
+			echo "127.0.0.1	localhost
+::1		localhost
+127.0.1.1	<Hostname>.localdomain	<Hostname>" >> /etc/hosts
+
+
+vi. Configure network interfaces
+	"""
+	- auto <interface>
+		- is like a 'function'; to indicate starting to edit interface
+	
+	- interfaces:
+		lo : Loopback
+		eth0 : Ethernet
+		wlan1 : WiFi
+
+	Target File: /etc/network/interfaces
+
+	Contents:
+		auto lo
+			iface lo inet loopback
+		auto eth0
+			iface eth0 inet dhcp
+	"""
+	- Append interfaces to /etc/network/interfaces
+		vi.a. Manual
+			$EDITOR /etc/network/interfaces
+			> enter contents
+			exit
+
+		vi.b. Automatic
+			echo -e "auto lo
+	iface lo inet loopback
+auto eth0
+	iface eth0 inet dhcp" >> /etc/network/interfaces
+	
+
+vii. Install other packages
+	"""
+	- Install other packages we need
+	
+	:: Remarks
+		- Please seperate all packages with spaces
+
+	:: Syntax
+		apt install {other-packages}	
+
+	:: Requirements:
+		- Other Packages to install
+	"""
+	- network-related packages
+		apt install dhcpcd5 network-manager
+
+viii. User Management
+	"""
+	- Please seperate all groups with delimiter ','
+
+	:: Options: 
+	useradd
+		-m 			: To specify specifically to create a home directory
+		-c <folder name>	: Custom Home Directory path
+		-d <new-home-directory> : To indicate new home directory
+		-g <primary-group>	: Puts the user in the specified group as his/her primary group
+		-G <secondary-groups>	: Adds the user to the specified supplementary/secondary groups
+		-s <shell>		: Set a default shell; i.e. /bin/bash; /bin/zsh; /bin/fish; Default: /bin/sh
+	groupadd
+		- TBC
+	usermod
+		-a 			: Appends the new group so that the user doesnt lose their previous groups
+		-g <primary-group>	: Puts the user in the specified group as his/her primary group
+		-G <secondary-groups> 	: Adds the user to supplementary/secondary groups
+
+	:: Syntax
+		Create New User: useradd -m -d {home-dir} -g {primary-group} -G {secondary-groups} -s {shell} {username}
+		Modify Existing User: usermod -aG {secondary-groups} {username}
+		Create New Group: groupadd
+		Change User Password: passwd {username}
+	"""
+	- Set Root Password
+		"""
+		- If {username} is empty; password set will be for Root 
+		"""
+		passwd
+
+	- Create Users
+		"""
+		- For security reasons, you need to create a user
+
+		:: Steps
+			i. Create User
+			ii. Change user password
+		"""
+		
+		- Create New User
+			"""
+			- Create a new user 'asura' with
+				Primary Group: sudo
+				Secondary Groups: users
+				Custom Home Directory: /home/profiles/admin/asura
+			"""
+			useradd -m -d /home/profiles/admin/asura -g sudo -G users -s /bin/bash asura
+		
+		- Change user password
+			passwd asura
+
+	viii.a. OPTIONAL: Add existing user to group
+		"""
+		- If a existing user is not in a group of choice
+			- i.e. sudo (aka wheel)
+
+		:: Syntax
+			usermod -aG {secondary-groups} {username}
+		"""
+		usermod -aG sudo asura
+
+	viii.b. OPTIONAL: Change Shell of a user
+		"""
+		- Change the shell for a user
+
+		:: Options
+			-h | --help 			: Help message
+			-R | --root {chroot_dir}	: Directory to chroot into
+			-s | --shell {shell}		: New login shell for the user account
+
+		:: Syntax
+			chsh {options} {username}
+		"""
+		chsh --shell /bin/bash asura
+
+ix. Setting up Bootloader
+	"""
+	- Install Bootloader
+	- Generate Bootloader Configs
+
+	:: Requirements
+		- Bootloader
+		- Boot Mode
+	"""
+	ix.a. If Bootloader is Grub
+		"""
+		:: Syntax
+			grub-install {options} --debug {device_name}
+		"""
+		- Install Bootloader
+			- If Boot Mode is MBR
+				grub-install --target=i386-pc --debug /dev/sdb
+			- If Boot Mode is UEFI
+				grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+		- Generate Bootloader configs
+			update-grub
+
+x. Exit root
+	"""
+	- exit will quit from a root in chroot back to host
+	"""
+	exit
+
+8. Post-Installation
+"""
+- Things to do after base install
+
+Requirements:
+	- Swapfile Size
+	- Packages
+"""
+i. Create Swapfile
+	"""
+	- Use fallocate to generate a swapfile of size n{MB|MiB|GB|GiB}
+
+	:: Requirements	
+		Swapfile Size		
+
+	:: Syntax
+		sudo fallocate {options} {swapfile_size} /swapfile
+	
+	:: Steps
+		i. Allocate swapfile of size nGiB
+		ii. Change Permission of swapfile to 600
+		iii. Format swapfile
+		iv. Enable swapfile
+		v. Append swapfile entry - if not in file systems table (/etc/fstab)
+	"""
+	- Allocate swapfile
+		sudo fallocate -l 8.0GiB /swapfile
+	- Change permission of swapfile
+		sudo chmod 600 /swapfile
+	- Format swapfile
+		sudo mkswap /swapfile
+	- Enable swapfile
+		sudo swapon /swapfile
+	- (OPTIONAL): Append swapfile entry - if not in file systems table (/etc/fstab)
+		echo "# Swapfile" | sudo tee -a /etc/fstab
+		echo "/swapfile none swap defaults 0 0" | sudo tee -a /etc/fstab
+
+ii. Install Packages
+	"""
+
+	"""
+
+
+FIN. Cleanup & Sanitize
+"""
+- Safely unmount all mounted systems
+"""
+i. Safely unmount 
+	- all mounted systems
+		umount -a
+	- only mounted
+		umount -l /mnt
+
+
+####### ADDITIONAL TO-DO #######
+- set UTC
+################################
+
