@@ -115,6 +115,7 @@ Requirements:
 		1, {device_name}1, Boot Partition, primary, ext4, True, /mnt/boot, 0%, 1024MiB
 		2, {device_name}2, Root Partition, primary, ext4, False, /mnt, 1024MiB, (x1)MiB
 		3, {device_name}3, Home Partition, primary, ext4, False, /mnt/home, (x1)MiB, 100%
+	Installation Method: {debootstrap|pacstrap|rootfs|xbps}
 	Packages (to include --include): NIL
 	Core Packages (to install): NIL
 	Other Packages (to install): NIL
@@ -178,6 +179,7 @@ iii. Base Installation Info
 	#	device_name: /dev/sdb
 	#	device_size: 51200MiB
 	#	partition_table: msdos
+	#	Installation Method: Debootstrap
 	#	packages to include (--include): 
 	#		linux-image-amd64
 	#		grub-efi
