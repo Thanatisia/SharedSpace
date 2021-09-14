@@ -22,6 +22,7 @@
   * 2021-05-24 0044H, Asura
   * 2021-05-24 2026H, Asura
   * 2021-05-26 0959H, Asura
+  * 2021-09-11 0932H, Asura
 
 
 
@@ -49,12 +50,13 @@
 10. Cloning a repository.txt
 11. Fetching changes.txt
 12. Pull changes.txt
-13. EX1. create new repository.txt
-14. EX2. push existing repository.txt
-15. Issues-1. Bypass - Untracked working tree files overwriting warning.txt
-16. Issues-2. Bypass - Filename too long.txt
-17. README.md
-18. Glossary.txt
+13. Contributing.txt
+14. EX1. create new repository.txt
+15. EX2. push existing repository.txt
+16. Issues-1. Bypass - Untracked working tree files overwriting warning.txt
+17. Issues-2. Bypass - Filename too long.txt
+18. README.md
+19. Glossary.txt
 
 
 
@@ -111,6 +113,10 @@
       * Issues-1. Bypass - Untracked working tree files overwriting warning.txt
       * Issues-2. Bypass - Filename too long.txt
 
+* 2021-09-11 0932H, Asura
+  * Added
+    * Files
+      * Contributing.txt
 
 
 # License
