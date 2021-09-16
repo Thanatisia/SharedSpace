@@ -1,0 +1,1051 @@
+Installation Guide - Void Linux
+```
+Remarks:
+	- Void Linux supports chroot installation via the XBPS Package Manager
+Keywords:
+	[1] chroot
+	[2] VoidLinux
+	[3] XBPS Package Manager
+References:
+	[1] https://docs.voidlinux.org/installation/guides/chroot.html
+File Information: 
+	Author: Asura
+	Created On: 2021-09-04 09:40H, Asura
+	Modified On:
+		- 2021-09-04 09:40H, Asura
+		- 2021-09-08 10:56H, Asura
+		- 2021-09-09 23:00H, Asura
+		- 2021-09-16 07:05H, Asura
+		- 2021-09-16 16:09H, Asura
+	Changelogs:
+		- 2021-09-04 09:40H, Asura
+			- Created guide draft
+			- Created
+				- [Table of Contents]
+				- [Contents]
+			- Added to [Contents]
+				0. Pre-Requisites
+				1. Prepare File System
+		- 2021-09-08 10:56H, Asura
+			- Converted [8. Post-Installations] -> [7. Configure Root (xii)]
+		- 2021-09-08 23:11H, Asura
+			- Added to [Contents]
+				8. To Remount
+		- 2021-09-15 23:00H, Asura
+			- Fixed Bootloader issue
+				- Turns out you need to manually install the base package (to test if is true for the git install method) when using ROOTFS Method
+		- 2021-09-16 07:05H, Asura
+			- Reorganized [Post-Installations]
+			- Added "Enable Sudo" to Post-Installations
+			- Added 'Base System Package: {base-system|base-minimal}' in [0. Pre-Requisites]
+			- Renamed [Installation Method] in [0. Pre-Requisites] -> Base System Strap Method
+		- 2021-09-16 16:09H, Asura
+			- Reorganized functions and added documentations
+```
+
+[Table of Contents]
+0. Pre-Requisites
+1. Prepare File System
+2. Mount Partitions
+3. Prepare Installer
+4. Strap packages and base files into root
+5. Prepare the chroot environment
+6. Generate File Systems Table (fstab)
+7. Configure Root
+8. To Remount
+FIN. Cleanup & Sanitize
+
+[Contents]
+
+0. Pre-Requisites
+"""
+- Must like installation for Arch, Gentoo, Linux from Scratch or even Slackware
+- You need to self-prepare and plan out some things, hence the following info must be prepared before proceeding
+
+Requirements:
+	Users:
+		:: Columns
+		ROW_ID, user_name, primary_group, secondary_groups, home_dir, password
+	Hostname: {Debian|ArchLinux|Others}
+	Region: {Asia}
+	City: {Singapore}
+	Locale: {en_SG.UTF-8|en_US.UTF-8}
+	Host Distribution: {Debian|Arch|Gentoo|LFS|Slackware|Fedora|Others}
+	Architecture: {amd64|arm}
+	Boot Mode: {bios|uefi}
+	Release: {unstable|stable|bullseye}
+	Device Type: {microSD|HDD|SSD}
+	Device Name: /dev/{sdX|nvme}
+	Device Size: {MB|MiB|GB|GiB}
+	Partition Table: {msdos|gpt}
+	Mount Paths:
+		{device_name}1, /mnt/boot
+		{device_name}2, /mnt
+		{device_name}3, /mnt/home
+	Partition Design:
+		:: Columns
+		ROW_ID, partition_name, description, partition_format, partition_type, bootable, mount_path, start_size, end_size
+		:: Default Example
+		1, {device_name}1, Boot Partition, primary, ext4, True, /mnt/boot, 0%, 1024MiB
+		2, {device_name}2, Root Partition, primary, ext4, False, /mnt, 1024MiB, (x1)MiB
+		3, {device_name}3, Home Partition, primary, ext4, False, /mnt/home, (x1)MiB, 100%
+	Base System Strap Method: {debootstrap|pacstrap|rootfs|xbps}
+	Base System Package: {base-system|base-minimal}
+	Packages (to include --include): NIL
+	Core Packages (to install): NIL
+	Other Packages (to install): NIL
+	Bootloader: {Grub|Grub2|syslinux}
+	Bootloader Options: {
+		--target : {i386-pc (for amd64)|x86_64-efi (for UEFI)}
+	}
+
+Post-Installation: 
+	SwapFile Size: {MB|MiB|GB|GiB}
+	Packages: 
+		# Other packages to install after installation here
+		NIL
+
+Setup Recommendations:
+	Custom Window Manager to Desktop Environment Setup:
+		"""
+		Package Categories in a typical Desktop Environment setup:
+			i. Window Manager
+					
+
+		Packages (with Categories): 
+		"""
+
+Optional:
+	File System Table (/etc/fstab):
+		:: Columns
+		device, mount_dir, filesystem_type, options, dump_conf_id, fsck_order
+
+
+:: Remarks
+	- Please seperate all column values with delimiter ','
+	- Please seperate all subvalues with delimiter ';'
+		
+"""
+
+i. User Info
+	# ========================================================================== #
+	# Let
+	#	Users:
+	#		1, Asura, sudo, users, /home/profiles/admin/asura, V0id
+	# ========================================================================== #
+
+ii. System Info
+	# ========================================================================== #
+	# Let
+	#	Hostname: VoidLinux
+	#	region: Asia
+	#	city: Singapore
+	#	locale: en_SG.UTF-8
+	# ========================================================================== #
+
+iii. Base Installation Info
+	# ========================================================================== #
+	# Let 
+	#	host distribution: ArchLinux
+	#	architecture: x86_64
+	#	boot mode: bios
+	#	release: unstable
+	#	device_type: microSD
+	#	device_name: /dev/sdc
+	#	device_size: 51200MiB
+	#	partition_table: msdos
+	#	Base System Strap Method: ROOTFS
+	#	Base System Package: {base-system|base-minimal}
+	#	packages to include (--include): 
+	#		linux-image-amd64
+	#		grub-efi
+	#		locales
+	#	core packages to install:
+	#		firmware-linux
+	#		sudo
+	#		vim
+	#		neofetch
+	#	other packages to install:
+	#		[network]
+	#			dhcpcd5
+	#			network-manager
+	#	bootloader: grub
+	#	bootloader options:
+	#		--target : i386-pc
+	#		--debug
+	# ========================================================================== #
+
+iv. Post-Installation Info
+	# ========================================================================== #
+	# Let
+	#	swapfile size: 4.0GiB
+	#	packages:
+	#		#[Category]={package-name}
+	#		[window-manager]=bspwm;sxhkd
+	# ========================================================================== #
+
+
+1. Prepare File System
+"""
+- Prepare the File System to be used
+Requirements:
+	- Device Name
+	- Device Size
+	- Partition Table
+	- Partition Design
+"""
+i. Create Label
+	"""
+	- Format and create a new file system
+	:: Syntax
+		parted {device_name} mklabel {partition_table}
+	"""
+	parted /dev/sdc mklabel msdos
+	
+ii. Create Partitions
+	"""
+	- Create a new partition
+	:: Syntax
+		parted {device_name} mkpart {partition_format} {partition_type} {start_size} {end_size}
+
+	:: Notes
+		- You can use percentages to allocate approximate sizes
+			0% : Start completely from the beginning
+			50% : Use up 50% starting from the specified start_size
+			100% : Use up from the specified start_size all the way to the end
+	"""
+	parted /dev/sdc mkpart primary ext4 0% 1024MiB
+	parted /dev/sdc mkpart primary ext4 1024MiB 32768MiB
+	parted /dev/sdc mkpart primary ext4 32768MiB 100%
+
+iii. Format Partitions
+	"""
+	- Format newly created partitions
+	:: Syntax
+		if partition_type is:
+			ext3: mkfs.ext4 {partition_name}
+			ext4: mkfs.ext4 {partition_name}
+			fat32: mkfs.fat -F16 {partition_name}
+			fat32: mkfs.fat -F32 {partition_name}
+	"""
+	mkfs.ext4 /dev/sdc1
+	mkfs.ext4 /dev/sdc2
+	mkfs.ext4 /dev/sdc3
+
+iv. Optionals
+	iv.a. OPTIONAL: If Bootable
+		"""
+		- Typically only partition 1 as it is your bootloader
+		:: Syntax
+			parted {device_name} set 1 boot on
+		"""	
+		parted /dev/sdc set 1 boot on
+
+	iv.b. OPTIONAL: If Swap Partition
+		"""
+		- Swap Partition is optional, as most would recommend creating a swap file as it is 
+			i. easier to handle
+			ii. easier to create
+		"""
+	
+		iii.a.i. Make Swap Partition
+			"""
+			:: Syntax
+				mkswap {partition_name}		
+			"""
+			mkswap /dev/sdc{partition_number}
+	
+		iii.a.ii. Enable Swap
+			"""
+			:: Syntax
+				swapon {partition_name}
+			"""	
+			swapon /dev/sdc{partition_number}
+
+2. Mount Partitions
+"""
+- You need to mount the mount directories to its partitions to access 
+
+:: Syntax
+	mount {partition_name} {mount_path}
+
+Requirements: 
+	- Mount Paths
+"""
+
+i. Mount Root Partition
+	"""
+	- Creating the root partition first so it holds the root folder containing the other partition mount paths
+	"""
+	mount /dev/sdc2 /mnt
+
+ii. Create Required Directories and Mount paths
+	"""
+	:: Syntax
+		mkdir -p {mount_path_1} {mount_path_2}...
+	"""
+	mkdir -p /mnt/boot /mnt/home
+
+iii. Mount Other Partitions
+	mount /dev/sdc1 /mnt/boot
+	mount /dev/sdc3 /mnt/home
+
+
+3. Prepare Installer
+"""
+- Obtain Installer
+- If your distro 
+	- is not <distro>-native
+		- You will need to seperately obtain/download the installer and install it before proceeding to setup
+
+Requirements:
+	- Distribution
+	- release
+	- Base System Strap Method
+"""
+i. If not native
+	a. XBPS
+		"""
+		- For the XBPS Method
+		- Requires installation
+		:: Links
+			- https://github.com/void-linux/xbps
+
+		:: Requirements
+			- git
+			
+		:: Syntax
+			- clone xbps
+				git clone https://github.com/void-linux/xbps
+			- configure make
+				# Thanks to --enable-rpath you can install it anywhere and it will still use the libxbps shared library at $ORIGIN/../lib, 
+				#	that means that if xbps is installed to $HOME/xbps-git/usr, 
+				#	the executables will use $HOME/xbps-git/usr/lib to locate libxbps.
+				./configure {options} --enable-rpath --prefix=/usr --sysconfdir=/etc
+			- make
+				make -j$(nproc)
+			- make destination directory
+				make dest_dir={destination-dir} install clean
+			- add git directory to path
+				PATH+=:{destination_dir}	
+		"""
+		- Clone
+			git clone https://github.com/void-linux/xbps
+
+		- Configure make
+			./configure --enable-rpath --prefix=/usr --sysconfdir=/etc
+
+		- make
+			make -j$(nproc)
+
+		- make destination directory
+			make DESTDIR=~/xbps-git install clean
+
+		- add git directory to path
+			PATH+=:~/xbps-git/usr/bin
+
+	b. ROOTFS
+		"""
+		- For the ROOTFS Tarball method
+		- Does not require installation
+		:: Requirements
+			- package: wget
+			- latest
+				- architecture
+					x86_64 | i686
+						base-system
+							glibc: https://alpha.de.repo.voidlinux.org/live/current/void-<architecture>-ROOTFS-yyyymmdd.tar.xz
+					x86_64
+							musl: https://alpha.de.repo.voidlinux.org/live/current/void-<architecture>-musl-ROOTFS-yyyymmdd.tar.xz
+
+		:: Mirrors
+			Tier 1 Mirrors (maintained by Void Linux infrastructure team)
+				# These mirrors sync directly from the build-master and will always have the latest packages available.
+				- Refer to https://docs.voidlinux.org/xbps/repositories/mirrors/index.html#tier-1-mirrors
+				# Repository									| Location
+				- https://alpha.de.repo.voidlinux.org			| EU: Finland
+				- https://mirrors.servercentral.com/voidlinux	| USA: Chicago
+				- https://alpha.us.repo.voidlinux.org			| USA: Kansas City
+
+			Tier 2 Mirrors (Synced from a nearby Tier 1 mirror when possible)
+				# These mirrors are not managed by Void and 
+				# Do not have any guarantees of freshness or completeness by packages nor
+				# are they required to sync every available architecture or sub-repository.
+				# Updated as of 2021-09-16 0731H, Asura
+				- refer to https://docs.voidlinux.org/xbps/repositories/mirrors/index.html#tier-2-mirrors
+
+		:: Links
+			- https://voidlinux.org/download/#download-installable-base-live-images-and-rootfs-tarballs
+
+
+		:: Syntax
+			wget {mirror-url}
+		"""
+		wget https://alpha.de.repo.voidlinux.org/live/current/void-x86_64-ROOTFS-20210218.tar.xz
+
+
+
+4. Strap packages and base files into root
+"""
+- take the base files and copy into the root directory and
+- install all {packages_to_include} into the mount
+
+Ensure that:
+	- All partitions are mounted
+
+Requirements:
+	- Packages (to include)
+	- Architecture
+	- Release
+	- Mount Path
+	- Repository Mirror
+"""
+
+i. XBPS Method
+	"""
+	- (Description) XBPS is the official package manager for Void Linux
+	- Requires installation
+	:: Requirements
+		- Architecture
+		- Mount Path
+		- Repository mirror
+
+	:: Mirrors
+		Tier 1 Mirrors (maintained by Void Linux infrastructure team)
+			# These mirrors sync directly from the build-master and will always have the latest packages available.
+			- Refer to https://docs.voidlinux.org/xbps/repositories/mirrors/index.html#tier-1-mirrors
+			# Repository									| Location
+			- https://alpha.de.repo.voidlinux.org			| EU: Finland
+			- https://mirrors.servercentral.com/voidlinux	| USA: Chicago
+			- https://alpha.us.repo.voidlinux.org			| USA: Kansas City
+
+		Tier 2 Mirrors (Synced from a nearby Tier 1 mirror when possible)
+			# These mirrors are not managed by Void and 
+			# Do not have any guarantees of freshness or completeness by packages nor
+			# are they required to sync every available architecture or sub-repository.
+			# Updated as of 2021-09-16 0731H, Asura
+			- refer to https://docs.voidlinux.org/xbps/repositories/mirrors/index.html#tier-2-mirrors
+
+	:: Notes
+		- XBPS also needs to know what architecture is being installed. Available options are x86_64, x86_64-musl, i686 for PC architecture computers and aarch64
+			ARCH=x86_64
+		- This architecture must be compatible with your current operating system, but does not need to be the same. 
+		- If your host is running an x86_64 operating system, 
+			- any of the three architectures can be installed (whether the host is musl or glibc), 
+			- but an i686 host can only install i686 distributions.
+
+	:: Syntax
+		REPO={repository-mirror}
+		ARCH={architecture}
+		XBPS_ARCH={architecture} xbps-install -S -r {root_mount_point} -R "{repository-mirror}" base-system
+	"""
+	REPO=https://alpha.de.repo.voidlinux.org/current
+	ARCH=x86_64
+	XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-system
+
+
+ii. ROOTFS Method
+	"""
+	- Unpack the tarball into the newly configured filesystems
+	- Does not Requires installation
+	:: Requirements
+		- Mount Path
+		- ROOTFS Tarball
+
+	:: Syntax
+		tar xvf {rootfs-tarball-file} -C {root_mount_path}
+	"""
+	tar xvf void-x86_64-ROOTFS-20210218.tar.xz -C /mnt
+
+
+5. Prepare the chroot environment
+"""
+- Before rooting into the installed base system, you need to ensure a few things 
+	- 1. Copy a temporary copy of the host's mounted file systems table (/etc/mtab) into the root in directory [{root_mount_dir}/etc]
+	- 2. Temporarily bind several virtual file systems (vfs)
+
+- These are a few things 
+- that are automatically taken care of while installing Arch with pacstrap and 
+	- rooting into the system using arch-chroot
+		
+Ensure that:
+	- 
+	
+Requirements: 
+"""
+
+i. Bind virtual file systems
+	"""
+	- To avoid issues we might encounter otherwise during the installation
+
+	:: Binds
+		/dev -> /mnt/dev
+		/proc -> /mnt/proc
+		/sys -> /mnt/sys
+
+	:: Syntax
+		mount --rbind {virtual_file_system} {mount_point}
+		mount --make-rslave {mount_point}
+	"""
+	mount --rbind /dev /mnt/dev
+	mount --make-rslave /mnt/dev
+	mount --rbind /proc /mnt/proc
+	mount --make-rslave /mnt/proc
+	mount --rbind /sys /mnt/sys
+	mount --make-rslave /mnt/sys
+
+ii. Copy DNS Configuration
+	"""
+	- Copy the DNS Configuration into the new root so that XBPS can still download new packages inside the chroot
+	:: Remarks
+
+	:: Syntax
+	"""
+	cp /etc/resolv.conf /mnt/etc
+
+
+6. Generate File Systems Table (fstab)
+"""
+- fstab = File Systems Table
+- 2 methods of creating a fstab file
+	- Automatic via genfstab (i.e. Arch)
+	- Manual
+
+Requirements:
+	- Distribution
+"""
+i. Automatic install via genfstab
+	"""
+	- genfstab is how Arch uses to create the /etc/fstab file
+
+	- Package: arch-install-scripts
+	"""
+	- Install package 
+		- If Distro is Debian
+			- Update your package manager first
+				apt update
+			- Upgrade your package manager on update
+				apt upgrade
+			- Install package
+				apt install arch-install-scripts
+		- Else If Distro is Arch
+			- Update and Upgrade your package manager first
+				pacman -Syu
+			- Install package
+				pacman -S arch-install-scripts
+
+	- Generate /etc/fstab via genfstab
+		"""
+		:: Syntax
+			- Generate file systems table from mount
+				genfstab -U {root_mount_dir}
+			- Output to mounted root filesystem
+				genfstab -U {root_mount_dir} >> {root_mount_dir}/etc/fstab
+
+		:: Examples
+			[1] If you are not root OR permission denied when trying to '>>' to {root_mount_dir}/etc/fstab:
+				sudo genfstab -U {root_mount_dir} | sudo tee -a {root_mount_dir}/etc/fstab
+		"""
+		[1] genfstab -U /mnt >> /mnt/etc/fstab
+		[2] genfstab -U /mnt | tee -a /mnt/etc/fstab
+
+	- (OPTIONAL) Comment out swapfile
+		"""
+		- Only if you are not creating a swapfile OR
+			- if the host you are installing from has a swapfile mounted on it
+		"""
+		sed -i '/swapfile/s/^/#/g' /mnt/etc/fstab
+
+ii. Manual
+	"""
+	:: Columns
+		device, mount_dir, filesystem_type, options, dump_conf_id, fsck_order
+
+	:: Notes
+		- Refer to blkid for the UUID etc.
+	"""
+	echo -e "device, mount_dir, filesystem_type, options, dump_conf_id, fsck_order" | sudo tee -a /etc/fstab
+
+
+iii. IF USING A DISTRO WITHOUT GENFSTAB
+	"""
+	- Automatically generate from currently mounted filesystems by copying the file '/proc/mounts'
+	:: NOTE
+		- If you are using a distro without genfstab
+		- Please do this after completing (7.1.) 
+
+	:: Steps
+		- 1. Copy fstab from /proc/mounts
+		- 2. Remove lines in /etc/fstab that refers to 'proc', 'sys', 'devtmpfs' and 'pts'
+
+	:: References
+		- https://docs.voidlinux.org/installation/guides/chroot.html#configure-fstab
+	"""
+	6.iii.a. Copy fstab from /proc/mounts
+		cp /proc/mounts /etc/fstab
+
+	6.iii.b. Remove reference lines in /etc/fstab
+		"""
+		- Remove lines in /etc/fstab that refers to 'proc', 'sys', 'devtmpfs' and 'pts'
+		"""
+
+	6.iii.c. Add an entry to mount /tmp in RAM
+		"""
+		:: Syntax
+			tmpfs	/tmp	tmpfs	defaults,nosuid,nodev	0 0
+		"""
+		echo "tmpfs	/tmp	tmpfs	defaults,nosuid,nodev	0 0" | sudo tee -a /etc/fstab
+
+	6.iii.d. (OPTIONAL) If using swap partitions
+		"""
+		:: Syntax
+			UUID=<swap>	swap	swap	rw,noatime,discard	0 0
+		"""
+		echo -e "UUID=<swap>	swap	swap	rw,noatime,discard	0 0" | sudo tee -a /etc/fstab
+
+	6.iii.e. (OPTIONAL) If using swap file
+		"""
+		:: Syntax
+			/swapfile	swap	swap	defaults	0 0
+		"""
+		echo -e "/swapfile	swap	swap	defaults	0 0" | sudo tee -a /etc/fstab
+		
+
+7. Configure Root
+"""
+- Change root to new system
+- Root will be the new workspace temporarily from point (1)
+
+Requirements: 
+	- Root Mount Path
+	- Region
+	- City
+	- Locales
+	- Hostname
+	- Core Packages (to install)
+	- Other Packages (to install)
+	- Users
+	- Bootloader
+	- Boot Mode
+"""
+
+i. Change root
+	"""
+	- This command is pretty similar to how we usually root into an Arch system using arch-chroot. 
+	- Once executed, the next commands we'll type will be run in the new system.
+	:: Syntax
+		chroot {root_mount_dir} {shell}
+	"""
+	chroot /mnt /bin/bash
+
+
+ii. Install base system
+	"""
+	- Especially for ROOTFS Method
+	- ROOTFS images generally contain out of date software, 
+		- due to being a snapshot of the time when they were built, and do not come with a complete base-system. 
+	- Update the package manager and install base-system
+
+	:: Base System Packages
+		base-system	 : For Base system which includes a kernel
+		base-minimal : For base system without a kernel; Requires installing own kernel and other packages
+
+	:: Remarks
+		- 
+	"""
+	xbps-install -Su xbps
+	xbps-install -u
+	xbps-install -S {base-system|base-minimal}
+	xbps-remove base-voidstrap
+
+iii. Update Base System
+	"""
+	- Keep installation up-to-date
+
+	:: Remarks
+		- You do not need to run this if you are doing ROOTFS Method as 
+			- You should have performed this action in ii.
+
+	:: Syntax
+		xbps-install -Su
+	"""
+	xbps-install -Su xbps
+
+iv. Install core packages
+	"""
+	- Install core software we need
+	
+	:: Remarks
+		- Please seperate all packages with spaces
+
+	:: Syntax
+		apt install {core-packages}	
+
+	:: Requirements:
+		- Core Packages to install
+	"""
+	xbps-install vim
+
+v. Configure Installation
+	"""
+	:: Syntax
+		dpkg-reconfigure -f noninteractive {options}
+
+	:: Options
+		tzdata : For Time Zone
+		locales : For Locale
+
+	- Requirements:
+		- Region
+		- City
+		- Locale
+
+	:: Remarks
+		- Setting Timezone & Locale
+		- You can also go through the options in '/etc/rc.conf'
+	"""
+	- Setting Timezone
+		"""
+		Requirements:
+			- Region
+			- City
+
+		:: Syntax
+			- To symbolic link (symlink)
+				ln -fs {source-path} {target-path}
+				=> target-path = source-path
+			- Find your Region
+				ls /usr/share/zoneinfo
+
+			- Find your City
+				ls /usr/share/zoneinfo/<Region>
+
+			- Symlink the zoneinfo to /etc/localtime
+				ln -fs /usr/share/zoneinfo/<Region>/<City> /etc/localtime	# Same as ArchLinux	
+		"""
+		ln -fs /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+
+
+	- Setting Locale
+		"""
+		- Requirements: 
+			- Locales
+
+		- option: locales
+
+		- To uncomment in file
+			sed -i '{regex}' <file>
+			where regex is: '/{keyword}/s/^#//g'
+		- To comment in file
+			sed -i '{regex}' <file>
+			where regex is: '/{keyword}/s/^/#/g'
+
+		Target File: /etc/default/libc-locales
+		Package: glibc-locales
+
+		- To uncomment locale
+			sed -i '/en_SG.UTF-8/s/^#//g' <file>
+
+		- Force Reconfigure after uncommenting
+			xbps-reconfigure --force {package}
+
+		- Update /etc/locale.conf with current locale language
+			echo "LANG={locale}" >> /etc/locale.conf
+
+		"""
+		- Uncomment from locale.gen
+			sed -i '/en_SG.UTF-8/s/^#//g' /etc/default/libc-locales
+
+		- Force Reconfigure after uncommenting
+			xbps-reconfigure --force glibc-locales
+
+		- Comment out any existing LANG in locale.conf
+			sed -i '/LANG=/s/^/#/g' /etc/locale.conf
+
+		- Update /etc/locale.conf
+			echo "LANG=en_SG.UTF-8" >> /etc/locale.conf
+
+vi. Configure network
+	"""
+	Requirements:
+		- Hostname
+	"""
+	- Setup hostname
+		"""
+		- Setup hostname of new machine
+		
+		Target File: /etc/hostname
+		Content: <Hostname>
+		
+		:: Syntax
+			echo "<Hostname>" > /etc/hostname
+		"""
+		echo "VoidLinux" > /etc/hostname
+		
+
+	- (OPTIONAL) Configure hosts file
+		"""
+		Target File: /etc/hosts
+
+		Contents:
+			127.0.0.1	localhost
+			::1		localhost
+			127.0.1.1	<Hostname>.localdomain	<Hostname>
+		"""
+		v.a. Manual
+			$EDITOR /etc/hosts
+			> enter contents
+			exit
+
+		v.b. Automatic
+			"""
+			- Add ipv4 loopback addresses
+			"""
+			echo "127.0.0.1	localhost
+::1		localhost
+127.0.1.1	<Hostname>.localdomain	<Hostname>" >> /etc/hosts
+
+	
+viii. Install other packages
+	"""
+	- Install other packages we need
+	
+	:: Remarks
+		- Please seperate all packages with spaces
+
+	:: Syntax
+		xbps-install {package-name}
+
+	:: Requirements:
+		- Other Packages to install
+	"""
+	xbps-install neofetch grub
+
+
+ix. User Management
+	"""
+	- Please seperate all groups with delimiter ','
+
+	:: Options: 
+	useradd
+		-m 			: To specify specifically to create a home directory
+		-c <folder name>	: Custom Home Directory path
+		-d <new-home-directory> : To indicate new home directory
+		-g <primary-group>	: Puts the user in the specified group as his/her primary group
+		-G <secondary-groups>	: Adds the user to the specified supplementary/secondary groups
+		-s <shell>		: Set a default shell; i.e. /bin/bash; /bin/zsh; /bin/fish; Default: /bin/sh
+	groupadd
+		- TBC
+	usermod
+		-a 			: Appends the new group so that the user doesnt lose their previous groups
+		-g <primary-group>	: Puts the user in the specified group as his/her primary group
+		-G <secondary-groups> 	: Adds the user to supplementary/secondary groups
+
+	:: Syntax
+		Create New User: useradd -m -d {home-dir} -g {primary-group} -G {secondary-groups} -s {shell} {username}
+		Modify Existing User: usermod -aG {secondary-groups} {username}
+		Create New Group: groupadd
+		Change User Password: passwd {username}
+	"""
+	- Set Root Password
+		"""
+		- If {username} is empty; password set will be for Root 
+		"""
+		passwd
+
+	- Create Users
+		"""
+		- For security reasons, you need to create a user
+
+		:: Steps
+			i. Create User
+			ii. Change user password
+		"""
+		
+		- Create New User
+			"""
+			- Create a new user 'asura' with
+				Primary Group: wheel
+				Secondary Groups: users
+				Custom Home Directory: /home/profiles/admin/asura
+			"""
+			useradd -m -d /home/profiles/admin/asura -g wheel -G users -s /bin/bash asura
+		
+		- Change user password
+			passwd asura
+
+		- Test User
+			"""
+			- To ensure that the user created is up and running
+			
+			:: Syntax
+				su - {username}
+				sudo whoami
+			"""
+			su - asura
+			sudo whoami
+			exit
+
+	ix.a. OPTIONAL: Add existing user to group
+		"""
+		- If a existing user is not in a group of choice
+			- i.e. sudo (aka wheel)
+
+		:: Syntax
+			usermod -aG {secondary-groups} {username}
+		"""
+		usermod -aG sudo asura
+
+	ix.b. OPTIONAL: Change Shell of a user
+		"""
+		- Change the shell for a user
+
+		:: Options
+			-h | --help 			: Help message
+			-R | --root {chroot_dir}	: Directory to chroot into
+			-s | --shell {shell}		: New login shell for the user account
+
+		:: Syntax
+			chsh {options} {username}
+		"""
+		chsh --shell /bin/bash asura
+
+x. Setting up Bootloader
+	"""
+	- Install Bootloader
+	- Generate Bootloader Configs
+
+	:: Requirements
+		- Bootloader
+		- Boot Mode
+	"""
+	x.a. If Bootloader is Grub
+		"""
+		:: Syntax
+			grub-install {options} --debug {device_name}
+		"""
+		- Install Bootloader
+			- If Boot Mode is MBR
+				grub-install --target=i386-pc --debug /dev/sdc
+			- If Boot Mode is UEFI
+				grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+		- Generate Bootloader configs
+			update-grub
+
+xi. Post-Installation
+	"""
+	- Things to do after base install
+	
+	Requirements:
+		- Swapfile Size
+		- Packages
+	"""
+	xi.a. Enable sudo
+		"""
+		- Enable user sudo functionality in sudoers file (/etc/sudoers)
+			EDITOR=vim sudo visudo
+		"""
+		- Manually
+			EDITOR={editor} sudo visudo
+			> Uncomment '%wheel ALL=(ALL) ALL'
+			> save
+			> exit
+		- Automatic
+			sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers
+
+	xi.b. Create Swapfile
+		"""
+		- Use fallocate to generate a swapfile of size n{MB|MiB|GB|GiB}
+		- Please unmount 
+	
+		:: Requirements	
+			Swapfile Size		
+	
+		:: Syntax
+			sudo fallocate {options} {swapfile_size} /swapfile
+		
+		:: Steps
+			i. Allocate swapfile of size nGiB
+			ii. Change Permission of swapfile to 600
+			iii. Format swapfile
+			iv. Enable swapfile
+			v. Append swapfile entry - if not in file systems table (/etc/fstab)
+		"""
+		- Allocate swapfile
+			sudo fallocate -l 8.0GiB /swapfile
+		- Change permission of swapfile
+			sudo chmod 600 /swapfile
+		- Format swapfile
+			sudo mkswap /swapfile
+		- Enable swapfile
+			sudo swapon /swapfile
+		- (OPTIONAL): Append swapfile entry - if not in file systems table (/etc/fstab)
+			echo "# Swapfile" | sudo tee -a /etc/fstab
+			echo "/swapfile none swap defaults 0 0" | sudo tee -a /etc/fstab
+
+	xi.c. Install Packages
+		"""
+
+		"""
+
+xii. Finalization
+	"""
+	Checking and Confirmation
+	"""
+	xii.a. Check package configuration
+		"""
+		- Ensure all install packages are configured properly
+ 		:: Syntax
+			- xbps-reconfigure -fa	
+		"""
+		xbps-reconfigure -fa
+
+xiii. Exit root
+	"""
+	- exit will quit from a root in chroot back to host
+	"""
+	exit
+
+
+8. To Remount
+"""
+- To Do when you want to remount
+- Refer to Point [5. Prepare the chroot environment]
+:: Requirements
+"""
+i. Mount partitions
+	- Mount Root Partition
+		mount /dev/sdc2 /mnt
+
+	- Mount Other Partitions
+		mount /dev/sdc1 /mnt/boot
+		mount /dev/sdc3 /mnt/home
+
+ii. Bind virtual file systems
+	mount --rbind /dev /mnt/dev
+	mount --make-rslave /mnt/dev
+	mount --rbind /proc /mnt/proc
+	mount --make-rslave /mnt/proc
+	mount --rbind /sys /mnt/sys
+	mount --make-rslave /mnt/sys
+
+iii. Copy DNS Configuration
+	cp /etc/resolv.conf /mnt/etc
+
+
+
+FIN. Cleanup & Sanitize
+"""
+- Safely unmount all mounted systems
+"""
+i. Safely unmount 
+	- all mounted systems
+		umount -a
+	- only mounted
+		umount -l /mnt
+
+
+####### ADDITIONAL TO-DO #######
+- set UTC
+################################
+

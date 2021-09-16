@@ -1,0 +1,124 @@
+<Distro> Setup Designs - {username}
+```
+Remarks:
+	- {Description of installer}
+
+Notes:
+	- Please create a copy of the setup design with reference to the installation guide for full accuracy
+		- This particular setup design has taken the 'automatic' functions
+			- If you wish to use the manual, the steps are also in the installation guide
+
+Keywords:
+
+References:
+
+
+File Information: 
+	Author: {author}
+	Created On: yyyy-mm-dd (HH:MM)H, {author}
+	Modified On:
+		- yyyy-mm-dd (HH:MM)H, {author}
+	Changelogs:
+		- yyyy-mm-dd (HH:MM)H, {author}
+			- Created setup design
+```
+
+[Table of Contents]
+Designs: 
+1. User Information
+2. Base Installation System Information
+3. Post-Installation
+4. Setup Recommendations
+5. Optionals
+Contents:
+1. Prepare File System
+2. Mount Partitions
+3. Obtain Debootstrap
+4. Prepare the chroot environment
+5. Generate File Systems Table (fstab)
+6. Configure Root
+7. Post-Installation
+FIN. Cleanup & Sanitize
+
+
+[Design]
+i. User Information
+	"""
+	- Please seperate all column values with ',' delimiter
+	- Please seperate all subvalues with ';' delimiter
+	"""
+	Users:
+		# Columns
+		# ROW_ID, user_name, primary_group, secondary_groups, home_dir, password
+		
+	Hostname: {Debian|ArchLinux|Others}
+	Region: {Asia}
+	City: {Singapore}
+	Locale: {en_SG.UTF-8|en_US.UTF-8}
+ii. Base Installation System Information
+	Host Distribution: {Debian|Arch|Gentoo|LFS|Slackware|Fedora|Others}
+	Architecture: {amd64|arm}
+	Boot Mode: {bios|uefi}
+	Release: {unstable|stable|bullseye}
+	Device Type: {microSD|HDD|SSD}
+	Device Name: /dev/{sdX|nvme}
+	Device Size: {MB|MiB|GB|GiB}
+	Partition Table: {msdos|gpt}
+	Mount Paths:
+		{device_name}1, /mnt/boot
+		{device_name}2, /mnt
+		{device_name}3, /mnt/home
+	Partition Design:
+		:: Columns
+		ROW_ID, partition_name, description, partition_format, partition_type, bootable, mount_path, start_size, end_size
+		:: Default Example
+		1, {device_name}1, Boot Partition, primary, ext4, True, /mnt/boot, 0%, 1024MiB
+		2, {device_name}2, Root Partition, primary, ext4, False, /mnt, 1024MiB, 32768MiB
+		3, {device_name}3, Home Partition, primary, ext4, False, /mnt/home, 32768MiB, 100%
+	Packages (to include --include): 
+		linux-image-amd64
+		grub-pc
+		locales
+	Core Packages (to install):
+		NIL
+	Other Packages (to install): 
+		# [categories]
+		# NIL
+	Bootloader: {Grub|Grub2|syslinux}
+	Bootloader Options: {
+		--target : {i386-pc (for amd64)|x86_64-efi (for UEFI)}
+	}	
+
+iii. Post-Installation: 
+	SwapFile Size: nGiB
+	Packages:
+		# Other packages to install after installation here
+		NIL
+
+iv. Setup Recommendations
+	Custom Window Manager to Desktop Environment Setup:
+		"""
+		Package Categories in a typical Desktop Environment setup:
+			i. Window Manager
+					
+
+		Packages (with Categories): 
+		"""
+		[window-manager]="NIL"
+
+
+v. Optional
+	File System Table (/etc/fstab):
+		:: Columns
+		device, mount_dir, filesystem_type, options, dump_conf_id, fsck_order	
+
+
+[Code]
+i. Prepare File System
+ii. Mount Partitions
+iii. Setup Debootstrap
+iv. Prepare the chroot environment
+v. Generate File Systems Table (fstab)
+vi. Configure Root
+vii. Post-Installation
+FIN. Cleanup & Sanitization

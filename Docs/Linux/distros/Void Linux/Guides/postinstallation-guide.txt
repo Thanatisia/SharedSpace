@@ -1,0 +1,154 @@
+PostInstallation Guide - Debootstrap
+```
+Remarks:
+	- Debootstrap is the officially-supported method used to install all Debian / Debian-based distros via terminal or another -NIX system
+	- Things to do after base install of Debian with Debootstrap
+Keywords:
+	[1] Debootstrap 
+	[2] Arch
+References:
+	[1] https://myterminal.me/diary/20210724/(VIDEO)-Installing-a-Minimal-Debian-system-the-Arch-way
+	[2] https://wiki.archlinux.org/title/Installation_guide
+
+File Information: 
+	Author: Asura
+	Created On: 2021-08-28 21:49H, Asura
+	Modified On:
+		- 2021-08-28 21:49H, Asura
+		- 2021-08-29 17:21H, Asura
+		- 2021-09-16 09:02H, Asura
+	Changelogs:
+		- 2021-08-28 21:49H, Asura
+			- Created guide draft
+			- Created
+				- [Table of Contents]
+				- [Contents]
+		- 2021-08-29 17:21H, Asura
+			- Modified
+				- 2. Install Packages
+					- Added to description
+		- 2021-09-16 09:02H, Asura
+			- Added 'Enable Sudo'
+```
+
+[Table of Contents]
+0. Pre-Requisites
+1. Enable Sudo
+2. Create Swapfile
+3. Install Packages
+FIN. Cleanup & Sanitize
+
+[Contents]
+
+0. Pre-Requisites
+"""
+- Must like postinstallation for Arch, Gentoo, Linux from Scratch or even Slackware
+- You need to self-prepare and plan out some things, hence the following info must be prepared before proceeding
+
+Requirements:
+
+Post-Installation: 
+	SwapFile Size: {MB|MiB|GB|GiB}
+	Packages: 
+		# Other packages to install after installation here
+		NIL
+
+Setup Recommendations:
+	Custom Window Manager to Desktop Environment Setup:
+		"""
+		Package Categories in a typical Desktop Environment setup:
+			i. Window Manager
+					
+
+		Packages (with Categories): 
+		"""
+
+Optional:
+	File System Table (/etc/fstab):
+		:: Columns
+		device, mount_dir, filesystem_type, options, dump_conf_id, fsck_order
+
+
+:: Remarks
+	- Please seperate all column values with delimiter ','
+	- Please seperate all subvalues with delimiter ';'
+		
+"""
+
+i. Post-Installation Info
+	# ========================================================================== #
+	# Let
+	#	swapfile size: 4.0GiB
+	#	packages:
+	#		#[Category]={package-name}
+	#		[window-manager]=bspwm;sxhkd
+	#		[others]=""
+	# ========================================================================== #
+
+1. Enable sudo
+	"""
+	- Enable user sudo functionality in sudoers file (/etc/sudoers)
+		EDITOR=vim sudo visudo
+	"""
+	- Manually
+		EDITOR={editor} sudo visudo
+		> Uncomment '%wheel ALL=(ALL) ALL'
+		> save
+		> exit
+	- Automatic
+		sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers
+
+2. Create Swapfile
+	"""
+	- Use fallocate to generate a swapfile of size n{MB|MiB|GB|GiB}
+
+	:: Requirements	
+		Swapfile Size		
+
+	:: Syntax
+		sudo fallocate {options} {swapfile_size} /swapfile
+	
+	:: Steps
+		i. Allocate swapfile of size nGiB
+		ii. Change Permission of swapfile to 600
+		iii. Format swapfile
+		iv. Enable swapfile
+		v. Append swapfile entry - if not in file systems table (/etc/fstab)
+
+	:: Requirements
+		- Swapfile Size
+	"""
+	- Allocate swapfile
+		sudo fallocate -l 8.0GiB /swapfile
+	- Change permission of swapfile
+		sudo chmod 600 /swapfile
+	- Format swapfile
+		sudo mkswap /swapfile
+	- Enable swapfile
+		sudo swapon /swapfile
+	- (OPTIONAL): Append swapfile entry - if not in file systems table (/etc/fstab)
+		echo "# Swapfile" | sudo tee -a /etc/fstab
+		echo "/swapfile none swap defaults 0 0" | sudo tee -a /etc/fstab
+
+3. Install Packages
+	"""
+	Requirements:
+		- Packages
+	"""
+
+
+FIN. Cleanup & Sanitize
+"""
+- Safely unmount all mounted systems
+"""
+i. Safely unmount 
+	- all mounted systems
+		umount -a
+	- only mounted
+		umount -l /mnt
+
+
+####### ADDITIONAL TO-DO #######
+- set UTC
+################################
+
