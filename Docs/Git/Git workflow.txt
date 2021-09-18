@@ -18,14 +18,24 @@ ArchLinux Bootabe USB : For Linux Testing
 	# Check git to add
 	git status
 
+	# (OPTIONAL): If havent state the target remote repository
+	# Specify target remote repository URL
+	git remote add origin <remote-repository-URL>
+
+	# (OPTIONAL) Add user configs
+	# specify '--global' to add this to all git projects
+	git config (--global) user.name {username}
+	git config (--global) user.email {email}
+
 	# Add all
 	git add *
 
 	# Commit all
 	git commit -m "<message>"
 
-	# (OPTIONAL): If havent state the target remote repository
-	git remote add origin <remote-repository-URL>
+	# (OPTIONAL): If you have not created a branch
+	# Create a branch to use and switch into
+	git checkout -b <new branch name>
 
 	# Push to remote repository
 	git push -u origin <branch>
@@ -40,12 +50,22 @@ ArchLinux Bootabe USB : For Linux Testing
 # --- If new updates / before starting editing
 git fetch && git merge 
 OR
-git pull
+git pull {remote-repository-url} {branch}
 
-# --- When you want to push to repository
-git status 				# To check if git recognises your changes
-git add *				# To add all files that has been changes
-git commit -m "<changes>"		# To commit all changes added into the links
+# --- When you want to push to repository (First Time)
+git status 								# To check if git recognises your changes
+git remote add origin {url}				# Set config: remote repository url
+git config user.name {username}			# Set config: remote repository username
+git config user.email {email}			# Set config: remote repository email
+git add *								# To add all files that has been changes
+git commit -m "<changes>"				# To commit all changes added into the links
+git checkout -b {branch}				# Create a branch to use and switch into
+git push -n <repository-url> <branch> 	# Push commit to github remote repository; Default = <repository-url> : origin, <branch> : main
+
+# --- When you want to push to repository (Subsequent)
+git status 								# To check if git recognises your changes
+git add *								# To add all files that has been changes
+git commit -m "<changes>"				# To commit all changes added into the links
 git push -n <repository-url> <branch> 	# Push commit to github remote repository; Default = <repository-url> : origin, <branch> : main
 
 
