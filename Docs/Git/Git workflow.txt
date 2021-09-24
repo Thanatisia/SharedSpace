@@ -44,7 +44,7 @@ ArchLinux Bootabe USB : For Linux Testing
 
 
 #
-# Example Git workflow
+# Example Git workflow [1]: You created your workspace before the Github remote repository
 #
 
 # --- If new updates / before starting editing
@@ -69,3 +69,21 @@ git commit -m "<changes>"				# To commit all changes added into the links
 git push -n <repository-url> <branch> 	# Push commit to github remote repository; Default = <repository-url> : origin, <branch> : main
 
 
+#
+# Example Git workflow [2]: You created your workspace before the Github remote repository
+#
+
+# --- If pushing to repository for the first time
+git clone {repository-url}					# Clone the remote repository to pull (fetch & merge) the latest copy & to automatically link the remote repository and your local repository
+git config user.name {username}				# Set config: remote repository username
+git config user.email {email}				# Set config: remote repository email
+
+# --- Before working on your updates
+git pull {remote-repository-url} {branch}	# Get the latest copy of your remote repository into your local copy
+
+# --- Subsequent pushes
+git status
+git add *								# To add all files that has been changes
+git commit -m "<changes>"				# To commit all changes added into the links
+git checkout -b {branch}				# (OPTIONAL) If you are contributing to a project (pull request) - Create a branch to use and switch into
+git push -u <repository-url> <branch> 	# Push commit to github remote repository; Default = <repository-url> : origin, <branch> : main
