@@ -1,0 +1,57 @@
+# How to deploy on GitHub Pages
+
+[Table of Contents]
+1. Summary
+2. Steps
+
+[Summary]
+1. Remote Repository
+	1. Create a remote repository on GitHub
+	2. Change Source Branch
+2. Local Repository
+	1. First time commit
+		1. Clone the remote repository on GitHub to Local
+	2. Subsequent commit
+		1. Pull latest changes from remote repository
+	3. Make changes into local repository
+	4. Add changes
+	5. Commit changes
+	6. Push changes to remote repository
+3. Refresh url
+4. Repeat steps 2.2-7
+
+[Steps]
+1.1. Create a remote repository on GitHub
+1.2. Change Source Branch
+	i. Go to Tab "Pages"
+	ii. Select a source branch
+		- Recommendation
+			- Branch: "main"
+			- Location: /(root)
+	iii. Press Save
+2.1. First-time commits
+	i. Clone the remote repository on GitHub to Local
+		- git clone <website-remote-repository-url>
+2.2. Subsequent commits
+	i. Pull latest changes from remote repository
+		- git pull {remote-repository-url} {branch}
+			- git pull origin main
+2.3. Make changes into local repository
+	- Create index.html
+	- Create style.css
+	- Create script.js
+2.4. Add changes 
+	- git add {files/folders/paths}
+		- git commit *
+			- all
+		- git commit . 
+			- current folder
+2.5. Commit changes
+	- git commit -m {commit-message}
+		- git commit -m "First change"
+2.6. Push changes to remote repository
+	- git push -u {remote-repository-url} {branch}
+		- git push -u origin main
+3. Refresh url
+	- {github-name}.github.io/{repository}
+4. Repeat steps 2.2-3
