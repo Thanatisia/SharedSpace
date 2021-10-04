@@ -1,0 +1,22 @@
+# Must Haves
+
+- Ensure that you have these files and/or folders in your projects created from the get-go
+
+[Files]
+1. CONTRIBUTING.md
+	- Description
+		- This file is to specify the steps that contributers have to follow to contribute to your project.
+		- This is also important for creating Pull Requests
+	- Syntax
+		- 
+
+
+2. README.md
+	- This contains a write-up & documentation of what your project does as well as how people contact you
+	- Basically the main thing most repositories have
+
+3. LICENSE
+	- Optional
+	- Depends on the license your repository holds
+
+	

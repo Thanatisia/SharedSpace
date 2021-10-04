@@ -2,14 +2,15 @@
 
 [Table of Contents]
 1. References
-2. Steps
-
+2. Steps - Full
+3. Steps - TLDR
 
 [References]
 1. https://www.dataschool.io/how-to-contribute-on-github/
+2. https://github.com/AM1CODES/Poke-Dex/blob/master/CONTRIBUTING.md
 
 
-[Steps]
+[Steps - Full]
 1. Setup
 
 	i. Fork the Project
@@ -206,3 +207,47 @@
 			- Since you will pull changes rom upstream before you make your next contribution to this project (Step 1.vi)
 				- However, this step is useful if you are going to clone your fork from another machine
 
+[Steps - TLDR]
+1. Star original repository (To return to it; OPTIONAL)
+2. Fork repository
+	- Fork in github
+		- Find the project's repository on GitHub, and then "fork" it by clicking the Fork button in the upper right corner
+	- This creates a copy of the project repository in your GitHub account
+3. Clone forked respository onto your system 
+	- using the command - git clone [url of forked repository]
+4. Create a new branch 
+	- This is so that the maintainer knows who is contributing and what the changes are from a glance
+	- using the command - git branch [branch-name]
+5. Move to newly created branch 
+	- using the command - git checkout [branch-name]
+6. REMARKS regarding point 3 and point 4
+	- You can shorten the process via
+		- using the command - git checkout -b [branch-name]
+			- This automatically 
+				1. creates the branch IF it doesnt exist (Point 3.)
+				2. changes to the branch (Point 4.)
+7. Make changes
+	- Work on the project and make changes to your program
+8. Add your changes 
+	- using any of the following commands
+		- Add all files : [
+			git add -A,
+			git add *
+		],
+		- Add only the current folder : git add .
+		- Add only a specific file : git add [file-name]
+		- Add only a specific folder : git add [folder-name]
+9. Commit your changes 
+	- using the command - git commit -m "your commit message"
+10. Push your committed changes to remote repository
+	- using the command - git push origin [branch-name]
+11. Create a pull request (on Forked repository)
+	- Enter description of changes 
+	- Press "Create Pull Request"
+12. Pull changes 
+	- to keep your local copy up to date
+	- using the commands
+		- git pull
+			= 
+		- git fetch && git merge 
+12. Repeat Steps [4-12]
