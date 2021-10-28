@@ -1,0 +1,16 @@
+InfoSec/CyberSecurity Tools
+
+[Table of Contents]
+--- Tools
+1. All
+2. 
+
+[Tool]
+1. All
+====================================================
+alphabet, tool_name, platform, tool_type, tool_url |
+====================================================
+C, cyberchef, web, NIL, NIL
+M, metasploit, terminal;Kali Linux, Vulnerability Scanner, NIL
+N, nmap, terminal; Kali Linux, Network Port Scanner, NIL
+S, shodan, web, Vulnerability Scanner, shodan.io

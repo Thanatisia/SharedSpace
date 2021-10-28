@@ -1,0 +1,62 @@
+Hacker's LifeCycle
+```
+Cyber Kill Chain
+
+- Lifecycle Circle structure for hacking
+```
+
+[Table of Contents]
+--- Summary
+1. Stages
+
+[Summary]
+```
+- Summary of Topics
+```
+1. Stages
+	"""
+	- Ethical Hacking Lifecycle stages
+
+	:: References
+		https://www.freecodecamp.org/news/ethical-hacking-lifecycle-five-stages-of-a-penetration-test/
+
+	:: Stages
+		1. Reconnaissance
+		2. Scanning & Enumeration
+		3. Exploitation
+		4. Persistency
+		5. Clearing Tracks
+		6. Reporting
+	"""
+	1: Reconnaissance
+		- Try and find the password into the network/'House'
+			- Method of Entry
+		- Gain information on the targt
+		- Social Engineering
+		- Phishing
+		[Examples]
+	2: Scanning & Enumeration
+		- Try and find a way to break into the network/'House'
+			- Entrance point
+		- Vulnerabilities etc.
+		[Examples]
+		- nmap
+	3: Exploitation
+		- Gain access to the system
+		- Successful exploit & payload
+		- Gain control of the system to at least a user level
+		- From user level, perform priviledge escalation to gain root access to the target
+		[Examples]
+		- Metasploit
+	4: Persistency
+		- Maintaining Access
+		- Install backdoors, keyloggers, rootkits etc.
+		[Examples]
+	5. Clearing Tracks
+		- Deleting files and removing info
+		[Examples]
+	6. Reporting
+		- Reporting is the final part of a penetration test. 
+			- It is what differentiates between an attacker and an ethical hacker.
+		- Summarize all the steps taken from recon (1.) to gaining access (3.)
+			- Helps the organization to understand its security architecture and defend itself better

@@ -2,6 +2,7 @@ Raspberry Pi Zero W(H) - Installing Base ArchLinux
 ```
 References:
 	https://ladvien.com/installing-arch-linux-raspberry-pi-zero-w/
+	https://archlinuxarm.org/platforms/armv6/raspberry-pi
 ```
 
 [Table of Contents]
@@ -10,7 +11,12 @@ References:
 	i. Pre-Requisites
 	ii. Create File System
 	iii. Create Partitions
-
+2. Setup & Installation
+	i. Mount folders
+	ii. Download ArchLinuxARM tar
+	iii. Move Boot Files to Boot Partition
+3. Clean-up
+	i. Unmount partitions
 
 [Installation Steps]
 1. Create an SD Card
@@ -21,6 +27,8 @@ References:
 - NOTE:
 	- This step is modular, universal/portable, and can be used in any installation processes for any distros
 		- Please do change accordingly, however, feel free to use it in your starting designs
+
+	- ArchLinux for ARM requires the boot partition to be type 'w95 fat32 (lba)' = FAT32, formatted as vfat
 ```
 
 i. (IMPORTANT) Pre-Requisites
@@ -52,6 +60,8 @@ i. (IMPORTANT) Pre-Requisites
 	3. Partition Design
 		<partition_ID> <disk_name> <partition_type> <partition_Name> <partition_file_Type> <partition_start_Size> <partition_end_Size> <partition_Bootable> <partition_Others>
 		1		/dev/sdX	Primary		Boot		ext4			0%			1024MiB		True			NIL
+		2		/dev/sdX	Primary		Root		ext4			1024MiB			(x)MiB				
+		3		/dev/sdX	Primary		Home		ext4			(x)MiB			100%
 
 
 ii. Create File System
@@ -93,6 +103,7 @@ iii. Create Partitions
 				sudo mkfs.ext{2|3|4} [disk_name]([partition_order_Number])
 			- fat{8|16|32}
 				sudo mkfs.fat -F{8|16|32} [disk_name]([partition_order_Number])
+				sudo mkfs.vfat [disk_name]([partition_order_Number])
 			- zfs
 				TBC
 			- btrfs
@@ -105,17 +116,115 @@ iii. Create Partitions
 	#	disk_Size: 51200MiB
 	#	Partition Structure:
 	#		[partition_order_Number] [disk_name] [partition_type] [partition_Name] [partition_filesystem] [partition_start_Size] [partition_end_Size] [partition_Bootable] [partition_Others]
-	#		1 	/dev/sdX 	Primary 	Boot 	ext4 	0% 		1024MiB 	Bootable
-	#		2 	/dev/sdX 	Primary 	Root 	ext4 	1024MiB 	32768MiB	
-	#		3	/dev/sdX	primary		Home	ext4	32768MiB	100%			
-	sudo parted /dev/sdX mkpart primary ext4 0% 1024MiB
-	sudo mkfs.ext4 /dev/sdX1
-	sudo parted /dev/sdX set 1 boot on
+	#		1 	/dev/sdX 	Primary 	Boot 	vfat 	0% 		1024MiB 	Bootable
+	#		2 	/dev/sdX 	Primary 	Root 	ext4 	1024MiB 	50%	
+	#		3	/dev/sdX	primary		Home	ext4	50%		100%			
+	sudo parted /dev/sdX mkpart primary fat32 0% 1024MiB
+	sudo mkfs.vfat /dev/sdX1
+	# sudo parted /dev/sdX set 1 boot on
 
-	sudo parted /dev/sdX mkpart primary ext4 1024MiB 32768MiB
+	sudo parted /dev/sdX mkpart primary ext4 1024MiB 50%
 	sudo mkfs.ext4 /dev/sdX2
 
-	sudo parted /dev/sdX mkpart primary ext4 32768MiB 100%
+	sudo parted /dev/sdX mkpart primary ext4 50% 100%
 	sudo mkfs.ext4 /dev/sdX3
 
+2. Setup & Installation
+```
+- Installation and Setup of ArchLinux ARM on device
 
+:: Reference
+	https://archlinuxarm.org/platforms/armv6/raspberry-pi
+```
+
+i. Mount folders
+	"""
+	:: Structure
+		1. Mount mount/root partition
+		2. Make Boot Directory
+		3. Make Root Directory
+		4. Mount Boot partition
+		5. Mount Root partition
+
+	:: Syntax
+		- Refer to your partition structure
+	
+	:: Example
+		- Partition Structure
+			Boot Partition - /boot : [device_name]1
+			Mount Partition - /mnt : [device_name]2
+			Home Partition - /home : [device_name]3
+	"""
+	# --- Create Mount Directories
+	mkdir -p boot root home
+	# --- Mount Directories
+	mount [device_name]1 boot
+	mount [device_name]2 root
+	mount [device_name]3 home	
+
+ii. Download ArchLinuxARM tar
+	"""
+	URL:
+		Raspberry Pi 1 / Zero / Zero W(H): http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+		Raspberry Pi 2: http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+		Raspberry Pi 3 / 4 / 400: http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz
+	:: Syntax
+		1. Download tar file
+			wget [archlinux ARM tar url]
+			curl -L -O [archlinux ARM tar url]
+			curl -L [archlinux ARM tar url] > [mounted-root-directory]
+		2. Untar
+			bsdtar -xvpf ArchLinuxARM-rpi-latest.tar.gz -C [mounted-root-directory]
+				- tar file extractor
+				:: Parameters
+					x: Extract
+					v: Verbose
+					p: Restore permissions (ACLs, owner, file flags)
+					f: <filename> Location of archive
+						-f <filename>
+		3. sync
+			sync
+
+	:: Notes
+		- If you are using the ArchLinux Install ISO or any ISO with small filesize, use the following syntax instead
+			curl -L http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz > root/ArchLinuxARM-rpi-latest.tar.gz
+
+		- sync: Synchronize cached writes to persistent storage
+	"""
+	1. Download root filesystem
+		a. wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+		b. curl -L -O http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+		c. curl -L http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz > [mounted-root-directory]/ArchLinuxARM-rpi-latest.tar.gz
+
+	2. Extract root filesystem
+		a. bsdtar -xvpf ArchLinuxARM-rpi-latest.tar.gz -C /mnt
+		b. bsdtar -xvpf ArchLinuxARM-rpi-latest.tar.gz -C .		# If you downloaded the file in the mounted root directory itself
+
+	3. Sync Filesystem to Partition
+		sync
+
+iii. Move Boot Files to Boot Partition
+	"""
+	- If your boot directory is not inside the root/mount directory (/)
+	- Boot Files Location: [archlinuxarm-root-directory]/boot/
+	- Copy from [Boot Files Location] to Boot partition
+
+	:: Syntax
+		mv [boot files location]/* [boot-partition-directory]
+	"""
+	cd ~
+	mv root/boot/* boot
+
+
+3. Clean-up
+```
+- Unmount
+```
+i. Unmount partitions
+	"""
+	- Unmount before finishing	
+
+	:: Syntax
+		umount -l [partitions]
+	"""
+	umount -l root boot home
