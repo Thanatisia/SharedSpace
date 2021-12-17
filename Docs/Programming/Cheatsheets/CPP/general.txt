@@ -31,6 +31,11 @@ Operators :
 	>> : Command Line Input Stream
 	<< : Command Line Output Stream
 
+Tips n Tricks : 
+	Convert negative integer to positive integer : abs([negative-integer])
+	Convert negative double to positive double : fabs([negative-double])
+	Convert negative float to positive float : fabsf([negative-float])
+
 Resources : 
 	Websites : 
 		cplusplus.com
