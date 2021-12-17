@@ -1,0 +1,38 @@
+Cheatsheets - C Programming
+
+Useful Libraries & Functions :
+	C : 
+		cstdlib.h
+			fgets
+			printf
+		cstdio.h
+		string.h
+	C++ : 
+		iostream
+			cin
+			cout
+			endl
+			getline
+		stdlib
+		stdio
+		string
+			string
+			to_string
+		iomanip
+			setprecision
+			unsetf
+
+Operators :
+	+ : Add
+	- : Subtract
+	* : Multiply
+	/ : Divide
+	% : Modulus (Remainder)
+	>> : Command Line Input Stream
+	<< : Command Line Output Stream
+
+Resources : 
+	Websites : 
+		cplusplus.com
+		geeksforgeeks.com
+		tutorialspoint.com

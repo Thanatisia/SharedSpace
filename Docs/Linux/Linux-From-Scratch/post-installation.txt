@@ -1,0 +1,19 @@
+Linux From Scratch: Install Guide
+```
+- Post-Installation process for Linux From Scratch
+
+Created: 2021-11-06 22:31H
+Author: Asura
+Modify and Updated as of: 
+	2021-11-06 22:31H, Asura
+```
+
+[Table of Contents]
+References
+Resources
+
+
+[References]
+Stable Install Wiki: https://linuxfromscratch.org/lfs/view/stable/index.html
+
+[Resources]

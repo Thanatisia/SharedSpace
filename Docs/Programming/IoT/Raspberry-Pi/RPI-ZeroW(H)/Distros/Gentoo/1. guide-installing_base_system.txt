@@ -1,8 +1,7 @@
-Raspberry Pi Zero W(H) - Installing Base ArchLinux
+Raspberry Pi Zero W(H) - Installing Base Gentoo64
 ```
 References:
-	https://ladvien.com/installing-arch-linux-raspberry-pi-zero-w/
-	https://archlinuxarm.org/platforms/armv6/raspberry-pi
+	https://wiki.gentoo.org/wiki/Raspberry_Pi
 ```
 
 [Table of Contents]
@@ -21,14 +20,11 @@ References:
 [Installation Steps]
 1. Create an SD Card
 ```
-- ARM Architecture for 
-	- Raspberry Pi Zero W(H) : ARMv6
-
 - NOTE:
 	- This step is modular, universal/portable, and can be used in any installation processes for any distros
 		- Please do change accordingly, however, feel free to use it in your starting designs
 
-	- ArchLinux for ARM requires the boot partition to be type 'w95 fat32 (lba)' = FAT32, formatted as vfat
+	- ARM requires the boot partition to be type 'w95 fat32 (lba)' = FAT32, formatted as vfat
 ```
 
 i. (IMPORTANT) Pre-Requisites
@@ -131,10 +127,10 @@ iii. Create Partitions
 
 2. Setup & Installation
 ```
-- Installation and Setup of ArchLinux ARM on device
+- Installation and Setup of Gentoo on device
 
 :: Reference
-	https://archlinuxarm.org/platforms/armv6/raspberry-pi
+	https://wiki.gentoo.org/wiki/Raspberry_Pi
 ```
 
 i. Mount folders
@@ -162,7 +158,7 @@ i. Mount folders
 	mount [device_name]2 root
 	mount [device_name]3 home	
 
-ii. Download ArchLinuxARM tar
+ii. Download Base System
 	"""
 	URL:
 		Raspberry Pi 1 / Zero / Zero W(H): http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
@@ -170,9 +166,9 @@ ii. Download ArchLinuxARM tar
 		Raspberry Pi 3 / 4 / 400: http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz
 	:: Syntax
 		1. Download tar file
-			wget [archlinux ARM tar url]
-			curl -L -O [archlinux ARM tar url]
-			curl -L [archlinux ARM tar url] > [mounted-root-directory]
+			wget [base system tar url]
+			curl -L -O [base system tar url]
+			curl -L [base system tar url] > [mounted-root-directory]
 		2. Untar
 			bsdtar -xvpf ArchLinuxARM-rpi-latest.tar.gz -C [mounted-root-directory]
 				- tar file extractor

@@ -1,0 +1,43 @@
+Raspberry Pi Zero W(H) - Tips n Tricks
+```
+References:
+	https://ladvien.com/installing-arch-linux-raspberry-pi-zero-w/
+	https://archlinuxarm.org/platforms/armv6/raspberry-pi
+```
+
+[Table of Contents]
+--- Terminal
+1. Automount
+
+
+[Terminal]
+1. Automount
+```
+- You need to set your target bootable partitions mapped to the drive into the /etc/fstab file 
+- Manually, you need to type in the 
+	UUID (obtainable via blkid [partition_label]), [mount-directory], [partition-filetype] [permissions] [start-bit] [stop-bit]
+- However, there is a automatic way
+```
+# 1. If you are using an ArchLinux-based host
+	"""
+	- Use genfstab
+	Package Name: genfstab
+	Located in: arch-install-scripts
+	Syntax: genfstab -U [mount-directory] >> [root-directory]/etc/fstab
+	- With this, you can automatically generate the filesystems table of all mounted directories
+		- If you have other mounted directories within the source mount directory, 
+			genfstab will detect and add those entries as well
+			- i.e.
+				let partitions be
+					/dev/sdX1 : /mnt/boot
+					/dev/sdX2 : /mnt
+					/dev/sdX3 : /mnt/home
+				- Note that the boot and home partitions are all within the root point itself
+				genfstab -U /mnt >> /mnt/etc/fstab
+					- genfstab will generate the blkid for /mnt, /mnt/boot and /mnt/home
+	"""
+	genfstab -U /mnt >> /mnt/etc/fstab
+
+# 2. If you are not using ArchLinux
+	TBC
+

@@ -1,0 +1,4422 @@
+Linux From Scratch: Install Guide
+```
+- Installation process for Linux From Scratch
+
+Created: 2021-11-06 22:27H
+Author: Asura
+Modify and Updated as of: 
+	2021-11-06 22:27H, Asura
+	2021-11-10 22:38H, Asura
+	2021-11-16 13:38H, Asura
+
+- To note:
+	- I recommend refering to the installation guide as a main usage at
+		https://www.linuxfromscratch.org/lfs/read.html
+		and use this as a reference guide on how to apply the step
+
+	- This rewrite of the manual is written as close to the website as possible, 
+		however, it is always recommended to refer to the dynamic source
+		as opposed to the static source
+```
+
+[Table of Contents]
+Preparing for Build
+	Prepare Host System
+		Install Required Applications
+		Create Partition
+		Create File System
+		Set Partition Attribute
+		(OPTIONAL) Using swap
+		Setting the $LFS Variable
+		Mounting New Partition
+		Update /etc/fstab in $LFS Root
+		Remounting
+	Packages and Patches
+		Create Working Directory
+		Make Directory Writable + Sticky
+		Obtain Packages & Patches
+		(OPTIONAL) Verify packages
+	Final Preparations
+		Create limited directory layout in LFS Filesystem
+		Add LFS User
+		User Security
+		Setup Environment
+Building the LFS Cross Toolchain and Temporary Tools
+	Important Preliminary Materials
+		Introduction
+		Toolchain Technical Notes
+		General Compilation Instructions
+	Compile Cross-Toolchain
+		Introduction
+		Binutils-2.37 - Pass 1
+		GCC-11.2.0 - Pass 1
+		Linux-5.13.12 API Headers
+		Glibc-2.34
+		Libstdc++ from GCC-11.2.0, Pass 1
+	Cross Compile Temporary Tools
+		Introduction
+		M4-1.4.19
+		Ncurses-6.2
+		Bash-5.1.8
+		Coreutils-8.32
+		Diffutils-3.8
+		File-5.40
+		Findutils-4.8.0
+		Gawk-5.1.0
+		Grep-3.7
+		Gzip-1.10
+		Make-4.3
+		Patch-2.7.6
+		Sed-4.8
+		Tar-1.34
+		Xz-5.2.5
+		Binutils-2.37 - Pass 2
+		GCC-11.2.0 - Pass 2
+	Enter Chroot and Build Additional Temporary Tools
+		Introduction
+		Changing Ownership
+		Preparing Virtual Kernel File Systems
+		Entering the Chroot Environment
+		Creating Directories
+		Creating Essential Files and Symlinks
+		Libstdc++ from GCC-11.2.0, Pass 2
+		Gettext-0.21
+		Bison-3.7.6
+		Perl-5.34.0
+		Python-3.9.6
+		Texinfo-6.8
+		Util-linux-2.37.2
+		Cleaning up and Saving the Temporary System
+Build LFS System
+	Install Basic System Software
+		Introduction
+		Package Management
+		Man-pages-5.13
+		Iana-Etc-20210611
+		Glibc-2.34
+		Zlib-1.2.11
+		Bzip2-1.0.8
+		Xz-5.2.5
+		Zstd-1.5.0
+		File-5.40
+		Readline-8.1
+		M4-1.4.19
+		Bc-5.0.0
+		Flex-2.6.4
+		Tcl-8.6.11
+		Expect-5.45.4
+		DejaGNU-1.6.3
+		Binutils-2.37
+		GMP-6.2.1
+		MPFR-4.1.0
+		MPC-1.2.1
+		Attr-2.5.1
+		Acl-2.3.1
+		Libcap-2.53
+		Shadow-4.9
+		GCC-11.2.0
+		Pkg-config-0.29.2
+		Ncurses-6.2
+		Sed-4.8
+		Psmisc-23.4
+		Gettext-0.21
+		Bison-3.7.6
+		Grep-3.7
+		Bash-5.1.8
+		Libtool-2.4.6
+		GDBM-1.20
+		Gperf-3.1
+		Expat-2.4.1
+		Inetutils-2.1
+		Less-590
+		Perl-5.34.0
+		XML::Parser-2.46
+		Intltool-0.51.0
+		Autoconf-2.71
+		Automake-1.16.4
+		Kmod-29
+		Libelf from Elfutils-0.185
+		Libffi-3.4.2
+		OpenSSL-1.1.1l
+		Python-3.9.6
+		Ninja-1.10.2
+		Meson-0.59.1
+		Coreutils-8.32
+		Check-0.15.2
+		Diffutils-3.8
+		Gawk-5.1.0
+		Findutils-4.8.0
+		Groff-1.22.4
+		GRUB-2.06
+		Gzip-1.10
+		IPRoute2-5.13.0
+		Kbd-2.4.0
+		Libpipeline-1.5.3
+		Make-4.3
+		Patch-2.7.6
+		Tar-1.34
+		Texinfo-6.8
+		Vim-8.2.3337
+		Eudev-3.2.10
+		Man-DB-2.9.4
+		Procps-ng-3.3.17
+		Util-linux-2.37.2
+		E2fsprogs-1.46.4
+		Sysklogd-1.5.1
+		Sysvinit-2.99
+		About Debugging Symbols
+		Stripping
+		Cleaning Up
+	System Configuration
+		Introduction
+		LFS-Bootscripts-20210608
+		Overview of Device and Module Handling
+		Managing Devices
+		General Network Configuration
+		System V Bootscript Usage and Configuration
+		The Bash Shell Startup Files
+		Creating the /etc/inputrc File
+		Creating the /etc/shells File
+	Make LFS System Bootable
+		Introduction
+		Creating the /etc/fstab File
+		Installing Kernel
+			Linux-5.13.12
+		Installing Bootloader
+			Using GRUB to Set Up the Boot Process
+	End
+		The End
+		Get Counted
+		Rebooting the System
+		What Now?
+Post-Installation
+References
+Resources
+
+[Preparing for Build]
+1. Prepare Host System
+```
+- LFS is different from ArchLinux and Gentoo with regards to file structure as
+	in LFS, you need to create the linux hierarchy yourself
+```
+	- Install Required Applications
+		"""
+		- Packages typically required:
+			- 
+		"""
+	- Create Disk Label (Optional)
+		"""
+		Disk Label:
+			Bootloader: BIOS | UEFI
+			Labels: Master Boot Record (MBR) | GUID Partition Table (GPT)
+		
+		Syntax: sudo parted [device_name] mklabel [msdos|gpt]
+		"""
+		sudo parted /dev/sdX mklabel msdos
+	- Create Partition
+		"""
+		- Specify any seperate partitions that you want to be automatically mounted on boot 
+			in the /etc/fstab
+		List of Partition:
+			Mandatory
+			- Root (/)
+			Optionals:
+			- Boot (/boot):
+				- Your Boot partition 
+				- To store kernels and other booting information
+				- To minimize potential boot problems with larger disks,
+					make this the first physical partition on your first disk drive
+					A partition size of 200mb is ok.
+			- Swap
+			- Home (/home):
+				- Your home partition
+				- To share your home directory and user customization across multiple distributions or LFS builds
+			System:
+			- /usr
+				- In LFS, /bin, /lib and /sbin are symlinks to their counterpart in /usr
+				- /usr contais all binaries needed for the system to run
+				- For LFS, a seperate partition for /usr is normally not needed
+					- If needed, you should make a partition large enough to fit all programs and libraries in the syystem.
+			- /opt
+				- The "Optionals" directory
+				- Most useful for BLFS where multiple installations of large packages like Gnome or KDE can be installed without embedding the files
+					in the /usr hierarchy.
+				- Adequate size: (5 - 10)gb
+			- /tmp
+				- Temporary directory to store files that will be removed on shutdown/restart
+			- /usr/src
+				- Useful for providing a location to store BLFS source files
+					and sharing them across LFS builds
+				- Can be used as a location for building BLFS packages
+				- Good Size: 30-50gb
+		
+		Syntax: (sudo) parted [device_name] mkpart [partition_type] [partition_filesystem_type] [start_size] [end_size]
+
+		Options:
+			device_name : Your Device Label 	
+				- i.e. /dev/sdX
+			partition_type : The type of partition you want to make
+				- primary
+				- logical
+				- extended
+			partition_filesystem_type : The partition's file system
+				- ext2
+				- ext3
+				- ext4
+				- fat8
+				- fat16
+				- fat32 (aka vfat)
+				- blfs
+				- zfs
+				- vfs
+				- swap (for swap partition)
+
+		Partition Design: 
+			ROW_ID, partition_path, partition_name, partition_type, filesystem_type, start_size, end_size, bootable, others
+		"""
+
+		# Let partition design be the following
+		```
+		Device Name: /dev/sdb
+		ROW_ID, partition_path, partition_name, partition_type, filesystem_type, start_size, end_size, bootable, others
+		1, /boot, Boot, Primary, ext4, 0%, 	1024MiB, Bootable
+		2, /,     Root, Primary, ext4, 1024MiB, 50%
+		3, /home, Home, Primary, ext4, 50%, 	100%
+		```
+		sudo parted /dev/sdb mkpart primary ext4 0% 1024MiB
+		sudo parted /dev/sdb mkpart primary ext4 1024MiB 50%
+		sudo parted /dev/sdb mkpart primary ext4 50% 100%
+	- Create File System
+		"""
+		- After creating partition
+		- Need to create the file system and attributes
+
+		File Systems:
+			- ext2
+			- ext3
+			- ext4
+			- fat8
+			- fat16
+			- fat32 (aka vfat)
+			- blfs
+			- zfs
+			- vfs
+		
+		Syntax:
+			ext:
+				(sudo) mkfs.ext{1|2|3|4} [device_name]
+			fat:
+				(sudo) mkfs.fat -F{8|16|32} [device_name]
+			swap:
+				(sudo) mkswap [device_name]
+		"""
+		(sudo) mkfs.ext4 /dev/sdb1
+		(sudo) mkfs.ext4 /dev/sdb2
+		(sudo) mkfs.ext4 /dev/sdb3
+	- Set Partition Attribute
+		"""
+		- Some partitions may require certain attributes
+		- i.e. Boot partition has to be set as bootable
+
+		:: Options
+			boot {on|off} : To set the bootable attribute
+		:: Syntax
+			To select a partition: (sudo) parted [device_name] set [partition_number]
+			To enable boot: (sudo) parted [device_name] set [partition_number] boot on
+		"""
+		(sudo) parted /dev/sdb set 1 boot on
+	- (OPTIONAL) Using swap
+		"""
+		- If you use swap
+			- either Swap partition or swapfile
+		
+
+		Syntax: swapon [swap-location]
+
+		Options:
+			swap-location: The place where you placed the swap
+				swap partition  (i.e. /dev/sdX2)
+				swap file	(i.e. /swapfile)
+		"""
+		1. Enable Swap
+			swapon /swapfile
+		2. Edit /etc/fstab
+			# swap file
+			/swapfile	swap	swap	defaults	0 0
+	- Setting the $LFS Variable
+		"""
+		- Temporarily set the lfs mount path to a variable so you dont need to type the full path
+
+		Syntax: export LFS=/lfs/mount/path
+		"""
+		1. Set LFS variable
+			export LFS=/mnt/lfs
+		2. Verify LFS variable
+			echo %LFS
+	- Mounting New Partition
+		"""
+		- Ensure that the folder exists before mounting
+		Syntax: 
+			Make Directory: mkdir -pv [paths]
+				-p : Create parent directories if not exist
+				-v : Verbose
+			Mounting: mount [mount-device] [mount-directory]
+				Options:
+				-v : Verbose
+				-t <filesystem> : Explicitly indicate target file system
+		"""
+		# Make relevant directories
+		mkdir -pv $LFS $LFS/boot $LFS/home
+
+		# Mount /mnt/lfs to Root Partition
+		mount /dev/sdb2 $LFS
+
+		# Mount /mnt/lfs/boot to Boot Partition 
+		mount /dev/sdb1 $LFS/boot
+
+		# Mount /mnt/lfs/home to Home Partition
+		mount /dev/sdb3 $LFS/home
+	- Update /etc/fstab in $LFS Root
+		"""
+		Methods:
+			[1] Manual
+				- Edit $LFS//etc/fstab
+				- Create entries of all partitions in /etc/fstab
+
+			[2] Automatic
+				- If Distro is ArchLinux
+					- Use genfstab
+					- Genfstab is in package [arch-install-scripts]
+					genfstab -U [mount-point] >> [target-root]/etc/fstab
+		"""
+		genfstab -U $LFS >> $LFS/etc/fstab
+
+	- Remounting
+		"""
+		- If you need to remount
+		Syntax: 
+			Make Directory: mkdir -pv [paths]
+				-p : Create parent directories if not exist
+				-v : Verbose
+			Mounting: mount [mount-device] [mount-directory]
+				Options:
+				-v : Verbose
+				-t <filesystem> : Explicitly indicate target file system
+		"""
+		# 1. Remounting
+		mkdir -pv $LFS
+		mount -v -t ext4 [device_label] $LFS
+		mkdir -v $LFS/home
+		mount -v -t ext4 [device_label] $LFS/home
+
+		# 2. Set automatic remount
+		# - Modify host system's /etc/fstab to automatically remount it upon boot
+		echo "# Automatic remounting of lfs root" >> /etc/fstab
+		echo "[device-label]	/mnt/lfs	ext4	defaults	1	1" >> /etc/fstab
+
+2. Packages and Patches
+```
+- Create sources directory under the LFS root directory to store all downloaded packages and patches to be stored somewhere
+	that is conveniently available throughout the entire build
+
+- A working directory is also required to unpack the sources and build them
+
+:: Resources
+	wget-list: https://linuxfromscratch.org/lfs/view/stable/wget-list
+	Packages: https://linuxfromscratch.org/lfs/view/stable/chapter03/packages.html	
+	Patches: https://linuxfromscratch.org/lfs/view/stable/chapter03/patches.html
+```
+	- Create Working Directory
+		"""
+		- to store all downloaded packages and patches to be stored somewhere
+			that is conveniently available throughout the entire build
+		- the required elements will be located on the LFS partition and will be available during all stages of the building process.
+		- Recommended: $LFS/sources as the place to store the tarballs and patches and as a working directory
+			mkdir -v $LFS/sources
+		"""
+		mkdir -v $LFS/sources
+	- Make Directory Writable + Sticky
+		"""
+		Syntax: chmod -v a+wt [working-directory]
+		Options:
+			a : Administrator
+			w : Writable
+			t : Sticky -> Even if multiple users have write permission on a directory,
+					Only the owner of a file can delete the file within a sticky directory
+		"""
+		chmod -v a+wt $LFS/sources
+	- Obtain Packages & Patches
+		"""
+		- Obtain all the necessary packages and patches to build LFS
+		- Several Ways:
+			- 1. Download individually
+			- 2. For Stable versions of the install book (https://linuxfromscratch.org/lfs/view/stable/chapter03/introduction.html)
+				A tarball of all the needed files can be downloaded from one of the LFS files mrirors listed at
+					https://www.linuxfromscratch.org/mirrors.html#files
+			- 3. Using wget and a wget-list
+		"""
+		1. Individual Download
+		2. Tarball
+		3. Wget
+			"""
+			Download using wget and wget-list
+			Syntax: wget --input-file=wget-list --continue --directory-prefix=[download-path]
+			wget-list: https://linuxfromscratch.org/lfs/view/stable/wget-list
+			"""
+			# Download wget-list
+			curl -L -O https://linuxfromscratch.org/lfs/view/stable/wget-list
+			# Download packages & patches
+			wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
+	- (OPTIONAL) Verify packages
+		"""
+		- Starting with LFS-7.0
+		- There is a seperate file
+			- md5sums
+			- Can be used to verify that all the correct packages are available before proceeding
+		- Place that file in [$LFS/sources] and run
+
+		Syntax:
+			pushd $LFS/sources
+				md5sum -c md5sums
+			popd
+		"""
+		pushd $LFS/sources
+			md5sum -c md5sums
+		popd
+
+3. Final Preparations
+```
+- Prepare for bullding the temporary system
+- Create a set of directories in $LFS for the installation of the temporary tools
+- Add an unpriviledged user to reduce risk +
+	- Create an appropriate build environment for that user
+```
+	- Create limited directory layout in LFS Filesystem
+		"""
+		- Create a limited directory hierarchy
+		- So that programs compiled in Chapter 6 as well as glibc and libstdc++ in Chapter 5
+			- May be installed in their final location.
+		- This is needed so that those temporary programs may be overwritten when rebuilding them in Chapter 8
+
+		1. Create Folders
+			$LFS/etc
+			$LFS/var
+			$LFS/usr/bin
+			$LFS/usr/lib
+			$LFS/usr/sbin
+
+		2. Create Symlink
+		3. Create lib64 folder if is 64-bit
+		"""
+
+		# Create folders 
+		mkdir -pv $LFS{etc,var} $LFS/usr/{bin,lib,sbin}
+
+		# Create a symlink between usr/$i and $LFS/$i
+		for i in bin lib sbin; do
+			ln -sv usr/$i $LFS/$i
+		done
+
+		# Check for Machine Architecture (x86 (32-bit) | 64-bit) etc.
+		# Create directory if is x86_64
+		case $(uname -m) in
+			x86_64) mkdir -pv $LFS/lib64;;
+		esac
+
+	- Add LFS User
+		"""
+		Syntax:
+			Create new group: groupadd [group-name]
+			Create new user : useradd [options] [username]
+				Options:
+					-s [shell] : Set the default shell for user [username]
+					-g [primary-group] : Set the primary group for user
+					-G [secondary-groups] : Set the secondary groups for user
+						- Please seperate all groups with delimiter ','
+					-m : Specifies to Create a home directory for user
+					-d [home-directory] : Explicitly specify and set a home directory for user
+					-k [copy-input-location] : Copy files to home directory
+						- Prevents possible copying of files from a skeleton directory (default is /etc/skel) 
+						- by changing the input location to a special null device (/dev/null)
+						- Default: /etc/skel
+				Structure: useradd -s [shell] -g [primary-group] -S [secondary-groups] -m -d [home-directory] -k /dev/null [username]
+		"""
+		# 1. Create Group
+		groupadd lfs
+		# 2. Create user and add to group
+		useradd -s /bin/bash -g lfs -m -k /dev/null lfs
+	
+	- User Security
+		"""
+		- Security measures for user
+
+		Syntax
+			Change user password: passwd [username]
+		"""
+		# 1. Change user password
+		passwd lfs
+		
+		# 2. Grant user full access to all directories under $LFS
+		#	- by making user the directory owner
+		chown -v lfs $LFS/{usr{,/*},lib,var,etc,bin,sbin,tools}
+		case $(uname -m) in
+			x86_64) chown -v lfs $LFS/lib64;;
+		esac
+
+		# 3. IF seperate working directory was created as suggested
+		#	i.e. $LFS/sources
+		# Give user ownership of $LFS/sources directory
+		chown -v lfs $LFS/sources
+
+		# 4. Switch user and login as user 
+		su - lfs
+
+	- Setup Environment
+		"""
+		Steps:
+			1. Set Profile for Bash
+			2. Create BashRC
+		"""
+		# 1. Set Profile for Bash
+			"""
+			 - Action to run when bash is started	
+			 - The exec env -i.../bin/bash command in the .bash_profile file 
+				replaces the running shell with a new one with a completely empty environment, except for the HOME, TERM, and PS1 variables.
+			 - This ensures that no unwanted and potentially hazardous environment variables from the host system leak into the build environment. 
+			 - The technique used here achieves the goal of ensuring a clean environment.
+			 - The new instance of the shell is a non-login shell, 
+				which does not read, and execute, 
+				the contents of /etc/profile or .bash_profile files, 
+				but rather reads, and executes, the .bashrc file instead.
+			"""
+		cat > ~/.bash_profile << "EOF"
+			exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$' /bin/bash
+		EOF
+
+		# 2. Create BashRC
+			"""
+			- Create BashRC to run with settings
+
+			Contents:
+				set +h : 
+					- Turn off Bash's hash function
+					- Bash's hashing uses a hash table to remember the full path of executable files 
+						- to avoid searching the PATH time and again to find the same executable
+					- By switching off the hash function, 
+					- The shell will always search the PATH when a program is to be run
+					- Thus, the shell will find the newly compiled tools in $LFS/tools
+						as soon as they are available without remembering a previous version of the same program in a different location
+				umask [permission-code]: 
+					- Set user file-creation mask (umask) to a permission code
+					Options:
+					umask 022: Setting the umask to 022
+						- Ensure that newly created files and directories are only writable by their owner,
+						- but are readable and executable by anyone
+						- Assuming default modes are used by the system call
+							- new files will end up with permission mode 64
+							- directories with mode 755
+				LFS=[lfs-mount-point] : 
+					- Set the chosen mount point (aka $LFS variable)
+				LC_ALL=POSIX : 
+					- The LC_ALL variable controls the localization of certain programs
+					- Making their messages follow the conventions of a specific country
+					Options:
+					- Setting LC_ALL to "POSIX" or "C" ensures that everything will work in the chroot environment
+				LFS_TGT=(uname -m)-lfs-linux-gnu : 
+					- The LFS Target machine
+					- The $LFS_TGT variable sets a non-default, but compatible machine description for use
+						- when building the cross compiler and linker
+						- and when cross compiling the temporary toolchain
+				PATH=[paths:to:add] : 
+					- Set the default paths ($PATH) recognized by the shell
+				if [ ! -L /bin ]; then PATH=/bin:$PATH; fi 
+					- If /bin is not a symbolic link
+					- Then it has to be added to the PATH variable
+				PATH=$LFS/tools/bin:$PATH
+					- By putting $LFS/tools/bin ahead of the standard PATH
+					- Cross-compiler installed in [Compiling Cross Toolchain] is picked up by the shell immediately after its installation
+					- This combined with turning off hashing
+						- Limits the risk that the compiler from the host be used instead of the cross-compiler
+				CONFIG_SITE=$LFS/usr/share/config.site
+					- In [Compiling a Cross-Toolchain] and [Cross Compiling Temporary Tools]
+						- If this variable is not set, [configure] scripts may attempt to load configuration items specific to some distributions from
+							/usr/share/config.site on the host system
+					- Override it to prevent potential contamination from the host
+				export ...:
+					- While the above commands have set some variables
+					- In order to make them visible within any sub-shells, you need to export them
+			"""
+		cat > ~/.bashrc << "EOF"
+			set +h
+			umask 022
+			LFS=/mnt/lfs
+			LC_ALL=POSIX
+			LFS_TGT=$(uname -m)-lfs-linux-gnu
+			PATH=/usr/bin
+			if [ ! -L /bin ]; then PATH=/bin:$PATH; fi
+			PATH=$LFS/tools/bin:$PATH
+			CONFIG_SITE=$LFS/usr/share/config.site
+			export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
+		EOF
+
+4. Building the LFS Cross Toolchain and Temporary Tools
+	- Important Preliminary Materials
+		1. Introduction
+			"""
+			- Divided into 3 stages
+				1. Building a cross compiler and its associated libraries
+				2. Use this cross toolchain to build several utilities in a way that
+					isolates them from the host distribution
+				3. Entrer the chroot environment
+					- Further improves host isolation
+					- Build the remaining tools needed to build the final system
+			"""
+		2. Toolchain Technical Notes
+			"""
+			Table of Contents:
+				1. About Cross-Compilation
+
+			References:
+				https://linuxfromscratch.org/lfs/view/stable/partintro/toolchaintechnotes.html
+			"""
+			1. About Cross-Compilation
+				"""
+				- Cross-Compilation involves some concepts that deserves a section on their own
+					- Ensure that you get a good grasp of this section
+
+				Terms:
+					- build
+						- Is the machine where we build programs.
+						- aka dev
+						- Note that this machine is referred to as the "Host" in other sections
+					- host
+						- Is the machine/system where the built programs will run
+						- aka target
+						- Note that this use of "host" is not the same as in other sections
+					- target
+						- Is only used for compilers
+						- It is the machine the compiler produces code for
+						- It may be different from both build and host
+
+				Syntax:
+					1. Compilation Table
+					==========================================
+					| Stage | Build | Host | Target | Action |
+					==========================================
+
+				Basic Information:
+					1. Compilation Table
+					Scenario:
+						- We have a compiler on a slow machine only
+							Let,
+								machine : machine A
+								compiler : ccA
+
+						- We have a fast machine, but no compiler
+							Let,
+								machine : machine B
+								compiler : NIL
+			
+						- We want to produce code for another slow machine
+							Let,
+								machine : machine C
+					
+					We want to build a compiler for machine 6, there are 3 stages:
+					==========================================
+					| Stage | Build | Host | Target | Action |
+					==========================================
+					1 | A | A | B | Build cross-compiler cc1 using ccA on machine A
+					2 | A | B | C | Build cross-compiler cc2 using cc1 on machine A
+					3 | B | C | C | Build compiler ccC using cc2 on machine B
+					4 | C | C | C | Rebuild and test ccC using itself on machine C
+				"""
+				1. Compilation Table
+				WIP
+		3. General Compilation Instructions
+			"""
+			TBC
+			"""
+	- Compile Cross-Toolchain
+		1. Binutils-2.37 - Pass 1
+			"""
+			- The Binutils package contains 
+				- a linker,
+				- an assembler
+				- other tools for handling object files
+
+			- Compilation Specs:
+				- Approximate Build Time: 1 SBU - aka Too flipping long
+				- Required Disk Space: 602MB 
+
+
+			- Notes:
+			 	1. It is important that Binutils be the first package compiled because
+					both Glibc and GCC performs various test on the available linker and assembler to
+					determine which of their own features to enable
+
+				2. In order for the SBU values listed in the rest of the book to be of any use, 
+					measure the time it takes to build this package from the configuration, up to and including the first install. To achieve this easily, wrap the commands in a time command like this: 
+					time { ../configure ... && make && make install; }
+
+			- Related:
+				General Compilation Instructions: https://linuxfromscratch.org/lfs/view/stable/partintro/generalinstructions.html			
+
+			- References:
+				https://linuxfromscratch.org/lfs/view/stable/chapter05/binutils-pass1.html
+			"""
+			# 1. The Binutils documentation recommends building Binutils in a dedicated build directory
+			mkdir -v build
+			cd build
+
+			# 2. Prepare Binutils for compilation
+			"""
+			Options: 
+				--prefix=$LFS/tools
+					- This tells the configure script to prepare to install the binutils programs in the $LFS/tools directory
+				--with-sysroot=$LFS
+					- For cross-compilation, this tells the build system to look in $LFS for the target system libraries as needed
+				--target=$LFS_TGT
+					- This switch will tell the [configure] script to adjust binutil's build system for building a cross linker
+					- This is because the machine description in the LFS_TGT variable is slightly different than the value returned by the config.guess script
+				--disable-nls
+					- This disables internationalization as i18n is not needed for the temporary tools
+				--disable-werror
+					- This prevents the build from stopping in the event there are warnings from the host's cmpiler
+			"""
+			../configure --prefix=$LFS/tools \
+				     --with-sysroot=$LFS \
+				     --target=$LFS_TGT	 \
+				     --disable-nls	 \
+				     --disable-werror
+
+			# 3. Continue with package compilation
+			make
+
+			# 4. Install package
+			"""
+			make Parameter:
+				-j1
+					- An issue in the building system may cause the installation to fail with -j(N) in MAKEFLAGS
+					- Override it to workaround this issue
+			"""
+			make install -j1
+		2. GCC-11.2.0 - Pass 1
+			"""
+			- The GCC package contains the GNU compiler collection
+				- Includes C/C++ Compilers
+
+			- Compilation Specs:
+				- Approximate Build Time: 12SBU
+				- Required Disk Space: 3.4GG
+
+			- Notes: 		
+
+			- Related:
+				Package build instructions: https://linuxfromscratch.org/lfs/view/stable/partintro/generalinstructions.html#buildinstr	
+			"""	
+			# 1.1. Unpack each package into the GCC source directory and
+			# 1.2. rename the resulting directories 
+			# 	so that the GCC build procedures will automatically use them
+			# GCC requires the GMP, MPFR and MPC packages
+			#	- As these packages may not be included in your host distribution, they will be build with GCC
+			tar -xvf ../mpfr-4.1.0.tar.xz
+			mv -v mpfr-4.1.0 mpfr
+			tar -xvf ../gmp-6.2.1.tar.xz
+			mv -v gmp-6.2.1 gmp
+			tar -xvf ../mpc-1.2.1.tar.gz
+			mv -v mpc-1.2.1 mpc
+
+			# 2. (OPTIONAL) On x86_64 hosts, set the default directory name for 64-bit libraries to 'lib'
+			case $(uname -m) in
+				x86_64)
+					sed -e '/m64=/s/lib64/lib/' \
+					    -i.orig gcc/config/i386/t-linux64
+					;;
+			esac
+
+			# 3. GCC Documentation recommends building GCC in a dedicated build directory
+			mkdir -v build	
+			cd build
+
+			# 4. Prepare GCC for Compilation
+			"""
+			Options:
+    				--target=$LFS_TGT           
+					-    
+    				--prefix=$LFS/tools            
+    				--with-glibc-version=2.11  
+					- Ensures the package will be compatible with the host's version of glibc
+					- It is set to the minimum glibc requirement specified in the Host System Requirements     
+    				--with-sysroot=$LFS             
+    				--with-newlib                 
+					- Since a working C library is not yet available, 
+					- this ensures that the inhibit_libc constant is defined when building libgcc
+					- This prevents the compiling of any code that requires libc support  
+    				--without-headers               
+					- Optional based on requirements
+					- When creating a complete cross-compiler
+					- GCC requires standard headers compatible with the target system
+					- This switch prevents GCC from looking for them as at the moment, the headers are not needed
+    				--enable-initfini-array         
+					- This switch forces the use of some internal data structures that are needed but 
+					- cannot be detected when building a cross-compiler
+    				--disable-nls                 
+    				--disable-shared                
+					- This switch forces GCC to link its internal libraries statically
+					- This is needed because the shared libraries require glibc, 
+						- which is not yet installed on the target system
+    				--disable-multilib             
+					- On x86_64, LFS does not support a multilib configuration
+					- This switch is harmless for x86
+    				--disable-decimal-float,         
+    				--disable-threads,               
+    				--disable-libatomic,             
+   				--disable-libgomp,               
+    				--disable-libquadmath,           
+    				--disable-libssp,                
+    				--disable-libvtv,                
+    				--disable-libstdcxx
+					- These switches disable support for the decimal floating point extension,
+						threading, libatomic, libgomp, libquadmath, libssp, libvtv, and the C++ standard library respectively.
+					- These features will fail to compile when building a cross-compiler and
+						- are not necessary for the task of cross-compilng the temporary libc		
+    				--enable-languages=c,c++
+					- This option ensures that only the C and C++ compilers are built
+					- These are the only languages needed at the moment.
+			"""
+			../configure                           	\
+    				--target=$LFS_TGT               \
+    				--prefix=$LFS/tools             \
+    				--with-glibc-version=2.11       \
+    				--with-sysroot=$LFS             \
+    				--with-newlib                   \
+    				--without-headers               \
+    				--enable-initfini-array         \
+    				--disable-nls                   \
+    				--disable-shared                \
+    				--disable-multilib              \
+    				--disable-decimal-float         \
+    				--disable-threads               \
+    				--disable-libatomic             \
+   				--disable-libgomp               \
+    				--disable-libquadmath           \
+    				--disable-libssp                \
+    				--disable-libvtv                \
+    				--disable-libstdcxx		\
+    				--enable-languages=c,c++
+
+			# 5. Compile GCC
+			make
+			
+			# 6. Install the package
+			make install
+		
+			# 7. Create full version of the internal header
+			"""
+			- This build of GCC has installed a couple of internal system headers
+			- Normally: One of the internal system headers - limits.h - would in turn include the corresponding
+				system limits.h header
+				- In this case, $LFS/usr/include/limits.h
+			- However, at the time of this build of GCC
+				- $LFS/usr/include/limits.h does not exist
+				- Thus the internal header that has just been installed is a partial, self-contained file and
+					does not include the extended features of the system header.
+				- Adequate for building glibc, but the full internal header will be needed later
+			- Create a full version of the internal header using the below command that is identical to 
+				what the GCC build system does in normal circumstances
+			"""
+			cd ..
+			cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+				`dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/install-tools/include/limits.h
+		3. Linux-5.13.12 API Headers
+			"""
+			- The Linux API Headers (in linux-5.13.12.tar.x) expose the kernel's API for use by Glibc
+
+			- Compilation Specifications:
+				- Approximate build time: 0.1 SBU
+				- Required Disk Space: 1.2GB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Sanitize various C header files shipped in the Linux kernel source tarball
+			# - The Linux kernel needs to expose an Application Programming Interface (API) for 
+			#	the system's C library (Glibc in LFS) to use.
+			# - Make sure there are no stale files embedded in the package
+			make mrproper
+
+			# 2. Extract user-visible kernel headers from the source
+			"""
+			- The recommended make target "headers_install" cannot be used, because
+				it requires rsync, which may not be available.
+			- The headers are first placed in ./usr, then copied to the needed location
+			"""
+			make headers
+			find usr/include -name '.*' -delete
+			rm usr/include/Makefile
+			cp -rv usr/include $LFS/usr
+		4. Glibc-2.34
+			"""
+			- The Glibc package contains the main C library.
+				- This library provides the basic routines for
+					> allocating memory
+					> searching directories
+					> Opening and Closing files
+					> Reading and Writing files
+					> String Handling
+					> Pattern Matching
+					> Arithmetic
+					> etc.
+
+			- Compilation Specifications:
+				- Appropriate build time: 4.2 SBU
+				- Required Disk Space: 744MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Create a symbolic link for LSB compliance
+			#	- Additionally:
+			#		- For x86_64: Create a compatibility symbolic link 
+			#			required for proper operation of the dynamic library loader
+			case $(uname -m) in
+				i?86)
+					ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
+					;;
+				x86_64)
+					ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64
+					ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64/ld-lsb-x86-64.so.3
+					;;
+			esac
+
+			# 2. Apply patch to make programs store their runtime data in the FHS-compliant locations
+			#	- Some of the Glibc programs use the non-FHS compliant /var/db directory to store their runtime data.
+			patch -Np1 -i ../glibc-2.34-fhs-1.patch
+
+			# 3. Glibc documentation recommends building Glibc in a dedicated build directory
+			mkdir -v build
+			cd build
+
+			# 4. Ensure that the ldconfig and sln utilities are installed into /usr/sbin
+			echo "rootsbindir=/usr/sbin" > configparams
+
+			# 5. Prepare Glibc for compilation
+			"""
+			Options: 
+				--host=$LFS_TGT, --build=$(../scripts/config.guess):
+					- The combined effect of these switches is that
+					- Glibc's build system configures itself to be cross-compiled,
+					- using the cross-linker and cross-compiler in $LFS/tools
+				--enable-kernel=3.2
+					- This tells Glibc to compile the library with support for 3.2 and
+						later Linux kernels.
+					- Workarounds for older kernels are not enabled.
+				--with-headers=$LFS/usr/include
+					- This tells Glibc to compile itself against the headers recently installed to
+						the $LFS/usr/include directory,
+						so that it knows exactly what features the kernel has and
+						can optimize itself accordingly.
+				libc_cv_slibdir=/usr/lib
+					- This ensures that the library is installed in /usr/lib instead of the default /lib64 on 64-bit machines
+
+			Notes:
+				- The following warning might appear
+					```
+					configure: WARNING:
+					*** These auxiliary programs are missing or
+					*** incompatible versions: msgfmt
+					*** some features will be disabled.
+					*** Check the INSTALL file for required versions.
+					```
+					- The missing or incompatible msgfmt program is generally harmless
+						- The msgfmt (Message format) program is part of the Gettext package
+						- Which the host distribution should provide
+				- There have been reports that this package may fail when building as a "parallel make"
+					- If this occurs, rerun the make command with a "-j1" option
+			"""
+			../configure 					\
+				--prefix=/usr				\
+				--host=$LFS_TGT				\
+				--build=$(../scripts/config.guess)	\
+				--enable-kernel=3.2			\
+				--with-headers=$LFS/usr/include		\
+				libc_cv_slibdir=/usr/lib
+
+			# 6. Compile the package
+			make
+
+			# 7. Install the package
+			"""
+			Options:
+				DESTDIR=$LFS
+					- The DESTDIR make variable is used by almost all packages
+						- To define the location where the package should be installed.
+					- If it is not set, it defaults to the root (/) directory
+					- Here we specify that the package be installed in $LFS
+						- Which will become the root after "Entering the Chroot Environment" 
+			"""
+			make DESTDIR=$LFS install
+
+			# 8. Fix hardcoded path to the executable loader in ldd script
+			sed '/RTLDLIST=/s@/usr@@g' -i $LFS/usr/bin/ldd
+
+			# 9. (OPTIONAL) Caution: Basic Functions Validation
+			"""
+			- At this point, it is imperative to stop and ensure that the basic functions
+				> Compiling 
+				> Linking
+			- of the new toolchain are working as expected.
+			"""
+			- To perform a sanity check:
+				"""
+				- If everything is working correctly, there should be no errors
+				- and the output of the last command will be of the form:
+					[Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+
+				- If the output is not shown as above OR there was no output at all
+					- something is wrong
+					- Investigate & retrace the steps to find out where the problem is and correct it
+					- This issue must be resolved before continuing on
+
+				- Building packages in the next chapter will serve as an additional check that the toolchain has been built properly
+					- if some package, especially binutils-pass2 or gcc-pass2, fails to build: It is an indication that something has gone wrong 
+						- with the previous Binutils, GCC or Glibc installations
+
+				- Note:
+					- For 32-bit machines: The interpreter name will be /lib/ld-linux.so.2
+				"""
+				echo 'int main(){}' > dummy.c
+				$LFS_TGT-gcc dummy.c
+				readelf -l a.out | grep '/ld-linux'
+
+			- Clean-up test files
+				rm -v dummy.c a.out
+
+			# 10. Finalize the installation of the limits.h header
+			# - Cross-toolchain is complete
+			$LFS/tools/libexec/gcc/$LFS_TGT/11.2.0/install-tools/mkheaders
+		5. Libstdc++ from GCC-11.2.0, Pass 1
+			"""
+			- Libstdc++ is the standard C++ library.
+				- It is needed to compile C++ code (part of GCC is written in C++)
+				- but we had to defer its installation when we built gcc-pass1 because it depends on glibc
+				- which was not yet available in the target directory
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.4 SBU
+				- Required Disk Space: 1.0 GB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Create seperate build directory for libstdc++ and enter it
+			mkdir -v build
+			cd build
+
+			# 2. Prepare libstdc++ for compilation
+			"""
+			Options:
+				--host=...
+					- Specifies that the cross-compiler we have just built
+						should be used instead of the one in /usr/bin
+				--disable-libstdcxx-pch
+					- This switch prevents the installation of precompiled include files,
+						which are not needed at this stage.
+				--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/11.2.0
+					- This is the location where the C++ compiler should search for the standard include files.
+					- In a normal build, this information is automatically passed to the libstdc++ [configure] options from the top level directory.
+					- In our case, this information must be explicitly given
+			"""
+			../libstdc++-v3/configure		\
+				--host=$LFS_TGT			\
+				--build=$(../config.guess)	\
+				--prefix=/usr			\
+				--disable-multilib		\
+				--disable-nls			\
+				--disable-libstdcxx-pch		\
+				--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/11.2.0
+
+			# 3. Compile libstdc++
+			make
+
+			# 4. Install the library
+			make DESTDIR=$LFS install
+	- Cross Compile Temporary Tools
+		1. M4-1.4.19
+			"""
+			- The M4 package contains a macro processor
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 32 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare M4 for compilation
+			./configure					\ 
+				--prefix=/usr				\
+				--host=$LFS_TGT				\
+				--build=$(build-aux/config.guess)
+
+			# 2. Compile package
+			make
+			
+			# 3. Install package
+			make DESTDIR=$LFS install
+		2. Ncurses-6.2
+			"""
+			- The Ncurses package contains libraries for terminal-independent handling of character screens.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.7 SBU
+				- Required Disk Space: 48 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Ensure that [gawk] is found first during configuration
+			sed -i s/mawk// configure
+
+			# 2. Build "tic" program on the build host
+			mkdir build
+			pushd build
+				../configure
+				make -C include
+				make -C progs tic
+			popd
+
+			# 3. Prepare Ncurses for compilation
+			"""
+			Options:
+				--with-manpage-format=normal:
+					- This prevents Ncurses installing compressed manual pages,
+						- which may happen if the host distribution itself has compressed manual pages
+				--without-ada:
+					- This ensures that Ncurses does not build support for the Ada compiler
+						- Which may be present on the host but will not be available once we enter the chroot environment.
+				--enable-widec:
+					- This switch causes wide-character libraries
+						i.e.
+							> libncursesw.so.6.2
+						- To be built instead of normal ones
+						i.e.
+							> libncurses.so.6.2.
+					- These wide-character libraries are usable in both multibyte and traditional 8-bit locales,
+						- while normal libraries work properly only in 8-bit locales.
+					- Wide-character and normal libraries are source-compatible, but not binary-compatible
+				--without-normal:
+					- This switch disables building and installing most static libraries
+			"""
+			./configure				\
+				--prefix=/usr			\
+				--host=$LFS_TGT			\
+				--build=$(./config.guess)	\
+				--mandir=/usr/share/man		\
+				--with-manpage-format=normal	\
+				--with-shared			\
+				--without-debug			\
+				--without-ada			\
+				--without-normal		\
+				--enable-widec
+
+			# 4. Compile package
+			make
+
+			# 5. Install package
+			"""
+			Options:
+				TIC_PATH=$(pwd)/build/progs/tic:
+					- We need to pass the path of the just-built [tic] able to run on the building machine,
+						- so that the terminal database can be created without errors
+				echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
+					- The libncurses.so library is needed by afew packages that will be built soon.
+					- We create this small linker script, as this is what is done in [Installing Basic System Software]
+			"""
+			make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install
+			echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
+		3. Bash-5.1.8
+			"""
+			- The Bash package contains the Bourne-Again SHell.
+			- Compilation Specifications:
+				- Appropriate build time: 0.4 SBU
+				- Required Disk Space: 64 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Bash for compilation
+			"""
+			Options:
+				--without-bash-malloc:
+					- This option turns off the use of Bash's memory allocation (malloc) function
+						- Which is known to cause segmentation faults.
+					- By turning this option off, Bash will use the malloc functions from Glibc 
+						- which are more stable
+			"""
+			./configure				\
+				--prefix=/usr			\
+				--build=$(support/config.guess)	\
+				--host=$LFS_TGT			\
+				--without-bash-malloc
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+
+			# 4. Make a link for the programs that use sh for a shell
+			ln -sv bash $LFS/bin/sh
+		4. Coreutils-8.32
+			"""
+			- The Coreutils package contains utilities for showing and setting the basic system characteristics.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.6 SBU
+				- Required Disk Space: 151 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Coreutils for compilation
+			"""
+			Options:
+				--enable-install-program=hostname
+					- This enables the [hostname] binary to be built and installed
+					- It is disabled by default but is required by the Perl test suite
+			"""
+			./configure					\
+				--prefix=/usr				\
+				--host=$LFS_TGT				\
+				--build=$(build-aux/config.guess)	\
+				--enable-install-program=hostname	\
+				--enable-no-install-program=kill,uptime
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+
+			# 4. Move programs to their final expected locations
+			# - Although this is not necessary in this temporary environment
+			# - We must do so because some programs hardcodes executable locations
+			mv -v $LFS/usr/bin/chroot		$LFS/usr/sbin
+			mkdir -pv $LFS/usr/share/man/man8
+			mv -v $LFS/usr/share/man/man1/chroot.1	$LFS/usr/share/man/man8/chroot.8
+			sed -i 's/"1"/"8"/'			$LFS/usr/share/man/man8/chroot.8
+		5. Diffutils-3.8
+			"""
+			- The Diffutils package contains programs that show the differences between files or directories.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 28 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Diffutils for compilation
+			./configure --prefix=/usr --host=$LFS_TGT
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		6. File-5.40
+			"""
+			- The File package contains a utility for determining the type of a given file or files
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 31 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Build file command
+			"""
+			- The file command on the build host need to be the same version as the one we are building
+				- In order to create the signature file
+
+			Options:
+				--disable-*
+					- The configuration script attempts to use some packages from the host distribution if the corresponding library files exist
+					- It may cause compilation failure if a library file exists, but the corresponding header files do not
+					- These options prevent using these unneeded capabilities from the host.
+			"""
+			mkdir build
+			pushd build
+				../configure			\ 
+					--disable-bzlib		\
+					--disable-libseccomp	\
+					--disable-xzlib		\
+					--disable-zlib
+				make
+			popd
+
+			# 2. Prepare file for compilation
+			./configure		\
+				--prefix=/usr	\
+				--host=$LFS_TGT	\
+				--build=$(./config.guess)
+
+			# 3. Compile package
+			make FILE_COMPILE=$(pwd)/build/src/file
+
+			# 4. Install package
+			make DESTDIR=$LFS install
+		7. Findutils-4.8.0
+			"""
+			- The Findutils package contains programs to find files. 
+				- These programs are provided to recursively search through a directory tree and 
+					> to create, 
+					> maintain, and 
+					> search a database (often faster than the recursive find, but is unreliable if the database has not been recently updated).
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 40 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Findutils for compilation
+			./configure				\
+				--prefix=/usr			\
+				--localstatedir=/var/lib/locate	\
+				--host=$LFS_TGT			\
+				--build=$(build-aux/config.guess)
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		8. Gawk-5.1.0
+			"""
+			- The Gawk package contains programs for manipulating text files.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 43 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Ensure some unneeded files are not installed
+			sed -i 's/extras//' Makefile.in
+
+			# 2. Prepare Gawk for compilation
+			./configure		\
+				--prefix=/usr	\
+				--host=$LFS_TGT	\
+				--build=$(./config.guess)
+
+			# 3. Compile package
+			make
+
+			# 4. Install package
+			make DESTDIR=$LFS install
+		9. Grep-3.7
+			"""
+			- The Grep package contains programs for searching through the contents of files.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 25 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Grep for compilation
+			./configure		\
+				--prefix=/usr	\
+				--host=$LFS_TGT
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		10. Gzip-1.10
+			"""
+			- The Gzip package contains programs for compressing and decompressing files.
+			- Compilation Specifications:
+				- Appropriate build time: 0.1 SBU
+				- Required Disk Space: 10 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Gzip for compilation
+			./configure		\
+				--prefix=/usr	\
+				--host=$LFS_TGT
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		11. Make-4.3
+			"""
+			- The Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
+			- Compilation Specifications:
+				- Appropriate build time: 0.1 SBU
+				- Required Disk Space: 15 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Make for compilation
+			"""
+			Options:
+				--without-guile
+					- Although we are cross-compiling, configure tries to use guile from the build host 
+						if it finds it.
+					- This will make the compilation fail, so this switch prevents using it.
+			"""
+			./configure			\
+				--prefix=/usr		\
+				--without-guile		\
+				--host=$LFS_TGT		\
+				--build=$(build-aux/config.guess)
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		12. Patch-2.7.6
+			"""
+			- The Patch package contains a program for modifying or creating files by applying a “patch” file typically created by the diff program.
+			- Compilation Specifications:
+				- Appropriate build time: 0.1 SBU
+				- Required Disk Space: 12 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Patch for compilation
+			./configure		\
+				--prefix=/usr	\
+				--host=$LFS_TGT	\
+				--build=$(build-aux/config.guess)
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		13. Sed-4.8
+			"""
+			- The Sed package contains a stream editor.
+			- Compilation Specifications:
+				- Appropriate build time: 0.1 SBU
+				- Required Disk Space: 20 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Sed for compilation
+			./configure		\
+				--prefix=/usr	\
+				--host=$LFS_TGT
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		14. Tar-1.34
+			"""
+			- The Tar package provides the ability to create tar archives as well as 
+				- perform various other kinds of archive manipulation. 
+			- Tar can be used on previously created archives to 
+				> extract files, 
+				> to store additional files, or 
+				> to update or list files which were already stored.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 38 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Tar for compilation
+			./configure		\
+				--prefix=/usr	\
+				--host=$LFS_TGT	\
+				--build=$(build-aux/config.guess)
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		15. Xz-5.2.5
+			"""
+			- The Xz package contains programs for compressing and decompressing files. 
+			- It provides capabilities for the lzma and the newer xz compression formats. 
+			- Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
+			
+			- Compilation Specifications:
+				- Appropriate build time: 0.1 SBU
+				- Required Disk Space: 15 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Xz for compilation
+			./configure					\
+				--prefix=/usr				\
+				--host=$LFS_TGT 			\
+				--build=$(build-aux/config.guess)	\
+				--disable-static			\
+				--docdir=/usr/share/doc/xz-5.2.5
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make DESTDIR=$LFS install
+		16. Binutils-2.37 - Pass 2
+			"""
+			- The Binutils package contains a linker, an assembler, and other tools for handling object files.
+
+			- Compilation Specifications:
+				- Appropriate build time: 1.3 SBU
+				- Required Disk Space: 505 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Create a seperate build directory again
+			mkdir -v build
+			cd build
+
+			# 2. Prepare Binutils for compilation
+			"""
+			Options:
+				--enable-shared
+					- Builds libbfd as a shared library
+
+				--enable-64-bit-bfd
+					- Enabled 64-bit support (on hosts with narrower word sizes).
+					- May not be needed on 64-bit systems, but does no harm.
+			"""
+			./configure				\
+				--prefix=/usr			\
+				--build=$(../config.guess)	\
+				--host=$LFS_TGT			\
+				--disable-nls			\
+				--enable-shared			\
+				--disable-werror		\
+				--enable-64-bit-bfd
+
+			# 3. Compile package
+			make
+
+			# 4. Install package
+			make DESTDIR=$LFS install
+
+			# 5. Workaround causing libctf.so to link against zlib from the host distribution
+			install -vm755 libctf/.libs/libctf.so.0.0.0 $LFS/usr/lib
+		17. GCC-11.2.0 - Pass 2
+			"""
+			- The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
+
+			- Compilation Specifications:
+				- Appropriate build time: 12 SBU
+				- Required Disk Space: 3.3 GB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Unpack the tarballs and move them into the required directory names
+			# - As in the first build of GCC
+			#	- the GMP, MPFR and MPC packages are required
+			tar -xvf ../mpfr-4.1.0.tar.xz
+			mv -v mpfr-4.1.0 mpfr
+			tar -xvf ../gmp-6.2.1.tar.xz
+			mv -v gmp-6.2.1 gmp
+			tar -xvf ../mpc-1.2.1.tar.gz
+			mv -v mpc-1.2.1 mpc
+
+			# 2. (OPTIONAL) If building on x86_64 architecture,
+			# - Change the default directory name for 64-bit libraries to "lib"
+			case $(uname -m) in
+				x86_64)
+					sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
+					;;
+			esac
+
+			# 3. Create a seperate build directory again
+			mkdir -v build
+			cd build
+
+			# 4. Create a symlink that allows glibcc to be built with POSIX threads support
+			mkdir -pv $LFS_TGT/libgcc
+			ln -s ../../../libgcc/gthr-posix.h $LFS_TGT/libgcc/gthr-default.h
+
+			# NOTE:
+			#	- Before starting to build GCC, remember to unset any environment variables
+			#		- That override the default optimization flags
+
+			# 5. Prepare GCC for compilation
+			"""
+			Options:
+				-with-build-sysroot=$LFS
+					- Normally, using --host ensures that a cross-compiler is used for building GCC, 
+						- and that compiler knows that it has to look for headers and libraries in $LFS. 
+					- But the build system of GCC uses other tools, 
+						- which are not aware of this location. 
+					- This switch is needed to have them find the needed files in $LFS, 
+						- and not on the host.
+
+				--enable-initfini-array
+					- This option is automatically enabled when building a native compiler with a native compiler on x86. 
+					- But here, we build with a cross compiler, 
+						- so we need to explicitly set this option.
+			"""
+			../configure                                       \
+    				--build=$(../config.guess)                 \
+    				--host=$LFS_TGT                            \
+    				--prefix=/usr                              \
+    				CC_FOR_TARGET=$LFS_TGT-gcc                 \
+    				--with-build-sysroot=$LFS                  \
+    				--enable-initfini-array                    \
+    				--disable-nls                              \
+    				--disable-multilib                         \
+    				--disable-decimal-float                    \
+    				--disable-libatomic                        \
+    				--disable-libgomp                          \
+    				--disable-libquadmath                      \
+    				--disable-libssp                           \
+    				--disable-libvtv                           \
+    				--disable-libstdcxx                        \
+    				--enable-languages=c,c++
+
+			# 6. Compile package
+			make
+
+			# 7. Install package
+			make DESTDIR=$LFS install
+
+			# 8. Create a utility symlink
+			# - Many programs and scripts run cc instead of gcc
+			#	- Which is used to keep programs generic and therefore,
+			#	- usable on all kinds of UNIX systems where the GNU C compiler is not always installed.
+			# - Running cc leaves the system administrator free to decide which C compiler to install
+			ln -sv gcc $LFS/usr/bin/cc
+	- Enter Chroot and Build Additional Temporary Tools
+		```
+		- The commands in the remainder of the guide must be performed while 
+			logged in as user [root] and no longer as user [lfs]
+		- Double check that $LFS is set in root's environment
+
+		[Resources]
+		[References]
+			- https://linuxfromscratch.org/lfs/view/stable/chapter07/changingowner.html
+		```
+		1. Changing Ownership
+			"""
+			- Currently The whole directory hierarchy in $LFS is owned by the user [lfs]
+				- A user that exists only on the host system
+			- If the directories and files under $LFS are kept as they are
+				- They will be owned by a user ID without a corresponding account
+				- This is dangerous because a user account created later could get this same user ID and
+					would own all files under $LFS
+				- Thus, exposing these files to potential malicious manipulation
+			Notes: 
+				- To specify multiple files in the same directory: 
+					/path/to/files/{file-1,file-2...,file-n}
+			Syntax: chown -R [username]:[group] [files]
+			"""
+			# Change the ownership of the $LFS/* directories to user [root]
+			chown -R root:root $LFS/{usr,lib,var,etc,bin,sbin,tools}
+			case $(uname -m) in
+				x86_64)
+					chown -R root:root $LFS/lib64
+					;;
+			esac
+		2. Preparing Virtual Kernel File Systems
+			"""
+			- Various file systems exported by the kernel are used to communicate to and from the kernel itself.
+			- These file systems are virtual in that no disk space is used for them.
+			- The contents of the file systems reside in memory
+
+			Syntax:
+				Make Nodes: mknod -m [permission] [node-path] 
+			"""
+			# 1. Create Mount Directories
+			# - Creating directories that the file systems will be mounted to
+			mkdir -pv $LFS/{dev,proc,sys,run}
+
+			# 2. Create Initial Device Nodes
+			"""
+			- When the kernel boots the system
+				- It requires the presence of a few device nodes
+					- In particular: The [console] and [null] devices
+			- The device nodes must be created on the hard disk
+				- so that they are available before the kernel populates /dev and
+				- additionally when Linux is started with init=/bin/bash
+			"""
+			mknod -m 600 $LFS/dev/console c 5 1
+			mknod -m 666 $LFS/dev/null c 1 3
+
+			# 3. Mounting and Populating /dev
+			"""
+			- The recommended method of populating the /dev directory with devices
+				- mount a virtual filesystem (i.e. tmpfs) on the /dev directory
+				- allow the devices to be created dynamically on that virtual filesystem as they are detected or accessed
+
+			- Device creation is generally done during the boot process by Udev
+			- As this new system does not yet have Udev, and has not yet been booted
+				- It is necessary to mount and populate /dev manually
+				- by Bind mounting the host system's /dev directory
+					- A bind mount is a special type of mount that allows you to create a mirror of a directory or
+						mount point to some other location
+			"""
+			# Bind mounting the host system's /dev directory
+			mount -v --bind /dev $LFS/dev
+
+			# 4. Mounting Virtual Kernel File Systems
+			# Mount remaining virtual kernel filesystems
+			mount -v --bind /dev/pts $LFS/dev/pts
+			mount -vt proc proc $LFS/proc
+			mount -vt sysfs sysfs $LFS/sys
+			mount -vt tmpfs tmpfs $LFS/run
+
+			# 5. (OPTIONAL) 
+			# In some host systems, /dev/shm is a symbolic link to /run/shm
+			# - The /run tmpfs was mounted above so in this case, only a directory needs to be created
+			if [ -h $LFS/dev/shm ]; then
+				mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+			fi
+		3. Entering the Chroot Environment
+			"""
+			- Now that all the packages which are required to build the rest of the needed tools are on the system
+			- Time to enter the chroot environment to finish installing the remaining temporary tools
+			- This environment will be in use also for installing the final system
+			"""
+
+			# 1. Enter the environment
+			# - Enter as user root
+			# - At the moment, populated with only the temporary tools
+			"""
+			Options: 
+				/usr/bin/env -i:
+					- Clear all variables of the chroot environment
+					- After this, only the HOME, TERM, PS1 and PATH variables are set again
+				TERM=$TERM:
+					- The primary terminal
+					- set the TERM variable inside chroot to the same value as ouside chroot
+					- This variable is needed for programs like [vim] and [less] to operate properly
+				PS1:
+					- The shell's main prompt text
+				PATH:
+					- The terminal's recognized environment path variables
+				/bin/bash --login +h:
+					- Switch off hashing			
+			Notes:
+				- If other variables are desired 
+					- i.e. CFLAGS or CXXFLAGS
+					- This is a good place to set them again
+			"""
+			chroot "$LFS" in /usr/bin/env -i 	\
+				HOME=/root			\
+				TERM="$TERM"			\
+				PS1='(lfs chroot) \u:\w\$'	\
+				PATH=/usr/bin:/usr/sbin		\
+				/bin/bash --login +h
+
+			# 2. Notes and Info
+			"""
+				- From this point on, there is no need to use the LFS variable anymore because
+					- All work will be restricted to the LFS file system
+					- This is because the Bash shell is told that $LFS is now the root (/) directory
+
+				- Notice that /tools/bin is not in the PATH
+					- This means that the cross toolchain will no longer be used in the chroot environment
+					- This occurs when the shell does not "remember" the locations of executed binaries
+						- for this reason, hashing is switched off by passing the +h option to bash
+
+				- The bash prompt will say "I have no name!"
+					- This is because the /etc/passwd file has not been created yet
+			"""
+		4. Creating Directories
+			"""
+			- Create full structure of the LFS file system
+			"""
+
+			# 1. Create root-level directories
+			# - Not in the limited set required in the previous chapters
+			mkdir -pv /{boot,home,mnt,opt,srv}
+
+			# 2. Create below root-level subdirectories
+			"""
+			- Create the required set of subdirectories below the root-level
+
+			Notes:
+				- Directories are, by default, created with permission mode 755, 
+					but this is not desirable for all directories. 
+				- In the commands, two changes are made—
+					one to the home directory of user root, 
+					and another to the directories for temporary files.
+
+				- The first mode change ensures that not just anybody can enter the /root directory—
+					- the same as a normal user would do with his or her home directory. 
+				- The second mode change makes sure that any user can write to the /tmp and /var/tmp directories, 
+					- but cannot remove another user's files from them. 
+				- The latter is prohibited by the so-called “sticky bit,” the highest bit (1) in the 1777 bit mask.
+			
+				- Directory default permission: 755
+			"""
+			mkdir -pv /etc/{opt,sysconfig}
+			mkdir -pv /lib/firmware
+			mkdir -pv /media/{floppy,cdrom}
+			mkdir -pv /usr/{,local/}{include,src}
+			mkdir -pv /usr/local/{bin,lib,sbin}
+			mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man}
+			mkdir -pv /usr/{,local/}share/{misc,terminfo,zoneinfo}
+			mkdir -pv /usr/{,local/}share/man/man{1..8}
+			mkdir -pv /var/{cache,local,log,mail,opt,spool}
+			mkdir -pv /var/lib/{color,misc,locate}
+
+			ln -sfv /run /var/run
+			ln -sfv /run/lock /var/lock
+
+			install -dv -m 0750 /root
+			install -dv -m 1777 /tmp /var/tmp
+
+			# 3. FHS Compliance Note
+			# The directory tree is based on the Filesystem Hierarchy Standard (FHS) 
+			#	(available at https://refspecs.linuxfoundation.org/fhs.shtml). 
+			# The FHS also specifies the optional existence of some directories such as 
+			#	> /usr/local/games and 
+			#	> /usr/share/games. 
+			# We create only the directories that are needed. 
+			#	- However, feel free to create these directories
+		5. Creating Essential Files and Symlinks
+			# 1. Create symlink for mount tab
+			"""
+			- To satisfy utilities that expect the presence of /etc/mtab
+			- Historically, Linux maintains a list of the mounted file systems in the file /etc/mtab
+			- Modern kernels maintain this list internally and exposes it to the user via the /proc filesystem.
+			"""
+			ln -sv /proc/self/mounts /etc/mtab
+
+			# 2. Create basic /etc/hosts file
+			# - To be referenced in some test suites
+			# - Used for networking
+			# - In one of Perl's configuration files as well
+			cat > /etc/hosts << EOF
+			127.0.0.1  	localhost  $(hostname)
+			::1		localhost
+			EOF
+
+			# 3. Create /etc/passwd file
+			# - In order for user [root] to be able to login and
+			# 	- for the name "root" to be recognized,
+			# - There must be relevant entries in the files
+			#	> /etc/passwd and 
+			#	> /etc/group
+			# - The actual password for root will be set later
+			cat > /etc/passwd << "EOF"
+			root:x:0:0:root:/root:/bin/bash
+			bin:x:1:1:bin:/dev/null:/bin/false
+			daemon:x:6:6:Daemon User:/dev/null:/bin/false
+			messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/bin/false
+			uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/bin/false
+			nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
+			EOF
+
+			# 4. Create /etc/group file
+			"""
+			- The created groups are not part of any standard—
+				- they are groups decided on in part by 
+					- the requirements of the Udev configuration in Chapter 9, 
+				- and in part by common convention employed by a number of existing Linux distributions. 
+			- In addition, some test suites rely on specific users or groups. 
+			- The Linux Standard Base (LSB, available at http://refspecs.linuxfoundation.org/lsb.shtml) only recommends that, 
+				- besides the group root with a Group ID (GID) of 0, 
+				- a group bin with a GID of 1 be present. 
+			- All other group names and GIDs can be chosen freely by the system administrator 
+				- since well-written programs do not depend on GID numbers, 
+				- but rather use the group's name.
+			"""
+			cat > /etc/group << "EOF"
+			root:x:0:
+			bin:x:1:daemon
+			sys:x:2:
+			kmem:x:3:
+			tape:x:4:
+			tty:x:5:
+			daemon:x:6:
+			floppy:x:7:
+			disk:x:8:
+			lp:x:9:
+			dialout:x:10:
+			audio:x:11:
+			video:x:12:
+			utmp:x:13:
+			usb:x:14:
+			cdrom:x:15:
+			adm:x:16:
+			messagebus:x:18:
+			input:x:24:
+			mail:x:34:
+			kvm:x:61:
+			uuidd:x:80:
+			wheel:x:97:
+			nogroup:x:99:
+			users:x:999:
+			EOF
+
+			# 5. Create regular user for testing
+			# - Some tests in [Installing Basic System Software] need a regular user
+			echo "tester:x:101:101::/home/tester:/bin/bash" >> /etc/passwd
+			echo "tester:x:101:" >> /etc/group
+			install -o tester -d /home/tester
+
+			# 6. Start a new shell
+			"""
+			- To remove the "I have no name!" prompt
+			- Since the /etc/passwd and /etc/group files have been created
+				- User name and group name resolution will now work
+
+			Options:
+				+h:
+					- This tells bash to not use its internal path hashing
+					- Without this directive, bash would remember the path to binaries it has executed
+					- To ensure the use of the newly compiled binaries as soon as they are installed, 
+						- the +h directive will be used for the duration of this and the next chapter.
+			"""
+			exec /bin/bash --login +h
+
+			# 7. Initialize log files and give them proper permissions
+			"""
+			- The [login], [agetty], and [init] programs (and others)
+				- use a number of log files to record information such as
+					- who was logged in the system andwhen
+			- However, these programs will not write to the log files if they do not already exist 
+			
+			Files:
+				- The /var/log/wtmp file records all logins and logouts. 
+				- The /var/log/lastlog file records when each user last logged in. 
+				- The /var/log/faillog file records failed login attempts. 
+				- The /var/log/btmp file records the bad login attempts.
+			Notes:
+				- The /run/utmp file records the users that are currently logged in. This file is created dynamically in the boot scripts.
+			"""
+			touch /var/log/{btmp,lastlog,faillog,wtmp}
+			chgrp -v utmp /var/log/lastlog
+			chmod -v 664  /var/log/lastlog
+			chmod -v 600  /var/log/btmp
+		6. Libstdc++ from GCC-11.2.0, Pass 2
+			"""
+			- When building gcc-pass2 we had to defer the installation of the C++ standard library 
+				- because no suitable compiler was available to compile it. 
+			- We could not use the compiler built in that section 
+				- because it is a native compiler and should not be used outside of chroot and risks polluting the libraries with some host components.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.8 SBU
+				- Required Disk Space: 1.1 GB
+
+			- Notes:
+				- Libstdc++ is part of the GCC sources
+				- You should first unpack the GCC tarball and change to the gcc-11.2.0 directory
+
+			- Related:
+			"""
+
+			# 1. Create symlink
+			# - Create a link which exists when building libstdc++ in the gcc tree
+			ln -s gthr-posix.h libgcc/gthr-default.h
+
+			# 2. Create seperate build directory
+			# - Create a seperate build directory for libstdc++ and enter it
+			mkdir -v build
+			cd build
+	
+			# 3. Prepare libstdc++ for compilation
+			"""
+			Options:
+				CXXFLAGS="-g -O2 -D_GNU_SOURCE":
+					- These flags are passed by the top level Makefile when doing a full build of GCC.
+
+				--host=$(uname -m)-lfs-linux-gnu
+					- We have to mimic what would happen if this package were built as part of a full compiler build. 
+					- This switch would be passed to configure by GCC's build machinery.
+
+				--disable-libstdcxx-pch
+					- This switch prevents the installation of precompiled include files, 
+					- which are not needed at this stage.
+			"""
+			../libstdc++-v3/configure			\
+				CXXFLAGS="-g -O2 -D_GNU_SOURCE"		\
+				--prefix=/usr				\
+				--disable-multilib			\
+				--disable-nls				\
+				--host=$(uname -m)-lfs-linux-gnu	\
+				--disable-libstdcxx-pch
+
+			# 4. Compile package
+			make
+
+			# 5. Install package
+			make install
+		7. Gettext-0.21
+			"""
+			- The Gettext package contains utilities for internationalization and localization. 
+			- These allow programs to be compiled with NLS (Native Language Support), 
+				- enabling them to output messages in the user's native language.
+
+			- Compilation Specifications:
+				- Appropriate build time: 1.8 SBU
+				- Required Disk Space: 280 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Gettext for compilation
+			"""
+			- For our temporary set of tools, we only need to install three programs from Gettext.
+			Options:
+				--disable-shared
+					- We do not need to install any of the shared Gettext libraries at this time, 
+					- therefore there is no need to build them.
+			"""
+			./configure --disable-shared
+
+			# 2. Compile package
+			make
+
+			# 3. Install the msgfmt, msgmerge and xgettext programs
+			cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /usr/bin
+		8. Bison-3.7.6
+			"""
+			- The Bison package contains a parser generator.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.3 SBU
+				- Required Disk Space: 50 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Bison for compilation
+			"""
+			Options:
+				--docdir=/usr/share/doc/bison-3.7.6
+					- This tells the build system to install bison documentation into a versioned directory.
+			"""
+			./configure					\
+				--prefix=/usr				\
+				--docdir=/usr/share/doc/bison-3.7.6
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make install
+		9. Perl-5.34.0
+			"""
+			- The Perl package contains the Practical Extraction and Report Language.
+
+			- Compilation Specifications:
+				- Appropriate build time: 1.7 SBU
+				- Required Disk Space: 272 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Prepare Perl for compilation
+			"""
+			Options: 
+				-des
+					- This is a combination of three options: 
+						-d uses defaults for all items; 
+						-e ensures completion of all tasks; 
+						-s silences non-essential output.
+			"""
+			sh Configure -des                                   	\
+             			-Dprefix=/usr                               	\
+             			-Dvendorprefix=/usr                         	\
+             			-Dprivlib=/usr/lib/perl5/5.34/core_perl     	\
+             			-Darchlib=/usr/lib/perl5/5.34/core_perl     	\
+             			-Dsitelib=/usr/lib/perl5/5.34/site_perl     	\
+             			-Dsitearch=/usr/lib/perl5/5.34/site_perl    	\
+             			-Dvendorlib=/usr/lib/perl5/5.34/vendor_perl 	\
+             			-Dvendorarch=/usr/lib/perl5/5.34/vendor_perl
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make install
+		10. Python-3.9.6
+			"""
+			- The Python 3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
+
+			- Compilation Specifications:
+				- Appropriate build time: 1.2 SBU
+				- Required Disk Space: 347 MB
+
+			- Notes:
+				- Note that at the time of this update, the latest version of Python is 3.10
+					- Please get the latest version of Python
+				- There are two package files whose name starts with “python”. 
+					- The one to extract from is Python-<version>.tar.xz (notice the uppercase first letter).
+				- Some Python 3 modules can't be built now because the dependencies are not installed yet. 
+					- The building system still attempts to build them however, 
+					- so the compilation of some files will fail and the compiler message may seem to indicate “fatal error”. 
+					- The message should be ignored. 
+						- Just make sure the toplevel make command has not failed. 
+						- The optional modules are not needed now and 
+						- they will be built in [Installing Basic System Software].
+			- Related:
+			"""
+			# 1. Prepare Python for compilation
+			"""
+			Options: 
+				--enable-shared
+					- This switch prevents installation of static libraries.
+
+				--without-ensurepip
+					- This switch disables the Python package installer, which is not needed at this stage.
+			"""
+			./configure				\
+					--prefix=/usr		\
+					--enable-shared		\
+					--without-ensurepip
+
+			# 2. Compile package
+			make
+
+			# 3. Install package
+			make install
+		11. Texinfo-6.8
+			"""
+			- The Texinfo package contains programs for reading, writing, and converting info pages.
+			- Compilation Specifications:
+				- Appropriate build time: 0.3 SBU
+				- Required Disk Space: 109 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Fix an issue buildingthe package with Glibc-2.34 or later
+			sed -e 's/__attribute_nonnull__/__nonnull/' \
+			    -i gnulib/lib/malloc/dynarray-skeleton.c
+
+			# 2. Prepare Texinfo for compilation
+			./configure --prefix=/usr
+
+			# 3. Compile package
+			make
+
+			# 4. Install package
+			make install
+		12. Util-linux-2.37.2
+			"""
+			- The Util-linux package contains miscellaneous utility programs.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.7 SBU
+				- Required Disk Space: 128 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Create /var/lib/hwclock directory
+			# - FHS recommends using the /var/lib/hwclock directory
+			#	- Instead of the usual /etc directory as the location for the adjtime file
+			mkdir -pv /var/lib/hwclock
+
+			# 2. Prepare Util-linux for compilation
+			"""
+			Options:
+				ADJTIME_PATH=/var/lib/hwclock/adjtime
+					- This sets the location of the file recording information about the hardware clock in accordance to the FHS. This is not stricly needed for this temporary tool, but it prevents creating a file at another location, which would not be overwritten or removed when building the final util-linux package.
+
+				--libdir=/usr/lib
+					- This switch ensures the .so symlinks targeting the shared library file in the same directory (/usr/lib) directly.
+
+				--disable-*
+					- These switches prevent warnings about building components that require packages not in LFS or not installed yet.
+
+				--without-python
+					- This switch disables using Python. It avoids trying to build unneeded bindings.
+
+				runstatedir=/run
+					- This switch sets the location of the socket used by uuidd and libuuid correctly.
+			"""
+			./configure 						\
+				ADJTIME_PATH=/var/lib/hwclock/adjtime    	\
+            			--libdir=/usr/lib    				\
+            			--docdir=/usr/share/doc/util-linux-2.37.2 	\
+            			--disable-chfn-chsh  				\
+            			--disable-login      				\
+            			--disable-nologin    				\
+            			--disable-su         				\
+            			--disable-setpriv    				\
+            			--disable-runuser    				\
+            			--disable-pylibmount 				\
+            			--disable-static     				\
+            			--without-python     				\
+            			runstatedir=/run
+
+			# 3. Compile package
+			make
+
+			# 4. Install package
+			make install
+		13. Cleaning up and Saving the Temporary System
+			# 1. Cleaning
+				# 1.1. Remove the currently installed documentation 
+					# to prevent them from ending up in the final system
+					# - and to save about 35MB
+					rm -rf /usr/share/{info,man,doc}/*
+				# 1.2. Remove libtool .la files	
+					# The libtool .la files are only useful when linking with static libraries
+					# - They are unneeded and potentially harmful when using dynamic shared libraries
+					#	- specially when using non-autotools build systems
+					find /usr/{lib,libexec} -name \*.la -delete
+
+				# 1.3. Delete /tools directory
+					# The current system size is now about 3GB
+					# However, the /tools directory is no longer needed
+					# It uses about 1GB of disk space
+					rm -rf /tools
+			
+			# 2. (OPTIONAL) Backup
+				"""
+				- Recommended
+				
+				Notes:
+					- All the remaining steps in this section are optional. 
+						- Nevertheless, as soon as you begin installing packages in Chapter [Install Basic System Software], 
+						- the temporary files will be overwritten. 
+						- So it may be a good idea to do a backup of the current system as described below.
+
+					- The following steps are performed from outside the chroot environment. 
+						- That means, you have to leave the chroot environment first before continuing. 
+						- The reason for that is to get access to file system locations outside of the chroot environment to store/read the backup archive which should not be placed within the $LFS hierarchy for safety reasons.
+				"""
+				# 2.1. Leave the chroot environment
+				exit
+
+				# NOTES
+				"""
+				# - At this point the essential programs and libraries have been created and your current system is in a good state. 
+				# Your system can now be backed up for later reuse. 
+				# In case of fatal failures in the subsequent chapters, 
+				# it often turns out that removing everything and starting over (more carefully) is the best option to recover. 
+				# Unfortunately, all the temporary files will be removed, too. 
+				#	- To avoid spending extra time to redo something which has been built successfully, 
+				#	- prepare a backup.
+				# - Make sure you have at least 1 GB free disk space (the source tarballs will be included in the backup archive) in the home directory of user root.
+				"""
+
+				# 2.2. Unmount the virtual file systems
+				# - Before making a backup, unmount the vfs
+				umount $LFS/dev/{/pts,}
+				umount $LFS/{sys,proc,run}
+
+				# 2.3. Create backup archive
+				# - Because the backup archive is compressed, it takes a relatively long time (over 10mins) even on a reasonably fast system
+				# - Also, ensure the LFS enviroment variable is set for the root user
+				# - Replace $HOME by a directory of your choice
+				#	- If you do not want to have the backup stored in root's home directory
+				cd $LFS
+				tar -cJpf $HOME/lfs-temp-tools-11.0.tar.xz .
+
+			# 3. (OPTIONAL) Restore
+				"""
+				- In case some mistakes have been made and you need to start over, you can use this backup to restore the system and save some recovery time. 
+				- Since the sources are located under $LFS, 
+					- they are included in the backup archive as well,
+				- so they do not need to be downloaded again. 
+				- After checking that $LFS is set properly, 
+					- restore the backup
+
+				Notes:
+					- The following commands are extremly dangerous. 
+						- If you run rm -rf ./* as the root user and 
+							- you do not change to the $LFS directory or the LFS environment variable is not set for the root user, 
+						- it will destroy your entire host system. 
+						- YOU ARE WARNED.
+
+					- If you left the chroot environment to create a backup or restart building using a restore, 
+						- remember to check that the virtual filesystems are still mounted (findmnt | grep $LFS). 
+						- If they are not mounted, 
+							- remount them now as described in Section “Preparing Virtual Kernel File Systems” and 
+							- re-enter the chroot environment (see Section “Entering the Chroot Environment”) 
+							- before continuing.
+				"""
+				# 3.1. Restore backup
+				# Warning: Ensure that you really want to do this as the files will be deleted
+				cd $LFS
+				rm -rf ./*
+				tar -xvpf $HOME/lfs-temp-tools-11.0.tar.xz				
+
+				# 3.2. Verify proper setup
+				# - Again, double check that the environment has been setup properly and continue building the rest of the system.
+
+Build LFS System
+```
+
+```
+	- Install Basic System Software
+		1. Package Management
+			"""
+			- A package manager 
+				- allows the tracking of installations easy, as well as to
+					- update, upgrade and remove packages, binary and library files
+				- will handle the installation of configuration files 
+
+			Options: 
+				ArchLinux: pacman	(sudo pacman {-s|-y|-u|-Ss|-Q|-Qq} <package-name>)
+				Debian: Aptitude	(sudo apt(-get) {install|update|upgrade|list} <package-name>)
+				Gentoo: Portage		(sudo emerge)
+			"""
+			- To be updated with various package managers
+		2. Man-pages-5.13
+			"""
+			The Man-pages package contains over 2,200 man pages.
+
+			- Compilation Specifications:
+				- Appropriate build time: < 0.1 SBU
+				- Required Disk Space: 33 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Install Man-pages
+			make prefix=/usr install
+		3. Iana-Etc-20210611
+			"""
+			The Iana-Etc package provides data for network services and protocols.
+
+			- Compilation Specifications:
+				- Appropriate build time: < 0.1 SBU
+				- Required Disk Space: 4.7 MB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Copy files into place
+			"""
+			Files:
+				- /etc/protocols
+					Describes the various DARPA Internet protocols that are available from the TCP/IP subsystem
+
+				- /etc/services
+					Provides a mapping between friendly textual names for internet services, and their underlying assigned port numbers and protocol types
+			"""
+			cp services protocols /etc
+		4. Glibc-2.34
+			"""
+			The Glibc package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
+
+			- Compilation Specifications:
+				- Appropriate build time: 21 SBU
+				- Required Disk Space: 2.4 GB
+
+			- Notes:
+
+			- Related:
+			
+			Table of Contents:
+				Installing Glibc : #1-#16
+				Configuring Glibc: #17
+
+			Files:
+				catchsegv: Can be used to create a stack trace when a program terminates with a segmentation fault
+				gencat: Generates message catalogues
+				getconf: Displays the system configuration values for file system specific variables
+				getent: Gets entries from an administrative database
+				iconv: Performs character set conversion
+				iconvconfig: Creates fastloading iconv module configuration files
+				ldconfig: Configures the dynamic linker runtime bindings
+				ldd: Reports which shared libraries are required by each given program or shared library
+				lddlibc4: Assists ldd with object files
+				locale: Prints various information about the current locale
+				localedef: Compiles locale specifications
+				makedb: Creates a simple database from textual input
+				mtrace: Reads and interprets a memory trace file and displays a summary in human-readable format
+				nscd: A daemon that provides a cache for the most common name service requests
+				pcprofiledump: Dump information generated by PC profiling
+				pldd: Lists dynamic shared objects used by running processes
+				sln: A statically linked ln program
+				sotruss: Traces shared library procedure calls of a specified command
+				sprof: Reads and displays shared object profiling data
+				tzselect: Asks the user about the location of the system and reports the corresponding time zone description
+				xtrace: Traces the execution of a program by printing the currently executed function
+				zdump: The time zone dumper
+				zic: The time zone compiler
+				ld-*.so: The helper program for shared library executables
+				libBrokenLocale: Used internally by Glibc as a gross hack to get broken programs (e.g., some Motif applications) running. See comments in glibc-2.34/locale/broken_cur_max.c for more information
+				libSegFault: The segmentation fault signal handler, used by catchsegv
+				libanl: An asynchronous name lookup library
+				libc: The main C library
+				libcrypt: The cryptography library
+				libdl: Dummy library containing no functions. Previously was the dynamic linking interface library, whose functions are now in libc
+				libg: Dummy library containing no functions. Previously was a runtime library for g++
+				libm: The mathematical library
+				libmcheck: Turns on memory allocation checking when linked to
+				libmemusage: Used by memusage to help collect information about the memory usage of a program
+				libnsl: The network services library, now deprecated
+				libnss: The Name Service Switch libraries, containing functions for resolving host names, user names, group names, aliases, services, protocols, etc.
+				libpcprofile: Can be preloaded to PC profile an executable
+				libpthread: Dummy library containing no functions. Previously contained functions providing most of the interfaces specified by the POSIX.1b Realtime Extension, now the functions are in libc
+				libresolv: Contains functions for creating, sending, and interpreting packets to the Internet domain name servers
+				librt: Contains functions providing most of the interfaces specified by the POSIX.1b Realtime Extension
+				libthread_db: Contains functions useful for building debuggers for multi-threaded programs
+				libutil: Dummy library containing no functions. Previously contained code for “standard” functions used in many different Unix utilities. These functions are now in libc
+			"""
+			# --- Installing Glibc
+			# 1. Fix a security problem identified upstream
+			sed -e '/NOTIFY_REMOVED)/s/)/ \&\& data.attr != NULL)/' \
+			    -i sysdeps/unix/sysv/linux/mq_notify.c
+
+			# 2. Apply patch
+			# - Some of the Glibc programs use the non-FHS compliant /var/db directory
+				- to store their runtime data
+			# - This makes such programs store their runtime data in the FHS-compliant locations
+			patch -Np1 -i ../glibc-2.34-fhs-1.patch
+
+			# 3. Build Glibc in a dedicated build directory
+			# - The Glibc documentation recommends building Glibc in a dedicated build directory
+			mkdir -v build
+			cd build
+
+			# 4. Ensure that the [ldconfig] and [sln] utilities are installed into /usr/sbin
+			echo "rootsbindir=/usr/sbin" > configparms
+
+			# 5. Prepare Glibc for compilation
+			"""
+			Options: 
+				--disable-werror
+					This option disables the -Werror option passed to GCC. This is necessary for running the test suite.
+
+				--enable-kernel=3.2
+					This option tells the build system that this glibc may be used with kernels as old as 3.2. This means generating workarounds in case a system call introduced in a later version cannot be used.
+
+				--enable-stack-protector=strong
+					This option increases system security by adding extra code to check for buffer overflows, such as stack smashing attacks.
+
+				--with-headers=/usr/include
+					This option tells the build system where to find the kernel API headers.
+
+				libc_cv_slibdir=/usr/lib
+					This variable sets the correct library for all systems. We do not want lib64 to be used.
+			"""
+			../configure 					\
+					--prefix=/usr           	\
+             				--disable-werror        	\
+             				--enable-kernel=3.2             \
+             				--enable-stack-protector=strong \
+             				--with-headers=/usr/include  	\
+             				libc_cv_slibdir=/usr/lib
+
+			# 6. Compile package
+			make
+
+			# NOTE:
+			#	- In this section, the test suite for Glibc is considered critical
+			#	- Do not skip it under any circumstances
+
+			# 7. Validate compilation
+			"""
+			- Generally afew tests do not pass
+			- The Glibc test suite is somewhat dependent on the host system
+			- A few failures out of over 4200 tests can generally be ignored.
+
+			:: Notes
+				- As of the time of this update (2021-November-10)
+					These test failures are usually safe to ignore:
+					- io/tst-lchmod is known to fail in the LFS chroot environment.
+					- misc/tst-ttyname is known to fail in the LFS chroot environment.
+			"""
+			make check
+
+			# 8. Create /etc/ld.so.conf
+			# - Though is a harmless message
+			# - The install stage of Glibc will complain about the absence of /etc/ld.so.conf
+			touch /etc
+
+			# 9. Fix generate Makefile
+			# - Fix the generated Makefile to skip an unneeded sanity check that fails in the LFS partial environment
+			sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
+
+			# 10. Install package
+			make install
+
+			# 11. Fix hardcoded path to the executable loader in ldd script
+			sed '/RTLDLIST=/s@/usr@@g' -i /usr/bin/ldd
+
+			# 12. Install the configuration file
+			cp -v ../nscd/nscd.conf /etc/nscd.conf 
+			# 13. Install the runtime directory for nscd
+			mkdir -pv /var/cache/nscd
+
+			# 14. Install the locales
+			"""
+			- Install the locales that can make the system respond in a different language
+			- None of the locales are required, but if some of them are missing, 
+				- The test suites of future packages would skip important testcases
+			- Individual locales can be installed using the localedef program
+				- E.g., 
+					> the first localedef command below combines the /usr/share/i18n/locales/cs_CZ charset-independent locale definition with the /usr/share/i18n/charmaps/UTF-8.gz charmap definition and 
+						appends the result to the /usr/lib/locale/locale-archive file.
+			- The following instructions will install the minimum set of locales necessary for the optimal coverage of tests:
+			"""
+			mkdir -pv /usr/lib/locale
+			localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true
+			localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
+			localedef -i de_DE -f ISO-8859-1 de_DE
+			localedef -i de_DE@euro -f ISO-8859-15 de_DE@euro
+			localedef -i de_DE -f UTF-8 de_DE.UTF-8
+			localedef -i el_GR -f ISO-8859-7 el_GR
+			localedef -i en_GB -f ISO-8859-1 en_GB
+			localedef -i en_GB -f UTF-8 en_GB.UTF-8
+			localedef -i en_HK -f ISO-8859-1 en_HK
+			localedef -i en_PH -f ISO-8859-1 en_PH
+			localedef -i en_US -f ISO-8859-1 en_US
+			localedef -i en_US -f UTF-8 en_US.UTF-8
+			localedef -i es_ES -f ISO-8859-15 es_ES@euro
+			localedef -i es_MX -f ISO-8859-1 es_MX
+			localedef -i fa_IR -f UTF-8 fa_IR
+			localedef -i fr_FR -f ISO-8859-1 fr_FR
+			localedef -i fr_FR@euro -f ISO-8859-15 fr_FR@euro
+			localedef -i fr_FR -f UTF-8 fr_FR.UTF-8
+			localedef -i is_IS -f ISO-8859-1 is_IS
+			localedef -i is_IS -f UTF-8 is_IS.UTF-8
+			localedef -i it_IT -f ISO-8859-1 it_IT
+			localedef -i it_IT -f ISO-8859-15 it_IT@euro
+			localedef -i it_IT -f UTF-8 it_IT.UTF-8
+			localedef -i ja_JP -f EUC-JP ja_JP
+			localedef -i ja_JP -f SHIFT_JIS ja_JP.SIJS 2> /dev/null || true
+			localedef -i ja_JP -f UTF-8 ja_JP.UTF-8
+			localedef -i nl_NL@euro -f ISO-8859-15 nl_NL@euro
+			localedef -i ru_RU -f KOI8-R ru_RU.KOI8-R
+			localedef -i ru_RU -f UTF-8 ru_RU.UTF-8
+			localedef -i se_NO -f UTF-8 se_NO.UTF-8
+			localedef -i ta_IN -f UTF-8 ta_IN.UTF-8
+			localedef -i tr_TR -f UTF-8 tr_TR.UTF-8
+			localedef -i zh_CN -f GB18030 zh_CN.GB18030
+			localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
+			localedef -i zh_TW -f UTF-8 zh_TW.UTF-8
+
+			# 15.1. Install locale for your own country, language and character set
+			"""
+			- In addition, install the locale for your own country, language and character set.
+			
+			Syntax: localedef -i [region-code] -f [encoding-format] [region-code.encoding-format]
+			"""
+			localedef -i en_SG -f UTF-8 en_SG.UTF-8
+
+			# 15.2. (OPTIONAL) Alternatively, install all locales listed in the glibc-2.34/localedata/SUPPORTED file (it includes every locale listed above and many more) at once with the following time-consuming command:
+			make localedata/install-locales
+
+			# 16. Create and install locales not listed in the glibc-2.34/localedata/SUPPORTED file
+			# - use the localedef command to create and install locales not listed in the glibc-2.34/localedata/SUPPORTED file when you need them.
+			# - For instance, the following two locales are needed for some tests later in this chapter
+			localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true
+			localedef -i ja_JP -f SHIFT_JIS ja_JP.SIJS 2> /dev/null || true
+			
+			# --- Configuring Glibc
+			# 17. Adding nsswitch.conf
+			# - The /etc/nsswitch.conf file needs to be created
+			#	- Because the Glibc defaults do not work well in a networked environment
+			cat > /etc/nsswitch.conf << "EOF"
+			# Begin /etc/nsswitch.conf
+
+			passwd: files
+			group: files
+			shadow: files
+
+			hosts: files dns
+			networks: files
+
+			protocols: files
+			services: files
+			ethers: files
+			rpc: files
+
+			# End /etc/nsswitch.conf
+			EOF
+
+			# 18. Adding time zone data
+			"""
+			- Install and setup the timezone data
+			Options: 
+				zic -L /dev/null ...
+					This creates posix time zones without any leap seconds. It is conventional to put these in both zoneinfo and zoneinfo/posix. It is necessary to put the POSIX time zones in zoneinfo, otherwise various test-suites will report errors. On an embedded system, where space is tight and you do not intend to ever update the time zones, you could save 1.9 MB by not using the posix directory, but some applications or test-suites might produce some failures.
+
+				zic -L leapseconds ...
+					This creates right time zones, including leap seconds. On an embedded system, where space is tight and you do not intend to ever update the time zones, or care about the correct time, you could save 1.9MB by omitting the right directory.
+
+				zic ... -p ...
+					This creates the posixrules file. We use New York because POSIX requires the daylight savings time rules to be in accordance with US rules.
+			"""
+			tar -xf ../../tzdata2021a.tar.gz
+
+			ZONEINFO=/usr/share/zoneinfo
+			mkdir -pv $ZONEINFO/{posix,right}
+
+			for tz in etcetera southamerica northamerica europe africa antarctica  \
+         			  asia australasia backward; do
+    			    zic -L /dev/null   -d $ZONEINFO       ${tz}
+    			    zic -L /dev/null   -d $ZONEINFO/posix ${tz}
+    			    zic -L leapseconds -d $ZONEINFO/right ${tz}
+			done
+
+			cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+			zic -d $ZONEINFO -p America/New_York
+			unset ZONEINFO
+
+			# 19. Determine local timezone
+			# After answering a few questions about the location, 
+			#	- the script will output the name of the time zone 
+			#	- e.g.
+			#		> America/Edmonton. 
+			# There are also some other possible time zones listed in /usr/share/zoneinfo such as Canada/Eastern or EST5EDT that are not identified by the script but can be used.
+			tzselect
+
+			# 20. Create /etc/localtime
+			"""
+			Syntax:
+				To list Regions: ls /usr/share/zoneinfo
+				To list City in Region: ls /usr/share/zoneinfo/[region]
+				To create timezone: ln -sfv /usr/share/zoneinfo/[region]/[city] /etc/localtime
+
+			Notes:
+				- Replace [region] with the name of the timezone region selected
+					- i.e. Asia, Canada, Eastern
+				- Replace [city] with the name of your country in the selected region
+					- i.e. Singapore, Canada, US
+			"""
+			ln -sfv /usr/share/zoneinfo/Asia/Singapore /etc/localtime
+
+			# 21. Create /etc/ld.so.conf
+			"""
+			- To Configure the Dynamic Loader
+
+			- By default, the dynamic loader (/lib/ld-linux.so.2) searches through /lib and /usr/lib for dynamic libraries that are needed by programs as they are run. 
+				- However, if there are libraries in directories other than /lib and /usr/lib, 
+					- these need to be added to the /etc/ld.so.conf file in order for the dynamic loader to find them. 
+				- Two directories that are commonly known to contain additional libraries are 
+					> /usr/local/lib and 
+					> /opt/lib, 
+				- so add those directories to the dynamic loader's search path.
+			"""	
+			cat > /etc/ld.so.conf << "EOF"
+			# Begin /etc/ld.so.conf
+			/usr/local/lib
+			/opt/lib
+			EOF
+
+			# 22. (OPTIONAL) Set dynamic loader - enable searching of directory and contents of files
+			"""
+			- If desired, the dynamic loader can also search a directory and include the contents of files found there. 
+			- Generally the files in this include directory are one line specifying the desired library path. 
+			"""
+			cat >> /etc/ld.so.conf << "EOF"
+			# Add an include directory
+			include /etc/ld.so.conf.d/*.conf
+			EOF
+
+			mkdir -pv /etc/ld.so.conf.d
+
+		5. Zlib-1.2.11
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time: < 0.1 SBU
+				- Required Disk Space: 5.0 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				libz: Contains compression and decompression functions used by some programs
+			"""
+			# 1. Prepare Zlib for compilation
+			./configure --prefix=/usr
+
+			# 2. Compile package
+			make
+
+			# 3. Test the result
+			make check
+
+			# 4. Install package
+			make install
+
+			# 5. Remove useless static library
+			rm -fv /usr/lib/libz.a
+		6. Bzip2-1.0.8
+			"""
+			- The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
+
+			- Compilation Specifications:
+				- Appropriate build time: < 0.1 SBU
+				- Required Disk Space: 7.2 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				bunzip2: Decompresses bzipped files
+				bzcat: Decompresses to standard output
+				bzcmp: Runs cmp on bzipped files
+				bzdiff: Runs diff on bzipped files
+				bzegrep: Runs egrep on bzipped files
+				bzfgrep: Runs fgrep on bzipped files
+				bzgrep: Runs grep on bzipped files
+				bzip2: Compresses files using the Burrows-Wheeler block sorting text compression algorithm with Huffman coding; the compression rate is better than that achieved by more conventional compressors using “Lempel-Ziv” algorithms, like gzip
+				bzip2recover: Tries to recover data from damaged bzipped files
+				bzless: Runs less on bzipped files
+				bzmore: Runs more on bzipped files
+				libbz2: The library implementing lossless, block-sorting data compression, using the Burrows-Wheeler algorithm
+			"""
+			# 1. Apply a patch that will install the documentation for this package
+			patch -Np1 -i ../bzip2-1.0.8-install_docs-1.patch
+
+			# 2. Ensure installation of symbolic links are relative
+			sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+
+			# 3. Ensure man pages are installed into the correct location
+			sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+			# 4. Prepare Bzip2 for compilation
+			"""
+			-f Makefile-libbz2_so
+				This will cause Bzip2 to be built using a different Makefile file, 
+					in this case the Makefile-libbz2_so file, 
+					which creates a dynamic libbz2.so library and links the Bzip2 utilities against it
+			"""
+			make -f Makefile-libbz2_so
+			make clean
+
+			# 5. Compile and test program
+			make
+			make check
+
+			# 6. Install program
+			make PREFIX=/usr install
+
+			# 7. Install shared library
+			cp -av libbz2.so.* /usr/lib
+			ln -sv libbz2.so.1.0.8 /usr/lib/libbz2.so
+
+			# 8. Install shared bzip2 binary into the /usr/bin directory
+			cp -v bzip2-shared /usr/bin/bzip2
+
+			# 9. Replace 2 copies of bzip2 with symlinks
+			for i in /usr/bin/{bzcat,bunzip2}; do
+				ln -sfv bzip2 $i
+			done
+
+			# 10. Remove a useless static library
+			rm -fv /usr/lib/libbz2.a
+		7. Xz-5.2.5
+			"""
+			- The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 15 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				lzcat: Decompresses to standard output
+				lzcmp: Runs cmp on LZMA compressed files
+				lzdiff: Runs diff on LZMA compressed files
+				lzegrep: Runs egrep on LZMA compressed files
+				lzfgrep: Runs fgrep on LZMA compressed files
+				lzgrep: Runs grep on LZMA compressed files
+				lzless: Runs less on LZMA compressed files
+				lzma: Compresses or decompresses files using the LZMA format
+				lzmadec: A small and fast decoder for LZMA compressed files
+				lzmainfo: Shows information stored in the LZMA compressed file header
+				lzmore: Runs more on LZMA compressed files
+				unlzma: Decompresses files using the LZMA format
+				unxz: Decompresses files using the XZ format
+				xz: Compresses or decompresses files using the XZ format
+				xzcat: Decompresses to standard output
+				xzcmp: Runs cmp on XZ compressed files
+				xzdec: A small and fast decoder for XZ compressed files
+				xzdiff: Runs diff on XZ compressed files
+				xzegrep: Runs egrep on XZ compressed files
+				xzfgrep: Runs fgrep on XZ compressed files
+				xzgrep: Runs grep on XZ compressed files
+				xzless: Runs less on XZ compressed files
+				xzmore: Runs more on XZ compressed files
+				liblzma: The library implementing lossless, block-sorting data compression, using the Lempel-Ziv-Markov chain algorithm
+			"""
+			# 1. Prepare Xz for compilation
+			./configure 				\
+					--prefix=/usr		\
+					--disable-static	\
+					--docdir=/usr/share/doc/xz-5.2.5
+
+			# 2. Compile package
+			make
+
+			# 3. Test the result
+			make check
+
+			# 4. Install package
+			make install
+		8. Zstd-1.5.0
+			"""
+			- Zstandard is a real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
+
+			- Compilation Specifications:
+				- Appropriate build time: 1.4 SBU
+				- Required Disk Space: 60 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				zstd: Compresses or decompresses files using the ZSTD format
+				zstdgrep: Runs grep on ZSTD compressed files
+				zstdless: Runs less on ZSTD compressed files
+				libzstd: The library implementing lossless data compression, using the ZSTD algorithm
+			"""
+			# 1. Compile package
+			make
+
+			# 2. Test result
+			# In the test output there are several places that indicate 'failed'. 
+			# These are expected and only 'FAIL' is an actual test failure. 
+			# There should be no test failures.
+			make check
+
+			# 3. Install package
+			make prefix=/usr install
+
+			# 4. Remove the static library
+			rm -v /usr/lib/libzstd.a
+		9. File-5.40
+			"""
+			- The File package contains a utility for determining the type of a given file or files.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.1 SBU
+				- Required Disk Space: 15 MB
+
+			- Notes:
+
+			- Related:
+			- Files:
+				file: Tries to classify each given file; it does this by performing several tests—file system tests, magic number tests, and language tests
+				libmagic: Contains routines for magic number recognition, used by the file program
+			"""
+			# 1. Prepare File for compilation
+			./configure --prefix=/usr
+
+			# 2. Compile package
+			make
+
+			# 3. Test result
+			make check
+
+			# 4. Install package
+			make install
+		10. Readline-8.1
+			"""
+			- The Readline package is a set of libraries that offers command-line editing and history capabilities.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.1 SBU
+				- Required Disk Space: 15 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				libhistory: Provides a consistent user interface for recalling lines of history
+				libreadline: Provides a set of commands for manipulating text entered in an interactive session of a program
+			"""
+			# 1. Fix linking bug in ldconfig
+			# - Reinstalling Readline will cause the old libraries to be moved to <libraryname>.old.
+			# while this is normally not a problem, in some cases it can trigger a linking bug in ldconfig.
+			sed -i '/MV.*old/d' Makefile.in
+			sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+			# 2. Prepare Readline for compilation
+			"""
+			Options:
+				--with-curses
+					This option tells Readline that it can find the termcap library functions in the curses library, rather than a separate termcap library. It allows generating a correct readline.pc file.
+			"""
+			./configure			\
+					--prefix=/usr	\
+					--with-curses	\
+					--docdir=/usr/share/doc/readline-8.1
+
+			# 3. Compile package
+			"""
+			Options:
+				SHLIB_LIBS="-lncursesw"
+					This option forces Readline to link against the libncursesw library.
+			"""
+			make SHLIB_LIBS="-lncursesw"
+
+			# 4. Install package
+			make SHLIB_LIBS="-lncursesw" install
+
+			# (OPTIONAL) 5. Install the documentation
+			install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.1
+		11. M4-1.4.19
+			"""
+			- The M4 package contains a macro processor.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.7 SBU
+				- Required Disk Space: 48 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				m4: Copies the given files while expanding the macros that they contain. These macros are either built-in or user-defined and can take any number of arguments. Besides performing macro expansion, m4 has built-in functions for including named files, running Unix commands, performing integer arithmetic, manipulating text, recursion, etc. The m4 program can be used either as a front-end to a compiler or as a macro processor in its own right
+			"""
+			# 1. Prepare M4 for compilation
+			./configure --prefix=/usr
+
+			# 2. Compile package
+			make
+
+			# 3. Test result
+			make check
+
+			# 4. Install package
+			make install
+		12. Bc-5.0.0
+			"""
+			- The Bc package contains an arbitrary precision numeric processing language.
+
+			- Compilation Specifications:
+				- Appropriate build time: < 0.1 SBU
+				- Required Disk Space: 6.7 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				bc: A command line calculator
+				dc: A reverse-polish command line calculator
+			"""
+			# 1. Prepare BC for compilation
+			"""
+			Options:
+				CC=gcc
+					- This parameter specifies the compiler to use
+				-O3
+					- Specify the optimization to use
+				-G
+					- Omit parts of the test suite that wont work without a GNU bc present 
+			"""
+			CC=gcc ./configure --prefix=/usr -G -O3
+
+			# 2. Compile package
+			make
+
+			# 3. Test bc
+			make test
+
+			# 4. Install package
+			make install
+		13. Flex-2.6.4
+			"""
+			- The Flex package contains a utility for generating programs that recognize patterns in text.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.4 SBU
+				- Required Disk Space: 32 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				flex: A tool for generating programs that recognize patterns in text; it allows for the versatility to specify the rules for pattern-finding, eradicating the need to develop a specialized program
+				flex++: An extension of flex, is used for generating C++ code and classes. It is a symbolic link to flex
+				lex: A symbolic link that runs flex in lex emulation mode
+				libfl: The flex library
+			"""
+			# 1. Prepare Flex for compilation
+			./configure 						\
+					--prefix=/usr				\
+					--docdir=/usr/share/doc/flex-2.6.4	\
+					--disable-static
+
+			# 2. Compile package
+			make
+
+			# 3. Test the result (about 0.5 SBU)
+			make check
+
+			# 4. Install package
+			make install
+
+			# 5. Create symlink named lex that runs flex in lex emulation mode
+			# - A few programs do not know about flex yet and
+			#	- try to run its predecessor, lex
+			# - To support those programs
+			ln -sv flex /usr/bin/lex
+		14. Tcl-8.6.11
+			"""
+			- The Tcl package contains the Tool Command Language, a robust general-purpose scripting language. The Expect package is written in the Tcl language.
+
+			- Compilation Specifications:
+				- Appropriate build time: 3.7 SBU
+				- Required Disk Space: 80 MB
+
+			- Notes:
+				- This package and the next two (Expect and DejaGNU) are installed to support running the test suites for binutils and GCC and other packages. 
+				- Installing three packages for testing purposes may seem excessive, 
+					- but it is very reassuring, if not essential, to know that the most important tools are working properly.
+			- Related:
+			- Files:
+				tclsh8.6: The Tcl command shell
+				tclsh: A link to tclsh8.6
+				libtcl8.6.so: The Tcl library
+				libtclstub8.6.a: The Tcl Stub library
+			"""
+			# 1. Unpack documentation
+			tar -xvf ../tcl8.6.11-html.tar.gz --strip-components=1
+
+			# 2. Prepare Tcl for compilation
+			"""
+			Options:
+				$([ "$(uname -m)" = x86_64 ] && echo --enable-64bit)
+					The construct $(<shell command>) is replaced by the output of the shell command. Here this output is empty if running on a 32 bit machine, and is --enable-64bit if running on a 64 bit machine.
+			"""
+			SRCDIR=$(pwd)
+			cd unix
+			./configure				\
+					--prefix=/usr		\
+					--mandir=/usr/share/man	\
+					$([ "$(uname -m)" = x86_64 ] && echo --enable-64bit)
+
+			# 3. Build package
+			# The various “sed” instructions after the “make” command removes references to the build directory from the configuration files and 
+			# 	- replaces them with the install directory. 
+			# This is not mandatory for the remainder of LFS, 
+			#	- but may be needed in case a package built later uses Tcl.
+			make
+
+			sed -e "s|$SRCDIR/unix|/usr/lib|" \
+ 			    -e "s|$SRCDIR|/usr/include|"  \
+    			    -i tclConfig.sh
+
+			sed -e "s|$SRCDIR/unix/pkgs/tdbc1.1.2|/usr/lib/tdbc1.1.2|" \
+   	 		    -e "s|$SRCDIR/pkgs/tdbc1.1.2/generic|/usr/include|"    \
+    			    -e "s|$SRCDIR/pkgs/tdbc1.1.2/library|/usr/lib/tcl8.6|" \
+     			    -e "s|$SRCDIR/pkgs/tdbc1.1.2|/usr/include|"            \
+    			    -i pkgs/tdbc1.1.2/tdbcConfig.sh
+
+			sed -e "s|$SRCDIR/unix/pkgs/itcl4.2.1|/usr/lib/itcl4.2.1|" \
+    			    -e "s|$SRCDIR/pkgs/itcl4.2.1/generic|/usr/include|"    \
+    			    -e "s|$SRCDIR/pkgs/itcl4.2.1|/usr/include|"            \
+    			    -i pkgs/itcl4.2.1/itclConfig.sh
+
+			unset SRCDIR
+
+			# 4. Test result
+			# - NOTE:
+			#	- One test, unixInit-1.2 is known to fail
+			make test
+
+			# 5. Install package
+			make install
+
+			# 6. Make installed library writable
+			# - So that debugging symbols can be removed later
+			chmod -v u+w /usr/lib/libtcl8.6.so
+
+			# 7. Install Tcl's headers
+			# - The next package 'Expect' requires them
+			make install-private-headers
+
+			# 8. Make necessary symlink
+			ln -sfv tclsh8.6 /usr/bin/tclsh
+
+			# 9. Rename a man page that conflicts with a Perl man page
+			mv /usr/share/man/man3/{Thread,Tcl_Thread}.3
+		15. Expect-5.45.4
+			"""
+			- The Expect package contains tools for automating, 
+				- via 
+					- scripted dialogues, 
+					> interactive applications such as 
+						- telnet, 
+						- ftp, 
+						- passwd, 
+						- fsck, 
+						- rlogin, and 
+						- tip. 
+			- Expect is also useful for testing these same applications as well as 
+				- easing all sorts of tasks that are prohibitively difficult with anything else. 
+			- The DejaGnu framework is written in Expect.
+
+			- Compilation Specifications:
+				- Appropriate build time: 0.2 SBU
+				- Required Disk Space: 3.9 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				expect: Communicates with other interactive programs according to a script
+				libexpect-5.45.so: Contains functions that allow Expect to be used as a Tcl extension or to be used directly from C or C++ (without Tcl)
+			"""
+			# 1. Prepare Expect for compilation
+			"""
+			Options:
+			--with-tcl=/usr/lib
+				This parameter is needed to tell configure where the tclConfig.sh script is located.
+
+			--with-tclinclude=/usr/include
+				This explicitly tells Expect where to find Tcl's internal headers.
+			"""
+			./configure				\
+					--prefix=/usr		\
+					--with-tcl=/usr/lib	\
+					--enable-shared		\
+					--mandir=/usr/share/man	\
+					--with-tclinclude=/usr/include
+
+			# 2. Build package
+			make
+
+			# 3. Test result
+			make test
+
+			# 4. Install package
+			make install
+			ln -svf expect5.45.4/libexpect5.45.4.so /usr/lib
+		16. DejaGNU-1.6.3
+			"""
+			- The DejaGnu package contains a framework for running test suites on GNU tools. 
+			- It is written in expect, which itself uses Tcl (Tool Command Language).
+
+			- Compilation Specifications:
+				- Appropriate build time: < 0.1 SBU
+				- Required Disk Space: 6.9 MB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				runtest: A wrapper script that locates the proper expect shell and then runs DejaGNU
+			"""
+			# 1. The upstream recommends building DejaGNU in a dedicated build directory
+			mkdir -v build
+			cd build
+
+			# 2. Prepare DejaGNU for compilation
+			../configure 										\
+					--prefix=/usr								\
+					makeinfo --html --no-split -o doc/dejagnu.html	../doc/dejagnu.texi	\
+					makeinfo --plaintext	   -o doc/dejagnu.txt	../doc/dejagnu.texi
+
+			# 3. Build package
+			make install
+
+			# 4. Install package
+			install -v -dm755	/usr/share/doc/dejagnu-1.6.3
+			install -v -m644	doc/dejagnu.{html,txt} /usr/share/doc/dejagnu-1.6.3
+
+			# 5. Test result
+			make check
+		17. Binutils-2.37
+			"""
+			- The Binutils package contains a linker, an assembler, and other tools for handling object files.
+
+			- Compilation Specifications:
+				- Appropriate build time: 6.3 SBU
+				- Required Disk Space: 4.5 GB
+
+			- Notes:
+
+			- Related:
+
+			- Files:
+				addr2line: Translates program addresses to file names and line numbers; given an address and the name of an executable, it uses the debugging information in the executable to determine which source file and line number are associated with the address
+				ar: Creates, modifies, and extracts from archives
+				as: An assembler that assembles the output of gcc into object files
+				c++filt: Used by the linker to de-mangle C++ and Java symbols and to keep overloaded functions from clashing
+				dwp: The DWARF packaging utility
+				elfedit: Updates the ELF header of ELF files
+				gprof: Displays call graph profile data
+				ld: A linker that combines a number of object and archive files into a single file, relocating their data and tying up symbol references
+				ld.gold: A cut down version of ld that only supports the elf object file format
+				ld.bfd: Hard link to ld
+				nm: Lists the symbols occurring in a given object file
+				objcopy: Translates one type of object file into another
+				objdump: Displays information about the given object file, with options controlling the particular information to display; the information shown is useful to programmers who are working on the compilation tools
+				ranlib: Generates an index of the contents of an archive and stores it in the archive; the index lists all of the symbols defined by archive members that are relocatable object files
+				readelf: Displays information about ELF type binaries
+				size: Lists the section sizes and the total size for the given object files
+				strings: Outputs, for each given file, the sequences of printable characters that are of at least the specified length (defaulting to four); for object files, it prints, by default, only the strings from the initializing and loading sections while for other types of files, it scans the entire file
+				strip: Discards symbols from object files
+				libbfd: The Binary File Descriptor library
+				libctf: The Compat ANSI-C Type Format debugging support library
+				libctf-nobfd: A libctf variant which does not use libbfd functionality
+				libopcodes: A library for dealing with opcodes—the “readable text” versions of instructions for the processor; it is used for building utilities like objdump
+			"""
+			--- Installation of Binutils
+			# 1. Verify PTY
+			# - Verify that the PTYs are working properly inside the chroot environment
+			expect -c "spawn ls"
+
+			# NOTES:
+			# - Expected Result: 'spawn ls'
+			
+			# ==============================================================
+			# (OPTIONAL) 2. Output not correct
+			# - If instead, the output includes the message
+			#	The system has no more ptys
+			#	Ask your system administrator to create more
+			# - Then the environment is not set up for proper PTY operation
+			# - This needs to be resolved before running the test suites for 
+			#	Binutils and GCC
+			# ==============================================================
+
+			# 3. Upstream has made a patch to fix a problem building some packages
+			patch -Np1 -i ../binutils-2.37-upstream_fix-1.patch
+
+			# 4. Workaround empty shipped man pages
+			# - An error in the building system causes the shipped man pages to be empty
+			# - Remove shipped man pages so that the man pages will be regenerated correctly
+			sed -i '63d' etc/texi2pod.pl
+			find -name \*.1 -delete
+
+			# 5. The Binutil documentation recommends building Binutils in a dedicated build directory
+			mkdir -v build
+			cd build
+
+			# 6. Prepare Binutils for compilation
+			"""
+			Options:
+				--enable-gold
+					Build the gold linker and install it as ld.gold (along side the default linker).
+
+				--enable-ld=default
+					Build the original bfd linker and install it as both ld (the default linker) and ld.bfd.
+
+				--enable-plugins
+					Enables plugin support for the linker.
+
+				--enable-64-bit-bfd
+					Enables 64-bit support (on hosts with narrower word sizes). 
+					May not be needed on 64-bit systems, but does no harm.
+
+				--with-system-zlib
+					Use the installed zlib library rather than building the included version.
+			"""
+			../configure
+					--prefix=/usr		\
+					--enable-gold		\
+					--enable-ld=default	\
+					--enable-plugins	\
+					--enable-shared		\
+					--disable-werror	\
+					--enable-64-bit-bfd	\
+					--with-system-zlib
+
+			# 7. Compile package
+			"""
+			Parameter:
+				tooldir=/usr
+					Normally, the tooldir (the directory where the executables will ultimately be located) is set to $(exec_prefix)/$(target_alias). 
+					For example, x86_64 machines would expand that to /usr/x86_64-pc-linux-gnu. 
+					Because this is a custom system, this target-specific directory in /usr is not required. 
+					$(exec_prefix)/$(target_alias) would be used if the system was used to cross-compile (for example, compiling a package on an Intel machine that generates code that can be executed on PowerPC machines).
+			"""
+			make tooldir=/usr
+
+			# ===========================
+			# NOTE:
+			#	- The test suite for Binutils in this section is considered critical
+			#	- do not skip it under any circumstances
+			# ===========================
+
+			# 8. Test result
+			# - Four tests related to zlib are known to fail.
+			make -k check
+		
+			# 9. Install package
+			make tooldir=/usr install -j1
+
+			# 10. Remove useless static libraries
+			rm -fv /usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.a
+
+		18. GMP-6.2.1
+			"""
+			- The GMP package contains math libraries. These have useful functions for arbitrary precision arithmetic.
+
+			- Compilation Specifications:
+				- Appropriate build time: 1.0 SBU
+				- Required Disk Space: 52 MB
+
+			- Notes:
+				- If you are building for 32-bit x86, 
+					but you have a CPU which is capable of running 64-bit code and 
+					you have specified CFLAGS in the environment, 
+					- the configure script will attempt to configure for 64-bits and fail. 
+					- Avoid this by invoking the configure command below with
+					ABI=32 ./configure ...
+
+				- The default settings of GMP produce libraries optimized for the host processor. 
+					If libraries suitable for processors less capable than the host's CPU are desired, 
+					generic libraries can be created by running the following:
+					cp -v configfsf.guess 	config.guess
+					cp -v configfsf.sub	config.sub
+			- Related:
+
+			- Files:
+				libgmp: Contains precision math functions
+				libgmpxx: Contains C++ precision math functions
+			"""
+			# 1. Prepare GMP for compilation
+			"""
+			Options:
+				--enable-cxx
+					This parameter enables C++ support
+
+				--docdir=/usr/share/doc/gmp-6.2.1
+					This variable specifies the correct place for the documentation.
+			"""
+			./configure				\
+					--prefix=/usr		\
+					--enable-cxx		\
+					--disable-static	\
+					--docdir=/usr/share/doc/gmp-6.2.1
+
+			# 2. Compile package
+			make
+
+			# 3. Generate HTML documentation
+			make html
+
+			# ===========================
+			# NOTE:
+			#	- The test suite for GMP in this section is considered critical
+			#	- do not skip it under any circumstances
+			# ===========================
+
+			# 4. Test result
+			"""
+			Caution: 
+				The code in gmp is highly optimized for the processor where it is built. 
+				Occasionally, the code that detects the processor misidentifies the system capabilities and 
+					there will be errors in the tests or other applications using the gmp libraries with the message "Illegal instruction". 
+				In this case, gmp should be reconfigured with the option --build=x86_64-pc-linux-gnu and rebuilt.
+			"""
+			make check 2>&1 | tee gmp-check-log
+
+			# 5. Check the results
+			# - Ensure that all 197 tests in the test suite passed
+			awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log
+
+			# 6. Install package
+			make install
+
+			# 7. Install documentation
+			make install-html
+		19. MPFR-4.1.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		20. MPC-1.2.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		21. Attr-2.5.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		22. Acl-2.3.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		23. Libcap-2.53
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		24. Shadow-4.9
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		25. GCC-11.2.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		26. Pkg-config-0.29.2
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		27. Ncurses-6.2
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		28. Sed-4.8
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		29. Psmisc-23.4
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		30. Gettext-0.21
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		31. Bison-3.7.6
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		32. Grep-3.7
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		33. Bash-5.1.8
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		34. Libtool-2.4.6
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		35. GDBM-1.20
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		36. Gperf-3.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		37. Expat-2.4.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		38. Inetutils-2.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		39. Less-590
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		40. Perl-5.34.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		41. XML::Parser-2.46
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		42. Intltool-0.51.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		43. Autoconf-2.71
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		44. Automake-1.16.4
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		45. Kmod-29
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		46. Libelf from Elfutils-0.185
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		47. Libffi-3.4.2
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		48. OpenSSL-1.1.1l
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		49. Python-3.9.6
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		50. Ninja-1.10.2
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		51. Meson-0.59.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		52. Coreutils-8.32
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		53. Check-0.15.2
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		54. Diffutils-3.8
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		55. Gawk-5.1.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		56. Findutils-4.8.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		57. Groff-1.22.4
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		58. GRUB-2.06
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		59. Gzip-1.10
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		60. IPRoute2-5.13.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		61. Kbd-2.4.0
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		62. Libpipeline-1.5.3
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		63. Make-4.3
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		64. Patch-2.7.6
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		65. Tar-1.34
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		66. Texinfo-6.8
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		67. Vim-8.2.3337
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		68. Eudev-3.2.10
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		69. Man-DB-2.9.4
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		70. Procps-ng-3.3.17
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		71. Util-linux-2.37.2
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		72. E2fsprogs-1.46.4
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		73. Sysklogd-1.5.1
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		74. Sysvinit-2.99
+			"""
+			[Description]
+
+			- Compilation Specifications:
+				- Appropriate build time:  SBU
+				- Required Disk Space:  MB
+
+			- Notes:
+
+			- Related:
+			"""
+		75. About Debugging Symbols
+			"""
+			- Most programs and libraries are compiled with debugging symbols included (by default)
+				- with gcc's [-g] option
+			- This means that when debugging a program or library that was compiled with debugging information, 
+				- the debugger can provide not only memory addresses
+				- but also the names of the routines and variables
+
+			- However, the inclusion of these debugging symbols enlarges a program or library significanrtly
+			- Examples of the amount of space these symbols occupy
+				subject 	| without debugging symbols -> with debugging symbols
+				======================================================================
+				bash binary				| 480 KB -> 1200kb
+				Glibc and GCC files (/lib and /usr/lib)	| 16  MB -> 87 MB
+
+			- Sizes may vary depending on which compile and C library were used
+				- but when comparing programs with and without debugging symbols
+				- difference will usually be a factor between two and five
+
+			- Because most users will never use a debugger on their system software
+				- alot of disk space can be regained by removing these symbols
+			"""
+		76. (OPTIONAL) Stripping
+			"""
+			- How to strip all debugging symbols from the programs and libraries
+			- This section is optional
+				- If the intended user 
+					- is not a programmer and 
+					- does not plan to do any debugging on the system software
+				- the system size can be decreased by about 2GB by removing the debugging symbols from
+					binaries and libraries
+				- This causes no inconvenience other than not being able to debug the software fully anymore
+
+			- The debugging symbols for selected libraries are placed in separate files. This debugging information is needed if running regression tests that use valgrind or gdb later in BLFS.
+
+			- Note that strip will overwrite the binary or library file it is processing
+				- This can crash the processes using code or data from the file.
+			- If the process running strip itself is affected, the binary or library being stripped can be destroyed and can make the system completely unusable
+				- To avoid it, 
+					> we'll copy some libraries and binaries into /tmp
+					> strip them there
+					> install them back with the install command
+	
+			RELATED:
+				- [Upgrade Issues]: https://www.linuxfromscratch.org/lfs/view/stable/chapter08/pkgmgt.html#pkgmgmt-upgrade-issues
+
+			NOTE:
+				- Most people who use the commands mentioned below do not experience any difficulties.
+				- However, it is easy to make a typo and render the new system unusable
+					- before running the strip commands, it is a good idea to make a backup of the LFS system in its current state.
+
+				- The ELF loader's name is ld-linux-x86-64.so.2 on 64-bit systems and ld-linux.so.2 on 32-bit systems. The contruct below selects the correct name for the current architecture.
+			"""
+			save_usrlib="$(cd /usr/lib; ls ld-linux*)
+             			libc.so.6
+             			libthread_db.so.1
+             			libquadmath.so.0.0.0 
+             			libstdc++.so.6.0.29
+             			libitm.so.1.0.0 
+             			libatomic.so.1.2.0" 
+
+			cd /usr/lib
+
+			for LIB in $save_usrlib; do
+    				objcopy --only-keep-debug $LIB $LIB.dbg
+    				cp $LIB /tmp/$LIB
+    				strip --strip-unneeded /tmp/$LIB
+    				objcopy --add-gnu-debuglink=$LIB.dbg /tmp/$LIB
+    				install -vm755 /tmp/$LIB /usr/lib
+    				rm /tmp/$LIB
+			done
+
+			online_usrbin="bash find strip"
+			online_usrlib="libbfd-2.37.so
+               			libhistory.so.8.1
+               			libncursesw.so.6.2
+               			libm.so.6
+               			libreadline.so.8.1
+               			libz.so.1.2.11
+               			$(cd /usr/lib; find libnss*.so* -type f)"
+
+			for BIN in $online_usrbin; do
+    				cp /usr/bin/$BIN /tmp/$BIN
+    				strip --strip-unneeded /tmp/$BIN
+    				install -vm755 /tmp/$BIN /usr/bin
+    				rm /tmp/$BIN
+			done
+
+			for LIB in $online_usrlib; do
+    				cp /usr/lib/$LIB /tmp/$LIB
+    				strip --strip-unneeded /tmp/$LIB
+    				install -vm755 /tmp/$LIB /usr/lib
+    				rm /tmp/$LIB
+			done
+
+			for i in $(find /usr/lib -type f -name \*.so* ! -name \*dbg) \
+        			 $(find /usr/lib -type f -name \*.a)                 \
+         			 $(find /usr/{bin,sbin,libexec} -type f); do
+    			    case "$online_usrbin $online_usrlib $save_usrlib" in
+        			*$(basename $i)* ) 
+            			    ;;
+       				* ) strip --strip-unneeded $i 
+            			    ;;
+    			    esac
+			done
+
+			unset BIN LIB save_usrlib online_usrbin online_usrlib
+
+			# NOTES:
+			# A large number of files will be reported as having their file format not recognized. 
+			# These warnings can be safely ignored. 
+			# They indicate that those files are scripts instead of binaries.
+		77. Cleaning Up
+			# 1. Clean up some extra files left around from running tests
+			rm -rf /tmp/*
+
+			# 2. Logout
+			logout
+
+			# 3. reenter the chroot environment with an updated chroot command
+			"""
+			- Note that '+h' option is not used anymore
+				- since all the previous programs have been replaced
+				- hashing is therefore possible
+			"""
+			chroot "$LFS" /usr/bin/env -i		\
+				HOME=/root TERM="$TERM"		\
+				PS1='(lfs chroot) \u:\w\$ '	\
+				PATH=/usr/bin:/usr/sbin		\
+				/bin/bash --login
+
+			# 4. (OPTIONAL) If the virtual kernel file systems have been unmounted
+			# - either manually or through a reboot, 
+			#	ensure that the virtual kernel file systems are 
+			#	mounted when reentering the chroot
+			# Related: 
+			#	- [Mounting and Populating /dev]
+			#	- [Mounting Virtual Kernel File Systems]
+			mount -v --bind /dev $LFS/dev
+			mount -v --bind /dev/pts $LFS/dev/pts
+			mount -vt proc proc $LFS/proc
+			mount -vt sysfs sysfs $LFS/sys
+			mount -vt tmpfs tmpfs $LFS/run
+			
+			# 5. Remove files with extension .la in /usr/lib and /usr/libexec
+			"""
+			- There are also several files installed in the 
+				> /usr/lib and 
+				> /usr/libexec 
+				directories with a file name extension of .la
+			- These are "libtool archive" files
+
+			- They are only useful when linking with static libraries
+			- They are unneeded, and potentially harmful When using dynamic shared libraries, specially when using also non-autotools build systems
+			
+			Syntax: find [directories] -name [file-name] [option]
+			Parameters:
+				directories: All target directories to search
+				file-name: Target file name to search for
+			Options:
+				-delete : Delete files found
+
+			- References
+				- BLFS section "About Libtool Archive (.la) files": https://www.linuxfromscratch.org/blfs/view/11.0//introduction/la-files.html
+			"""
+			find /usr/lib /usr/libexec -name \*.la -delete
+
+			# 6. Remove compiler built in [Cross Compiling Temporary Tools] and [Entering Chroot and Building additional temporary tools]
+			# - The compiler built in [Cross Compiling Temporary Tools] and [Entering Chroot and Building additional temporary tools] is still partially installed
+			#	and not needed anymore
+			find /usr -depth -name $(uname -m)-lfs-linux-gnu\* | xargs rm -rf
+
+			# 7. Remove temporary 'tester' user account
+			# - Finally, remove the temporary 'tester' user account created at the beginning of the previous chapter.
+			userdel -r tester
+	System Configuration
+		1. Introduction
+			"""
+			- Booting a Linux system involves several tasks. 
+			- The process must 
+				> mount both virtual and real file systems, 
+				> initialize devices, 
+				> activate swap, 
+				> check file systems for integrity, 
+				> mount any swap partitions or files, 
+				> set the system clock, 
+				> bring up networking, 
+				> start any daemons required by the system, 
+				> and accomplish any other custom tasks needed by the user. 
+			- This process must be organized to ensure the tasks are performed in the correct order but, 
+				- at the same time, be executed as fast as possible.
+			"""
+			# 1. System V
+			"""
+			- System V is the classic boot process that has been used in Unix and 
+				Unix-like systems such as Linux since about 1983. 
+			- It consists of a small program, init, that sets up basic programs such as 
+				login (via getty) and runs a script. 
+			- This script, usually named rc, 
+				controls the execution of a set of additional scripts that 
+				perform the tasks required to initialize the system.
+
+
+			- The init program is controlled by the /etc/inittab file and is organized into run levels that can be run by the user
+				> 0: Halt
+				> 1: Single user mode
+				> 2: Multiuser, without networking
+				> 3: Full multiuser mode
+				> 4: User definable
+				> 5: Full multiuser mode with display manager
+				> 6: Reboot
+				- The usual default run level is 3 or 5
+
+			- Advantages:
+				> Established, well understood system
+				> Easy to customize
+			- Disadvantages:
+				> May be slower to boot. A medium speed base LFS system takes 8-12 seconds where the boot time is measured from the first kernel message to the login prompt. Network connectivity is typically established about 2 seconds after the login prompt.
+				> Serial processing of boot tasks. This is related to the previous point. A delay in any process such as a file system check, will delay the entire boot process.
+				> Does not directly support advanced features like control groups (cgroups), and per-user fair share scheduling.
+				> Adding scripts requires manual, static sequencing decisions.
+			"""
+		2. LFS-Bootscripts-20210608
+			"""
+			- The LFS-Bootscripts package contains a set of scripts to start/stop the LFS system at bootup/shutdown. The configuration files and procedures needed to customize the boot process are described in the following sections.
+
+			- Compilation Specifications:
+				- Appropriate build time: < 0.1 SBU
+				- Required Disk Space: 440 KB
+
+			- Notes:
+
+			- Related:
+			"""
+			# 1. Install package
+			make install
+		3. Overview of Device and Module Handling
+			"""
+			Reference:
+				https://www.linuxfromscratch.org/lfs/view/stable/chapter09/udev.html
+			"""
+		4. Managing Devices
+			"""
+			Reference:
+				https://www.linuxfromscratch.org/lfs/view/stable/chapter09/symlinks.html
+			"""
+			
+		5. General Network Configuration
+		6. System V Bootscript Usage and Configuration
+		7. The Bash Shell Startup Files
+		8. Creating the /etc/inputrc File
+		9. Creating the /etc/shells File
+	Make LFS System Bootable
+		1. Introduction
+		2. Creating the /etc/fstab File
+		3. Installing Kernel
+			Linux-5.13.12
+		4. Installing Bootloader
+			Using GRUB to Set Up the Boot Process
+	End
+		1. The End
+		2. Get Counted
+		3. Rebooting the System
+		4. What Now?
+
+[References]
+Stable Install Wiki: https://linuxfromscratch.org/lfs/view/stable/index.html
+
+[Resources]

@@ -1,0 +1,123 @@
+Raspberry Pi Zero W(H) - Creating Partition
+```
+References:
+
+```
+
+[Table of Contents]
+--- Installation Steps
+1. Create an SD Card
+	i. Pre-Requisites
+	ii. Create File System
+	iii. Create Partitions
+
+[Installation Steps]
+1. Create an SD Card
+```
+- ARM Architecture for 
+	- Raspberry Pi Zero W(H) : ARMv6
+
+- NOTE:
+	- This step is modular, universal/portable, and can be used in any installation processes for any distros
+		- Please do change accordingly, however, feel free to use it in your starting designs
+
+	- ARM requires the boot partition to be type 'w95 fat32 (lba)' = FAT32, formatted as vfat
+```
+
+i. (IMPORTANT) Pre-Requisites
+	"""
+	- Some (important) Points to take note of before proceeding
+	- Please ensure you have prepared these before proceeding as
+		any changes made are not recoverable
+	"""
+	1. Contents:			
+		1. Disk Name 		[ /dev/sdX etc.]
+		2. Disk Label Type	[mbr|gpt]
+		3. Bootloader Type	[BIOS|UEFI]
+		4. Disk Size		[MB|MiB|GB|Gi]
+		5. Partition Structure
+
+	2. Remarks
+		1. To find the above information
+			Command:
+			- sudo fdisk -l
+			- lsblk
+		2. This should give you your partitions, disk name, sizes
+		3. For Disk Sizes:
+			- You can use percentages to determine the size
+				> 0% : The very beginning of the memory
+				> 25% : 1/4 of the entire disk
+				> 50% : Half of the entire disk
+				> 75% : 3/4 of the entire disk
+				> 100% : The very end of the memory (all the way to the end)
+	3. Partition Design
+		<partition_ID> <disk_name> <partition_type> <partition_Name> <partition_file_Type> <partition_start_Size> <partition_end_Size> <partition_Bootable> <partition_Others>
+		1		/dev/sdX	Primary		Boot		ext4			0%			1024MiB		True			NIL
+		2		/dev/sdX	Primary		Root		ext4			1024MiB			(x)MiB				
+		3		/dev/sdX	Primary		Home		ext4			(x)MiB			100%
+
+
+ii. Create File System
+	"""
+	- File Systems:
+		- msdos : For BIOS Bootloader
+		- efi	: For UEFI Bootloader (GPT)
+	
+	- Syntax:
+		sudo parted [disk-name] mklabel [msdos|efi]
+	"""
+	sudo parted /dev/sdX mklabel [msdos|efi]
+
+
+iii. Create Partitions
+	"""
+	partition table schema/structure:
+		[partition_order_Number] [disk_name] [partition_type] [partition_Name] [partition_filesystem] [partition_start_Size] [partition_end_Size] [partition_Bootable] [partition_Others]
+
+		where,
+			partition_order_Number: Just for note, the partition row number
+			disk_name: The Disk Label (/dev/sdX)
+			partition_type: The Partition format you want to use (Primary|Logical|Extended)
+			partition_name: Only usable for UEFI - This is the name of the partition; If you are using a BIOS/MBR Bootloader system, just use it as an identifier so you recognize it
+			partition_filesystem: File System for the partition (i.e. zfs|btrfs|ext{1|2|3|4}|fat{8|16|32})
+			partition_start_Size: The starting memory allocation bit for the file system; (MB|MiB|GB|GiB); Please refer to section [1.2.3] for more info on sizes
+			partition_end_Size: The ending memory allocation bit for the file system; (MB|MiB|GB|GiB); Please refer to section [1.2.3] for more info on sizes
+			partition_Bootable: Is the partition bootable? True|False; Typically used for the bootloader partition (/boot) - normally partition 1
+			partition_Others: Any other partition info to note
+
+	Syntax:
+		1. Create a new partition
+			- MBR|BIOS Bootloader
+				sudo parted [disk_name] mkpart [partition_type] [partition_filesystem] [partition_start_Size] [partition_end_Size]
+			- UEFI|EFI Bootloader
+				sudo parted [disk_name] mkpart (TBC)
+		2. Format File System
+			- ext{2|3|4}
+				sudo mkfs.ext{2|3|4} [disk_name]([partition_order_Number])
+			- fat{8|16|32}
+				sudo mkfs.fat -F{8|16|32} [disk_name]([partition_order_Number])
+				sudo mkfs.vfat [disk_name]([partition_order_Number])
+			- zfs
+				TBC
+			- btrfs
+				TBC
+		3. (OPTIONAL) IF partition_Bootable is True
+			- Bootable partition
+				sudo parted [disk_name] set [partition_order_Number]
+	"""
+	# Let
+	#	disk_Size: 51200MiB
+	#	Partition Structure:
+	#		[partition_order_Number] [disk_name] [partition_type] [partition_Name] [partition_filesystem] [partition_start_Size] [partition_end_Size] [partition_Bootable] [partition_Others]
+	#		1 	/dev/sdX 	Primary 	Boot 	vfat 	0% 		1024MiB 	Bootable
+	#		2 	/dev/sdX 	Primary 	Root 	ext4 	1024MiB 	50%	
+	#		3	/dev/sdX	primary		Home	ext4	50%		100%			
+	sudo parted /dev/sdX mkpart primary fat32 0% 1024MiB
+	sudo mkfs.vfat /dev/sdX1
+	# sudo parted /dev/sdX set 1 boot on
+
+	sudo parted /dev/sdX mkpart primary ext4 1024MiB 50%
+	sudo mkfs.ext4 /dev/sdX2
+
+	sudo parted /dev/sdX mkpart primary ext4 50% 100%
+	sudo mkfs.ext4 /dev/sdX3

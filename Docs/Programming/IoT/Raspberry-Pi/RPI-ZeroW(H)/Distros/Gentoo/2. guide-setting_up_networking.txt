@@ -1,0 +1,131 @@
+Raspberry Pi Zero W(H) - Enabling WiFi on Boot
+```
+References:
+	https://ladvien.com/installing-arch-linux-raspberry-pi-zero-w/
+```
+
+[Table of Contents]
+--- Networking Steps
+1. Create Script to Enable WiFi on Boot
+	i. Create script file
+	ii. Give script executable permissions
+	iii. Execute script
+
+[Networking Steps]
+1. Create Script to Enable WiFi on Boot
+```
+- Script to Automatically enable wifi on boot
+	1. Allow device to automatically connect to your WiFi router when boot
+		1. Access RPI Zero W(H) ArchLinux files
+		2. Inject WiFi information
+		3. Get immediate access via SSH
+```
+i. Create script file
+	"""
+	1. Create a file
+		touch [filename].sh 
+		OR
+		$EDITOR [filename].sh
+
+	2. Populate script
+		- Script takes 3 parameters
+			1. Location of SD Card in the PC's device tree
+			2. SSID of your WiFi router
+			3. Password for the WiFi router
+		- Script mounts the SD Card, accesses the files needed to setup the WiFi
+		- Script inserts the connection information appropriately
+	"""
+	# 1. Enter script	
+	$EDITOR al-wpa-setup.sh
+
+	# 2. Populate script
+		--- Content ---
+		#!/bin/sh
+
+		set -e
+
+		if [[ $# -ne 3 ]] ; then
+   			echo "Usage: $0 </dev/disk> <ssid> <passphase>"
+   			exit 1
+		fi
+
+		DISK="$1"
+		SSID="$2"
+		PASS="$3"
+
+		if [[ ! -b "${DISK}" ]] ; then
+   			echo "Not a block device: ${DISK}"
+   			exit 1
+		fi
+
+		if [[ "${USER}" != "root" ]] ; then
+   			echo "Must run as root."
+   			exit 1
+		fi
+
+		echo Mounting
+		mkdir root
+		mount "${DISK}2" root
+		
+		### --- Start of EOF (in-script cat)
+		cat << EOF >> root/etc/systemd/network/wlan0.network
+		[Match]
+		Name=wlan0
+
+		[Network]
+		DHCP=yes
+		EOF
+		### --- End of EOF
+
+		wpa_passphrase "${SSID}" "${PASS}" > root/etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+
+		ln -s \
+   			/usr/lib/systemd/system/wpa_supplicant@.service \
+   			root/etc/systemd/system/multi-user.target.wants/wpa_supplicant@wlan0.service
+
+		echo Unmounting
+		umount root
+
+		echo Cleaning up
+		rmdir root
+		--- End Content ---
+
+ii. Give script executable permissions
+	"""
+	- Permission required: +x
+		- + : Add/Allow
+		- x : Executable
+	:: Syntax
+		chmod +x [script-name].sh
+	"""
+	chmod +x al-wpa-setup.sh
+
+iii. Execute script
+	"""
+	- Execute the script 
+		- Provide the parameters
+			- device name [/dev/sdX]
+			- WiFi SSID
+			- WiFi Password
+	:: Syntax
+		./script_name.sh ${DEVICE_NAME} ${WIFI_SSID} ${WIFI_PASSWORD}
+
+	:: Remarks
+		- If you execute the script in the same path where you build the SD Card
+			- Script will complain
+			- Because the ArchLinux instructions didnt mention removing the SD card paths
+		- To delete the paths 'root' and 'boot' which were required for setup run
+			- Pre-Requisite: Ensure that you are not in the root (/) path first
+			sudo rm -R boot root
+	"""
+	# 1. Pre-Requisite: To delete the paths 'root' and 'boot' which were required for setup run
+	# Ensure that you are not in the root (/) path first
+	sudo rm -R boot root
+
+	# 2. Execute
+	# Intended Output:
+	#	Mounting
+	#	Unmounting
+	#	Cleaning up
+	./al-wpa-setup.sh $device_Name $wifi_name $wifi_password
+
