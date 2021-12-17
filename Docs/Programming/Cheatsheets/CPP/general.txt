@@ -36,6 +36,51 @@ Tips n Tricks :
 	Convert negative double to positive double : fabs([negative-double])
 	Convert negative float to positive float : fabsf([negative-float])
 
+Templates:
+	main : 
+		C : 
+			#include <stdlib.h>
+			#include <stdio.h>
+			#include <string.h>
+
+			int main(int argc, const char *argv[])
+			{
+				/*
+				* :: Params
+				*		argc : Number of arguments
+				*			Type: Integer 
+				*		argv : Variable-Length arguments 
+				*			Type: List
+				*/
+				printf("%s", "Hello World");
+				return 1;
+			}
+
+		CPP : 
+			#include <iostream>
+			#include <cstdlib>
+			#include <cstdio>
+			#include <string>
+			using std::cout;
+			using std::cin;
+			using std::endl;
+			using std::getline;
+			using std::string;
+			using std::to_string;
+
+			int main(int argc, const char *argv[])
+			{
+				/*
+				* :: Params
+				*		argc : Number of arguments
+				*			Type: Integer 
+				*		argv : Variable-Length arguments 
+				*			Type: List
+				*/
+				cout << "Hello World" << endl;
+				return 1;
+			}
+
 Resources : 
 	Websites : 
 		cplusplus.com
