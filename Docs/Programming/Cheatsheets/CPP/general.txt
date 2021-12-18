@@ -30,11 +30,23 @@ Operators :
 	% : Modulus (Remainder)
 	>> : Command Line Input Stream
 	<< : Command Line Output Stream
+	= : Assignnment Operator (Assigns value of right hand side (RHS) to left hand variable (LHS))
+	== : Equality Comparison Operator (Checks if LHS and RHS are the same)
+	! : NOT Operator (aka Negation Operator)
+	?: : Ternary/Conditional Operator (? and : comes in a pair) [Syntax: expression-1 ? expression-2 : expression-3]
+	& : Reference (Memory Address) Operator. Value passed into the function will be the exact same memory address of the caller's variable value; Caller's passed variable is associated with the function's implemented parameter
+
+Keywords:
+	static : Memory remains allocated as long as the program executes
+		- Used if you want the variable to not reinitialized everytime the function is looped/called
+		- Alternative: global
 
 Tips n Tricks : 
-	Convert negative integer to positive integer : abs([negative-integer])
-	Convert negative double to positive double : fabs([negative-double])
-	Convert negative float to positive float : fabsf([negative-float])
+	Data Type :
+		Conversion : 
+			Convert negative integer to positive integer : abs([negative-integer])
+			Convert negative double to positive double : fabs([negative-double])
+			Convert negative float to positive float : fabsf([negative-float])
 
 Templates:
 	main : 
