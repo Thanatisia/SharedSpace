@@ -40,6 +40,16 @@ Keywords:
 	static : Memory remains allocated as long as the program executes
 		- Used if you want the variable to not reinitialized everytime the function is looped/called
 		- Alternative: global
+	typedef : Type Definition, Can use typedef to define and use any object variables to represent the object type 
+		- Syntax: typedef [data_type] [variable]
+		- Examples:
+			Array : typedef [data_type] [array_name] [NUM_OF_ROWS] [NUM_OF_COLS]
+			enum : typedef enum [enum_name] { //values... } [type_variable];
+			struct : typedef struct [struct_name] { [data_type] [variable_name]; } [struct_var];
+	enum : 
+		- Syntax: enum [enum_name] { //values... } [type_variable];
+	struct : 
+		- Syntax: struct [struct_name] { [data_type] [variable_name]; } [struct_var];
 
 Tips n Tricks : 
 	Data Type :
