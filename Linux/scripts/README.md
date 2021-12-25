@@ -1,10 +1,10 @@
 # README
 
-<h6> Linux scripts </h6>
++ Linux scripts
 
 ## Basic Information
 
-* Authors: 
+* Authors:
 
   * Asura
 
@@ -34,12 +34,13 @@
   * 2021-06-06 1230H, Asura
   * 2021-06-06 2304H, Asura
   * 2021-06-07 0013H, Asura
+  * 2021-12-25 2246H, Asura
 
 ## To Note
 
 
 
-# Documentation
+## Documentation
 
 ## Getting Started
 
@@ -52,6 +53,7 @@
 5. chmod +x customs.sh
 6. chmod +x makefile.sh
 7. chmod +x clipkger.sh
+8. chmod +x unittest.sh
 
 ### Dependencies
 
@@ -87,9 +89,9 @@
 
 5. customs.sh
 
-   > A script with commands that are what I consider essential custom folders to create, use etc.
-   >
-   > - Please edit this and adjust it to fit what you would consider essential for you
+  > A script with commands that are what I consider essential custom folders to create, use etc.
+
+    > - Please edit this and adjust it to fit what you would consider essential for you
 
 6. makefile.sh
 
@@ -98,9 +100,15 @@
    > Please edit this file to include/remove the scripts of your choice. (or your own custom multi-script run layout; place the scripts accordingly)
   
 7. clipkger.sh
-	
+
    > Short for 'CLI Packager', a command line interface/terminal package control utility
    > Please edit the array [pkgs] to add / remove packages of your choice
+
+8. unittest.sh
+
+    > Simple Unit Testing implementation for shellscript
+    > WIP
+    > aims to be useful in every shellscripting design, UML and shellscript-related software testing
 
 ## Usage
 
@@ -116,6 +124,7 @@
 5. ./customs.sh
 6. ./makefile.sh
 7. ./clipkger.sh {options} <package-name>
+8. ./unittest.sh
 
 ## Help
 
@@ -123,13 +132,13 @@
 
 
 
-# Authors
+## Authors
 
 > Contributors name, git ID, contact info
 
 
 
-# Version History
+## Version History
 
 >  Changelogs
 
@@ -238,11 +247,12 @@
     * clipkger.sh
 	  > Added Help function
 	  > Added Command Line Features
+* 2021-12-25 2249H, Asura
+  * Added [unittest.sh]
 
 
-# License
+## License
 
 
-
-# Acknowledgements
+## Acknowledgements
 

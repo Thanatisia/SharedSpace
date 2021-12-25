@@ -13,14 +13,20 @@ Useful Libraries & Functions :
 			cout
 			endl
 			getline
+			sizeof
 		stdlib
 		stdio
 		string
-			string
-			to_string
+			string			: string var;
+			to_string		: string str = to_string([variable]);
+			getline			: getline([stream], [storage_variable]); 
 		iomanip
 			setprecision
 			unsetf
+		cmath
+			abs
+			fabs
+			fabsf
 
 Operators :
 	+ : Add
@@ -34,7 +40,10 @@ Operators :
 	== : Equality Comparison Operator (Checks if LHS and RHS are the same)
 	! : NOT Operator (aka Negation Operator)
 	?: : Ternary/Conditional Operator (? and : comes in a pair) [Syntax: expression-1 ? expression-2 : expression-3]
-	& : Reference (Memory Address) Operator. Value passed into the function will be the exact same memory address of the caller's variable value; Caller's passed variable is associated with the function's implemented parameter
+	& : Reference (Memory Address) Operator. Extracts Memory Address of variable; TLDR: Get the memory address of the target variable. Value passed into the function will be the exact same memory address of the caller's variable value; Caller's passed variable is associated with the function's implemented parameter
+	* : Dereferencing Operator. Extracts value found in the memory address of a variable; TLDR: Get the value in a provided memory address
+	-> : Arrow Operator
+	. : Dot Operator
 
 Keywords:
 	static : Memory remains allocated as long as the program executes
@@ -50,6 +59,19 @@ Keywords:
 		- Syntax: enum [enum_name] { //values... } [type_variable];
 	struct : 
 		- Syntax: struct [struct_name] { [data_type] [variable_name]; } [struct_var];
+	new :
+		- Dynamic pointers; Used to create dynamic variables
+		- Syntax:
+			new data_type;			// Ask OS for new mmeory enough to store [data_type]
+			new data_type(value);	// Store value first then ask OS for new memory enough to store [data_type] and store it in the memory address of the value
+
+			// To access allocated memory
+			int mem = *p;
+	delete :
+		- Dynamic pointers; Used to destroy dynamic variables
+		- Syntax:
+			delete [pointer_variable] : To deallocate a single dynamic variable
+			delete [] [pointer_variable] : To deallocate a dynamically created variable
 
 Tips n Tricks : 
 	Data Type :
