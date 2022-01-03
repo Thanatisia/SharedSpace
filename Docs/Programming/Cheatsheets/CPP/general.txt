@@ -44,6 +44,7 @@ Operators :
 	* : Dereferencing Operator. Extracts value found in the memory address of a variable; TLDR: Get the value in a provided memory address
 	-> : Arrow Operator
 	. : Dot Operator
+	:: : Namespace Operator. Organisation Tools for Encapsulation; Syntax: [namespace]::[class], where using X::Y refers to class Y in namespace X.
 
 Keywords:
 	static : Memory remains allocated as long as the program executes
@@ -72,6 +73,14 @@ Keywords:
 		- Syntax:
 			delete [pointer_variable] : To deallocate a single dynamic variable
 			delete [] [pointer_variable] : To deallocate a dynamically created variable
+	signed:
+		- Default
+		- Registers Negative values as well as positive values
+		- Syntax:
+	unsigned: 
+		- Does not store negative numbers, registers positive ranges only
+		- Syntax:
+			unsigned [data_type] [variable] = [value];
 
 Tips n Tricks : 
 	Data Type :

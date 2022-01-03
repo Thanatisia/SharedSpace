@@ -1,0 +1,86 @@
+Multiple Files:
+	- Code is often, usually and preferably spread across multiple files
+	- in "Header files"
+	- Helpful to put all of the functions into other files
+	- Particularly useful if there are alot of functions and classes and if some of them are shared between programs
+	- To import:
+		#include "file.h"
+	- Structure:
+		Requirements:
+			1. Your main source file 
+				- contains the main() function
+			2. Your external header library
+				- Contains your prototype function for forward definitions
+			3. Your other source files containing other functions and their declarations
+				- You can also put class implementation code
+
+		Syntax:
+			// main.cpp
+			#include "lib.h"
+			int main()
+			{
+				return 0;
+			}
+
+			// lib.h
+			[return_type] [prototype_func_name](arguments);
+
+			// other_src.cpp
+			#include <iostream>
+			using std::cout;
+			using std::cin;
+			using std::end;
+			[return_type] [prototype_func_name](arguments)
+			{
+				// Function Declaration for prototype function here
+				...
+			}
+
+			// Compilation
+			g++ [parameters] [source-file-1] [source-file-2] ... -o [output-file]
+				where:
+					parameters : Other parameters to use with g++
+					source-file-1 : Contains your source file with main() function
+					source-file-2 : Contains your source file with all other functions
+					output-file : Your specified output file name; Default: encapsulated object file (file.o)
+
+	- Example:
+
+		/*
+		 * Hello.cpp 
+		 * - Source File 
+		 * - Contains your main() function
+		 */
+		#include "print.h"
+		int main()
+		{
+			print();
+			return 0;
+		}
+
+		/* 
+		 * print.h 
+		 * - External Header Library
+		 * - Contains your prototype function for forward definitions
+		 */
+		void print();
+
+		/*
+		 * print.cpp (
+		 * - Your source file for all other functions
+		 * - Can also put class implementation code
+		 */
+		#include <iostream>
+		using std::cout;
+		using std::cin;
+		using std::end;
+		void print()
+		{
+			cout << "Hello World" << endl;
+		}
+
+		// To compile multiple cpp
+		g++ Hello.cpp print.cpp -o Hello.exe
+
+		// To compile with object files
+		g++ Hello.cpp print.o -o Hello.exe		

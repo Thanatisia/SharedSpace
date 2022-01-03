@@ -1,0 +1,19 @@
+Encapsulation	
+
+1. To share your function
+		/*
+		 * [Encapsulation]
+		 * If an external party (friend etc.) wants to use your function but 
+		 *	- you dont want to give source code
+		 * 1. Generate a .o object file
+		 * 2. Pass to your friend - print.h and print.o
+		 *	- Not print.cpp
+		 * 	- as this is your source code
+		 * 3. Friend will compile his own executable using the object file
+		 *	- Object file is not editable
+		 */
+		// E1. Generate a .o object file
+		g++ -c print.cpp		
+
+		// E3. Your friend code a hello2.cpp
+		g++ hello2.cpp print.o -o hello2.exe
