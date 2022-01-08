@@ -1,0 +1,50 @@
+Cheatsheet - Regular Expressions
+
+[Table of Content]
+Metacharacters
+	Matching
+	Quantifiers
+	Character Types - PCRE
+
+Metacharacters:
+	Matching:
+		# Metacharacters that is used to identify or match
+		.	: Matches any single character
+		\	: Identifies the next character as a literal value
+		^	: Anchors characters to the beginning of a string
+		$	: Anchors characters to the end of a string
+		()	: Specifies requires characters to include in a pattern match	
+		[]	: Specifies alternate characters allowed in a pattern match
+		[^]	: Specifies characters to exclude in a pattern match
+		-	: Identifies a possible range of characters to match
+		|	: Specifies alternate sets of characters to include in a pattern match
+
+	Quantifiers:
+		# Metacharacters that specifies the quantity of a match
+		?	: Specifies that the preceding character is optional
+		+	: Specifies that one or more of the preceeding characters must match
+		*	: Specifies that zero or more of the preceeding characters can match
+		{n}	: Specifies that the preceeding character repeat exactly n times; {min, max} where n = size
+		{n,}	: Specifies that the preceeding character repeat at least n times; {min, max} where n = minimum
+		{,n}	: Specifies that the preceeding character repeat up to n times; {min, max} where n = maximum
+		{n1, n2}: Specifies that the preceeding character repeat at least n1 times but no more than n2 times; {min, max} where n1 = min & n2 = max
+
+
+	Character Types - PCRE:
+		\a	: alarm (hex 07)
+		\cx	: "control-x", where x is any character
+		\d	: Any decimal digit
+		\D	: any character not in \d
+		\e	: escape (hex 1B)
+		\f	: formfeed (hex 0C)
+		\h	: any horizontal whitespace character
+		\H	: any character not in \h
+		\n	: newline (hex 0A)
+		\r	: carriage return (hex 0D)
+		\s	: any whitespace character
+		\S	: any character not in \s
+		\t	: tab (hex 09)
+		\v	: any vertical whitespace character
+		\V	: any character not in \v
+		\w	: any letter, number or underscore character
+		\W	: any character not in \w
