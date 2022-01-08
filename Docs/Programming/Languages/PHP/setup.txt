@@ -1,0 +1,63 @@
+PHP Web Server Programming Setup Guide
+
+[Table of Contents]
+Using XAMPP
+
+
+# --- Using XAMPP
+
+If you are using XAMPP:
+	[Local Copy]
+	1. Install XAMPP / Download XAMPP Zip
+		- To make it portable
+			- Download and Install, but remove all permanent artefacts such as:
+				- Shortcuts
+				- Desktop Icons
+			- After installation:
+				- zip and uninstall
+				- Extract zip and put it into your C:/ directory
+				- Final result: 
+					- you should have C:/xampp
+
+	2. Go into C:/xampps > htdocs
+	3. (OPTIONAL) Paste or create project workspace/directories
+	4. Enter directory of your choice
+	5. Paste or create a PHP file
+		NOTE:
+			- To use a PHP file
+				- Create a '.php' file and write HTML code in it (OPTIONAL)
+				- If you create a .html file, the XAMPP / WAMP server will not recognise it as a PHP-executable file,
+				- thus it would not send the PHP file for processing
+				- the server recognizes .php extension as PHP
+
+	6. Double click "xampp-control.exe"
+	7. Press "Start" under the XAMPP module
+		NOTE:
+			- If you are unable to start any of the Modules
+				- Take note of the log below
+				- Typical issues:
+					- Another application is using a port number that the module requires
+						- Disable temporarily the program that is using the port number OR
+						- Change the required port number
+	8. After starting XAMPP module
+		- Take note of the port number under the "Port(s)" column for the started module
+			- i.e. 80, 443
+		- Type in your browser 
+			- localhost:[port_number] or
+			- 127.0.0.1:[port_number] or
+			- localhost:[port_number]/directory/to/file/file.{html|php}
+			- 127.0.0.1:[port_number]/directory/to/file/file.{html|php}
+
+	9. Modify PHP file as required
+
+	[Remote Copy]
+	- You will require Filezilla for a remote/network FTP file/web server
+
+	10. [IF Web Server] Install Filezilla Server
+		10.i. Setup Web Server
+	11. [User] Install Filezilla Client
+		11.i. Setup Client Application
+		11.ii. Connect to FTP File/Web Server address and password
+		11.iii. Copy from your local copy into the remote FTP server
+		11.iv. Test domain on network
+
