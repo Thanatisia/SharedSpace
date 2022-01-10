@@ -1,0 +1,35 @@
+Macros :
+	#define
+		Syntax:
+			To Define : #define [macro] [replacement_value]
+			To Undefine : #undef
+		Examples:
+			#define PI 3.1415926
+			#define MAX(a,b)	( ( (a)>(b) ? (a) : b) )
+
+	#extern
+		Syntax:
+			[file B]
+			[data_type] [variable] = value;
+
+			[file A]
+			extern [data_type] [variable];
+
+			- Compilation : Must compile together
+			g++ fileA.cpp fileB.cpp -o file.exe
+		Examples:
+			fileA.cpp
+			---------
+			int fileAVar = 138;
+	
+			fileB.cpp
+			---------
+			extern int fileAVar;			// Declare the use of fileA.cpp's variable [fileAVar] in fileB.cpp
+
+			int main()
+			{
+				cout << fileAVar << endl;
+			}
+
+			- Compilation : Must compile together
+			g++ fileA.cpp fileB.cpp -o file.exe

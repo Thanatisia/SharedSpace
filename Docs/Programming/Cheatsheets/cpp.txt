@@ -27,6 +27,12 @@ Useful Libraries & Functions :
 			abs
 			fabs
 			fabsf
+		fstream
+		ifstream
+		ofstream
+		sstream
+		random
+		time
 
 Operators :
 	+ : Add
@@ -81,6 +87,31 @@ Keywords:
 		- Does not store negative numbers, registers positive ranges only
 		- Syntax:
 			unsigned [data_type] [variable] = [value];
+
+Macros :
+	#define : #define [macro] [replacement_value]
+	#extern : extern [definition_from_other_file];
+
+Topics :
+	File Handling :
+		Libraries :
+			fstream
+			ifstream
+			ofstream
+
+		Modes:
+			- To use multiple modes
+				ios::[mode]_1 | ios::[mode]_2
+			Syntax: [file_stream_object].open("file_name", ios::[modes]);
+				in	: Open file for input (reading)
+				out	: Open file for output (writing)
+				app 	: Append, always write to the end, no overwrite
+				ate 	: "At the end", On opening - go to the end.
+				truc 	: Open file and wipes out existing content
+				binary  : Open file to read/write in binary, doesnt have the text conversion layer
+
+	Makefile : 
+
 
 Tips n Tricks : 
 	Data Type :

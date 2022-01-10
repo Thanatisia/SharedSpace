@@ -1,0 +1,20 @@
+Cheatsheets - PHP
+
+Operators:
+	. : Concatenator Operator
+
+Special Characters:
+	/ : Escape Character
+	
+Autoglobals :
+	# are predefined global arrays that provide information about [server], [environment], and [user input]
+	# Array	  : Description
+	$_COOKIE  : An array of values passed to the current script as HTTP cookies
+	$_ENV	  : An array of environment information
+	$_FILES	  : An array of information about uploaded files
+	$_GET	  : An array of values from a form submitted with the "get" method
+	$_POST	  : An array of values from a form submitted with the "post" method
+	$_REQUEST : An array of all the elements in the $_COOKIE, $_GET and $_POST arrays
+	$_SERVER  : An array of information about the Web server that served the current script
+	$_SESSION : An array of session variables that are available to the current script
+	$GLOBALS  : An array of references to all variables that are defined with global scope

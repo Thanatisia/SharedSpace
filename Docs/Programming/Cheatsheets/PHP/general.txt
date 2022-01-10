@@ -1,8 +1,0 @@
-Cheatsheets - PHP
-
-Operators:
-	. : Concatenator Operator
-
-Special Characters:
-	/ : Escape Character
-	

@@ -1,0 +1,105 @@
+Background Information
+	- Contains a list of dependencies and rules 
+		- for the make function to follow for compilation
+	- Left Side : 
+		- Specifies the names of targets
+		- Programs or System Files to built or processed
+	- Right Side :
+		- List the names of the files of which the target depends
+			- i.e. Source files, header files
+		- Construction Rules
+
+	- Any changes made to the files
+		- it will follow the construction rules
+
+	- Indentation is critical
+	- place these instructions in a file called makefile
+
+	- use 'make [files]' to compile
+		- it will look for the construction rules to follow
+
+Syntax:
+	# left-side : right-side
+	
+	[target]:	[dependencies : list of files required to construct the target]
+			[construction rules : instructions to construct the target]
+
+	clean:
+			[cleaning instructions]
+
+	# To compile
+	make
+
+	# To compile only 1 object file
+	make [object-file]
+
+	# To remove all dependencies/clean output file
+	make clean
+
+Examples:
+	[1] Simple Example
+		# Makefile
+		prog:		main.o fa.o fb.o
+				g++ -o prog main.o fa.o	fb.o
+
+		main.o:		main.cpp fa.h fb.h
+				g++ -c main.cpp
+
+		fa.o		fa.cpp fa.h
+				g++ -c fa.cpp
+
+		fb.o		fb.cpp fb.h
+				g++ -c fb.cpp
+
+		clean:
+				rm *.o
+
+		# Compile
+		make
+
+Arguments:
+	- make -n            : To list the command which make would run (without running)
+	- make -d 	     : To get information as to why particular actions are taken
+	- make -f [filename] : Tell make to use a different file instead of "makefile" to express rules and commands
+	- make clean	     : Clean unnecessary files
+
+Macros:
+	- much like #define
+	- accessed using the '$' operator
+		- with brackets if the name is more than one character
+	Syntax:
+		OBJECTS = x.o y.o z.o
+		prog:		$(OBJECTS)
+				g++ $(OBJECTS) -o prog
+
+	Examples:
+		[1] 2 macros - one for the compiler, and one for compiler flags
+
+			# Compiler type
+			CCC=g++
+
+			# Compiler Standard and Flags
+			CCFLAGS=-std=c++11
+					
+			TARGETS=x.o y.o z.o
+			prog:	$(TARGETS)
+				$(CCC) $(CCFLAGS) $(TARGETS) -o prog
+
+			x.o:	x.c x.h
+				$(CCC) $(CCFLAGS) -c x.c
+			y.o	y.c y.h
+				$(CCC) $(CCFLAGS) -c x.c
+			z.o	z.c z.h
+				$(CCC) $(CCFLAGS) -c z.c
+
+Makefiles for other purposes:
+
+Requirements:
+	make function
+
+Structure:
+	[Workflow]
+		vim makefile
+		make install		// Compile Code for Installation
+		sudo make install	// Install Project into System
+		make clean		// Delete unnecessary files (Clean-up)
