@@ -1,0 +1,49 @@
+Unified Modelling Language (UML):
+	Introduction to UML:
+		- Language for design
+		- Standardised
+			- People from any background can understand your design by handing the UML design plans
+		- UML : Unified Modelling Language
+			- Provides an unambiguous mechanism to describe technical systems
+
+	Types of UML Models:
+		- Functional View
+			- What should the system do?
+			- Perspective: User
+			- Use Case Description, Use Case Design, Use Case Model, Use Case Diagrams
+		- Structural View
+			- How must the system be implemented?
+			- Perspective: System Architect
+			- Class Diagrams, Object Diagrams
+		- Behavioural View
+			- How does the system operate?
+			- The flow of the program
+				- Main Flow
+				- Alternate Flow
+			- Interaction Diagram, State Diagram
+
+		- Class Model
+			- Structural
+			- Class Diagram, Object Diagram
+		- State Model
+			- Evolution of objects of one class/type (by modelling transitions from one state to another)
+				- State Diagrams
+		- Interaction Model
+			- How objects interact
+				- Use cases, sequence diagrams, activity diagrams
+
+	Contains:
+		- Use-Case
+			- Use Case Model
+			- Use Case Design	
+			- Use Case Description
+		- Database
+			- Database Description
+			- Database Design
+			- Database Diagram
+		- GUI 
+			- GUI Design
+			- GUI Diagram
+		- Activity Diagram
+		- Class Diagram
+		- Object Diagram

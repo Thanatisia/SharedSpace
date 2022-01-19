@@ -7,11 +7,13 @@ Metacharacters
 	Character Types - PCRE
 
 Metacharacters:
+	General:
+		^...$	: Start and End
 	Matching:
 		# Metacharacters that is used to identify or match
 		.	: Matches any single character
 		\	: Identifies the next character as a literal value
-		^	: Anchors characters to the beginning of a string
+		^	: NOT anything inside bound, NOT, Anchors characters to the beginning of a string
 		$	: Anchors characters to the end of a string
 		()	: Specifies requires characters to include in a pattern match	
 		[]	: Specifies alternate characters allowed in a pattern match
@@ -48,3 +50,24 @@ Metacharacters:
 		\V	: any character not in \v
 		\w	: any letter, number or underscore character
 		\W	: any character not in \w
+
+	Important (?):
+		^...$	:    Start and End
+		^	:    NOT anything inside bound, NOT
+		*	:    Zero or more
+		+	:    One or more
+		?	:    Optional Characters
+		-	:    To, range
+		[]	:    Bound, anything inside are the keywords to search for
+		{}	:    Range, Repetition
+		[abc]	:    Only a, b or c
+		[^abc]	:    NOT a, b nor c
+		[a-z]	:    Characters a to z
+		[0-9]	:    Numbers 0 to 9
+		{m}	:    m Repetitions
+		{m,n}	:    m to n repetition, i.e.: {0, 10} = 0 to 10 times
+		{*}	:    0 or more Repetitions
+		\d	:    Any Digit
+		\D	:    Any Non-Digit Character
+		\w	:    Any Alphanumeric character
+		\W	:    Any Non-alphanumeric character

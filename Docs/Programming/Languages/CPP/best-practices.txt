@@ -1,0 +1,9 @@
+C++ Best Practices:
+
+Encapsulation:
+	File-Level:
+		To generate .o file :
+			g++ -c [source-file].cpp	// Pass source.o, source.h to friend
+
+		To compile using .o file :
+			g++ main1.cpp source.o -o main1.exe

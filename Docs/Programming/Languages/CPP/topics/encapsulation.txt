@@ -1,0 +1,96 @@
+		Encapsulation:
+			- Example of a black box
+			- Hide components in a container
+			- To access some of the hidden components: An [interface] should be provided
+			- Interface:
+				- Access point to access
+					- Example:
+						 - To access the phone, you need a touch screen to interact with the phone
+			- users of an object only need to see the surface of the object
+				- Whatever they need
+
+			File-Level Encapsulation (*.h, *.cpp)
+				- Inside *.h file, Function Prototypes
+				- Generate *.o
+				- Pass your *.o, *.h file to your friend
+
+			Modes:
+				private : 
+					// Black box
+
+				public :
+					// Interface
+
+				protected:
+					// Only own-self + related sub-class
+					// Partial black box
+
+			Syntax:
+				class class_name
+				{
+					private:
+						// data (& functions) hidden from the user
+						[data_type] var = value;
+					public:
+						// user-accessible functions, etc -> Interfaces	
+						// Prototype Functions
+						class_name();
+				};
+
+				// In your *.cpp file
+				// Force the public to use your function as a control list
+				
+				// Setter Function
+				void class_name::func_name(params)	
+				{
+					val = new_val;
+				}
+
+				// Getter Function
+				[data_type] class_name::func_name()
+				{
+					return [value];
+				}
+
+				int main()
+				{
+					class_name class_obj;
+
+					// To modify private object in class
+					class_obj.func_name(params);
+				}
+			Examples:
+				- To access/modify private
+				class class_name
+				{
+					private:
+						// data (& functions) hidden from the user
+						string val = "Hello World";
+					public:
+						// user-accessible functions, etc -> Interfaces	
+
+						// Prototyep functions
+						class_name();
+						void set_val(string new_val);
+						string get_val();
+				};
+
+				// In your *.cpp file
+				// Force the public to use your function as a control list
+				void class_name::set_val(string new_val)	
+				{
+					val = new_val;
+				}
+
+				string class_name::get_val()
+				{
+					return val;
+				}
+
+				int main()
+				{
+					class_name class_obj;
+
+					// To modify private object in class
+					class_obj.set_val("Test");
+				}

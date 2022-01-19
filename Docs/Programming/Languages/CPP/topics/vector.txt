@@ -1,0 +1,17 @@
+Data Structure: Vector
+	- To import: #include <vector>
+	- To declare: vector<[data_type]> vector_obj;
+	- To initialize: vector<[data_type]> vector_obj = [];
+	- To get size of container: vector_obj.size();
+	- To append: vector_obj.push_back(element)
+	- To remove last element: vector_obj.pop_back()
+	- To access elements: [data_type] element = vector_obj[index];
+	Examples:
+		#include <vector>	// Import vector
+		vector<[data_type]> func_name(args)
+		{
+			vector<[data_type]> variable;		// Declare vector container
+			variable.push_back(element);		// Append to vector container
+			int vector_size = variable.size();	// Get size of vector
+			[data_type] element = variable[index];	// Get element of vector
+		}

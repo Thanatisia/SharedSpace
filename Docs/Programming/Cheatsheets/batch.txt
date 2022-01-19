@@ -1,0 +1,231 @@
+Windows Shellscript - Batch Cheatsheet
+
+Table of Contents:
+    Commands
+    Usage
+    Special Characters
+    Operators
+    Snippets
+    Topics
+        Redirection
+    Best Practices
+    Glossary
+    Resources
+
+Commands:
+    call    : Call one batch program from another / call a subroutine (function)
+    copy    : Copy a file from one location to another (same as 'cp')
+    echo    : Echo (Standard Output Function)
+    exit    : Exit the script/program and return the error code
+    findstr : Equivalent to Linux's 'grep'
+    goto    : Jump to a labelled line / function
+    type    : Equivalent to Linux's 'cat'
+
+Usage:
+    call 
+        Syntax: 
+            [1] Call a batch script                                                     : call [drive:] [path] [filename] [parameters]
+            [2] Call a function (label)                                                 : call :label [params/arguments]
+            [3] Call an internal command, first expanding any variables in the arguent  : call [internal_command]
+        Params: 
+            drive:      : The drive letter of your program
+            path        : The path of the batch program
+            filename    : The filename of the batch program
+            :label      : Name of the function (aka Label) you want to run
+        Examples:
+            [1] Passing literal value as argument   : CALL MyScript_1.{cmd|bat} "variable"
+            [2] Passing variable as argument        : CALL Myscript_2.{cmd|bat} %variable%
+            [3] Calling a label (Function/method)   : CALL :label "variable"
+            [4]
+                :: Call a method with arguments
+                call :label args
+                :: Go back to caller
+                GOTO :eof
+
+    copy
+        Syntax:
+            copy/cp [file_1] [destination]
+        Params:
+        Examples:
+
+    echo
+        Syntax:
+            echo [params] [message]
+        Params:
+            -e : To note newlines
+        Examples
+
+    exit
+        Syntax:
+        Params:
+            /B [return_code]    : Exit with a return code
+        Examples:
+            EXIT /B 0
+
+    findstr
+        Syntax: 
+            [1] Open a file and search          - findstr [params] /c:"[regex_pattern]" "filename.extension"
+            [2] Grep the output of a command    - [command] | findstr [params] /c:"{regex_pattern|search_keyword}"
+        Params:
+            /i : Case-insensitive Search
+            /c : Use string as a literal search string
+                - Without this option: If the search string contains multiple words, seperated with spaces
+                    - then findstr will return lines that contain either word (OR)
+            /r : Evaluate as a regular expression
+            /? : Get Help
+        Examples:
+            Syntax to search for keyword                                        : [echo %PATH% | findstr /i /r /c:"keyword"]
+            Search for keyword 'python'                                         : [echo %PATH% | findstr /i /r /c:"python"]
+            Open File and grep for a pattern that matches a regular expression  : [findstr /i /r /c:"^SEARCH.*string_here$" file.extension
+
+    goto    
+        Syntax:
+            goto :label
+        Params:
+        Options:
+            :eof    : End of File
+        Examples:
+            goto :eof   : Return back to function caller after function has ended
+
+    type
+        Syntax: 
+            [1] Print contents of a text file   -   type "/path/to/filename.extension"
+            [2] Concatenate files               -   type [file_1] [file_2] > [output_file]
+        Params:
+
+Special Characters:
+    Escape Characters:
+        ^
+        \
+
+Operators:
+    Command Redirection:
+        [command] > filename                        : Redirect command output to a file (stdout) and write (overwrite)
+        [command] >> filename                       : Redirect command output to a file (stdout) and append
+        [command] < filename                        : Type (equivalent to 'cat') a text file (filename) and pass the output to [command]
+        [command_1] | [command_2]                   : Pipe; passing [command_1] output to [command_2]
+        [command_1] & [command_2]                   : Run [command_1] then run [command_2]
+        [command_1] && [command_2]                  : Execute [command_2] only if [command_1] is successful
+        [command_1] || [command_2]                  : Execute [command_2] only if [command_1] failed
+        [command_1] && [command_2] || [command_3]   : Execute [command_2] if [command_1] succeeds and Execute [command_3] if [command_1] failed
+        [command] >nul                              : To Hide/Suppress Error
+
+    Comments:
+        rem
+        ::
+       
+Variables:
+    - To Create Variables : set 
+        Syntax: [params] [variable_name]=[value]
+        Params:
+            /A : Used if the value needs to be numeric in nature
+            /P : Used if you want to get user input
+    - To Access Variables : %variable%
+    - To Access Expanded Variables : !variable!
+
+    Command Line Arguments:
+        %{1-9}          : To get 1st to 9th arguments
+        %@              : To get all other arguments past the 9th
+        %~[variable]    : Expand %variable% removing any surrounding quotes
+        %~f[variable]   : Expand %variable% to a Fully qualified path name                                      [i.e. %~f1 (Expand %1 to a fully qualified path name) => C:\utils\MyFile.txt]
+        %~d[variable]   : Expand %variable% to a Drive letter only                                              [i.e. %~d1 (Expand %1 to a Drive letter only) => C:]
+        %~p[variable]   : Expand %variable% to a Path only                                                      [i.e. \utils\ (This includes a trailing '\' which will be interpreted as an escape character by some commands)]
+        %~n[variable]   : Expand %variable% to a file name without file extension or path                       [i.e. MyFile]
+                            or
+                          If only a path is present (with no trailing backslash) - The last folder in that path
+        %~x[variable]   : Expand %variable% to a file extension only                                            [i.e. .txt]
+        %~s[variable]   : Change the meaning of f, n, s and x to reference the Short 8.3 name (if exists)
+        %~a[variable]   : Display the file attributes of %variable%
+        %~t[variable]   : Display the date/time of %variable%
+        %~z[variable]   : Display the file size of %variable%
+        %~$PATH:[variable]  : Search the PATH environment variable and expand %variable% to the fully qualified name of the first match found (if any)
+        %~dp[variable]  : Expand %variable% to a drive letter and path only (%~d + %~p)                         [i.e. %~dp1 (Expand %1 to a drive letter and path only) => C:\\utils]
+        %~sp[variable]  : Expand %variable% to a path shortened to 8.3 characters (%~s + %~p)
+        %~nx[variable]  : Expand %variable% to a file name and extension only (%~n + %~x)                       [i.e. %~nx2 (Expand %2 to a file name and extension only) => MyFile.txt]
+
+    Environment:
+        PATH    : Returns recognized system PATHs
+        windir  : Returns the WINDOWS path [C:\WINDOWS]
+
+    Expansion:
+        - Variable expansion means replacing a variable with its value [e.g. %windir% with its value C:\WINDOWS]
+        Syntax: SETLOCAL [Expansion-Type]
+        Options:
+            EnableDelayedExpansion : Delayed Expansion will cause variables within a batch file to be expanded at execution time rather than at parse time
+                NOTE:
+                    1. You need to use the '!variable!' syntax to access an expanded variable
+        NOTE:
+            - To end 'SETLOCAL' : 'ENDLOCAL'
+
+
+Snippets:
+    # Make a function
+        :func_name
+            rem Statements
+
+Topics:
+    Redirection:
+        - When redirection is performed without specifying a numeric handle
+            - Default is '1'
+                - i.e.: '>' will not redirect error messages
+        NOTES:
+            - Any long filenames must be surrounded by "double quotes"
+            - A CMD error '(command)' is an error raised by the command processor itself rather than the program/command
+            - Redirection with '>' or '2>' will overwrite any existing files
+            - You can redirect to a printer or any devices
+
+        Numeric Handles:
+            0   : STDIN   : Standard Input - Keyboard Input
+            1   : STDOUT  : Standard Output - Text Output
+            2   : STDERR  : Standard Error - Error Text Output
+            3-9 : Undefined
+
+        Special Devices:
+            DOS:
+                CON  : Console
+                LPT1 : Line Print Terminal (Parallel Port) 1
+                PRN  : Printer
+
+        Syntax: 
+            [command] 2> filename       : Redirect any error message and write into a file (2 : STDERR, > : Overwrite)
+            [command] 2>> filename      : Redirect any error message and append into a file (2 : STDERR, >> : Append)
+            (command) 2> filename       : Redirect any CMD.exe error and write into a file (2 : STDERR, > : Overwrite, () : CMD.exe)
+            command > file 2>&1         : Redirect errors and output to one file
+            command > file_1 2> file_2  : Redirect output and errors to seperate files (1: STDOUT : file_1, 2: STDERR : file_2)
+            command 2> nul              : Redirect error messages to NUL
+            command >nul 2>&1           : Redirect error and output to NUL
+            command > filename 2> nul   : Redirect output to file but suppress error
+            (command) > filename 2> nul : Redirect output to file but suppress CMD.exe errors
+
+
+        Examples:
+           Type NUL> newfile.txt    : Create an empty file using the NUL device
+           Copy NUL newfile.txt     : Create an empty file by copying a NUL file
+
+        Redirect Multiple Lines:
+            - Redirect multiple lines by [Bracketing a set of commands]
+            Syntax:
+                (
+                    [command_1]
+                    [command_2]
+                ) [direction] [filename]
+            Examples:
+                (
+                    echo Sample Text 1
+                    echo Sample Text 2
+                ) > C:\logfile.txt
+
+Best Practices:
+
+
+Glossary:
+    label : Also known as Function/Method
+
+Resources:
+    CALL                                                                        : https://ss64.com/nt/call.html
+    GOTO                                                                        : https://ss64.com/nt/goto.html
+    EnableDelayedExpansion                                                      : https://ss64.com/nt/delayedexpansion.html
+    How-to: Pass Command Line arguments (Parameters) to a Windows batch file    : https://ss64.com/nt/syntax-args.html
+    How to: Redirection                                                         : https://ss64.com/nt/syntax-redirection.html
+    Windows: `Cat`  Equivalent - CMD & PowerShell                               : https://www.shellhacks.com/windows-cat-equivalent-cmd-powershell/
+    Windows: `Grep` Equivalent - CMD & PowerShell                               : https://www.shellhacks.com/windows-grep-equivalent-cmd-powershell/
