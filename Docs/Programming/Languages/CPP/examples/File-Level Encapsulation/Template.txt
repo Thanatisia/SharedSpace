@@ -1,0 +1,47 @@
+/*
+ * ====================
+ * Inside Class.h file
+ * ====================
+ */
+#ifndef [CLASS]_H
+#define [CLASS]_H
+
+class [Class] {
+	private:
+
+	public:
+};
+
+#endif
+
+
+/* 
+ * =======================
+ * Inside Class.cpp file
+ * =======================
+ */
+#include "Class.h"
+
+[return_type] [Class]::[function](function signature) {
+
+}
+
+/*
+ * ================
+ * Inside main.cpp
+ * ================
+ */
+int main()
+{
+
+}
+
+/* 
+ * Compilation and Sharing
+ * 1. Generate 'Person' Object file
+ *      g++ -c Class.cpp
+ * 2. Pass the .o object file and .h header file to the other party
+ * 3. User will compile the object file with his main.cpop file
+ *      g++ Class.o main.cpp -o main.exe
+ */
+

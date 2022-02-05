@@ -14,6 +14,7 @@ Table of Contents:
 
 Commands:
     call    : Call one batch program from another / call a subroutine (function)
+    cd	    : Change Directory
     copy    : Copy a file from one location to another (same as 'cp')
     echo    : Echo (Standard Output Function)
     exit    : Exit the script/program and return the error code
@@ -41,6 +42,12 @@ Usage:
                 call :label args
                 :: Go back to caller
                 GOTO :eof
+
+    cd
+	Syntax:
+	    cd [options] [drive:][directory]
+	Options:
+	    /d : Change to the drive letter and the directory at the same time (normally : need to manually switch drive letters)
 
     copy
         Syntax:
@@ -162,6 +169,9 @@ Snippets:
     # Make a function
         :func_name
             rem Statements
+
+    # Start Command Prompt and keep the caller window
+	start cmd /k
 
 Topics:
     Redirection:

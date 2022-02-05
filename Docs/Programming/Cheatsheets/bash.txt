@@ -12,33 +12,39 @@ Commands:
 Usages:
 
 Snippets:
-    seperate_by_Delim()
-    {
-        #
-        # Seperate a string into an array by the delimiter
-        #
+    seperate by delimiter:
+        seperate_by_Delim()
+        {
+            #
+            # Seperate a string into an array by the delimiter
+            #
 
-        # --- Input
-        
-        # Command Line Argument
-        delim="${1:-';'}"	# Delimiter to split
-        str="$2"			# String to be seperated
+            # --- Input
+            
+            # Command Line Argument
+            delim="${1:-';'}"	# Delimiter to split
+            str="$2"			# String to be seperated
 
-        # Local Variables
+            # Local Variables
 
-        # Array
-        content=()			# Array container to store results
-        char=''				# Single character for splitting element of a string
+            # Array
+            content=()			# Array container to store results
+            char=''				# Single character for splitting element of a string
 
-        # Associative Array
+            # Associative Array
 
-        # --- Processing
-        # Split string into individual characters
-        IFS=$delim read -r -a content <<< "$str"
-        
-        # --- Output
-        echo "${content[@]}"
-    }
+            # --- Processing
+            # Split string into individual characters
+            # IFS=$delim read -r -a content <<< "$str"
+            content=($(echo $str | tr $delim "\n"))
+            
+            # --- Output
+            echo "${content[@]}"
+        }
 
+    if-main:
+        if "${BASH_SOURCE[0]}" == "${0}"; then
+            main "$@"
+        fi
 
 Glossary:

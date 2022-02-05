@@ -1,7 +1,10 @@
 Cheatsheets - PHP
 
 Operators:
-	. : Concatenator Operator
+	.   : Concatenator Operator
+    +   : Additional Operator - To append one array to another
+    +=  : Additive Compound Assignment Operator - To append one array to another
+    =>  : Array Operator - To specify an element's key in Associative Arrays [$array_name = array(key_1=>value_1, key_2=>value_2...)]
 
 Special Characters:
 	/ : Escape Character
@@ -18,3 +21,97 @@ Autoglobals :
 	$_SERVER  : An array of information about the Web server that served the current script
 	$_SESSION : An array of session variables that are available to the current script
 	$GLOBALS  : An array of references to all variables that are defined with global scope
+
+Functions:
+    Write-up:
+        Variables:
+            Check:
+                isset : Check if Variable is set
+        Array:
+            Array Manipulation:
+                array_shift     :  
+                array_unshift   :
+
+    Descriptions:
+        chmod : used to change the permissions or modes of a file or directory
+        Syntax: chmod($filename, $mode)
+        NOTES:
+            $mode = permission of the file/directory
+        Examples:
+            [1]
+              chmod("myfile.txt", 0754);    /* 0754 : */
+
+    Usage:
+
+Topics:
+    File Permissions:
+        Permissions | First Digit (Left Mode) - Always 0 | Second Digit (User (u)) | Third Digit (Group (g)) | Fourth Digit (Right Most) (Other (o))
+        Read    (r) : 0, 4, 4, 4
+        Write   (w) : 0, 2, 2, 2
+        Execute (x) : 0, 1, 1, 1
+
+    Cookies:
+        Type of Cookies: 
+            - Temporary
+            - Persistant
+        Creating Cookies: setcookie(name [, value, expires, path, domain, secure]);
+        Reading Cookies: $_COOKIE['key'];
+        Deleting Cookies: setcookie('cookie_name', "", time()-n);
+
+    Sessions:
+        Syntax: $_SESSION["your_keyword"] = value;
+            - You can use $_SESSION global keyword to temporarily store a value in the global field for use in other files without including
+            - To unset: unset($_SESSION["your_keyword"]);
+            - To Check if is set: if( isset($_SESSION["your_keyword"]) )
+
+        Manage Sessions:
+            Starting Session: session_start();
+            Closing Session: session_destroy();
+        
+        Session ID:
+            Get or Set Session ID: session_id();
+        
+        Session Key-Value:
+            Creating Session Key-Value: $_SESSION['key'] = value;
+            Reading Session Key-Value: $session_value = $_SESSION['key'];
+            Validate Session Key-Value: isset($_SESSION['key'])
+            Deleting Session Key-Value: unset $_SESSION['key']
+
+
+Snippets:
+    Get all files/folders in current directory with hyperlink:
+        <?php
+            $Dir = "./"; //$Dir = "name_of_dir";
+            $DirOpen = opendir($Dir);
+            while ($CurFile = readdir($DirOpen)) {
+                if ((strcmp($CurFile, '.') != 0) && (strcmp($CurFile, '..') != 0))
+                    /*
+                        Trying to create a hyperlink to each file
+                    */
+                    echo "<a href=\"./" . $CurFile ."\">" . $CurFile . "</a><br/>\n";
+                    // echo "<a href=\"name_of_dir/" . $CurFile . "\">" . $CurFile . "</a><br />\n";
+            }
+            closedir($DirOpen); 
+        ?>
+
+    //Helper function that checks input for malicious or unwanted content.
+    	<?php
+	    function sanitize_input($data)
+            {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+            }
+
+Variables:
+    Downloading Files:
+        $_FILES : autoglobal array; Information for the uploaded file
+            Syntax:
+                $_FILES['file_name']['elements']
+            - Contains five elements
+                ['error']       : Contains the error code associated with the file
+                ['tmp_name']    : Contains the temporary location of the file contents
+                ['name']        : Contains the name of the original file
+                ['size']        : Contains the size of the uploaded file in bytes
+                ['type']        : Contains the type of the fil

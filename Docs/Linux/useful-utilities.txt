@@ -1,0 +1,25 @@
+# Useful Utilities for [Linux]
+
+Table of Contents:
+	General
+	Distro-Specific
+		Arch
+		Debian
+	Repositories
+	Vim Plugins
+
+General:
+	dos2unix : To convert files creates in Windows to *nix (windows uses '\r\n' delimiter for newline) | Syntax : dos2unix [filename]
+	unix2dos : To convert files creates in *nix to Windows (Unix uses '\r' delimiter for newline)      | Syntax : unix2dos [filename]
+
+Distro-Specific:
+	Arch
+	Debian
+	
+Repositories:
+
+Vim Plugins:
+	# Table of Contents
+	# project : author
+	# [Colorscheme]
+		gruvbox : morhetz

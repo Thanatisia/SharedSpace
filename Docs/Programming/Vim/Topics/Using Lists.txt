@@ -1,0 +1,43 @@
+Vim - Lists
+
+Table of Contents:
+	Syntax
+	Access	
+
+Syntax: 
+	[1] 
+		let tmp_list=[5, 'elements','in','here', 5.0]
+
+Notes:
+	# To split a list into multiple lines
+	# - Append a '\' behind your element
+		let tmp_list=[
+		\element
+		\]
+
+	# To add a comment in the list
+	# - Append a '\' after your ""
+		let tmp_list=[
+		"\ Comment-1
+		\element_1,
+		"\ Comment-2
+		\element_2
+		\]
+
+Access:
+- To access an element
+	Syntax: list[index]
+
+- To Iterate a list
+	Syntax:
+		for (statement)
+			// Iteration
+		endfor
+
+	1. Foreach-style
+		let test_list=["Hello", "World"]
+		for element in test_list
+			echom element
+			" or
+			execute 'echom ' . element
+		endfor

@@ -1,0 +1,88 @@
+Cheatsheets - SQL
+```
+Includes the various SQL types
+	- SQLite
+	- MySQL
+	- NoSQL
+	- Postgresql
+```
+
+Database Platforms:
+	mysql
+	nosql
+	postgresql
+	sqlite
+
+MySQL:
+    To Access MySQL: Go to phpmyadmin
+    
+    Opening MySQL Connection:
+        $conn = mysqli_connect(host, username, password [, dbname, port, socket]);
+    
+    Closing MySQL Connection:
+        $conn_status = mysqli_close($connection);
+    
+    Execute SQL Statements:
+        $result = mysqli_query($connection, $query_stmt);
+
+    Query Results:
+        Working with Query Results:
+            mysqli_data_seek($Result, position)                                 : Moves the result pointer to a specified row in the resultset
+            mysqli_fetch_array($Result, MYSQL_ASSOC | MYSQL_NUM | MYSQL_BOTH)   : Returns the fields in the current row of a resultset into an indexed array, associative array, or both, and moves the result pointer to the next row 
+            mysqli_fetch_assoc($Result)                                         : Returns the fields in the current row of a resultset into an associative array and moves the result pointer to the next row
+            mysqli_fetch_row($Result)                                           : Returns the fields in the current row of a resultset into an indexed array and moves the result pointer to the next row
+        Closing Query Results: 
+            mysqli_free_result();
+        Accessing Query Result Information:
+            mysqli_num_rows(queryResults) : Returns the number of rows in a query result
+            mysqli_num_fields(queryResults) : returns the number of fields in a query result
+
+    Errors:
+        mysqli_connect_errno(connection); : Get Connection Error Number
+        mysqli_connect_error(connection); : Get Connection Error
+        die(error function);              : Display Error
+        mysqli_errno(connection);         : Get MySQL Error Number
+        mysqli_error(connection);         : Get MySQL Error
+
+    Prepared Statements and Bound Parameters:
+        Notes:
+            - Prepared Statements
+                - You can use '?' as placeholders for unknown values
+        Prepare:
+            mysqli_prepare($conn, $sqlstat);
+            mysqli_stmt_bind_param(preparedS, argType,[arguments])
+            mysqli_stmt_bind_results(preparedS, mixed &$var1 [, mixed &$... ] )
+
+        Execute:
+            mysqli_stmt_execute (preparedS)
+            mysqli_stmt_fetch (preparedS)
+            mysqli_stmt_get_result(preparedS)
+
+        Finish:
+            mysqli_stmt_close(preparedS)
+
+SQL:
+    SQL Statements:
+        CREATE  :
+            Database: CREATE DATABASE [db_name];
+            Tables: CREATE TABLE [table_name] ( column_name column_data_type constraints, ... );
+        DROP    : 
+            - To Delete a database/table
+            Database : DROP DATABASE [db_name]
+            Tables: DROP TABLE [table_name]
+        SELECT  : SELECT [table_name] FROM [db_name] WHERE [conditions];
+            - To Query and Retrieve Data
+        INSERT  : INSERT INTO [table_name](column_names) VALUES(values);
+            - Add a new record/row into a table
+        UPDATE  : UPDATE [table_name] SET column_name='[new_value]' WHERE [condition];
+            - To update a column or row in a table
+        DELETE  : DELETE FROM [table_name] WHERE [condition];
+            - To Delete Records from a table
+            - Omit the WHERE clause to delete all records in a table
+
+    SQL Constraints:
+        AUTO_INCREMENT  : Often used with a PRIMARY KEY to generate a unique ID for each new row (row number) ina  table
+        PRIMARY KEY     : 
+        FOREIGN KEY
+        NOT NULL        : To require a field include a value
+

@@ -87,6 +87,18 @@ Keywords:
 		- Does not store negative numbers, registers positive ranges only
 		- Syntax:
 			unsigned [data_type] [variable] = [value];
+	virtual:
+		- To enable polymorphic behaviour
+		- Syntax: 
+			virtual [statement]
+	override:
+		- To provide a check on the use of a base class
+		- Syntax:
+			[statement] override;
+	final:
+		- To stop a class from being inherited
+		- Syntax:
+			class [class_name] final {};
 
 Macros :
 	#define : #define [macro] [replacement_value]
@@ -186,6 +198,13 @@ Topics :
 
 			To compile using .o file :
 				g++ main1.cpp source.o -o main1.exe
+
+	Inheritance:
+		- Nested Classes
+
+	Polymorphism:
+		Type casting: Use static_cast
+			Syntax: static_cast<[type]*>(object);
 
 Snippets:
 	String Manipulation and Vector:
