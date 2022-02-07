@@ -90,7 +90,10 @@ Keywords:
 	virtual:
 		- To enable polymorphic behaviour
 		- Syntax: 
-			virtual [statement]
+			# General Usage in Class
+			    virtual [statement]
+			# Multiple Inheritance
+			    class ChildClass : virtual public ParentClass1, virtual public ParentClass2 {...}
 	override:
 		- To provide a check on the use of a base class
 		- Syntax:
@@ -99,6 +102,9 @@ Keywords:
 		- To stop a class from being inherited
 		- Syntax:
 			class [class_name] final {};
+    template:
+        # To make a generic type template
+             
 
 Macros :
 	#define : #define [macro] [replacement_value]
@@ -124,6 +130,11 @@ Topics :
 
 	Data Structure: 
 		Vector:
+            - Vector is a form of template
+                - Vector takes in a generic type 'T' whereby
+                    when you initialize a vector object of type 'T(n)', 
+                    vector will take that type and replace generic type 'T' with 'T(n)'
+                i.e. vector<T>
 			Syntax:
 				- To import: #include <vector>
 				- To declare: vector<[data_type]> vector_obj;
@@ -201,6 +212,26 @@ Topics :
 
 	Inheritance:
 		- Nested Classes
+
+		Multiple Inheritance:
+			- To avoid duplicate inheritance : Use the keyword 'virtual'
+                        Syntax:
+                            class ChildClass : virtual public ParentClass {
+                                // Statements
+                            }
+                        Notes:
+                            - Only use virtual in a inheritance (class ChildClass : virtual public ParentClass) when you plan or design to have multiple inheritance
+                        Examples:
+                            [1]
+                                class Student : virtual public Person {…};
+                                class Employee : virtual public Person {…};
+
+                                class StudentEmployee : 
+                                    virtual public Student, 
+                                    virtual public Employee
+                                {
+                                    // Statements
+                                };
 
 	Polymorphism:
 		Type casting: Use static_cast

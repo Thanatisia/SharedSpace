@@ -5,25 +5,25 @@ Table of Contents:
     Workflow
 
 Commands:
-	git status 							:	To view the current status of the branch
-    git config {options} {parameters}   :   Configuration to the current repository. Options: {-u: User | -g: Global}, Parameters: {user.name: Username | user.email: Email}
-	git init							:	To Initialize the current directory into a git repository
-	git add [files (default: *)]		:	Add files to git repository, NOTE: Example file names include [* - All files in this directory and subdirectory, . - All files in this directory]
-	git commit -m [messages]			:	Confirm and commit changes made to repository and write a message specifying the changes
-	git push -u [remote-url] [branch]	:	Push added files, changes and committed updates to the [specified branch] of the [specified remote repository server]
-	git branch -b [branch-name]			:	Create the branch (if does not exist) and switch to it
-	git switch [branch_name]			:	Switch active branch to another branch
+    git status 					:	To view the current status of the branch
+    git config {options} {parameters}   	:   	Configuration to the current repository. Options: {-u: User | -g: Global}, Parameters: {user.name: Username | user.email: Email}
+    git init					:	To Initialize the current directory into a git repository
+    git add [files (default: *)]		:	Add files to git repository, NOTE: Example file names include [* - All files in this directory and subdirectory, . - All files in this directory]
+    git commit -m [messages]			:	Confirm and commit changes made to repository and write a message specifying the changes
+    git push -u [remote-url] [branch]		:	Push added files, changes and committed updates to the [specified branch] of the [specified remote repository server]
+    git branch -b [branch-name]			:	Create the branch (if does not exist) and switch to it
+    git switch [branch_name]			:	Switch active branch to another branch
 
 Workflow:
-	Default:
-        git pull / git fetch && git merge
-        git status
-        git add [files]
-        git commit -m [messages]
-        git push -u origin main
+    Default:
+    	git pull / git fetch && git merge
+    	git status
+    	git add [files]
+    	git commit -m [messages]
+    	git push -u origin main
 
     First Commit:
-		git init
+	git init
         git config -u user.name  [username] // Set Username
         git config -u user.email [email]    // Set Email
         git add *
