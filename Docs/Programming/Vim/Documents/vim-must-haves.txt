@@ -1,0 +1,50 @@
+VimRC Settings, Keybindings, Commands Remaps, Plugins
+
+Table of Contents:
+	Settings
+	Plugins
+	Commands
+	Keybindings
+	Remaps
+
+
+
+#=========
+# Settings
+#=========
+
+
+
+#=====================
+# Plugins
+# author/project_name
+#=====================
+
+#=========
+# Commands
+#=========
+
+
+#=======
+# Remaps
+#=======
+
+# Undo break points
+	inoremap , ,<c-g>u			
+	inoremap . .<c-g>u			
+	inoremap [ [<c-g>u				
+	inoremap ! !<c-g>u			
+	inoremap ? ?<c-g>u		
+# Moving Text
+	vnoremap J :m '>+1<CR>gv=gv		: Move highlighted texts upwards; gv=gv (Re-Highlights, indent then rehighlight after moving)
+	vnoremap K :m '<-2<CR>gv=gv		: Move highlighted texts downwards; gv=gv (Re-Highlight, indent then rehighlight after moving)
+	inoremap <C-j> <esc>:m .+1<CR>==	: Moving text upwards (j)
+	inoremap <C-k> <esc>:m .-2<CR>==	: Moving text downwards (k)
+	nnoremap <leader>j :m .+1<CR>==		: Moving text upwards (j)
+	nnoremap <leader>k :m .-2<CR>==		: Moving text downwards (k)
+# General
+	nnoremap n nzzzv			: nz by default moves to the next search, this remap centers the line so nz will not move to another location
+	nnoremap Y y$				: Make capital 'Y' in Vim behave the same as yy
+	vnoremap " <esc>`>a"<esc>`<i"<esc>	: Wrap selected texts in Quotation Marks '"'
+
+

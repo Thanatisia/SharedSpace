@@ -1,0 +1,15 @@
+#=============================#
+# How to turn vim into an ide #
+#=============================#
+
+Table of Contents:
+1. ToDo
+2. Utilities
+3. Settings
+4. Commands
+5. Plugins
+6. Remaps
+
+1. ToDo
+- What to do after installing?
+	- Create a VimRC file

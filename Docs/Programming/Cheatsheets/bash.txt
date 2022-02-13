@@ -1,4 +1,4 @@
-Linux Shellscript (Bash) Cheatsheet
+﻿Linux Shellscript (Bash) Cheatsheet
 
 Table of Contents:
     Commands

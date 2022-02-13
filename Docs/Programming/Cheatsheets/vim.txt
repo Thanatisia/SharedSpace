@@ -14,4 +14,3 @@ Tabs:
 
 Vimscript:
     # Vim Scripting and Commands
-    

@@ -103,8 +103,23 @@ Keywords:
 		- Syntax:
 			class [class_name] final {};
     template:
-        # To make a generic type template
-             
+        # To make a generic type template: 
+            template <typename T>
+            T function_name(T param) {};
+
+        # To mix generic types:
+            # Must overload the correct operators
+
+        # To make multiple generic types in a function template:
+            template <typename T, typename U>
+            T function_name(T param, U param) {};
+
+        # Default Template Arguments:
+            # Use the library function-object template 'less' to set a default
+            template <typename T, typename F=less<T>>
+            function_name(T param1, T param2, F f=F()) {};
+
+  
 
 Macros :
 	#define : #define [macro] [replacement_value]

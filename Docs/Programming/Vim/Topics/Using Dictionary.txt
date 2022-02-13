@@ -1,0 +1,58 @@
+Vim - Dictionary
+
+Table of Contents:
+	Syntax
+	Access	
+
+Syntax: 
+	[1] 
+		let tmp_dict = { 'key_1' : 'value_1', 'key_2' : 'value_2' }
+
+Notes:	
+	# To split a list into multiple lines
+	# - Append a '\' behind your element
+		let tmp_list = {
+		        \ 'key_1' : 'value_1',
+			\ 'key_2' : 'value_2',
+		        \ }
+
+	# To add a comment in the list
+	# - Prepend a Quotation open mark '"' before your '\'
+		let tmp_list = [
+		        "\ Comment-1
+		        \ 'key-1' : 'value-1',
+		        "\ Comment-2
+		        \ 'key-2' : 'value-2'
+		        \ ]
+
+Functions:
+	has_key:
+		- Used to check if key is in dictionary
+		Syntax: has_key(dictionary, string)
+	items:
+		- Used to get items of dictionary (both key and value)
+		Syntax: for [k,v] in items(dictionary) ... endfor
+
+Access:
+- To access an element
+	Syntax: dictionary['key']
+
+- To Iterate a dictionary
+	Syntax:
+		# General
+		for (statement)
+			// Iteration
+		endfor
+
+		# items([dictionary])
+		for [k,v] in items(dictionary)
+
+		endfor
+
+	1. Foreach-style
+		let test_dict={ 'hello' : 'world' }
+		for [k,v] in items(test_dict)
+			echom k . ':' . v
+			" or
+			execute 'echom ' . k . ':' . v
+		endfor

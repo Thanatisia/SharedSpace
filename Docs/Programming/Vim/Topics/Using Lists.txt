@@ -8,21 +8,21 @@ Syntax:
 	[1] 
 		let tmp_list=[5, 'elements','in','here', 5.0]
 
-Notes:
+Notes:	
 	# To split a list into multiple lines
 	# - Append a '\' behind your element
-		let tmp_list=[
-		\element
-		\]
+		let tmp_list = [
+		        \ 'element'
+		        \ ]
 
 	# To add a comment in the list
-	# - Append a '\' after your ""
-		let tmp_list=[
-		"\ Comment-1
-		\element_1,
-		"\ Comment-2
-		\element_2
-		\]
+	# - Prepend a Quotation open mark '"' before your '\'
+		let tmp_list = [
+		        "\ Comment-1
+		        \ 'element_1',
+		        "\ Comment-2
+		        \ 'element_2'
+		        \ ]
 
 Access:
 - To access an element
