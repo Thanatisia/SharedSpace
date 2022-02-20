@@ -1,8 +1,35 @@
-Path of Windows Fonts: C:/Windows/Fonts
+Windows 10 - System Fonts
 
 Table of Contents:
+	To obtain fonts
 	To change system font to personal font
 	To Restore the default system font
+
+- Obtaining Fonts
+	
+	- There are alot of places to find fonts and some fonts even has icon packs
+		Examples:
+			Font Awesome : fontawesome.com
+			Nerd Fonts   : nerdfonts.com
+		
+	- Some recommended Fonts:
+		- Nerd Fonts
+			- Hack
+
+	- Git-based downloads: 
+		- Link to download latest version : http://github.com/project_author/project_name/releases/latest/download/Your_Font_Name_Here.zip
+
+	- Nerd Font : https://github.com/ryanoasis/nerd-fonts
+		- Go to 'Releases'
+		- Download your font of choice
+		- Automated Latest Release Download:
+			http://github.com/ryanoasis/nerd-fonts/releases/latest/download/Your_Font_Name_Here.zip
+
+- Placing Fonts
+
+	- Path of Windows Fonts: C:/Windows/Fonts
+	- Some examples of extensions used by fonts are : '.otf', '.ttf'
+	- Copy your fonts from your folder and paste into 'C:/Windows/Fonts'
 
 - To change system font to personal font:
 
