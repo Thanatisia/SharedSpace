@@ -2,6 +2,69 @@
 # Git guide - Cloning a repository
 #
 
-1. To clone a repository
+Table of Contents
+	1. Full Clone
+
+1. Full Clone 
+	- To clone a repository fully
 	git clone <repository_url>
 
+2. Sparse Clone
+	- To specify a tree path you want to clone from
+	- Remarks
+		- Special Thanks to the following:
+			Sparse Clone Tutorial : https://stackoverflow.com/questions/600079/how-do-i-clone-a-subdirectory-only-of-a-git-repository 
+	- Resources:
+		1. Jason Karns : http://jasonkarns.com/blog/subdirectory-checkouts-with-git-sparse-checkout/
+		2. Official Documentation : https://git-scm.com/docs/git-sparse-checkout
+		3. Read Tree : https://schacon.github.io/git/git-read-tree.html#_sparse_checkout
+
+	[Long Method]	
+
+	1. Make a local folder for cloning and go into it
+		mkdir <repository_name>
+		cd <repository_name>
+
+	2. Initialize local git
+		git init
+
+	3. Add path of remote repository to Remote
+		# This creates an empty repository with your remote, 
+		# and fetches all objects but doesn't check them out
+		git remote add -f origin <url>
+
+	4. Enable Sparse Checkout
+		git config core.sparseCheckout true
+
+	5. Define which file/folders you want to actually checkout
+		# List them in .git/info/sparse-checkout
+		echo "/path/to/subtree/dir_1" >> .git/info/sparse-checkout
+		echo "/path/to/subtree/dir_2" >> .git/info/sparse-checkout
+
+	6. Verify Sparse Checkout
+		# Linux: 
+		cat .git/info/sparse-checkout
+		# Windows: 
+		type .git/info/sparse-checkout
+
+	7. Update your empty repo with the state from the remote
+		# Default branch should be 'main'
+		git pull origin {branch}
+
+	[Experimental sparse-checkout]
+	
+	1. Initialize Sparse-Checkout
+		# same as:
+		#	git config core.sparseCheckout true
+		git sparse-checkout init
+
+	2. Set Path to Sparse Checkout
+		# same as:
+		#	echo "/path/to/subtree/dir" >> .git/info/sparse-checkout
+		git sparse-checkout set "/path/to/subtree/dir"
+		
+	3. Verify sparse-checkout
+		# same as:
+		#	Linux   : cat .git/info/sparse-checkout
+		#	Windows : type .git/info/sparse-checkout
+		git sparse-checkout list

@@ -118,8 +118,17 @@ Keywords:
             # Use the library function-object template 'less' to set a default
             template <typename T, typename F=less<T>>
             function_name(T param1, T param2, F f=F()) {};
-
-  
+    typeid:
+        - Syntax: typeid(class_obj);
+    typename:
+        - To implement variadic templates
+        - Allow to take in any number of arguments in a template
+        Syntax:
+            template<typename T, typename... Args>
+            void func(const T &t, const Args&... argv);
+    sizeof:
+        - Used to check number of arguments
+        Syntax: sizeof(objects)
 
 Macros :
 	#define : #define [macro] [replacement_value]
