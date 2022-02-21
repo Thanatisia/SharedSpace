@@ -33,6 +33,9 @@ Useful Libraries & Functions :
 		sstream
 		random
 		time
+		vector				: For Vector
+		map				: For map (Associative Array/Dictionary/Hashmap)
+		memory				: for Allocator
 
 Operators :
 	+ : Add
@@ -133,6 +136,39 @@ Keywords:
 Macros :
 	#define : #define [macro] [replacement_value]
 	#extern : extern [definition_from_other_file];
+
+Functions:
+	# Containers:
+		vector
+		    Syntax:
+			Declare a vector : vector<T> vec_obj;
+			Append element to vector : vec_obj.push_back(element);
+			Insert element in vector : vec_obj.insert(iterator, text_to_insert);
+			Remove element from vector : vec_obj.pop();
+			Point begining of vector : vec_obj.begin();
+			Point end of vector : vec_obj.end();
+			Get size of vector : vec_obj.size();
+			Get maximum size of container : vec_obj.max_size();
+			Get current memory allocation of container : vec_obj.capacity();
+			Reserve memory for n elements to avoid reallocation : vec_obj.reserve(n);
+
+	# Associative Containers:
+		map
+		    Library: #include <map>
+                    Syntax:
+		        Declare a map container : map<key_T, value_T> dict;
+                        Assign a value to a key : dict["key"] = value;
+		   Usage:
+                        map<key_T, value_T> dict;   // Declare a map container
+                    	dict["key"] = value;	// Assign value to dictionary's "key"
+    	allocator<T>
+        	Header: <memory>
+        	Syntax:
+        	    #include <memory>
+        	    class Allocator = allocator<T>
+        	Usage:
+        	    template<class T, class Allocator = allocator<T>>
+        	    class vector { ... }
 
 Topics :
 	File Handling :
@@ -260,6 +296,65 @@ Topics :
 	Polymorphism:
 		Type casting: Use static_cast
 			Syntax: static_cast<[type]*>(object);
+
+	Exception Handling:
+		try
+		{
+
+		}
+		catch(...)	// Default Catch Block - catches all other exceptions not caught; Must be placed at the bottom
+		{
+
+		}
+
+		- Standard Exceptions
+        		- Header '<exception>'
+            			- class 'std::exception' - equivalent to Java's Exception
+        		- In C++11 : header '<stdexcept>'
+        		Syntax:
+            			#include <stdexcept>
+            			using std::exception;
+            			try
+            			{
+            			}
+            			catch(exception& e)
+            			{
+            			}
+            			catch(...)
+            			{
+            			}
+
+	Containers:
+		Associative Containers:
+            		Sorted : Elements ordered by key
+                		- map
+                		- set
+                		- multimap
+                		- multiset
+            		Unordered Collections (C++11)
+            			- unordered_map
+                		- unordered_set
+                		- unordered_multimap
+                		- unordered_multiset
+            		Syntax:
+                		map:
+					Library: #include <map>
+                    			Declare a map container : map<key_T, value_T> dict;
+                    			Assign a value to a key : dict["key"] = value;
+            		Usage:
+                		map:
+                    			map<key_T, value_T> dict;   // Declare a map container
+                    			dict["key"] = value;	// Assign value to "key"
+
+	Allocators:
+    		allocator<T>
+        		Header: <memory>
+        		Syntax:
+            			#include <memory>
+            			class Allocator = allocator<T>
+        		Usage:
+            			template<class T, class Allocator = allocator<T>>
+            			class vector { ... }
 
 Snippets:
 	String Manipulation and Vector:
