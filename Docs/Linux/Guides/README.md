@@ -4,7 +4,7 @@
 	- Files
 
 ## Files
-- ["Resolution & Screen Handling"](Resolution Management.txt)
+- [Resolution and Screen Handling](Resolution Management.txt)
 
 
 
