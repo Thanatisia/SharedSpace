@@ -1,0 +1,75 @@
+=================================
+| Guide : Resolution Management |
+=================================
+
+Table of Contents:
+	Background
+	Resources
+	Pre-Requisites & Requirements
+	Using xrandr
+
+Background: 
+- Guides and Tutorial for Screen Handling & Resolution Control in Linux
+- To change screen resolution in Linux, users would usually use one of the following command(s)/package(s)
+	```
+	NOTE: this list may change when more display servers (i.e. wayland) comes to play
+	```
+	- xrandr (X11)
+
+Resources:
+	How To Configure Your Monitors With Xrandr in Linux : https://linuxconfig.org/how-to-configure-your-monitors-with-xrandr-in-linux
+
+Pre-Requisites & Requirements:
+- sudo : For escalation permissions
+
+Basics Information:
+	# Terminologies
+		- connected : Connection/Output is found/connected
+		- disconnected : No connection/output is found
+		- primary : Your main connected monitor - i.e. monitor [1]
+			- All subsequent monitors do not have 'primary'
+	# Resolution Structure
+		- Resolution is usually displayed in the following strcture: [width]x[height]+[x-axis]+[y-axis]
+			
+
+Using xrandr:
+```
+All Parameters:
+	-q : Query Monitors
+	--output [target-monitor] 	: Select an output monitor
+	--mode [resolution]		: Set resolution of [target-monitor]
+	--rate [framerate]		: Set [target-monitor]'s refresh rate
+	--primary 			: Set [target-monitor] as the primary monitor
+	--left-of [target-monitor] 	: Set position of selected monitor to the left of a specified monitor
+	--right-of [target-monitor] 	: Set position of selected monitor to the right of a specified monitor
+```
+	# To query your monitors for all information
+		```
+		Information consists of:
+			- How your system is referencing them
+			- available resolutions
+			- refresh rates
+		Syntax: xrandr -q
+
+		Notes:
+			- Output template:
+				# Each Listing entry is arranged in the following format:
+					[Connection-Method]-[connection-ID] {connected|disconnected} {other_keywords} {resolution+position} (normal left inverted right x axis y axis) n1mm x n2mm
+		```
+		
+	# To set your monitor resolution
+		```
+		Syntax: xrandr --output [target-monitor] {options}
+ 		Options:
+			--mode [resolution ([width]x[height])] 	: 
+			--rate [framerate]			: Set your monitor's refresh rate
+		```
+	
+	# Multi-monitor support
+		```
+		Syntax: xrandr --output [selected-monitor] {options}
+		Options:
+			--primary : Specify and Set [selected-monitor] as the primary monitor
+			--left-of [target-monitor] : Set position of selected monitor to the left of a specified monitor
+			--right-of [target-monitor] : Set position of selected monitor to the right of a specified monitor
+

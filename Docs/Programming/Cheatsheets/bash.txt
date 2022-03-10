@@ -11,6 +11,17 @@ Commands:
 
 Usages:
 
+Topics: 
+	# Resolution Management
+		xrandr
+			-q : Query Monitors
+			--output [target-monitor] 	: Select an output monitor
+			--mode [resolution]		: Set resolution of [target-monitor]
+			--rate [framerate]		: Set [target-monitor]'s refresh rate
+			--primary 			: Set [target-monitor] as the primary monitor
+			--left-of [target-monitor] 	: Set position of selected monitor to the left of a specified monitor
+			--right-of [target-monitor] 	: Set position of selected monitor to the right of a specified monitor
+
 Snippets:
     seperate by delimiter:
         seperate_by_Delim()
