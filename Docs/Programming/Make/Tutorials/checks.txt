@@ -1,0 +1,4 @@
+# makefile Tutorial
+
+To test/check if a directory exist: @test -d /path/to/variable
+

@@ -1,0 +1,34 @@
+# Programming Ideas - Command Line Input & Processing
+
+Command Line Input Config:
+	- Seperate user input string into an array with each option seperated into an element
+		- Use dictionary to check which element is in the user input
+		- Process detected element and run appropriate functions
+
+	Syntax:
+		options = {
+			"-h" : "Help",
+			"-p" : "Print",
+			"-v" : "Verbose",
+			"-i" : "Include"
+		}
+
+		// User Input Retrieval
+		user input = "-h -p -v -i 'Hello World'";
+		delimiter = " "
+		arraylist = ['-h', '-p', '-v', '-i', 'Hello Word'];
+
+		// Processing (For current design - I'm using python)
+		for i in range(len(arraylist)):
+			curr_param = arraylist[i]
+
+			# Check if param is in your options dictionary
+			if(curr_param in options):
+				"""
+				if element is a valid option
+				- execute it
+				"""
+				options[$curr_param]()
+				
+				
+		

@@ -1,0 +1,101 @@
+# Git Version Control - Remote Starters Guide
+
+
+## Table of Contents
+	- Create a new repository
+	- Push an existing repository
+
+
+## Create a new repository
+
+1. Create README.md
+	echo "# Your_Repository_Name" >> README.md
+
+2. Initialize new local git
+	git init
+
+3. Add new files
+	```
+	Syntax: git add {files}
+	Options:
+		files:
+			* : All Files
+			. : All Files in current directory
+			file_name : Specific File
+			dir/* : All Files in specified directory [dir]
+	```
+	git add README.md
+
+4. Commit all changes
+	```
+	Syntax: git commit -m "commit_message"
+	```
+	git commit -m "First Commit"
+
+5. Create a 'main' branch
+	```
+	Syntax:
+		# To create a new branch and switch to that
+			git checkout -b {branch_name}
+
+		# To merge a branch
+			git branch -M {branch_name}
+	```
+	git checkout -b main
+
+6. Add Remote Origin
+	```
+	Syntax: git remote add origin {origin_url}
+	```
+	git remote add origin https://github.com/{username}/{repository_name}.git
+
+7. Push to remote repository
+	```
+	Syntax: git push -u {remote_repository_url} {branch_name}
+	```
+	git push -u origin main
+
+
+Full Code:
+	```
+	echo "# linux-setup-wm" >> README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git checkout -b main
+	git remote add origin https://github.com/Thanatisia/linux-setup-wm.git
+	git push -u origin main
+	```
+
+## Push an existing repository
+
+1. Add Remote Origin
+	```
+	Syntax: git remote add origin {origin_url}
+	```
+	git remote add origin https://github.com/{username}/{repository_name}.git
+
+2. (OPTIONAL) Create a new branch
+	```
+	Syntax:
+		# To create a new branch and switch to that
+			git checkout -b {branch_name}
+
+		# To merge a branch
+			git branch -M {branch_name}
+	```
+	git checkout -b main
+
+3. Push to remote repository
+	```
+	Syntax: git push -u {remote_repository_url} {branch_name}
+	```
+	git push -u origin main
+
+Full Code:
+	```
+	git remote add origin https://github.com/{username}/{repository_name}.git
+	git checkout -b main
+	git push -u origin main
+	```
+

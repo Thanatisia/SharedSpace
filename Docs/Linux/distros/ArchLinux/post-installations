@@ -126,6 +126,41 @@ sudo pacman -S xorg-server xorg-apps
 #		2. ALSA
 #
 
+# Resources:
+https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture
+
+# Required Packages: alsa-utils
+# Optional Packages: pulseaudio
+
+# Install packages 
+pacman -S alsa-utils
+
+# i. To setup alsa
+# By default: ALSA has all channels unmuted. Those have to be unmuted manually.
+
+# Unmute with amixer
+#	- Unmuting the sound card's master volume can be done by using amixer
+# To unmute Master
+amixer sset Master unmute
+# To unmute Speaker
+amixer sset Spekaer unmute
+# To unmute Headphone
+amixer sset Headphone unmute
+
+# Enabling the microphone
+
+# To Test Audio
+# speaker-channel : The channel your speaker is using
+#	Example:
+#		speaker-test -c 2 : Channel 2
+#		speaker-test -c 8 : 7.1
+speaker-test -c <speaker-channel>
+
+
+# ii. To setup Pulseaudio
+
+
+
 #
 # Samba
 #

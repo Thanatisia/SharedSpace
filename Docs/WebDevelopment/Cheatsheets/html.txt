@@ -1,0 +1,56 @@
+Cheatsheets - For Web Development - HTML
+
+Table of Contents:
+	HTML Tags
+
+HTML Tags:
+	anchor:
+		Syntax: 
+			<a href="page-to-go-to.html">Text</a>
+		Parameters:
+			href : Hyperlink Reference (URL to go to)
+		Usage:
+			<a href="page.html">Page</a>
+	input:
+		Syntax: <input type="" name="" value="">
+		Parameters:
+			type : The input type
+			    Options:
+				button
+				radio
+				submit
+				text
+			name : The ID/value that will be used as key in the $_POST global variable
+			value : The text that will appear in the input tag
+			placeholder : A transparent text that will appear as placeholder
+		Usage:
+			<form action="process_page.php" method="post">
+				Username : <input type="text" name="username">
+				Password : <input type="text" name="password">
+				<input type="submit" name="send">
+			</form>
+			
+			# Result:
+			$_POST["username"]	: From <input type="text" name="username">
+			$_POST["password"]	: From <input type="text" name="password">
+			$_POST["send"]		: From <input type="submit" name="send">
+		NOTES:
+			1. Typically used with either
+				- form
+				- selection
+	form:
+		Syntax: 
+			<form action="process_page.php" method="post|get">
+			</form>
+		Parameters:
+			action="page-to-go-to.php"
+			method="post|get"
+		Usage:
+			<form action="process_page.php" method="post">
+				<input type="submit" name="send">
+			</form>
+		NOTES:
+			1. Typically comes with
+				- <input> of other types
+				- <input type="submit">
+					- This is the submit button that will submit the form

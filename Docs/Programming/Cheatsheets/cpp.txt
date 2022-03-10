@@ -132,6 +132,14 @@ Keywords:
     sizeof:
         - Used to check number of arguments
         Syntax: sizeof(objects)
+    namespace:
+	- Used to define specific scopes
+	Syntax:
+		namespace [Name-of-Namespace]
+		{
+			// Declarations
+		}
+
 
 Macros :
 	#define : #define [macro] [replacement_value]
@@ -355,6 +363,84 @@ Topics :
         		Usage:
             			template<class T, class Allocator = allocator<T>>
             			class vector { ... }
+
+	Namespaces
+    		- Closest Analogy:
+        		- concept of Java's 'import'
+    		- Used to define specific scopes
+    		- use the scope resolution operator ('::')
+		Notes:
+			- A namespace can be defined over multiple files, as the std namespace is
+			- This is the property of being dis-contiguous or open
+				- unlike classes which are closed
+    		Syntax:
+        		To initialize namespace:
+            			namespace Name-of-namespace
+            			{
+                			// Declarations
+            			}
+        		To import Namespace                 : using namespace [header/class name];
+        		To import scope found in namespace  : using namespace::scope;
+    		Examples:
+			[1] Importing
+        			using namespace std;    // Namespace
+        			using std::cout;        // Using scope found in namespace
+			[2] using namespace in multiple files
+				
+				// ns_1.h
+				namespace nsvar
+				{
+					int i;
+				}
+				// ns_2.h
+				namespace nsvar
+				{
+					int j;
+				}
+				// main
+				using namespace nsvar; // Importing whole namespace
+				using nsvar::i;	// Using only variable i of namespace
+				using nsvar::j;	// Using only variable j of namespace
+				int main()
+				{
+					/*
+					 * Same as:
+					 * nsvar::i = ns::j = 10;
+					 * cout << ns::i * ns::j << endl;
+					 * OR
+					 * using namespace nsvar;
+					 * cout << i * j << endl;
+					 */
+					i = j = 10;
+					cout << i * j << endl;
+					return 0;
+				}
+
+    Namespace Aliases
+        - Specify an abbreviation to use
+        Syntax:
+            namespace ns
+            {
+                // Declaration
+            }
+
+            namespace alias = namespace-name;
+        Examples:
+            [1]
+                namespace ns_1
+                {
+                    // Declaration
+
+                    namespace ns_2
+                    {
+                        void a() { j++; }
+                        int j;
+                        void b() { j++; }
+                    }
+                }
+                namespace ns_2_new_name = ns_1::ns_2;
+
+
 
 Snippets:
 	String Manipulation and Vector:

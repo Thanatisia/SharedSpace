@@ -1,0 +1,42 @@
+# Git Multi-Distro Version Control Makefile Script
+## Nested Folders with Multiple makefiles
+
+Table of Contents:
+	File Structure
+	Makefile Contents
+
+File Structure:
+	Root
+	|
+	|-- makefile (Includes recipe to run recipes in makefile for Dotfile_Profile_{1-n})
+	|
+	|-- Dotfile_Profile_1
+		|
+		|-- makefile
+	|-- Dotfile_Profile_2
+		|-- makefile
+
+Makefile Contents:
+	root : 
+		```
+		dotfile_profile_1: ## Recipe for making dotfile profile #1
+			Dotfile_Profile_1\makefile {action} {parameters}
+		```	
+	Dotfile_Profile_1 : 
+		```
+		start: ## Full main body
+		
+		clean: ## Cleaning up of folder
+		```	
+	Dotfile_Profile_2 : 
+		```
+		start: ## Full main body
+		
+		clean: ## Cleaning up of folder
+		```
+	Dotfile_Profile_n : 
+		```
+		start: ## Full main body
+		
+		clean: ## Cleaning up of folder
+		```

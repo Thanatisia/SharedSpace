@@ -1,3 +1,7 @@
+Operators:
+	&& : AND / Check Passed
+	|| : OR	/ Check Failed
+
 Syntax:
 	# left-side : right-side
 	
@@ -83,4 +87,13 @@ Structure:
 			install		: make install		// Compile Code for Installation
 			global install	: sudo make install	// Install Project into System
 			clean		: make clean		// Delete unnecessary files (Clean-up)
+
+
+
+Topics:
+	## General
+		To execute an instruction/recipe: make -s [recipe_name]
+	## Checks
+		To test if a directory exist: @test -d /path/to/variable
+
 

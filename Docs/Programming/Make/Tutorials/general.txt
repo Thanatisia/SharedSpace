@@ -1,0 +1,30 @@
+# General Snippets & Guides
+```
+- May Contain some important pointers
+```
+
+To execute an instruction/recipe: make -s [recipe_name]
+	Syntax:
+		recipe-1:
+			make -s recipe-2
+			|
+			| Make will run this
+			V
+		recipe-2:
+			// Statement
+	Examples:
+		[1]
+			scripts:
+				make -s $(HOME)/.scripts
+				|
+				| Make will run this
+				V
+			$(HOME)/.scripts:
+				// Statement
+
+
+
+
+To test if a directory exist: @test -d /path/to/variable
+
+
