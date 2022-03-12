@@ -1,0 +1,16 @@
+#=============
+# Enable Sudo
+#=============
+```
+File: /etc/sudoers
+```
+- Automatic (via Terminal command)
+	```
+	- Locate the line '%wheel ALL=(ALL:ALL) ALL' and uncomment it from /etc/sudoers
+	```
+	sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+ALL\)/\1/' /etc/sudoers
+
+- Manual
+	visudo
+	> Uncomment the line '%wheel ALL=(ALL:ALL) ALL'
+	> Save

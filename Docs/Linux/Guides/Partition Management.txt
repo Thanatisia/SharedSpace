@@ -1,0 +1,111 @@
+=================================
+| Guide : Partition Management |
+=================================
+
+Table of Contents:
+	Background
+	Resources
+	Pre-Requisites & Requirements
+	Basic Information
+	Using parted
+
+Background: 
+- Guides and Tutorial for Partition Management in Linux
+- Methods of handling partitions
+	- Manual Handling (GUI/TUI):
+		fdisk
+		cfdisk
+		cgdisk
+	- Command Line Tools:
+		parted
+
+Resources:
+
+
+Pre-Requisites & Requirements:
+- lsblk / sudo fdisk -l : To check your devices and get device name
+
+
+Basics Information:
+
+			
+Using parted:
+```
+Syntax: parted [device_name] <function_name> {options}
+All Parameters:
+	[device_name] : Select a partition
+	Functions:
+		mklabel : Format device with specified partition labels (MSDOS or GPT)
+			Syntax: mklabel [partition_label]
+			Options:
+				partition_label : Your Partition Label
+					- MSDOS (if BIOS boot is BIOS/MBR) or 
+					- GPT (if BIOS boot is UEFI)
+
+		mkpart : Make Partitions
+			Syntax: mkpart [partition_category] [partition_type] [start_size] [end_size]
+			Parameters:
+				partition_category: Type of Partition
+					- Primary
+					- Extended
+					- Logical
+				partition_type: Partition Filetype
+					- fat16
+					- fat32
+					- ext3
+					- ext4
+				start_size: The size to start writing the partition, Write from [start_size]
+					Default: 0%
+				end_size: The size to stop writing the partition, Write until [end_size]
+					Default: 100%
+				
+		set : Select a partition number to set/change settings
+			Syntax: set [partition_number] {settings}
+			Settings:
+				boot {on|off} : To change bootable
+```
+	# To select a partition
+		```
+		Syntax: sudo parted [device_name]
+		```
+		sudo parted /dev/sdX
+
+	# To format device with new partition label (msdos (mbr|bios)| gpt (uefi))
+		```
+		Syntax: sudo parted [device_name] mklabel [partition_label]
+		```
+		sudo parted /dev/sdX mklabel {msdos|gpt}
+
+	# To create a new partition
+		```
+		Syntax: mkpart [partition_category] [partition_type] [start_size] [end_size]
+		Parameters:
+			partition_category: Type of Partition
+				- Primary
+				- Extended
+				- Logical
+			partition_type: Partition Filetype
+				- fat16
+				- fat32
+				- ext3
+				- ext4
+			start_size: The size to start writing the partition, Write from [start_size]
+				Default: 0%
+			end_size: The size to stop writing the partition, Write until [end_size]
+				Default: 100%
+		```
+		sudo parted /dev/sdX mkpart primary ext4 0% 1024MiB
+		sudo parted /dev/sdX mkpart primary ext4 1024MiB 100%
+
+	# To set a setting to a partition
+		```
+		Syntax: sudo parted [device_name] set [partition_number] {settings}
+		Parameters:
+			device_name : The device's name (i.e. /dev/sdX)
+			partition_number : Partition number (i.e. /dev/sdX1 = 1)
+		Settings:
+			boot {on|off} : To change bootable
+		```
+		sudo parted /dev/sdX set 1 boot on
+
+	

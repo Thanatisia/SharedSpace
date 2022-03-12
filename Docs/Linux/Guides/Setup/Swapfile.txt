@@ -1,0 +1,30 @@
+To Setup Swapfile
+	- Create /swapfile of size (n)
+		```
+		Syntax: fallocate -l [size] /swapfile
+		Parameters:
+			size : Size of swapfile
+				- n(KiB|MiB|GiB)
+				NOTE: 
+					- Recommend to create a swapfile about 2x your physical RAM
+		```
+		fallocate -l 8GiB /swapfile
+	- Change Permission of swapfile to 600
+		```
+		Syntax: chmod [permission_number] /swapfile
+		```
+		chmod 600 /swapfile
+
+	- Make swapfile to swapfile type
+		mkswap /swapfile
+
+	- Activate and turn on swapfile
+		swapon /swapfile
+
+	- Write swapfile into File Systems Table (fstab)
+		```
+		- for swapfile to mount automatically on startup
+		```
+		echo "# /swapfile" >> /etc/fstab
+		echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+

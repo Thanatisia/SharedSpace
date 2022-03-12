@@ -1,0 +1,22 @@
+#======================================#
+# Operating System Guides - Partitions #
+#======================================#
+
+Partition Categories:
+    Unallocated – unallocated space – this is how your hard drive arrives from the factory
+    Primary partition – a primary partition can be used to boot an Operating System. Your Windows OS is installed on a primary partition.
+    Extended partition – an extended partition is used to hold logical drives. To break the limitation of 4 partitions. can only be one extended partition on a single disk
+    Logical drives – logical drives hold files unrelated to the Operating System – pretty much everything else on your computer – data, audio, video, etc.
+	- Cannot host an operating system
+
+Partition Design:
+	Device Name : {/dev/sdX}
+	Device Label : {msdos|gpt}
+	Partition Schema:
+	========================================================================================================
+	ROW_ID, partition_name, mount_path, partition_format, partition_type, start_size, end_size, other_opts
+	========================================================================================================
+	1, /dev/sdX1, /mnt/boot, primary, ext4, 0% (From the start), 	(x1){KiB|MiB|GiB},		Bootable
+	2, /dev/sdX2, /mnt/root, primary, ext4, (x1){KiB|MiB|GiB}, 	(x2){KiB|MiB|GIB}
+	3, /dev/sdX3, /mnt/home, primary, ext4, (x2){KiB|MiB|GiB}, 	100% (To the end)
+
