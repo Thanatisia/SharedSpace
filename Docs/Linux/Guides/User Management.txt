@@ -1,0 +1,61 @@
+===========================
+| Guide : User Management |
+===========================
+
+Table of Contents:
+	Background
+	Resources
+	Pre-Requisites & Requirements
+	Basic Information
+	User Management
+
+Background: 
+- Guides and Tutorial for User Management & Control in Linux
+- To manage users in Linux, depending on distros
+	- Arch-based:
+		useradd
+	- Debian-based:
+		adduser
+
+Resources:
+
+
+Pre-Requisites & Requirements:
+
+
+Basics Information:
+
+
+- User Management
+	- Create a new user
+		```
+		Syntax: useradd -m -g [primary-group] -G [secondary,groups] -d [home-directory] {username}
+		Parameters:
+			-m : Specify to create a home directory for the user
+			-g [primary-group] : add user to primary-group
+			-G [secondary,groups] : add user to secondary groups
+			-d [home-directory] : Explicitly specify where to create the home directory for the user
+		```
+		useradd -m -g wheel -d /home/profiles/user user
+
+	- Change password
+		```
+		Syntax: passwd {username}
+		Note:
+			- if {username} is empty (i.e. passwd)
+				- Default to changing root password
+		```
+		passwd user
+
+	- Verify user
+		- Switch user to {username}
+			```
+			Syntax: su - {username}
+			```
+			su - user
+
+		- Check user
+			```
+			If successful : result should show 'root'
+			```
+			sudo whoami
