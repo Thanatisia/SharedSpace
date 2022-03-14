@@ -2,7 +2,13 @@
 # Linux Command Documentation: <command name>
 #
 
+Table of Contents:
+	Background
+	Parameters
+	Usage
+
 [Background]
+
 Command Name: 
 Abbreviation: 
 Command Summary: 
@@ -10,10 +16,11 @@ General Syntax:
 General Parameters: 
 
 [Parameters]
+
 <parameter> : <description of parameter>
 	Syntax:
 		<syntax/structure of parameter in command>
-	Examples:
+	Usage:
 		[1] An example of command with <parameter>
 			Command:
 				<The example command with parameter>
@@ -21,5 +28,5 @@ General Parameters:
 				<intended output>	
 
 
-[Use-Cases]
+[Usage]
 
