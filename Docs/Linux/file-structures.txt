@@ -1,0 +1,29 @@
+#=======================#
+# Linux File Structures #
+#=======================#
+
+Table of Contents:
+	Background
+	Structure
+	Purpose
+
+Background:
+
+Documentation on Linux File Structures
+
+Structure:
+	```
+	Full Linux File Structures (as much as possible)
+	```
+	/
+	|
+	|-- /boot
+	|-- /home
+	|-- /root
+	|-- /tmp
+
+Purpose:
+	```
+	File Structure folder purpose, use-case and usage
+	```
+	

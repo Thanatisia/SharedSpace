@@ -1,0 +1,137 @@
+#=============================================================#
+# Linux Documentation - Guides - Preparation for Installation #
+#=============================================================#
+
+A Preparation guide and list of things to do before starting any Linux Distributions
+- Steps are designed to be generic and non-distro specific (unless specified otherwise - will be categorised in a distro-specified section)
+- Created to be portable and modular
+	- You, the user, can use this to plan out what you should do before proceeding with any linux distribution installation and/or following any guides
+
+Table of Contents:
+	- Steps
+		1. Planning
+		2. Preparing Disk
+
+
+Steps:
+
+#=============#
+# 1. Planning #
+#=============#
+
+- Device Info
+	Device Type  : {VHD|MicroSD|HDD|SSD...}
+	Device Name  : {/dev/sdX}
+	Device Label : {msdos|gpt}
+	Device Size  : {KiB|KB|MiB|MB|GiB|GB...}
+	Device Boot  : {BIOS (MBR|MSDOS)|UEFI (EFI|GPT)}
+
+- Partition Design:
+	Partition Schema:
+	==========================================================================================================
+	| ROW_ID, partition_name, mount_path, partition_format, partition_type, start_size, end_size, other_opts |
+	==========================================================================================================
+	1, /dev/sdX1, /mnt/boot, primary, ext4, 0%, 1024MiB, Bootable
+	2, /dev/sdX2, /mnt/root, primary, ext4, 1024MiB, 32768MiB
+	3, /dev/sdX3, /mnt/home, primary, ext4, 32768MiB, 100%
+
+
+
+#===================#
+# 2. Preparing Disk #
+#===================#	
+```
+NOTE:
+	- I am using parted in these examples for fast and easy formatting
+		- you can use fdisk (for example) if you are better with those
+```
+
+- (OPTIONAL) Format Drive
+	```
+	Syntax: sudo parted {device_name} mklabel {msdos | gpt}
+	```
+	sudo parted /dev/sdX mklabel msdos
+
+- Create Partitions
+	```
+	Syntax: sudo parted {device_name} mkpart [partition_Type] [partition_FileType] [start_size] [end_size]
+	```
+	sudo parted /dev/sdX mkpart primary ext4 0% 1024MiB
+	sudo parted /dev/sdX mkpart primary ext4 1024MiB 32768MiB
+	sudo parted /dev/sdX mkpart primary ext4 32768MiB 100%
+
+
+- Format Created Partitions
+	```
+	Syntax: 
+		sudo mkfs.{partition_type} {others} {device_name}{partition_number}
+	Options:
+		If partition type is
+			fat16 : -f 16
+			fat32 : -f 32
+	```
+	sudo mkfs.ext4 /dev/sdX1
+	sudo mkfs.ext4 /dev/sdX2
+	sudo mkfs.ext4 /dev/sdX3
+
+- Set Bootable
+	```
+	Syntax: sudo parted [device_name] set [partition_number] {settings}
+	Parameters:
+		device_name : The device's name (i.e. /dev/sdX)
+		partition_number : Partition number (i.e. /dev/sdX1 = 1)
+	Settings:
+		boot {on|off} : To change bootable
+	```
+	sudo parted /dev/sdX set 1 boot on
+
+- Mount Root Directory
+	```
+	Syntax: mount {device_name}{partition_number} {mount_path}
+	```
+	mount /dev/sdX2 /mnt/root
+	
+- Created other mount directories
+	```
+	Syntax: mkdir -p [directories]
+	```
+	mkdir -p /mnt/boot /mnt/home
+
+- Mount Created Directories
+	```
+	Syntax: mount {device_name}{partition_number} {mount_path}
+	```
+	mount /dev/sdX1 /mnt/boot
+	mount /dev/sdX3 /mnt/home
+
+- Generate File Systems Table
+	```
+	- Create File Systems Table (Fstab) for partitions and devices to load on startup and mount automatically
+	```
+	Automatic:
+		```
+		- using genfstab
+			- Pre-Requisites: Install 'arch-install-scripts' for genfstab
+				If Host System is 
+					ArchLinux (pacman):
+						sudo pacman -S arch-install-scripts
+					Debian (aptitude):
+						sudo apt install arch-install-scripts
+					Gentoo (portage):
+						sudo emerge --ask sys-fs/genfstab
+
+			Syntax: genfstab -U {mount_path} | sudo tee -a {mount_path}/etc/fstab
+		```
+		genfstab -U /mnt | sudo tee -a /mnt/root/etc/fstab
+		
+
+	Manual:
+		```
+		You need to use the UUID of a partition to make a truly portable system
+		- to get UUID : blkid
+		
+		Syntax: blkid [partition]
+		```
+		blkid=$(blkid [partition])
+		echo "UUID=$blkid ... " >> {mount_path}/etc/fstab
+

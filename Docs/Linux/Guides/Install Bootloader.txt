@@ -1,0 +1,120 @@
+
+=================================
+| Guide : Installing Bootloader |
+=================================
+
+Table of Contents:
+	Background
+	Resources
+	Pre-Requisites & Requirements
+	Basic Information
+
+Background: 
+
+- Guides and Tutorial for Installing Bootloader in Linux
+- Types of Bootloaders
+	- Grub
+	- Syslinux
+
+Resources:
+
+
+Pre-Requisites & Requirements:
+
+
+Basics Information:
+
+
+- Install Bootloader
+	# If Bootloader is 
+	- Grub	
+		- Install Grub Package
+			# if distro is 
+			Arch-based:
+				sudo pacman -S grub
+			Debian-based:
+				sudo apt(-get) install grub
+	
+		- Install Grub
+			``` 
+			Next, install the necessary GRUB2 files to the /boot/grub/ directory via the grub-install command
+
+			Syntax: grub-install {options} [device_name]
+			Parameters/Options:
+				--target=[architecture] : Compile with a specific target architecture
+				--debug			: Enable verbose output
+
+				UEFI-Specific:
+					--efi-directory=[path]
+
+			Usage:
+				# Presuming the first disk (the one where the system boots from) is /dev/sda, one of the following commands will do: 
+				grub-install --debug /dev/sda
+
+			NOTES:
+				- device_ID : Your device name; i.e. /dev/sda, /dev/sdb etc.; No partition number, is the disk itself
+			```
+			MBR/BIOS:
+				grub-install --target=i386-pc --debug (optionals) $device_name
+
+			UEFI:			
+				```
+				NOTES:
+					- Make sure the EFI system partition has been mounted before running grub-install. 
+						- It is possible for grub-install to install the GRUB EFI file (grubx64.efi) into the wrong directory without providing any indication the wrong directory was used.
+					- Modify the --efi-directory option to the root of the EFI System Partition. 
+						- This is necessary if the /boot partition was not formatted as a FAT variant.
+					- If grub_install returns an error like Could not prepare Boot variable: Read-only file system, it may be necessary to remount the efivars special mount as read-write in order to succeed: 
+						mount -o remount,rw /sys/firmware/efi/efivars
+
+				Output: This creates the default directory defined by the UEFI specification, and then copies the grubx64.efi file to the 'default' EFI file location defined by the same specification. 
+				```
+				# Base: 
+					grub-install --target=x86_64-efi --efi-directory=/boot {device_name}
+					
+				# Some motherboard manufacturers seem to only support the /efi/boot/ directory location for the .EFI file in the EFI System Partition (ESP). The GRUB installer can perform this operation automatically with the --removable option. Verify the ESP is mounted before running the following commands. Presuming the ESP is mounted at /boot (as suggested earlier), execute: 
+					grub-install --target=x86_64-efi --efi-directory=/boot --removable
+
+		- (OPTIONAL) Install os-prober
+			```
+			The os-prober utility can be used in conjunction with GRUB2 to detect other operating systems from attached drives. Windows 7, 8.1, 10, and other distributions of Linux are detectable. Those desiring dual boot systems should emerge the sys-boot/os-prober package then re-run the grub-mkconfig command (as seen above). If detection problems are encountered be sure to read the GRUB2 article in its entirety before asking the Gentoo community for support.
+			```	
+			# If distro is
+			Arch-based:
+				sudo pacman -S os-prober
+			Debian-based:
+				sudo apt(-get) install os-prober
+			Gentoo-based:
+				emerge --ask sys-boot/os-prober
+
+		- Configure grub config
+			```
+			Next, generate the GRUB2 configuration based on the user configuration specified in the /etc/default/grub file and /etc/grub.d scripts. In most cases, no configuration is needed by users as GRUB2 will automatically detect which kernel to boot (the highest one available in /boot/) and what the root file system is. It is also possible to append kernel parameters in /etc/default/grub using the GRUB_CMDLINE_LINUX variable. 
+			- To generate the final GRUB2 configuration, run the grub-mkconfig command
+
+			Syntax: grub-mkconfig -o {output_path}
+
+			NOTES:
+				- The output of the command must mention that at least one Linux image is found, as those are needed to boot the system. 
+				- If an initramfs is used or genkernel was used to build the kernel, the correct initrd image should be detected as well. 
+				- If this is not the case, 
+					- go to /boot/ and check the contents using the ls command. 
+					- If the files are indeed missing, go back to the kernel configuration and installation instructions. 
+			```
+			grub-mkconfig -o /boot/grub/grub.cfg
+
+		- Summary:
+			```
+			NOTE: 
+				* /dev/sdX = your disk name; NOT a partition; i.e. /dev/sdb
+			```
+			# Install Grub Package
+			emerge --ask --verbose sys-boot/grub:2
+
+			# Install Grub Bootloader
+			# OPTIONALS:
+			#		--boot-directory=/boot/
+			grub-install --target=i386-pc --debug (optionals) /dev/sdX
+
+			# Create Grub Config
+			grub-mkconfig -o /boot/grub/grub.cfg

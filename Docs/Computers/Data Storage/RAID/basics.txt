@@ -1,0 +1,33 @@
+#=======================================#
+# Documentation - Computer Data Storage #
+#	RAID - Basics			#
+#=======================================#
+
+Table of Contents:
+	1. What is RAID
+	2. RAID Types
+
+
+#=================#
+# 1. What is RAID #
+#=================#
+
+RAID standards for [Redundant Array of Inexpensive/Independent Disks]. 
+A data storage virtualization technology that combines multiple physical disk drive components into one or more logical units for the purposes of data redundancy, performance improvement, or both.
+
+RAID is not a backup method but a redundancy backplane designed to allow extra data recovery in case things go south.
+
+#===============#
+# 2. RAID Types #
+#===============#
+
+Levels:
+	0 - Spanning
+	1 - Mirrored
+	2
+	3
+	4
+	5
+	6
+	10 (aka 1 + 0)
+

@@ -1,0 +1,36 @@
+- Localization
+	- Add Locale
+		```
+		Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed locales. 
+		```
+		Manual: 
+			```
+			Uncomment locales and save file
+			Locales:
+				ie.
+					en_US.UTF-8 UTF-8	
+					en_SG.UTF-8 UTF-8
+			```
+			$EDITOR /etc/locale.gen
+			>  Uncomment the locale of your choice
+
+		Automatic:
+			```
+			- To uncomment from locale.gen
+				sed -i '/{keyword}/s/^#//g' <file>
+			- To comment in locale.gen
+				sed -i '/{keyword}/s/^/#/g' <file>
+			```
+			sed -i '/en_SG.UTF-8/s/^#//g' /etc/locale.gen
+
+	- Generate locales
+		locale-gen
+
+	- Set LANG variable according to your locale obtained
+		echo "LANG=en_SG.UTF-8" | tee -a /etc/locale.conf
+
+	- (OPTIONAL) If you changed the keyboard layout 
+		```
+		Make changes persistent in vconsole.conf
+		```	
+		echo "KEYMAP=<keymap>" | tee -a /etc/vconsole.conf
