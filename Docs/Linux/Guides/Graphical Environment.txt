@@ -1,0 +1,152 @@
+============================================
+| Guide : Setting up Graphical Environment |
+============================================
+
+Table of Contents:
+	Background
+	Resources
+	Pre-Requisites & Requirements
+	Basic Information
+	Setting Up
+
+Background: 
+
+- Guides and Tutorial for Setting up a graphical environment (Desktop Environment/Window Managers)
+- Types of Environments:
+	- Desktop Environments
+	- Window Managers
+
+Resources:
+
+
+Pre-Requisites & Requirements:
+
+
+Basics Information:
+
+NOTES:
+	- To read up on more : (My Linux Post-Installation Setup Resources)[https://github.com/Thanatisia/linux-postinstallations]
+
+
+#============#
+# Setting Up #
+#============#
+
+- Install Display Server:
+	```
+	The Display Server [xorg] and 
+	- related packages:
+		xorg-xinit : For Startx
+	- For X11 usage and Graphical Display
+	```
+	- X
+		# If your distro is
+		Arch-based :
+			sudo pacman -S xorg
+			sudo pacman -S xorg-xinit
+
+- Install Desktop Environment / Window Manager
+	- Desktop Environments
+		- GNOME
+		- KDE
+			If your distro is Debian:
+				sudo apt-get install kde-plasma
+		- XFCE
+	- Window Managers
+		- bspwm
+			via Package Manager:
+				If your distro is 
+					Debian (via Apt):
+						# Install bspwm
+							sudo apt-get install bspwm
+						# Install sxhkd
+							sudo apt-get install sxhkd
+					Arch (via Pacman):
+						# Install bspwm
+							sudo pacman -S bspwm
+						# Install sxhkd
+							sudo pacman -S sxhkd
+			via Manual:	
+				```
+				NOTE:
+					- With this method, you might need to install additional dependencies or have missing libraries you need to download seperately
+						References: https://askubuntu.com/questions/392718/problems-installing-bspwm
+
+						If your distro is Debian-based:
+							- Install package [apt-file]
+								# This program will find the relevant package for the library
+									sudo apt-get install apt-file
+
+								# Update after finding
+									sudo apt-file update
+									Syntax: apt-file search "library_header_fullname"
+									Usage: 
+										apt-file search "X11/extensions/Xinerama.h"
+
+								# Install returned package
+				```
+				# Clone Make and Install bspwm
+					git clone https://github.com/baskerville/bspwm.git
+					make && sudo make install
+				# Clone, Make and Install sxhkd
+					git clone https://github.com/baskerville/sxhkd.git
+					make && sudo make install	
+	
+- Setup Configs
+	- Desktop Environments / Window Managers
+		- Window Managers
+			- bspwm
+				```
+				Steps:
+					1. Make Directories [~/.config/bspwm, ~/.config/sxhkd]
+					2. Copy bspwmrc and sxhkdrc examples to ~/.config/bspwm and ~/.config/sxhkd
+					3. Change permissions of bspwmrc and sxhkdrc to Executable for use
+				```
+				- Make Directories [~/.config/bspwm, ~/.config/sxhkd]
+					mkdir -p ~/.config/bspwm ~/.config/sxhkd
+				- Copy bspwmrc and sxhkdrc examples to ~/.config/bspwm and ~/.config/sxhkd
+					cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
+					cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
+				- Change permissions of bspwmrc and sxhkdrc to Executable for use
+					chmod +x ~/.config/bspwm/bspwmrc
+					chmod +x ~/.config/sxhkd/sxhkdrc
+
+
+
+- (OPTIONAL) Setup xinitrc (if using startx - no display manager)
+	```
+	The '.xinitrc' dotfile is the X initialization Resource Control file
+	- Used alongside startx as a settings file to know what to run when passed
+	
+	- Contents to put into .xinitrc:
+		- Things to run automatically when 'startx' or 'sx' is ran
+	NOTES:
+		- Try not to put too many functions here as this file is processed on every startx
+			- The more you put, the longer it will take to startup the graphical environment
+
+		- Place functions that requires a one-time startup load (i.e. Networking startup etc.) in
+			~/.bash_profile (bash shell profile) or 
+			~/.profile (generic shell profile) or
+			~/.zsh_profile (ZSH shell profile)
+		  to reduce the amount of workload on the startup process
+
+		- Place '&' behind commands in .xinitrc to run them in the background
+
+	Syntax: startx ~/.xinitrc {params}
+	```
+	echo "exec [wm | de]" >> ~/.xinitrc
+
+
+- (OPTIONAL) Setup .{bash_|zsh_}profile
+	```
+	The profile files related to the default shell will be executed on first startup
+	- i.e. on the first bash/zsh startup after logging in
+		- .profile will be ran (general)
+		- .bash_profile will be ran (if shell is Bash)
+		- .zsh_profile will be ran (if shell is Zsh)
+
+	File: ~/.{bash_|zsh_}profile
+	```
+	# One-time Network setup (if you dont want to enable Network automatically)
+		echo "sudo systemctl start NetworkManager" | tee -a ~/.bash_profile
+	
