@@ -28,12 +28,12 @@ Steps:
 
 - Partition Design:
 	Partition Schema:
-	==========================================================================================================
-	| ROW_ID, partition_name, mount_path, partition_format, partition_type, start_size, end_size, other_opts |
-	==========================================================================================================
-	1, /dev/sdX1, /mnt/boot, primary, ext4, 0%, 1024MiB, Bootable
-	2, /dev/sdX2, /mnt/root, primary, ext4, 1024MiB, 32768MiB
-	3, /dev/sdX3, /mnt/home, primary, ext4, 32768MiB, 100%
+	==================================================================================================================
+	| ROW_ID, device, partition_name, mount_path, partition_format, partition_type, start_size, end_size, other_opts |
+	==================================================================================================================
+	1, /dev/sdX1, Boot, /mnt/boot, primary, ext4, 0%, 1024MiB, Bootable
+	2, /dev/sdX2, Root, /mnt/root, primary, ext4, 1024MiB, 32768MiB
+	3, /dev/sdX3, Home, /mnt/home, primary, ext4, 32768MiB, 100%
 
 
 
