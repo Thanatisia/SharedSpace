@@ -132,9 +132,41 @@ NOTES:
 
 		- Place '&' behind commands in .xinitrc to run them in the background
 
+		# IF there's error running due to
+		[1] command error
+			- Ensure that you place '#!/bin/bash' at the top to force the script to run with bash
+			OR
+			- Change default shell to bash
+
 	Syntax: startx ~/.xinitrc {params}
+
+	File: ~/.xinitrc
+
+	- Recommended Contents:
+		[1] Associative Array
+			DEFAULT_ENV="bspwm"
+			declare -a list_of_env=(
+				# Key : Name of Window Manager/Desktop Environment
+				# Value : command to start the exec and its parameters
+				# Syntax: [wm/de]="command"
+				[bspwm]="bspwm"
+			)
+			SESSION="${1:-$DEFAULT_ENV}"
+			exec ${list_of_env["$SESSION"]}
+
+		[2] Case
+			DEFAULT_ENV="bspwm"
+			SESSION="${1:-$DEFAULT_ENV}
+			case "$SESSION" in
+				"bspwm")
+					exec bspwm
+					;;
+				*)
+					# Default
+					echo "Invalid Environment"
+					;;
+			esac
 	```
-	echo "exec [wm | de]" >> ~/.xinitrc
 
 
 - (OPTIONAL) Setup .{bash_|zsh_}profile
