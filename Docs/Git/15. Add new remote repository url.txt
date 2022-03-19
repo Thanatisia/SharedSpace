@@ -1,0 +1,30 @@
+#==========================================#
+# Add a new Remote Repository URL (Origin) #
+#==========================================#
+
+Table of Contents:
+	- Adding a general origin
+	- Adding a origin with token
+
+# Adding a general origin
+	```
+	This is generally what you do the first time you push or clone the project
+	- When a token is active
+
+	Syntax: git remote add origin [url]
+	```
+
+# Adding a origin with token
+	```
+	If you need to replace a token manually after regenerating
+
+	Syntax: 
+		Removing existing origin : git remote remove origin
+		Adding remote repository url (origin) with token : git remote add origin https://[your-personal-access-token]@github.com/[your-username]/[repository-name].git
+	```
+	- Remove existing origin
+		git remote remove origin
+
+	- Add new origin
+		git remote add origin https://[your-personal-access-token]@github.com/[your-username]/[repository-name].git
+
