@@ -1,0 +1,67 @@
+#=================================#
+# Handling Personal Access Tokens #
+#=================================#
+
+Table of Contents:
+	Background
+
+# Background
+	Personal Access Tokens are a new authentication method by Github that will replace the traditional Username and Password system
+
+# Generating a Personal Access Token
+	- Generate Token
+		Go to "Settings"
+			> Developer Settings
+				> Personal Access Tokens
+					> Click on "Generate new token"
+						> Fill up the required information
+							* Notes (Description)
+							* Expiration Duration
+							* Scopes
+							> After complete, click on 'Generate Token'
+								> Note down the token string (it will only show once)
+								> (OPTIONAL) Note down the expiry date
+	- Use Token
+		- Login to your GitHub account using Git CLI
+			gh auth login
+
+			> Select Login by Token
+				> Enter your token
+
+# Regenerate a Personal Access Token
+	```
+	After your token expires, you need to regenerate the token and replace it in your git cli
+	```
+	- Regenerate Token
+		Go to "Settings"
+			> Developer Settings
+				> Personal Access Tokens
+					> Select your token to regenerate
+						> Click on 'Regenerate Token'
+							> Note down the token string (it will only show once)
+							> (OPTIONAL) Note down the expiry date
+
+	- (OPTIONAL) Adding a origin with token
+		```
+		If you need to replace a token manually after regenerating
+
+		Syntax: 
+			Removing existing origin : git remote remove origin
+			Adding remote repository url (origin) with token : git remote add origin https://[your-personal-access-token]@github.com/[your-username]/[repository-name].git
+		```
+		- Remove existing origin
+			git remote remove origin
+
+		- Add new origin
+			git remote add origin https://[your-personal-access-token]@github.com/[your-username]/[repository-name].git
+
+
+	- Use Token
+		- Login to your GitHub account using Git CLI
+			gh auth login
+
+			> Select Login by Token
+				> Enter your token
+
+
+
