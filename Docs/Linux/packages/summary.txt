@@ -1,0 +1,13 @@
+# Linux Packages Summary
+
+Background:
+	General writeup of all useful packages and their purposes
+
+Table of Contents:
+	Packages
+	
+
+Packages:
+- Masterlist
+	ffmpeg : Video Utilities; For Video Capture, Conversion 
+
