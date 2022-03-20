@@ -1,0 +1,77 @@
+#==============#
+# Setup Termux #
+#==============#
+
+Table of Contents:
+    - Installation
+	    - Update Repositories before use
+        - Install Essential Packages
+    - Setup
+	    - Setup Storage
+
+#==============#
+# Installation #
+#==============#
+- Update Repositories before using
+    pkg update
+
+- Install Essential Packages
+    ```
+    Essential Packages to install
+    ```
+    vim
+	git
+	termux-api
+	wget
+	python
+	tar
+	zip
+	unzip
+
+- Install Additional Repositories
+    ```
+    game-repo : Games
+	root-repo : For Root
+	science-repo : Science Repositories
+	unstable-repo : Unstable version repo
+	x11-repi : X11 Repositories
+	```
+    game-repo
+    root-repo
+	science-repo
+    unstable-repo
+    x11-repo
+
+#=======#
+# Setup #
+#=======#
+- Setup Storage
+    - Pre-Requisite
+		1. Ensure that your [Files Storage] permission
+		has been allowed by Termux
+
+    - Mount Host Android Filesystem to Termux
+	    ```
+		Note: 
+		    - Ensure that 'termux-api' has been installed
+		```
+		termux-setup-storage
+
+- Setup Network
+    - Check Network Connection
+	    ```
+		Note:
+		    - Ensure that 'termux-api' has been installed
+		Syntax: termux-wifi-connectioninfo 
+		```
+
+    - Enable WiFi
+        ```
+		Syntax: termux-wifi-enable {options}
+		Options: 
+		    true : Enable
+			false : Disable
+		```
+		termux-wifi-enable true
+
+
