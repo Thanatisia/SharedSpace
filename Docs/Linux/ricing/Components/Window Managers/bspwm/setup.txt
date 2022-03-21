@@ -1,0 +1,62 @@
+#=====================================================================#
+# Documentation - Linux - Ricing - Components - Graphical Environment #
+#			Window Managers - BSPWM                       #
+#                       [Setup]                                       #
+#=====================================================================#
+
+Table of Contents:
+	Setup Window Manager
+	(OPTIONAL) Setup xinitrc (if using startx - no display manager)
+	(OPTIONAL) Setup .{bash_|zsh_}profile
+
+Setup Window Manager:
+	```
+	Steps:
+		1. Make Directories [~/.config/bspwm, ~/.config/sxhkd]
+		2. Copy bspwmrc and sxhkdrc examples to ~/.config/bspwm and ~/.config/sxhkd
+		3. Change permissions of bspwmrc and sxhkdrc to Executable for use
+	```
+	- Make Directories [~/.config/bspwm, ~/.config/sxhkd]
+		mkdir -p ~/.config/bspwm ~/.config/sxhkd
+	- Copy bspwmrc and sxhkdrc examples to ~/.config/bspwm and ~/.config/sxhkd
+		cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
+		cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
+	- Change permissions of bspwmrc and sxhkdrc to Executable for use
+		chmod +x ~/.config/bspwm/bspwmrc
+		chmod +x ~/.config/sxhkd/sxhkdrc
+
+
+- (OPTIONAL) Setup xinitrc (if using startx - no display manager)
+	```
+	The '.xinitrc' dotfile is the X initialization Resource Control file
+	- Used alongside startx as a settings file to know what to run when passed
+
+	- Contents to put into .xinitrc:
+		- Things to run automatically when 'startx' or 'sx' is ran
+	NOTES:
+		- Try not to put too many functions here as this file is processed on every startx
+			- The more you put, the longer it will take to startup the graphical environment
+
+		- Place functions that requires a one-time startup load (i.e. Networking startup etc.) in
+			~/.bash_profile (bash shell profile) or 
+			~/.profile (generic shell profile) or
+			~/.zsh_profile (ZSH shell profile)
+		  to reduce the amount of workload on the startup process
+
+		- Place '&' behind commands in .xinitrc to run them in the background
+	
+	Syntax: startx ~/.xinitrc {params}
+	```
+	echo "sxhkd &" \
+	"exec bspwm" >> ~/.xinitrc
+
+- (OPTIONAL) Setup .{bash_|zsh_}profile
+	```
+	The profile files related to the default shell will be executed on first startup
+	- i.e. on the first bash/zsh startup after logging in
+		- .profile will be ran (general)
+		- .bash_profile will be ran (if shell is Bash)
+		- .zsh_profile will be ran (if shell is Zsh)
+	```
+	
+

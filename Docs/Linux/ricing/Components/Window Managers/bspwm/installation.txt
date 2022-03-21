@@ -1,0 +1,45 @@
+#=====================================================================#
+# Documentation - Linux - Ricing - Components - Graphical Environment #
+#			Window Managers - BSPWM                       #
+#                       [Installation]                                #
+#=====================================================================#
+
+Table of Contents:
+	via Package Manager
+	via Manual
+
+via Package Manager:
+	If your distro is
+		Debian-based (via Apt):
+			# Install bspwm
+				sudo apt-get install bspwm
+			# Install sxhkd
+				sudo apt-get install sxhkd
+via Manual:
+	```
+	NOTE:
+		- With this method, you might need to install additional dependencies or have missing libraries you need to download seperately
+			References: https://askubuntu.com/questions/392718/problems-installing-bspwm
+
+			If your distro is Debian-based:
+				- Install package [apt-file]
+					# This program will find the relevant package for the library
+						sudo apt-get install apt-file
+
+					# Update after finding
+						sudo apt-file update
+						Syntax: apt-file search "library_header_fullname"
+						Usage: 
+							apt-file search "X11/extensions/Xinerama.h"
+
+					# Install returned package
+	```
+	# Clone Make and Install bspwm
+		git clone https://github.com/baskerville/bspwm.git
+		make && sudo make install
+	# Clone, Make and Install sxhkd
+		git clone https://github.com/baskerville/sxhkd.git
+		make && sudo make install
+
+
+

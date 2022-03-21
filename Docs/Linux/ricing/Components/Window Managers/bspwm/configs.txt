@@ -1,0 +1,22 @@
+#=====================================================================#
+# Documentation - Linux - Ricing - Components - Graphical Environment #
+#			Window Managers - BSPWM                       #
+#                       [Configs]                                     #
+#=====================================================================#
+
+Table of Contents:
+	- README
+
+README:
+	```
+	Document Information
+	```
+	Author: Asura
+	Created: 2022-03-21 23:58:35H, Asura
+	Modified
+		[1] 2022-03-21 23:58:35H, Asura
+	CHANGELOGS:
+		[1] Asura
+			- Created Documentation
+			- Added Segment/Chapter 'README'
+
