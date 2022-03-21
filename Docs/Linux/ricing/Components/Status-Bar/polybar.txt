@@ -1,0 +1,129 @@
+#====================================================================#
+# Documentation - Linux - Ricing - Components - Status Bar - Polybar #
+#====================================================================#
+
+Table of Contents:
+	Program Information
+	Setup
+	Configuration
+	Samples
+
+Program Information:
+	Name: polybar
+	Component Type: Status Bar
+	Config Example (Default) Path : 
+		/etc/polybar/config.ini
+		/etc/xdg/polybar/config.ini
+	Config Path : ~/.config/polybar/config.ini
+	
+
+- Setup
+	- If your distro is ArchLinux
+		```
+		Polybar may not be inside pacman's official repository
+		- Need to either 
+			- use the AUR or
+			- git clone from the repository
+		```
+		- Clone Git Repository
+			git clone https://github.com/polybar/polybar.git
+
+		- Build Polybar Repository
+			```
+			System will ask you to install the example config
+			- Recommend to say Yes as you will get a example starter pack
+			```
+			cd polybar && ./build.sh	
+
+		- Test Installation
+			```
+			If you installed the example config during the installation
+			```
+			polybar example		
+
+	- Running with Window Manager: 
+		```
+		Create an executable file containing the startup logic
+	
+		File: ~/.config/polybar/launch.sh
+		
+		Contents:
+			# Terminate already running bar instances
+			killall -q polybar
+
+			# Launch polybar
+			# 2>&1 : Redirect to empty stdout
+			polybar [bar-name] 2>&1 | tee -a /tmp/polybar.log
+		```	
+		- Create polybar executable script		
+			echo "# Terminate already running bar instances" \
+		     	     "killall -q polybar" \
+		     	     "# Launch polybar" \
+	     	     	     "polybar [bar-name] 2>&1 | tee -a /tmp/polybar.log" >> ~/.config/polybar/launch.sh
+
+		- Change permission to executable
+			chmod +x ~/.config/polybar/launch.sh
+
+		- Add polybar into the Window Manager config script
+			# If Window Manager is
+			- bspwm
+				```
+				Config file: ~/.config/bspwm/bspwmrc
+				```
+				echo "# Launch Polybar on startup" \
+				     "./$HOME/.config/polybar/launch.sh" >> ~/.config/bspwm/bspwmrc
+
+			- i3
+				```
+				Config file: ~/.config/i3/
+				```
+				echo "# Launch Polybar on startup" \
+				     "exec_always --no-startup-id $HOME/.config/polybar/launch.sh" >> ~/.config/i3/
+
+- Configurations
+	Glossary:
+		modules : Add-on items for widgets
+		widget : A full item that has actions in the status bar, can be populated by 'modules'
+
+	Syntax: 
+		- To create a new widget
+			[widget/widget-name]
+			{settings]
+
+		- To create a new module (Add-on for widgets)
+			[module/module-name]
+			{settings}
+
+	Widgets:
+		bar : Status Bar
+		module : Module/Add-on for Widget
+
+	Settings:
+		widgets:
+			modules-right : Set all modules on the right of the widget
+				Syntax: modules-right = [module-name]
+
+		modules:
+			type : Type of module
+				Syntax: type = [type]
+			date : Set the date
+				Syntax: date = [structure]
+
+	Skeleton:
+		[bar/new-bar-name]
+		modules-right = [module-name]
+
+		[module/new-module]
+		type = [module-type]
+		date = %Y-%m-%d%
+	
+- Samples
+	[1]
+		[bar/new-bar-name]
+		modules-right = [module-name]
+	
+		[module/date]
+		type = internal/date
+		date = %Y-%m-%d%
+
+
