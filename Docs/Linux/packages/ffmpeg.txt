@@ -1,0 +1,22 @@
+#================================#
+# Linux Documentation - Packages #
+#	FFMPEG			 #
+#================================#
+
+Linux Documentation on package [ffmpeg]
+
+Table of Contents:
+	Background Information
+	Project Details
+	Parameters
+
+Project Details:
+	Author: 
+	Package Name: 
+		Base : ffmpeg : In Official Repository
+		Development : ffmpeg-git : in AUR
+		Full : ffmpeg-full : in AUR
+	Platforms: Windows, Linux
+	
+Parameters:
+	
