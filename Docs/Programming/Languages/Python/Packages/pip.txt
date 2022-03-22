@@ -1,0 +1,50 @@
+#==============================#
+# Documentation - Python - Pip #
+#==============================#
+
+Documentation and guide on Python PyPI Plugin Manager
+
+Table of Contents:
+	Pip parameters
+	Installing Pip
+	Upgrading Pip
+
+PIP Parameters:
+	- install   : Install packages
+		--upgrade : To upgrade a specific package
+	- download  : Download packages
+	- uninstall : Uninstall/remove packages
+	- freeze    : Get and output installed packages in requirements format (hint: output to 'requirements.txt' for backup and restoration for collaboration)
+	- list      : List installed packages
+	- show      : Show information about installed packages
+	- check     : Verify installed packages have compatible dependencies
+	- config    : Manage local and global configurations
+	- search    : Search PyPI for packages
+
+Installing Pip:
+	```
+	Steps: 
+		1. Download 'get-pip.py'
+		2. Run PIP PyPI installer
+		3. Verify Installation
+	```
+	- Download 'get-pip.py'
+		```
+		Link: https://bootstrap.pypa.io/get-pip.py
+		```
+		curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+	- Run PIP PyPI installer
+		python get-pip.py
+
+	- Verify Installation
+		pip help
+
+Upgrading Pip:
+	python -m pip install --upgrade pip
+
+Downgrading Pip
+	```
+	Syntax: python -m pip install pip==version_number
+	```
+	

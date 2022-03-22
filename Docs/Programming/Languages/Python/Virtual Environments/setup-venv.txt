@@ -39,20 +39,31 @@ Background Info:
 	```
 	New virtual environment that will isolate all installation like a virtual machine for python
 	Syntax: 
-		python2 : virtualenv env
-		python3 : python3 -m venv venv
+		python2 : virtualenv [virtual-environment-workspace-name]
+		python3 : python3 -m venv [virtual-environment-workspace-name]
 
 	Note:
 		- By default, this will not include any of your existing site packages
 	```
+	python3 -m venv env
 	
 - Activate scripts
 	```
 	To use this environment's packages/resources in isolation
 	- you need to "activate" it
-	Syntax: source [virtual-environment-directory]/bin/activate
 	```
-	source env/bin/activate
+	- Linux
+		```
+		Syntax: source [virtual-environment-directory]/bin/activate
+		```
+		source env/bin/activate
+
+	- Windows
+		```
+		On Windows: virtualenv (venv) creates a batch file called [Scripts\activate.bat]
+		Syntax: \path\to\env\Scripts\activate.bat
+		```
+		env\Scripts\activate.bat
 
 - Deactivate scripts
 	```

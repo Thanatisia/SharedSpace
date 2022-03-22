@@ -1,0 +1,35 @@
+#===================================#
+# Documentation - Python - Packages #
+#===================================#
+
+Documentation and Guide on things you can do with your python pip
+- Focus : Collaboration
+
+Table of Contents:
+	- Backup & reuse
+
+Backup & Reuse:
+	```
+	This is great for collaboration and Open Source Software (FOSS) Contribution
+	- Systematically recreate similar environment in another python install
+	```
+	- Create requirements.txt
+		```
+		Backup and list all installed packages into file called 'requirements.txt'
+
+		- This file is commonly used to recreate a virtual environment
+		- It is also good/best practice to make a backup of your host python environment or virtual environment's libraries in case 
+			- you need to reinstall
+		```
+		pip freeze > requirements.txt
+
+	- Reuse & Recreate Virtual Environment
+		```
+		This file can also then be used by collaborators to update virtual environments
+		
+		Syntax: pip install -r requirements.txt
+		Parameters:
+			-r : Read file and install all packages in the file
+		```
+		pip install -r requirements.txt
+

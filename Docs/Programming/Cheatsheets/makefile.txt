@@ -96,4 +96,10 @@ Topics:
 	## Checks
 		To test if a directory exist: @test -d /path/to/variable
 
+	## Command Line Arguments
+		# Reference: https://stackoverflow.com/questions/2826029/passing-additional-variables-from-command-line-to-make
+		# Pass an argument: 
+			make <action> [arg-name]=[arg-value] 
+		# Get an argument value: 
+			arg=$(arg-name)
 

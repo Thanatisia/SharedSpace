@@ -1,0 +1,60 @@
+Cheatsheets - Python
+
+Table of Contents:
+	- MACROS
+	- Snippets
+	- Best Practices
+	- Version Specific Features
+	- PIP
+		- PIP Parameters
+		- Installing Pip
+		- pip version
+
+
+MACROS:
+	__name__ : Get the name of the source file that's being executed
+
+Snippets:
+	# if-main
+		def main():
+			print("Hello World")
+
+		if __name__ == "__main__":
+			main()
+
+Best Practices:
+
+
+Version Specific Features:
+	
+
+PIP:
+	PIP Parameters:
+		- install   : Install packages
+			--upgrade : To upgrade a specific package
+		- download  : Download packages
+		- uninstall : Uninstall/remove packages
+		- freeze    : Get and output installed packages in requirements format (hint: output to 'requirements.txt' for backup and restoration for collaboration)
+		- list      : List installed packages
+		- show      : Show information about installed packages
+		- check     : Verify installed packages have compatible dependencies
+		- config    : Manage local and global configurations
+		- search    : Search PyPI for packages
+
+	Installing Pip:
+		# Download 'get-pip.py'
+			curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+		# Run PIP PyPI installer
+			python get-pip.py
+
+		# Verify Installation
+			pip help
+
+	pip version:
+		# Upgrading Pip
+			python -m pip install --upgrade pip
+
+		# Downgrading Pip
+			python -m pip install pip==version_number
+
