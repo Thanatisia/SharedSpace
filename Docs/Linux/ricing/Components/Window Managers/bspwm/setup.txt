@@ -5,9 +5,24 @@
 #=====================================================================#
 
 Table of Contents:
+	README
 	Setup Window Manager
 	(OPTIONAL) Setup xinitrc (if using startx - no display manager)
 	(OPTIONAL) Setup .{bash_|zsh_}profile
+
+README:
+	```
+	Document Information
+	```
+	Author: Asura
+	Created: 2022-03-21 23:58:35H, Asura
+	Modified
+		[1] 2022-03-21 23:58:35H, Asura
+	CHANGELOGS:
+		[1] Asura
+			- Created Documentation
+			- Added Segment/Chapter 'README'
+
 
 Setup Window Manager:
 	```

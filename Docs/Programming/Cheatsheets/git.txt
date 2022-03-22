@@ -14,6 +14,10 @@ Commands:
     git branch -b [branch-name]			:	Create the branch (if does not exist) and switch to it
     git switch [branch_name]			:	Switch active branch to another branch
 
+Topics:
+    github authentication:
+	gh auth login : Login to GitHub in command line
+
 Workflow:
     Default:
     	git pull / git fetch && git merge

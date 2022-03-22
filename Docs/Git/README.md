@@ -1,6 +1,16 @@
-# README
+# Documents - Git
 
-<h6> Documents - Git </h6>
+## Table of Contents
+	- Basic Information
+	- To Note
+	- Documentation
+	- Files
+	- Usage
+	- Help
+	- Authors
+	- Version History
+	- License
+	- Acknowledgements
 
 ## Basic Information
 
@@ -23,6 +33,7 @@
   * 2021-05-24 2026H, Asura
   * 2021-05-26 0959H, Asura
   * 2021-09-11 0932H, Asura
+  * 2022-03-22 1057H, Asura
 
 
 
@@ -30,33 +41,40 @@
 
 
 
-# Documentation
+## Documentation
 
-## Getting Started
+- Getting Started
 
 
 
 ## Files
 
-1. setup.txt
-2. Adding files.txt
-3. Commit files.txt
-4. Create new Branch.txt
-5. Create new Repository on Github.txt
-6. Pushing a branch to Github.txt
-7. Create & Merge Pull Request.txt
-8. Delete Branch.txt
-9. Get changes on Github back to your computer.txt
-10. Cloning a repository.txt
-11. Fetching changes.txt
-12. Pull changes.txt
-13. Contributing.txt
-14. EX1. create new repository.txt
-15. EX2. push existing repository.txt
-16. Issues-1. Bypass - Untracked working tree files overwriting warning.txt
-17. Issues-2. Bypass - Filename too long.txt
-18. README.md
-19. Glossary.txt
+- 1. setup.txt
+- 2. Adding files.txt
+- 3. Commit files.txt
+- 4. Create new Branch.txt
+- 5. Create new Repository on Github.txt
+- 6. Pushing a branch to Github.txt
+- 7. Create & Merge Pull Request.txt
+- 8. Delete Branch.txt
+- 9. Get changes on Github back to your computer.txt
+- 10. Cloning a repository.txt
+- 11. Fetching changes.txt
+- 12. Pull changes.txt
+- 13. Contributing.txt
+- 14. Must have files
+- 15. Add new remote repository url.txt
+- 16. Handling Personal Access Tokens.txt
+- EX1. create new repository.txt
+- EX2. push existing repository.txt
+- Git workflow.txt
+- Glossary
+- Issues-1. Bypass - Untracked working tree files overwriting warning.txt
+- Issues-2. Bypass - Filename too long.txt
+- Open Source Contributions.txt
+- README.md
+- Starters-Guide.txt
+- User-Example.sh
 
 
 
@@ -72,13 +90,13 @@
 
 
 
-# Authors
+## Authors
 
 > Contributors name, git ID, contact info
 
 
 
-# Version History
+## Version History
 
 >  Changelogs
 

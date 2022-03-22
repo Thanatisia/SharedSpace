@@ -5,8 +5,23 @@
 #=====================================================================#
 
 Table of Contents:
+	REAMDE
 	via Package Manager
 	via Manual
+
+README:
+	```
+	Document Information
+	```
+	Author: Asura
+	Created: 2022-03-21 23:58:35H, Asura
+	Modified
+		[1] 2022-03-21 23:58:35H, Asura
+	CHANGELOGS:
+		[1] Asura
+			- Created Documentation
+			- Added Segment/Chapter 'README'
+
 
 via Package Manager:
 	If your distro is
