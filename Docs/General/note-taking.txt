@@ -1,0 +1,25 @@
+#=================================================#
+# Documentations on General items (Non-Specifics) #
+#=================================================#
+
+Documentation & Note-taking Structure/Syntax flow:
+	- Have a '# [Table of Contents]' at the start for reader
+	- Start each points/header with '# [Header-title]' to identify its position
+		- Use in '# [Table of Contents]' for referral
+	- Start each subsequent subpoints with '- Subpoint' after a header
+		- These (in the hierarchy) will be the second main pointers
+	- Each tab/subpointers under the main subpoints will follow this structure:
+		```
+		> Sub-subpointer 1
+			* Item 1
+			* Item 2
+			> Sub-subpointer n
+				* Item 1
+				* Item 2
+				...
+			...
+		> Sub-subponter n
+		```
+		- If there are any subpointers under a subpointer, use the '>' notation
+		- If the subpointer is a item, use the '*' notation
+

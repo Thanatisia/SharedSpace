@@ -1,0 +1,78 @@
+# Typical Python Project Filesystem Structure
+
+# [Table of Contents]
+- Structure
+
+# [Structure]
+
+- General/Generic File Structure
+	. (Project Root)
+	|- LICENSE
+	|- docs
+	|    |-- Documentations Here (.md)
+	|
+	|-- bin/
+	|    |
+	|    |-- project (Executable)
+	|
+	|-- data/
+	|    |-- file
+	|
+	|-- src/
+	|    |
+	|    |-- Module/
+	|	|-- __init__.py
+	|	|-- module_file.py
+	|	|-- helper_files.py
+	| 
+	|-- test/
+	|    |-- __init__.py
+	|    |-- test_main.py
+	|
+	|-- requirements.txt
+	|-- setup.py
+	|-- README.md
+
+- Web Application Layout
+
+	project/
+	|
+	|-- project/
+	    |
+	    |-- __init__.py
+	    |-- settings.py
+	    |-- urls.py
+	    |-- wsgi.py
+	|
+	|-- manage.py
+
+- Mobile App Development
+	. (Project Root)
+	|- LICENSE
+	|- docs
+	|    |-- Documentations Here (.md)
+	|
+	|-- bin/
+	|    |
+	|    |-- project (Executable)
+	|
+	|-- data/
+	|    |-- file
+	|
+	|-- resources/
+	|    |-- layouts/
+	|
+	|-- src/
+	|    |
+	|    |-- Module/
+	|	|-- __init__.py
+	|	|-- module_file.py
+	|	|-- helper_files.py
+	| 
+	|-- test/
+	|    |-- __init__.py
+	|    |-- test_main.py
+	|
+	|-- requirements.txt
+	|-- setup.py
+	|-- README.md

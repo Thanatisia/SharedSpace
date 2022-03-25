@@ -1,0 +1,40 @@
+#=====================================================================#
+# Documentation - Python - Frameworks - Mobile App Development - Kivy #
+#=====================================================================#
+
+# [Table of Contents]
+	- Classes
+	- Creating Widgets
+	- Adding Widgets
+
+# [Classes]
+
+kivy.app
+	App
+kivy.uix
+	button 	: Button
+	gridlayout : GridLayout
+	label	: Label
+	textinput : TextInput
+	widget	: Widget
+
+# [Creating Window/Root]
+
+Syntax:
+	from kivy.app import App
+	class GUI(App): # Automatically call constructor 'App'
+		"""
+		Main Mobile Application
+		"""
+		def build(self):
+			# Return what you want to draw
+			return [Widget]
+
+# [Creating Widgets]
+
+Syntax: var_name = Widget_Class([Parameters])
+
+# [Adding Widgets]
+
+Syntax: Widget_Class.add_widget(var_name)
+

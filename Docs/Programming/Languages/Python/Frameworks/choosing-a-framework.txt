@@ -1,0 +1,31 @@
+#===========================================================#
+# Documentation - Python - Framework - Choosing a Framework #
+#===========================================================#
+
+# [Table of Contents]
+	Program Types
+	Frameworks
+
+# [Program Types]
+- Categories of Applications
+	* Web Application
+	* Mobile Application
+	* Console Application
+	* GUI Application
+
+# [Frameworks]
+
+- Web Application
+	* Django
+	* Flask
+
+- Mobile Application
+	* Kivy
+
+- Console Application
+	* Base Python
+
+- GUI Application
+	* TKinter
+	* Kivy
+	* PyQt5

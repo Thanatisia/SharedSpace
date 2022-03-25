@@ -1,7 +1,15 @@
 # CONTRIBUTING
-- Basic steps to contribute
+
+Basic steps to contribute
+
+Table of Contents:
+	- Setup
+		- First Commits
+	- Commit & Pushing
+	- Creating Pull Requests
 
 ## Setup : First commits
+
 1. Clone the remote repository 
     git clone [url]
 
@@ -13,6 +21,7 @@
     git config user.email   [email]
 
 ## Setup : Subsequent Contributions
+
 1. Fetch the latest updates
     git fetch
 
@@ -34,12 +43,19 @@
 8. Push to remote repository
     git push -u [remote-repository-url] [branch-name]
 
+## Creating Pull Requests
+
 9. Go to Github.com -> Remote Repository URL
 
 10. Switch branch to your branch name
 
-11. Press 'Confirm' Merge and Type in your change description in the textbox
+### If you are a maintainer
+	11. Press 'Confirm' Merge and Type in your change description in the textbox
+	12. Press 'Submit Merge' button
 
-12. Press 'Submit Merge' button
+### If you are a contributor
+	11. Press 'Create Pull Requests' and Type in your changes in the text box
+	12. Press 'Submit Pull Request'
+	13. Wait for maintainer to confirm changes
 
 13. After confirmation, repeat [Setup : Subsequent Contributions] Step 1.

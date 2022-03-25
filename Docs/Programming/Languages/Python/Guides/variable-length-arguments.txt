@@ -1,0 +1,61 @@
+#====================================================#
+# Documentation - Python - Variable Length Arguments # 
+#====================================================#
+
+Variable Length Arguments in functions is where the function signature accepts unlimited parameters
+
+- There are 2 types of Variable Length Arguments
+	- vargs (*vargs)    : Variable Arguments
+		- Type : List
+	- kwargs (**kwargs) : Keyword Arguments
+		- Type : Dictionary
+
+- Operators
+	- * : Variable Length Argument - List
+	- ** : Keyword Variable Length Argument - Dictionary
+
+Notes:
+	- 1. You can pass the entirety of a list into a function using *
+		- 1.1. Useful for passing an entire list into a function without specifying specific keywords (representing the arguments for the function)
+	- 2. You can pass the entirety of a dictionary into a function using **
+		- 2.1. Useful for passing an entire dictionary into a function with specific keywords (representing the arguments for the function)
+
+Syntax:
+	vargs: 
+		# Function Definition
+		def func(*vargs):
+			number_of_args = len(vargs)
+			for i in range(number_of_args):
+				print(vargs[i])
+
+				"""
+				Hello World
+				Hello 2
+				"""
+
+		# Usage
+		list_var = [
+			"Hello World",
+			"Hello 2"
+		]
+		func(*list_var)
+
+	kwargs:
+		# Function Definition
+		def func(**kwargs):
+			number_of_args = len(**kwargs)
+			for k,v in kwargs.items():
+				print("{} : {}".format(k,v))
+
+				"""
+				Result:
+					text : Hello World
+					text2 : Hello 2
+				"""
+
+		# Usage
+		dict_var = {
+			"text" : "Hello World",
+			"text2" : "Hello 2"
+		}
+		func(**dict_var) # Pass an entire dictionary as kwargs (Notes.2)
