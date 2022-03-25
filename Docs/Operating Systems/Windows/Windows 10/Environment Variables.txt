@@ -1,0 +1,37 @@
+Documentation - Windows 10 - Environment Variables
+
+Table of Contents:
+	Environment Variables
+	Temporarily modifying Environment Variables
+
+[Environment Variables]
+- Environment Variables can be accessed using the '%' operator like all other variables but are typically
+	- Used by the system in a high-importance program
+	Syntax : %[ENVIRONMENT_VARIABLE]%
+
+- List of Environment Variables
+	- PATH : System-recognized paths, any folders listed is recognized by the system and programs inside these directories can be ran 
+	- CD : Current Working Directory
+
+
+[Modifying Environment Variables]
+- Temporary
+	- You can temporarily modify Environment Variables to perform additional operations
+		- i.e. Appending to PATH
+		- Changes made here will be resetted once the session of command prompt has been exitted
+	Syntax: 
+		Assign new value to environment variable : [ENVIRONMENT_VARIBALE]=[NEW_VALUE]
+		Append behind environment variable: [ENVIRONMENT_VARIABLE]=[ENVIRONMENT_VARIABLE];[NEW_VALUE]
+
+- Permanent
+	- Open the Search Bar
+		- Type 'Environment Variables'
+			- Click on 'Edit the system environment variables'
+				- System Properties tab should open
+				- Click on the 'Environment Variables' button
+					- You can 
+						- Change Environment Variables
+						- Add Environment Variables
+						- Delete Environment Variables
+					- Please becareful as any changes made here are permanent
+						- Thus, recommended to make backups of the text string before confirming

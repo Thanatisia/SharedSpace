@@ -1,0 +1,7 @@
+#==========================================================================#
+# Documentation - Mobile App Development - Android - Environment Variables #
+#==========================================================================#
+
+# [Environment Variables]
+ANDROID_HOME : Android SDK Home Path
+ANDROID_SDK_ROOT : Android SDK Folder Root

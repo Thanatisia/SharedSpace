@@ -1,0 +1,134 @@
+#=================================================================================================#
+# Documentation - Mobile App Development - Android - Java + XML - Development Environment - Setup #
+#=================================================================================================#
+
+Documentation and guide on how to setupthe Android Environment without Android Studio
+- to build and compile your android apk without android studio/on terminal
+
+# [Table of Contents]
+* Pre-Requisites
+	- Download
+	- Prepare
+* Steps
+
+# [Pre-Requisites]
+- Download
+	* Java JDK
+	* Gradle 
+		- gradle.org/install
+		- Binary-only is recommended as docs and sources can be found online
+	* Android Command Line Tools (Android SDK)
+		- developer.android.com
+		- Go to 'Command Line Tools only" section
+		- Download 'commandlinetools-[platform]-[release]_latest.zip'
+
+- Prepare
+	- Android Environment Information
+		```
+		source.android.com/setup/start/build-numbers		
+		```
+		* Android Codename
+		* Android Version
+		* Android API Level
+		* Build Tools Major Version
+
+# [Steps]
+
+- Setup Android SDK
+	> Extract downloaded Android SDK zip file to anywhere of your choice
+	> (Recommended) Rename extracted folder to 'Android-SDK'
+	> Update sdkmanager
+		- If Windows
+			```
+			Syntax: .\[Android-sdk-folder]\tools\bin\sdkmanager.bat --update
+			```
+			- If received a 'Could not find or load main class com.android.sdklib.tool.sdkmanager.SdkManagerCli' error
+				- Go to '.\[Android-sdk-folder]\tools\lib\_'
+				- Copy all Java Jar files
+				- Paste into lib folder
+				- Retry command
+
+			- If received a 'Could not create settings' warning (java.lang.IllegalArgumentException)
+				- Go to '.\[Android-sdk-folder]'
+				- Create new folder
+				- Rename as 'cmdline-tools'
+				- Move 'tools' folder nto 'cmdline-tools'
+				- Retry command
+	> Install Build Tools and Platforms
+		- Installation
+			```
+			Syntax: .\[Android-sdk-folder]\cmdline-tools\tools\bin\sdkmanager.bat \
+				"platforms;android-[your_android_version]" \
+				"build-tools;[your_build_tools_major_version]" \
+				"extras;[extras];[repository]"
+			```
+			.\[Android-sdk-folder]\cmdline-tools\tools\bin\sdkmanager.bat \
+				"platforms;android-[your_android_version]" \
+				"build-tools;[your_build_tools_major_version]" \
+				"extras;google;m2repository" \
+				"extras;androd;m2repository"
+		- Go to '.\[Android-sdk-folder]'
+			- New folders should be created
+
+- Add to PATH
+	```
+	- Please refer to my guide on how to add to PATH : https://github.com/Thanatisia/SharedSpace/tree/main/Docs/Operating%20Systems/Windows/Windows%2010/Environment-Variables.txt
+	```
+	1. Java JDK
+		PATH+="\path\to\jdk";
+
+	2. Add Gradle to PATH
+		PATH+="\path\to\gradle";
+
+	3. Android SDK Command Line Tools
+		PATH+=".\[Android-sdk-folder]\cmdline-tools\tools"
+
+- Verify Setup Tools
+	```
+	Verify the following has been setup/installed
+	```
+	- Java JDK
+		java --version
+
+	- Gradle
+		```
+		Resources:
+			Gradle Install : gradle.org/install
+		```
+		gradle --version
+		
+	- Android SDK
+
+
+- Set Android Environment Variables
+	```
+	- Please refer to my guide on how to add to PATH : https://github.com/Thanatisia/SharedSpace/tree/main/Docs/Operating%20Systems/Windows/Windows%2010/Environment-Variables.txt
+	```
+	- ANDROID_SDK_ROOT
+		```
+		This Environment Variable is what android studio use to determine the Android SDK's root directory
+		```
+		SET ANDROID_SDK_ROOT="\path\to\Android-sdk-folder"
+
+	- ANDROID_HOME
+		```
+		This Environment Variable is what android studio use to determine the Android Environment's Home Directory
+		```
+		SET ANDROID_HOME="\path\to\Android-sdk-folder"
+
+- Verify Android Environment Variables
+	```
+	Check to see if the Android Environment Variables are set properly
+	```
+	In Powershell:
+		echo $env:ANDROID_HOME
+		echo $env:ANDROID_SDK_ROOT
+
+	In Command Line:
+		echo %ANDROID_HOME%
+		echo %ANDROID_SDK_ROOT%
+
+	In Linux Bash:
+		echo $ANDROID_HOME
+		echo $ANDROID_SDK_ROOT
+

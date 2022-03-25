@@ -1,0 +1,50 @@
+#============================================#
+# Documentation - Termux - Backup & Recovery #
+#============================================#
+
+Termux is limited when in an unrooted device - however, it is not unusable as a day-to-day editor, terminal, file manager etc.
+
+Backup and Recovery is limited as the FAT32 file system supports only [Read-Only permission], thus, you are unable to perform operations such as
+	- Symlinks
+	- Paste into Shared Storage Folders
+
+Table of Contents:
+	- Backup
+	- Recovery
+
+Backup:
+	```
+	Compress and Backup Dotfiles into a tar file for portability and transport
+	- Copy tar file to another place for backup
+
+	Syntax: tar -cvzf [output-path] -owner=0 -group=0 [folders]
+	
+	Params:
+		-c : Compress to tar file
+		-v : Verbose (with message)
+		-z : 
+		-f : 
+
+		-owner : Set owner ID (Default: 0 for no owner)
+		-group : Set group ID (Default: 0 for no group)
+
+	Notes:
+		- Please seperate all folder values with delimiter ' '
+	```
+	# let storage be '/sdcard/Download/termux.tgz'
+	tar -cvzf /sdcard/Download/termux.tgz -owner=0 -group=0 home user
+
+Recovery:
+	```
+	Extract Dotfile backup tarfile to dotfiles path
+
+	Syntax: tar -xvzf [backup-tar-file-path]
+	
+	Params:
+		-x : Extract
+		-v : Verbose (With Message)
+		-z : 
+		-f : 
+	```
+	# let storage be '/sdcard/Download/termux.tgz'
+	tar -xvzf /sdcard/Download/termux.tgz

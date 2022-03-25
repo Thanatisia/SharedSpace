@@ -1,0 +1,15 @@
+#========================================#
+# Documentation - Termux - General Usage #
+#========================================#
+
+Table of Contents:
+
+* Paths
+
+[Paths]
+	Application Storage : /data/data/files
+	Internal Public Storage : /sdcard/
+	Termux config directory: /data/data/files/usr
+	Mounted Device Root (Start of shared devices after mounting): /data/data/files/home/
+	Shared Storage: /data/data/files/home/shared/
+
