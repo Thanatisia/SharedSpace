@@ -1,0 +1,261 @@
+#==================================================================#
+# Documentation - Mobile App Development - Android - Java - Gradle #
+#			Signing your APK                           #
+#==================================================================#
+
+Documentation and guide on how to sign your android apk without android studio/on terminal
+	using Java JDK & Gradle
+
+Table of Contents:
+	- Resources
+	- Pre-Requisites
+	- Introduction
+	- Preparation & Setup
+	- Documentation
+	- Steps
+
+# [Resources]
+- References
+	Build your app from the command line | Android Developer : https://developer.android.com/studio/build/building-cmdline
+	Gradle Wrapper | Gradle Docs : https://docs.gradle.org/current/userguide/gradle_wrapper.html
+	Configure your build | Android Developer : https://developer.android.com/studio/build
+
+# [Pre-Requisites]
+- Java JDK
+- Gradle
+- Android SDK
+
+# [Introduction]
+
+This is the official way Android Studio uses to compile/build the android apk from the command line.
+- You can execute all the build tasks available to your Android project using the [Gradle wrapper] command line tool
+
+# [Preparation & Setup]
+	```
+	If you have setup your Android Environment manually as well
+	- You should have the Java JDK and Gradle
+	```
+	- Install Java JDK
+
+	- Verify Java JDK
+		java --version
+
+	- Install Gradle
+
+	- Verify Gradle
+		gradle --version
+
+# [Documentation]
+
+- Build types
+	```
+	By default: There are 2 build types available for every Android app
+		- debug : For debugging your app
+		- release : For releasing your app to user
+
+	- Generated apk from each build must be signed with a certificate and zaligned before you can deploy your app to a device.
+
+	- The debug build is automatically signed with a debug key provided by the SDK tools
+		- Cannot publish with it to the Google Play Store because it is insecure
+
+	- The release build must be signed with your own private key
+	```
+
+
+# [Steps]
+
+- Generate private key
+	```
+	- You can sign your app using [apksigner] for APKs
+		or [jarsigner] for app bundles
+		or configure Gradle to sign it for you during the build
+	- Either way, tyou need to first generate a private key using [keytool]
+	References: https://developer.android.com/studio/build/building-cmdline#sign_cmdline
+
+	Keytool:
+		Syntax: keytool <parameters>
+		Options:
+			-genkey   					 : Generate Key
+			-v 	  					 : Verbose
+			-keystore <output-file.jks> 			 : Output file to generate
+			-keyalg	<encryption-algorithm (RSA|SHA256 etc.)> : The Key Encryption Algorithm
+			-keysize  <n>					 : Size of the Key (bits)
+			-validity <n>					 : Number of days for the key to stay valid
+			-alias    <alias-name>				 : Set the name/alias of the key
+	```
+	keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+
+- Sign your app from the command line
+	- Manually
+		- If you want to sign an app bundle
+			```
+			You can use [jarsigner]
+			
+			Syntax: 
+			Options:
+			```
+
+		- If you want to sign an APK
+			```
+			You need to use [zipalign] and [apksigner]
+			- zipalign : Used to align the apk
+			- apksigner : Used to sign the apk
+
+			zipalign:
+				Syntax: zipalign {parameters} [unsigned-app.apk] [unsigned-aligned-app.apk]
+				Parameters: 
+					-v : Verbose
+					-p <n>: Start uncompressed data with a particular byte alignmet relative to the start of the file
+						- May reduce the amount of RAM consumed by an app
+
+			apksigner:
+				Syntax: apksigner <action> {parameters} [unsigned-apk.apk]
+				action:
+					sign : Sign the apk
+					verify : Verify the app
+				Parameters:
+					--ks [keystore.jks] : The keystore private key used to sign the APK
+					--out [release-apk] : The signed apk output file
+			```
+			# Align apk 
+				zipalign -v -p 4 my-app-unsigned.apk my-app-unsignd-unaligned.apk
+
+			# Sign APK
+				apksigner sign -ks my-release-key.jks --out my-app-release.apk unsigned-aligned-app.apk
+
+			# Verify APK is signed
+				apksigner verify my-app-release.apk
+
+	- Configure Gradle to sign your app
+		```
+		Open the module-level build.gradle file and
+			- add the [signingConfigs {}] block with entries for
+				- storeFile
+				- storePassword
+				- keyAlias
+				- keyPassword
+			- pass that object to the [signingConfig] property in your build type
+		
+		#==============#
+		# build.gradle #
+		#==============#
+		android {
+			...
+
+			defaultConfig {...}
+			signingConfigs {
+				// Signing config for release build
+				release {
+					// You need to specify either an absolute path OR 
+					// include the keystore file in the same directory as the build.gradle file
+					storeFile file("release-keystore-filename.jks")
+					storePassword "password"
+					keyAlias "my-alias"
+					keyPassword "password"
+				}
+			}
+			buildTypes {
+				release {
+					// Pass signingConfigs release object
+					signingConfig signingConfigs.release
+				}
+			}
+		}
+
+		- When you build your app by invoking a gradle task
+			- Gradle will 
+				1. Sign your app
+				2. Run zipalign
+		- Additionally, because you configured the release build with your signing key
+			- the "install" task is available for that build type
+				- release
+			- this means you can build, align, sign and install the release APK on an emulator or
+				device all with the [installRelease] task
+		``` 
+		- For Improved Security
+			```
+			Remove the signing information from your build file
+			```
+			- Create a file named 'keystore.properties'
+				Location: root directory of your project
+				# This file should contain your signing information
+				# Content
+					storePassword=myStorePassword
+					keyPassword=mykeyPassword
+					keyAlias=myKeyAlias
+					storeFile=myStoreFileLocation
+
+			- Add code to load your keystore.properties
+				```
+				Add code to load your keystore.properties file before the android {} block
+				```
+				- Groovy
+
+					...
+
+					// Create a variable called keystorePropertiesFile, and initialize it to your
+					// keystore.properties file, in the rootProject folder.
+					def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+					// Initialize a new Properties() object called keystoreProperties.
+					def keystoreProperties = new Properties()
+
+					// Load your keystore.properties file into the keystoreProperties object.
+					keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+					android {
+						...
+					}
+
+				- Kotlin
+
+					...
+					import java.util.Properties
+					import java.io.FileInputStream
+
+					// Create a variable called keystorePropertiesFile, and initialize it to your
+					// keystore.properties file, in the rootProject folder.
+					val keystorePropertiesFile = rootProject.file("keystore.properties")
+
+					// Initialize a new Properties() object called keystoreProperties.
+					val keystoreProperties = Properties()
+
+					// Load your keystore.properties file into the keystoreProperties object.
+					keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
+					android {
+					    ...
+					}
+
+			- To refer to properties stored in keystoreProperties
+				```
+				Syntax: keystoreProperties['propertName']
+
+				- Modify the [signingConfigs] block of your module's build.gradle file 
+					to reference the signing information stored in keystoreProperties
+				```
+				- Groovy
+					android {
+						signingConfigs {
+							config {
+								keyAlias keystoreProperties['keyAlias']
+								keyPassword keystoreProperties['keyPassword']
+								storeFile file(keystoreProperties['storeFile'])
+								storePassword keystoreProperties['storePassword']
+							}
+						}
+					}
+
+				- Kotlin
+					android {
+						signingConfigs {
+							config {
+								keyAlias keystoreProperties['keyAlias']
+								keyPassword keystoreProperties['keyPassword']
+								storeFile file(keystoreProperties['storeFile'])
+								storePassword keystoreProperties['storePassword']
+							}
+						}
+					}
+
+

@@ -1,0 +1,67 @@
+#====================================================#
+# Documentation - Linux - Guides - Backup & Recovery #
+#====================================================#
+
+Table of Contents:
+	- Dotfiles Management
+	- Backup
+	- Recovery
+
+Dotfiles Management:
+	- Create Symbolic Links (Symlinks)
+		```
+		Use ln to Symbolic Link the dotfile directory to their respective config location
+
+		Syntax: ln -s [base-file] [output-symlink-location]
+
+		Parameters:
+			-s : Create Symbolic Link
+		```
+		# This will create a symbolic link of 
+		#	Source : repository_path/.config/config_file
+		#	Imaginary Symlink : ~/.config/config_file
+		ln -s repository_path/.config/config_file ~/.config/config_file
+
+
+Backup:
+	```
+	Use tar 
+	- Compress and Backup Dotfiles into a tar file for portability and transport
+	- Copy tar file to another place for backup
+
+	Syntax: tar -cvzf [output-path] -owner=0 -group=0 [folders]
+	
+	Params:
+		-c : Compress to tar file
+		-v : Verbose (with message)
+		-z : 
+		-f : 
+
+		-owner : Set owner ID (Default: 0 for no owner)
+		-group : Set group ID (Default: 0 for no group)
+
+	Notes:
+		- Please seperate all folder values with delimiter ' '
+	```
+	# let storage be '~/Desktop/system_archives/[Current Date]/[Current Time]/system_archive.tar.gz'
+	# and want to backup: 
+	#	- Root Partition
+	#	- Home Partition
+	tar -cvzf ~/Desktop/system_archives/[Current Date/[Current Time]/system_archive.tar.gz -owner=0 -group=0 / /home
+
+Recovery:
+	```
+	Extract Dotfile backup tarfile to dotfiles path
+
+	Syntax: tar -xvzf [backup-tar-file-path]
+	
+	Params:
+		-x : Extract
+		-v : Verbose (With Message)
+		-z : 
+		-f : 
+	```
+	# let storage be '~/Desktop/system_archives/[Date]/[Time]/system_archive.tar.gz'
+	# - system will restore paths to the archived locations
+	#	- i.e. root => /root
+	tar -xvzf ~/Desktop/system_archives/[Date]/[Time]/system_archive.tar.gz

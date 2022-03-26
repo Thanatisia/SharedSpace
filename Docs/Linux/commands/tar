@@ -5,6 +5,7 @@
 Table of Contents:
 	Background
 	Parameters
+	Syntax
 	Usage
 
 [Background]
@@ -13,7 +14,8 @@ Command Name: tar
 Abbreviation: 
 Command Summary: A compression utility - like zip and rar - that compresses a folder or file into a 'tar file' for backup and recovery
 General Syntax: tar [options] [output-file-name] [targets]
-General Parameters: 
+
+[Parameters]
 	-c : Compress to tar file
 	-f : Force compress
 	-v : Verbose (with message)
@@ -22,26 +24,10 @@ General Parameters:
 	-owner : Set owner ID (Default: 0 for no owner)
 	-group : Set group ID (Default: 0 for no group)
 
-[Parameters]
-
-<parameter> : <description of parameter>
-	Syntax:
-		<syntax/structure of parameter in command>
-	Usage:
-		[1] An example of command with <parameter>
-			Command:
-				<The example command with parameter>
-			Output:
-				<intended output>	
-
--c : Compress to tar file
-	Syntax: tar -c [output-file-name] {targets}
-
--f 
-
--v : Verbose (with message)
+[Syntax]
+Backup: tar -cvzf [output-path] -owner=0 -group=0 [folders]
+Recovery: tar -xvzf [tar-file]
 
 [Usage]
 
-Backup: tar -cvzf [output-path] -owner=0 -group=0 [folders]
-Recovery: tar -xvzf [tar-file]
+

@@ -1,0 +1,78 @@
+#==================================================================#
+# Documentation - Mobile App Development - Android - Java - Gradle #
+#			Gradle Manual                              #
+#==================================================================#
+
+Documentation and Manual on using Java JDK & Gradle
+
+Table of Contents:
+	- Resources
+	- Pre-Requisites
+	- Introduction
+	- Preparation & Setup
+	- Documentation
+		- Syntax
+		- Options
+	- Usage
+
+# [Resources]
+- References
+	Build your app from the command line | Android Developer : https://developer.android.com/studio/build/building-cmdline
+	Gradle Wrapper | Gradle Docs : https://docs.gradle.org/current/userguide/gradle_wrapper.html
+	Configure your build | Android Developer : https://developer.android.com/studio/build
+
+# [Pre-Requisites]
+- Java JDK
+- Gradle
+
+# [Introduction]
+
+This is the official way Android Studio uses to compile/build the android apk from the command line.
+- You can execute all the build tasks available to your Android project using the [Gradle wrapper] command line tool
+
+# [Preparation & Setup]
+	```
+	If you have setup your Android Environment manually as well
+	- You should have the Java JDK and Gradle
+	```
+	- Install Java JDK
+
+	- Verify Java JDK
+		java --version
+
+	- Install Gradle
+
+	- Verify Gradle
+		gradle --version
+
+# [Documentation]
+
+- Syntax
+	- On Windows
+		gradlew [task-name]
+	- On Linux or Mac
+		./gradlew [task-name]
+
+	- Options
+		- task-names:
+			General:
+				tasks : To see a list of all available build tasks for your project	
+			Build Types:
+				```
+				NOTES:
+					- Refer to 'tasks' task for the [build variant]
+				```
+				Debug:
+					assemble[build_variant] : To initiate a debug build
+						- This creates an APK named [module_name-debug].apk in project_name/module_name/build/outputs/apk/
+					installDebug : Build the APK and immediately install on a running emulator or connected device
+				Release:
+					installRelease : if release build type, private keystore file is specified in the gradle - run the install process
+
+# [Usage]
+
+- To see a list of all available build tasks for your project
+	gradlew tasks
+
+
+

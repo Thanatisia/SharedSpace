@@ -1,0 +1,132 @@
+#===============================================================================#
+# Documentation - Mobile App Development - Android - Python - Frameworks - Kivy #
+#				Buildozer                                       #
+#===============================================================================#
+
+Documentation for Python to Android APK Compiler 'Buildozer'
+
+Table of Contents:
+	- Resources
+	- Introduction
+	- Preparation & Setup
+	- Syntax
+	- Options
+	- Usage
+
+# [Resources]
+
+Buildozer Github Repository : https://github.com/kivy/buildozer
+
+# [Introduction]
+
+Python is not natively available for use on Android, thus you need to compile and build/convert it into 
+android-readable format. 
+
+Buildozer is used to compile and build python application into android 
+	- As of 2022-03-26:
+		Buildozer is only available on Linux
+
+
+# [Preparation & Setup]
+
+- Installation
+	- via Pip
+		```
+		If you are using a Virtual Environment: don't use the '--user' option
+
+		Syntax: pip install {options} {package_name}
+		```	
+		- Latest Stable (Recommended)
+			pip install {--user} buildozer
+
+		- Latest Development Version
+			pip install {--user} https://github.com/kivy/buildozer/archive/master.zip
+
+
+	- Manual
+		```
+		Repository: https://github.com/kivy/buildozer
+		```
+		git clone https://github.com/kivy/buildozer
+		cd buildozer
+		python setup.py build
+		pip install -e .
+
+- Verify Buildozer is installed
+	```
+	As Buildozer is only on Linux as of 2022-03-26,
+	- this step is only on Linux
+
+	Troubleshooting:
+		- If there are no results and you installed with --user
+			- Add '~/.local/bin/~ to your PATH
+			- run '. ~/.bashrc'
+	```
+	which buildozer
+
+
+
+
+# [Documentation]
+
+- Syntax: buildozer [--profile <name>] [--verbose] {targets} <commands>
+
+- Options
+	targets: 
+		android : Android devices, based on python-for-android projects
+		ios	: iOS devices, based on kivy-ios projects
+
+	Global commands:
+		# Without target
+		distclean   : Clean the whole buildozer environment
+		help	    : Show buildozer help	
+		init	    : Create and Initialize and initial buildozer.spec in the current directory
+		serve	    : Serve the bin directory via SimpleHTTPServer (python -m http.server)
+		setdefault  : Set the default command to run when no arguments are given
+		version	    : Show the Buildozer version
+
+	Target commands:
+		clean	    : Clean the target environment
+		update	    : Update the target dependencies
+		debug	    : Build the application in debug mode
+		release	    : Build the application in release mode
+		deploy      : Deploy the application on the connected device
+		run	    : Run the application on the connected device
+		serve	    : Serve the bin directory via SimpleHTTPServer (python -m http.server)
+
+	Target - iOS commands:
+		list_identities : List the available identities to use for signing
+		xcode		: Open the XCode project
+
+	Target - Android commands:
+		adb		: The Android Debug Bridge. Run adb from the android SDK.
+					- Arguments must come after '--', or use '--alias' to make an alias
+		logcat		: Shows the log from the device. Useful for Debugging
+		p4a		: Run p4a commands. Arguments must come after '--', or use '--alias' to make an alias
+
+- Configuration:
+	```
+	Please refer to [https://raw.githubusercontent.com/kivy/buildozer/master/buildozer/default.spec] for an up-to-date spec file
+	
+	- All config tokens in the buildozer.spec file are mapped to an appropriate Android Environment Variable
+	```
+	# token | env_variable
+	title -> $APP_TITLE
+	package.name -> $APP_PACKAGE_NAME
+	p4a.source_dir -> $APP_P4A_SOURCE_DIR
+	
+
+# [Usage]
+
+- Create Buildozer build configurations (buildozer.spec):
+	buildozer init
+
+- Edit buildozer config:
+	$EDITOR buildozer.spec
+
+- To deploy apk to mobile
+	```
+	Syntax: buildozer {targets} 
+	```
+	buildozer android debug deploy run
+

@@ -1,0 +1,57 @@
+#==============================================================================#
+# Documentation - Mobile App Development - Android - Projects - File Structure #
+#==============================================================================#
+
+Documentation for Android App Development - Projects : File Structure
+
+Table of Contents:
+	- Resources
+	- File Structures
+
+# [Resources]
+
+- References
+	Configure your Build | Android Dev : https://developer.android.com/studio/build
+
+# [File Structures]
+
+- Default Project Structure for an Android app module
+	```
+	Notes:
+		- Note that the project's data folder - [com.organization.program_name] - uses the lowercase of the Program Name
+	```
+	MyApp/
+	|
+	|-- build.gradle
+	|
+	|-- settings.gradle
+	|
+	|--.gradle/
+	|   |
+	|   |-- gradle.properties
+	|
+	|-- app/
+	    |
+	    |-- build.gradle
+	    |
+	    |-- build/
+	    |
+	    |-- libs/
+	    |
+	    |-- src/
+		|
+		|-- main/
+		    |
+		    |-- java/
+			|
+			|-- com.example.myapp
+		    |
+		    |-- res/
+			|
+			|-- drawable/
+			|
+			|-- layout/
+			|
+			|-- ...
+		|
+		|-- AndroidManifest.xml

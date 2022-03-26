@@ -1,0 +1,151 @@
+#==================================================================#
+# Documentation - Mobile App Development - Android - Java - Gradle #
+#			Compiling to APK                           #
+#==================================================================#
+
+Documentation and guide on how to compile/build android apk without android studio/on terminal
+	using Java JDK & Gradle
+
+Table of Contents:
+	- Resources
+	- Pre-Requisites
+	- Introduction
+	- Preparation & Setup
+	- Documentation
+	- Steps
+
+# [Resources]
+- References
+	Build your app from the command line | Android Developer : https://developer.android.com/studio/build/building-cmdline
+	Gradle Wrapper | Gradle Docs : https://docs.gradle.org/current/userguide/gradle_wrapper.html
+	Configure your build | Android Developer : https://developer.android.com/studio/build
+
+# [Pre-Requisites]
+- Java JDK
+- Gradle
+
+# [Introduction]
+
+This is the official way Android Studio uses to compile/build the android apk from the command line.
+- You can execute all the build tasks available to your Android project using the [Gradle wrapper] command line tool
+
+# [Preparation & Setup]
+	```
+	If you have setup your Android Environment manually as well
+	- You should have the Java JDK and Gradle
+	```
+	- Install Java JDK
+
+	- Verify Java JDK
+		java --version
+
+	- Install Gradle
+
+	- Verify Gradle
+		gradle --version
+
+# [Documentation]
+
+- Build types
+	```
+	By default: There are 2 build types available for every Android app
+		- debug : For debugging your app
+		- release : For releasing your app to user
+
+	- Generated apk from each build must be signed with a certificate and zaligned before you can deploy your app to a device.
+
+	- The debug build is automatically signed with a debug key provided by the SDK tools
+		- Cannot publish with it to the Google Play Store because it is insecure
+
+	- The release build must be signed with your own private key
+	```
+
+- File Structure
+	```
+	References:
+		Build Configuration Files : https://developer.android.com/studio/build
+	```
+	- Gradle Files
+		- build.gradle : Gradle's Build File; Used to automatically run gradle with specified actions
+
+# [Steps]
+
+- To see a list of all available build tasks for your project
+	gradlew tasks
+
+- Build an APK
+	- Build an APK
+		```
+		To build unsigned apk files
+		```
+		gradlew assemble
+
+	- Build a debug APK
+		```
+		For immediate app testing and debugging - you can build a debug apk
+		- The debug APK is signed with a debug key provided by the SDK tools and
+		- allows debugging through adb (Android Development Bridge)
+		```
+		- To initiate a debug build
+			```
+			This creates an APK named [module_name-debug].apk in
+				project_name/module_name/build/outputs/apk/
+
+			- The file is already signed with the debug key and
+				aligned with zipalign
+				- So you can immediately install it on a device
+			```
+			gradlew assembleDebug
+
+		- Build the APK and immediately install on a running emulator or connected device
+			```
+			Note:
+				- The "Debug" part in the above task names is just a camel-case version of the build variant name, 
+					so it can be replaced with whichever build type or variant you want to assemble or install. 
+					- For example, if you have a "demo" product flavor, 
+						then you can build the debug version with the assembleDemoDebug task.
+			```
+			gradlew installDebug
+
+- Deploy your app
+	- To the emulator
+		```
+		To use the Android Emulator
+		- you must create an Android Virtual Device using Android Studio or 
+		- (WIP) Using Command Line tools
+		
+		- Navigate to 'android_sdk/tools/'
+		```
+		- Check AVDs
+			emulator -list-avds
+
+		- Specify your AVD
+			emulator -avd [avd_name]
+
+		- Install your app
+			- Using Gradle Install Tasks
+
+			- Using adb
+				```
+				Syntax: adb install {-t} path/to/your_app.apk
+				```
+
+	- To a physical device
+		- Pre-Requisites
+			```
+			You must enable USB Debugging on your device
+			- You can find the option under 'Settings > Developer Options'
+			- To make the option available
+				- Go to 'Settings' > About Phone > Tap 'Build number' 7 times
+
+			Ensure that your device is connected
+			```
+
+		- Install your app
+			- Using Gradle Install Tasks
+		
+			- Using adb
+				```
+				Reference : https://developer.android.com/studio/run/device
+				Syntax: adb -d install path/to/your_app.apk
+				```

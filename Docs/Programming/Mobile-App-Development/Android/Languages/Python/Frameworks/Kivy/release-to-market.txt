@@ -1,0 +1,57 @@
+#===============================================================================#
+# Documentation - Mobile App Development - Android - Python - Frameworks - Kivy #
+#			Releasing to the market                                 #
+#===============================================================================#
+
+Documentation and guide on Mobile App Development - Android
+	using Python Kivy
+	- Releasing to Market (Google Play Store)
+
+Table of Contents:
+	- Pre-Requisites
+	- Introduction
+	- Preparation & Setup
+	- Syntax
+	- Options
+	- Usage
+
+# [Resources]
+
+Kivy - Packaging Android : https://kivy.org/doc/stable/guide/packaging-android.html
+
+# [Pre-Requisites]
+
+- Run and generate android apk as 'release' mode
+	```
+	- This will create a release AAB in the bin directory
+		- You must properly sign and zipalign
+		- like in other android app development language/frameworks 
+			Example:
+				Java
+				Kotlin
+				Javascript & NodeJS - React Native
+	```
+	- If you are using Buildozer
+		```
+		Run with the [release] parameter
+		```
+		buildozer android release
+
+	- If you are using python-for-android
+		```
+		Use the --release option to build.py
+		```
+		build.py --release
+
+
+
+# [Introduction]
+
+# [Preparation & Setup]
+
+# [Syntax]
+
+# [Options]
+
+# [Usage]
+

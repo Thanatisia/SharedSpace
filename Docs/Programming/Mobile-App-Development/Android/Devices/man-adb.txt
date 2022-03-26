@@ -1,0 +1,63 @@
+#==================================================================#
+# Documentation - Mobile App Development - Android - Communication #
+#			   ADB Manual                              #
+#==================================================================#
+
+Documentation and Manual on using the Android Debug Bridge (ADB)
+
+Table of Contents:
+	- Resources
+	- Pre-Requisites
+	- Introduction
+	- Preparation & Setup
+	- Documentation
+		- Syntax
+		- Options
+	- Usage
+
+# [Resources]
+- References
+	ADB | Android Developer : https://developer.android.com/studio/command-line/adb
+
+# [Pre-Requisites]
+- Java JDK
+- Gradle
+
+# [Introduction]
+
+This is used to communicate with your Android Device/Android Emulator with a socket relationship (Server <-> Client)
+
+# [Preparation & Setup]
+	```
+	If you have setup your Android Environment manually as well
+	- You should have the Java JDK and Gradle
+	```
+	- Install Java JDK
+
+	- Verify Java JDK
+		java --version
+
+	- Install Gradle
+
+	- Verify Gradle
+		gradle --version
+
+# [Documentation]
+
+- Syntax : adb <action> {parameters}
+
+- Actions
+	install : Install an apk with connected device
+		Syntax : adb <action> {parameters} [apk_file.apk]
+		Parameters:
+			-d : Install on physical device
+			-t : Must include if APK is built using a developer preview SDK (if the targetSdkVersion is a letter instead of a number)
+
+
+# [Usage]
+
+
+# [Notes]
+
+- All APKs you build are saved in project_name/module_nme/build/outputs/apk/
+

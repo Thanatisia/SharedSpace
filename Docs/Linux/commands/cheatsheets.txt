@@ -1,0 +1,34 @@
+#=============================================#
+# Documentation - Linux - Commands Cheatsheet #
+#=============================================#
+
+Table of Contents:
+	- Commands
+	- Topics
+
+Commands:
+	awk
+	dd
+	sed
+	su
+	tar
+
+Topics:
+	- Backup and Recovery
+		# Backup Dotfiles with tar	
+		# Use tar (-cvzf) to compress and archive the source dotfile repository to a backup (dotfile_archive.tar.gz)
+			tar -cvzf dotfile_archive.tar.gz [dotfiles]
+
+	- Symlinks
+	# - Use command 'ln' to generate Symlinks
+		Syntax: ln -s [base-file] [output-symlink-location]
+		Options:
+			-s : Create Symbolic Link
+			-r : Set Relative Path
+		Usage:
+			# Backup Dotfiles with Symlinks and Git
+			# Create symlinks of the folders in your dotfile repository to the target config directories
+			# Periodically git add, commit and push to your dotfile remote repository for backup
+			# Examples:
+				repository/.config/config_fldr => ~/.config/config_fldr 
+	

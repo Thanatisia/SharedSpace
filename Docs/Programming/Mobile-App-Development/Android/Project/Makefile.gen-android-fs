@@ -1,0 +1,6 @@
+# Makefile to generate an Android Project File Structure
+
+ORG_NAME = "MyOrg"
+APP_NAME = "MyApplication"
+APP_VERS = "v0.0a"
+

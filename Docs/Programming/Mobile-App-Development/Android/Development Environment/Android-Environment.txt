@@ -5,3 +5,8 @@
 # [Environment Variables]
 ANDROID_HOME : Android SDK Home Path
 ANDROID_SDK_ROOT : Android SDK Folder Root
+GRADLE_OPTS : Specifies the JVM arguements
+GRADLE_USER_HOME : Specifies the Gradle user home directory (Defaults to $USER_HOME/.gradle)
+JAVA_HOME : Specify the JDK Installation directory to use for the client VM. 
+		- This VM is also used for the daemon, 
+			unless a different one is specified in a Gradle properties file with [org.gradle.java.home]

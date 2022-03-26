@@ -1,0 +1,577 @@
+#=====================================================================#
+# Documentation - Mobile App Development - Android - Projects - Files #
+#=====================================================================#
+
+Documentation for Android App Development - Projects : Files
+
+Table of Contents:
+	- Resources
+	- Files
+
+# [Resources]
+
+- References
+	Configure your Build | Android Dev : https://developer.android.com/studio/build
+
+# [Files]
+
+- Gradle settings file
+	```
+	File Name : settings.gradle
+	Location  : project directory root
+	Description : Defines project-level repository settings and
+			tells Gradle which modules it should include when building your app
+	```
+	- Groovy (Default)
+		
+		pluginManagement {
+			/**
+			 * The pluginManagement {repositories {...}} block
+			 *	- configures the repositories Gradle uses to search or download 
+			 *		- the Gradle plugins and their transitive dependencies,
+			 * Gradle pre-configures support for remote repositories such as 
+			 *	- JCenter,
+			 *	- Maven Central,
+			 *	- Ivy
+			 *
+			 * You can also use local repositories or define your own repositories
+			 *
+			 * The code below defines the
+			 *	- Gradle Plugin Portal
+			 *	- Google's Maven Repository
+			 *	- Maven Central Repository
+			 * as the repositories Gradle should use to look for its dependencies
+			 */
+			repositories {
+				/** Specify Repositories here */ 
+				gradlePluginPortal()
+				google()
+				mavenCentral()
+			}
+		}
+
+		dependencyResolutionManagement {
+			/**
+			 * The dependencyResolutionManagement { repositories {...} } block
+			 *	is where you configure the repositories and dependencies used by all modules in your project
+			 *	- such as
+			 *		- Libraries that you are using to create your application
+			 *	However, you should configure module-specific dependencies in each module-level build.gradle file.
+			 *
+			 * For new projects, 
+			 *	- Android Studio includes Google's Maven Repository and theMaven Central Repository by default
+			 *	- But it does not configure any dependencies (unless you select a template that requires some)
+			 */
+			repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+			repositories {
+				google()
+				mavenCentral()
+			}
+		}
+
+		rootProject.name = "My Application Name"
+		include ':app'
+		
+
+	- Kotlin
+
+		pluginManagement {
+			/**
+			 * The pluginManagement {repositories {...}} block
+			 *	- configures the repositories Gradle uses to search or download 
+			 *		- the Gradle plugins and their transitive dependencies,
+			 * Gradle pre-configures support for remote repositories such as 
+			 *	- JCenter,
+			 *	- Maven Central,
+			 *	- Ivy
+			 *
+			 * You can also use local repositories or define your own repositories
+			 *
+			 * The code below defines the
+			 *	- Gradle Plugin Portal
+			 *	- Google's Maven Repository
+			 *	- Maven Central Repository
+			 * as the repositories Gradle should use to look for its dependencies
+			 */
+			repositories {
+				/** Specify Repositories here */ 
+				gradlePluginPortal()
+				google()
+				mavenCentral()
+			}
+		}
+
+		dependencyResolutionManagement {
+			/**
+			 * The dependencyResolutionManagement { repositories {...} } block
+			 *	is where you configure the repositories and dependencies used by all modules in your project
+			 *	- such as
+			 *		- Libraries that you are using to create your application
+			 *	However, you should configure module-specific dependencies in each module-level build.gradle file.
+			 *
+			 * For new projects, 
+			 *	- Android Studio includes Google's Maven Repository and theMaven Central Repository by default
+			 *	- But it does not configure any dependencies (unless you select a template that requires some)
+			 */
+			repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+			repositories {
+				google()
+				mavenCentral()
+			}
+		}
+
+		rootProject.name = "My Application Name"
+		include(":app")
+		
+
+- Top-level Build File
+	```
+	File Name : build.gradle
+	Location : Project Root Directory
+	Description : Defines dependencies that apply to all modules in your project
+			- by default, the top-level build file uses the plugins block to
+				define the Gradle dependencies that are common to all modules in the project
+			- In addition, the top-level build file contains code to clean your build directory.
+	
+	Notes:
+		- The following code sample describes the default settings and DSL elements you can find in the 
+			top-level build.gradle file after creating a new project
+	```
+	- Groovy (Default)
+
+		plugins {
+    			/**
+     			 * You should use `apply false` in the top-level build.gradle file
+     			 * to add a Gradle plugin as a build dependency, but not apply it to the
+     			 * current (root) project. 
+			 *
+			 * You should not use `apply false` in sub-projects.
+     			 * 
+			 * For more information, see [Applying external plugins with same version to subprojects].
+     			 */
+
+			/** Syntax: id 'com.organization.application_name' version 'version' apply false */
+    			id 'com.android.application' version '7.0.0' apply false
+    			id 'com.android.library' version '7.0.0' apply false
+    			id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+		}
+
+		task clean(type: Delete) {
+			/** Action */
+    			delete rootProject.buildDir
+		}
+
+	- Kotlin
+
+		plugins {
+    			/**
+     			 * You should use `apply false` in the top-level build.gradle file
+     			 * to add a Gradle plugin as a build dependency, but not apply it to the
+     			 * current (root) project. 
+			 *
+			 * You should not use `apply false` in sub-projects.
+     			 * 
+			 * For more information, see [Applying external plugins with same version to subprojects].
+     			 */
+
+			/** Syntax: id 'com.organization.application_name' version 'version' apply false */
+    			id("com.android.application" version '7.1.0-beta02' apply false
+    			id("com.android.library" version '7.1.0-beta02' apply false
+    			id("org.jetbrains.kotlin.android" version '1.5.30' apply false
+		}
+
+		tasks.register("clean", Delete::class) {
+			/** Action */
+    			delete(rootProject.buildDir)
+		}
+
+- Module-level Build File
+	```
+	File Name : build.gradle
+	Location : In each project/module/ directory
+	Description : Allows you to configure build settings for the specific module it is located in.
+			Configuring these build settings allows you to provide custom packaging options
+			- Such as
+				- additional build types and product flavors
+				- Override settings in the main/ app manifest or top-level build.gradle file
+	Notes:
+		- This sample Android app module build.gradle file
+			outlines some of the essential basic DSL elements and settings 
+	```
+	- Groovy (Default)
+
+		/**		 
+ 		 * The first line in the build configuration applies the Android plugin for
+ 		 * Gradle to this build and makes the android block available to specify
+ 		 * Android-specific build options.
+ 		 */
+
+		plugins {
+		    id 'com.android.application'
+		}
+
+		/**
+		 * The android block is where you configure all your Android-specific
+		 * build options.
+		 */
+
+		android {
+
+		    /**
+		     * compileSdkVersion specifies the Android API level Gradle should use to compile your app. 
+		     * 
+		     * This means your app can use the API features included in this API level and lower.
+		     */
+		    compileSdkVersion 28
+
+		    /**
+		     * buildToolsVersion specifies the version of the SDK build tools, command-line utilities, and 
+		     * compiler that Gradle should use to build your app. You need to download the build tools using the SDK Manager.
+		     *
+		     * This property is optional because the plugin uses a recommended version of the build tools by default.
+		     */
+		    buildToolsVersion "30.0.2"
+
+		    /**
+		     * The defaultConfig block encapsulates default settings and entries for all
+		     * build variants, and can override some attributes in main/AndroidManifest.xml
+		     * dynamically from the build system. You can configure product flavors to override
+		     * these values for different versions of your app.
+		     */
+
+		    defaultConfig {
+
+		        /**
+		         * applicationId uniquely identifies the package for publishing.
+		         * However, your source code should still reference the package name
+		         * defined by the namespace property (for simplicity, keep the
+		         * applicationId and namespace the same).
+		         */
+
+		        applicationId 'com.example.myapp'
+
+		        // Defines the minimum API level required to run the app.
+		        minSdkVersion 15
+
+		        // Specifies the API level used to test the app.
+		        targetSdkVersion 28
+
+		        // Defines the version number of your app.
+		        versionCode 1
+
+		        // Defines a user-friendly version name for your app.
+		        versionName "1.0"
+		    }
+
+		    /**
+		     * The buildTypes block is where you can configure multiple build types.
+		     * By default, the build system defines two build types: debug and release. The
+		     * debug build type is not explicitly shown in the default build configuration,
+		     * but it includes debugging tools and is signed with the debug key. The release
+		     * build type applies Proguard settings and is not signed by default.
+		     */
+
+		    buildTypes {
+
+		        /**
+		         * By default, Android Studio configures the release build type to enable code
+		         * shrinking, using minifyEnabled, and specifies the default Proguard rules file.
+		         */
+
+		        release {
+		              minifyEnabled true // Enables code shrinking for the release build type.
+		              proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		        }
+		    }
+
+		    /**
+		     * The productFlavors block is where you can configure multiple product flavors.
+		     * This allows you to create different versions of your app that can
+		     * override the defaultConfig block with their own settings. Product flavors
+		     * are optional, and the build system does not create them by default.
+		     *
+		     * This example creates a free and paid product flavor. Each product flavor
+		     * then specifies its own application ID, so that they can exist on the Google
+		     * Play Store, or an Android device, simultaneously.
+		     *
+		     * If you declare product flavors, you must also declare flavor dimensions
+		     * and assign each flavor to a flavor dimension.
+		     */
+
+		    flavorDimensions "tier"
+		    productFlavors {
+		        free {
+		            dimension "tier"
+		            applicationId 'com.example.myapp.free'
+		        }
+
+		        paid {
+		            dimension "tier"
+		            applicationId 'com.example.myapp.paid'
+		        }
+		    }
+		}
+
+		/**
+		 * The dependencies block in the module-level build configuration file
+		 * specifies dependencies required to build only the module itself.
+		 * To learn more, go to Add build dependencies.
+		 */
+
+		dependencies {
+		    implementation project(":lib")
+		    implementation 'com.android.support:appcompat-v7:28.0.0'
+		    implementation fileTree(dir: 'libs', include: ['*.jar'])
+		}
+
+	- Kotlin
+
+		/**
+		 * The first section in the build configuration applies the Android plugin for
+		 * Gradle to this build and makes the android block available to specify
+		 * Android-specific build options.
+		 */
+
+		plugins {
+		    id("com.android.application")
+		}
+		
+		/**
+		 * The android block is where you configure all your Android-specific
+		 * build options.
+		 */
+
+		android {
+
+		    /**
+		     * compileSdkVersion specifies the Android API level Gradle should use to
+		     * compile your app. This means your app can use the API features included in
+		     * this API level and lower.
+		     */
+
+		    compileSdk = 28
+
+		    /**
+		     * buildToolsVersion specifies the version of the SDK build tools, command-line
+		     * utilities, and compiler that Gradle should use to build your app. You need to
+		     * download the build tools using the SDK Manager.
+		     *
+		     * This property is optional because the plugin uses a recommended version of
+		     * the build tools by default.
+		     */
+
+		    buildToolsVersion = "30.0.2"
+
+		    /**
+		     * The defaultConfig block encapsulates default settings and entries for all
+		     * build variants, and can override some attributes in main/AndroidManifest.xml
+		     * dynamically from the build system. You can configure product flavors to override
+		     * these values for different versions of your app.
+		     */
+
+		    defaultConfig {
+
+		        /**
+		         * applicationId uniquely identifies the package for publishing.
+		         * However, your source code should still reference the package name
+		         * defined by the namespace property (for simplicity, keep the
+		         * applicationId and namespace the same).
+		         */
+
+		        applicationId = "com.example.myapp"
+
+		        // Defines the minimum API level required to run the app.
+		        minSdk = 15
+
+		        // Specifies the API level used to test the app.
+		        targetSdk = 28
+
+		        // Defines the version number of your app.
+		        versionCode = 1
+
+		        // Defines a user-friendly version name for your app.
+		        versionName = "1.0"
+		    }
+
+		    /**
+		     * The buildTypes block is where you can configure multiple build types.
+		     * By default, the build system defines two build types: debug and release. The
+		     * debug build type is not explicitly shown in the default build configuration,
+		     * but it includes debugging tools and is signed with the debug key. The release
+		     * build type applies Proguard settings and is not signed by default.
+		     */
+
+		    buildTypes {
+
+		        /**
+		         * By default, Android Studio configures the release build type to enable code
+		         * shrinking, using minifyEnabled, and specifies the default Proguard rules file.
+		         */
+
+		        getByName("release") {
+		            isMinifyEnabled = true // Enables code shrinking for the release build type.
+		            proguardFiles(
+		                getDefaultProguardFile("proguard-android.txt"),
+		                "proguard-rules.pro"
+		            )
+		        }
+		    }
+
+		    /**
+		     * The productFlavors block is where you can configure multiple product flavors.
+		     * This allows you to create different versions of your app that can
+		     * override the defaultConfig block with their own settings. Product flavors
+		     * are optional, and the build system does not create them by default.
+		     *
+		     * This example creates a free and paid product flavor. Each product flavor
+		     * then specifies its own application ID, so that they can exist on the Google
+		     * Play Store, or an Android device, simultaneously.
+		     *
+		     * If you declare product flavors, you must also declare flavor dimensions
+		     * and assign each flavor to a flavor dimension.
+		     */
+
+		    flavorDimensions = "tier"
+		    productFlavors {
+		        create("free") {
+		            dimension = "tier"
+		            applicationId = "com.example.myapp.free"
+		        }
+
+		        create("paid") {
+		            dimension = "tier"
+		            applicationId = "com.example.myapp.paid"
+		        }
+		    }
+		}
+
+		/**
+		 * The dependencies block in the module-level build configuration file
+		 * specifies dependencies required to build only the module itself.
+		 * To learn more, go to Add build dependencies.
+		 */
+
+		dependencies {
+		    implementation(project(":lib"))
+		    implementation("com.android.support:appcompat-v7:28.0.0")
+		    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+		}
+
+
+- Configure project-wide properties
+	```
+	For Android projects that include multiple modules
+
+	- May be useful to define certain properties at the project level and share them across all the modules
+		- You can do this by adding extra properties (https://docs.gradle.org/current/userguide/writing_build_scripts.html#sec:extra_properties) 
+			to the ext block in the top-level build.gradle file
+	```
+	- Add Extra Properties to the ext block in the top-level build.gradle file
+		- Groovy
+
+			// This block encapsulates custom properties and makes them available to all
+			// modules in the project. The following are only a few examples of the types
+			// of properties you can define.
+			ext {
+    				sdkVersion = 28
+    				// You can also create properties to specify versions for dependencies.
+    				// Having consistent versions between modules can avoid conflicts with behavior.
+    				supportLibVersion = "28.0.0"
+    				...
+			}
+			...
+
+		- Kotlin
+
+			// This block encapsulates custom properties and makes them available to all
+			// modules in the project. The following are only a few examples of the types
+			// of properties you can define.
+			ext {
+  				extra["compileSdkVersion"] = 28
+  				// You can also create properties to specify versions for dependencies.
+  				// Having consistent versions between modules can avoid conflicts with behavior.
+  				extra["supportLibVersion"] = "28.0.0"
+				...
+			}
+			...
+
+	- Access these properties from a module in the same project
+		- Module's build.gradle file
+			```
+			File Name : build.gradle
+			Location : Module path
+			```
+			- Groovy
+
+				android {
+				    // Use the following syntax to access properties you defined at the project level:
+				    // rootProject.ext.property_name
+				    compileSdkVersion rootProject.ext.compileSdkVersion
+				    ...
+				}
+				...
+				dependencies {
+				    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+				    ...
+				}
+
+			- Kotlin
+
+				android {
+				    // Use the following syntax to access properties you defined at the project level:
+				    // rootProject.extra["property_name"]
+				    compileSdk = rootProject.extra["sdkVersion"]
+
+				    // Alternatively, you can access properties using a type safe delegate:
+				    val sdkVersion: Int by rootProject.extra
+				    ...
+				    compileSdk = sdkVersion
+				}
+				...
+				dependencies {
+				    implementation("com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}")
+				    ...
+				}
+
+		
+- Gradle Properties Files
+	- Project-Wide
+		```
+		File Name : gradle.properties
+		Location : Project Root Directory
+		Description : This is where you can configure project-wide Gradle settings
+				such as
+					- the Gradle daemon's maximum heap size
+		```
+		
+	- Local Environment Properties
+		```
+		File Name : local.properties
+		Location : Project Root Directory
+		Description : Configures the local environment properties for the build system, including the following:
+				ndk.dir : Path to the Native Development Kit (NDK). This property has been deprecated.
+						Any downloaded versions of the NDK will be installed/placed in the [ndk] directory within the Android SDK directory
+				sdk.dir : Path to the SDK
+				cmake.dir : Path to CMake
+				ndk.symlinkdir : In Android Studio 3.5+ - creates a symlink to the NDK that can be shorter than the installed NDK path
+		```
+- Source Sets
+	```
+	Helps organize files and resources that Gradle should only use when building certain versions of your app
+	```
+	- src/
+		- main/				: Main Source Set; Includes code and resources common to all build variants
+		- buildType/			: Include code and resources only for a specific build type
+		- productFlavor/		: Include code and resources only for a specific product flavor
+		- productFlavorBuildType/	: Include code and resources only for a specific build variant
+
+		[Example]
+		- To generate the "fullDebug" version of your app
+			```
+			The build system 
+				- merges code, settings and resources from the following source sets
+					src/fullDebug/  : The build variant source set
+					src/debug/	: The build type source set
+					src/full/	: The product flavor source set
+					src/main/	: The main source set
+			```

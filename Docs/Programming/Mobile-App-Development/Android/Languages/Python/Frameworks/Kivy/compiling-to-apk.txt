@@ -1,0 +1,37 @@
+#===============================================================================#
+# Documentation - Mobile App Development - Android - Python - Frameworks - Kivy #
+#				Compiling to APK                                #
+#===============================================================================#
+
+Documentation and guide on how to compile/build android apk without android studio/on terminal
+	using Python Kivy
+
+Table of Contents:
+	- Pre-Requisites
+	- Introduction
+	- Preparation & Setup
+	- Steps
+
+# [Pre-Requisites]
+- Buildozer
+
+# [Introduction]
+
+Python is not natively available for use on Android, thus you need to compile and build/convert it into 
+android-readable format. 
+
+Buildozer is used to compile and build python application into android 
+	- As of 2022-03-26:
+		Buildozer is only available on Linux
+
+
+# [Preparation & Setup]
+
+# [Steps]
+
+- Create Buildozer build configurations (buildozer.spec)
+	buildozer init
+
+- Edit buildozer config
+	$EDITOR buildozer.spec
+

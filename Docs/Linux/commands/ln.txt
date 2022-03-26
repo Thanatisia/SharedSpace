@@ -1,0 +1,36 @@
+#===============================#
+# Documentation - Linux - Links #
+#===============================#
+
+[Table of Contents]
+	- Basic Information
+	- Syntax
+	- Parameters
+	- Usage
+
+Basic Information: 
+	- Used to link a source file/folder to a target destination path
+	- Used to create a symbolic link
+		- A symbolic link folder/folder holds the same data as the original source, like a "Shortcut"
+			- Changes made to the symlink will affect the original and vice versa
+		- Useful for Dotfile management
+			- refer to [Usage]
+
+Syntax: ln [options] [source-file] [target-link-destination]
+
+Parameters:
+	-r : Set Relative Path
+	-s : Create Symbolic Link
+
+Usage:
+- Backup Dotfiles with Symlinks and Git
+	- Create symlinks of the folders in your dotfile repository to the target config directories
+		- Examples:
+			repository/.config/config_fldr => ~/.config/config_fldr
+		- Periodically git add, commit and push to your dotfile remote repository for backup 
+	
+- Backup Dotfiles with tar	
+	- Use tar (-cvzf) to compress and archive the source dotfile repository to a backup (dotfile_archive.tar.gz)
+
+Notes:
+	- Use 'ln -s' to Symbolic Link the dotfile directory to their respective config location
