@@ -12,14 +12,25 @@
 #	- <Feature n>
 #
 
-#
-# Input
-#
+func_name()
+{
+	# [Input]
 
-#
-# Processing
-#
+	# - Command Line Arguments
+	argv=("$@")
+	argc=${#argv[@]}
 
-#
-# Output
-#
+	# [Processing]
+
+	# [Output]
+}
+
+main()
+{
+	# Main Body Here
+}
+
+if "${BASH_SOURCE[0]}" == "${0}" ]]; then
+	# Equivalent to 'if_main'
+	main $@
+fi

@@ -1,0 +1,29 @@
+#======================================#
+# Software Development Design Planning #
+#======================================#
+
+# [Table of Contents]
+
+* Basic Information
+* Design Planning
+
+# [Basic Information]
+
+
+# [Design Planning] 
+
+- Unified Modelling Language (UML)
+	- Use Case Description
+	- Use Case Diagram
+	- Use Case Model
+
+- Activity Diagram
+- Class Diagram
+- Database Design
+	- Database Description
+	- Database Schema
+	- Database Diagram
+- Graphical Design
+	- GUI Widgets/Parts (Frontend)
+	- GUI Business Logic Layer
+	- GUI Diagram

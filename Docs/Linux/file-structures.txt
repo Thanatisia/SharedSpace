@@ -22,6 +22,27 @@ Structure:
 	|-- /root
 	|-- /tmp
 
+    - Home Directory:
+	~/
+	|
+	|-- .config/
+	|    |
+	|    |-- config-folders/
+	|
+	|-- .local/
+	|
+	|-- .bashrc
+	|
+	|-- .bash_profile
+	|
+	|-- .profile
+	|
+	|-- .xinitrc
+	|
+	|-- .Xresources
+	|
+	|...
+
 Purpose:
 	```
 	File Structure folder purpose, use-case and usage

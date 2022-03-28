@@ -15,30 +15,34 @@ Table of Contents:
 - Update Repositories before using
     pkg update
 
+- Upgrade Repositories after updating
+    pkg upgrade
+
 - Install Essential Packages
     ```
     Essential Packages to install
     ```
     vim
-	git
-	termux-api
-	wget
-	python
-	tar
-	zip
-	unzip
+    git
+    termux-api
+    wget
+    python
+    tar
+    zip
+    unzip
+    lf		# Terminal File Manager
 
 - Install Additional Repositories
     ```
     game-repo : Games
-	root-repo : For Root
-	science-repo : Science Repositories
-	unstable-repo : Unstable version repo
-	x11-repi : X11 Repositories
-	```
+    root-repo : For Root
+    science-repo : Science Repositories
+    unstable-repo : Unstable version repo
+    x11-repo : X11 Repositories
+    ```
     game-repo
     root-repo
-	science-repo
+    science-repo
     unstable-repo
     x11-repo
 
@@ -60,10 +64,10 @@ Table of Contents:
 - Setup Network
     - Check Network Connection
 	    ```
-		Note:
-		    - Ensure that 'termux-api' has been installed
-		Syntax: termux-wifi-connectioninfo 
-		```
+	    Note:
+ 	        - Ensure that 'termux-api' has been installed
+	    Syntax: termux-wifi-connectioninfo 
+	    ```
 
     - Enable WiFi
         ```
@@ -74,4 +78,11 @@ Table of Contents:
 		```
 		termux-wifi-enable true
 
+
+- Setup SSH
+    - Install SSH
+	```
+	Package: openssh
+	```
+	pkg install openssh
 

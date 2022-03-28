@@ -44,13 +44,21 @@ Table of Contents:
 		    |
 		    |-- java/
 			|
-			|-- com.example.myapp
+			|-- com/ # com.organization.project_name
+			    |
+			    |-- example/ 
+				|
+				|-- myapp/
+				    |
+				    |-- MyApp.java
 		    |
 		    |-- res/
 			|
 			|-- drawable/
 			|
 			|-- layout/
+			|   |
+			|   |-- myapp.xml
 			|
 			|-- ...
 		|

@@ -5,6 +5,8 @@
 Table of Contents:
 
 * Paths
+* Termux-API
+* Home Directory
 
 [Paths]
 	Application Storage : /data/data/files
@@ -13,3 +15,75 @@ Table of Contents:
 	Mounted Device Root (Start of shared devices after mounting): /data/data/files/home/
 	Shared Storage: /data/data/files/home/shared/
 
+[Termux-API]
+	termux-setup-storage : Setup the shared storage directory between termux and mobile device
+	termux-wifi-connectioninfo : Check Wifi Connection
+	termux-wifi-enable {true|false} : Enable/Disable WiFi
+	termux-scan-info : Check all wifi connections
+	termux-change-repo : Change target repository to use
+
+[File Structure]
+    - Termux Root Directory
+	/data/data/com.termux/files/
+	|
+	|-- usr/
+	|   |
+	|   |-- bin/
+	|   |
+	|   |-- etc/
+	|
+	|-- home/
+	    |
+	    |-- [Refer to Home Directory]
+
+    - Home Directory 
+	# Linux Filesystem
+	```
+ 	    In the typical Linux Filesystem Structure, the home directory is as follows
+	```
+	~/
+	|
+	|-- .config/
+	|    |
+	|    |-- config-folders/
+	|
+	|-- .local/
+	|
+	|-- .bashrc
+	|
+	|-- .bash_profile
+	|
+	|-- .profile
+	|
+	|-- .xinitrc
+	|
+	|-- .Xresources
+	|
+	|...
+
+	# Termux Filesystem
+    	```
+	In Termux, the Home directory is as follows
+	```
+	~/
+	|
+	|-- .termux/
+	|    |
+	|    |-- termux.properties # Termux Config File
+	|
+	|-- .vnc/
+	|
+	|-- .config/
+	|    |
+	|    |-- config-folders/
+	|
+	|-- bin/
+	|
+	|-- data/
+	|    |
+	|    |-- HOME/
+	|        |
+	|        |-- 
+	|
+	|-- storage/ (after running 'termux-setup-storage')
+  
