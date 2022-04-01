@@ -28,3 +28,24 @@ To Setup Swapfile
 		echo "# /swapfile" >> /etc/fstab
 		echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 
+To Disable Swapfile
+	- Turn off swapfile
+		```
+		Syntax: swapoff [swapfile-name]
+		```
+		swapoff /swapfile
+
+	- Delete swapfile
+		```
+		Syntax: rm -f [swapfile-name]
+		```
+		rm -f /swapfile
+
+	- Remove swapfile entry from /etc/fstab
+		```
+		Use Editor to remove swapfile entry from /etc/fstab
+		- Content: [swapfile-name] none swap defaults 0 0
+		- File: /etc/fstab
+		```
+		sed -i 's/swapfile-name/d' /etc/fstab
+
