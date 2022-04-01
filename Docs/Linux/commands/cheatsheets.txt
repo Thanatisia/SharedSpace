@@ -10,6 +10,11 @@ Commands:
 	awk
 	dd
 	sed
+		# Syntax
+			sed -i '<regular_expression>' filename
+
+		# To find and replace
+			sed -i 's/old-text/new-text/g' filename
 	su
 	tar
 

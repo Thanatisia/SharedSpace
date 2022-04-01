@@ -2,39 +2,46 @@
 # Linux Command Documentation: sed
 #
 
+Table of Contents:
+	* Background
+	* Documentation
+	* Patterns
+	* Use-Cases
+
 [Background]
 Command Name: sed
 Abbreviation: Stream Editor
 Command Summary: Take in a stream of text / open a file and edit it  with regular expressions
-General Syntax: sed -i '<regular-expression' <filename>
-General Parameters: 
+
+[Documentation]
+- Syntax: sed -i '<regular-expression' <filename>
+- Parameters 
 	-i
 	-h
 
-[Parameters]
-<parameter> : <description of parameter>
-	Syntax:
-		<syntax/structure of parameter in command>
-	Examples:
-		[1] An example of command with <parameter>
-			Command:
-				<The example command with parameter>
-			Output:
-				<intended output>	
+[Patterns]
 
+d : delete line
+p : print line
+s/old-text/new-text : Substitute command of sed for find all occurences of 'old-text' and replace with 'new-text'
 
 [Use-Cases]
 1. Comment a line containing a specific string with sed
 	[Syntax]
-	sed -i '/<pattern_keyword>/s/^/#/g' <filename>
+		sed -i '/<pattern_keyword>/s/^/#/g' <filename>
 	[Example]
-	i. sed -i '/en_SG.UTF-8/s/^/#/g' /etc/locale.gen
+		i. sed -i '/en_SG.UTF-8/s/^/#/g' /etc/locale.gen
 
 2. Uncomment a line containing a specific string with sed
 	[Syntax]
-	sed -i '/<pattern_keyword>/s/^#//g' <filename>
+		sed -i '/<pattern_keyword>/s/^#//g' <filename>
 	[Example]
-	i. sed -i '/en_SG.UTF-8/s/^#//g' /etc/locale.gen
+		i. sed -i '/en_SG.UTF-8/s/^#//g' /etc/locale.gen
+
+3. Search and Replace
+	Syntax: sed -i 's/old-text/new-text/g' filename
+	Explanation:
+		s : Substitute command of sed for find all occurences of 'old-text' and replace with 'new-text'
 
 [Functions]
 comment_line()

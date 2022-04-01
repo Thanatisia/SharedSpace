@@ -1,0 +1,45 @@
+# Documentation - Base Information
+
+Documentation of Vim (Base) Information such as 
+- File Structure
+
+## Table of Contents
+* [File Structure](#file-structure)
+
+## File Structure
+
+- On Linux
+	```
+	~/
+	|
+	|-- .vim/
+	    |
+	    |
+	    |-- after/
+	    |
+	    |-- autoload/
+	    |
+	    |-- colors/
+	    |
+	    |-- plugged/
+	    |
+	    |-- vimrc
+	|
+	|-- .vimrc (if no .vim)
+	```
+
+- On Windows
+	```
+	%LOCALAPPDATA%
+	|
+	|-- vimfiles/
+	    |
+	    |
+	    |-- after/
+	    |
+	    |-- autoload/
+	    |
+	    |-- colors/
+	    |
+	    |-- _vimrc
+	```

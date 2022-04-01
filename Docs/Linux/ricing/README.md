@@ -15,11 +15,11 @@ Contains configs, guides and write-up for Linux Ricing (aka Customization)
 
 ## Files
 - Root
-	- file-structure
-	- riceguide
+	- general-info.txt
 	- [Components](Components)
 		- [Status-Bar](Components/Status-Bar)
 			- [Polybar](Components/Status-Bar/polybar.txt)
+		- [Repositories](Repositories)
 	- [GTK (WIP)](GTK)
 
 ## Remarks

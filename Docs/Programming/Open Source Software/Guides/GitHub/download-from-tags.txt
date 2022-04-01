@@ -1,0 +1,25 @@
+#================================================#
+# Documentation - Open Source Software - GitHub  #
+#                Download from Tags              #
+#================================================#
+
+Table of Contents:
+	- Basic Information
+	- Download
+
+Basic Information:
+
+	- Github Structure: https://github.com/<Author>/<Repository_Name>/archive/refs/tags
+		```
+		Explanation: 
+			In the archives of a repository is split to 2 categories
+				- Releases
+				- Tags
+		```
+
+Download:
+	- Use wget
+		```
+		Syntax: wget https://github.com/<Author>/<Repository_Name>/archive/refs/tags/filename
+		```
+		

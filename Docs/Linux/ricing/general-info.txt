@@ -1,10 +1,14 @@
-# File Structure & Hierarchy
+# General Information
+
+General Guide and Write-up on Linux Ricing as well as packages
+
 # Author: Asura
 # Date 
 #	Created: 2021-06-14 0024H, Asura
 # 	Modified:
 #		2021-06-14 0024H, Asura
 #		2021-06-14 0126H, Asura
+#		2022-03-31 1823H, Asura
 
 # [Table of Contents]
 + Table of Contents
@@ -98,3 +102,6 @@ Optionals:
 2. 2021-06-14 0126H, Asura:
 	- Added
 		* [Package Categories]
+
+3. 2022-03-31 1823H, Asura
+	- Renamed file from [riceguide] => [general-info.txt]
