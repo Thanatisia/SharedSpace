@@ -1,0 +1,118 @@
+#=================================#
+# Setup Guide to prepare Disk for #
+#	MBR/BIOS File System      #
+#=================================#
+
+Write-up and Documentation on how to prepare disk for MBR/BIOS File System
+
+## Table of Contents:
+* MBR/BIOS Filesystem Structure
+* Requirements
+* Steps
+
+
+## MBR/BIOS Filesystem Structure
+
+- Background:
+	The MBR/BIOS filesystem structure is different from GPT. 
+
+	- Differences between MBR (MSDOS) and GPT:
+		- MBR/BIOS uses partition types (volumes, i.e. Primary, Logical Extended) instead of Labels
+			- Based on the legacy BIOS boot architecture 
+		- MBR/BIOS boot partition requires an ext4 filesystem type
+
+## Requirements:
+
+- Preparation
+	Device Information:
+		Disk Size: 51200 MiB
+	Partition Design:
+		Partition Schema:
+		==================================================================================================================
+		| ROW_ID, device, partition_name (personal use only), mount_path, partition_type, filesystem_type, start_size, end_size, other_opts |
+		==================================================================================================================
+		1, /dev/sdX1, Boot, /mnt/boot, primary, fat32, 0%,	1024MiB, Bootable
+		2, /dev/sdX2, Root, /mnt     , primary, ext4, 1024MiB,	32768MiB
+		3, /dev/sdX3, Home, /mnt/home, primary, ext4, 32768MiB, 100%
+	
+## Steps
+
+- Format Disk
+	```
+	Syntax: parted [disk-name] mklabel [partition-table-type]
+	```
+	parted /dev/sdX mklabel msdos
+
+
+- Create Partition
+	```
+	MSDOS/MBR (BIOS) uses a BOOT partition of filetype ext4
+	
+	- To create a partition
+		# The boot partition must be EXT4
+		#	- all other partitions can be any filesystem type you want
+		Syntax:
+			- with Parted
+				parted mkpart <partition-type> <filesystem-type> <start_size> <end_size>
+
+	- Format Filesystem
+		Syntax:
+			fat(n) : mkfs.fat -F(n) [device_name](partition_number)
+			ext4 : mkfs.ext4 [device_name](partition_number)
+
+	- (OPTIONAL) For Bootable:
+		- Format MBR/BIOS partition
+			Syntax: mkfs.ext4 [device_name](partition_number)
+
+		- Set boot flag
+			# For Bootable Partitions
+			# Equivalent to 'set 1 boot on' for MBR (MSDOS)
+			Syntax: parted [device_name] set [partition_number] boot on
+	```
+
+- Mount Root Partition
+	```
+	Syntax: mount [disk-name](partition_number) [mount-point]
+	```
+	mount /dev/sdb2 /mnt
+
+- Make Mount Directories
+	```
+	Typical Boot Partition Mount Points:
+		/boot : The usual boot partition mount point and is the preferred method when directly booting on EFISTUB kernel from UEFI or booting it via a boot manager like systemd-boot
+	```
+	mkdir -p /mnt/boot /mnt/home
+	
+- Mount Partition
+	mount /dev/sdb1 /mnt/boot
+	mount /dev/sdb3 /mnt/home
+	
+## Examples
+
+- Based off [Preparation]
+	
+	# Create Disk Label
+	parted /dev/sdX mklabel msdos
+
+	# Create Partitions
+	parted /dev/sdX mkpart primary ext4 0% 1024MiB
+	parted /dev/sdX mkpart primary ext4 1024MiB 32768MiB
+	parted /dev/sdX mkpart primary ext4 32768MiB 100%
+
+	# Format Filesystems
+	mkfs.ext4 /dev/sdX1
+	mkfs.ext4 /dev/sdX2
+	mkfs.ext4 /dev/sdX3
+
+	# Set Bootable
+	parted /dev/sdX set 1 boot on
+
+	# Mount Root Partition
+	mount /dev/sdX2 /mnt
+	
+	# Make other directories
+	mkdir -p /mnt/boot /mnt/home
+
+	# Mount other directories
+	mount /dev/sdX1 /mnt/boot
+	mount /dev/sdX3 /mnt/home

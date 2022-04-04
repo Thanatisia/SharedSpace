@@ -1,0 +1,48 @@
+# [Package List]
+* Display Server
+	> xorg
+	> xorg-xinit
+* Terminal Emulator
+	> alacritty
+	> urxvt
+* File Browser
+	> pcmanfm
+* Web Browser
+	> firefox
+	> google chrome
+	> chromium
+	> vimb
+* Text Editor
+	> vim
+	> nano
+* Status Bar
+	> polybar
+	> lemonbar
+* Window Manager
+	> i3
+	> bspwm
+	> Qtile
+	> herbstluftwm
+* Compositor
+	> picom
+* Desktop Wallpaper Setter
+	> nitrogen
+	> feh
+	> wallset
+* Application Launcher
+	> dmenu
+	> rofi
+* Volume Manager
+	> alsa-utils
+* Network Manager
+	> NetworkManager
+* Clipboard Manager
+	> clipman
+* Bluetooth Manager
+	> Bluez
+* Notification Daemon
+	> dunst
+* Screenlocker
+	> slock
+* Others
+	> xautolock (Autolocker)

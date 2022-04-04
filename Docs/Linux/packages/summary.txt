@@ -9,5 +9,8 @@ Table of Contents:
 
 Packages:
 - Masterlist
-	ffmpeg : Video Utilities; For Video Capture, Conversion 
+	```
+	package_name : repository (official|aur), category, description
+	```
+	ffmpeg : Official Repository, Video Utilities, For Video Capture; Conversion
 

@@ -9,6 +9,7 @@ Table of Contents:
 	Vim Plugins
 
 General:
+	# Terminal Utilities
 	dos2unix : To convert files creates in Windows to *nix (windows uses '\r\n' delimiter for newline) | Syntax : dos2unix [filename]
 	unix2dos : To convert files creates in *nix to Windows (Unix uses '\r' delimiter for newline)      | Syntax : unix2dos [filename]
 

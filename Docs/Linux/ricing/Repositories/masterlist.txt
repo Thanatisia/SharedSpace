@@ -12,7 +12,7 @@ Free Open Source Software (FOSS) from GitHub that will help with ricing, useful 
 
 - Masterlist
 ```
-package_name : component : repository_location : references
+package_name : component : repository_host : repository_location : references
 
 NOTES:
 - [component] => refers to the type/category of utility this program is
@@ -22,5 +22,5 @@ NOTES:
 - Please seperate all column values with delimiter '|'
 - Please seperate all subvalues with delimiter ';'
 ```
-wallset | Wallpaper Setter | https://github.com/terroo/wallset | https://www.youtube.com/watch?v=pFkipMkkWeg
-
+wallset | Wallpaper Setter | Community | https://github.com/terroo/wallset | https://www.youtube.com/watch?v=pFkipMkkWeg
+vimb | Web Browser | Community | https://fanglingsu.github.io/vimb/ | https://www.youtube.com/watch?v=Jtr73LeMrpY

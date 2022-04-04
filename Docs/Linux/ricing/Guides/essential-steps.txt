@@ -1,0 +1,15 @@
+# Documentation - Linux - Ricing Guides
+
+Essential steps/todos when ricing
+
+## Table of Contents:
+* [Steps](#steps)
+
+## Steps
+
+- Change Fonts
+
+- Get Font Icons
+
+- Change Wallpaper
+

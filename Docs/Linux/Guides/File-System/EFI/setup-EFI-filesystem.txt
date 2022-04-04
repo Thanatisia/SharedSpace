@@ -1,0 +1,145 @@
+#=================================#
+# Setup Guide to prepare Disk for #
+#	EFI File System           #
+#=================================#
+
+Write-up and Documentation on how to prepare disk for EFI File System
+
+## Table of Contents:
+* EFI Filesystem Structure
+* Requirements
+* Steps
+
+
+## EFI Filesystem Structure
+
+- Background:
+	The EFI filesystem structure is different from BIOS. 
+
+	- Differences between MBR (MSDOS) and GPT:
+		- EFI uses partition names instead of partition volumes (Primary|Logical|Extended)
+			- Thus, you can create alot more partitions and
+			- Thats why its recommended to use gpt partition table with EFI
+		- In every instance, a special bootable EFI system partition is required
+
+## Requirements:
+
+- Check that system supports UEFI
+	- List efivars directory
+	```
+	if it displays 
+		- without error - booted in UEFI mode;  
+		- with error - booted in BIOS or CSM mode
+	```
+	ls /sys/firmware/efi/efivars 
+
+- Preparation
+	Device Information:
+		Disk Size: 51200 MiB
+	Partition Design:
+		Partition Schema:
+		==================================================================================================================
+		| ROW_ID, device, partition_name, mount_path, disk_label, start_size, end_size, other_opts |
+		==================================================================================================================
+		1, /dev/sdX1, Boot, /mnt/boot, fat32, 0%,	1024MiB, Bootable
+		2, /dev/sdX2, Root, /mnt     , ext4, 1024MiB,	32768MiB
+		3, /dev/sdX3, Home, /mnt/home, ext4, 32768MiB, 100%
+	
+## Steps
+
+- Create GPT disk label
+	```
+	- Recommended to use gpt with EFI instead of MBR/MSDOS due to compatibility issues
+		- However, it is possible to use MBR/MSDOS with efi
+	Syntax: parted [disk-name] mklabel [partition-table-type]
+	```
+	parted /dev/sdX mklabel gpt
+
+
+- Create EFI Partition
+	```
+	EFI is different from MSDOS/MBR BIOS
+		- MSDOS/MBR (BIOS) uses a BOOT partition of filetype ext4
+		- EFI (UEFI) uses a BOOT partition of filetype FAT32 and
+			set the esp flag on it
+	
+	- To Create an EFI partition
+		# The boot partition must be FAT32
+		#	- all other partitions can be any filesystem type you want
+		Syntax:
+			- with Parted
+				parted mkpart "partition-label" <filesystem-type> <start_size> <end_size>
+
+	- Format Filesystem
+		Syntax:
+			fat(n) : mkfs.fat -F(n) [device_name](partition_number)
+			ext4 : mkfs.ext4 [device_name](partition_number)
+
+	- (OPTIONAL) For Bootable:
+		- Format EFI partition
+			Syntax: mkfs.fat -F32 [device_name](partition_number)
+
+		- Set esp flag
+			# For Bootable Partitions
+			# Equivalent to 'set 1 boot on' for MBR (MSDOS)
+			Syntax: parted [device_name] set [partition_number] esp on
+	```
+
+- Mount Root Partition
+	```
+	Syntax: mount [disk-name](partition_number) [mount-point]
+	```
+	mount /dev/sdb2 /mnt
+
+- Make Mount Directories
+	```
+	Typical Boot Partition Mount Points:
+		/boot : The usual boot partition mount point and is the preferred method when directly booting on EFISTUB kernel from UEFI or booting it via a boot manager like systemd-boot
+		/efi : Is a replacement for the previously popular (and is possibly still used by other Linux distros) ESP mountpoint [/boot/efi]
+			- Use a bootloader which is capable of accessing the kernel(s) and initramfs image(s) that are stored elsewhere - typically /boot
+
+	Alternative Mount points:
+		- You need to copy your boot files to ESP (referred to hereafter as esp)
+			# mkdir -p esp/EFI/arch
+			# cp -a /boot/vmlinuz-linux esp/EFI/arch/
+			# cp -a /boot/initramfs-linux.img esp/EFI/arch/
+			# cp -a /boot/initramfs-linux-fallback.img esp/EFI/arch/
+	```
+	mkdir -p /mnt/efi /mnt/home
+	
+- Mount Partition
+	mount /dev/sdb1 /mnt/boot
+	mount /dev/sdb3 /mnt/home
+
+	
+
+## Examples
+
+- Based off [Preparation]
+	
+	# Create Disk Label
+	parted /dev/sdX mklabel gpt
+
+	# Create Partitions
+	parted /dev/sdX mkpart Boot fat32 0% 1024MiB
+	parted /dev/sdX mkpart Root ext4 1024MiB 32768MiB
+	parted /dev/sdX mkpart Home ext4 32768MiB 100%
+
+	# Format Filesystems
+	mkfs.fat -F32 /dev/sdX1
+	mkfs.ext4 /dev/sdX2
+	mkfs.ext4 /dev/sdX3
+
+	# Set Bootable
+	parted /dev/sdX set 1 esp on
+
+	# Mount Root Partition
+	mount /dev/sdX2 /mnt
+	
+	# Make other directories
+	mkdir -p /mnt/boot /mnt/home
+
+	# Mount other directories
+	mount /dev/sdX1 /mnt/boot
+	mount /dev/sdX3 /mnt/home
+

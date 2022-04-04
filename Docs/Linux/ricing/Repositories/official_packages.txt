@@ -1,0 +1,50 @@
+# Ricing Tools & Utilities Found in the Official Package Repositories
+
+Collection of Ricing Tools & Utilities found on the official package repositories
+
+## Background
+
+Contains packages from the Official Repositories that will help with ricing, useful daily tools & utilities and general Quality-of-Life improvements
+
+## Records
+
+- Both
+```
+package_name : component : references
+
+NOTES:
+- [component] => refers to the type/category of utility this program is
+	i.e. : nautilus is a wallpaper setter, conky is a system monitor etc.
+	do tell me if there's a industry-standard way of phrasing it, thank you!
+
+- Please seperate all column values with delimiter '|'
+- Please seperate all subvalues with delimiter ';'
+```
+
+
+- ArchLinux
+```
+package_name : component : references
+
+NOTES:
+- [component] => refers to the type/category of utility this program is
+	i.e. : nautilus is a wallpaper setter, conky is a system monitor etc.
+	do tell me if there's a industry-standard way of phrasing it, thank you!
+
+- Please seperate all column values with delimiter '|'
+- Please seperate all subvalues with delimiter ';'
+```
+
+
+- Debian
+```
+package_name : component : references
+
+NOTES:
+- [component] => refers to the type/category of utility this program is
+	i.e. : nautilus is a wallpaper setter, conky is a system monitor etc.
+	do tell me if there's a industry-standard way of phrasing it, thank you!
+
+- Please seperate all column values with delimiter '|'
+- Please seperate all subvalues with delimiter ';'
+```

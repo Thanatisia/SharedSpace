@@ -1,0 +1,32 @@
+#==============================#
+# Masterlist of Terminologies  #
+#  regarding Disk Partitioning #
+#==============================#
+
+Disks: Each device mounted/mountable and detected by the system are known as Disks
+	- HDD : Hard Disk Drive
+	- SSD : Solid State Drive
+	- FlashDrive
+	- MicroSD
+
+Filesystem Type: The partition's file system type the partition will be formatted to use
+	- fat16
+	- fat32
+	- ext4
+	- btrfs
+	- zfs
+
+Partition Tables: The Bootloader method the disk uses to read the disk on boot-time
+	- msdos, gpt
+
+Partition Label: Used by GPT Partition Table
+	- Sets the PARTLABEL attribute of the partition
+
+Partition Type: Used by MBR Partition Table
+	- In MSDOS/MBR systems, these are the "types" of partitions that can be created
+	- Primary partition : a primary partition can be used to boot an Operating System. 
+		- Your Windows OS is installed on a primary partition.
+    	- Extended partition : an extended partition is used to hold logical drives. 
+		- To break the limitation of 4 partitions. can only be one extended partition on a single disk
+    	- Logical drives : logical drives hold files unrelated to the Operating System – pretty much everything else on your computer – data, audio, video, etc.
+		- Cannot host an operating system

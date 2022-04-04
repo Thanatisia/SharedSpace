@@ -1,0 +1,76 @@
+Cheatsheet : Database Management Systems (DBMS)
+
+Data Types:
+    BOOL : Binary/Boolean - True|False
+    REAL : Floating Point Numbers - x.y
+    BLOB : Object Values - Files etc.
+    INTEGER : Integers/Real Numbers - 1,2,3,4....
+    TEXT : Variable-Length String value
+    int  : Modern unsigned Integer values
+    varchar
+    nvarchar
+
+Constraints
+    - Keys
+        - Primary Key : The main identifer for an object class to identify the records; Only can have One
+        - Foreign Keys : In Relational Model, all 'one-to-many' and 'one-to-one' associations will be implemented using the Referential Constraint (aka Foreign Key)
+            - Take the PRIMARY KEY from the '1' side of the association and paste it into the 'Many' side of the association
+                - The 'Referenced' PRIMARY KEY from the '1' side of the one-to-Many and one-to-one Association is the FOREIGN KEY
+            - Multiple Primary Keys from various Objects to form an Association Class
+            - Always copy from the one side to the Many side
+        - Composite Key : If a class in the conceptual model have (n)x IDs; 
+            - Those n attributes combined together will become a UNIQUE Key called the Composite Key; 
+            - Only can have 1 PRIMARY Key and the Composite Key is the table's PRIMARY KEY
+            - Wrap it around a bracket
+        - Candidate Key : The candidate(s) to be chosen as a primary key in a relational data model; Can have Many
+    - NULL : Checks if column can contain NULL value
+    - AUTO_INCREMENT : Row valued will increment by 1 everytime a new ROW is inserted. If a Column is PRIMARY KEY and Data Type is INTEGER, column is automatically AUTO_INCREMENT
+
+Queries:
+    # C.R.U.D
+    # Create
+    # Read
+    # Update
+    # Delete
+    CREATE:
+        Database : CREATE DATABASE [Database_Name]
+        Table : CREATE TABLE {options} [TABLE_NAME] (column_definitions)
+    SELECT:
+        # Syntax
+        SELECT {columns} FROM {table_name} WHERE {filters}
+    INSERT:
+        INSERT INTO {table_name}
+
+    UPDATE:
+
+    ALTER:
+        # Modify
+
+    JOIN:
+
+    DELETE:
+        Drop:
+
+Unified Modelling Language (UML):
+    Symbols:
+        Triangle ▲ : Generalization/Specialization
+
+    Database Design:
+        - Terminology:
+            Specialization/Generalization
+            Link/Association
+
+        - Every class must have 1 UNIQUE Key
+            - If system detects no UNIQUE Key, it will combine all columns in the table to form 1 Key to form a Composite/Primary Key
+
+
+
+Database Schema Design Table:
+    Database Name: 
+    Table Name: 
+    Table Columns:
+    =====================================================
+    | ROW_ID, column_name, column_datatype, constraints |
+    =====================================================
+
+
