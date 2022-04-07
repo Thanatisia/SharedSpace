@@ -1,0 +1,19 @@
+# Documentation - Linux - bspwm bspc
+
+Documentation: Linux - bspwm - bspc manual
+
+## Table of Contents
+* Documentation
+
+## Documentation
+
+- Synopsis
+
+bspc 
+
+- Parameters
+
+-d : Send to the current desktop
+
+- Usage
+

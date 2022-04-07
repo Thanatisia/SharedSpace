@@ -1,48 +1,79 @@
-# [Package List]
-* Display Server
-	> xorg
-	> xorg-xinit
-* Terminal Emulator
-	> alacritty
-	> urxvt
-* File Browser
-	> pcmanfm
-* Web Browser
-	> firefox
-	> google chrome
-	> chromium
-	> vimb
-* Text Editor
-	> vim
-	> nano
-* Status Bar
-	> polybar
-	> lemonbar
-* Window Manager
-	> i3
-	> bspwm
-	> Qtile
-	> herbstluftwm
-* Compositor
-	> picom
-* Desktop Wallpaper Setter
-	> nitrogen
-	> feh
-	> wallset
-* Application Launcher
-	> dmenu
-	> rofi
-* Volume Manager
-	> alsa-utils
-* Network Manager
-	> NetworkManager
-* Clipboard Manager
-	> clipman
-* Bluetooth Manager
-	> Bluez
-* Notification Daemon
-	> dunst
-* Screenlocker
-	> slock
-* Others
-	> xautolock (Autolocker)
+# All Components and Packages 
+
+Includes components and package description
+
+## Packages
+
+Application Launcher | [dmenu](https://tools.suckless.org/dmenu/) | Community; https://tools.suckless.org/dmenu/
+Application Launcher | rofi | Official Repository
+Audio Utilities | alsa-utils | Official Repository
+Audio Utilities | pulseaudio | Official Repository
+Bluetooth Manager | bluez | Official Repository
+Clipboard Manager | clipman | Official Repository
+Compositors | picom | Official Repository
+Colorscheme Utilities | [python-pywal](https://github.com/dylanaraps/pywal) | Official Repository, Community; https://github.com/dylanaraps/pywal
+Cronjob | cronie | Official Repository
+Display Server | xorg | Official Repository
+Display Server | xorg-xinit | Official Repository
+Document Maker | pandoc | Official Repository
+File Manager | lf | Official Repository | Terminal
+File Manager | nnn | Official Repository | Terminal
+File Manager | pcmanfm | Official Repository | Graphical
+File Manager | thunar | Official Repository | Graphical; KDE's official file browser
+File Utilities | dos2unix | Official Repository | Includes 'unix2dos'
+Filesystem Utilities | cifs-utils | Official Repository | CIFS filesystem user-space tools (i.e. Samba & mounting shared drives)
+Filesystem Utilities | ntfs-3g | Official Repository | For NTFS Filesystem Support
+Filesystem Utilities | samba | Official Repository | Samba Filesystem support
+Fonts | ttf-font-awesome | Official Repository | FontAwesome Fonts
+Image Utility | imagemagick | Official Repository
+Image Viewer | feh | Official Repository
+Media Player | mpv | Official Repository
+Media Utility | ffmpeg | Official Repository
+Network | inetutils | Official Repository
+Network | networkmanager | Official Repository
+Notification Daemon | dunst | Official Repository
+Notification Daemon | notify-send | Official Repository
+PDF Reader | zathura | Official Repository
+Plugin | zathura-djvu | Official Repository | djvu add-on
+Plugin | zathura-pdf-mupdf | Official Repository | mupdf add-on
+Plugin | zathura-ps | Official Repository | ps add-on
+Plugin | zathura-cb | Official Repository | cb add-on
+Screenlocker | i3-lock | Official Repository
+Screenlocker | [slock](http://tools.suckless.org/slock) | Official Repository; Arch, AUR; https://aur.archlinux.org/slock-git.git, Community; http://tools.suckless.org/slock
+Screenlocker | [xscreensaver](https://www.jwz.org/xscreensaver/) | Official Repository, Community; https://www.jwz.org/xscreensaver/
+Screenshot Utilities | scrot | Official Repository
+Status Bar | [lemonbar](https://github.com/LemonBoy/bar) | Official Repository; Debian, AUR; https://aur.archlinux.org/lemonbar-git.git, Community; https://github.com/LemonBoy/bar
+Status Bar | [polybar](https://github.com/polybar/polybar) | AUR; https://aur.archlinux.org/polybar.git, Community; https://github.com/polybar/polybar
+System Monitor | conky | Official Repository
+System Monitor | neofetch | Official Repository
+Terminal Emulator | alacritty | Official Repository
+Terminal Emulator | rxvt-unicode | Official Repository | aka URXVT
+Text Editor | nano | Official Repository
+Text Editor | vim | Official Repository
+Version Control | git | Official Repository
+Wallpaper Packs | archlinux-wallpaper | Official Repository
+Wallpaper Packs | deepin-backgrounds | Official Repository
+Wallpaper Packs | elementary-wallpapers | Official Repository
+Wallpaper Packs | gnome-backgrounds | Official Repository
+Wallpaper Packs | mate-backgrounds | Official Repository
+Wallpaper Packs | plasma-workspace-wallpapers | Official Repository
+Wallpaper Setter | nitrogen | Official Repository
+Wallpaper Setter | [wallset](https://github.com/terroo/wallset) | Community; https://github.com/terroo/wallset
+Web Browser | chromium | Official Repository | Graphical
+Web Browser | firefox | Official Repository | Graphical
+Web Browser | google chrome | Official Repository | Graphical
+Web Browser | links | Official Repository | Terminal
+Web Browser | lynx | Official Repository | Terminal
+Web Browser | [VimB](https://fanglingsu.github.io/vimb/) | Community; https://fanglingsu.github.io/vimb | Graphical
+Window Manager | awesome | Official Repository | Dynamic
+Window Manager | bspwm | Official Repository | Tiling
+Window Manager | [dwm](https://dwm.suckless.org/) | Community; https://dwm.suckless.org/ | Dynamic
+Window Manager | herbstluftwm | Official Repository | Tiling
+Window Manager | i3wm | Official Repository | Tiling
+Window Manager | openbox | Official Repository | Floating
+Window Manager | qtile | Official Repository | Dynamic
+X Utilities | xautolocker | Official Repository
+X Utilities | [xdo](https://github.com/baskerville/xdo) | Official Repository, Community; https://github.com/baskerville/xdo | Small X Utility to perform elementary actions on windows
+X Utilities | [xdotools](https://github.com/jordansissel/xdotool) | Official Repository, Community; https://github.com/jordansissel/xdotool | Command-line X11 Automation Tool
+
+
