@@ -1,0 +1,21 @@
+# Documentations - Vim - Plugins
+
+Basics regarding Vim Plugins
+
+## Table of Contents
+* Information
+* Steps
+
+## Information
+Plugin Folder : 
+	Linux : ~/.vim/pack/my-plugins/start/<your-plugins-here>
+	Windows : /path/to/.vim/pack/my-plugins/start/<your-plugins-here>
+
+## Steps
+
+- Packages added in opt can be loaded to memory by
+	:packadd [package-name]
+
+- Manually Download to Plugin Folder
+	git clone --depth 1 {plugin_url} {path-to-vim}/.vim/pack/my-plugins/start/{Plugin-Name}
+

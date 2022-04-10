@@ -1,0 +1,49 @@
+# Documentation - Linux
+
+Issue: Panic Attack
+
+A Kernel Panic occurs when the bootloader has an issue trying to locate a kernel to run from.
+
+## Table of Contents
+* Steps
+* Instructions
+
+## Steps:
+	1. Re-install Kernel
+	2. Re-initialize Ram disk memory
+	3. Re-config your bootloader
+	4. Restart your system
+
+## Instructions
+1. Re-install Kernel
+	> If your Distro is:
+		- ArchLinux : pacman
+			```
+			sudo pacman -S {kernel}
+			```
+			sudo pacman -S linux linux-lts
+
+		- Debian : apt/apt-get
+			```
+			sudo apt(-get) install {kernel}
+			```
+			sudo apt(-get) install linux linux-lts
+
+2. Re-initialize Ram Disk Memory
+	```
+	mkinitcpio -P {kernel}
+	```
+	mkinitcpio -P linux
+	mkinitcpio -P linux-lts
+
+3. Re-config your bootloader
+	> If your Bootloader is:
+		- Grub
+			```
+			Syntax: grub-mkconfig -o {boot-path}/grub
+			```
+			grub-mkconfig -o /boot/grub
+
+
+4. Restart your system
+	

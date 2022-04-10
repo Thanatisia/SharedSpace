@@ -1,0 +1,15 @@
+Documentation - Oracle DBMS - SQLPlus
+
+
+Synopsis : sqlplus {options}
+
+Usage:
+	sqlplus {username} : To login to SQLPlus
+		> Enter {password}
+
+	To Reset Password :
+		```
+		Use SQL to reset
+		```
+		ALTER user {username} IDENTIFIED BY oracle;
+

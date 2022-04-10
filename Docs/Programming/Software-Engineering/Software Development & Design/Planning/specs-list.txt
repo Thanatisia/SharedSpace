@@ -1,0 +1,13 @@
+# Software Development Planning : Specification List
+
+User/Client's Software Development Specification Document
+
+- specify use-cases, features, functions etc.
+
+## Table of Contents
+* Specifications
+
+## Specifications
+==================================================================
+| feature-id | title | description | completion-status | remarks |
+==================================================================

@@ -1,0 +1,88 @@
+# Documentation - Python : Environment Variables
+
+Flow of using Environment Variables
+
+## Table of Contents
+* Steps
+
+## Steps
+
+### Setting Environment Variables
+> Using Terminal
+	> Linux
+		- From Shell
+			```
+			export env=value
+			```
+			export DEBUG=true
+	
+		- Set with the intended application
+			```
+			env=value python app_name.py
+			```
+			DEBUG=true python main.py
+
+	> Windows
+		```
+		SET env=value
+		```
+		SET DEBUG=true
+
+	> Powershell
+		```
+		$Env:var_name = "value"
+		```
+
+> Using .env files
+	```
+	.env - aka Environment Files - is a text file in which the variables are defined, one per line.
+	- Format of a .env file is exactly the same on all OS
+	- having your environment variables written in a file that is automatically imported by python means that you dont have to manually set them everytime you start a new shell
+	- You can create a .env file in the root directory of each of your project
+		- You can keep all the variables that are needed by each project neatly organized
+	```
+	- Template
+		```
+		env_var1=value_1
+		env_var2=value_2
+		```
+		DEBUG=true
+		DATABASE_URL=sqlite:///mydb.sqlite
+
+	- To import .env files
+		```
+		Module : python-dotenv
+		```
+		- Install Package
+			pip install python-dotenv
+
+		- Import a .env file into a Python Application
+			```
+			Package: dotenv
+			Subpackage: load_dotenv
+			```
+			from dotenv import load_dotenv
+
+		- Loading Dotenv file
+			```
+			Syntax: load_dotenv('/path/to/project/.env')
+	
+			NOTES:
+				- Leave it empty to search current working directory
+
+				- The load_dotenv() function will look for a file named '.env' in the current directory and
+					- will add all the variable definitions in it to the [os.environ] dictionary.
+
+				- If a .env file is not found in the current directory, then the parent directory is searched for it.
+					- The search keeps going up in the directory hierarchy until 
+						- a .env file is found OR
+						- the top-level directory is reached
+			```
+
+			- To prevent python-dotenv from searching for a .env file through your directories
+				```
+				- Pass an explicit path to your file as an argument to load_dotenv()
+				```
+				load_dotenv('/path/to/project/.env')
+
+			

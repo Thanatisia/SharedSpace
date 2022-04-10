@@ -1,0 +1,7 @@
+# General Keybindings for starts
+
+dd : Cut
+p  : Paste
+u  : Undo
+yy : Copy
+Ctrl + R : Redo

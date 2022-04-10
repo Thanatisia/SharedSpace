@@ -1,0 +1,38 @@
+# Documentation - Python : Environment Variables
+
+Syntax and Usage of the [os.environ] dictionary
+
+## Synopsis
+
+### Background
+
+In Python - The [os.environ] dictionary contains all the environment variables retrieved on run-time. 
+
+### Information
+
+Module/Library : os
+Variable : environ
+
+### Syntax
+
+```
+Structure of os.environ dictionary
+
+Key : Environment Variable name
+Value : $ENVIRONMENT_VARIABLE
+```
+
+- To retrieve Environment Variable : 
+	variable = os.environ['ENVIRONMENT_VARIABLE_KEY']
+	> Notes
+		* If the environment variable doesnt exist, Python will raise [KeyError] Exception
+
+- To retrieve Optional Environment Variables : 
+	variable = os.environ.get('ENVIRONMENT_VARIABLE_KEY', 'default_value_if_not_exists')
+	variable = os.getenv('ENVIRONMENT_VARIABLE_KEY', 'default_value_if_not_exists')
+	> Notes
+		* If Default Value is not provided : Returns None if the environment variable doesnt exist
+		* os.getenv() is a wrapper for os.environ.get()
+
+### Usage
+
