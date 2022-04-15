@@ -25,6 +25,14 @@ With Specfile : pyinstaller [spec-file]
 
 ### Parameters
 
+#### Important
+
+* -D | --onedir : Create a one-folder bundle containing an executable (default)
+* -F | --onefile : Create a one-file bundled executable
+* -n <NAME> | --name <NAME> : Name to assign to the bundled app and spec file (default: first script/main script's basename)
+* --specpath <directory> : Folder to store the generated spec file (defaut: current directory)
+
+
 #### Optionals
 
 * -a | --ascii : Do not include unicode encoding support (default: included if available)
