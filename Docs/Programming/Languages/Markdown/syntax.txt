@@ -7,6 +7,8 @@ Topic : Syntax
 ## Table of Contents
 * Operators
 * Formatting
+* Escape Characters
+* Lists
 * Headings
 * Links
 * Highlighting
@@ -18,15 +20,154 @@ Topic : Syntax
 
 ## Operators
 
-Block Quotes (>) : Meant to emulate reply text, Quotes etc.
-Dash (-) : Create "Bullet points"
-Plus (+) : Create new point
+>  : Block Quotes : Add a block paragraph; Meant to emulate reply text, Quotes etc.
+>> : Multiline Block Quotes : Add a nested blockquote paragraph
+-  : Dash : Create "Bullet points"
++  : Plus : Create new point
+*  : Asterisk : Make a new point/paragraph
 
 ## Formatting
 
-*text* : Make text italic
-**text** : Make text bold
+*text* : Make text italic (Recommended)
+**text** : Make text bold (Recommended)
+***text*** : Make text italic and bold (Recommended)
+_text_ : Make text italic
 __text__ : Make text bold
+___text___ : Make text italic and bold
+
+## Escape Characters
+
+- To display a literal character that would be used to format text in a markdown doc
+
+	\ : Backslash
+	` : Backtick
+	* : Asterisk
+	_ : Underscore	
+	{} : Curly Braces
+	[] : Brackets
+	<> : Angle Brackets
+	() : Parenthesis
+	# : Pound Sign
+	+ : Plus Sign
+	- : Minus Sign (Hyphen)
+	. : Dot
+	! : Exclamation Mark
+	| : Pipe
+
+## Lists
+
+- 2 Types of Lists
+	- Ordered Lists
+	- Unordered Lists 
+
+### List Types
+
+#### Ordered Lists
+```
+NOTE:
+	- The numbers dont have to be in numerical order, 
+	- but the list should start with the number one
+```
+
+- Create new Ordered Lists
+	```
+	Add line items with numbers followed by period (dot)
+
+	1. First Item
+	2. Second Item
+	3. Third Item
+	...
+	```
+
+- Create nested Ordered Lists
+	```
+	Start the new list with a '1.' tabbed
+	
+	1. First Item
+	2. Second Item
+	3. Third Item
+		1. Indented Item 1
+		2. Indented Item 2
+	...
+	```
+
+- Similar to HTML's <ol>
+	```html
+	<ol>
+		<li>First Item</li>
+		<li>Second Item</li>
+		<li>Third Item</li>
+	</ol>
+	```
+
+#### Unordered Lists
+
+- Create new Unordered Lists
+	```
+	Add dashes (-), asterisks (*) or plug signs (+) in front of line items
+
+	- First Item	
+	- Second Item
+	- Third Item
+	...
+
+	* First Item
+	* Second Item
+	* Third Item
+	...
+
+	+ First Item
+	+ Second Item
+	+ Third Item
+	...
+	```
+
+- Create nested Unordered Lists
+	```
+	Indent one or more items to create a nested list
+
+	- First Item	
+	- Second Item
+	- Third Item
+		- Indented Item 1
+		- Indented Item 2
+	...
+	```
+
+- Similar to HTML's <ul>
+	```html
+	<ul>
+		<li>First Item</li>
+		<li>Second Item</li>
+		<li>Third Item</li>
+	</ul>
+	```
+
+### Adding Elements in List
+
+- Indent the element by four spaces or one tab
+
+	* First List Item
+	* Second List Item
+		
+		Another Paragraph
+
+	* Third List Item
+
+- Code Blocks
+
+	- While in a list, indent them eight spaces or two tabs
+
+		1. First Line
+		2. Second Line
+
+			<html>
+				<head>
+					<title>Hello World</title>
+				</head>
+			</html>
+
+		3. Third Line
 
 ## Headings
 
@@ -90,6 +231,15 @@ YouTube videos cannot be added directly, but you can add an image with a link to
 	- Lose the image sizing and border
 	```
 	[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
+### Emails
+
+- Enclose URL/email address in angle brackets (< >) to turn it into a link
+
+	<link-url>
+	<email@address.com>
+
+
 
 ## Highlighting
 ```
@@ -169,3 +319,5 @@ These 3 are usable to make a horizontal ruler
 ## Resources
 
 adam-p : https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet
+
+markdown guide : https://www.markdownguide.org/basic-syntax/
