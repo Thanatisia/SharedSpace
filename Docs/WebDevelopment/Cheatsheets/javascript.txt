@@ -1,0 +1,36 @@
+# Cheatsheets - Javascript
+
+Operators:
+	+ : To Add numbers/Concatenate strings
+	- 
+
+Keywords:
+	const : Create constant variables - these variables are not able to change values on definition
+	let   : Declare variables limited to the scope of a block statement or expression on which it is used
+	var   : Declares a variable globally or locally to an entire function regardless of block scope
+
+Macros:
+
+	__dirname : To get root directory (directory that the executing script resides in)
+
+Tips:
+
+	# Javascript equivalent of Python's [ if __main__ == "__main__": ]
+	
+		if(require.main === module)
+		{
+			main();
+		}
+	
+
+	# To create in-line function
+
+		# [1] Long Method
+			(arguments) => {
+				// Statements here
+			}
+
+		# [2] Short Method
+			function( (arguments) => command );
+
+

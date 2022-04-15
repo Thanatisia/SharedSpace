@@ -1,0 +1,78 @@
+# Licenses
+
+## Table of Contents
+* Licenses
+* Adding Licenses
+* Remarks
+
+## Licenses
+
+### General List
+
+* Apache License 2.0
+* GNU General Public License v3.0
+* MIT
+* BSD Clauses
+* Boost Software License 1.0
+* Creative Commons Zero v1.0 Universal
+* Eclipse Public License 2.0
+* GNU Affero General Public License v3.0
+* GNU General Public License v2.0
+* GNU Lesser General Public License v2.1
+* Mozilla Public License 2.0
+* The Unlicense
+
+### MIT License
+
+```
+source: https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633
+```
+
+* This is the leanest license.  
+* It's a Do whatever you want with my stuff, just don't sue me type of license.  
+* It is a type of permissive free software license.  
+* Choose it if you're afraid of nobody using your software. 
+* The MIT is roughly the same as BSD and ISC licenses.
+
+### Apache
+
+```
+source: https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633
+```
+
+* Same as MIT but with more words. Great for lawyers.
+* Choose it over the MIT if you're afraid of Patent Trolling.
+* It is a type of permissive free software license.
+
+### GPL
+
+```
+source: https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633
+```
+
+* This is the heaviest license.
+* If you're afraid of people using your work in an unfair way
+	> i.e.
+		* make money on your back bothers you. 
+			- If they use your software, they will have to use the same license as you (i.e. probably open-source it).
+* In a nutshell, it says: if you make a derivative work of this, and distribute it to others under certain circumstances, then you have to provide the source code under this license.
+* It's a copyleft license (as opposed to copyright).
+* For example, one of the reasons why Apple's Mac OS is not built on top of Linux is because Linux is GPL, which means that OSX would have been forced to be opened sourced to.
+* A lot of startups don't like the GPL license because it can pose a serious problem during an exit. Indeed, it's rare the investors would like to buy something that they're forced to open-source.
+
+
+### BSD Clause
+
+
+## Adding Licenses
+
+On GitHub:
+	- In an existing project
+		* Press on "Create new file"
+		> Type 'LICENSE' | 'LICENSE.md' or 'LICENSE.txt' as the New File's name.
+			* This will popup a "Want to use a new template?" option
+			* Select your preferred license (i.e. MIT, GPL)
+
+## Resources
+
+Summary of git licenses : https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633

@@ -1,0 +1,14 @@
+# Documentation - CSharp
+
+Documentation, Guides, Tips n Tricks and General docs on CSharp
+
+This file is on syntax
+
+## Table of Contents
+* Syntax
+
+## Syntax
+
+To import an external library : using [Project_Name].[Folder_Name];
+To initialize a class : [class_name] class_obj = new [Folder_Name].[class_name];
+

@@ -1,0 +1,11 @@
+# CSharp IDE : Visual Studio
+
+Keybindings for C# IDE Visual Studio
+
+Ctrl + K : Comment
+Ctrl + U : Uncomment
+Ctrl + B : Build Project
+Ctrl + Shift + B : Build Solution
+
+F5 : Start Debugging
+Ctrl + F5 : Start without Debugging

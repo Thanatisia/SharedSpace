@@ -1,0 +1,10 @@
+# Linux - Cronjob - File(s) Structure
+
+Default System Cron Path: /etc/
+User Cron Path: 
+	/var/spool/anacron
+	/var/spool/cron/
+	/var/spool/cron/crontab
+
+Files:
+	cron.deny : To blacklist users from users

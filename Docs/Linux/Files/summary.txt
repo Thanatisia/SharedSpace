@@ -12,6 +12,7 @@ Bluetooth Manager | bluez | Official Repository
 Clipboard Manager | clipman | Official Repository
 Compositors | picom | Official Repository
 Colorscheme Utilities | [python-pywal](https://github.com/dylanaraps/pywal) | Official Repository, Community; https://github.com/dylanaraps/pywal
+Cronjob | anacron | Official Repository
 Cronjob | cronie | Official Repository
 Display Server | xorg | Official Repository
 Display Server | xorg-xinit | Official Repository

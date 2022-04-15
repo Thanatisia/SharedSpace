@@ -1,0 +1,101 @@
+# Linux Cronjob - Using Crontab
+
+Crontab is used to edit cron file configs
+
+## Table of Contents
+* Documentation
+* Crontab File
+* References
+
+## Documentation
+
+### Synopsis (Syntax)
+
+crontab [-u username] {parameters} <arguments>
+
+### Parameters
+
+-e : Edit Crontab file and Install/Update Job in crontab
+-l : List Crontab entries
+-r : Deinstall Job from crontab
+-s : Add SELINUX Security to crontab file
+-u [username] : Use Crontab as a specific user
+-i -r : Confirm Deinstall of job from crontab
+
+### Usage
+
+- Using 'sample.sh' as example
+	- * * * * * sample.sh : Run sample.sh every minutes
+	- 0 17 *  sun sample.sh : Run sample.sh at 1700H (5p.m.)
+
+## Crontab File
+
+### Background Information
+
+A Crontab file contains instructions to the cron daemon of the general form : "Run this command at this time on this date"
+
+Each user can have their own crontab
+
+Eveen though these are files in the '/var' directory : They are not intended to be edited directly
+
+### Format
+
+```
+* * * * * [Command-to-Execute]
+| | | | |
+| | | | |
+| | | | Day of the Week (0-6) (Sunday=0)
+| | | |
+| | | Month (1-12)
+| | | 
+| | Day of Month (1-31)
+| |
+| Hour (0-23)
+|
+Minutes (0-59)
+```
+
+### Contents
+
+1. Format (refer to #format)
+
+2. Cronjob strings
+	```
+	Syntax: [cronjob-string] <command-to-execute>
+	```
+	* @reboot : Run once, at startup
+	* @yearly : Run once a year
+	* @annually : Same as @yearly
+	* @monthly : Run once a month
+	* @weekly : Run once a week
+	* @daily : Run once a day
+	* @midnight : Same as @daily
+	* @hourly : Run once an hour
+
+### Operators
+
+- Asterisk (*) Operator : Specifies all possible values for a field
+	> i.e. 
+		* Every Hour or Every Day
+
+- Comma (,) Operator : Specifies a list of values
+	> i.e. 
+		* 1,5,10,11
+	
+- Dash (-) Operator : Specifies a range of values
+	> i.e.
+		* 1-6 : Equivalent to "1,2,3,4,5,6"
+
+- Slash (/) Operator : Skip a given number of values
+	> i.e.
+		* "/3" in the hour time field = "0,3,6,9,12,15,18,21"
+
+### Notes
+
+- Cron will email to the user all output of the commands it runs
+	* To silence : Redirect the output to a logfile or to /dev/null
+
+## References
+
+- Tutorialspoint Crontab : https://www.tutorialspoint.com/unix_commands/crontab.htm
+- ostechnix Cronjob Beginner's Guide : https://ostechnix.com/a-beginners-guide-to-cron-jobs/

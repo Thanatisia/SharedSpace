@@ -1,0 +1,124 @@
+# Cheatsheet - Git
+
+Please refer to this if you are unsure on where to begin
+
+## Table of Contents
+* Documentation
+* Usage
+
+## Documentation
+
+### Synopsis (Syntax)
+
+git {option} {arguments}
+
+### Options
+
+- init   : Initialize a brand new git (local) repository folder if not found
+- status : Get current status of the git repository (i.e. new files to add / deleted files / moved files / updated files etc.)
+- add [files/directories] : Add new files to be committed
+- commit -m {commit-change-messages} : Commit/Confirm all changes made and allow git to proceed with version control
+- push -u {remote-repository-url} {repository-branch} : Push upstream from your local git repository to a remote repository - in a branch ('origin' for default registered url)
+- pull {remote-repository-url} {repository-branch} : Pull downstream from the remote repository to your local repository
+- config {options} <arguments> : Set value to config
+	> Options
+		* -g : Set as config as global
+	> Arguments
+		* user.name <username> : Get/Set your username; Returns your currently set username if a username is not provided
+		* user.email <email> : Get/Set your email; Returns your currently set email if an email is not provided
+- remote [action] {options} <arguments> : Modify config regarding the remote repository
+	> Action
+		add origin url <remote-repository-url> : Set a default remote repository url (named as 'origin')
+- checkout {option} <argument> : Create and change
+	> Option
+		* -b <branch-name>: Create (if branch is not found) and change to the specified branch 
+- switch {option} : Switch branch
+	> Option
+		* -m <branch-name>: Switch to a branch
+
+## Usage
+
+### General Workflow
+
+- If repository is not created
+
+	```
+	git init
+	git config user.name {username}
+	git config user.email {email}
+	git remote add origin url https://[your-oauth-key]@github.com/author/repository-name
+	```
+
+- If your main branch is not created
+
+	```
+	git checkout -b {new-branch-name}
+	```
+
+- Subsequent contributions
+
+	```
+	git pull
+	```
+
+### Open Source Contribution
+
+- Fork the project
+	
+	- In GitHub
+		* Click on "Fork Project"
+
+- Setup Project Workspace Folder
+
+	```
+	Fetch the project : git clone
+
+	Configure your local git repository : 
+		git config user.name {username}
+		git config user.email {email}
+
+	(OPTIONAL) Add Remote Repository URL :
+		git remote add origin url https://[your-oauth-key]@github.com/author/repository-name
+	```
+	
+- Subsequent Contributions
+
+	```
+	git pull
+
+	git status (To check for any files to add)
+
+	git add [files/folders]
+	git commit -m "commit message"
+	```
+
+- Preparing to push to remote repository url	
+
+	- Create a new branch
+
+		```
+		git checkout -b {new-branch-name}
+		```
+
+- Push to remote repository url
+
+	```
+	git push -u {remote-repository-url} {created-branch-name}
+	```
+
+- Create Pull Request
+
+	- In GitHub
+
+		> If there is a Yellow box stating to Create Pull Request
+			* Click on button
+
+		> Else
+			* Click on tab "Pull Requests"
+			* Click on Create Pull Request
+
+		- Type
+			* Pull Request Title
+			* Changes made
+		
+		- Click "Create Pull Request"

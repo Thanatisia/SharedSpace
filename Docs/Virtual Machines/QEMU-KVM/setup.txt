@@ -1,0 +1,46 @@
+# QEMU KVM Setup Processes
+
+## Table of Contents
+* Validation
+* Install Packages
+* Enable/Start Services
+
+## Validation
+
+### Check if Linux system is compatible with kvm
+```
+Intended Output: 
+	Virtualiztion: {architecture}
+```
+LC_ALL=C lscpu | grep Virtualization
+
+## Install Packages
+
+```
+Packages to Install:
+
+qemu : QEMU package
+ebtables : Ethernet Bridge
+```
+- if Distro is
+	> Debian-based
+		sudo apt(-get) install qemu ebtables
+
+	> Arch-based
+		sudo pacman -S install qemu ebtables
+
+## (Optional) Enable/Start Services
+
+```
+Start: libvirtd
+```
+sudo systemctl enable/start libvirtd
+
+
+## (OPTIONAL) Add user to group [libvirtd]
+
+```
+Group: libvirtd
+```
+sudo usermod -G libvirtd -a [user]
+

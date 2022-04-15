@@ -131,7 +131,8 @@
 	> Colorscheme Utilities
 		* [python-pywal](https://github.com/dylanaraps/pywal) : Official Repository, Community; https://github.com/dylanaraps/pywal
 	> Cronjob
-		* cronie
+		* anacron : Official Repository
+		* cronie : Official Repository
 	> Document Utilities
 		* pandoc : Official Repository
 		> zathura : Official Repository

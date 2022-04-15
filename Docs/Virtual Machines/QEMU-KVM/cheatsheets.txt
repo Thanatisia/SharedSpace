@@ -1,0 +1,55 @@
+# QEMU KVM Cheatsheets
+
+## Table of Contents
+* Documentation
+* Usage
+* Examples
+
+### Documentation
+
+Variables:
+	- libvirt Path : /var/lib/libvirt
+	- libvirt Images Storage : /var/lib/libvirt/images
+
+Syntax:
+	qemu-img [options] <arguments>
+	qemu-system-[architecture] {options} <arguments>
+
+Params:
+	> qemu-img
+		* create [image-name].img [size]
+		* convert -f [input-file-format] -O [output-file-format] [input-file-name] [output-file-name]
+	> qemu-system-[architecture]
+		* -accel [accelerator] : Accelerator
+		* -hda : Virtual Disk Name; .qcow2 format
+		* -m : Memory Size (RAM)
+		> -net [network-objects]
+			* network-interface
+			* network-name
+		* -cdrom : ISO to launch
+		* -vga : Video Graphics Appliance (Default: std) 
+		> -boot : Boot Options
+			> Boot Order : order=[arrangement]
+				* c : Hard Drive
+				* d : CDROM
+
+## Usage
+- Convert file to another file format : sudo qemu-img convert -f [input-file-format] -O [output-file-format] [input-file-name] [output-file-name]
+- To Initialize a file : qemu-img create [image-name].img [size]
+- To boot an iso : qemu-system-[architecture] -hda [virtual-disk-name (.qcow2 format)] -m [memory-size] -cdrom [iso-to-launch].iso -boot [boot-options]
+- To boot an existing qcow2 image : qemu-system-[architecture] -hda [virtual-disk-name (.qcow2 format)] -m [memory-size] -boot [boot-options]
+
+## Examples
+
+- To convert Oracle VBox (VDI) to QEMU (qcow)
+	```
+	VBox File Format: vdi
+	QEMU File Format: qcow2
+	Syntax: sudo qemu-img convert -f vdi -O qcow2 [input-file-name] [output-file-name]
+	```
+
+- To launch an ISO installer and create a new image
+	```
+	```
+	qemu-system-[architecture] -accel whpx -hda .\[disk-name].qcow2 -m 512 -net nic,model=virtio -net user -cdrom .\[name].iso -vga std -boot strict=on
+

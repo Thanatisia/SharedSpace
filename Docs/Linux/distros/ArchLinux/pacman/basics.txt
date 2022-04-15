@@ -1,0 +1,35 @@
+# ArchLinux Pacman Docs
+
+Documentation, Guides, Tips n Tricks for ArchLinux's Package Manager - pacman 
+
+[Basics]
+
+## Table of Contents
+* Documentation
+
+## Documentation
+
+### Synopsis (Syntax)
+
+(sudo) pacman {parameters} [package-name]
+
+### Parameters
+
+-F : Search for package file names in remote packages
+-Q : List all installed packages (Default - name and version)
+-R : Remove package (all dependencies are still installed)
+-S : Install packages
+-Rdd : Remove a package - which is required by another package - without removing the dependent package
+-Rs : Remove a package and its dependencies not required by any other installed packages
+-Rsc : Remove a package, its dependencies and all packags that depends on the target package
+-Rsu : Remove a package and its dependencies including a group required by otherwise needed packages
+-Si : Display extensive information about a given package in the official repository
+-Ss : Search for a package in the Official Repositories according to keyword/strings provided
+-Su : Upgrade all packages in the Official Repository Database with definitions from the Update
+-Sy : Get Update for all packages in the Official Repository Database
+-Syu : Update and Upgrade all packages in the Official Repository Database
+-Qi : List detailed information of all installed packages
+-Ql : List all files generated/outputted by a package (All Packages if no package name is specified)
+-Qq : List all installed packages (name only)
+-Qs : List all installed packages (Default - name, version and description)
+--help : Put at the back of the parameter to get help on the query flags
