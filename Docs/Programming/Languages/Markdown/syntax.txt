@@ -1,0 +1,171 @@
+# Markdown Language (.md)
+
+Documentation, Guides and General Tips n Tricks for Markdown Language (.md) & Files
+
+Topic : Syntax
+
+## Table of Contents
+* Operators
+* Formatting
+* Headings
+* Links
+* Highlighting
+* Tables
+* Raw HTML
+* Horizontal Ruler
+* Line Breaks
+* Resources
+
+## Operators
+
+Block Quotes (>) : Meant to emulate reply text, Quotes etc.
+Dash (-) : Create "Bullet points"
+Plus (+) : Create new point
+
+## Formatting
+
+*text* : Make text italic
+**text** : Make text bold
+__text__ : Make text bold
+
+## Headings
+
+#      : Heading 1
+##     : Heading 2
+###    : Heading 3
+####   : Heading 4
+#####  : Heading 5
+###### : Heading 6
+
+## Links
+
+### Hyperlink
+
+* To add a hyperlink : 
+	- Inline : [title-of-link-here](url)
+	- Reference :
+		```
+		[title-of-link-here][case-insensitive-reference-text-or-number]
+		[case-insensitive-reference-text-or-number]: url
+		```
+	- Link Text Itself : 
+		```
+		[link-text]
+		[link-text]: url
+		```
+
+* To add a reference link (to a header in same page) : [title-of-reference-here](#name-of-heading)
+
+### Images
+```
+NOTE:
+
+alt text is the text that will display when you hover over the image
+```
+
+* Inline : ![alt text](link-url-to-image-here.png "Logo-Title-Text")
+* Reference : 
+	```
+	![alt text][logo]
+	[logo]: link-url-to-image-here.png "Logo-Title-Text"
+	```
+
+### YouTube Videos
+```
+YouTube videos cannot be added directly, but you can add an image with a link to the video
+```
+
+- Structure	
+	<a href="video-embed-link-url" target="_blank">
+		<img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg"
+			alt="IMAGE ALT TEXT HERE"
+			width="240"
+			height="180"
+			border="10"
+		/>
+	</a>
+
+- Pure Markdown
+	```
+	- Lose the image sizing and border
+	```
+	[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
+## Highlighting
+```
+NOTE:
+
+Code blocks are part of the markdown spec, but syntax highlighting isnt
+```
+
+### Code
+
+* In-line (Single-Line) Codes : Use `Backticks` 
+* Multiline (Block) Codes : Use ``` Triplle Back-ticks ```
+
+### Syntax
+
+- Structure
+
+	```[language]
+	statements here
+	```
+
+* Python
+
+	```python
+	print("Hello World");
+	```
+
+* No Language
+
+	```
+	No Syntax Highlighting
+	<p>Hello World</p>
+	```
+
+## Tables
+```
+NOTE:
+
+Tables are not part of the core Markdown spec - but they are part of GFM and Markdown Here supports them
+
+- An easy way of adding tables to your email
+	- A task that would require copy and pasting from another application
+```
+
+Structure:
+
+	| Col_1 | Col_2 | Col_3 | ... | Col_n |
+	| ----- | ----- | ----- |:---:| -----:|
+
+- Notes:
+	* Colons (:) can be used to align columns 
+	* The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily. 
+	* You can also use inline Markdown.
+
+## Raw HTML
+
+You can also use raw HTML in Markdown
+
+## Horizontal Ruler
+
+These 3 are usable to make a horizontal ruler
+
+	```
+	---
+	
+	***
+	___
+	```
+
+## Line Breaks
+
+- Hit Enter once (i.e. insert a newline) : Seperate line in the same paragraph
+- Hit Enter twice (insert 2 lines)	 : Start a new paragraph
+
+
+
+## Resources
+
+adam-p : https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet
