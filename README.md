@@ -70,21 +70,18 @@ To download a individual file, use wget or curl
 ### Recommended workflow
    
 curl the curl_repositories.sh script
-    
     ```bash
     curl -L -O https://raw.githubusercontent.com/Thanatisia/SharedSpace/main/curl_repositories.sh
     ```
 
 Change Permission to allow execution
-
     ```bash
     chmod +x curl_repositories.sh
     ```
 
 Edit and append any and all links + filename of your requirement.
-
     - Run script
-	```
+	```bash
         ./curl_repositories.sh
         Enter your file of choice
         Download
