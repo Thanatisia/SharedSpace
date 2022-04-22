@@ -23,6 +23,22 @@
 * [Window Managers](#window-managers)
 * [X Utilities](#x-utilities)
 * [Others](#others)
+	- [Bluetooth Manager](#bluetooth-manager)
+	- [Clipboard Manager](#clipboard-manager)
+	- [Colorscheme Utilities](#colorscheme-utilities)
+	- [Compression Utilities](#compression-utilities)
+	- [Cronjob](#cronjob)
+	- [Document Utilities](#document-utilities)
+	- [Downloader](#downloader)
+	- [Filesystem](#filesystem)
+	- [File Utilities](#file-utilities)
+	- [Fonts](#fonts)
+	- [Font Icons](#font-icons)
+	- [Prompt](#prompt)
+	- [Screenshot](#screenshot)
+	- [Shell](#shell)
+	- [Version Control](#version-control)
+	- [Wallpaper Packs](#wallpaper-packs)
 
 ## All Packages
 
@@ -107,6 +123,7 @@
 ### Window Managers
 	> Floating
 		* openbox : Official Repository
+		* [Berry](https://github.com/jlervin/berry) : Community; https://github.com/jlervin/berry, https://berrywm.org/https://berrywm.org/
 
 	> Dynamic
 		* awesome : Official Repository
@@ -130,6 +147,8 @@
 		* clipman : Official Repository
 	> Colorscheme Utilities
 		* [python-pywal](https://github.com/dylanaraps/pywal) : Official Repository, Community; https://github.com/dylanaraps/pywal
+	> Compression Utilities
+		* zip : Official Repository
 	> Cronjob
 		* anacron : Official Repository
 		* cronie : Official Repository
@@ -140,6 +159,8 @@
 			* zathura-pdf-mupdf : Official Repository 
 			* zathura-ps : Official Repository 
 			* zathura-cb : Official Repository
+	> Downloader
+		* wget : Official Repository
 	> Filesystem
 		* ntfs-3g : Official Repository
 		* cifs-utils : Official Repository
@@ -149,14 +170,20 @@
 	> Fonts
 		* ttf-font-awesome : Official Repository
 	> Font Icons
+	> Prompt
+		> Zsh
+			* [Spaceship](https://github.com/spaceship-prompt/spaceship-prompt) : https://github.com/spaceship-prompt/spaceship-prompt
 	> Screenshot
 		* scrot : Official Repository
+	> Shell
+		- [Xonsh](xon.sh) : Community; xon.sh
+		- Zsh : Official Repository
 	> Version Control
 		* git : Official Repository
 	> Wallpaper Packs
-		* gnome-backgrounds
-		* mate-backgrounds
-		* deepin-backgrounds
-		* elementary-wallpapers
-		* plasma-workspace-wallpapers
-		* archlinux-wallpaper
+		* gnome-backgrounds : Official Repository
+		* mate-backgrounds : Official Repository
+		* deepin-backgrounds : Official Repository
+		* elementary-wallpapers : Official Repository
+		* plasma-workspace-wallpapers : Official Repository
+		* archlinux-wallpaper : Official Repository

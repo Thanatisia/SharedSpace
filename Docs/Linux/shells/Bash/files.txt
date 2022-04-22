@@ -1,0 +1,13 @@
+# Linux - Shell : Bash
+
+Files typically used exclusively by the bash shell
+
+## Table of Contents
+* Home Directory
+
+## Files
+
+~/
+|
+|-- .bashrc
+|-- .bash_profile

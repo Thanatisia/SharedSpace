@@ -1,0 +1,7 @@
+# Linux - Dotfiles : Recommended Aliases
+
+Some recommended aliases to use in your Shell RC (.bashrc, .zshrc etc) or other support scripts (if any)
+
+alias dir="dir --all --color -sh"
+alias ls="ls --all --color -sh"
+alias reload="source ~/.bashrc"

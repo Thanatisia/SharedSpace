@@ -1,0 +1,42 @@
+# Linux - Customization & Designs (Ricing) Resource MasterList
+
+List of all resources 
+
+## Table of Contents
+- Websites
+	- Colorschemes
+	- Fonts
+	- Icons
+	- Wallpapers
+
+## Websites
+
+### Colorschemes
+```
+| website_title | links_url | Description
+```
+Terminal Sexy | terminal.sexy | A Terminal colorscheme customization website
+
+### Fonts 
+```
+| website_title | links_url | Description
+```
+FontAwesome | https://fontawesome.com/
+FontSquirrel | fontsquirrel.com
+Material Design | https://materialdesignicons.com/
+Nerd Fonts | https://github.com/ryanoasis/nerd-fonts
+
+### Icons
+```
+| website_title | links_url | Description
+```
+NerdFonts | nerdfonts.com/cheat-sheet | Collection of Nerd Font Glyphicons
+
+### Wallpapers
+```
+| website_title | links_url | Description
+```
+Wallhaven | wallhaven.cc | Best free, great wallpaper 
+
+
+

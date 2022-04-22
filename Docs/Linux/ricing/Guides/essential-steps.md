@@ -6,25 +6,43 @@ Essential steps/todos when ricing
 * [Steps](#steps)
 
 ## Steps
+- [Download & Setup Window Manager]
+- [Download Packages]
+- [Download Resources]
+- [Setup Dotfiles]
+- [Change Fonts]
+- [Get Font Icons]
+- [Change Wallpaper]
 
-- Setup sudo
+## Explanation
 
-- Download & Setup Window Manager
+### Download & Setup Window Manager
 
-- Download Packages
+### Download Packages
 
 * You may refer to the list of packages to download [here](https://github.com/Thanatisia/SharedSpace/Docs/Linux/Files/packages-masterlist.md)
 
-- Setup Dotfiles
+### Download Resources
+
+- Fonts
+
+- Icons
+	- Cursor Icons
+	- Icon Themes
+	- Font Icons (Glyphicons)
+
+- Wallpapers
+
+### Setup Dotfiles
 
 * .bash_profile
 * .bashrc
 * .xinitrc
 * etc
 
-- Change Fonts
+### Change Fonts
 
-- Get Font Icons
+### Get Font Icons
 
-- Change Wallpaper
+### Change Wallpaper
 

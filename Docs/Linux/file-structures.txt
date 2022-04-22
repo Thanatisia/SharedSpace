@@ -17,10 +17,17 @@ Structure:
 	```
 	/
 	|
-	|-- /boot
-	|-- /home
-	|-- /root
-	|-- /tmp
+	|-- boot/
+	|-- home/
+	|-- root/
+	|-- tmp/
+	|-- usr/
+	    |-- local/
+		|-- share/
+		    |-- fonts/
+	    |-- share/	
+		|-- fonts/
+		|-- icons/
 
     - Home Directory:
 	~/
@@ -30,6 +37,17 @@ Structure:
 	|    |-- config-folders/
 	|
 	|-- .local/
+	     |
+	     |-- share/
+		 |
+		 |-- fonts/
+		 |-- icons/
+	|
+	|-- .icons/
+	     |
+	     |-- default/
+		 |
+		 |-- cursors/
 	|
 	|-- .bashrc
 	|

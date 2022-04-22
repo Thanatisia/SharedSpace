@@ -3,17 +3,39 @@
 Documentation: Linux - bspwm - bspc manual
 
 ## Table of Contents
-* Documentation
+- Documentation
+- References
 
 ## Documentation
 
-- Synopsis
+### Synopsis
 
-bspc 
+bspc [action] [{options} <arguments>]
 
-- Parameters
+### Parameters
 
--d : Send to the current desktop
+- query COMMANDS [OPTIONS]
+	- Commands
+		-N | --nodes [NODE_SELECTION] : List the IDs of the matching nodes 
+			```
+			List all if NODE_SELECTION is not provided
+			```
+		-D | --desktops [DESKTOP_SELECTION] : List the IDs (or names) of the matching desktop(s)	
+		-M | --monitors [MONITOR_SELECTION] : List the IDs (or names) of the matching monitor(s)
+		-T | --tree : Print a JSON representation of the matching item
 
-- Usage
+	- Options
+		-d | --desktop [DESKTOP_SELECTION] : Constraint matches to the selected desktop; The descriptor can be omitted for -M, -D or -N
+		-m | --monitor [MONITOR_SELECTION] : Constraint matches to the selected monitor; The descriptor can be omitted for -M, -D or -N
+		-n | --node [NODE_SELECTION] : Constraint matches to the selected node; The descriptor can be omitted for -M, -D or -N
+		--names : Print names of the selected command instead of IDs.
+			```
+			Can only be used with 
+				-M
+			and 
+				-D
+			```
 
+### Usage
+
+## References

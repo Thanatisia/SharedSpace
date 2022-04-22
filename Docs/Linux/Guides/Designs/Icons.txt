@@ -1,0 +1,152 @@
+# Linux Docs - Icons
+
+Linux Docs and Guides on Icon Management
+
+## Table of Contents
+* Information
+* Locations
+* Flow
+* Usage
+* Commands
+* Customization
+* Resources
+
+## Information
+
+### Types of Fonts
+
+- Cursor (Mouse) Icons
+- Font Icons
+
+## Locations
+
+### System-Wide Icon Locations
+
+	```
+	/
+	|
+	|-- usr/
+	    |
+	    |-- share/
+	        |
+	        |-- icons/
+		    |
+		    |-- your-icons-here
+	```
+
+### User Icon Locations
+
+	```
+	~/
+	|
+	|-- .local/
+	    |
+	    |-- share/
+		|
+		|-- icons/
+		    |
+		    |-- cursor_theme_name/
+			|
+			|-- cursors/
+			    |
+			    |-- your-cursor-icons-here
+		    |-- your-icons-here
+	|-- .icons/
+	    |
+	    |-- default/
+		|
+		|-- cursors/
+		    |
+		    |-- your-cursor-icons-here
+	    |
+	    |-- your-icons-here
+	```
+
+## Flow
+
+
+## Usage
+
+### Icon Themes
+- Obtain Icon Themes
+	1. Manually
+		- Download Icon Pack
+		
+		- Extract downloaded icon pack
+			tar -xzvf /path/to/icon/pack.tar.gz
+
+		- Move extracted folder to the appropriate folders
+			```
+			User-only : 
+				~/.icons
+				~/.local/share/icons
+
+			System-wide:
+				/usr/share/icons
+			```
+
+- Change Icon Themes
+	1. Manually
+		- Create [index.theme] default theme config file in
+			```
+			- User-specific Config : ~/.icons/default/index.theme
+			- System-wide Config : /usr/share/icons/default/index.theme
+			```	
+			Contents:
+				```
+				[icon theme]
+				Inherits=cursor_theme_name
+				```
+
+		- Edit GTK settings.ini
+			```
+			Folder: ~/.config/gtk-3.0/settings.ini
+			```
+			Contents:
+				```
+				[Settings]
+				gtk-cursor-theme-name=cursor_theme_name
+				```
+
+		- Restart X(Org|Server) for the changes to take effect
+
+	2. Use LXAppearance
+
+- Temporarily set a theme for a single application using Environment Variable
+	```
+	Edit Environment Variable 
+		[XCURSOR_THEME] : For Theme name
+		[XCURSOR_PATH] : Retrieves all xcursor paths recognised by the system
+	```
+	- Set theme
+		XCURSOR_THEME=theme_name [application]
+	
+	- Append ~/.local/share/icos to XCURSOR_PATH
+		export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+
+
+## Commands
+
+xrdb -merge ~/.Xresources : XRDB is the X Resources Database Command; Update xrdb with the current Xresources
+
+## Customization
+
+## Resources
+
+### Websites
+
+OSTechnix - Install Nerd Fonts : https://ostechnix.com/install-nerd-fonts-to-add-glyphs-in-your-code-on-linux/#:~:text=Install%20Nerd%20Fonts%20On%20Linux,-Installing%20Nerd%20Fonts&text=Download%20your%20preferred%20nerd%20font,the%20Linux%20distribution%20you%20use.
+ArchWiki - Cursor Themes : https://wiki.archlinux.org/title/Cursor_themes
+
+### Icons
+- Fontawesome
+- nerdfonts 
+	```
+	- nerdfonts.com
+	- https://github.com/ryanoasis/nerd-fonts/releases/
+	```
+- material design
+- opendesktop
+	```
+	opendesktop.org
+	```

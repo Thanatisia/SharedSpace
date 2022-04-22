@@ -1,0 +1,99 @@
+# Software Development - Version Naming
+
+Naming convention - How to name your Software release's version name?
+
+## Table of Contents
+* Version Number Naming Conventions
+* FAQ
+* References
+
+## Version Number Naming Conventions
+
+### .NET version numbering
+
+Structure: (Major version).(Minor version).(Revision number).(Build number)
+
+	W.X.Y (Z)
+	^ ^ ^  ^
+	| | |  |
+	| | |  * Build number : Should correspond with a revision in source control
+	| | |
+	| | * Revision Number : Minor Bugs, spelling mistakes etc.
+	| |
+	| * Minor Release : features, major bug fixes etc.
+	| 
+	* Major Release : UX changes, file format changes etc.; The first public release of software is 1.X (pre-release versions are 0.X)
+
+
+### Semantic Versioning
+
+Purpose : Communicate meaning with the version number
+
+Structure: [Major].[Minor].[Patch]-[label/state]
+
+	X.Y.Z-label
+	^ ^ ^
+	| | |
+	| | |
+	| | * Patch
+	| |
+	| * Minor Release Version
+	|
+	* Major Release Version
+
+```
+NOTE:
+
+Major Release Version:
+	- For every final release of the software 
+		- that is the result of a seperate development cycle. 
+	- Each new major version must introduce significant new functionality, 
+		- or significantly change existing functionality or 
+		- the underlying technology platform
+	- (0: Initial development, anything may change at any time, should not be considered stable)
+
+Minor Release Version:
+	- For every official release of the software as per the release plan or any attached Change Requests (CR)
+	- May introduce new functionality or may simply be a later version in a sequence of releases (alpha, beta, etc.)
+	- Can also be incremented by installing a service pack on an existing system
+
+Build/Patch:
+	- Is incremented everytime the software is compiled regardless of whether version is actually released or
+	- The extent of any changes introduced.
+	- Build numbers are always sequential
+
+label/state refers to the current status/phase of the software at the point of its pre-release/public release
+	- Alpha
+	- Beta
+	- Release Candidate (RC)
+	- Leave it empty if it is a pre-release/public-release
+
+Alpha:
+	- releases are typically the 'First Public Release' to test the first build of a software
+	- Before fixing and Q/A Testing
+
+Beta:
+	- releases are releases after the Alpha build where touch ups are made, 
+	- After Q/A Testing
+	- at a stage/state where changes are hardly made to prepare for deployment/release
+
+Release Candidate (RC):
+	- At this stage, the software is complete and ready for user acceptance testing (UAT).
+	- If the system passes the test, the software is repackages as the release version
+```
+
+## FAQ
+
+1. How to know when to release 1.0.0 (Official Public Release)
+
+	- If your software is being used in production
+	- If you have a stable API on which users have come to depend
+	- If you're worrying alot about backwards compatibility
+
+
+## References
+
+- How do you know what version number to use : https://stackoverflow.com/questions/396429/how-do-you-know-what-version-number-to-use
+- Software Versions are Broken : https://medium.com/javascript-scene/software-versions-are-broken-3d2dc0da0783
+- Semantic Versioning : http://semver.org/
+- Software Naming and Versioning Guide : https://dif.ens.dk/Pages/PopUps/ReleaseNotes.aspx

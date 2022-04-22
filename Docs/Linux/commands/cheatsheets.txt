@@ -61,6 +61,11 @@ Commands:
 			sed -i 's/old-text/new-text/g' filename
 	tar : Compression Utility like zip
 
+	# Command Line Utilities
+	getopts : Parses command line options and arguments
+	notify-send : Prograa to send desktop notifications
+	xargs : UNIX shell command to convert input from standard input into arguments via pipe
+
 Topics:
 	- Backup and Recovery
 		# Backup Dotfiles with tar	

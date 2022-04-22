@@ -1,0 +1,15 @@
+# Picom Forks
+
+List of all picom forks
+
+## Table of Contents
+- List
+
+## List
+
+```
+author, url, descriptions_features
+```
+yshui, https://github.com/yshui/picom, The picom main fork; aka "picom-git" in the AUR
+ibhagwan, https://github.com/ibhagwan/picom, TBC
+jonaburg, https://github.com/jonaburg/picom, Combination of Ibhagwhan's fork

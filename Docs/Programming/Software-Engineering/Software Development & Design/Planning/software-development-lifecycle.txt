@@ -1,0 +1,52 @@
+# Software Development Cycle
+
+## Table of Contents
+* Lifecycle Components
+* Steps
+
+## Lifecycle Components
+- Planning
+- Analysis
+- Design
+- Implementation
+- Testing
+- Deployment
+- Maintenance
+
+## Steps
+- Planning
+	- Features
+	- Background Information
+	- Program end-goal and requirements
+	- Manpower
+	- Funding (For big-scale projects)
+- Analysis
+	- Requirements
+	- Do-ability
+- Design
+	- Unified Modelling Language (UML)
+	- Use Case Design
+		- Use Case Description
+		- Use Case Diagram
+		- Use Case Model
+	- Sequence Diagram
+	- Activity Diagram
+	- Class Diagram
+	- Database Design
+		- Database Description
+		- Database Diagram
+	- UI/UX Design
+		- GUI Widgets/features design
+		- GUI Diagram
+- Implementation
+	- Prototyping
+	- Building
+- Testing
+	- Unit Testing
+- Deployment
+	- Alpha Build Test Release (Pre-release)
+	- Beta Build Test Release (Pre-release)
+	- Software Public Release
+- Maintenance
+	- Patching
+	- Bug Fixing

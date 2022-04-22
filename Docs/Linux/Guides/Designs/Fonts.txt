@@ -1,0 +1,211 @@
+# Linux Docs - Fonts
+
+Linux Docs and Guides on Font Management
+
+## Table of Contents
+* Information
+* Font Locations
+* Flow
+* Usage
+* Commands
+* Customization
+* Font Resources
+
+## Information
+
+### Font Types
+
+- Bitmap
+- Latin script
+	- Monospaced
+	- Sans-serif
+	- Serif
+- Non-Latin Scripts
+
+## Font Locations
+
+### System-Wide Font Locations
+
+Notes:
+- [/usr/local/share/fonts] may need to be created first
+- [/usr/share/fonts/] Should only be modified by a package manager
+
+	```
+	/
+	|
+	|-- usr/
+	    |
+	    |-- share/
+	        |
+	        |-- fonts/
+		    |
+		    |
+		    |-- otf/
+			|
+			|-- your-fonts-here
+		    |-- ttf/
+			|
+			|-- your-fonts-here
+	    |-- local/
+	        |
+	        |-- share/
+		    |
+		    |-- fonts/
+		     	|
+			|-- otf/
+			    |
+			    |-- your-fonts-here
+			|-- ttf/
+			    |
+			    |-- your-fonts-here
+	```
+
+	
+
+### User Font Locations
+
+	```
+	~/
+	|
+	|-- .local/
+	    |
+	    |-- share/
+		|
+		|-- fonts/
+		    |
+		    |-- otf/
+			|
+			|-- your-fonts-here
+		    |-- ttf/
+			|
+			|-- your-fonts-here
+	```
+
+## Flow
+
+- Download latest font zip from GitHub
+
+	```
+	wget https://github.com/author/repo/releases/latest/download/font-name.zip
+
+	unzip font-name.zip
+
+	cp font-name/*.otf ~/.local/share/fonts
+	```
+
+	- Nerd-fonts
+
+		```
+		wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/font-name.zip
+	
+		unzip font-name.zip
+	
+		cp font-name/font*.otf ~/.local/share/fonts
+		```
+
+## Usage
+
+- Change Font
+
+	```
+	To change fonts, you need to do it from within the config of the application
+	- it is not possible to change the fonts from the SHELL (Bash/zsh/fish etc)
+	```
+
+## Commands
+
+fc-cache : Update the fontconfig cache
+fc-list : List all fonts detected by the system
+fc-match : Test for a default font being set
+
+## Customization
+
+### Font Colors
+
+- Shell Font colors are specified using ANSI Escape Sequence
+
+Styles:
+	0 | Reset/Normal
+	1 | Bold
+	2 | Darker Color
+	3 | Italic
+	4 | Underline
+	5 | Blinking (Slow)
+	6 | Blinking (Fast)
+	7 | Reverse
+	8 | Hide
+	9 | Cross-out
+
+Color Definitions:
+
+			----------------------
+			| Normal  | Bright   |
+	--------------------------------------
+	|		| FG | BG | FG | BG  |
+	|-------------------------------------
+	| Black		| 30 | 40 | 90 | 100 |
+	|------------------------------------|
+	| Red		| 31 | 41 | 91 | 101 |
+	| Green		| 32 | 42 | 92 | 102 |
+	| Yellow	| 33 | 43 | 93 | 103 |
+	| Blue		| 34 | 44 | 94 | 104 |
+	| Magenta	| 35 | 45 | 95 | 105 |
+	| Cyan		| 36 | 46 | 96 | 106 |
+	| White		| 37 | 47 | 97 | 107 |
+	|------------------------------------|
+
+Syntax: \033[X;Ym
+	 |  |||||
+	 |  |||||-- SGR Code (Static - just the letter 'm')		
+	 |  ||||-- Parameter (Optional) 
+	 |  |||-- Seperator		
+	 |  ||-- Parameter (Optional)	
+	 |  |
+	 |  |-- Defining a sequence (Many characters in a code)
+	 |   
+	 |-- Escape Character (ESC)
+
+
+Parameters
+	X;Y; ... : Foreground/Background settings according to ANSI code (Leave empty for default)
+
+Usage:
+	- Examples
+		-----------------------------------------------------------
+		| Code         | Description                              |
+		-----------------------------------------------------------
+		| \033[30;47m  | Black letters on White background        |
+		| \033[31m     | Red letter                               |
+		| \033[1;2;94m | Bold, Italic font with Bright Blue color |
+		| \033[0m      | Reset Everything                         |
+		-----------------------------------------------------------
+
+## Font Resources
+
+### Websites
+
+ArchWiki - Fonts : https://wiki.archlinux.org/title/fonts
+ArchWiki - Font Configuration : https://wiki.archlinux.org/title/font_configuration
+OSTechnix - Install Nerd Fonts : https://ostechnix.com/install-nerd-fonts-to-add-glyphs-in-your-code-on-linux/#:~:text=Install%20Nerd%20Fonts%20On%20Linux,-Installing%20Nerd%20Fonts&text=Download%20your%20preferred%20nerd%20font,the%20Linux%20distribution%20you%20use.
+
+### Videos
+
+Brodie Robertson | Don't Settle For 256 Colors Get Yourself a True Color Terminal - https://www.youtube.com/watch?v=RKPsd4tD9dQ
+
+### Fonts
+- Fontawesome
+- nerdfonts 
+	```
+	- nerdfonts.com
+	- https://github.com/ryanoasis/nerd-fonts/releases/
+	```
+- material design
+- fontlibrary
+	```
+	https://fontlibrary.org/en
+	```
+- fontsquirrel
+	```
+	- fontsquirrel.com
+	- fontsquirrel.com/fonts/list/popular
+	```
