@@ -1,0 +1,37 @@
+# Docs - Linux Package Managers - Tips n Tricks
+
+Checking for a specific package manager
+
+## Table of Contents
+- Synopsis/Syntax
+- Explanation
+
+### Synopsis/Syntax
+
+type -P "your-package-manager" &> /dev/null : Check for the package manager's bin path and redirect it to NULL so there is no standard output
+
+### Parameters
+
+-P : Find and get the path of the function (in this case, your package manager)
+
+### Explanation
+
+type -P "your-package-manager" : Check and returns the path of your package manager
+&> /dev/null : Redirects the standard output to NULL (so there is no standard output)
+
+## Usage
+
+- Check if package manager is installed
+	```console
+	type -P "your-package-manager" &> /dev/null
+	
+	ret_code="$?"
+
+	if [[ "$?" == "0" ]]; then
+		# 0 = Success
+		# >= 1 = Failure
+		// Statement if success
+	else
+		// Statement if does not exit
+	fi
+	```

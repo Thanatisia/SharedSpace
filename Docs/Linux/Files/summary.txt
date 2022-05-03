@@ -12,16 +12,22 @@ Application Launcher | rofi | Official Repository
 Audio Utilities | alsa-utils | Official Repository
 Audio Utilities | pulseaudio | Official Repository
 Bluetooth Manager | bluez | Official Repository
+Clients | acpi | Official Repository | Client for ACPI modules (battery, power and thermal) readings
+Clients | dhcpcd | Official Repository | Currently the most feature-rich open source DHCP and DHCPv6 client
+Clients | ncmpcpp | Official Repository | Client for mpd
 Clipboard Manager | clipman | Official Repository
+Collection | sysstat | Official Repository | Collection of Performance Monitoring tools (mpstat etc.)
+Colorscheme Utilities | [python-pywal](https://github.com/dylanaraps/pywal) | Official Repository, Community; https://github.com/dylanaraps/pywal
 Compositors | picom | Official Repository
 Compression Utilities | zip | Official Repository
-Colorscheme Utilities | [python-pywal](https://github.com/dylanaraps/pywal) | Official Repository, Community; https://github.com/dylanaraps/pywal
 Cronjob | anacron | Official Repository
 Cronjob | cronie | Official Repository
+Dialog Box | yad | Official Repository, Community; https://github.com/v1cont/yad | A GTK Dialog/Text Info Box
 Display Server | xorg | Official Repository
 Display Server | xorg-xinit | Official Repository
 Document Maker | pandoc | Official Repository
 Downloader | wget | Official Repository
+Encoders | gifski | Community; gif.ski | GIF Encoder with functionality to convert mp4 to gif; Use with ffmpeg for optimization
 File Manager | lf | Official Repository | Terminal
 File Manager | nnn | Official Repository | Terminal
 File Manager | pcmanfm | Official Repository | Graphical
@@ -31,10 +37,12 @@ Filesystem Utilities | cifs-utils | Official Repository | CIFS filesystem user-s
 Filesystem Utilities | ntfs-3g | Official Repository | For NTFS Filesystem Support
 Filesystem Utilities | samba | Official Repository | Samba Filesystem support
 Fonts | ttf-font-awesome | Official Repository | FontAwesome Fonts
+Hotkey Daemon | sxhkd | Official Repository | Simple X Hotkey Daemon; Generic (non-distro specific) Hotkey Daemon
 Image Utility | imagemagick | Official Repository
 Image Viewer | feh | Official Repository
 Media Player | mpv | Official Repository
 Media Utility | ffmpeg | Official Repository
+Music Daemon | mpd | Official Repository | Music Player Daemon
 Network | inetutils | Official Repository
 Network | networkmanager | Official Repository
 Notification Daemon | dunst | Official Repository
@@ -79,11 +87,13 @@ Window Manager | Berry | Community; https://github.com/jlervin/berry, https://be
 Window Manager | bspwm | Official Repository | Tiling
 Window Manager | [dwm](https://dwm.suckless.org/) | Community; https://dwm.suckless.org/ | Dynamic
 Window Manager | herbstluftwm | Official Repository | Tiling
+Window Manager | Hypr | Community; https://github.com/vaxerski/Hypr, AUR; https://aur.archlinux.org/packages/hypr | Tiling
 Window Manager | i3wm | Official Repository | Tiling
 Window Manager | openbox | Official Repository | Floating
 Window Manager | qtile | Official Repository | Dynamic
-X Utilities | xautolocker | Official Repository
+X Utilities | xautolocker | Official Repository | X Autolocker for automatic background Screenlocking after a certain period of time
+X Utilities | xidlehook | Community; https://github.com/jD91mZM2/xidlehook, AUR; https://aur.archlinux.org/packages/xidlehook | A replacement for xautolock
+X Utilities | xclip | Official Repository | Command Line Interface to the X11 Clipboard
 X Utilities | [xdo](https://github.com/baskerville/xdo) | Official Repository, Community; https://github.com/baskerville/xdo | Small X Utility to perform elementary actions on windows
 X Utilities | [xdotools](https://github.com/jordansissel/xdotool) | Official Repository, Community; https://github.com/jordansissel/xdotool | Command-line X11 Automation Tool
-
-
+Uncategorised | entr : Official Repository | Run arbitrary commands when files are changed; Run piped command when file is modified

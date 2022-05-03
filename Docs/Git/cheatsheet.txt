@@ -35,6 +35,12 @@ git {option} {arguments}
 - switch {option} : Switch branch
 	> Option
 		* -m <branch-name>: Switch to a branch
+- tag : Add a detail (such as Version Number) to the repository
+	- Params:
+		\-a : Version Name
+		\-m : Version Message
+	- Usage:
+		git tag -a "v1.5.0-beta" -m "version 1.5.0 -beta"
 
 ## Usage
 

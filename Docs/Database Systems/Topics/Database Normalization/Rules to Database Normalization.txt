@@ -1,0 +1,34 @@
+# Database Normalisation
+
+
+Rules to Normalise:
+	1. Not Normalized Table
+		- If your table contains Multi-values (0..* | 1..*)
+		- Split your table into n tables depending on requirements
+			- 1x Your Main table WITHOUT the Multivalues
+			- (n)x Tables to hold your multivalue values
+				- Include the PRIMARY KEY to the Main table/your REFERENCE table
+					- This will become the FOREIGN Key
+		- This will now be normalized and shouldnt contain any Multivalue values in each table			
+
+	2. 1NF
+		- Your Table must be atomic (only has 1 element); No Multi-value tables (0..* | 1..*  etc)
+		- Your Table must be a Full Functional Dependency
+
+	3. 2NF
+		- Your Table must be 1NF AND 
+		- Your Table should not contain any Partial Functional Dependencies
+
+	4. 3NF
+		- Your Table must be 2NF AND
+		- Your Table should not contain any Transitive Functional Dependencies
+
+	5. BCNF
+		- Your Table must be 3NF AND
+		- Your Table should not contain any Non-Trivial Functional Dependencies
+
+	6. 4NF
+		- Your Table must be BCNF AND
+		- Your Table should not contain multiple multi-value values
+
+	7. 5NF

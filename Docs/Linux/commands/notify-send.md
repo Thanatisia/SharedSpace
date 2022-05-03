@@ -84,11 +84,16 @@ notify-send [[OPTIONS] <arguments>] [[title/summary] [body]]
 
 ## Remarks
 
+- Use '--' to indicate nothing for the title of the notification
+	```console
+	notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"
+	```
+
 ### Design Documents
 
 
 
 ### References
 
-- Notify-Send manual : https://man.archlinux.org/man/extra/libnotify/notify-send.1.en
-
++ [Notify-Send manual](https://man.archlinux.org/man/extra/libnotify/notify-send.1.en)
++ [Automatic Screen Lock and Suspend for Window Managers - Linux Tutorial](https://www.youtube.com/watch?v=_wcrytoLufA)

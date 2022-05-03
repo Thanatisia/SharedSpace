@@ -1,0 +1,10 @@
+# Docs - Useful Software
+
+List of general useful software/tools
+
+## Table of Contents
+- Video Editing
+
+## Video Editing 
++ kdenlive
+

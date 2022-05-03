@@ -1,0 +1,7 @@
+# Linux Guides - NAS : OpenMediaVault
+
+Some Frequently Encountered Issues
+
+- After installation, OpenMediaVault may override your default ssh configs, and your user may receive the following Error Messages
+	- "Permission Denied, Please try again later" even though password is correct
+		+ Solution: Add your user to the group 'ssh'

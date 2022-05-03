@@ -5,7 +5,7 @@
 	- Files
 
 ## Folders
-- [Guides - Setup](Setup)
+- [Guides - Setup](Setup) : This folder contains guides for steps you would use for Base Installation
 
 ## Files
 

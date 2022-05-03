@@ -78,6 +78,17 @@ All Parameters:
 					Default: 0%
 				end_size: The size to stop writing the partition, Write until [end_size]
 					Default: 100%
+
+		mkfs : Make Filesystem
+			Syntax: mkfs.{file-system} [{Options} [arguments]] [partition_label]
+			Filesystems:
+				ext4
+				vfat : For if you want to enter the drive with Windows (similar to exFAT)
+				fat
+					Options:
+						-f[FAT version]
+							* 16 : FAT16
+							* 32 : FAT32
 				
 		set : Select a partition number to set/change settings
 			Syntax: set [partition_number] {settings}
@@ -116,6 +127,19 @@ All Parameters:
 		```
 		sudo parted /dev/sdX mkpart primary ext4 0% 1024MiB
 		sudo parted /dev/sdX mkpart primary ext4 1024MiB 100%
+
+	# Format Created Partitions
+		```
+		Syntax: 
+			sudo mkfs.{partition_type} {others} {device_name}{partition_number}
+		Options:
+			If partition type is
+				fat16 : -f 16
+				fat32 : -f 32
+		```
+		sudo mkfs.ext4 /dev/sdX1
+		sudo mkfs.ext4 /dev/sdX2
+		sudo mkfs.ext4 /dev/sdX3
 
 	# To set a setting to a partition
 		```

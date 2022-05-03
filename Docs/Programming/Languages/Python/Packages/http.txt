@@ -1,0 +1,39 @@
+# Docs - Python Module : http
+
+## Table of Contents
+- Information
+- Submodules
+- Resources
+
+## Information
+
+A python class/scipt utility that contains functionality for HTTP REST API implementation
+
+## Setup
+
+### Pre-Requisites
+
+- python
+- pip
+
+### Obtaining
+
+python -m pip install http
+
+## Documentation
+
+### Synopsis/Syntax
+
+http.server {arguments} [port]
+
+### Parameters/Arguments
+
+--directory | -d [DIRECTORY_PATH] : Serve a specific directory path
+
+### Usage
+
+## Submodules
+
+- server.py : Start up a pre-implemented HTTP File/Web Server to serve a file directory
+
+## Resources

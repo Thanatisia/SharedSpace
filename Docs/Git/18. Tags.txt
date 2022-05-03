@@ -1,0 +1,33 @@
+# Git Docs : Using Tags
+
+Tags are used in git to add details such as Version Numbers to a reposiotry
+
+## Table of Contents
+- [Documentation](#documentation)
+- [Usage](#usage)
+
+## Documentation
+
+### Synopsis/Syntax
+
+git tag [{options} <arguments>]
+
+### Parameters
+
+-a "version-number" : Add/"Tag" a version number to the repository
+-m "version-message" : Add/"Tag" a version message/full name to the repository
+
+### Usage
+
+- Adding Version Number
+	```bash
+	git tag -a "v1.5.0-beta" -m "version v1.5.0-beta"
+	```
+
+- Validate version number
+	
+	- git show [version_number]
+
+	```bash
+	git show v1.5.0-beta	
+	```

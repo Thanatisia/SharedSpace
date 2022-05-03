@@ -1,0 +1,6 @@
+# Linux - Guides - Retrieving Distribution Name
+
+Some Methods of retrieving distribution name
+
+## Table of Contents
+

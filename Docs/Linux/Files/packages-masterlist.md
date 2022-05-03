@@ -16,6 +16,7 @@
 * [Terminal Emulator](#terminal-emulator)
 * [Text Editors](#text-editors)
 * [Media](#media)
+* [Music Daemon](#music-daemon)
 * [Network](#network)
 * [Notification Daemon](#notification-daemon)
 * [Wallpaper Setter](#wallpaper-setter)
@@ -25,20 +26,24 @@
 * [Others](#others)
 	- [Bluetooth Manager](#bluetooth-manager)
 	- [Clipboard Manager](#clipboard-manager)
+	- [Collection](#collection)
 	- [Colorscheme Utilities](#colorscheme-utilities)
 	- [Compression Utilities](#compression-utilities)
 	- [Cronjob](#cronjob)
 	- [Document Utilities](#document-utilities)
 	- [Downloader](#downloader)
+	- [Encoders](#encoders)
 	- [Filesystem](#filesystem)
 	- [File Utilities](#file-utilities)
 	- [Fonts](#fonts)
 	- [Font Icons](#font-icons)
+	- [Hotkey Daemon](#hotkey-daemon)
 	- [Prompt](#prompt)
 	- [Screenshot](#screenshot)
 	- [Shell](#shell)
 	- [Version Control](#version-control)
 	- [Wallpaper Packs](#wallpaper-packs)
++ [Uncategorised](#uncategorised)
 
 ## All Packages
 
@@ -98,6 +103,9 @@
 	> Media Player
 		* mpv : Official Repository
 
+### Music Daemon
+	- mpd : Official Repository
+
 ### Network
 	* inetutils : Official Repository
 	* networkmanager : Official Repository
@@ -134,17 +142,27 @@
 		* bspwm : Official Repository
 		* herbstluftwm : Official Repository
 		* i3 : Offfcial Repository
+		* [Hypr](https://github.com/vaxerski/Hypr) : Community; https://github.com/vaxerski/Hypr, AUR; https://aur.archlinux.org/packages/hypr
 
 ### X Utilities
 	* xautolocker : Official Repository
+	+ [xidlehook](https://github.com/jD91mZM2/xidlehook) : Community; https://github.com/jD91mZM2/xidlehook, AUR; https://aur.archlinux.org/packages/xidlehook
+	* xclip : Official Repository
 	* [xdo](https://github.com/baskerville/xdo) : Official Repository, Community; https://github.com/baskerville/xdo
 	* [xdotools](https://github.com/jordansissel/xdotool) : Official Repository, Community; https://github.com/jordansissel/xdotool
 
 ### Others
 	> Bluetooth Manager
 		* bluez : Official Repository
+	- Clients
+		- acpi : Official Repository
+		- dhcpcd : Official Repository
+		- ncmpcpp : Official Repository
 	> Clipboard Manager
 		* clipman : Official Repository
+	> Collection
+		- Performace Monitoring
+			+ sysstat : Official Repository
 	> Colorscheme Utilities
 		* [python-pywal](https://github.com/dylanaraps/pywal) : Official Repository, Community; https://github.com/dylanaraps/pywal
 	> Compression Utilities
@@ -152,6 +170,8 @@
 	> Cronjob
 		* anacron : Official Repository
 		* cronie : Official Repository
+	- Dialog Box
+		+ yad : Official Repository, Community; https://github.com/v1cont/yad
 	> Document Utilities
 		* pandoc : Official Repository
 		> zathura : Official Repository
@@ -161,6 +181,9 @@
 			* zathura-cb : Official Repository
 	> Downloader
 		* wget : Official Repository
+	- Encoders
+		- GIF
+			+ [gifski](gif.ski) : Community; gif.ski
 	> Filesystem
 		* ntfs-3g : Official Repository
 		* cifs-utils : Official Repository
@@ -170,6 +193,8 @@
 	> Fonts
 		* ttf-font-awesome : Official Repository
 	> Font Icons
+	- Hotkey Daemon
+		- sxhkd : Official Repository
 	> Prompt
 		> Zsh
 			* [Spaceship](https://github.com/spaceship-prompt/spaceship-prompt) : https://github.com/spaceship-prompt/spaceship-prompt
@@ -187,3 +212,9 @@
 		* elementary-wallpapers : Official Repository
 		* plasma-workspace-wallpapers : Official Repository
 		* archlinux-wallpaper : Official Repository
+
+### Uncategorised
+```
+Place all uncategorised packages here, to be refiltered at a later date
+```
++ entr : Official Repository

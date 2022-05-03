@@ -1,0 +1,65 @@
+# Docs - Java External Libraries - JUnit
+
+Documentations, Guides, Tips n Tricks and Basics of Java External Library [JUnit]   
+
+## Table of Contents
+- Classes
+- JUnit Assert
+- Syntax
+
+- Classes
+        - TestFixture : abstract class
+            - Override Functions
+                - setup (using the annotation @Before)
+                    - Operations that would be invoked prior to each individual test
+                    - Examples:
+                        - Create new clean instances of class ready for next test
+                - teardown (using the annotation @After)
+                    - Operations that would be invoked after each individual test
+                    - Examples:
+                        - Deletes instances
+        - TestSuite
+            - Groups a number of tests (Using TestFixture) so that they can all be run
+        - TestRunner
+            - Driver program 
+            - run the TestSuite
+
+Junit Assert:
+        Provides a set of assertion methods useful for writing tests
+        Functions:
+            void assertEquals(boolean expected, boolean actual) : Checks that two primitives/objects are equal.
+            void assertTrue(boolean condition) : Checks that a condition is true.
+            void assertFalse(boolean condition) : Checks that a condition is false.
+            void assertNotNull(Object object) : Checks that an object isn't null.
+            void assertNull(Object object) : Checks that an object is null.
+            void assertSame(object1, object2) : The assertSame() method tests if two object references point to the same object.
+            void assertNotSame(object1, object2) : The assertNotSame() method tests if two object references do not point to the same object.
+            void assertArrayEquals(expectedArray, resultArray); : The assertArrayEquals() method will test whether two arrays are equal to each other    
+        Reference: http://junit.sourceforge.net/javadoc/org/junit/Assert.html
+
+Syntax:
+        To Setup Before executing:
+            @Before
+            public void before_func() 
+            {
+
+            }
+
+        To Setup After Execution:
+            @After
+            public void after_func()
+            {
+            
+            }
+
+        To add to TestSuite:
+	    ```
+	    You can add as many as you want
+	    - Add this for every test case you want to perform
+	    ```
+            @Test
+            public void testfunc()
+            {
+                assertEquals("name-of-assert", result, function_to_test());
+            }
+

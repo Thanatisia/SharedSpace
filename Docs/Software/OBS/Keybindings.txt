@@ -1,0 +1,8 @@
+# Docs - OBS : Keybindings
+
+OBS Shortcut and Keybindings
+
+## Window Capture
+
+Shift + Drag : To Expand/Shrink the current screen
+Alt + Drag : To crop out starting from the corner

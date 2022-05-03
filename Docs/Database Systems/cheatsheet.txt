@@ -1,5 +1,13 @@
 Cheatsheet : Database Management Systems (DBMS)
 
+## Table of Contents
+- Constraints
+- Database Schema Design Table
+- Data Types
+- Normal Forms
+- Queries
+- Unified Modelling Language (UML):
+
 Data Types:
     BOOL : Binary/Boolean - True|False
     REAL : Floating Point Numbers - x.y
@@ -47,9 +55,21 @@ Queries:
         # Modify
 
     JOIN:
+	- To combine multiple tables together to form 1 table
+	# Syntax
+	INNER JOIN [main-table] ON [attributes_current=attribute_new]
 
     DELETE:
-        Drop:
+        - Drop
+	Table: DROP TABLE;
+
+    ORDER: 
+	# Syntax
+	ORDER BY [columns]
+
+    GROUP:
+	# Syntax
+	GROUP BY [group-name]
 
 Unified Modelling Language (UML):
     Symbols:
@@ -73,4 +93,46 @@ Database Schema Design Table:
     | ROW_ID, column_name, column_datatype, constraints |
     =====================================================
 
+
+Normal Forms:
+    1NF : IFF All its attributes are Atomic (Single Value Attributes; No Multi-value Attributes)
+    2NF : IFF it is already in 1NF and all its Non-Key Attributes are FULLY functionally dependent on their Minimal Super Key
+        ```
+        Tldr;
+        
+        A 2NF table CANNOT contain Partial Functional Dependency
+        ```
+    3NF : IFF it is already in 2NF and all its Non-Key Attributes are mutually independent.
+        ```
+        Tldr;
+
+        A 3NF table CANNOT contain Transitive Functional Dependency
+        ```
+    BCNF : IFF all its determinants are Minimal Super Key (Candidate Keys)..
+        ```
+        Tldr;
+
+        A BCNF table CANNOT contain Non-Trivial Functional Dependency where 
+            - the determinant (Left Hand Side) is NOT a Candidate Key
+        
+        - Requirements:
+            - Identify all Functional Dependency
+            - Identify 1NF requirement is met
+            - Identify 2NF requirement is met
+            - Identify 3NF requirement is met
+        ```
+    4NF : A relational table is in 4NF IF and only IF the table is already in BCNF, and
+        there is NO multiple multi-value Attriutes
+        ```
+        - Existence (evidence) of Multiple multi-value attributes is an indication of violation of 4NF
+        ```
+
+    5NF : A relational table is in 5NF IF and only IF the table is already in 4NF, and
+        there is NO losy joint violation.
+        In other words, a 5NF must contain only lossless join
+        - Lossless Join:
+            - 1 table can split it into multiple tables
+            - After splitting, you can join the multiple split tables back into 1
+            - If after splitting and you cannot join the table back into 1,
+                this is a LOSSY join
 

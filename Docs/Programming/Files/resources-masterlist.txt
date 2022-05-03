@@ -1,0 +1,28 @@
+# List of Programming Resources
+
+Table of Contents
+	- Blogs
+	- Online IDE
+	- Web Hosting Services
+	- Version Control Remote Repositories
+
+Blogs:
+	- medium.com
+	- dev.to
+	- hashnode.dev
+
+Online IDE:
+	- repl.it 
+
+Web Hosting Services
+	- netlify
+	- GitHub Pages
+	- heroku
+
+Version Control Remote Repositories
+	- GitHub
+	- GitLab
+
+SCRUM/AGILE:
+	- taiga.io
+

@@ -64,7 +64,19 @@ Commands:
 	# Command Line Utilities
 	getopts : Parses command line options and arguments
 	notify-send : Prograa to send desktop notifications
+	shift : To move current/specified index back and forth
 	xargs : UNIX shell command to convert input from standard input into arguments via pipe
+
+	# Scripting Utilities
+	basename : Get the file/directory name at the end of a given path
+		# Syntax
+			basename {option] [path] [optionals: [extension-to-remove]]
+	dirname : Get the path leading up to a given file/directory path
+		# Syntax
+			dirname {option} [path]
+	shuf : Get a result at random from a list
+		# Syntax
+			stdout | shuf {parameter}
 
 Topics:
 	- Backup and Recovery
