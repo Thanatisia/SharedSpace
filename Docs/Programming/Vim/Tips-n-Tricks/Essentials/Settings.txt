@@ -1,0 +1,39 @@
+# Essential Vim Settings (In my opinion) - no plugins
+
+Some useful and even essential vim settings any vim user should have, no plugins
+
+## Table of Contents
+- [Settings](#settings-and-enable)
+
+## Settings and Enable
+
+Enable Autoindent in new line			: set autoindent
+Enable Smart indent in new line based off language : set smartindent
+Enable Cursor Column 				: set cursorcolumn
+Enable Cursor Line/Row 				: set cursorline
+Enable Highlight Search Pattern			: set hlsearch
+Enable Ignore case search sensitivity		: set ignorecase
+Enable Line Numbers 				: set number
+Enable Mouse Support 				: set mouse=a
+Enable Relative Line Numbers 			: set relativenumber
+Enable Smart Case search sensitivity		: set smartcase
+Enable Syntax Highlighting 			: syntax on
+Set amount of whitespace to be added		: set softtabstop=4
+Set amount of whitespace to addd in normal mode : set shiftwidth=4
+Set width of tab character			: set tabwidth=4
+Set text wrap width (default to 0 to have unlimited line length) : set textwidth=0
+Set use space instead of tabs			: set expandtab
+Show the matching part of pairs [] {} and () 	: set showmatch
+
+## Conditionals
+
+" Enable Color Themes
+if !has('gui_running')
+	set t_Co=256	: Set Terminal Colour if is not gui
+endif
+set termguicolors 	: Set Terminal GUI colors
+colorscheme [colorscheme] : Set colorscheme
+
+## Highlighting
+Set Cursor Line Highlighting to bold and black :highlight Cursorline cterm=bold ctermbg=black
+Set Cursor Column Highlighting :highlight CursorColumn cterm=bold ctermbg=black

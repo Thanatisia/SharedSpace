@@ -1,0 +1,68 @@
+# Tmux - Basics
+
+Documentation, Basics, Tips and Tricks of using Tmux 
+
+## Table of Contents
+- [Information](#information)
+- [Files](#files)
+- [Documentation](#documentation)
+- [Customization and Configuration](#customization-and-configuration)
+
+## Information
+
+A Terminal Multiplexer that allows you to have multiple shells opened in a single terminal.
+Allows for multi-terminal conveniences such as Preconfigured environments
+
+## Files
+
+### Configs
+
+```
+~/
+|
+|-- .tmux.conf : Tmux configuration file
+```
+
+## Documentation
+
+### Synopsis/Syntax
+
+tmux [action] [{options} [arguments]...]
+
+### Actions
+
++ configure tmux : To open up tmux config
+
++ new-session [{options} [arguments]...] : To create a new tmux session	
+	- Options:
+		+ -s [new-session-name] : Start new session with name [new-session-name]
+
++ ls : List all sessions
+
++ attach-session [session-name] : Attach an existing session
+
++ detach : Detach session
+
+### Parameters
+
+
+### Usage
+
+
+## Customization and Configuration
+
+### Useful Binds
+
++ Unbind default prefix and set it to another
+	```console
+	unbind C-b		# Unbind Ctrl + B from use
+	set -g prefix C-a	# Set global prefix to Ctrl + A
+	bind C-a send-prefix	# Bind prefix to Ctrl + A
+	```
+
+
+
+### Keybindings (Default)
+
++ Ctrl + B : Switch sessions
+

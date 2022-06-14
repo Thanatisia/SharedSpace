@@ -1,0 +1,71 @@
+# Pacman Setup Guide
+
+Steps to setup pacman in other linux distros or in a Linux From Scratch (LFS) install
+
+## Table of Contents
+- [Information](#information)
+- [Setup](#setup)
+- [Post-Installation](#post-installation)
+- [References](#references)
+
+## Information
+
+Fixes and Issues with ArchLinux Distro-specified Issues such as
+- pacman
+	+ keyring
+
+## Setup
+
+- Initialize Keyring
+	- The randomness created is used to initialize the keyring (/etc/pacman.d/gnupg) and the GPG signing key of your system
+	- NOTE:
+		- This process requires entropy
+		- To generate entropy : Move your mouse around, press random characters on the keyboard or run some disk-based activity.
+		- Initialization may take longer if the system does not have enough sufficient entropy
+	```
+	pacman-key --init
+	```
+
+- Verify master keys
+	```
+	pacman-key --populate archlinux
+	```
+
+## Post-Installation
+
+- Adding Developer Keys
+	```
+	- The [archlinux-keyring] package is a dependency of pacman
+		- Contains the latest keys
+	```
+
+- Adding Unofficial Keys
+	```
+	Get the Key ID (keyid) from its owner
+	```
+	- If the key is found on a key server
+		- Import into Keyring
+			```
+			pacman-key --recv-keys [keyid]
+			```
+	- If a link to a keyfile is provided
+		- Download keyfile
+		- Import into keyring
+			```
+			pacman-key --add /path/to/downloaded/keyfile
+			```
+
+- Verify fingerprints
+	```
+	pacman-key --finger [keyid]
+	```
+
+- Locally sign the imported key
+	```
+	pacman-key --lsign-key [keyid]
+	```
+
+## References
+
+- [Invalid or corrupted package (PP Signature)](https://bbs.archlinux.org/viewtopic.php?id=275924)
+- [ArchWiki - Package Signining : Upgrade System Regularly](https://wiki.archlinux.org/title/Pacman/Package_signing#Upgrade_system_regularly)

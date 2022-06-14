@@ -1,0 +1,76 @@
+# PL/SQL Guide - Stored PL/SQL
+
+Database Systems - Guide, Tips n Tricks and Introduction to PLSQL : The Oracle SQL + Programming Language 
+
+## Table of Contents
+- Information
+- Operators
+- Keywords
+- Structure
+- Syntax
+- Settings
+- Classes
+- Database Queries
+
+## Information
+- Stored PL/SQL : PL/SQL Procedures and PL/SQL Functions pre-compiled and stored in a data dictionary, 
+    - ready to be processed
+    - Usable as a Library
+
+- Stored Procedures and Functions 
+    - can be referenced or called any number of times by multiple applications processing the relational tables
+    - can accept parameters when processed (called)
+    - Stored Procedures
+        - Can be processed (called) with EXECUTE statement
+            Synopsis/Syntax
+                ```sql
+                EXECUTE procedure_func_name(parameters);
+                ```
+
+## Documentation
+
+### Synopsis/Syntax
+
+- Create or Replace Procedure statement
+    - Used to compile the procedure instead of leaving it as a script
+    ```sql
+    CREATE OR REPLACE PROCEDURE [procedure_name] IS
+        --- Column Definitions
+        
+    BEGIN
+        --- Statements
+    END;
+    /
+    ```
+
+- Process (Call) Procedure
+    - Use 'EXECUTE'
+    ```sql
+    EXECUTE Procedure_Name(Parameters...);
+    ```
+
+### Parameters
+
+### Usage
+
+### Examples
+
+- Create or Replace Procedure statement
+    ```sql
+    BEGIN
+        INSERT INTO COURSE VALUES(
+            cnumber, UPPER(ctitle), ccredits, UPPER(coffer)
+        );
+
+        COMMIT;
+    END INSERT_COURSE;
+    ```
+
+- store as PL/SQL Library
+    - Use '@/path/to/sql/file' to compile the library
+    ```sql
+    --- Compile Library
+    @/path/to/sql/file
+    ```
+
+

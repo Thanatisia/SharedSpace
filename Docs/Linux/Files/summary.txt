@@ -89,6 +89,7 @@ Window Manager | [dwm](https://dwm.suckless.org/) | Community; https://dwm.suckl
 Window Manager | herbstluftwm | Official Repository | Tiling
 Window Manager | Hypr | Community; https://github.com/vaxerski/Hypr, AUR; https://aur.archlinux.org/packages/hypr | Tiling
 Window Manager | i3wm | Official Repository | Tiling
+Window Manager | leftWM |  Community; https://github.com/leftwm/leftwm | Tiling
 Window Manager | openbox | Official Repository | Floating
 Window Manager | qtile | Official Repository | Dynamic
 X Utilities | xautolocker | Official Repository | X Autolocker for automatic background Screenlocking after a certain period of time

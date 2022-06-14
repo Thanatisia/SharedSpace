@@ -1,0 +1,347 @@
+# MongoDB - Basics
+
+Documentation, tips n tricks as well as guides on Database Systems
+
+This is for MongoDB
+
+## Table of Contents
+- Information
+- Setup
+- Documentation
+- Advanced
+- Tips n Tricks
+- FAQ
+- Remarks
+- Resources
+- References
+
+## Information
+
+### MongoDB Database Model
+    
+Basics:
+    - Is a NoSQL database
+        - Not a Relational Database Management System (RDBMS)
+        - File-based database query structure
+    - uses BSON  
+        - Based on a concept of key-value pairs 
+            - grouped into documents and arrays
+    - Operates on a number of databases
+
+    Keywords:
+        - MongoDB Database => Set of [Collections]
+            - a Database File
+        - MongoDB Collection => Set of [Documents]
+            - Documents = Table
+        - MongoDB Document => Set of [Key:value pairs]
+            - JSON/BSON Key-value Dictionary
+
+    - A MongoDB value is either
+        - An Atomic Value (single value)
+        - A Document (Table)
+        - An Array (Group of values)
+
+
+## Setup
+
+### Pre-Requisites
+
+### Dependencies
+
+### Compilation/Building
+
+### Installation
+
+## Documentation
+
+### Synopsis/Syntax
+
+- Server
+	- Using [mongod] => [mongo daemon]
+	```console
+	# Mongo Daemon
+	mongod [{options} [arguments]...]
+	```
+
+- Client
+	- Using [mongo]
+	```console
+	mongo [{options} [arguments]...]
+	```
+
+### Parameters
+
+#### Server
+
+--dbpath /path/to/data/folder : Set path to database folder/directory to store/create NoSQL MongoDB files
+--port port-number : Set the port number that the database will use
+
+#### Client
+
+--port port-number : Set the port number that you (the client) wants to connect to
+
+### Usage
+
+## Advanced
+
+### Server
+
+Startup MongoDB Server
+    - via Systemd
+        ```
+        # systemctl
+        sudo systemctl start mongod
+        # service
+        sudo service mongod start
+        ```
+    - via MongoDB Daemon
+        Syntax:
+            ```console
+            mongod --dbpath /path/to/data/folder --port [port_number]
+            ```
+        mongod --dbpath data --port 4000
+
+### Client
+
+- Connecting into MongoDB Server as Client
+    ```console
+    mongo --port [port_number_of_server]
+    ```
+    mongo --port 4000
+
+- Redirect and save query results into an output file
+    Syntax : mongo --port [port-number] [databaseName] <[input-script-to-run] >[output-file-to-write-to]
+
+### Operators
+
+Comparison:
+        $and : Operator for logical 'AND'
+            Syntax : {$and : [{condition},...]}
+            - Comparison if "condition1" && "condition2" ...
+            - All conditions specified must be TRUE
+            - AND can take in multiple values
+            - condition specified must be in an array
+        $eq : Operator for finding Equality
+            Syntax : { "key" : {$eq : condition} }
+            - Comparison if "key" = "value"
+        $gt : Operator for finding "Greater Than"
+            Syntax : { "key" : {$gt : condition} }
+            - Comparison if "key" > "value"
+        $lt : Operator for finding "Less Than"
+            Syntax : { "key" : {$lt : condition} }
+            - Comparison if "key" < "value"
+        $not : Operator for logical Negation or 'NOT'
+            Syntax : {$not : {condition}}
+            - Comparison if one condition to negate
+        $nor : Operator for multiple-condition logical Negation or 'NOT'
+            Syntax : {$nor : [{condition}, ...]}
+            - Comparison if multiple conditions to negate
+        $or : Operator for logical 'OR'
+            Syntax : {$or : [{condition},...]}
+            - Comparison if "condition1" || "condition2" ...
+            - If either condition is TRUE
+            - OR can take in multiple values
+            - condition specified must be in an array
+
+Data Manipulation:
+        $inc : Operator for increment
+            Syntax : {$inc : {"key" : amount_to_increase}}
+        $set : Operator to set a new attribute
+            Syntax : {$set : {"key" : new_attribute}}
+        $mul : Operator for multiplying a value
+            Syntax : {$mul : {"key" : amount_to_multiply_by}}
+        $rename : Operator to rename a key in a document
+            Syntax : {$rename : {"old-key-name" : "new-key-name"}}
+        $unset : Operator to delete an attribute 
+            Syntax : {$unset : {"key-to-remove" : null}}
+        $currentDate : Operator to set the current date
+            Syntax : {$currentDate : {"key" : true}}
+
+### Functions
+
+- General
+    - help : Get the first help from shell
+    - db.help() : Help on database methods
+    - db.version() : Get current database version
+    - show dbs : Show database names (same as 'show databases')
+    - show collections : Show collections in current database
+    - use db_name : Set current database
+
+- Files
+    - To run a script
+        Syntax : load('filepath/filename')
+
+- Database
+    - Setting a current database / creating and switching to a new database
+        Syntax : use [database-name]
+        Examples:
+            1: use local
+
+    - Get Database Name
+        Syntax : db.getName()
+
+    - Drop/Delete a Database
+        Syntax : db.dropDatabase()
+
+- Listing
+    - Listing all databases
+        Syntax : show dbs
+
+    - Listing all collections
+        Syntax : show collections
+
+- Collections
+    - Insert collection with a document
+        Syntax : db.[collection_name].insert({"key" : "value"})
+        - System will autogenerate a unique ObjectID for the collection
+        Examples:
+            - Creating a new empty document
+                db.[collection_name].insert({})
+            - Creating a new non-empty document
+                db.[collection_name].insert({"one" : "1", "many ones" : [1,1,1,1]})
+
+    - Insert collection with an array of values
+        Syntax : db.[collection_name].insert([values,...])
+
+    - Find total number of documents in collection
+        Syntax : db.[collection_name].count()
+
+    - List the contents of a collection
+        Syntax : db.[collection_name].find({"key" : "value"})
+        Usages:
+            - Multiple Conditions (AND)
+                ```
+                ',' is interpreted as an "AND" condition
+                    - condition {key1 : value1} must equal to {key2 : value2}
+                ```
+                db.[collection_name].find(
+                    {
+                        $and : [
+                            "key-1" : "value-1",
+                            "key-2" : "value-2"
+                        ]
+                    }
+                )
+            - Multiple Conditions (OR)
+                ```
+                $or : Operator for logical 'OR'
+                    - OR can take in multiple values
+                    - condition specified must be in an array
+                    - Either condition-1 or condition-2 must be TRUE
+                ```
+                db.[collection_name].find(
+                    {
+                        $or : [
+                            {"key-1" : "value-1"},
+                            {"key-2" : "value-2"}
+                        ]
+                    }
+                )
+        Note: 
+            - if not specified, .find() will find everything in the collection
+
+    - List the contents of a collection with formatting
+        Syntax : db.[collection_name].find({"key" : "value"}).pretty()
+
+    - Update Document in Collection
+        Syntax : db.[collection_name].update({target-document-key-value}, {key-values-to-update})
+        Usage:
+            - To Increment
+                db.[collection_name].update(
+                    {"source-key" : "source-id-value"},
+                    {
+                        $inc : {
+                            "key-to-increment" : amount-to-increment
+                        }
+                    }
+                )
+            - To Multiply
+                db.[collection_name].update(
+                    {"source-key" : "source-id-value"},
+                    {
+                        $mul : {
+                            "key-to-multiply" : amount-to-multiply
+                        }
+                    }
+                )
+            - To set a new value
+                db.[collection_name].update(
+                    {source-key} : "source-ID-value"},
+                    {
+                        $set : {
+                            "key-to-set" : attribute-to-set
+                        }
+                    }
+                )
+            - To create a key-value attribute with the current date
+                db.[collection_name].update(
+                    {source-key} : "source-ID-value",
+                    {
+                        $currentDate : {
+                            "key-name" : true
+                        }
+                    }
+                )
+            - To rename a key in a document
+                db.[collection_name].update(
+                    {source-key} : "source-ID-value"},
+                    {
+                        $rename : {
+                            "old-key-name" : "new-key-name"
+                        }
+                    }
+                )
+            - To delete an attribute
+                db.[collection_name].update(
+                    {source-key} : "source-ID-value"},
+                    {
+                        $unset : {
+                            "key-to-remove" : null
+                        }
+                    }
+                )
+        Note:
+            - If you dont specify a source or target, it will replace the whole collection of documents with empty
+
+    - Remove Document from Collection
+        Syntax : db.[collection_name].remove(document)
+        Note: 
+            - If document ({"key" : "value"}) is not specified : Removes every record if not specified
+
+    - Drop/Delete Collection
+        Syntax : db.[collection_name].drop()
+        Note:
+            - Unlike a RDBMS, dropping wont have any warning messages
+
+## Notes
+
+- Always try to put in your own '_id' into your document
+    - So that the document has its own ID and 
+        - MongoDB will automatically not add that item if it already exists in the collection
+    - To avoid duplicate data
+
+- MongoDB 
+    - Always keep a script
+    - Backup the documents and collections
+
+## Tips n Tricks
+
++ Run mongod in tmux and detach it to run in the background
+	```console
+	# Create new session in tmux
+	tmux new-session -s mongodb-server
+
+	# Run mongo daemon in background
+	mongod --dbpath /path/to/db --port port-number &
+
+	# Detach tmux
+	tmux-detach
+	```
+
+## FAQ
+
+## Remarks
+
+## Resources
+
+## References

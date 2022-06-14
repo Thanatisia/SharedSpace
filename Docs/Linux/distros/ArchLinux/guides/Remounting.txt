@@ -1,0 +1,54 @@
+# Remounting
+
+ArchLinux processes to take when Remounting
+
+## Information
+
+- Reasons to remount
+	1. Re-generate init ram filesystem
+	2. Reinstall Kernel
+
+## Setup
+
+### Prepartion
+
+- Mount all directories
+	```console
+	: "
+	- Mount according to Partition Schema
+	For Example:
+		/dev/sdx1 | Boot Partition | /mnt/boot
+		/dev/sdx2 | Root/Mount Partition | /mnt
+		/dev/sdx3 | Home Partition | /mnt/home
+	"
+	sudo mount /dev/sdx2 /mnt
+	sudo mount /dev/sdx1 /mnt/boot
+	sudo mount /dev/sdx3 /mnt/home
+	```
+
+- Chroot into new root directory
+	- ArchLinux
+		```console
+		sudo arch-chroot /mnt
+		```
+	- Other-Linux
+		```console
+		# Mount temporary API filesystems
+		cd [mount_path]
+		mount -t proc /proc proc
+		mount -t sysfs /sys sys
+		mount --rbind /dev dev
+		mount --rbind /run run # Optional
+
+		# If you are using UEFI system
+		# require access to EFI variables
+		mount --rbind /sys/firmware/efi/efivars sys/firmware/efi/efivars
+
+		# In order to use an internet connection in the chroot environment
+		cp /etc/resolv.conf etc/resolv.conf
+
+		# Chroot into mount directory
+		sudo chroot [mount_path] [shell]
+		```
+
+

@@ -1,0 +1,49 @@
+# To Migrate a Linux Build from one device to another
+
+## Prepare new device medium
+- Recreate partitions based on your source device (to backup)
+
+### Preparation
+Disk Size: 51200MiB
+Disk Label: (/dev/sdX)
+
+### Create New Disk Label
+- Basically this will reformat the device
+sudo parted /dev/sdX mklabel {msdos|gpt}
+
+### Create New Partition
+sudo parted /dev/sdX mkpart primary ext4 0% 1024MiB
+sudo parted /dev/sdX mkpart primary ext4 1024MiB 32768MiB
+sudo parted /dev/sdX mkpart primary ext4 32768MiB 100%
+
+### Format File System
+sudo mkfs.ext4 /dev/sdx1
+sudo mkfs.ext4 /dev/sdx2
+sudo mkfs.ext4 /dev/sdx3
+
+### Set Settings
+sudo parted /dev/sdX set 1 boot on
+
+
+## Mount newly created device filesystems
+
+mount /dev/sdx2 /mnt
+mount /dev/sdx1 /mnt/boot
+mount /dev/sdx3 /mnt/home
+
+## Backup files into tar file
+
+- Compress source device's filesystem
+	sudo tar -cvzf root.tar.gz /
+	sudo tar -cvzf home.tar.gz /home
+	
+- Copy files elsewhere
+
+## Extract to destination device's filesystem
+
+sudo tar -xvzf root.tar.gz /mnt
+sudo tar -xvzf home.tar.gz /mnt/home
+
+## Verify
+
+arch-chroot /mnt 

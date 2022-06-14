@@ -1,0 +1,459 @@
+# PL/SQL Guide - Basics
+
+Database Systems - Guide, Tips n Tricks and Introduction to PLSQL : The Oracle SQL + Programming Language 
+
+## Table of Contents
+- Information
+- Operators
+- Keywords
+- Structure
+- Syntax
+- Settings
+- Classes
+- Database Queries
+
+## Information
+
+- PL/SQL is a strongly-typed language
+	- You need to explicitly declare the variables at the head of the application
+
+## Operators
+
+- Arithmetic Operators
+	+ 
+	-
+	*
+	/
+	**
+
+- Relational Operators
+	<  : Less than
+	>  : More than
+	>= : More than or Equals to
+	<= : Less than or Equals to
+	= : Assign
+	!= : Not Equals to
+	<> : Not Equals to
+
+- Comparison Operators
+	LIKE
+	BETWEEN
+	IN
+	IS NULL
+	= 
+	!=<> 
+
+- Boolean Operators
+	AND
+	OR
+	NOT
+
+- General
+	-- : To comment in SQLPLUS PL/SQL
+	:= : Assign a value to a variable
+	&  : Part of SQLPlus; Request User Input for variable; Syntax: &var_name
+
+- String Operators
+	|| : String Concatenation
+
+
+## Keywords
+
+- General
+- Procedure
+	IN : Set the variable IN a datatype; Parse data into the procedure (Input)
+	OUT : Set the output variable; Set the storage container to return/send out to the caler (Output)
+	IS : Start specifying the definition and declaration of the procedure/function
+- Blocks
+	declare : Start Declaration Block
+	begin : Start Executable Block
+	NULL : Start NULL Block (OPTIONAL)
+	EXCEPTION : Start Exception Block (OPTIONAL)
+	end; : End Executable Block
+- Variables
+	CONSTANT : Set a variable as a constant; The value cannot be changed
+	CURSOR : The pointer used by the database to point to the location/memory address of the database table
+		- If SELECT query statement, cursor is used to point to the memory address requested by the user to retrieve and fetch the values
+			- Cursor will take the values and return to the user as a result
+- Data Types
+	DATE : Set variable to a DATE type; Example: date-month-year
+	TEXT : Set variable to a TEXT type; Example: "String"
+	VARCHAR : Set variable to a VARCHAR type; Example: "number_of_characters"
+	VARCHAR2 : An expansion of VARCHAR with more memory than VARCHAR
+- Declarative Components
+	Implicit Type Declarations:
+		[table_name]%type : Declare the data type of the attribute in the table
+		[table_name]%rowtype : Declare the data type of the whole row in the table
+	INTO : Use 'INTO [variable_name]' in your SELECT statement to output/redirect the query statement into your variable
+- Executable Components
+	IF-ELSE
+		IF (condition) THEN : Start IF condition
+		ELSEIF (condition) : The Else-If condition; To run if the previous condition is not met and this is met
+		ELSE : Execute when all previous conditions are not met
+		END IF;	: End the IF condition
+	FOR LOOP
+		FOR i IN {range} LOOP : Start a FOR loop
+		END LOOP : End the FOR LOOP
+- Exception Components
+	NO_DATA_FOUND : Exception Handler if no data is found; SELECT statement returns no rows
+    TOO_MANY_ROWS : Exception Handler raised when SELECT statement returns more than one row
+    INVALID_CURSOR : Exception Handler raised when PL/SQL call specifies an invalid cursor; i.e. Closing an unopened cursor
+    OTHERS : General Exception Handler; When any other exceptions (not explicitly named) happens
+	RAISE : Explicitly Call/Raise an Exception 
+	WHEN : When an exception is detected, execute the statement
+
+## Structure
+
+- Anonymous Block
+	- It has no name
+	```sql
+	-- Declaration Block
+	declare
+		-- place variables here
+
+	-- The Statements between the 'BEGIN' and 'END' is known as the Executable Block
+	begin
+		-- Query statements here
+
+	NULL
+		-- (OPTIONAL) Null block here
+
+	EXCEPTION
+		-- (OPTIONAL) Exception statements here
+		
+		-- Output statements here
+	end;
+
+	-- The Forward Slash '/' is a command to instruct the SQLPLUS to compile the PL/SQL block
+	/
+	```
+
+- Procedure Block
+    	- Procedure is a void-return type function with no return value
+	- Declaration and Definition
+		```sql
+		PROCEDURE procedure_name(parameters) IS
+			-- Optional Declarations
+		BEGIN
+			-- Executable Statements
+		EXCEPTION
+			-- Optional Exception Handlers
+		END [proceudre_name];
+		```
+	- Usage
+		```
+		procedure_name(arguments);
+
+        execute [procedure_name]('parameters');
+		```
+	- Examples
+		- Hello World
+			```sql
+			-- Declaration and Definition
+			PROCEDURE hello_world(hello IN VARCHAR2, world IN varchar2, hello_world OUT VARCHAR2) IS
+			BEGIN
+				hello_world := hello || '' || world || "!";
+			END hello_world;
+
+			-- Usage
+			res TEXT; -- Declare result variable as type "TEXT"
+			hello_world("Hello", "World", res);
+			dbms_output.put_line("Result from Query String: " || res);
+			```
+
+		- Processing SQL statements in a sample procedure
+			```sql
+			PROCEDURE raise_budget(department_name IN VARCHAR2, budget_limit IN NUMBER) IS
+				Current_budget DEPARTMENT.budget%TYPE;
+			BEGIN
+				-- Query budget from DEPARTMENT table where filter = 'name = department_name' and
+				-- Return query output to current_budget variable
+				SELECT budget INTO current_budget
+				FROM DEPARTMENT
+				WHERE name = department_name;
+				
+				-- Validate that current_budget is less than the budget limit then
+				-- Update the DEPARTMENT table
+				IF current_budget < budget_limit THEN
+					UPDATE DEPARTMENT
+					SET budget := budget_limit
+					WHERE NAME = department_name;
+				ELSE
+					INSERT INTO AUDIT VALUES('Math budget OK', current_budget);
+				END IF;
+			
+				COMMIT; -- To confirm and commit all changes into the database
+			END raise_budget;
+			```
+
+- Function Block
+	- Function will have a return type and a return statement after the processing
+	- Declaration and Definition
+		```sql
+		FUNCTION function_name(parameters) RETURN [return_type] IS
+			-- Optional Declarations
+		BEGIN
+			-- Executable Statements
+		EXCEPTION
+			-- Optional Exception Handlers
+		END [function_name]
+		```
+	- Usage
+		```sql
+		dbms_output.put_line(function_name(parameters));
+		```
+	- Examples
+		- Hello World
+			```sql
+			-- Declaration and Definition
+			FUNCTION hello_world(hello IN VARCHAR2, world IN VARCHAR2) IS 
+				RETURN VARCHAR2 IS
+			BEGIN
+				RETURN hello || '' || world || '!';
+			END hello_world;
+
+			-- Usage
+			dbms_output.put_line(hello_world("Hello", "World"));
+			```
+
+		- Processing SQL statements in a sample function
+			```sql
+			FUNCTION raise_budget(department_name IN VARCHAR2, budget_limit IN NUMBER)
+				RETURN NUMBER IS
+					current_budget DEPARTMENT.budget%TYPE;
+			BEGIN
+				SELECT budget INTO current_budget
+				FROM DEPARTMENT
+				WHERE name = department_name;
+
+				IF current_budget < budget_limit THEN
+					UPDATE DEPARTMENT
+					SET budget := budget_limit
+					WHERE name = department_name;
+					RETURN budget_limit
+				ELSE
+					INSERT INTO AUDIT VALUES("Math budget OK", current_budget);
+					RETURN current_budget;
+				END IF;
+
+				COMMIT;
+			END raise_budget
+			```
+
+## Syntax
+
+- To set a new setting for the database temporarily
+	- like @echo in Batch (DOS) and #!/bin/env bash in Shellscript
+	```sql
+	set [setting] {argument}
+	```
+
+- To declare a variable
+	- Variables to be declared here
+	- Syntax: [variable name] [data_type]:=[value];
+	```sql
+	declare
+		-- place variables here;
+		num_var 	   NUMBER(total_number_of_digits_to_accept, significant_figure);
+		date_var 	   DATE;
+		string_var	   TEXT:="Hello World!";
+		const_var CONSTANT TEXT:="Hello World!"; -- Set as constant
+		string_varchar	   VARCHAR();
+	```
+
+- Executable block
+	- Commands to run here
+	```sql
+	begin
+		-- Query Statements Here
+	end;
+	/
+	```
+
+- For Block Comment
+	```sql
+	/* 
+	 * Multi-line comments here 
+	 */
+	```
+
+- Store output query result to variable
+	- Output query result and variable container must be the same data type
+	- Use 'INTO [variable_name]' in your SELECT statement
+	```sql
+	-- Query the database and store result in variable_name
+	SELECT [columns] INTO [variable_name] FROM [table_name] WHERE [filter_options];
+
+	-- Output result
+	dbms_output.put_line("Query Result : " || variable_name);
+	```
+
+- Using Cursors
+	- Syntax: 
+		CURSOR [cursor_name] IS
+			-- Query Statements Here	
+	```sql
+	CURSOR cur IS
+		SELECT columns
+ 		FROM table 
+		WHERE filter;
+	```
+    - Attributes
+        ```
+        Determines the state of a cursor
+        ```
+        + %NOTFOUND : Evaluates if the last FETCH failed because no more rows were available
+        + %FOUND : Evaluates if the last FETCH succeeded
+        + %ROWCOUNT : Evaluated to the total number of rows FETCHed so far
+        + %ISOPEN : Evaluates if a cursor is OPENed
+
+    - Types
+        - Explicit Cursor
+            - You need to 
+                1. Open Cursor
+                2. Fetch Data
+                3. Check for AND condition
+                4. If steps 1 - 3 are not satisfied
+                    - Process Data
+                5. Close Cursor
+        - Implicit Cursor
+            - Use a control variable to define the cursor
+                - Use control variable as the cursor name
+            - A cursor is implicitly
+                - Dclared
+                - Opened
+                - Closed
+            - A row is implicitly fetched
+            - End of table condition is implicitly checked
+
+    - Examples:
+        - Explicit Cursor Processing
+            ```
+            BEGIN 
+                --- Open Cursor for use
+                OPEN Q;
+
+                LOOP
+                    --- Start Iterative Loop
+                    FETCH Q INTO student_no;
+                    IF Q%NOTFOUND THEN
+                        --- Break
+                        EXIT; 
+                    END IF
+                    INSERT INTO PAM VALUES(student_no)
+                END LOOP;
+
+                --- Close Cursor after using
+                CLOSE Q;
+
+                --- Confirm Changes and Commit to them
+                COMMIT; 
+            END;
+            ```
+        - Implicit Cursor Processing
+            ```
+            BEGIN
+                FOR Q_row IN (SELECT snum FROM STUDENT WHERE name = 'Pam')
+                    --- Define For loop scope
+                    LOOP
+                        --- Begin LOOP Iteration
+                        INSERT INTO PAM VALUES(Q_row.snum);
+                    END
+
+                --- Execute LOOP Iteration
+                LOOP;
+
+                --- Confirm all changes and commit
+                COMMIT;
+            END;
+            ```
+
+- Executable Components
+	- IF-ELSE
+		```sql
+		IF (condition)
+		THEN
+			-- If condition is met, then run
+		ELSIF (condition)
+			-- If previous condition is not met and this is met, then run
+		ELSE
+			-- Final Statement if previous conditions are not met
+		END IF;
+		```
+
+	- FOR Loop
+		- Syntax: 
+			FOR i IN {lower_bound..upper_bound} LOOP
+				-- Statement
+			END LOOP;
+		```sql
+		FOR i IN 1..100 LOOP
+			b:= b-i;
+		END LOOP;
+		```
+		- Same as
+			```cpp
+			for (int i=0; i <= 100; i++)
+			{
+				b = b-1;
+			}
+			```
+
+- Exception Components
+	```sql
+	EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		-- Statement if no data is found
+	WHEN OTHERS
+		-- General Exception
+		-- Statement when other exceptions are detected
+	END;
+	```
+
+	- Assign a variable as an EXCEPTION
+		```sql
+		variable_name EXCEPTION;
+		RAISE variable_name; -- Explicitly call an exception if a condition is met
+		WHEN variable_name; -- When system detects the exception 
+		```
+
+- Get User Input
+	- Place an '&' ampersand sign behind the variable name
+	```sql
+	res := "&res";
+	```
+
+## Settings
+set serveroutput {on|off} : Set to Enable/Display Server output message display on the client's side
+
+## Classes
+
+dbms_output : 
+	Methods:
+		put_line : Print out a message; similar to print() in Python, printf() in C, cout in C++, or echo in Linux Shellscript
+			Syntax: dbms_output.put_line(output message here);
+
+conversion Methods:
+	to_char : To convert the object to a character type
+		Syntax: to_char(object)
+
+## Database Queries
+
++ desc [table-name]; : Get Database Table description
+
+## Topics
+
+Stored PL/SQL:
+    - Stored PL/SQL : PL/SQL Procedures and PL/SQL Functions pre-compiled and stored in a data dictionary, 
+        - ready to be processed
+        - Usable as a Library
+
+    - Stored Procedures and Functions 
+        - can be referenced or called any number of times by multiple applications processing the relational tables
+        - can accept parameters when processed (called)
+        - Stored Procedures
+            - Can be processed (called) with EXECUTE statement
+                Synopsis/Syntax
+                    ```sql
+                    EXECUTE procedure_func_name(parameters);
+                    ```

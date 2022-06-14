@@ -1,0 +1,51 @@
+# Linux Distros - ArchLinux : Issues and Fixes
+
+Fixes and Issues with ArchLinux Distro-specified Issues
+
+## Table of Contents
+- [Information](#information)
+- [Fixes and Issues](#fixes-and-issues)
+- [References](#references)
+
+## Information
+
+Fixes and Issues with ArchLinux Distro-specified Issues such as
+- pacman
+	+ keyring
+
+## Fixes and Issues
+
+- Initial Ramdisk boot hang
+	- Possible Issue: initramfs is outdated/issues	
+	- Possible Fix: 
+		- chroot into root directory and 
+		- update from another install/build
+		- reinstall kernels
+			- Examples:
+				+ linux
+				+ linux-lts
+		- reinitialize initramfs	
+	```console
+	# Update and Upgrade
+	sudo pacman -Syu
+
+	# Reinstall kernels
+	sudo pacman -S linux linux-headers linux-lts linux-lts-firmware
+	
+	# Reinitialize initramfs
+	mkinitcpio -P
+	```
+
+- Invalid or corrupted package (PGP signature)
+	```
+	Corrupted Packages and Failed to commit transactions
+	```
+	- Update pacman keyring
+		```console
+		sudo pacman -Sy archlinux-keyring
+		```
+
+## References
+
+- [Invalid or corrupted package (PP Signature)](https://bbs.archlinux.org/viewtopic.php?id=275924)
+- [ArchWiki - Package Signining : Upgrade System Regularly](https://wiki.archlinux.org/title/Pacman/Package_signing#Upgrade_system_regularly)

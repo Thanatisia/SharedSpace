@@ -1,0 +1,9 @@
+# Essential Vim Autocommands (In my opinion)
+
+Some useful and even essential vim autocommands any vim user should have in their vimrc
+
+Autocommands are actions that vim will execute on reading that autocommand and if the condition is met
+
+" Remove trailing whitespace from files of a specified extension
+autocmd BufWritePre *.{extension} :%s/\s\+$//e
+

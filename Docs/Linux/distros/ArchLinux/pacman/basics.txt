@@ -33,3 +33,7 @@ Documentation, Guides, Tips n Tricks for ArchLinux's Package Manager - pacman
 -Qq : List all installed packages (name only)
 -Qs : List all installed packages (Default - name, version and description)
 --help : Put at the back of the parameter to get help on the query flags
+
+### Usage
+
++ Update Keyring : sudo pacman -Sy archlinux-keyring

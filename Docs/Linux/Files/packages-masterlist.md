@@ -142,7 +142,8 @@
 		* bspwm : Official Repository
 		* herbstluftwm : Official Repository
 		* i3 : Offfcial Repository
-		* [Hypr](https://github.com/vaxerski/Hypr) : Community; https://github.com/vaxerski/Hypr, AUR; https://aur.archlinux.org/packages/hypr
+		+ [leftWM](https://github.com/leftwm/leftwm-community-themes) : Community; https://github.com/leftwm/leftwm
+		+ [Hypr](https://github.com/vaxerski/Hypr) : Community; https://github.com/vaxerski/Hypr, AUR; https://aur.archlinux.org/packages/hypr
 
 ### X Utilities
 	* xautolocker : Official Repository

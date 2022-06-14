@@ -1,11 +1,32 @@
 ﻿Linux Shellscript (Bash) Cheatsheet
 
 Table of Contents:
+    Operators
+    Symbols
     Commands
     Usage
     Snippets
     Best Practices
     Glossary
+
+Operators:
+	# Mathematical Operations
+		Addition 	: res=$((a + b))
+		Subtraction 	: res=$((a - b))
+		Multiplication 	: res=$((a * b))
+		Division 	: res=$((a / b))
+		Modulus 	: res=$((a % b))
+
+	# Arrays
+		Set Array 		: An Array; Container object for storing values : arr=()
+		Set Associative Array 	: Like HashMap/Dictionaries; Key-Value Pairs 	: declare -A aarr=([key]=value)
+		Set Name References	: Useful for returning arrays in functions   	: declare -n ret_arr"$1"
+
+Symbols:
+	$? : Get the status code for the most recently ran command, Returns '0' = Success; >= '1' = Error
+	$! : Get the process ID (pid) for the most recently ran command
+	$@ : Get all command line arguments
+	$# : Get the number of command line arguments
 
 Commands:
 

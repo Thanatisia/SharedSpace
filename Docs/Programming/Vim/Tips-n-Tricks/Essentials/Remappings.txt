@@ -1,0 +1,10 @@
+# Essential Vim Remappings (In my opinion)
+
+Some useful and even essential vim remap/keybindings any vim user should have
+
+## Visual Mode
+
+### Reselect Visual Selection after indenting
+vnoremap < <gv	# When indenting backwards
+vnoremap > >gv	# When indenting forward
+
