@@ -1,0 +1,12 @@
+- Network Configuration
+	- Create hostname file
+		```
+		Your Hostname is used in your network to identify your device
+		```
+		echo "<Hostname>" | tee -a /etc/hostname
+
+	- Add matching entries to hosts file
+		echo "127.0.0.1		localhost" | tee -a /etc/hosts
+		echo "::1					localhost" | tee -a /etc/hosts
+		echo "127.0.1.1		<Hostname>.localdomain	<Hostname>" | tee -a /etc/hosts
+
