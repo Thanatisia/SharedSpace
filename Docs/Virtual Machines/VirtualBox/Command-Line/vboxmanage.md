@@ -45,6 +45,10 @@ VBoxManage [internalcommands, [action]] [options [arguments]...]
 						```console
 						VBoxManage registervm
 						```
+	- modifyhd : To Modify an existing Virtual Hard Drive/Disk Image
+		- Syntax: VBoxManage modifyhd [vdi|vhd name] [{options} {arguments}...]
+		- Options:
+			+ --resize N : Set the new size to expand to
 	- modifyvm : To Modify an existing Virtual Machine
 		- Syntax: VBoxManage modifyvm [Virtual Machine Name] [{options} {arguments}...]
 		- Options: 
@@ -109,6 +113,14 @@ VBoxManage createvm --name [Name of Virtual Machine] --ostype [OS Type (i.e. Deb
 VBoxManage internalcommands createrawvmdk -filename [path-to-vmdk-file-to-create] -rawdisk \\.\PhysicalDrive[drive_number]
 ```
 
+### Modify VHD/VDI Image files
+
+```console
+VBoxManage modifyhd file.vdi --resize N{GiB|GB|MiB|MB}
+```
+
 ## References
 + [VirtualBox - How to Boot from USB | How to Convert Bootable USB device to VMDK Raw file](https://www.how2shout.com/how-to/virtualbox-virtual-machine-boot-usb.html)
 + [VirtualBox - How to create a virtualbox vm from command line | How to create a VM from Terminal](https://andreafortuna.org/2019/10/24/how-to-create-a-virtualbox-vm-from-command-line/)
++ [VirtualBox - How to resize a VirtualBox VM from command line](https://www.techrepublic.com/article/how-to-resize-a-virtualbox-vm-from-the-command-line/)
+
