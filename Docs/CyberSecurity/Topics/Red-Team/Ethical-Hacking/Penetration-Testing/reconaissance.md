@@ -8,6 +8,7 @@
     - [Subdomains](#gathering-information-about-subdomains)
     - [Domains on the Same Server](#gathering-information-about-domains-on-the-same-server)
     - [Open Source Intelligence (OSINT)](#open-source-intelligence-osint)
+- [Repositories](#repositories)
     
 ## Information
 - Stage 1 of the Ethical Hacking Lifecycle
@@ -82,4 +83,7 @@
 ### Open Source Intelligence (OSINT)
 + [Shodan](shodan.io)
 
+
+## Repositories
++ [leebaird/discover](https://github.com/leebaird/discover)
 
