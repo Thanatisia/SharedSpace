@@ -112,3 +112,10 @@ scapy is a network packet analysis program that enables the user to generate, mo
     ```
 
 ## Resources
+
+## Notes
+- Creating packets
+    - Must follow the sequence
+        - IP()/TCP()
+            + Cannot use TCP()/IP()
+

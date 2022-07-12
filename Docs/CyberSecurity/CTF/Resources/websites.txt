@@ -1,0 +1,6 @@
+# CTF Websites
+
+ctftime.org : Consolidation of all upcoming CTF events in real time
+hackthebox : Virtual CTF Simulation for professionals
+picoctf : Virtual CTF Simulation with pre-made boxes
+tryhackme : Virtual CTF Simulation like hackthebox
