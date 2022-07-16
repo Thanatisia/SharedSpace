@@ -111,6 +111,13 @@ scapy is a network packet analysis program that enables the user to generate, mo
     # sr1( IP(dst="74.125.130.104")/TCP(dport=80, flags="S") ) # dport = Destination Port
     ```
 
+- ARP Scanning
+    + ips = IP Address such as "10.0.2.0/30"
+    + iface = Network Interface such as "eth0"
+    ```python
+    ans, unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=ips), timeout=2, iface=interface, inter=0.1) 
+    ```
+
 ## Resources
 
 ## Notes

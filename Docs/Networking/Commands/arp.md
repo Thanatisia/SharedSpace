@@ -12,7 +12,7 @@ This arp command manipulates the System’s ARP cache, and also allows a complet
 
 ## Information
 
-arp is the Address Resolution Protocol. The primary function of this protocol is to resolve the IP address of a system to its mac address, and hence it works between level 2(Data link layer) and level 3(Network layer).
+arp is the Address Resolution Protocol. The primary function of this protocol is to resolve and map the IP address of a system to its mac address, and hence it works between level 2(Data link layer) and level 3(Network layer).
 
 ### Files related to ARP
 + /proc/net/arp
