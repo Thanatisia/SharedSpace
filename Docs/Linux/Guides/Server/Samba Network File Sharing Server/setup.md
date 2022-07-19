@@ -197,6 +197,10 @@ sudo service smbd start
 
 # Using systemctl
 sudo systemctl start smbd
+
+# Using SMB daemon in the background without systemd
+# please refer to syntax of smbd in the synopsis/syntax to see what the parameters does
+smbd -D
 ```
 
 - To Stop Samba
@@ -273,18 +277,28 @@ NAS
 
 #### Synopsis/Syntax
 
-sudo smbpasswd {options} [argument]
++ smbd {options} : the Samba (SMB) Daemon Utility; use this to start smb without systemd
++ sudo smbpasswd {options} [argument] : Change SMB Passwords
 
 #### Parameters
 
-+ -a [username] : Allow a specified user to connect to shares
+- smbd
+	+ -D | --daemon 				: Become/start as a daemon (Default) in the background
+	+ -F | --foreground 				: To run the daemon in the foreground
+	+ -i | --interactive				: Run interactive mode (Opposite of daemon) and log to stdout
+	+ -p=[port-number] | --port=[port-number]	: Listen on the specified ports
+	+ -s=[config-file] | --configfile=[config-file]	: Use an alternte configuration file specified
+
+- smbpasswd
+	+ -a [username] : Allow a specified user to connect to shares
 
 #### Usage
 
-+ To allow a user to connect to shares
-	```console
-	sudo smbpasswd -a username
-	```
+- smbpasswd
+	+ To allow a user to connect to shares
+		```console
+		sudo smbpasswd -a username
+		```
 
 ### Customization and Configuration
 
