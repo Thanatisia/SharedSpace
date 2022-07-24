@@ -1,0 +1,12 @@
+# List of Free DNS Services
+
+## INTRODUCTION
+
+### What is DNS?
+
+```
+	DNS stands for Dynamic Name Server, this protocol effectively maps an IP Address to a human-readable text/name so that you do not need to remember the entire IP address.
+```
+
+## DNS Services List
++ duckdns.org
