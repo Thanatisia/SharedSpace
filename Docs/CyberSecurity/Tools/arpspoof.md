@@ -16,7 +16,7 @@ ARPspoof is an ARP spoofing/poisoning utility
 + Utility Type: ARP Spoofing/Poisoning
 + Tool Area of Efficiency : Offensive (Red Team)
 + Penetration Testing stage : Scanning & Enumeration
-+ Package Name: 
++ Package Name: dsniff
 + Repository URL: 
 
 ## Setup
@@ -28,20 +28,28 @@ ARPspoof is an ARP spoofing/poisoning utility
 
 ### Dependencies
 
-### Obtaining
+### Installing
+
+- If installing via Package Manager
+	- Debian-based (apt)
+		```console
+		sudo apt update
+
+		sudo apt install dsniff
+		```
 
 ## Documentation
 ### Synopsis/Syntax
-+ arpspoof -i [interface] -t [Target A] [Target B]
++ arpspoof {options} [arguments...]
 ### Parameters
 + -i [interface]    : Specify your target interface
-+ -t [Target A] [Target-B]   : Specify your targets on the interface to tell that the attacker is the default gateway
++ -t [Target to trick] [Attacker host device to Spoof]   : Specify your targets on the interface to trick that the attacker is the spoof device
 ### Usage
-+ To tell Target-A that Target-B is the default gateway
++ To trick Target-A to think that the Attacker is Target B
     ```console
-    arpspoof -i eth0 -t 10.0.1.3 (Target to Spoof) 10.0.1.1 (Default Gateway / Attacker)
+    arpspoof -i eth0 -t 10.0.1.3 (Target to trick) 10.0.1.1 (Default Gateway / Attacker's target to spoof)
     ```
-+ To tell the default gateway that the attacker is the target
++ To trick the default gateway that the attacker is the target host
     ```console
     arpspoof -i eth0 -t 10.0.1.1 10.0.1.3
     ```

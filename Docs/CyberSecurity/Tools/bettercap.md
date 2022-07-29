@@ -8,6 +8,7 @@ Bettercap also has a ncurses mode that allows for Terminal User Interface
 - [Information](#information)
 - [Setup](#setup)
 - [Documentation](#documentation)
+- [Customization and Configuration](#customization-and-configuration)
 - [Resources](#resources)
 - [References](#references)
 - [Remarks](#remarks)
@@ -78,6 +79,11 @@ bettercap {options}
 
 ### Usage
 
+- To run a caplet
+	```console
+	bettercap -iface eth0 -caplet caplet-file.cap
+	```
+
 ### Commands
 ```
 To be used in the ncurses TUI (Terminal User Interface)
@@ -99,7 +105,11 @@ To be used in the ncurses TUI (Terminal User Interface)
 use set.[variable] {values} 
 ```
 #### ARP Spoof
++ arp.spoof.fullduplex {true|false} : Enable ARP Poisoning/Spoofing (Full Duplex)
 + arp.spoof.targets [specify targets (seperate by comma-delimited] : Specify your targets to spoof
+
+#### Sniffing
++ net.sniff.local {true|false} : Enable Local Network Sniffing
 
 #### ticker
 + ticker.commands [commands] 	: Set the commands to execute slowly
@@ -107,6 +117,23 @@ use set.[variable] {values}
 
 ### sniff
 + net.sniff.verbose {true|false} : Set verbosity of the sniff output
+
+## Customization and Configuration
+
+### Scripting
+
+- Perform ARPspoof on Bettercap
+	> Write the following into a caplet file (*.caplet)
+	```console
+	net.probe on
+	set arp.spoof.fullduplex true
+	set arp.spoof.targets [target IP]
+	arp.spoof on
+	net.sniff on
+	```
+
+### Scripts
++ hstshijack : A caplet script that allows for SSL Stripping (HTTPS downgrading to HTTP)
 
 ## Resources
 

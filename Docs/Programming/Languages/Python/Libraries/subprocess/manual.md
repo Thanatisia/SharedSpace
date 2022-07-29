@@ -81,13 +81,24 @@ The Subprocess module class allows python to
 		+ Else : It will return the process's exit code
 
 - cmd_stdout = process.stdout.read1() : Reads as many bytes as available in .stdout attribute; is only available on byte streams
+- cmd_stdout_Encoded = process.stdout.close() : Close Standard Output
+- process_result = process.communicate(options) : Returns a tuple containing the stdout data and stderr data
+	- Options
+		+ input_data=[input-stream]
+		+ timeout=n : Specify a timeout period before the command stops
+	- Return 
+		+ Type : <tuple>
+		+ Value : (stdout_data, stderr_data)
 
 #### Subprocess
 - return_code = subprocess.call(cmd_list, options) : Same as Popen and takes all the same arguments, but waits until the command completes and gives the return codes (Blocking call)
 	- Parameters
-		+ cmd_list : type<List>; Set the command string to execute/run; Structure: ["command-name", "argument-1", "argument-2", ..., "argument-n"]
-	- Options
-		+ Same as subprocess.Popen()
+		- cmd_list : 
+			+ type<List>; Set the command string to execute/run; Structure: ["command-name", "argument-1", "argument-2", ..., "argument-n"]
+			+ type<String>; Set the command string to execute/run; Structure: "command-name arg1 arg2 arg3...argn"
+		- Options
+			+ Same as subprocess.Popen()
+			+ shell: type<Bool>; Specify to use the current shell if true
 
 - completed_process = subprocess.run(cmd_list, options) : Runs a command; Returns the status code of the completed process in an instance of the [CompletedProcess] class
 	- NOTES
