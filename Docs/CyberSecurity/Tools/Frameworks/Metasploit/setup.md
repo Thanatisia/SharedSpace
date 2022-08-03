@@ -5,6 +5,11 @@ Documentations on the scripts in Metasploit Framework
 ```
 
 ## Information
+
+- Package Name :
+    + Debian | apt : metasploit-framework
+    + Archlinux | pacman : metasploit
+
 ### Payloads in Metasploit
 - 3 Types of Payload
     - Singles : Payloads that are self-contained and standalone
@@ -30,9 +35,43 @@ Documentations on the scripts in Metasploit Framework
 ### Pre-Requisites
 
 ### Dependencies
++ bundler
++ curl
++ gcc-mingw-w64-i686-win32
++ gcc-mingw-w64-x86-64-win32
++ git
++ john
++ libc6
++ libffi8
++ libgcc-s1
++ libpcap0.8
++ libpq5
++ libruby3.0
++ libsqlite3-0
++ libssl3
++ libstdc++6
++ nasm
++ nmap
++ openssl
++ oracle-instantclient-basic
++ postgresql
++ python3
++ rake
++ ruby
++ ruby-json
++ wget
 
 ### Installing
-    
+- Using package manager
+    - Debian-based (apt)
+        ```console
+        sudo apt install metasploit-framework
+        ```
+    - Arch-based (pacman)
+        ```console
+        sudo pacman -S metasploit
+        ```
+   
 ## Documentation
 ### Scripts/Files
 + msfconsole    : Metasploit Framework's Console Shell
