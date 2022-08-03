@@ -38,11 +38,11 @@ regex are used to perform pattern matching as well as filtering of texts.
 
 ### Special Regex Characters
 + .     : Match any characters
-+ +     : Matches a sequence of one or more instances of the following character
-+ *     : Zero or more instances of whatever precedes/came before it
++ \+     : Matches a sequence of one or more instances of the following character
++ \*     : Zero or more instances of whatever precedes/came before it
 + ?     : Match zero or one instance of the following character
 + ^     : A match must occur at the beginning of the searched text
-+ -     : Range operator; Range of min (x) to max (y)
++ \-     : Range operator; Range of min (x) to max (y)
 - $     : Matches the end of a line; Placed at the end of the entire pattern
     + Matches an entire line    : If an entire Regex pattern is enclosed by a caret and dollar sign
 + (,)   : Group the enclosed elements within that section Regular Expression pattern together
@@ -61,8 +61,8 @@ regex are used to perform pattern matching as well as filtering of texts.
 + \n : Newline
 + \s : Matches Any whitespaces
 + \s* : Zero or more whispaces
-+ \s\+ : One or more whitespaces
-+ ^\# : Comment
++ \s\\+ : One or more whitespaces
++ ^\\# : Comment
 + ^# : Uncomment 
 
 ## Expressions
@@ -94,7 +94,7 @@ Example Expression Snippets
 + {x,}  : Preceding element or subexpression must occur at least x times
 
 ## References
-+ [Digital Humanities - Regex Tips](http://dh.obdurodon.org/regex-tips.xhtml#:~:text=A%20question%20mark%20(%20%3F%20\),will%20match%20Great%20or%20Great!%20.)
++ [Digital Humanities - Regex Tips](http://dh.obdurodon.org/regex-tips.xhtml#:~:text=A%20question%20mark%20\(%20%3F%20\),will%20match%20Great%20or%20Great!%20)
 + [NTU - Programming - Howto - Regex](https://www3.ntu.edu.sg/home/ehchua/programming/howto/Regexe.html)
 + [rexegg - Regex Modifiers](https://www.rexegg.com/regex-modifiers.html)
 + [StackOverflow - What does the forward slash mean within a JavaScript regular expression?](https://stackoverflow.com/questions/15661969/what-does-the-forward-slash-mean-within-a-javascript-regular-expression)
