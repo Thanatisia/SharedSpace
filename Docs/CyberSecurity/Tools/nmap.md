@@ -71,6 +71,9 @@ nmap [option] <target_IP_address>
     + -sX : TCP Xmas Scan
     + -sA : TCP ACK Scan
     + -sU : UDP Scan
+    + -sV : To gather information about version number of the programs the target server is running
+- Reconnaissance
+    + -O  : To gather information about the target server's Operating System
 - Timing Options
     + -T<mode> : Set a timer mode
     - Modes
