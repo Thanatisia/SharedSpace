@@ -1,12 +1,18 @@
 # Linux Security Hardening - Firewall - Using ufw
 
+## Table of Contents
+
+## Information
+
+### DESCRIPTION
+
+```
 ufw is the Uncomplicated Firewall. This firewall is designed to be simple to use and will help to protect your linux devices such as
 + Servers
 + Raspberry Pi
 
-## Table of Contents
-
-## Information
+ufw is built on top of iptables. iptables is a very flexible tool but requires a deeper understanding of TCP/IP, thus ufw was created to make firewall management easier and more accessible to everyone.
+```
 
 ## Setup
 
@@ -44,18 +50,21 @@ ufw is the Uncomplicated Firewall. This firewall is designed to be simple to use
 ### Synopsis/Syntax
 
 ```console
-sudo ufw [[parameters] {arguments}]
+sudo ufw {options} [arguments]
 ```
 
 ### Parameters
 
 #### Firewall Rules
 
-+ allow [PORT_NUMBER] : Allow access through a port
++ allow [PORT_NUMBER] : Open/Allow a port to pass through
++ deny [PORT_NUMBER]  : Deny/block a port from passing through
 + limit [PORT_NUMBER] : Impose rate limits to limit on the number of connections through a specific port
 
 #### Controls
 
 + show added : Show all UFW added rules
-+ enable : Enable UFW
-+ status : Check the status of UFW
++ enable : Enable/startup the firewall
++ disable : Disable/Stop the firewall
++ status : Check the status of the firewall
+

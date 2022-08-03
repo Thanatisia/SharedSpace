@@ -1,7 +1,0 @@
-### List of Regular Expressions ###
-
-\s : Any whitespaces
-\s* : Zero or more whispaces
-\s\+ : One or more whitespaces
-^\# : Comment
-^# : Uncomment 
