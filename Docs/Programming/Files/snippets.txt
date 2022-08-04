@@ -1,4 +1,10 @@
-# Programming Ideas - Command Line Input & Processing
+# Programming Snippets - Command Line Input & Processing
+
+```
+Note : 
+- These are WIP and may be removed
+- These are pseudocodes for general programming concepts
+```
 
 Command Line Input Config:
 	- Seperate user input string into an array with each option seperated into an element
