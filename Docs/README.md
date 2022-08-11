@@ -1,88 +1,39 @@
-# README
+# SharedSpace - Documentations
 
-<h6> Documents </h6>
+## Information
 
-## Basic Information
+### Repository
++ Last Modified : 2022-08-11 0954H
 
-* Authors: 
+### DESCRIPTION
+```
+This folder will contain multiple subfolders holding documents for the respective category
+```
 
-  * Asura
+## Documentation
 
-* Date Created: 2021-05-24 0049H, Asura
+### Folders/Topics
+- Computers
+- CyberSecurity
+- Database Systems
+- Docker
+- General
+- Git
+- Language
+- Linux
+- Music
+- Networking
+- Operating Systems
+    - Android/
+    - File Sharing/
+    - Windows/
+- Programming
+- Software
+- Technology
+- Termux
+- Virtual Machines
+- WebDevelopment
 
-* Folder background:
+## Wiki
 
-  > This folder will contain multiple subfolders holding documents for the respective category
-  
-* Contents:
-
-  > * Git
-  
-* Last Update/Modified:
-  * 2021-05-24 0049H, Asura
-
-
-
-## To Note
-
-
-
-# Documentation
-
-## Getting Started
-
-
-
-## Folders
-
-1. Git 
-
-   > Git Documents
-
-
-
-## Usage
-
-> How to use
-
-
-
-## Help
-
-> Help Commands
-
-
-
-# Authors
-
-> Contributors name, git ID, contact info
-
-
-
-# Version History
-
->  Changelogs
-
-* 2021-05-24 0049H, Asura
-  * Created 
-    * README
-    * Basic Information (Description)
-    * To Note
-    * Documentations
-      * Getting Started
-      * Folders
-      * Usage
-      * Help
-    * Authors
-    * Version History (Changelogs)
-    * License
-    * Acknowledgements
-
-
-
-# License
-
-
-
-# Acknowledgements
 

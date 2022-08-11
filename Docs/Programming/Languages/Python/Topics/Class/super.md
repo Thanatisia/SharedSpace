@@ -6,6 +6,8 @@
 ```
 Returns a proxy/temporary object of the superclass
 - Allows us to access methods of the base class
+
+- super() can be read as "next in line" in an inheritance
 ```
 
 ## Documentation
