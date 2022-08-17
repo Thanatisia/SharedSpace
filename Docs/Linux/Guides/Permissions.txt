@@ -1,0 +1,62 @@
+# Linux - Permissions
+
+```
+Permissions in an Operating System is essential to ensure that the different levels in a OS' filesystem hierarchy does not touch or manage files that they have no rights to. 
+This is for enhancing security.
+
+In Windows, Permissions are handled by Domains where the top level domain is the C:\ drive
+In Linux, Permissions are handled by modifiers and numeric values
+```
+
+- Permissions
+	```
+	Permissions in Linux are represented by 3 modes
+
+	- Each path, directory and files are made up of 3 sections
+		+ with each section being represented by the permission modifiers.
+	- Every modifier space in each section is assigned to a numeric value.
+	- The permission calculation for the section is calculated by 
+		+ Adding up all the numeric values assigned to each modifier space in a section (Refer to 'chmod calculation' for more information)	
+	```
+	- Modifiers
+		+ r : Read
+		+ w : Write
+		+ e : Executable
+
+- Structure
+    + Consists of either r (Read), w (Write), x (Executable)
+    - First bit = File Type (T)
+        + _ = File
+        + D = Directory
+        + L = Link
+    - Every space in a given block/section (for example - 234)
+	+ Is made up of Read (r), Write (w) and Execute (x) - In that order
+    ```
+    _/___/___/___
+    T/234/567/890
+      rwx/rwx/rwx
+    ```
+
+- chmod calculation
+    - Permission Modifiers Numerical Values
+        + r : 4 : Read
+        + w : 2 : Write
+        + x : 1 : Executable
+
+    - Calculation
+	1. The first block (consisting of only 1 space) is the file/folder type.
+	2. Scan through each section
+		2.1. Convert all spaces within the section/block that has a permission modifier key into a Numerical value as specified in [Permission Modifiers Numerical Values]
+			+ every space in the section/block that does not have a permission (empty) will be considered a 0
+		2.2. Calculate and add all of the numerical values together
+			+ The number will be the permission for that block
+	3. After completing the calculation of all 3 sections
+		- the 3 numbers obtained from the calculation will be concatenated together to be formed the chmod permission modifier
+			+ This permission will determine if a file can be read, written and/or executed depending on the permission modifiers calculated.
+
+    - Examples
+        + _rwxrwxrwx = _/rwx/rwx/rwx = _/4+2+1/4+2+1/4+2+1 = _/7/7/7 = 777
+        + _rwxr_xr_x = _/rwx/rx/r_x = _/4+2+1/4+1/4_1 = _/7/5/5 = 755
+        + drwxr-xr-x = d/rwx/r_x/r_x = d/4+2+1/4+1/4+1 = d/7/5/5 = 755
+        + -rw-r--r-- = _/rw_/r__/r__ = _/4+2/4/4 = _/6/4/4 = 644
+

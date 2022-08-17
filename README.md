@@ -40,7 +40,7 @@ This is my Repository created for Consolidation/Compilation of Documentations, G
 
 - Cloning the repository
     ```console
-    git clone 
+    git clone https://github.com/Thanatisia/SharedSpace.git
     ```
     
 - Download a individual file

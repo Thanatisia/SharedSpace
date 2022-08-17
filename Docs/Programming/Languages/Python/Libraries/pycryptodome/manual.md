@@ -16,6 +16,8 @@
     + Cipher
     + PublicKey
     + Random
+    + Signature
+    + Hash
 
 ## Setup
 
@@ -63,14 +65,21 @@
 + AES
 + PKCS1_0AEP
 
+#### Crypto.Hash
++ SHA256 : The SHA256 Hashing Algorithm
+
 #### Crypto.PublicKey
-+ RSA
++ DSA : A Digital Signature Algorithm
++ RSA : The Rivett-Shamir-Ackermann Asymmetric (Public) Key Encryption Algorithm
 
 #### Crypto.Random
 + get_random_bytes
 
 #### Crypto.Protocol
 + KDF
+
+#### Crypto.Signature
++ DSS : Digital Signature Signing
 
 ### Functions
 - Crypto.Cipher.AES
@@ -80,18 +89,125 @@
 - Crypto.Cipher.PKCS1_0AEP
     + cipher_rsa = .new(recipient_key)					: Generate a new RSA cipher
     + enc_session_key = cipher_rsa.encrypt(session_key)			: Encrypt the session key with the Public RSA key
+   
+- Crypto.Hash.SHA256
+    - hash_obj = SHA256.new(message)                    : Create a new SHA256 Hash object
+        - Parameters
+            - message : The message you want to hash
+                + Type : Bytes
+        + Return Type : SHA256Hash
+   
+- Crypto.PublicKey.DSA
+    - DSAKey = DSA.construct(tup)                        : Construct the DSAKey object using the Public Key (y) and the Domain tuple (g,p,q)
+        - Parameters
+            - tup : The DSAKey object domain tuple (y,g,p,q) that you want to construct the DSAKey object with
+                + Type : list
+        - Return Type : DSAKey
+    - DSAKey = DSA.generate(size, domain)
+        - Parameters
+            - size : The size of your DSAKey object in Bits (1024, 2048, 4096 etc.)
+                + Type : integer
+            - domain : The tuple containing a pre-existing DSAKey object domain (key.y, key.g, key.p, key.q); Generates a randomized DSAKey object Key of the specified size if domain is not provided
+                + Type : tuple
+        - Return Type : DSAKey
+    - DSAKey = DSA.import_key(external_key_Bytes) : Import an external key and returns a DSAKey object
+        - Parameters
+            - external_key_Bytes : The external key you want to import
+                + Type : Bytes object
+        - Return Type : DSAKey
+    
+- Crypto.PublicKey.RSA
+    + rsa_key = .generate(bits)						        : Generate a RSA key combo of 2048 bits
+    + recipient_key = import_key(key_file)                  : Import an RSA Key from a file
+    + private_key = rsa_key.exportKey()                     : Export Private Key from generated key
+    + public_key = rsa_key.publickey()                      : Export Public Key from generated key
 
-- Crypto.PublicKey.RSA()
-    + rsa_key = .generate(bits)						: Generate a RSA key combo of 2048 bits
-    + recipient_key = import_key(key_file)				: Import an RSA Key from a file
-    + private_key = rsa_key.exportKey()					: Export Private Key from generated key
-    + public_key = rsa_key.publickey()					: Export Public Key from generated key
-
-- session_key = Crypto.Random.get_random_bytes(size)			: Generate a random byte from a given size
+- Crypto.Random
+    + session_key = Crypto.Random.get_random_bytes(size)	: Generate a random byte from a given size
 
 - Crypto.Protocol.KDF
     + key = PBKDF2(password, salt, dkLen=[bytes])			: Generate a key of any length using PBKDF2 with salt and the plaintext
+   
+- Crypto.Signature.DSS
+    - {verifier/signer} = .new(key, mode)                 : Create a new DSS Digital Signature Signer/verifier object using the provided DSA Key and the format
+        - Parameters
+            - Key : The DSAKey object you generated
+                + Type : DSAKey
+            - Mode : The signature format to generate the verifier/signer
+                + Type : String
+                - Options
+                    + "fips-186-3"
+                    + "fips-186-4"
+        - Return Type : DssSigScheme
+   
+### Objects
 
+#### Crypto.Hash.SHA256
+- SHA256Hash
+    - Attributes
+        - oid : The ASN.1 Object ID
+            + Type : String
+        - block_size : The size of the internal message block, input to the compression function
+            + Type : Integer
+        - digest_size : The size of the resulting hash
+            + Type : Integer
+    - Functions
+        - hash_Bytes = .digest() : Returns the binary (non-printable) digest of the message that has been hashed so far
+            + Return Type : byte string
+        - hash_Hex = .hexdigest() : Returns the printable Hexadecimal-value digest of the message that has been hashed so far
+            + Return Type : Hexadecimal String
+        - hash_obj = .new(message) : Create a new fresh SHA256 Hash object
+            - Parameters
+                - message : The message you want to hash
+                    + Type : Bytes   
+            + Return Type : SHA256Hash
+
+#### Crypto.PublicKey
++ Key : Public key object
+
+#### Crypto.PublicKey.RSA
+- RSAKey
+
+#### Crypto.PublicKey.DSA
+- DSAKey
+    - Attributes
+        - DSAKey.y : Public Key
+            + Type : Integer
+        - DSAKey.g : Generator
+            + Type : Integer
+        - DSAKey.p : DSA Modulus
+            + Type : Integer
+        - DSAKey.q : Order of the Subgroup
+            + Type : Integer
+        - DSAKey.x : Private Key (OPTIONAL)
+            + Type : Integer
+
+#### Crypto.Signature.DSS
+```
+Can perform (EC)DSA Signature or Verification
+```
+- DssSigScheme
+    - Functions
+        - can_sign() : Checks if the signature object can be used for signing messages
+            - Return Type : Boolean 
+        - signature = sign(msg_hash) : Compute the DSA/ECDSA signature of a message (aka Sign the message hash with the verifier/signer) and Returns the Signature (as bytes)
+            - Parameters
+                - msg_hash : A Hashed Message's Hash; Refer to 'Crypto.Hash'
+                    - Type : Hash
+            - Return Type : bytes
+        - verify(msg_hash, signature) : Checks if a certain (EC)DSA signature is authentic by comparing the Signature with the Secret message's hash
+            - Parameters
+                - msg_hash : A Hashed Message's Hash; Refer to 'Crypto.hash'
+                    - Type : Hash
+                - signature : The signature to be validated
+                    - Type : bytes
+            - Exceptions
+                + ValueError : If the signature is not authentic/value of the signature hash does not match the hashed message
+   
+### Exceptions
+#### Crypto.Signature.DSS.DssSigScheme
++ ValueError : If the signature is not authentic
+   
 ### Variables
 #### Crypto.Cipher.AES
 + MODE_CBC
@@ -100,6 +216,7 @@
 
 ### Usage
 
+#### Encryption with RSA
 - Storing a key
 	```python
 	from Crypto.Random import get_random_bytes
@@ -201,6 +318,9 @@
 		write_key.close()
 	```
 
+#### Digital Signature Signing with DSA/S
+
+    
 ## References
 + [Nitratine - Python Encryption and Decryption with Pycryptodome](https://nitratine.net/blog/post/python-encryption-and-decryption-with-pycryptodome/)
 + [Levelup Gitconnected - Substitution Encoder and Solver in Python](https://levelup.gitconnected.com/substitution-encoder-and-solver-in-python-19984a6b8d5d)

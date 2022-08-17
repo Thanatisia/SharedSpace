@@ -27,9 +27,18 @@ This module is for handling JSON API data in Python, allowing for
 
 ## Documentation
 
-### Module Class
+### Importing
+- Import module
+	```python
+	import json
+	```
+- Import class
+	```python
+	from json import [class]
+	```
 
-import json
+### Classes
++ json
 
 ### Variables
 
@@ -38,10 +47,28 @@ import json
 #### Serializing JSON
 
 + .dump(data, file_object) : Write the JSON data object to the file
++ .dumps(dictionary, sort_keys={True|False}, indent=[indent-space], seperators=('','')...) : Export the Dictionary object into JSON string content
+    - Parameters
+        - dictionary : The dictionary object you want to convert into JSON string
+            + Type : <'dict'>
+    - Options
+        - sort_keys : To sort the output of dictionaries of the serialized JSON key-value according by key
+            + Type : <'bool'>
+        - indent : The number of indentation spaces
+            + Type : <'int'>
+        - separators : The separators used by the key and value tuple
+            + Type : <'tuple'>
+            + Value Example : (item_separator, key_separator)
 
 #### Deserializing JSON
 
 + .load()
++ .loads(json_string) : Import/Load the JSON string into a Dictionary object
+    - Parameters
+        - json_string : The serialized JSON string object you want to import into the program as a Dictionary object
+            + Type : <'str'>
+    - Options
+        - 
 
 ### Synopsis/Syntax
 

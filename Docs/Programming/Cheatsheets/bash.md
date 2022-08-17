@@ -11,30 +11,58 @@
 - [Best Practices](#best-practices)
 - [Glossary](#glossary)
 
+## Basics
+
+### Variables
+- Global Variables
+    - To declare a global variable within a function
+        + Available in Bash v
+- Special Environment Variables
+    - $$ : Gives you the Process ID of the shellscript when it is running in the background
+        + Useful when you create a cript that can run multiple times parallely
+    - `$*` : similar to `$@` in functionality as it stores all arguments parsed
+        + Difference between `*` and '@' is that '@' will store the command line arguments in lists while `*` in string
+    - $# : Gets the count of variables passed to the script
+    - IFS : Internal Field Separator
+        + Automatically uses SPACE, TAB or NEWLINE characters as separators for inputs to a script
+        - If you change this variable in the script to any other separators
+            + Your script will break down the inputs using that specified character as a new separator
+        
 ## Operators:
 ### Mathematical Operations
-+ Addition 	: res=$((a + b))
-+ Subtraction 	: res=$((a - b))
++ Addition 	        : res=$((a + b))
++ Subtraction 	    : res=$((a - b))
 + Multiplication 	: res=$((a * b))
-+ Division 	: res=$((a / b))
-+ Modulus 	: res=$((a % b))
++ Division 	        : res=$((a / b))
++ Modulus 	        : res=$((a % b))
 
 ### Arrays and Lists
 - Initializing and Declaration
-    + Set Array 		: An Array; Container object for storing values : arr=()
-    + Set Associative Array : Like HashMap/Dictionaries; Key-Value Pairs 	: declare -A aarr=([key]=value)
-    + Set Name References	: Useful for returning arrays in functions   	: declare -n ret_arr="$name_of_array"
+    - Set Array 		    : An Array; Container object for storing values
+        ```console
+        arr=()
+        ```
+    - Set Associative Array : Like HashMap/Dictionaries; Key-Value Pairs 
+        + parse/pass the '-A' Flag to *declare
+        ```console
+        declare -A aarr=([key]=value)
+        ```
+    - Set Name References	: Useful for returning arrays in functions
+        + parse/pass the '-n' Flag to *declare*
+        ```console
+        declare -n ret_arr="$name_of_array"
+        ```
 - Accessing
     - Array/List
-        + Get a specific element			: "${arr[n]}"
-        + Get all List Elements				: "${arr[@]}"
-        + Get all indexes of the elements 		: "${!arr[@]}"
+        + Get a specific element			            : "${arr[n]}"
+        + Get all List Elements				            : "${arr[@]}"
+        + Get all indexes of the elements 		        : "${!arr[@]}"
         + Get count/size/number of elements in the list : "${#arr[@]}"
     - Associative Array/Dictionary/HashMap
         + Get count/size/number of elements in the list : "${#aarr[@]}"
         + Get key of all elements in associative array 	: "${!aarr[@]}"
         + Get value of all elements in associative array: "${aarr[@]}"
-        + Get value of an associative array 		: "${aarr[key]}"
+        + Get value of an associative array 		    : "${aarr[key]}"
 
 ## Symbols:
 + $? : Get the status code for the most recently ran command, Returns '0' = Success; >= '1' = Error
@@ -102,29 +130,30 @@
     ```
 
 ### Resolution Management
-- xrandr
-    -q : Query Monitors
-    --output [target-monitor] 	: Select an output monitor
-    --mode [resolution]		: Set resolution of [target-monitor]
-    --rate [framerate]		: Set [target-monitor]'s refresh rate
-    --primary 			: Set [target-monitor] as the primary monitor
-    --left-of [target-monitor] 	: Set position of selected monitor to the left of a specified monitor
-    --right-of [target-monitor] 	: Set position of selected monitor to the right of a specified monitor
+- X Server
+    - xrandr
+        -q                          : Query Monitors
+        --output [target-monitor] 	: Select an output monitor
+        --mode [resolution]		    : Set resolution of [target-monitor]
+        --rate [framerate]		    : Set [target-monitor]'s refresh rate
+        --primary 			        : Set [target-monitor] as the primary monitor
+        --left-of [target-monitor] 	: Set position of selected monitor to the left of a specified monitor
+        --right-of [target-monitor] : Set position of selected monitor to the right of a specified monitor
 
 ### User Management
 - if Distro is
     - Arch | Gentoo:
         + useradd
-            -m : Specify to create a home directory for the user
-            -g [primary-group] : add user to primary-group
-            -G [secondary,groups] : add user to secondary groups
-            -d [home-directory] : Explicitly specify where to create the home directory for the user
+            -m                      : Specify to create a home directory for the user
+            -g [primary-group]      : add user to primary-group
+            -G [secondary,groups]   : add user to secondary groups
+            -d [home-directory]     : Explicitly specify where to create the home directory for the user
     - Debian:
         + adduser
-            -m : Specify to create a home directory for the user
-            -g [primary-group] : add user to primary-group
-            -G [secondary,groups] : add user to secondary groups
-            -d [home-directory] : Explicitly specify where to create the home directory for the user
+            -m                      : Specify to create a home directory for the user
+            -g [primary-group]      : add user to primary-group
+            -G [secondary,groups]   : add user to secondary groups
+            -d [home-directory]     : Explicitly specify where to create the home directory for the user
 
 ## Snippets:
 + seperate by delimiter:
