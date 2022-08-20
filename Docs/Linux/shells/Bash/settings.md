@@ -3,16 +3,22 @@
 ```
 The linux shells - i.e. Bash, Zsh, Xonsh, Fish etc. - all have individual settings and configs that makes them extremely customizable and extensible.
 
-This is a compilation for the usage of Linux Bash settings 
+This is a compilation for the usage of Linux bash settings 
 ```
 
 ## Setup
 - To Add settings
-	+ Use the *set -o* keyword in your .bashrc file
-		```console
-		set -o {settings}
-		```
-
+    - Change behaviours of bash as if it had been invoked with different command line options
+        + Use the *set -o* keyword in your .bashrc file
+            ```console
+            set -o {settings}
+            ```
+    - Enabled/disabled options for the current shell session
+        + Use the *shopt* command in your .bashrc file
+            ```console
+            shopt {options} [settings]
+            ```
+        
 ## Masterlist
 > List of Bash settings
 + vi : Enable Vim Mode

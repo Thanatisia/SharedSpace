@@ -11,7 +11,8 @@ Table of Contents:
 
 PIP Parameters:
 	- install   : Install packages
-		--upgrade : To upgrade a specific package
+		+ -U | --upgrade : To upgrade packages that already exists
+		+ -r [requirements.txt] | --requirements [requirements.txt] : Parse and Install python packages specified in an external 'requirements.txt' file
 	- download  : Download packages
 	- uninstall : Uninstall/remove packages
 	- freeze    : Get and output installed packages in requirements format (hint: output to 'requirements.txt' for backup and restoration for collaboration)

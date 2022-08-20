@@ -20,4 +20,6 @@
 - 2022-08-11 1000H, Asura
     - Performed a overhaul on the SharedSpace Root and Docs folder README
 
-    
+- 2022-08-20 2328H, Asura
+    - Pushed 'Update 2022-08-20 2328H, Asura'
+

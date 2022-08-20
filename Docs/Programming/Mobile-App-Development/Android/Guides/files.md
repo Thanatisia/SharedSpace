@@ -55,11 +55,33 @@ Files and documentation of files in a typical Android Mobile App Development wor
 ```
 
 ## Android Manifest
+### DESCRIPTION
 ``` 
 The AndroidManifest.xml file is the heart of an android application development project workspace
 
 It contains the instructions of what to compile, add or remove in the APK bundle
 ```
+
+### Basics
+- Declaring Components
+	+ The primary task of the manifest is to inform the system about the app's components
+	- Elements
+		+ <application> : The application tag that contains the information of the application
+			- Attributes
+				- android:icon : Points to 'resources' folder for an icon that identifies the app; Basically the icon that you want to compile with
+					- Example:
+						+ @drawable/app_icon.png
+		+ <activity> : Contains information and attributes for the specified activity (aka 'Page')
+			- Attributes
+				- android:name : Specifies the fully qualified class name of the Activity subclass
+					- Example:
+						+ com.[organization-name].[project-name].[activity-name]
+				- android:label : Specifies a string ('@string') to use as the user-visible label for the activity
+					- Example:
+						+ @string/example_label
+		+ <service> : Contains information and attributes for the specified services
+		+ <receiver> : Contains information and attributes for the specified broadcast receivers
+		+ <provider> : Contains information and attributes for the specified content providers
 
 ### General Structure
 ```xml

@@ -1,53 +1,26 @@
 # Documents - Git
 
 ## Table of Contents
-	- Basic Information
-	- To Note
-	- Documentation
-	- Files
-	- Usage
-	- Help
-	- Authors
-	- Version History
-	- License
-	- Acknowledgements
+- Information
+- Documentation
 
-## Basic Information
+## Information
++ Date Created: 2021-05-24 0044H, Asura
++ Last Updated: 2022-08-18 1707H, Asura
 
-* Authors: 
+### DESCRIPTION
+```
+This folder is for all git-related notes and documents
 
-  * Asura
-
-* Date Created: 2021-05-24 0044H, Asura
-
-* Folder background:
-
-  > This folder is for all git-related notes and documents
-  
-* Contents:
-
-  > Short, simple notes on Git commands and what to do, how to use etc.
-
-* Last Update/Modified:
-  * 2021-05-24 0044H, Asura
-  * 2021-05-24 2026H, Asura
-  * 2021-05-26 0959H, Asura
-  * 2021-09-11 0932H, Asura
-  * 2022-03-22 1057H, Asura
-
-
-
-## To Note
-
-
+- aims to make short, simple notes on Git commands and what to do, how to use etc.
+```
 
 ## Documentation
 
-- Getting Started
+### Folders
++ [Remote Repository Hosts](Remote%20Repository%20Hosts)
 
-
-
-## Files
+### Files
 
 - 1. setup.txt
 - 2. Adding files.txt
@@ -65,6 +38,9 @@
 - 14. Must have files
 - 15. Add new remote repository url.txt
 - 16. Handling Personal Access Tokens.txt
+- 17. Licenses.txt
+- 18. Tags
+- cheatsheet
 - EX1. create new repository.txt
 - EX2. push existing repository.txt
 - Git workflow.txt
@@ -72,74 +48,10 @@
 - Issues-1. Bypass - Untracked working tree files overwriting warning.txt
 - Issues-2. Bypass - Filename too long.txt
 - Open Source Contributions.txt
-- README.md
 - Starters-Guide.txt
 - User-Example.sh
 
 
 
-## Usage
 
-> How to use
-
-
-
-## Help
-
-> Help Commands
-
-
-
-## Authors
-
-> Contributors name, git ID, contact info
-
-
-
-## Version History
-
->  Changelogs
-
-* 2021-05-24 0044H, Asura
-  * Created 
-    * README
-    * Basic Information (Description)
-    * To Note
-    * Documentations
-      * Getting Started
-      * Files
-      * Usage
-      * Help
-    * Authors
-    * Version History (Changelogs)
-    * License
-    * Acknowledgements
-* 2021-05-24 2026H, Asura
-  * Created
-    * Files
-      * 11. Fetching changes.txt
-        12. Pull changes.txt
-  * Modified
-    * Files
-      * Glossary.txt 
-        * Seperated keywords to categories
-          * Added categories [Terminology] and [Commands].
-        * Added new definitions of commands and terminology.
-* 2021-05-26 0959H, Asura
-  * Created
-    * Files
-      * Issues-1. Bypass - Untracked working tree files overwriting warning.txt
-      * Issues-2. Bypass - Filename too long.txt
-
-* 2021-09-11 0932H, Asura
-  * Added
-    * Files
-      * Contributing.txt
-
-
-# License
-
-
-
-# Acknowledgements
 

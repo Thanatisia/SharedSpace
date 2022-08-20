@@ -1,0 +1,64 @@
+#=============#
+# Deployments #
+#=============#
+
+Table of Contents:
+	Background
+
+# Background
+	Deployments in a Remote Git Repository Server like GitHub and GitLab usually comes in the form of Releases
+		- Releases are files provided by the developer/maintainer that have been tagged/packaged with tools and files required to use the project
+			- such as
+				+ Source Code
+				+ Pre-built Binaries
+
+# Releases
+
+- Adding a release
+	- GitHub
+		- Manual Release
+			+ Generally, Releases are handled on the Remote repository site itself, i.e. GitHub's releases page or GitLab's Deployments > Releases page
+			- Steps:
+				1. Creating a release
+					- Go to GitHub.com > Your Repository
+					- Look at the right navbar to the list of files
+						+ Click on 'Releases'
+					+ Click "Draft a new release"
+					- Drafting a release
+						- Specify Tags
+							- Choose a tag
+								+ Type a version number for your release or
+								+ Select an existing tag
+							- (OPTIONAL) Create new tag (If you are creating a new tag)
+								+ Use the 'Target' drop-down menu to select the branch that contains the project you want to release
+						- Specify Title and Description
+							- Type a title and description for your release or
+								+ If you @mention any GitHub users in the description, the published release will include a 'Contributors' section with an avatar list of all mentioned users
+							- Automatically generate your release notes 
+								+ by clicking 'Generater release notes'
+						- (OPTIONAL) Include files into your release
+							- Such as
+								+ Binary Files
+								+ Pre-Compiled Files
+								+ Source Codes
+						- (OPTIONAL) Notify users that the release is not ready for production and may be unstable
+							+ Select 'This is a pre-release'
+						- (OPTIONAL) If GitHub Discussions are enabled in the repository
+							+ Select 'Create a discussion for this release'
+							+ Select the 'Category' drop-down menu and 
+							+ Choose a category for the release discussion
+								- Categories
+									+ General
+						- (OPTIONAL) To work on the release later
+							+ Click "Save Draft"
+						- Publish the release
+							+ Click "Publish Release"
+				
+		- Command Line Release
+			+ using the gh-cli command line utility
+				
+				
+
+# References
++ GitHub Docs | Release Projects on Github | Managing Releases in a repository - https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
+
