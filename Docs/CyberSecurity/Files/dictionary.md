@@ -8,6 +8,7 @@ Compilation of terminologies and acronyms used in Cybersecurity
 + APT = Advanced Persistent Threat
 + CII : Critical Information Infrastructure
 + OSINT : Open Source Intelligence
++ RAT : Remote Administration Tool
 + SCADA : Supervisory Control and Data Acquisition
 
 ## Terminologies

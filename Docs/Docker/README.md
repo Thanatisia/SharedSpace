@@ -33,13 +33,19 @@ i.e.
 and ship it all out as one package
 ```
 
-### Kickstart Steps
+## Steps
+### Kickstart
 > Some starting steps
 + [Docker Setup](Guides/setup.md)
 + [Docker Basics](Guides/basics.md)
 + Creating a *Dockerfile*
 + [Creating your first image](Guides/making-your-own-image.md)
 + Creating your first container
+
+### Intermediate
++ [Docker Networking](Guides/networking.md)
++ Creating a Docker compose
++ Docker Volumes
 
 ## Resources
 + [LinuxHint - ArchLinux Docker Tutorial](https://linuxhint.com/arch-linux-docker-tutorial/)

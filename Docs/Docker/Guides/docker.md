@@ -20,10 +20,10 @@ sudo docker {actions} [image-name]
 + build [path-to-build] : Build a container/image recipe found in the specified path
 + images : To list all available Docker images on your host
 + info : To get information about docker
-+ network {options} : Display Network Information
++ network {options} : Display Network Information and Handle Docker networks
 	- Options
-		+ create {arguments} [bridge-templates] [new-bridge-name] : To create a new bridge network by using existing networks as templates. Using user-defined bridge networks allows the user to control which containers can communicate with each other and containers can be connected to multiple networks at the same time
-			- Arguments
+		+ create {options} {bridge-templates} [new-bridge-name] : To create a new bridge network by using existing networks as templates. Using user-defined bridge networks allows the user to control which containers can communicate with each other and containers can be connected to multiple networks at the same time
+			- Options
 				+ --driver : Create bridge network
 		+ ls : List the networks 
 		+ inspect [network interface] : See information about the specified network
@@ -43,15 +43,17 @@ sudo docker {actions} [image-name]
 		+ -t : Run in terminal
 + rm [container ID] : To remove/delete a container and start from scratch
 + rmi [image-name] : To *remove image*
-+ run {options} [image-name] {(optional) commands...} : Start running the specified image and execute the commands specified (if any)
++ run {options} [image-name] {(optional) commands...} : Start running the specified image/container and execute the commands specified (if any)
 	- Options
 		+ -d : Start as a daemon (Backend Service)
 		+ -i : Start Interactive Mode
-		+ -p [port-number] : Start using a specific Port Number
+		- -p [port-number] : Start using a specific Port Number
+		    + -p [internal-port]:[external-port] : To Port Forward and expose a specified internal port within the Docker container to an external port on the host system
 		+ -t : Run in terminal
 		+ -v [host-directory]:[container-volume] : To attach the specified host directory to the specified container volume location located in the container's filesystem; Used for storage sharing between container and host
-		+ --name=[Container ID] : Provide a specific Container ID as the name of the container
-		+ --network=[bridge-name] : Specify the Network Bridge Interface for the container to use
+		+ --name=[Container ID] : Provide a specific Container ID as the name of the container; aka Set container name
+		+ --network=[bridge-name] : Specify the Network Bridge Interface for the container to use; aka Run Docker container with a specific network
+		+ --rm : Delete the container created and its cache after the Docker instance has ended
 + search [image-name] : To search for a docker image called the specified *image-name*
 + start [Container ID or name] : Start the specified container. Note: You will need to get the container id/name to start a specific container, please use *ps -l* to display all running and stopped containers to get the container ID/name.
 + stop [Container ID or name] : Stop the specified container. Note: You will need to get the container id/name to start a specific container, please use *ps -l* to display all running and stopped containers to get the container ID/name.
@@ -67,7 +69,7 @@ sudo docker {actions} [image-name]
 
 - Creating a named image
     ```console
-    docker run --name [your_container_name] [your-container-id]
+    docker run --name [your_container_name] {your-container-id}
     ```
 
 

@@ -1,0 +1,8 @@
+# Pacman Files
+
+## Repository Files
++ mirrors : /etc/pacman.d/mirrorlist
+	```
+	Contains all the mirrors checked by pacman
+	```
+

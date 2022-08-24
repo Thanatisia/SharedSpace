@@ -1,0 +1,22 @@
+# ArchLinux - repository mirrors
+
+- Pacman Mirrors Location : /etc/pacman.d/mirrorlist
+
+```
+ArchLinux uses the pacman package manager
+
+Pacman's repository mirrors are found in '/etc/pacman.d/mirrorlist'
+	+ This file dictates the links of pacman package mirrors and 
+	- The file follows a downwards hierarchy
+		+ The top mirror URL will be searched first followed the next all the way down
+		+ Thus, please place the mirror that's closest to your region at the top positions
+```
+
+- To update mirrors
+	- Open /etc/pacman.d/mirrorlist
+		+ Comment out the repositories mirror url
+	- Refresh and Upgrade your pacman cache
+		```console
+		sudo pacman -Syu
+		```
+

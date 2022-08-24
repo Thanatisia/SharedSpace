@@ -82,7 +82,9 @@ SQL:
 
     SQL Constraints:
         AUTO_INCREMENT  : Often used with a PRIMARY KEY to generate a unique ID for each new row (row number) ina  table
-        PRIMARY KEY     : 
-        FOREIGN KEY
+        PRIMARY KEY     : Set as the main identifier of a table; Can only have 1 PRIMARY KEY per table
+        FOREIGN KEY	: This is a PRIMARY KEY of a reference table; Can have multiple FOREIGN KEYS per table to form a composite key
+	    - Schema Syntax:
+		[column_name] [type] FOREIGN KEY [foreign_key_column_name] REFERENCES (table_name)
         NOT NULL        : To require a field include a value
 
