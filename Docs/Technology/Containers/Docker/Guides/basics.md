@@ -30,6 +30,7 @@
 ## Resources
 + [YouTube | NetworkChuck | You need to learn Docker RIGHT NOW //Docker Containers 101](https://youtu.be/eGz9DS-aIeY)
 + [YouTube | takacsmark | Dockerfile Tutorial by Example - ( Part I - Basics )](https://www.youtube.com/watch?v=6Er8MAvTWlI)
++ [Docker Hub](hub.docker.com)
 
 ## References
 

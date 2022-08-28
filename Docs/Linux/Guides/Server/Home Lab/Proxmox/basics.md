@@ -13,6 +13,14 @@ Proxmox is a Type-1 Hypervisor Operating System and is used to make any hardware
 
 + A type-1 hypervisor operates and runs off bare-metal from ground up, meaning the CPU and GPU is entirely usable by the hypervisor
 
+## System Features
+- Containers
+    + Proxmox uses LXC - A Linux Containerization platform - instead of Docker
+
+## Notes
+- Proxmox doesnt use WiFi, only Ethernet
+- Proxmox may ask you to check out subscription
+	- The subscription is primarily just to provide services, you can just ignore it to use the full program
 
 ## References
 + [YouTube | NetworkChuck - Virtual Machines Pt 2. (Proxmox Install with Kali Linux)](https://youtu.be/_u8qTN3cCnQ)

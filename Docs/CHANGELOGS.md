@@ -23,3 +23,13 @@
 - 2022-08-20 2328H, Asura
     - Pushed 'Update 2022-08-20 2328H, Asura'
 
+- 2022-08-25 0918H, Asura
+    - Moved Folder "Docker" to Technology/Containers
+	- My Reasoning
+	    + Containers is a type of Technology
+	    + Docker is a type of Container
+
+    - Moved Folder "Termux" to "Operating Systems\Android\Free Open-Source Software (FOSS)"
+	- My Reasoning
+	    + Termux is an Android free open source software
+

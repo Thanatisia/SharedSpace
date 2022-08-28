@@ -60,6 +60,27 @@ PubNub is a developer API platform that provides Real-Time API integration with 
             + PNConfiguration : your *PNConfiguration()* object
         - Options
 
+### Event Listeners
+> Listeners help your app react to events and messages. You can implement custom app logic to respond to each type of message or event.
+- presence : Listens for presence events
+	- Presence Events
+		+ No Operation Listener (pass)
+	- Parameters
+		+ pubnub
+		+ presence
+- status : Listens for status events
+	- when it receives an event of type *PNConnectedCategory* (Initial connection detected)
+		+ It publishes the message
+	- Parameters
+		+ pubnub
+		+ status
+- message : This event listener will wait and listen for new incoming messages in a channel; This is where you send the messages whenever a message is received
+	- Attributes
+		+ message.message : Contains the messages sent on the channel
+	- Parameters
+		+ pubnub
+		+ message
+
 ### Objects
 - PNConfig
     - Attributes
@@ -79,7 +100,8 @@ PubNub is a developer API platform that provides Real-Time API integration with 
     - Attributes
         + .PNUnexpectedDisconnectCategory : Event happens when radio/connectivity is lost
         + .PNConnectedCategory : Connected event. You can do stuff like publish, subscription, UI/Internal notifications
-            - This is where you send messages
+            - This is the startup event
+		+ This will only run on initial startup
         + .PNReconnectedCategory : Reconnection; Event happens when radio/connectivity is lost and regained
         + .PNDecryptionErrorCategory : Handle message decryption errors. Probably client configured to encrypt messages and on live data feed it received in plaintext
 

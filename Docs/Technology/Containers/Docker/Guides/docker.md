@@ -72,4 +72,7 @@ sudo docker {actions} [image-name]
     docker run --name [your_container_name] {your-container-id}
     ```
 
-
+- To list all images
+    ```console
+    docker image ls
+    ```

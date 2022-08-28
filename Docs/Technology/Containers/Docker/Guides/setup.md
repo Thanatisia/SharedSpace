@@ -53,6 +53,17 @@
 	gpasswd -a [your-username] docker
 	```
 
+#### Start the Docker service
+- Start Docker Service
+	```console
+	sudo systemctl start docker
+	```
+
+- (OPTIONAL) Enable Docker Service
+	```console
+	sudo systemctl enable docker
+	```
+
 #### To change location of Docker images
 - If you are using SystemD
 	- Stop the Docker Daemon

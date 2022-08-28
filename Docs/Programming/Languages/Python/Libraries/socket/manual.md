@@ -164,7 +164,7 @@ import socket
 ## References
 
 ## Resources
-
++ [YouTube | buildwithpython | Python Network Programming 5 - Sending Commands (Socket Programming)](https://youtu.be/JT0WaoHR0TI)
 + [RealPython - Sockets](https://realpython.com/python-sockets/)
 
 ## Remarks
