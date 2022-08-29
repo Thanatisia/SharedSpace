@@ -7,7 +7,7 @@ Collection of various Home Lab/Server and self-hosting utilities
 ```
 
 ## Unidentified
-
++ Ansible
 
 ## Music Server
 + beets
@@ -31,6 +31,7 @@ Collection of various Home Lab/Server and self-hosting utilities
 + Network File System (NFS)
 ### Software 
 + OpenMediaVault
++ NextCloud
 
 ## VPN Servers
 ### Protocol-based
@@ -60,5 +61,6 @@ Collection of various Home Lab/Server and self-hosting utilities
 
 ## References
 + [YouTube | NetworkChuck | access everything from your web browser](https://youtu.be/gsvS2M5knOw)
++ [YouTube | Wolfgang's Channel | What's on my Home Server? Storage, OS, Media Server, Provisioning, Automation](https://youtu.be/f5jNJDaztqk)
 
 ## Remarks

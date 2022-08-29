@@ -20,11 +20,23 @@
 #### Synopsis/Syntax
 + gpg {options} [arguments...]
 #### Parameters
+- General
+    + -a | --armor : Create ASCII armoured output
+    + --batch : Use batch mode. Never ask, do not allow interactive commands.; Required when using none-interactive (aka automated) options
+    + --no-batch : Opposite of '--batch'; Disable Batch mode. This may be of use if '--batch' is enabled from an options file
+    + -i | --interactive : Prompt before overwriting any files
+    + -v | --verbose : Verbose flag; Give more information during processing. If used twice, the input data is listed in detail
+    + -q | --quiet : Quiet flag; Give less information
+    + --passphrase [key|string] : Allows you to parse a "key" or a passphrase string directly into gpg without the use of a popup interactive GUI (not recommended unless scripting); Requires the use of "--batch"
+    - --passphrase-fd [file-descriptor|int] : Reads the passphrase/secret key from a file descriptor (aka a file object n). 
+	+ If you used 0 for n : The passphrase will be read from stdin.
+	+ This can only be used if only one passphrase is supplied
+	+ Requires the use of "--batch"
+    + -o [output-filename] | --output [output-filename] : Outputs the encrypted file with the specified target filename
 - Symmetric Encryption/Decryption (AES)
     + -c [target-filename] : Encrypt specified file with AES
     + -d [encrypted-filename] : Decrypt the specified encrypted file using AES
 - Asymmetric Public Key Encryption (RSA)
-    + -a | --armor : Create ASCII armoured output
     + -d | --decrypt [encrypted-filename] : To decrypt the specified encrypted file
     + -e | --encrypt {options} [filename] : To encrypt the specified filename with Public Key Encryption
         - Options
@@ -42,6 +54,7 @@
                 - You can quickly boost the entropy using rng-tools
                     + Package Name : rng-tools
     + --list-keys : Get the list of your keys
+
 #### Usage
 - Encrypt file
     ```console
@@ -50,6 +63,15 @@
 - Decrypt file
     ```console
     gpg -d test.txt.gpg
+    ```
+
+- Encrypt a file via the CLI (automatically)
+    + Using "--batch" and "--passphrase"
+    - Using symmetric key encryption as example
+	+ You can use Asymmetric/Public Key Encryption as well
+    ```console
+    secret_Key="your-key"
+    gpg -c --armor --batch --passphrase $secret_Key --output "output-file-name" "target-input-file-name"
     ```
     
 - Symmetric Encryption

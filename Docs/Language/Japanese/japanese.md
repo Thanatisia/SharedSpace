@@ -411,6 +411,10 @@ Syntax and Structure:
     + To return; to go back
 - 書き : Kaki
     + To read
+- 来 : Ki 
+    + Come
+- 消え : Kie 
+    + Vanish; To Disappear 
 - 聞き : Kiki
     + To hear
 - 嫌い : Kirai
@@ -481,6 +485,11 @@ Syntax and Structure:
         + 喋る : Shyaberu
 - 過ぎ : Sugi
     + to pass; after; exceed; go beyond
+- 助かり : Tasukari 
+    + To Help; Assistance
+    - Alternative 
+        + Tasuke : 助け
+        + Tasukete : 助けて
 - 照らし : Terashi
     + To illuminate; shine
 - 閉じ : Toji 
@@ -617,6 +626,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + informal ending for "-のこと (-no koto)"
 
 ## Adverb
+- 放課後 : Houkago 
+    + After school
 - 前 : Mae
     + Previously; Before; earlier; In front of
 - 真っ直ぐ : Massugu 
@@ -730,10 +741,14 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 窓 : Window
 - Mahou
     - 魔法 : Magic
+- Megane 
+    - 眼鏡 : Glasses
 - Michi 
     - 道 : Road; Street; Method
 - Mirai
     - 未来 : Future
+- Mizugi 
+    - 水着 : Swimsuit
 - Monogatari
     - 物語 : Story; Tale; Legend
 - Musuko 
@@ -854,6 +869,7 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 + otsukaresamadeshita : お疲れ様でした : Thank you for your hard work
 + moushiwakearimasen : 申し訳ありません : Sincere apologies; very sorry
 + urusai : 煩い : Shut up; keep quiet
++ tasukete! : 助けて! : Help me!
 + yahari : やはり : As I thought; also; still; of course; nevertheless; same as やっぱり
 + yappari : やっぱり : As I thought; also; still; of course; nevertheless; same as やはり
 
