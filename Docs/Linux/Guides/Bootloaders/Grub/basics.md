@@ -23,17 +23,27 @@ GRUB is one of the most well-known and widely used bootloaders that is easy to i
 		}
 	```
 
+### Notes
+- Installation
+	- Depending on the Bootloader Filesystem, MBR or UEFI,
+		+ MBR : GRUB must be installed in the Disk Label (/dev/sdX)
+		- (U)EFI : GRUB can be installed in the Boot partition (/dev/sdX1 usually)
+			+ Within the EFI folder
+
 ## Folders
 
 ## Files
 + /boot/grub/grub.cfg : The custom grub configuration file
 + /etc/default/grub : The default GRUB directory; used by 'grub-install' to generate the grub core.img file
 
-## Scripts
+## Commands
 ### Main
 > Grub has 2 main commands you will generally use
 + grub-install : To install GRUB Bootloader into the boot system
 + grub-mkconfig : To generate the grub configuration files
+- grub-mkfont : To convert a target font into a font that GRUB can actually read
+	- GRUB readable fonts
+		+ .pf2
 
 ### Helper Utilities
 > Grub has other helper utilities that may be useful with the configuration

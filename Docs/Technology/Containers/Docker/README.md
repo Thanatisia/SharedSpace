@@ -38,13 +38,15 @@ and ship it all out as one package
 > Some starting steps
 + [Docker Setup](Guides/setup.md)
 + [Docker Basics](Guides/basics.md)
-+ Creating a *Dockerfile*
++ [Creating a *Dockerfile*](Guides/Dockerfile.md)
 + [Creating your first image](Guides/making-your-own-image.md)
 + Creating your first container
 
 ### Intermediate
 + [Docker Networking](Guides/networking.md)
-+ Creating a Docker compose
+- Creating a Docker compose
+	+ [docker-compose command](Guides/Docker%20Compose/docker-compose.md)
+	+ [docker-compose YAML Configuration File](Guides/Docker%20Compose/docker-compile%20YAML%20Configuration.md)
 + Docker Volumes
 
 ## Resources

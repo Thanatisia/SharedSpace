@@ -15,6 +15,9 @@
 + WEP : Wired Equivalent Privacy
 + WPA : WiFi Protected Access
 
+### Routing
++ CDN : Content Delivery Network
+
 ### Cryptography
 + IV : Initialization Vector
 

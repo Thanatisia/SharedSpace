@@ -57,8 +57,9 @@
 + n : ん
 
 ### Connectors
-- が : ga : Emphasis on subject
-    - Synopsis/Syntax : [subject] ga [object]
+- が : ga : 
+    - Emphasis on subject
+        - Synopsis/Syntax : [subject] ga [object]
         - Meaning : subject **is** [object]
 - へ : he : To; Short Distance; Within Reach
 - に : ni : To; at; on; in; into; upon; Long Distance; At a distance
@@ -208,6 +209,9 @@
 ### Shot (Attempts)
 > The number of rotations/counts/times of tries/attempts is measured as -っ発
 + 一発 : ippatsu : One Shot
+### Sheets
+> 枚 : Used for flat; thin things 
++ 十枚 : jyuu mai : One Sheet
 ### Hours
 > The number of hours is N時間
 + 一時間 : Ichi jikan : 1 Hour 
@@ -264,6 +268,8 @@
 + ５日 : Itsuka : 5th Day of the Month
 + ２０日 : Hatsu : 20th Day of the Month
 + 明日 : ashita : Tomorrow
+    - Alternate Pronounciations 
+        + あす : Asu
 + 昨日 : kinou : Yesterday 
 + 朝 : Asa : Morning
 + 晩 : Ban : Night
@@ -312,6 +318,10 @@
 + 馬 : Uma : Horse 
 + 牛 : Ushi : Cow
 
+## Feelings
++ 悲しみ : Kanashimi : Sorrow; Sadness; Grief; Depression; Melancholy
++ 孤独 : Kodoku : Loneliness; Solitude; Isolation; Separation
+
 ## Adjectives
 ```
 - Japanese has 2 Connectors for Adjectives/Descriptive words
@@ -324,12 +334,15 @@
 + 便利な : Benri na : Convenient
 + 近い : Chikai : Near; Close; Short
 + 小さな : Chiisana : Small; Little; Tiny
++ 深い : Fukai : Deep; Profound; Thick
++ ふさわしい : Fusawashii : Deserving; Fit; Proper; Befitting
 + 元気な : Genki : Fine; Healthy; Energy; Courage
 + 早い : Hayai : Early; Fast; Quick
 + 速い : Hayai : Fast; Quick
 + 酷い : Hidoi : Terrible; Awful
 + 広い : Hiroi : Wide; Spacious
 + 意地悪な : Ijiwaruna : Mean
++ 忙しい : Isogashii : Busy
 + 輝きい : Kagayakii
     + Shine; Radiant
 + カッコいい : Kakkoi 
@@ -437,18 +450,30 @@ Syntax and Structure:
         + 見せて : Misete : Show (me/you) something
         + 見せる : Miseru : To show; informal Form of "misemasu"
         + 見せろ : Misero : Show me; commanding 
+- 見つけ : Mitsuke 
+    + To Find; To locate; To Discover; find out
+- 求め : Motome 
+    + To Request; To Demand; To Appeal; To Claim; To Seek
 - 泣き : Naki
     + To cry; To weep; To lament
 - 鳴き : Naki
     + To cry
+- 慣れ : Nare 
+    + To get used to; accustomed to
 - なり : Nari
     + To become
+- 寝 : Ne 
+    + To sleep; To nap
 - 願い : Negai 
     + To wish; to desire; to request; to hope
+- 眠り : Nemuri 
+    + To sleep
 - 逃げ : Nige 
     + To run; escape
 - 覚え : Oboe 
     + To remember; recall; experience
+- 落ち : Ochi 
+    + To fall; To drop down; To fall down
 - 追い : Oi
     + To Chase
 - 起き : Oki
@@ -500,6 +525,8 @@ Syntax and Structure:
     + To stop
 - 使い : Tsukai
     + To use; user
+- 着き : Tsuki 
+    + To wear; To put on; To add on
 - 伝え : Tsutae
     + To tell
 - 続き : Tsudzuki 
@@ -518,6 +545,8 @@ Syntax and Structure:
     + To understand; comprehend
 - 解り : Wakari
     + To understand 
+- 笑い : Warai 
+    + To Laugh; Smile; Laughter 
 - 忘れ : Wasure 
     + Forget
 - 読み : Yomi
@@ -547,6 +576,10 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 - ~ぐらい : -gurai 
     + About; Estimation
     - Same as "~くらい"
+- ~じゃない : -jyanai
+    + Not; Opposite Of
+- ~かも : -kamo
+    + Maybe; Perhaps
 - ~かな : -kana
     + I wonder
 - ~から : -kara 
@@ -556,6 +589,11 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
         + Because 
     - Adverb
         + Off
+- ~く: -ku
+    + allows い-adjectives to “continue” on and connect to other elements, forming new words and meanings
+    - Examples
+        - Tadashii (Tadashii)
+            + 正しく慣れない (Tadashiku Narenai)
 - ~くらい : -kurai 
     + About; Estimation
     - Same as "~ぐらい"
@@ -573,8 +611,21 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + "if -"; Formal conditional indicator
 - ~のこと : -no koto
     + About; Focus on the subject
+- ~のように : -no youni
+    + like; as; comparison
 - ~のために : -no tame ni 
     + for; on behalf of; because of
+- ~るんだ : -[Verb] runda
+    + Indicator of Requirement
+    + Need to; Want to
+    + Used after a verb
+    + Mostly used by men; Women uses [の] or [~んです]
+    - Examples 
+        + ~するんだ : ~surunda : Need to do
+-しかも~ : Shikamo~
+    +  Moreover
+-しかし~ : Shikashi~
+    + But; However
 - ~します : -shimasu
     + To do; Formal indicator for wanting to do a verb
 - ~と 思います : -to omoimasu
@@ -606,6 +657,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + To do; do; make
     + Indicator of "to do"
     + Similar to "~る"
+- ~た : -ta 
+    + Was; Past Tense
 - ~たい : -tai
     + want
     + informal ending for "-が 欲しい です"
@@ -628,16 +681,22 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 ## Adverb
 - 放課後 : Houkago 
     + After school
+- いつも : Itsumo 
+    + Everytime; Forever
 - 前 : Mae
     + Previously; Before; earlier; In front of
 - 真っ直ぐ : Massugu 
     + Straight; Upright; Direct; Straightforward 
+- もっと : Motto 
+    + More; Longer; Further
 - 思い切り: Omoikiri
     + with all of one's strength/heart
 - 先 : Saki
     + Behind; previous; prior; former; destination
 - 静かに : shizuka ni
     + Be Quiet
+- 全て : Subete
+    + All; Entirely; Whole; Wholly; In general 
 - 直ぐ : Sugu 
     + Immediately; Soon; Right then; easily
 - 確かに : Tashika ni 
@@ -648,18 +707,32 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - Sometimes
 - 突然 : Totsuzen 
     - Suddenly; abruptly
+- よく : Yoku 
+    - Often
+- 是非 : Zehi 
+    - Certainly; Definitely; I'd love to
 - 全然 : Zen Zen
     + at all; Absolutely; completely; entirely
+- ずっと : Zutto
+    + Always; all the time; more; throughout
 
 ## Vocabulary
 - Ame
     - 雨 : Rain
+- Ashi
+    - 足 : Leg
 - Basho
     - 場所 : Place; Location
 - Boushi
     - 帽子 : Hat
+- Chikatetsu 
+    - 地下鉄 : Subway; Underground Train; Metro
 - Chikyuu
     - 地球 : Earth
+- Doku 
+    - 毒 : Poison
+- Egao 
+    - 笑顔 : Smile
 - Eki
     - 駅 : Eki
 - Enpitsu
@@ -689,6 +762,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 星空 : Starry Sky
 - Ie
     - 家 : House; Home; Residence; Building
+- Ijimekko 
+    - いじめっ子 : Bully
 - Iro 
     - 色 : Colour
 - IroIro
@@ -751,6 +826,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 水着 : Swimsuit
 - Monogatari
     - 物語 : Story; Tale; Legend
+- Mori 
+    - 森 : Forest; Woods
 - Musuko 
     - 息子 : Son
 - Musume 
@@ -794,6 +871,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 世界 : World
 - Sentaku 
     - 選択 : selection; choice; option; pick
+- Shinkai 
+    - 深海 : Deep sea
 - Shyudai 
     - 主題 : Subject; Theme; Motif
 - Shyukudai 
@@ -823,6 +902,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 家 : House; Dwelling
 - Uchyuu 
     - 宇宙 : Space; Universe; Cosmos
+- Umi 
+    - 海 : Sea
 - Uso
     - 嘘 : Lie
 - Usotsuki 
@@ -846,6 +927,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 勇気 : Strength; Bravery
 - Yuurei
     - 幽霊 : Ghost
+- Zatsudan 
+    - 雑談 : Small talk; Idle Talk; Chatting
 - Zetsubou
     - 絶望 : Despair; Disappointment; Hopeless
 
@@ -862,17 +945,34 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 + Ijou : 以上 : That's all
 + ika : 以下 : Below; Beneath; Under; Less than
 + ikaga deshouka? : 如何でしょうか : How was it?
++ itsumademo : いつまでも : Forever and ever
++ itsumadoori : いつまどおり : As usual
 + kudasai : Please
 + tokoro ni : 所に : by the way 
 + uketori : 受け取り: Acceptance; Accept
 + youkousou : ようこうそ : Welcome!
 + otsukaresamadeshita : お疲れ様でした : Thank you for your hard work
 + moushiwakearimasen : 申し訳ありません : Sincere apologies; very sorry
++ ochitsuite : 落ち着いて : calm down; take it easy
 + urusai : 煩い : Shut up; keep quiet
++ sakebita ga terrunda : 叫びたがてっるんだ : I want to scream
 + tasukete! : 助けて! : Help me!
 + yahari : やはり : As I thought; also; still; of course; nevertheless; same as やっぱり
 + yappari : やっぱり : As I thought; also; still; of course; nevertheless; same as やはり
++ yoku dekimashita : よく 出来ました : Well Done; Good Job
+
+## Expressions
+> Small grammar/connectors Used by individuals during communication to transition or announce certain things/emotions/mood/message
++ さて : Sate : Now; Similar to そして; 所で
++ そして : Soshite : And; That's why
++ そうして : Soushite : Then
 
 ## Rules
 ### Grammar
 
+## Resources
+
+## References
++ [LearnJapaneseDaily - Grammar - Runda](https://learnjapanesedaily.com/japanese-%E3%82%8B%E3%82%93%E3%81%A0-grammar-runda.html)
+
+## Remarks

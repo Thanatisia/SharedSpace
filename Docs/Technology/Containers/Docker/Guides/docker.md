@@ -25,6 +25,7 @@ sudo docker {actions} [image-name]
 		+ create {options} {bridge-templates} [new-bridge-name] : To create a new bridge network by using existing networks as templates. Using user-defined bridge networks allows the user to control which containers can communicate with each other and containers can be connected to multiple networks at the same time
 			- Options
 				+ --driver : Create bridge network
+                + --subnet [subnet-mask/prefix] : Specify the subnet mask/prefix for this new docker network
 		+ ls : List the networks 
 		+ inspect [network interface] : See information about the specified network
 + stats {options} [container ID...] : To get access to CPU, memory, network and disk utilization for all of the containers running on your host (or the specified containers if provided); You may specify as many container IDs as you want
@@ -75,4 +76,19 @@ sudo docker {actions} [image-name]
 - To list all images
     ```console
     docker image ls
+    ```
+    
+- To list existing running docker container processes
+    ```console
+    sudo docker ls
+    ```
+    
+- To startup a docker container
+    ```console
+    sudo docker run --name [container-name] -itd -p [host-port:container-port] [image-name]
+    ```
+    
+- To create a new docker network
+    ```console
+    sudo docker network create [network-name] --subnet [subnet-mask/prefix]
     ```

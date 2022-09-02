@@ -10,6 +10,13 @@ Documentation, Guides and general tips n tricks for the Python Library - PyInsta
 * [Setup](#setup)
 
 ## Information
+### DESCRIPTION
+```
+PyInstaller is a python package created to provide python with the capability to compile/build python scripts and projects into an executable.
+
+Basically, PyInstaller allows easy distribution of python applications through binary files
+```
+
 ### File Locations
 - Folders
     - Working Directory
@@ -162,4 +169,4 @@ Solution: Include the missing import library to the "hidden-import" list
     
 ## Resources
 + [PyInstaller Docs](https://pyinstaller.org/en/stable/usage.html)
-
++ [RealPython - PyInstaller](https://realpython.com/pyinstaller-python/)

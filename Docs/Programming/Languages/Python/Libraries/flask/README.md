@@ -1,0 +1,21 @@
+# Python Library - flask
+
+```
+Setup, Documentation, Guides and general tips n tricks for the Python Library
+```
+
+## Table of Contents
++ [File structure](#file-structure)
++ [Resources](#resources)
+
+## File structure
+```
+root
+|
+|-- README.md
+|-- manual.md
+|-- setup.txt
+```
+
+## Resources
++ [YouTube | NetworkChuck | build a meme Python website (Flask Tutorial for Beginners)](https://www.youtube.com/watch?v=5aYpkLfkgRE)

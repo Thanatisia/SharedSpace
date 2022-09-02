@@ -14,6 +14,8 @@
                 + But those VMs can use the Internet provided by the host machine freely
 
 ## Networking 
+- DNS Sinkhole : A Mechanism aimed at protecting users by intercepting DNS requests attempting to connect to either known malicious, unwanted or advertisement domains and returning a false/controlled IP address.
+    - This "controlled" IP Address will then point to a sinkhole server defined by the DNS sinkhole administrator
 - IP Address: The name/network address of a network-enabled device within the network
     - This changes depending on if 
         + it is statically set, 
@@ -25,6 +27,8 @@
 ## Protocols
 + ARP : The Address Resolution Protocol; Maps an IP Address of a device in the network to the MAC Address for location by the router
 + DHCP : Dynamic Host Control Protocol; Used by a router to Dynamically assign an IP Address to a device within the network whenever
+- DNS : Domain Name Service, an Internet protocol that basically maps/translates the IP address of your server with a Human-readable string, essentially becoming the Server's "name".
+    - This new string that you can access is known as the "Domain Name" of the Server
 - NAT : Network Address Translation
     ```
     A method of remapping an IP address space into another by modifying addresses in the IP header of packets while they are in transit across a traffic routing device. 
