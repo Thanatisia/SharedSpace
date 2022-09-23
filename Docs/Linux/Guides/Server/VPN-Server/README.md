@@ -20,17 +20,37 @@ A VPN can be either
 - Accessing your Home Network, Home Lab/Server from an external/private (Untrusted) Network 
 	+ through an encrypted stream
 
-## VPN Protocols
-+ L2TP IPSEC
-	- IPSec uses predefined communication channels 
-		+ UDP Port 500 and UDP Port 4500 to establish the encrypted tunnel and 
-		+ ESP for the transmission of encrypted data
+## VPN Tunneling Protocols
++ IPSec
+    - IPSec uses predefined communication channels 
+        + UDP Port 500 and UDP Port 4500 to establish the encrypted tunnel and 
+        + ESP for the transmission of encrypted data
+    - Linux-related Package/Services
+        + ipsec
 + OpenVPN
 	- Uses a chosen UDP or TCP port, allowing for flexible configuration choices
++ PP2P
++ SSTP
++ WireGuard
 
-## VPN Servers
-### L2TP IPSec
-+ [Self-Hosted L2TP IPSec VPN Server (Automated, thanks to hwdsl2)](IPSEC\Automatic\hwdsl2\linux-setup-ipsec-vpn\setup.txt)
+## VPN Encryption
+- L2TP
+    - Linux-related Package/Services
+        + xl2tpd
++ IKEv2
+
+## Implementations
+### IPSec
+- Libreswan
+    - Repositories
+        + [Self-Hosted L2TP + IKEv4 IPSec VPN Server (Automated, thanks to hwdsl2)](IPSEC\Automatic\hwdsl2\linux-setup-ipsec-vpn\setup.txt)
+	    - Dependencies
+		+ Libreswan : IPSec server (with IKEv2 support)
+		+ xl2tpd    : L2TP provider
+- Strongswan
+- Openswan
+
+
 ### OpenVPN
 + PiHole
 

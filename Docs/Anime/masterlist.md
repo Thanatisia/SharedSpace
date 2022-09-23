@@ -23,6 +23,7 @@ This is a masterlist/collection of all anime, anime movies, OVAs etc that I have
 - Fullmetal Alchemist
 	+ Fullmetal Alchemist: Brotherhood
 + Fuuka
++ Gekkan Shoujo
 + Gintama
 + Goblin Slayer
 - Gundam
@@ -44,17 +45,20 @@ This is a masterlist/collection of all anime, anime movies, OVAs etc that I have
 	+ Diamond is Unbreakable
 	+ Vento Aureo
 	+ Stone Ocean
++ Kanojo, Okarishimasu (Rent a Girlfriend)
 + Keroro Gunsou
 + Kimi no Iru Machi
 + Kobayashi-san chi no Maidragon
 + KonoSuba: God's Blessing on This Wonderful World!
 + Kyoukai no Kanata
++ Lycoris Recoil
 + Magic Knight Rayearth
 + Mahouka Koukou no Rettousei
 + Mirai Nikki
 - Monogatari
 	+ Bakemonogatari
 	+ Nekomonogatari
++ My Dress-up Darling
 - Naruto
 	+ Naruto Shippuden
 + Nichijou

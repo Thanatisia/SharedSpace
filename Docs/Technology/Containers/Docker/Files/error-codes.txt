@@ -1,0 +1,17 @@
+======================
+| Docker Error Codes |
+======================
+
+0: Absence of attached foreground process
+1: Container stopped due to either Application Error or an Incorrect Reference in Dockerfile to a file that is not present in the container
+126: Permission problem/command is not executable
+127: Possibly typos in shellscript with unrecognizable characters
+137: Container received SIGKILL (Kill Signal), i.e. docker kill
+143: Container received SIGTERM (Terminate Signal), i.e docker(-compose) stop
+
+## References
+- betterprogramming: Understanding docker container exit codes (https://betterprogramming.pub/understanding-docker-container-exit-codes-5ee79a1d58f6)
+
+## Resources
+
+## Remarks

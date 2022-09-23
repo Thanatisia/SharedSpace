@@ -115,7 +115,7 @@ In fact, Unbound can make any Linux system into a Recursive DNS server/resolver
                 private-address: 172.16.0.0/12
                 private-address: 10.0.0.0/8
                 private-address: fd00::/8
-            private-address: fe80::/10
+                private-address: fe80::/10
             ``` 
 
     - Open unbound configuration file 
@@ -151,6 +151,10 @@ In fact, Unbound can make any Linux system into a Recursive DNS server/resolver
                         - Under Custom (n)
                             - Input your Pi-hole Interface IP address and the Pi-hole Port number that you used in the Unbound configuration file
                                 + Seperated by '#' delimiter
+                                - The IP Address should be the same one set in your '/etc/unbound/unbound.conf.d/pi-hole.conf' interface variable
+                                    + In this example: 127.0.0.1
+                                + Port number should be the same one set in your '/etc/unbound/unbound.conf.d/pi-hole.conf' port variable
+                                    + In this example: 5335
                             - Syntax
                                 ```
                                 [IP-address]#[port-number]
@@ -159,6 +163,18 @@ In fact, Unbound can make any Linux system into a Recursive DNS server/resolver
                     + Press Save
 
 + When you connect to Pi-hole, this should now act as both your DNS Server and DNS Sinkhole/Ad-blocker
+
+- To test unbound
+    - Resolve 'whoami.akamai.net'
+        - Using dig
+            ```console
+            dig +short whoami.akamai.net
+            ```
+        - Using nslookup
+            ```console
+            nslookup whoami.akamai.net
+            ```
+    + You should see the your pi-hole/unbound DNS Resolver IP Address (i.e. 127.0.0.1#53) as the main server as well as the DNS provider it forwards to
             
 ## References
 + [YouTube | TechHut | The Pi-Hole install EVERYONE needs!](https://www.youtube.com/watch?v=xtMFcVx3cHU)

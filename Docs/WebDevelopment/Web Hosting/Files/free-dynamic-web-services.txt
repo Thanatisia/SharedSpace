@@ -1,0 +1,24 @@
+# List of Free Dynamic Web Services Services
+
+## INTRODUCTION
+
+### Website Types
+
+```
+In Web Development, there are generally - 2 forms of Websites
+	- Static Websites
+	- Dynamic Websites
+
+Static Websites operate entirely on a client-side basis
+	- There are generally no interactions with a database or libraries that requires server-side backend programming
+
+Dynamic Websites operates on a client-server relationship
+	- Client Side : HTML5 CSS3 Javascript
+	- Server Side : Python Flask, PHP, NodeJS
+```
+
+## Dynamic Web Services
++ heroku (might change)
++ vercel
++ fly
++ pythonanywhere.com

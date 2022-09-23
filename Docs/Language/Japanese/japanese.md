@@ -62,11 +62,11 @@
         - Synopsis/Syntax : [subject] ga [object]
         - Meaning : subject **is** [object]
 - へ : he : To; Short Distance; Within Reach
-- に : ni : To; at; on; in; into; upon; Long Distance; At a distance
+- に : ni : with; To; at; on; in; into; upon; Long Distance; At a distance
 - の : no : Belonging to; Of something; concept of ['s]
     - Synopsis/Syntax : [subject] の [object]
         - Meaning : subject's object
-- と : to : and; as well as
+- と : to : and; as well as; with
     - Similar to や
     - Synopsis/Syntax : [subject-1] と [subject-2]
         - Meaning : subject-1 and subject-2
@@ -86,12 +86,15 @@
 
 ### Conversation
 - You
-    + Kimi
-    + Anata
+    + Kimi 君
+    + Anata あなた
 - I
-    + Watashi 
-    + Boku
-    + Ore
+    + Watashi 私
+    + Boku 僕
+    + Ore 俺
+- We
+    + Watashitachi 私達
+    + Wareware 我々
 - He
     + Kare
 - She
@@ -321,6 +324,7 @@
 ## Feelings
 + 悲しみ : Kanashimi : Sorrow; Sadness; Grief; Depression; Melancholy
 + 孤独 : Kodoku : Loneliness; Solitude; Isolation; Separation
++ 絶命 : Zetsumei : Desperate
 
 ## Adjectives
 ```
@@ -343,17 +347,24 @@
 + 広い : Hiroi : Wide; Spacious
 + 意地悪な : Ijiwaruna : Mean
 + 忙しい : Isogashii : Busy
++ 愛しい : Itoshii : Love; Dear
 + 輝きい : Kagayakii
     + Shine; Radiant
 + カッコいい : Kakkoi 
     + Cool
 + 悲しい : Kanashii 
     + Sad; Unhappy; Melancholy; Dejected
++ 可愛い : Kawai
+    + Cute
 + 綺麗な : Kirei na 
     + Beautiful
 + 眩しい : Mabushii : Dazzling; Glaring; Radiant; Blinding
++ 未知な : Michi na : Unknown 
 + 短い : Mijikai : Short
++ 無邪気な : Mujyaki na : Innocent; Innocence; simple-minded
++ 無敵な : Muteki na : Invincible; Unrivalled
 + 長い : Nagai : Long
++ 重い : Omoi : Heavy; Severe; Serious; Massive; Important; Oppressed
 + 大きい : Ookii : Big; Large
 + 遅い : Osoi : Late; Slow 
 + 寂しい : Sabishii : Lonely; Solitary
@@ -369,10 +380,12 @@
 + 強い : Tsuyoi : Strong; Tough; Powerful
 + 嬉しい : Ureshii : Happy; Glad; Pleasant
 + 煩い : Urusai : Bothering; noisy; loud; annoying
++ 美しい : Utsukushii : Beautiful; Lovely
 + 悪い : Warui : Bad; Evil
 + 安い : Yasui : Cheap; Inexpensive; Quiet; Peaceful
 + 良い : Yoi : Good
 + 弱い : Yowai : Weak; Fragile; Delicate
++ 有名な : Yuumei na : Famous
 
 ## Verb
 ```
@@ -410,6 +423,10 @@ Syntax and Structure:
     + To open
     - Alternatives
         + 開く : Hiraku 
+- 言え : ie/ii
+    + To say
+    - Alternatives
+        + 言う : iu
 - 行き : Iki 
     + To go; going
 - 生き : Iki 
@@ -506,10 +523,13 @@ Syntax and Structure:
     + Sit
 - 喋り: Shyaberi
     + To talk; To speak
-    - Alternative Pronounciations
+    - Forms
         + 喋る : Shyaberu
 - 過ぎ : Sugi
     + to pass; after; exceed; go beyond
+    - Forms
+        + 過ぎる : Sugiru
+        + 過ぎて : Sugite
 - 助かり : Tasukari 
     + To Help; Assistance
     - Alternative 
@@ -623,7 +643,7 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - Examples 
         + ~するんだ : ~surunda : Need to do
 -しかも~ : Shikamo~
-    +  Moreover
+    + Moreover
 -しかし~ : Shikashi~
     + But; However
 - ~します : -shimasu
@@ -678,11 +698,21 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + About; What; Focus on the subject
     + informal ending for "-のこと (-no koto)"
 
+## Conjunction 
+> Connectors Used to join multiple sentences together to make a full story
+- だから : dakara : that's why; so; hence; therefore; for this reason; and
+- だけど : dakedo : however
+- でも : demo : but; however
+
 ## Adverb
+- だけ : Dake
+    + Only; Just
 - 放課後 : Houkago 
     + After school
 - いつも : Itsumo 
     + Everytime; Forever
+- 重ねて : Kasanete
+    + Once More; Repeatedly
 - 前 : Mae
     + Previously; Before; earlier; In front of
 - 真っ直ぐ : Massugu 
@@ -713,6 +743,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - Certainly; Definitely; I'd love to
 - 全然 : Zen Zen
     + at all; Absolutely; completely; entirely
+- 絶対 : Zettai
+    + Absolutely
 - ずっと : Zutto
     + Always; all the time; more; throughout
 
@@ -737,6 +769,10 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 駅 : Eki
 - Enpitsu
     - 鉛筆 : Pencil
+- Gekkan
+    - 月刊 : Monthly; Monthly Publication 
+- Geki
+    - 激 : Fierce
 - Genkai
     - 限界 : Limit; Boundary; Edge; Border
 - Ginkou
@@ -780,6 +816,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 準備 : Preparation; Ready; Arrangements
 - Kako
     - 過去 : Past
+- Kasa
+    - 傘 : Umbrella; Parasol
 - Kaze
     - 風 : Wind; Sick
 - Kazoku 
@@ -814,6 +852,10 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 町 : Town
 - Mado 
     - 窓 : Window
+- Mato 
+    - 的 : Target
+        - Alternative Pronounciations 
+            + Teki 
 - Mahou
     - 魔法 : Magic
 - Megane 
@@ -824,6 +866,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 未来 : Future
 - Mizugi 
     - 水着 : Swimsuit
+- Mokuteki 
+    - 目的 : Purpose; Objective; Aim; Target; Goal; Intention
 - Monogatari
     - 物語 : Story; Tale; Legend
 - Mori 
@@ -871,12 +915,16 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 世界 : World
 - Sentaku 
     - 選択 : selection; choice; option; pick
+- Setsuna 
+    - 刹那 : moment; instant; juncture
 - Shinkai 
     - 深海 : Deep sea
 - Shyudai 
     - 主題 : Subject; Theme; Motif
 - Shyukudai 
     - 宿題 : Homework
+- Shyuu
+    - 集 : Special
 - Shyuumatsu
     - 週末 : Weekend
     - 終末 : Doomsday; The End; Close 
@@ -884,12 +932,20 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 空 : Sky
 - Te 
     - 手 : Hands
+- Ten 
+    - 天 : Sky; Heaven
+    - Alternative Pronounciations 
+        + Ama
 - Tenshi 
     - 天使 : Angel
 - Tobira
     - 扉 : Door; Opening
 - Toki 
     - 時 : Time
+- Toku
+    - 特 : Special
+- Tokushyu
+    - 特集 : Special Feature
 - Toshi
     - 都市 : City
 - Toshokan
@@ -904,6 +960,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 宇宙 : Space; Universe; Cosmos
 - Umi 
     - 海 : Sea
+- Unmei 
+    - 運命 : Fate; Destiny
 - Uso
     - 嘘 : Lie
 - Usotsuki 
@@ -927,6 +985,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 勇気 : Strength; Bravery
 - Yuurei
     - 幽霊 : Ghost
+- Zankoku 
+    - 残酷 : Cruelty
 - Zatsudan 
     - 雑談 : Small talk; Idle Talk; Chatting
 - Zetsubou
@@ -966,6 +1026,7 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 + さて : Sate : Now; Similar to そして; 所で
 + そして : Soshite : And; That's why
 + そうして : Soushite : Then
++ という : to iu : called
 
 ## Rules
 ### Grammar

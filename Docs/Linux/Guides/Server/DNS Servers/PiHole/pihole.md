@@ -10,7 +10,7 @@
 
 ### Files
 - /etc/pihole
-    + gravity.db : Contains the domainlist table for DNS
+    + gravity.db : Contains the domainlist table/database containing the DNS Sinkhole blocklist
 
 ### Scripts
 - /opt/pihole

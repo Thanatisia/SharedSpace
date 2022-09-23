@@ -9,4 +9,6 @@
 ```
 
 ## DNS Services List
++ cloudflare
 + duckdns.org
++ noip.com

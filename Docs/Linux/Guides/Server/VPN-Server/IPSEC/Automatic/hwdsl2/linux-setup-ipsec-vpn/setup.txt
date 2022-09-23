@@ -1,11 +1,31 @@
 # IPSEC VPN Server Setup Guide
 
 ## Table of Contents
+- [Information](#information)
 - [Setup](#setup)
 - [References](#references)
 
-## Setup
+## Information
+### DESCRIPTION
+```
+This IPSEC VPN Server is made by hwdsl2 (https://github.com/hwdsl2)
 
+There are 2 services running
+    - Libreswan (Pluto) : This is for the IPsec VPN tunneling
+    - xl2tpd : For the L2TP Encryption support
+
+The default IPsec configuration supports
+    - IPsec/L2TP with PSK
+    - IKEv1 with PSK and XAuth ("Cisco IPSec")
+    - IKEv2
+
+The following ports are exposed and used
+    - for IPSec
+        - 4500/UDP
+        - 500/UDP
+```
+
+## Setup
 ### Pre-Requisites
 
 - Security
@@ -110,4 +130,11 @@
 	> Click on "VPN Connections"
 
 ## References
-* https://www.stewright.me/2018/07/create-a-raspberry-pi-vpn-server-using-l2tpipsec/
++ [Stewright - Create a Raspberry Pi IPSec VPN Server](https://www.stewright.me/2018/07/create-a-raspberry-pi-vpn-server-using-l2tpipsec/)
++ [DockerHub - IPSec VPN Server](https://hub.docker.com/r/hwdsl2/ipsec-vpn-server)
++ [GitHub - hwdsl2/docker-ipsec-vpn-server (Docker)](https://github.com/hwdsl2/docker-ipsec-vpn-server)
++ [GitHub - hwdsl2/setup-ipsec-vpn (Non-Docker)](https://github.com/hwdsl2/setup-ipsec-vpn)
+
+## Resources
+
+## Remarks

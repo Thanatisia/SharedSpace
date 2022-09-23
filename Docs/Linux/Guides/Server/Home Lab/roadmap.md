@@ -1,7 +1,7 @@
 # Home Server Roadmap
 
 ```
-A master Writeup and drawing of a overview/roadmap of a working Home Lab/Server infrastructure from start (Default Gateway and Clients) to end (Server and Interfaces + Protocols
+A master Writeup and drawing of a overview/roadmap of a working Home Lab/Server infrastructure from start (Default Gateway and Clients) to end (Server and Interfaces + Protocols)
 ```
 
 ## Overview Structure 
