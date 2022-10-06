@@ -26,6 +26,11 @@ Collection/Documentation of Networking Protocols and the relevant port numbers
 - OSPF      : Open Shortest Path First Protocol
 - POP(3)    : Post Office Protocol
     + Email Protocol
+- RDP       : Remote Desktop Protocol
+    + Port Number : 3389
+- SMB       : Samba File Sharing Server Protocol
+    + Port Number : 445
+    + Protocol used for Network File Sharing
 - SMTP      : Simple Mail Transfer Protocol
 - SNMP      : Simple Network Management Protocol
 - SSH       : Secured Shell
