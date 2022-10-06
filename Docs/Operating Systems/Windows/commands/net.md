@@ -23,7 +23,7 @@ net [command] {options} <arguments>
 ### Parameters
 
 - Commands
-    + use [drive-letter]: [remote-filesystem-location] {options}  : Manage Network resources (i.e. Network Shared Drives)
+    + use [drive-letter]: [remote-filesystem-location] {password} {options}  : Manage Network resources (i.e. Network Shared Drives)
         - Notes
             + Default: 
                 - If drive letter and remote filesystem is specified: 
@@ -31,8 +31,14 @@ net [command] {options} <arguments>
                 - If not specified
                     + Check mounted filesystems
             + Use '*' as the drive letter to select all drives
+        - Positionals
+            + drive-letter : The drive letter/device you want to mount the remote filesystem with
+            + remote-filesystem-location : The target Remote Network Shared Drive (File Server/Volume)
+            + password : The password to a specified user; Required if '/USER' is provided.
         - Options
             + /D | /DELETE : Unmount/remove the mounted filesystem
+            + /p:{yes|no} : Specify to set persistency when mounting filesystem
+            + /USER:[remote-username | {domain\}username | username@domain-name] : Specify the user of the Remote Filesystem to login as
 
 - Optionals
     + /? : Display detailed Documentation of command
@@ -52,6 +58,11 @@ net [command] {options} <arguments>
 	```batchdos
 	net use [drive-letter]: /delete
 	```
+
+- To mount a file server with credentials
+    ```batchdos
+    net use [drive-letter]: [remote-file-server-volume] "password" /USER:my_username
+    ```
 
 ## Resources
 
