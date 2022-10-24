@@ -66,6 +66,14 @@ Documentations, Guides, Tips n Tricks and Setup strategy for working with Networ
 ### Installation
 
 1. Install Samba
+        - Alpine-based
+                ```
+		# Update and Upgrade to latest repository
+		apk update && apk upgrade
+
+		# Install samba
+		apk install samba
+		```
 	- Debian-based
 		```
 		# Update and Upgrade to latest repository
@@ -98,9 +106,22 @@ Documentations, Guides, Tips n Tricks and Setup strategy for working with Networ
 	```
 
 4. Restart Samba to apply changes
-	```console
-	sudo service smbd restart
-	```
+	- Using service
+		```console
+		sudo service smbd restart
+		```
+	- Using systemd
+		```console
+		sudo systemctl restart smbd
+		```
+	- Using OpenRC
+		```console
+		# Enable/Start service on boot
+		rc-update add samba
+
+		# Start service
+		rc-service samba start
+		```
 
 ### Test Access
 ```
@@ -152,7 +173,7 @@ For more focused and specialised info on Samba security and authentication, refe
 	sudo service smbd restart
 	
 	# Using systemctl
-	sudo systemctl enable smbd
+	sudo systemctl restart smbd
 	```
 
 ## Documentation
@@ -198,6 +219,9 @@ sudo service smbd start
 # Using systemctl
 sudo systemctl start smbd
 
+# Using OpenRC
+rc-service samba start
+
 # Using SMB daemon in the background without systemd
 # please refer to syntax of smbd in the synopsis/syntax to see what the parameters does
 smbd -D
@@ -221,6 +245,9 @@ sudo service smbd enable
 
 # Using systemctl
 sudo systemctl enable smbd
+
+# Using OpenRC
+rc-update add samba
 ```
 
 - To Disable Samba
@@ -240,7 +267,7 @@ sudo systemctl disable smbd
 sudo service smbd restart
 
 # Using systemctl
-sudo systemctl enable smbd
+sudo systemctl restart smbd
 ```
 
 #### Parameter
@@ -318,6 +345,5 @@ NAS
 ## References
 
 ## Resources
-
-- [RaspberryPi Tips - How to turn a Raspberry Pi into a file server?](https://raspberrytips.com/raspberry-pi-file-server/)
-
++ [RaspberryPi Tips - How to turn a Raspberry Pi into a file server?](https://raspberrytips.com/raspberry-pi-file-server/)
++ [AlpineLinux Wiki - Setting up Samba Server](https://wiki.alpinelinux.org/wiki/Setting_up_a_samba-server)
