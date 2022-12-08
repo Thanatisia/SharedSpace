@@ -3,7 +3,10 @@
 #
 
 Table of Contents
-	1. Full Clone
+    1. Full Clone
+    2. Sparse Clone
+    3. Shallow Clone
+    4. Branch Clone
 
 1. Full Clone 
 	- To clone a repository fully
@@ -68,3 +71,21 @@ Table of Contents
 		#	Linux   : cat .git/info/sparse-checkout
 		#	Windows : type .git/info/sparse-checkout
 		git sparse-checkout list
+
+3. Shallow Clone
+    + If you want only the latest commit, you can use a 'shallow clone' 
+    + Useful if the repository codebase is very big
+    - Usage
+        + Use the '--depth [number-of-branches]'
+        ```
+        git clone --depth 1 [repository-url]
+        ```
+
+4. Branch Clone
+    + If you want only a specific branch/tag
+    - Usage
+        + Use the '--branch [tag-name/branch]'
+        ```
+        git clone --branch [branch/tag]
+        ```
+

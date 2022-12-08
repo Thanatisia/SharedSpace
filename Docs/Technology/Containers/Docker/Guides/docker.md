@@ -33,6 +33,8 @@ sudo docker {actions} [image-name]
 		+ --all : Displays stopped containers
 		+ --no-steam : To get a one-time snapshot of current container resource usage
 + version : To get information about docker version
++ container : Manage docker containers
++ volume : Manage docker volumes
 + ps {options} : To display information of the running and stopped container processes
 	- Options
 		+ -l : To display a list of the running and stopped containers
@@ -47,11 +49,14 @@ sudo docker {actions} [image-name]
 + run {options} [image-name] {(optional) commands...} : Start running the specified image/container and execute the commands specified (if any)
 	- Options
 		+ -d : Start as a daemon (Backend Service)
-		+ -i : Start Interactive Mode
+		+ -i : Start Interactive Mode; Corresponds with a docker-compose's "stdin" keyword
 		- -p [port-number] : Start using a specific Port Number
-		    + -p [internal-port]:[external-port] : To Port Forward and expose a specified internal port within the Docker container to an external port on the host system
-		+ -t : Run in terminal
-		+ -v [host-directory]:[container-volume] : To attach the specified host directory to the specified container volume location located in the container's filesystem; Used for storage sharing between container and host
+		    + -p [host-system-port]:[container-port] : To Port Forward and expose a specified internal port within the Docker container to an external port on the host system
+		+ -t : Run in terminal; Corresponds with docker-compose's "tty" keyword
+                + -u : Set the user id and group id of the user to use; Corresponds with docker-compose's "user" keyword
+                    + Format: "[user-id]:[group-id]"
+                    + Recommended Values : "$(id -u):$(id -g)"
+		+ -v [host-directory]:[container-volume]:[permissions] : To attach the specified host directory to the specified container volume location located in the container's filesystem; Used for storage sharing between container and host; Corresponds to docker-compose'd "volumes" keyword
 		+ --name=[Container ID] : Provide a specific Container ID as the name of the container; aka Set container name
 		+ --network=[bridge-name] : Specify the Network Bridge Interface for the container to use; aka Run Docker container with a specific network
 		+ --rm : Delete the container created and its cache after the Docker instance has ended

@@ -60,9 +60,16 @@ sudo docker-compose [action] {options}
     + -f [docker-compose-location] : Specify the location of the docker compose file; Required if you are not inside the docker compose working directory
 
 ### Usage
+- Startup docker-compose environment with building of Dockerfiles
+    - Notes
+        + Certain docker containers (i.e. my samba share) are built from scratch using Dockerfile and docker-compose, thus you need to run build
+    ```console
+    docker-compose up -d --build
+    ```
+
 - Startup and Create Docker Containers in the docker-compose environment and bridge networks
     ```console
-    sudo docker-compose up -d
+    sudo docker-compose up -d {container-name(s)}
     ```
     
 - Take down and delete all Docker Containers in the docker-compose environment and remove bridge networks
@@ -72,12 +79,23 @@ sudo docker-compose [action] {options}
     
 - Start/Run all stopped Docker Container processes in the docker-compose environment
     ```console
-    sudo docker-compose start -d
+    sudo docker-compose start -d {container-name(s)}
     ```
 
 - Stop all stopped Docker Container processes in the docker-compose environment
     ```console
-    sudo docker-compose stop -d
+    sudo docker-compose stop -d {container-name(s)}
+    ```
+
+- Restart docker-compose environment
+    + Leaving 'container-name' empty will restart all containers in the compose environment
+    ```console
+    docker-compose restart [container-name]
+    ```
+
+- Open Interactive Shell in docker-compose
+    ```console
+    docker-compose run [service-name]
     ```
     
 - List only the Docker Container processes in the docker-compose environment

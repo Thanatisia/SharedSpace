@@ -44,14 +44,21 @@ By default:
 
 ## Wiki
 ### Optional Named Volume Keys
-+ driver : The type of volume you want to create
+- driver : The type of volume you want to create
+    - Valid Values
+        + local : Create a local volume
 - driver_opts : The driver options/settings
-    + type : driver type (default : 'none')
-    + o : driver 
-	- Valid Values:
-	    + 'bind' : For Bind Mount
-    + device : Define the custom path to mount the volume 
-
+    - Sub-keys
+        + type : driver type (default : 'none')
+        + o : driver 
+	    - Valid Values:
+	        + 'bind' : For Bind Mount
+        + device : Define the custom path to mount the volume 
+- external : Tell compose this volume is externally created
+    + Type: Boolean
+- name : Create this volume with a different name
+    + Type: String
+  
 ## Resources
 
 ## References

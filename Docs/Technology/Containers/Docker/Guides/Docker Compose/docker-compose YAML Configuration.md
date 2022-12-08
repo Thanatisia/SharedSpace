@@ -175,13 +175,29 @@ networks:
                 ```
             - Default Value
                 + . : Specify current directory
+            - Subkeys
+                + context : The location/path of the Dockerfile image to build
         + command : Type Array; Commands you want to execute when starting up
-            - *- command*
+            - Format: 
+                - Single Command:
+                    ```yaml
+                    - command
+                    ```
+                - Multi command : use pipes to execute multiple commands
+                    ```yaml
+                    command:
+                        - /bin/sh
+                        - -c
+                        - |
+                            command 1
+                            command 2
+                            command 3
+                    ```
         + container_name : To specify the custom container name
         + depends_on : Specify dependencies required by the container; This basically tells docker-compose to build these images here first before building this main container - because this main container depends on the specified images
             - [dependency-image] : Specify the image this container depends/requires
                 - *- [depedency-image]*
-        + entrypoint: Explicitly specify the entrypoint of the container
+        + entrypoint: Explicitly specify the entrypoint of the container; Corresponds with Dockerfile's "ENTRYPOINT" instruction
             - *[command, arguments,...]*
         + environment : Set Environment Variables; Place each environment variable in a new line
             - [VARIABLE_NAME]: value
@@ -199,10 +215,58 @@ networks:
             - Type: Boolean
         + tty: Corresponds to 'docker run -it', setting this to 'true' will prevent the docker container from exitting immediately after creation
             - Type: Boolean
+        + user : Set the current user-group mapping in the container
+            - Format
+                ```
+                - [user-id]:[group-id]
+                ```
         + volumes : Docker Volume; Maps a docker directory/folder in the container to a directory/folder volume in the host system. This means that if the container goes down, dies or is restarted, that directory's data still exists on the host - Important for things like a database.
-            - *- [host-directory-path]:[docker-directory]*
+            - Type: List
+            - Format: 
+                - General Mounting : 
+                    ```
+                    - [host-directory-path]:[docker-directory]
+                    ```
+                - Bind Mount :
+                    ```
+                    - type: bind
+                      source: [host system path]
+                      target: [container path]
+                    ```
+            - Subkeys:
+                - type : The type of mounting
+                    + Type: String
+                    + Valid Values:
+                        - volume : Volume mounting of a source (host system) directory to a destination (container) directory
+                        - bind : Bind mounting
+                - source : The source volume (of the host system) to mount
+                    + Type: String
+                - target : The destination volume (in the container) to mount on
+                    + Type: String
+                - volume: Contains options for the volume
+                    + Type: List
+                    + Subkeys
+                        - nocopy : Dont copy the files
+                            + Type: Boolean
+        + working_dir : Set the current working directory within the container (Corresponds with WORKDIR in Dockerfile)
+            - Type: String
 + volumes : To initialize/specify all volumes you want to use
     - [volume-name] : To specify the volume you want to create in your services and want to mount
+    - driver : The type of volume you want to create
+        + Type : String
+        - Valid Values
+            + "local" : Create a local volume
+    - driver_opts : The driver options/settings
+        - Sub-keys
+            + type : driver type (default : 'none')
+            + o : driver 
+	        - Valid Values:
+	           + 'bind' : For Bind Mount
+            + device : Define the custom path to mount the volume 
+    - external : Tell docker-compose this volume is externally created
+        + Type: Boolean
+    - name : Tell docker-compose this volume is created with a different name
+        + Type: String
 + networks : To generate/create a new network
     - [network-name] : Specify the network to create in the compose environment
         - ipam : Stands for IP Address Management

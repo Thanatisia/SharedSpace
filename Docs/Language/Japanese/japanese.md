@@ -47,6 +47,11 @@
 + tsu : つ
 + te : て
 + to : と
++ ga : が
++ gi : ぎ
++ gu : ぐ
++ ge : げ
++ go : ご
 + za : ざ
 + ji : じ
 + zu : ず
@@ -368,6 +373,9 @@
 + 大きい : Ookii : Big; Large
 + 遅い : Osoi : Late; Slow 
 + 寂しい : Sabishii : Lonely; Solitary
++ 最悪 : Saiaku : Worst
++ 最初 : Saishyo : First; Beginning; Commencement
++ 最終 : Saishyuu : Last; Closing
 + 寒い : Samui : Cold; Chilly
 + 素晴らしい : Subarashii : Amazing; Wonderful; Excellent; Awesome
 + 凄い : Sugoi : Amazing; great; wonderful; terrible; terrific; dreadful
@@ -401,6 +409,11 @@ Syntax and Structure:
     + To increase; raise; give; promote; advance
 - 諦め : Akirame 
     + To give up
+- 遊び : Asobi
+    + To play; Fun; Entertainment 
+    - Forms
+        + 遊ぶ : Asobu : To play
+        + 遊ぼう : Asobou : Let's play (Request) 
 - 勉強 : Benkyou 
     + To Study
 - 違い : Chigai
@@ -449,12 +462,21 @@ Syntax and Structure:
     + To hear
 - 嫌い : Kirai
     + To Hate; Dislike
-- 越え : koe
+- 越え : Koe
     + To go over; To go beyond; exceed
+- 繰り返し : Kurikaeshi
+    + Again; repeat; repetition
+    - Forms
+        + 繰り返す: Kurikaesu
 - 間違い : Machigai 
     + To make a Mistake; Error; Fault
-- 守り : mamori 
+- 守り : Mamori 
     + To protect; defend
+- 回り | 周り: Mawari
+    + To spin; turn; rotation
+    - Forms
+        + 回る : mawaru
+        + 周る : mawaru
 - 迷い : Mayoi 
     + To get lost; Wander
 - 見 : Mi 
@@ -530,9 +552,14 @@ Syntax and Structure:
     - Forms
         + 過ぎる : Sugiru
         + 過ぎて : Sugite
+- 足り : Tari
+    + Sufficient; Have enough
+    - Forms
+        + 足ります : tarimasu : Formal, Have enough
+        + 足りない : tarinai : Informal, Not Enough; Insufficient
 - 助かり : Tasukari 
     + To Help; Assistance
-    - Alternative 
+    - Forms
         + Tasuke : 助け
         + Tasukete : 助けて
 - 照らし : Terashi
@@ -573,6 +600,11 @@ Syntax and Structure:
     + To Read
     - Alternative Pronounciations
         + 読む : Yomu
+
+## Sokuon
+> Where you double the consonant that comes after "っ"
++ って : -tte : 
+
 
 ## Grammar
 ```
@@ -707,6 +739,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 ## Adverb
 - だけ : Dake
     + Only; Just
+- 久々 : Hisabisa
+    + Long time
 - 放課後 : Houkago 
     + After school
 - いつも : Itsumo 
@@ -715,6 +749,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + Once More; Repeatedly
 - 前 : Mae
     + Previously; Before; earlier; In front of
+- まだ : mada
+    + Not Yet
 - 真っ直ぐ : Massugu 
     + Straight; Upright; Direct; Straightforward 
 - もっと : Motto 
@@ -735,6 +771,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + In the middle of; on the way; en route
 - 時々 : Tokidoki 
     - Sometimes
+- とても : Totemo
+    - Very; extremely 
 - 突然 : Totsuzen 
     - Suddenly; abruptly
 - よく : Yoku 
@@ -751,6 +789,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 ## Vocabulary
 - Ame
     - 雨 : Rain
+- Arika
+    - 在りか : Whereabouts
 - Ashi
     - 足 : Leg
 - Basho
@@ -786,6 +826,10 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 花弁 : Petal
 - Hanashi
     - 話 : Story; Speech; Conversation
+- Hashi
+    - 箸 : Chopsticks
+    - 橋 : Bridge
+    - 端 : At the edge; end; tip
 - Hikari
     - 光 : Light; Shine; Gleam
 - Hon
@@ -812,6 +856,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 人生 : Life
 - Joudan 
     - 冗談 : Joke
+- Jouzu
+    - 上手 : Proficient; Good; Skillful; adept; qualified
 - Junbi 
     - 準備 : Preparation; Ready; Arrangements
 - Kako
@@ -907,18 +953,23 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 流星 : Meteor
 - Sae
     - 冴え : Clear
-- Saishyou 
-    - 最初 : First; Beginning; Commencement
-- Saishyuu 
-    - 最終 : Last; Closing
+- Saikai
+    - 再会 : Reunion; Meet again
+    - 再開 : Reopening; Resumption; Resume
 - Sekai
     - 世界 : World
 - Sentaku 
     - 選択 : selection; choice; option; pick
 - Setsuna 
     - 刹那 : moment; instant; juncture
+- Shiawase 
+    - 幸せ : Happiness; Fortune
 - Shinkai 
     - 深海 : Deep sea
+- Shirushi
+    - 印 : Stamp 
+- Shyashin 
+    - 写真 : Pictures; Photos
 - Shyudai 
     - 主題 : Subject; Theme; Motif
 - Shyukudai 
@@ -932,6 +983,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 空 : Sky
 - Te 
     - 手 : Hands
+- Tegami 
+    - 手紙 : Letter
 - Ten 
     - 天 : Sky; Heaven
     - Alternative Pronounciations 
@@ -1023,10 +1076,13 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 
 ## Expressions
 > Small grammar/connectors Used by individuals during communication to transition or announce certain things/emotions/mood/message
++ じゃなくって : Jyanakutte : Not; Not like that
 + さて : Sate : Now; Similar to そして; 所で
 + そして : Soshite : And; That's why
 + そうして : Soushite : Then
 + という : to iu : called
+
+## Sentences/Usage
 
 ## Rules
 ### Grammar
