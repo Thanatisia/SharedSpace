@@ -1,0 +1,48 @@
+## Create a raw disk image file of size 8GiB and blocksize of 1024
+dd if=/dev/zero of=disk.img bs=1024 count=8GiB
+
+## Create filesystem partition table
+parted disk.img mklabel msdos
+
+## Create partitions
+parted disk.img mkpart primary ext4 0% 1024MiB
+parted disk.img mkpart primary ext4 1024MiB 50%
+parted disk.img mkpart primary ext4 50% 100%
+
+## Mount it as loopback device
+sudo losetup -Pf disk.img
+
+## Check loopback disk
+sudo fdisk -l
+
+## Format partitions
+sudo mkfs.ext4 /dev/loop0p1
+sudo mkfs.ext4 /dev/loop0p2
+sudo mkfs.ext4 /dev/loop0p3
+
+## Set partition as bootable
+sudo parted /dev/loop0 set 1 boot on
+
+## Mount partitions
+sudo mount /dev/loop0p2 /mnt
+
+## Make mount directories
+sudo mkdir -p /mnt/{boot,home}
+
+## Mount other partitions
+sudo mount /dev/loop0p1 /mnt/boot
+sudo mount /dev/loop0p3 /mnt/home
+
+## Other actions here
+
+### (Using ArchLinux) pacstrap archlinux into mount point
+sudo pacstrap /mnt base linux linux-firmware base-devel
+
+### Chroot into filesystem
+sudo arch-chroot /mnt
+
+## Unmount partitions
+sudo umount -l /mnt
+
+## Unloop
+sudo losetup -d /dev/loop0

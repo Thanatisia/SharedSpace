@@ -40,6 +40,14 @@ Documentation for basics of Makefile and 'make'.
     ```
     make [target]
     ```
+
+## Wiki
+
+### Template Skeletons
++ [Installer and Build System (Recommended)](Skeleton/installer.Makefile)
++ [CPP Build](Skeleton/cpp.Makefile)
++ [General Building](Skeleton/general.Makefile)
++ [Python Build](Skeleton/python.Makefile)
     
 ## Resources
 

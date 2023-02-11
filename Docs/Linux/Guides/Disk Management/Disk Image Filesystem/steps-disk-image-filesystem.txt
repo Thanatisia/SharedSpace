@@ -1,0 +1,70 @@
+# Steps to create a disk image file (.img) with multiple partitions and filesystem types for Linux installation
+
+```
+These are the steps to create a Linux filesystem from a raw disk image file (.img) with multiple partitions and filesystem types
+
+- to allow automated linux installation into an image file
+```
+
+## References
++ [linuxconfig - How to create a file-based filesystem using dd command on linux](https://linuxconfig.org/how-to-create-a-file-based-filesystem-using-dd-command-on-linux)
++ [superuser - how do you create and partition a raw disk image](https://superuser.com/questions/518554/how-do-you-create-and-partition-a-raw-disk-image)
++ [serverfault - losetup mounts disk image as one deivce. How to loopback the partitions seperately](https://serverfault.com/questions/1066744/losetup-mounts-disk-image-as-one-device-how-to-loopback-the-partitions-seperate)
+
+## Setup
+### Pre-Requisites
+
+### Commands
++ dd : Disk Destroyer
++ parted : Partition manager CLI utility
++ losetup : Loopback setup CLI utility
+
+## Steps
+
+### dd create image file
+dd if=/dev/zero of=[image file] bs=1024 count=[size of file]
+
+### Create partition table in image file
+parted [image file] mklabel [msdos|gpt]
+
+### Create Partitions in disk (raw) image file partition table
+parted [image file] mkpart [disk/partition label] [filesystem type] [start size] [end size]
+
+### Mount it as a loopback device (simplest way to define cylinders, heads and sectors)
+- Mount file as loopback device
+    + -P will create loop devices for each partition (important)
+    losetup -Pf [image file] # Find image file
+
+- Validate loopback device is created
+    losetup -a # Find all loopback addresses
+
+### Check your loopback device's partiton
+sudo fdisk -l
+
+### Partition your image file in the loopback interface
+```
+Note: From this point on, each loopback device is treated as a partition
+    parted /dev/loop[loopback-number]p[partition-number]
+```
+- Format loopback device partitions
+    - fat32
+        mkfs.fat -F32 /dev/loop[loopback-number]p[partition-number]
+    - ext4
+        mkfs.ext4 /dev/loop[loopback-number]p[partition-number]
+
+- Set filesystem as bootable
+    parted /dev/loop[loopback-number] set 1 boot on
+
+### Mount your mount path to the partitions
+mount [loopback-partition] [mount path]
+
+### Perform your actions
+> Perform all other actions here
+
+### Unloop the device (need unmapping and unmounting first)
+- Unmount
+    umount -l [mount path]
+
+- Unloop
+    losetup -d /dev/loop[loopback-number]
+

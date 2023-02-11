@@ -1,0 +1,12 @@
+# Data Recovery tools and utilities
+
+* List of Data Recovery tools and utilities used by professionals
+
+## CLI
++ dd : Disk Cloning utility; aka Disk Destroyer. This utility is used to burn ("clone") from an input device/disk/file into an output device/disk/file; No validation.
++ ddrescue : Disk Cloning; used to copy data from failing drives with as little damage caused as possible
++ testdisk : Partition and Data Recovery Tool. Allows you to recover the Master Boot Record (MBR) or partition table boot sectors if lost
+
+## GUI Software
++ CrystalDiskInfo : Hard Drive/Disk Diagnostics/testing software; provides a complete overview of all connected devices.
++ CrystalDiskMark : Hard Drive/Disk Diagnostics/testing software; Used to measure and test hard disks as well as offers benchmarking.

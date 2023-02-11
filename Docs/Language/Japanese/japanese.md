@@ -322,9 +322,15 @@
 + 東京 : Toukyo
 
 ## Animals 
++ 羊 : Hitsuji : Sheep
 + 魚 : Sakana : Fish
 + 馬 : Uma : Horse 
 + 牛 : Ushi : Cow
++ 山羊 : Yagi : Goat
+
+## Plants
++ 紫陽花 : Ajisai : Hydrangea
++ 向日葵 : Himawari : Sunflower
 
 ## Feelings
 + 悲しみ : Kanashimi : Sorrow; Sadness; Grief; Depression; Melancholy
@@ -350,6 +356,7 @@
 + 速い : Hayai : Fast; Quick
 + 酷い : Hidoi : Terrible; Awful
 + 広い : Hiroi : Wide; Spacious
++ 一番 : Ichiban : Number One; Best (Positive); Worst (Negative)
 + 意地悪な : Ijiwaruna : Mean
 + 忙しい : Isogashii : Busy
 + 愛しい : Itoshii : Love; Dear
@@ -376,6 +383,7 @@
 + 最悪 : Saiaku : Worst
 + 最初 : Saishyo : First; Beginning; Commencement
 + 最終 : Saishyuu : Last; Closing
++ 最低 : Saitei : Lowest; Worst; Disgusting; Least
 + 寒い : Samui : Cold; Chilly
 + 素晴らしい : Subarashii : Amazing; Wonderful; Excellent; Awesome
 + 凄い : Sugoi : Amazing; great; wonderful; terrible; terrific; dreadful
@@ -468,6 +476,7 @@ Syntax and Structure:
     + Again; repeat; repetition
     - Forms
         + 繰り返す: Kurikaesu
+        + 繰り返して : Kurikaeshite
 - 間違い : Machigai 
     + To make a Mistake; Error; Fault
 - 守り : Mamori 
@@ -564,6 +573,8 @@ Syntax and Structure:
         + Tasukete : 助けて
 - 照らし : Terashi
     + To illuminate; shine
+- 届け : Todoke
+    + To reach; deliver; arrive
 - 閉じ : Toji 
     + To close
     - Alternatives 
@@ -596,6 +607,8 @@ Syntax and Structure:
     + To Laugh; Smile; Laughter 
 - 忘れ : Wasure 
     + Forget
+    - Forms
+        + 忘れない : Wasurenai; Unforgettable
 - 読み : Yomi
     + To Read
     - Alternative Pronounciations
@@ -613,6 +626,9 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 ### Formal
 - ~ばかり : Bakari 
     + Approximately; only; just; merely
+- ~でした : Deshita
+    + was
+    + Formal indicator for Past perfect tense
 - ~でしょう : Deshou 
     + Probably; Right?; hope; will; get
 - ~でしょうか : Deshouka 
@@ -653,14 +669,16 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + To; Until
 - ~ます : -masu
     + Formal indicator for verbs
-- ~ました : -deshita
-    + was; had been done
-    + Formal indicator for Past perfect tense
 - ~ました : -mashita
     + has been done
     + Formal indicator for Present ending tense
 - もし~ : moshi-
     + "if -"; Formal conditional indicator
+- ~なければ なりません : -nakereba narimasen
+    + Must; have to; obligation
+    + Formal of なきゃ
+- ~なくちゃ : -nakuchya
+    + Must; have to do; not obligated
 - ~のこと : -no koto
     + About; Focus on the subject
 - ~のように : -no youni
@@ -684,6 +702,7 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + I think/thought 
 - ~と 申します : -to moushimasu
     + Greetings; My name is; Introducing
+
 ### Informal
 - ~だ : -da
     + Is
@@ -696,6 +715,9 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 - ~か : -ka
     + Question marker
     + informal ending for "-ですか"
+- ~なきゃ : -nakya
+    + Must; have to; obligation
+    + Informal of なければ なりません
 - ~無い : -nai
     + No; Don't have; The absence of
     + informal ending for "いない"
@@ -743,6 +765,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + Long time
 - 放課後 : Houkago 
     + After school
+- いつでも : Itsudemo
+    + Any time; All the time; Always
 - いつも : Itsumo 
     + Everytime; Forever
 - 重ねて : Kasanete
@@ -759,6 +783,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + with all of one's strength/heart
 - 先 : Saki
     + Behind; previous; prior; former; destination
+- せめて : Semete
+    + At least; At most
 - 静かに : shizuka ni
     + Be Quiet
 - 全て : Subete
@@ -787,6 +813,14 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + Always; all the time; more; throughout
 
 ## Vocabulary
++ Hat : Boushi, 帽子
++ Leg : Ashi, 足; 脚
++ Location : Basho, 場所
++ Pencil : Enpitsu, 鉛筆
++ Place : Basho, 場所
++ Rain : Ame, 雨
+
+## Romaji
 - Ame
     - 雨 : Rain
 - Arika
@@ -817,6 +851,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 限界 : Limit; Boundary; Edge; Border
 - Ginkou
     - 銀行 : Bank
+- Hako
+    - 箱 : Box
 - Hana
     - 華 : Flower
     - 花 : Flower
@@ -832,6 +868,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 端 : At the edge; end; tip
 - Hikari
     - 光 : Light; Shine; Gleam
+- Hitomi
+    - 瞳 : Pupil; Beautiful Eyes
 - Hon
     - 本 : Book; Origin; Initial
 - Honto 
@@ -860,21 +898,27 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 上手 : Proficient; Good; Skillful; adept; qualified
 - Junbi 
     - 準備 : Preparation; Ready; Arrangements
+- Kagami
+    - 鏡 : Mirror
+- Kage
+    - 影 : Shadow
 - Kako
     - 過去 : Past
-- Kasa
-    - 傘 : Umbrella; Parasol
-- Kaze
-    - 風 : Wind; Sick
-- Kazoku 
-    - 家族 : Family
 - Kami
     - 神 : God
     - 上 : Up; Above; God
     - 髪 : Hair
     - 紙 : Paper
+- Kaminari
+    - 雷 : Lightning
+- Kasa
+    - 傘 : Umbrella; Parasol
 - Katachi 
     - 形 : Shape; Form; Type
+- Kaze
+    - 風 : Wind; Sick
+- Kazoku 
+    - 家族 : Family
 - Keshigomu
     - 消しゴム : Eraser  
 - Kibou
@@ -887,6 +931,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 心 : Heart (Feelings); Mind; Core
 - Kotoba
     - 言葉 : Words; language; speech
+- Kuji
+    - くじ : Lottery
 - Kumo
     - 雲 : Clouds
 - Kuukou
@@ -904,6 +950,10 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
             + Teki 
 - Mahou
     - 魔法 : Magic
+- Me
+    - 眼 : Eye
+- Megami
+    - 女神 : Goddess
 - Megane 
     - 眼鏡 : Glasses
 - Michi 
@@ -924,6 +974,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 娘 : Daughter 
 - Namae 
     - 名前 : Name 
+- Naraku
+    - 奈落 : Hell; Hades; Abyss
 - Nijii
     - 虹 : Rainbow
 - Nikki
@@ -968,6 +1020,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 深海 : Deep sea
 - Shirushi
     - 印 : Stamp 
+- Shoushinshya
+    - 初心者 : Beginner
 - Shyashin 
     - 写真 : Pictures; Photos
 - Shyudai 
@@ -1022,6 +1076,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 - Uta
     + 唄 : Song
     + 歌 : Song; Poetry
+- Yama
+    - 山 : Mountain
 - Yami 
     - 闇 : Darkness; Dark
 - Yome
@@ -1044,6 +1100,69 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 雑談 : Small talk; Idle Talk; Chatting
 - Zetsubou
     - 絶望 : Despair; Disappointment; Hopeless
+
+## Kanji
+> Kanji : Individual; Combined/Element-of
++ 青 : Ao
++ 地 : Chi; Ji
++ 大 : Dai; Oo
++ 第 : Dai
++ 段 : Dan
++ 談 : Dan
++ 園 : En
++ 学 : Gaku
++ 獄 : Goku
++ 箱 : Hako; Bako
++ 話 : Hanashi
++ 羽 : Hane
++ 瞳 : Hitomi
++ 羊 : Hitsuji; Gi
++ 方 : Hou; Koto, Goto
++ 家 : Ie
++ 犬 : Inu
++ 勇 : Isamu; Yuu
++ 自 : Ji
++ 鏡 : Kagami; Gane
++ 影 : Kage
++ 神 : Kami
++ 髪 : Kami
++ 紙 : Kami
++ 雷 : Kaminari
++ 形 : Katachi
++ 気 : Ki
++ 君 : Kimi
++ 限 : Kiri; Gen
++ 桐 : Kiri
++ 子 : Ko
++ 小 : Ko
++ 声 : Koe
++ 酷 : Koku
++ 近 : Kon
++ 前 : Mae; Zen
++ 眼 : Me
++ 緑 : Midori
++ 無 : Mu
++ 紫 : Murasaki
++ 奈 : Na
++ 中 : Naka; Chu, Ju
++ 生 : Nama; Sei
++ 落 : Ochi; Raku
++ 楽 : Raku
++ 真 : Shin; Ma
++ 白 : Shiro
++ 空 : Sora; Zora
++ 手 : Te
++ 上 : Ue; Kami
++ 歌 : Uta
++ 山 : Yama; Ya
++ 夜 : Yoru; Yo
++ 雪 : Yuki
++ 夢 : Yume
++ 由 : Joshi; Yu
++ 夕 : Yuu
++ 残 : Zan
++ 雑 : Zatsu
++ 絶 : Zetsu
 
 ## Internet Vocabulary 
 + Utaite : 歌い手 : Singer

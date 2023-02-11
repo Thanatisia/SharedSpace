@@ -1,0 +1,39 @@
+Cheatsheet - yt-dlp
+```
+- Fork of Youtube-dl
+```
+
+Formats:
+	%(channel_id)s		: Channel ID
+	%(uploader)s		: Uploader YouTube channel/user name
+	%(playlist)s		: Playlist Name
+	%(playlist_id)s		: Playlist ID
+	%(id)s			: Video ID
+	%(ext)s			: Video Extension
+	%(title)s		: Video Title
+	%(playlist_index)s	: Video Order
+	%(upload_date>%Y)s	: Video Upload Year
+	%(chapter_number)s	: Video Chapter Number
+	%(chapter)s		: Video Chapter Title
+
+Parameters:
+	-f [video+audio] 			: To set the format you want the video to use when downloading
+	-F		 			: To get all available encoding format for the video URL to choose, related to [-f]
+	-o 'format/of/output/files'		: To set the output file path and name
+	-v					: Verbose
+	--download-archive [archive_filename]	: To get all downloaded videos and save into an archive logfile
+
+Syntax:
+
+Usage:
+	Download Playlists: 
+		# Syntax
+			yt-dlp https://youtube.com/playlist?list=[playlist_ID] -o 'format/of/output/files'
+			yt-dlp -f '[format]' --download-archive [archive-list-filename]  [playlist_url] -o '[format]'
+		# Example
+			[1] yt-dlp -f 'bv*[height=1080]+ba' --download-archive videos.txt  https://www.youtube.com/playlist?list=PLlVlyGVtvuVnUjA4d6gHKCSrLAAm2n1e6 -o '%(channel_id)s/%(playlist_id)s/%(id)s.%(ext)s'
+			[1] yt-dlp https://youtube.com/playlist?list=[playlist_ID] -o 'format/of/output/files'
+
+
+
+			
