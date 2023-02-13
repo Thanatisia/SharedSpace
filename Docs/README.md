@@ -3,7 +3,7 @@
 ## Information
 
 ### Repository
-+ Last Modified : 2022-08-11 0954H
++ Last Modified : 2023-02-13 2328H
 
 ### DESCRIPTION
 ```
@@ -13,14 +13,18 @@ This folder will contain multiple subfolders holding documents for the respectiv
 ## Documentation
 
 ### Folders/Topics
+- Anime
 - Computers
 - CyberSecurity
+- Data Recovery and Validation
 - Database Systems
-- Docker
+- Engineering
 - General
 - Git
+- Home Lab
 - Language
 - Linux
+- Mathematics
 - Music
 - Networking
 - Operating Systems
@@ -28,9 +32,12 @@ This folder will contain multiple subfolders holding documents for the respectiv
     - File Sharing/
     - Windows/
 - Programming
+- Recreational
+- Science
+- Services
 - Software
 - Technology
-- Termux
+- Texts
 - Virtual Machines
 - WebDevelopment
 
