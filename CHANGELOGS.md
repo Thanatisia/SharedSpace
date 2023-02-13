@@ -47,3 +47,45 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Created CHANGELOGS files in Root directory and '~/Docs'
     - Created folder 'Temporary' to store all temporary files to be moved within the pipeline   
 
+- Update 2023-02-13 2338H, Asura
+    ```
+    - Added
+        - Docs/Programming/Designing/program_designer.md : A Software Development Project Documentation template
+
+    - Deleted
+        - Files/
+        - Linux/
+        - Projects/
+        - Scripts/
+        - Windows/
+
+    - Migrated
+        - Files/PC Parts List.txt => Docs/Computers/Computer Hardware/PC Parts List.md
+        - Files/Skeleton/CONTRIBUTING.md => Docs/Git/CONTRIBUTING.md
+        - Files/Plans => Docs/Programming/Files/Plans
+        - Linux/dotfiles => Docs/Linux/ricing/Dotfiles
+        - Linux/scripts => Docs/Programming/Shellscript/My-Scripts
+        - Projects/Programming/C/Practice_1 => Docs/Programming/Languages/C/Code-Snippets/HelloWorld
+        - Projects/Programming/C++/autoutils => Docs/Programming/Languages/CPP/Code-Snippets/HelloWorld
+        - Projects/Programming/Artificial Intelligence/ => Docs/Programming/Artificial Intelligence/Ideas
+        - Projects/Programming/Template_Folder/C => Docs/Programming/Languages/C/Templates/Project structure/Project_Name
+        - Projects/Programming/Template_Folder/C++ => Docs/Programming/Languages/CPP/Templates/Project structure/Project_Name
+        - Projects/Scripting/Batch => Docs/Programming/Languages/Batch/Code-Snippets/Startup Workspace
+        - Projects/Scripting/Python/Fiverr/csv_reader/ => Docs/Programming/Languages/Python/Examples/Code-Snippets/CSV-Reader
+        - Projects/Scripting/Python/PersonalDBMS => Docs/Programming/Languages/Python/Examples/Code-Snippets/PersonalDBMS
+        - Projects/Scripting/Python/SimpleGUI => Docs/Programming/Languages/Python/Examples/Code-Snippets/Simple-GUI
+        - Projects/Scripting/Template_Folder/Python => Docs/Programming/Languages/Python/Templates/Project structure/Project_Name
+        - Projects/Templates/Software Development/Programming/libs/tests.py => Docs/Programming/Languages/Python/Examples/Code-Snippets/Unit Tests
+        - Scripts/Batch/Portable-Scripts => Docs/Programming/Languages/Batch/My-Scripts
+        - Templates => Docs/Programming/Files/Templates
+        - Temporary/curl_repositories.sh,gits.sh,textdl.sh => Docs/Programming/Shellscript/My-Scripts
+
+    - Moved
+        - Docs/layout.md => layout.md
+
+    - Modified
+        - Renamed Docs/Computers/Computer Hardware/parts-list.txt => Docs/Computers/Computer Hardware/PC Parts List.md
+        - CHANGELOGS.md
+        - README.md
+        - Docs/README.md
+    ```
