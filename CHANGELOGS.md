@@ -47,7 +47,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Created CHANGELOGS files in Root directory and '~/Docs'
     - Created folder 'Temporary' to store all temporary files to be moved within the pipeline   
 
-- Update 2023-02-13 2319H, Asura
+- Update 2023-02-13 2338H, Asura
     ```
     - Added
         - Docs/Programming/Designing/program_designer.md : A Software Development Project Documentation template
@@ -80,6 +80,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Templates => Docs/Programming/Files/Templates
         - Temporary/curl_repositories.sh,gits.sh,textdl.sh => Docs/Programming/Shellscript/My-Scripts
 
+    - Moved
+        - Docs/layout.md => layout.md
+
     - Modified
         - Renamed Docs/Computers/Computer Hardware/parts-list.txt => Docs/Computers/Computer Hardware/PC Parts List.md
+        - CHANGELOGS.md
+        - README.md
+        - Docs/README.md
     ```
