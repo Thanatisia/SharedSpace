@@ -33,12 +33,22 @@ Documentation for basics of Makefile and 'make'.
         # Comments
         recipe/commands
     ``` 
+
+### Components
+- General components of a Makefile
+    - ingredients: Variables and other ingredients required to make the target/recipe
+    - target/recipe: The instructions to build/make the product
+        - Typical target/recipes
+            + build     : To make/compile/build the source code into a binary locally
+            + install   : To install and copy the binary as well as other required files to the system level
+            + uninstall : To remove the installed binary as well as other required files from the system level
+            + clean     : To remove all temporary files generated from the build/compilation process.
     
 ### Usage
 
 + Run a target
     ```
-    make [target]
+    {sudo} make [target]
     ```
 
 ## Wiki

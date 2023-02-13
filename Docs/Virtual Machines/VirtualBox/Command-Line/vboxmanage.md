@@ -16,7 +16,7 @@ VBoxManage is a VirtualBox Utility created to Manage VirtualBox accessories and 
 
 ### Syntax
 
-VBoxManage [internalcommands, [action]] [options [arguments]...]
+VBoxManage [action] [options [arguments]...]
 
 ### Params
 
@@ -45,6 +45,40 @@ VBoxManage [internalcommands, [action]] [options [arguments]...]
 						```console
 						VBoxManage registervm
 						```
+	- list : List some information related to Virtual Machines depending on Keyword
+		- Syntax: VBoxManage list [list-type] [{options} {arguments}...]
+		- Positionals
+			- list-type : The keyword/category you wish to list
+				- List Categories
+					+ vms : Get all existing Virtual Machines
+					+ runningvms : Get all running Virtual Machines
+					+ ostypes : Get all Virtual Machine Operating System types
+					+ hostdvds : Get existing DVDs on the Host System
+					+ hostfloppies : Get existing Floppy drives (A:) on the Host system
+					+ intnets : Get Host System's Internal Network details
+					+ bridgedifs : Get Host System's Bridged Network Interfaces
+					+ hostonlyifs : Get Host System's Host-only Interfaces
+					+ natnets : Get Host System's Network Address Translation (NAT)-based Network Interfaces
+					+ dhcpservers : Get all DHCP Servers in VirtualBox
+					+ hostinfo : Get all Virtual Machine's Host Information
+					+ hostcpuids : Get all Virtual Machine's Host CPU IDs
+					+ hddbackends : Get all Virtual Machine's HDD Backends
+					+ hdds : Get all Virtual Machine's mounted Hard Disk Drives
+					+ dvds : Get all Virtual Machine's mounted DVDs
+					+ floppies : Get all Virtual Machine's mounted Floppy Drives
+					+ usbhost : Get all Virtual Machine's USB Hosts/Devices
+					+ usbfilters : Get all Virtual Machine's USB Filters
+					+ systemproperties : Get all Virtual Machine's System Properties
+					+ extpacks : Get all installed VirtualBox Extension Pack properties
+					+ groups : Get all Virtual Machine groups
+					+ webcams : Get all Webcams on Host System
+					+ screenshotformats : Get VirtualBox Screenshot Formats
+					+ cloudproviders : Get VirtualBox Cloud Providers
+					+ cloudprofiles : Get VirtualBox Cloud Profiles
+					+ cloudnets : Get VirtualBox Cloud Networks
+		- Options
+			+ -l | --long : Get long/verbose/detailed information
+			+ -s | --sorted : Sorted by Ascending/Descending Format
 	- modifyhd : To Modify an existing Virtual Hard Drive/Disk Image
 		- Syntax: VBoxManage modifyhd [vdi|vhd name] [{options} {arguments}...]
 		- Options:
@@ -79,21 +113,20 @@ VBoxManage [internalcommands, [action]] [options [arguments]...]
 	- storagectl : Modify/Create Storage Controller
 		- Syntax: VBoxManage storagectl [Virtual Machine Name] [{options} {arguments}...]
 		- Options:
-			+ --name [Storage Controller Name]
-			+ --add [Storage Type to Add]
+			+ --name [Storage Controller Name] : Specify the name of the Storage Controller to control/add/modify/manage
+			+ --add [Storage Type to Add] : Specify the type for the new storage device you wish to add to the target Storage Controller
 				- Examples:
 					+ ide : For IDE
 					+ sata : For SATA 
-			+ --controller [Storage Controller]
+			+ --controller [Storage Controller] : Specify the type for the target Storage Controller
 				- Examples:
 					+ PIIX4
 					+ IntelAhci
-			
-- internalcommands [command] : Run a list of other commands
-	createrawvmdk : Create Raw VMDK file from a given Bootable USB Disk/Drive
-		Options:
-			-filename [output-file-path] : Set Output Path to VMDK File 
-			-rawdisk \\.\PhysicalDrive[drive_number] : To set the Physical Drive you want to convert
+	- internalcommands [command] : Run a list of other commands within a Virtual Machine
+		- createrawvmdk : Create Raw VMDK file from a given Bootable USB Disk/Drive
+			- Options:
+				+ -filename [output-file-path] : Set Output Path to VMDK File 
+				+ -rawdisk \\.\PhysicalDrive[drive_number] : To set the Physical Drive you want to convert
 
 ### Usage
 
