@@ -20,7 +20,11 @@ A VPN can be either
 - Accessing your Home Network, Home Lab/Server from an external/private (Untrusted) Network 
 	+ through an encrypted stream
 
-## VPN Tunneling Protocols
+## Components
+- Encryption Protocol
+- Tunneling Protocol
+
+## VPN Encryption Protocols
 + IPSec
     - IPSec uses predefined communication channels 
         + UDP Port 500 and UDP Port 4500 to establish the encrypted tunnel and 
@@ -31,13 +35,13 @@ A VPN can be either
 	- Uses a chosen UDP or TCP port, allowing for flexible configuration choices
 + PP2P
 + SSTP
-+ WireGuard
++ WireGuard : Peer-to-Peer Tunneling + Encryption protocol
 
-## VPN Encryption
-- L2TP
+## VPN Tunneling Protocols
+- L2TP : The Layer-2 Tunneling Protocol; used with IPSec
     - Linux-related Package/Services
         + xl2tpd
-+ IKEv2
++ IKEv2 : Used with IPSec
 
 ## Implementations
 ### IPSec

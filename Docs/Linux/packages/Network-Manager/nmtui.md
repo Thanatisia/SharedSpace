@@ -6,6 +6,7 @@
 - Summary
     + nmtui is a Terminal User Interface (TUI) variant of [nmcli - the Network Manager Command Line Interface](nmcli.md)
     + It is not as powerful as nmcli but it is convenient and allows you to have a big overview and a Terminal GUI to work with
+    + On edit, this will update and append the DHCP Daemon configuration file '/etc/dhcpcd.conf' with the static IP and/or any changes made.
 
 ## Setup
 ### Pre-Requisites
