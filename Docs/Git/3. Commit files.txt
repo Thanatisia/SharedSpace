@@ -11,5 +11,8 @@
 	# NOTE:
 		The message at the end of the commit should be related to the commit
 
+3. Ammending commits and writing commit changes
+	- If you have not pushed the commit
+		+ You can edit your commit messages by ammending the commit
 
-
+	git commit --ammend

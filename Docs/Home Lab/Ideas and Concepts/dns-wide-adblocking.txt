@@ -1,0 +1,52 @@
+DNS-Wide Adblocking + DNS Server
+
+[Components]
+- DNS Server
+    + Pihole
+- DNS Adblocker
+    + AdGuard (Home)
+- VPN Server
+    - Tunneling
+       + IPSec
+    - Encryption Protocol
+       + L2TP
+       + IKEv2
+
+[Structure]
+Network Server/Edge Router
+- Adblocker
+```
+User
+  |
+  |
+  V
+  AdGuard
+  |
+  |
+  |--- Points to Upstream DNS Server ---> Pi-Hole (DNS Server, Sinkhole and Firewall) 
+                                              ^
+                                              |
+                                              |--- VPN Server
+```
+
+- DNS Adblocking, Firewall and Server via VPN Connection
+    Purpose: This allows a user connecting to the Home Network via VPN to automatically be connected to the DNS Server (pihole) as well by default
+        - This allows the user to automatically be able to use local domain names in the home network from the external network.
+```
+      External                                   Internal
+   (Public/Unsafe)                              (Private)
+      Network                                    Network
+User ---> | Connects to VPN Server and Authentication | ---> Edge Router/Networking Home Lab/Server 
+                                                               | 
+                                                               |--- Run VPN Server (IPSec + L2TP/IKEv2, WireGuard, OpenVPN etc) -----
+                                                               |--- Run DNS Adblocker (AdGuard etc)                                 |
+                                                               |     |                                                 Points to Upstream DNS Server
+                                                               |     |--- Points to Upstream DNS Server ---                         |
+                                                               |                                          |                         | 
+                                                               |                                          V                         v
+                                                               |--- Run DNS Server/Sinkhole/Firewall (Pihole + unbound etc) --- Points to Localhost (itself) as Upstream DNS Server --->
+                                                                     ^                                                                                                                 |
+                                                                     |                                                                                                                 |
+                                                                     |-----------------------------------------------------------------------------------------------------------------|
+
+```
