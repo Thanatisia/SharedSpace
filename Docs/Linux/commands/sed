@@ -64,3 +64,7 @@ uncomment_line()
 	filename="$2"
 	sed -i '/$regex_Pattern/s/^#//g' $filename
 }
+
+[References]
++ GitHub - le0me55i/uncomment_sed.md - Uncomment/comment line using sed: https://gist.github.com/le0me55i/e1f2244cdc0d64d8e541378357543b15
+
