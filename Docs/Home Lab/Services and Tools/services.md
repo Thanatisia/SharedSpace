@@ -39,7 +39,7 @@ Feel free to contribute and add here based on the various categories.
 + Apache Guacamole : Remote Desktop Gateway
 + bind9 : DNS (Authoritative) Server
 + heimdall : Dashboard
-+ homer : Dashboard
++ [bastienwirtz/homer](https://github.com/bastienwirtz/homer/) : Dashboard
 + pihole : DNS Sinkhole, DNS (Forwarder) Server
 + unbound : DNS Resolver
 + uptime kuma : Uptime Monitoring
