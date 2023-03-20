@@ -1,5 +1,8 @@
 # Japanese
 
+## Components
++ jyoshi (助詞) : Particles
+
 ## Basics
 ### Alphabet
 + a : あ
@@ -350,6 +353,7 @@
 + 近い : Chikai : Near; Close; Short
 + 小さな : Chiisana : Small; Little; Tiny
 + 深い : Fukai : Deep; Profound; Thick
++ 不明 : Fumei : Unknown; Uncertain; Obscure
 + ふさわしい : Fusawashii : Deserving; Fit; Proper; Befitting
 + 元気な : Genki : Fine; Healthy; Energy; Courage
 + 早い : Hayai : Early; Fast; Quick
@@ -404,15 +408,25 @@
 + 有名な : Yuumei na : Famous
 
 ## Verb
-```
-Generally 
-- end with a "-masu" to indicate verb
-- end with a "-shimasu" to indicate intent to perform the verb
+### Forms
+- Dictionary Form:
+    - ends with "-u"
+        + ku
+        + ru
+- Masu (Formal) Form:
+    + ends with "-masu"
+- Te Form:
+    + ends with "-te"
 
-Syntax and Structure:
-    [Verb]ます
-    [Verb]します
-```
+- Generally 
+    - end with a "-masu" to indicate verb
+    - end with a "-shimasu" to indicate intent to perform the verb
+
+- Syntax and Structure:
+    + [Verb]ます
+    + [Verb]します
+
+### Entries
 - 上げ : Age 
     + To increase; raise; give; promote; advance
 - 諦め : Akirame 
@@ -781,6 +795,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     + More; Longer; Further
 - 思い切り: Omoikiri
     + with all of one's strength/heart
+- さえ : Sae
+    + Even; Only; Besides
 - 先 : Saki
     + Behind; previous; prior; former; destination
 - せめて : Semete
@@ -956,6 +972,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 女神 : Goddess
 - Megane 
     - 眼鏡 : Glasses
+- Meisei
+    - 名声 : Fame
 - Michi 
     - 道 : Road; Street; Method
 - Mirai
@@ -1008,6 +1026,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 - Saikai
     - 再会 : Reunion; Meet again
     - 再開 : Reopening; Resumption; Resume
+- Sankai
+    - 散会 : Adjourne; Split; Done
 - Sekai
     - 世界 : World
 - Sentaku 
@@ -1053,6 +1073,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 特 : Special
 - Tokushyu
     - 特集 : Special Feature
+- Tomi
+    - 富 : Wealth; Fortune
 - Toshi
     - 都市 : City
 - Toshokan
@@ -1080,6 +1102,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 山 : Mountain
 - Yami 
     - 闇 : Darkness; Dark
+- Yokochou
+    - 横丁 : Alley; Side Street; Lane
 - Yome
     - 嫁 : Wife
 - Youkai
@@ -1090,6 +1114,8 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
     - 夢 : Dream
 - Yuki
     - 雪 : Snow
+- Yukue
+    - 行方 : Whereabouts
 - Yuuki
     - 勇気 : Strength; Bravery
 - Yuurei
@@ -1141,6 +1167,7 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 + 前 : Mae; Zen
 + 眼 : Me
 + 緑 : Midori
++ 宮 : Miya
 + 無 : Mu
 + 紫 : Murasaki
 + 奈 : Na
@@ -1152,6 +1179,7 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 + 白 : Shiro
 + 空 : Sora; Zora
 + 手 : Te
++ 富 : Tomi
 + 上 : Ue; Kami
 + 歌 : Uta
 + 山 : Yama; Ya
@@ -1186,12 +1214,14 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 + otsukaresamadeshita : お疲れ様でした : Thank you for your hard work
 + moushiwakearimasen : 申し訳ありません : Sincere apologies; very sorry
 + ochitsuite : 落ち着いて : calm down; take it easy
++ odaiji ni : お大事に : Take care
 + urusai : 煩い : Shut up; keep quiet
 + sakebita ga terrunda : 叫びたがてっるんだ : I want to scream
 + tasukete! : 助けて! : Help me!
 + yahari : やはり : As I thought; also; still; of course; nevertheless; same as やっぱり
 + yappari : やっぱり : As I thought; also; still; of course; nevertheless; same as やはり
 + yoku dekimashita : よく 出来ました : Well Done; Good Job
++ yukue fumei : 行方不明 : Missing; Unaccounted
 
 ## Expressions
 > Small grammar/connectors Used by individuals during communication to transition or announce certain things/emotions/mood/message
@@ -1202,6 +1232,14 @@ These are the use case and Syntaxes for the stated Japanese grammar as well as c
 + という : to iu : called
 
 ## Sentences/Usage
+### Basics
+- Asking
+    - Where is the station?
+        - Query: 
+            + Kanji: 駅 は 何処ですか? 
+            + Romaji: Eki ha doko desuka?
+        - Reply: 
+            + 
 
 ## Rules
 ### Grammar
