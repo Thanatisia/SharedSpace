@@ -1,4 +1,4 @@
-# Linux Kernel
+# Apache httpd Web Server
 
 ## Information
 + Application Title: Apache Webserver HTTP Daemon
@@ -22,8 +22,8 @@
             git clone https://github.com/apache/httpd
             ```
 
-    - From Linux Kernel Mirrors
-        - Download kernel tarball
+    - From Mirrors
+        - Download latest tarball
             ```console
             wget https://dlcdn.apache.org/httpd/httpd-[latest-version].tar.gz
             ```
@@ -57,7 +57,7 @@
     ./configure --prefix=[PREFIX]
     ```
 
-- Build/Compile the kernel
+- Build/Compile
     ```console
     make {options}
     ```

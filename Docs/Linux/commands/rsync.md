@@ -88,6 +88,7 @@ Comparing with cp,
         + -f : Force copy
         + -h : Human-readable, output numbers in a human-readable format
         + -r : Copies data recursively; doesnt preserve timestamps and permissions while transferring data
+        + -u : Unison; synchronizes in both directions; It's like doing rsync twice from source to destination and vice versa; `unison source <----> destination`
         + -v : Verbose; Display more details to standard output
         + -W : Explicitly want to synchronize the whole file like `cp`; By default, rsync synchronizes changed blocks and bytes only
         + -z : Compress file data
