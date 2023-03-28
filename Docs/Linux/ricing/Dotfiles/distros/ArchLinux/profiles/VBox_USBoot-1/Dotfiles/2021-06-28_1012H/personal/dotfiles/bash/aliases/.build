@@ -1,9 +1,0 @@
-#
-# This Contains aliases for all linux commands
-# based on build and makepkg
-#
-
-# Build utilities
-alias pkgbuild="makepkg"
-
-

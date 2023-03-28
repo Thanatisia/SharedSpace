@@ -1,6 +1,0 @@
-#
-# Command Variables
-#
-
-# [Commands]
-networkmgr_status="$(systemctl status NetworkManager | grep running)"

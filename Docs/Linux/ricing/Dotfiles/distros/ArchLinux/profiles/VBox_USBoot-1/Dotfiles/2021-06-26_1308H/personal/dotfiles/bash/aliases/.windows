@@ -1,9 +1,0 @@
-#
-#
-# This Contains aliases for all linux commands with a windows-equivalent commands
-#
-
-# --- Aliases
-alias chkdsk="fsck"
-alias chkdsk_All="fsck -A"
-alias chkdsk_skip_Root="fsck -R"
