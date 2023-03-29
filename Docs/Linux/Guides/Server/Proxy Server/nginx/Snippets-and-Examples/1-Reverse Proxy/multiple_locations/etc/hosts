@@ -1,0 +1,23 @@
+#==========================
+# /etc/hosts file
+# for the container
+#
+# This is where you map the host names of your webservices
+#   to the IP address of your webservices.
+#
+# - Essentially, this is where the Reverse Proxy server's Domain name setting for DNS takes place
+#   - DNS will map the IP address to a domain name
+#   - A Reverse Proxy server will be able to take that domain name and map a path to the IP address as a URL
+#===============================
+
+# Format:
+## [ip-address] [domain/url]
+127.0.0.1 localhost
+::1 localhost
+127.0.1.1 nginx.localdomain nginx
+
+# Custom Domain Names here
+192.168.1.72 dns.home
+192.168.1.72 apps.home
+192.168.1.73 ironwolf.home
+192.168.1.97 edge.router
