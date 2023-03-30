@@ -58,6 +58,13 @@
 		```console
 		find * -type f | fzf
 		```
+	- print line number instead of contents of the chosen line
+		+ Parse the standard output of the previous command into `nl` to display result with line numbers
+		+ Afterwhich, parse the new results into fzf to display in reverse (so that the lines are displaying downwards)
+		+ Get the first parameter in the selected line which is the line number
+		```console
+		[command] | nl | fzf --reverse | awk '{print $1}'
+		```
 
 - Taking in standard input pipe
 	- Simple example
@@ -118,6 +125,19 @@
 		```console
 		command ls -d $PWD/* | fzf [target-extension] | xargs [your-wallpaper-setter]
 		```
+	- Read file and select a line
+		+ --reverse will display the result in descending order (top to bottom) instead of the default (bottom to top)
+		+ by default, parsing the cat result to fzf will display the lines from bottom upward
+		```console
+		cat [file-name] | fzf --reverse
+		```
+	- print line number instead of contents of the chosen line
+		+ Parse the contents of the file into `nl` to display result with line numbers
+		+ Afterwhich, parse the new results into fzf to display in reverse (so that the lines are displaying downwards)
+		+ Get the first parameter in the selected line which is the line number
+		```console
+		cat [file-name] | nl | fzf --reverse | awk '{print $1}'
+		```
 
 - dmenu and rofi equivalent usage
 	- Setting prompt name
@@ -166,6 +186,7 @@ Syntax:
 
 ## References
 + [Building FZF](https://github.com/junegunn/fzf/blob/master/BUILD.md)
++ [GitHub - junegunn/fzf - Print line number instead of contents of chosen line](https://github.com/junegunn/fzf/issues/1014)
 
 ## Remarks
 
