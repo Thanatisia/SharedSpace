@@ -1,0 +1,26 @@
+# Docker-compose for
+# [service type]
+# Service Author: [service-author-name]
+# Service Name: [service-name]
+# URL: [repository-url]
+# Documentations
+
+version: '3.5'
+
+services:
+  portainer:
+    image: [image]:latest
+    container_name: [container-name]
+    restart: [always|unless-stopped|never]
+    hostname: [your-hostname] # To explicitly specify hostname
+    # network_mode: host # (OPTIONAL) To use host network mode
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+      # Port forward/translate from host system port to container port
+      # [host-system-port]:[container-port]
+    volumes:
+      # Mount volumes from host system volume to container volume
+      # [host-system-volume]:[container-volume]:[permission]
+
