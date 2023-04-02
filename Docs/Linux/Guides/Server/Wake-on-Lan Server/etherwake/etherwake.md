@@ -1,11 +1,16 @@
 # Linux - etherwake
 
-## Wiki
+## Documentations
 
 ### Synopsis/Syntax
-```console
-sudo etherwake {options} <arguments> [target-MAC-address]
-```
+- Debian-based
+    ```console
+    sudo etherwake {options} <arguments> [target-MAC-address]
+    ```
+- Fedora-based
+    ```console
+    sudo ether-wake {options} <arguments> [target-MAC-address]
+    ```
 
 ### Parameters
 
@@ -15,5 +20,23 @@ sudo etherwake {options} <arguments> [target-MAC-address]
         + Type : String
 
 - Optional Arguments
-    + -i [ethernet-interface] : Specify the ethernet interface to send the magic packets through
+    - With Arguments
+        + -i [ethernet-interface] : Specify the ethernet interface to send the magic packets through
+    - Flags
+        + -D : Send WoL Magic Packets with Increased Debug Level (verbose)
 
+### Usage
+- etherwake
+        - Send WoL Magic Packets
+        ```console
+        etherwake [MAC-address-here]
+        ```
+- Send WoL Magic Packets with Increased Debug Level (verbose)
+        ```console
+        etherwake -D [MAC-address-here]
+        ```
+
+- Set command to wake PC up with Magic Packet
+    ```console
+    sudo etherwake -i [ethernet-interface] [target-MAC-address]
+    ```

@@ -20,5 +20,6 @@ A WoL server will allow you to wake up any devices that supports WoL through sen
 
 ## References
 + [Instructables - Raspberry Pi as a Wake-on-LAN Server](https://www.instructables.com/Raspberry-Pi-As-Wake-on-LAN-Server/)
++ [Cyberciti - Linux How to send WakeOnLAN Magic Packets](https://www.cyberciti.biz/tips/linux-send-wake-on-lan-wol-magic-packets.html)
 
 ## Remarks

@@ -1,5 +1,20 @@
 # Linux - Wake-on-LAN Server : using Etherwake
 
+```
+Etherwake is a package containing a set of Wake-on-LAN-related tools/utilities that 
+allows users to either send or receive Magic Packets so as to wake/sleep a target machine 
+through their network interface
+```
+
+## Information
+### Package Information
+- Package/Project Name
+    + apt : etherwake
+    + yum : net-tools
+- Utilities/Tools
+    + [etherwake](etherwake.md)
+    + [wakeonlan](wakeonlan.md)
+
 ## Setup
 ```console
 This process is similar to making any linux system into a Wake-on-Lan (WoL) Server
@@ -60,6 +75,8 @@ This process is similar to making any linux system into a Wake-on-Lan (WoL) Serv
 
 
 ### Dependencies
++ etherwake
++ ethtool
 
 ### Installation
 - Install 'etherwake'
@@ -67,12 +84,10 @@ This process is similar to making any linux system into a Wake-on-Lan (WoL) Serv
         ```console
         sudo apt install etherwake
         ```
+    - Fedora-based
+        ```console
+        sudo yum install net-tools
+        ```
 
-## Documentation
-
-### Usage
-- Set command to wake PC up with Magic Packet
-    ```console
-    sudo etherwake -i [ethernet-interface] [target-MAC-address]
-    ```
+## Wiki
 

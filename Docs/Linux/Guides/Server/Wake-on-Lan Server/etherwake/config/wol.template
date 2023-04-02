@@ -1,0 +1,19 @@
+# File structure
+# --------------
+# - blank lines are ignored
+# - comment lines are ignored (lines starting with a hash mark '#')
+# - other lines are considered valid records and can have 3 columns:
+#
+#       Hardware address, IP address, destination port
+#
+#   the last two are optional, in which case the following defaults
+#   are used:
+#
+#       IP address: 255.255.255.255 (the limited broadcast address)
+#       port:       9 (the discard port)
+#
+ 
+## Example
+# [MAC address] [IPv4 address] [port number]
+# aa:bb:cc:dd:ee:ff	xx:xx:xx:xxx		n
+
