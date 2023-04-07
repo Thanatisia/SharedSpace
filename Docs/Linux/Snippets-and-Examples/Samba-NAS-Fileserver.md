@@ -47,7 +47,7 @@ SMB is cross-platform and used in many different Operating Systems
         ```
 
 ## Resources
-+ [chrismiller - mount samba share](https://chrismiller.com/mount-samba-share-in-ubuntu/amp)
++ [chrisrmiller - mount samba share](https://www.chrisrmiller.com/mount-samba-share-in-ubuntu/)
 
 ## References
 
