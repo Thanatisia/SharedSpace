@@ -88,31 +88,64 @@ pv monitors data sent through the pipe, afterwhich, gives the user a visual disp
 			+ -W | -wait      : Wait for transfer of first byte before displaying progress
 
 ### Usage
-- Create a progress bar with the `copy` command
-	```console
-	pv [filename] > /path/to/output/[output-file-name]
-	```
-
-- Compress and making a zip file with a progress bar
-	```console
-	pv [filename] | zip > /path/to/output/[output-file-name]
-	```
-
-- Counting number of lines, words and bytes
-	- Word count
+- Standalone
+	- Create a progress bar with the `copy` command
 		```console
-		pv -p [filename] | wc
+		pv [filename] > /path/to/output/[output-file-name]
 		```
-	- Line count
+	- Compress and making a zip file with a progress bar
 		```console
-		pv -p [filename] | wc -l
+		pv [filename] | zip > /path/to/output/[output-file-name]
 		```
+	- Counting number of lines, words and bytes
+		- Word count
+			```console
+			pv -p [filename] | wc
+			```
+		- Line count
+			```console
+			pv -p [filename] | wc -l
+			```
 
-- Monitor tar progress
-	- Pipe
+- Pipe
+	- Structure
+		- Standard
+			```console
+			[command] | pv
+			```
+		- Show only display bar
+			```console
+			[command] | pv -p
+			```
+		- Show only Elapsed time
+			```console
+			[command] | pv --timer
+			```
+		- Show only ETA
+			```console
+			[command] | pv --eta
+			```
+		- Show only Rate
+			```console
+			[command] | pv --rate
+			```
+		- Show only transferred data size
+			```console
+			[command] | pv --bytes
+			```
+		- Refresh specified interval
+			```console
+			[command] | pv -i 2
+			```
+	- Monitor tar progress
 		```console
 		tar -cvzf - [archive-files...] | (pv -p --timer --rate --bytes > [output-tar-file.tar.gz])
 		```
+	- Copying files
+		```console
+		cp [source-file] [destination-filepath] | pv {options}
+		```
+
 
 ### Snippets and Examples
 
@@ -123,6 +156,7 @@ pv monitors data sent through the pipe, afterwhich, gives the user a visual disp
 ## References
 + [GeeksForGeeks - pv command in linux with examples](https://www.geeksforgeeks.org/pv-command-in-linux-with-examples/)
 + [SuperUser - Is there a way to see any tar progress per file?](https://superuser.com/questions/168749/is-there-a-way-to-see-any-tar-progress-per-file)
++ [poftut - Linux pv command tutorial and examples](https://www.poftut.com/linux-pv-command-tutorial-examples-monitor-progress-copybackupcompress/)
 
 ## Remarks
 
