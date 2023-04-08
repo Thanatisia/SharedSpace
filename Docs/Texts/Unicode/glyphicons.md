@@ -18,6 +18,7 @@ These characters can also be known as
 + σ : lowercase Sigma (lower; Variance; finding Standard Deviation
 + π : Pi; Product/Multiplication
 + φ : Psi
++ θ : Theta; Typically angle
 
 ## Mathematical
 ### Order of Operation

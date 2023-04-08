@@ -138,9 +138,14 @@ pv monitors data sent through the pipe, afterwhich, gives the user a visual disp
 			[command] | pv -i 2
 			```
 	- Monitor tar progress
-		```console
-		tar -cvzf - [archive-files...] | (pv -p --timer --rate --bytes > [output-tar-file.tar.gz])
-		```
+		- Compressing
+			```console
+			tar -cvzf - [archive-files...] | (pv -p --timer --rate --bytes > [output-tar-file.tar.gz])
+			```
+		- Extracting
+			```console
+			tar -xvzf [target-file-name] | pv -p --timer --rate --bytes
+			```
 	- Copying files
 		```console
 		cp [source-file] [destination-filepath] | pv {options}
