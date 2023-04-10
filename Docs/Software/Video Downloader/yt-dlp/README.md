@@ -92,39 +92,66 @@
 ## Documentation
 ### Synopsis/Syntax
 ```console
-yt-dlp {options} <arguments>
+yt-dlp {options} <arguments> [video-url]
 ```
 
 ### Parameters
-+ `TBC`
+> This list is incomplete; Please refer to the help/manual/documentations for a full list of options
+- Positionals
+    - video-url : The URL/link of the target video
+        + Type: URL String
+- Optionals
+    - With Arguments
+        - Video Format Options
+            + -f [format] | --format [format] : Specify the video/audio encoding format codes to download; Use '[video-format]+[audio-format]' operator/structure to download the video and audio files and merge them together
+    - Flags
+        - Video Format Options
+            + -F | --list-formats : List all available video/audio encoding format codes
+        - General Options
+            + -h | --help   : Display help and all options
+            + -U | --update : Update this program to the latest stable version
+            + --no-update   : Do not check for updates (Default)
+            + --version     : Display program version and exit
 
 ### Snippets and Examples
-- Download from Teachables
-    - Pre-Requisites
-        1. Obtain the URL of the video's page
-        2. Obtain the link of the m3u8 encoded video cache file
-            + Open the `Developers Tools`/`Web Tools`
-            + Go to the `Network` tab
-            + Type into the filter 'm3u8'
-            - Refresh the webpage and startup the video
-                + Wait for a m3u8 row containing the word/substring 'master' somewhere in the text
-                - Once you see the 'master' item
-                    + Right click on that row
-                    - Select "Copy"
-                        + Select "to Link" to copy the path to the cache
-    - Synopsis/Syntax
+- Download specific video/audio encoding format(s)
+    - Search for your target format(s)
+        + Choose a target audio/video format code (i.e. 217)
         ```console
-        yt-dlp {options} --referer [video-page-URL] [mu8r-cache-link]
+        yt-dlp -F [video-url]
         ```
-    - Usage
-        - Default
+    - Specify your target format codes to download
+        + Use the structure `-f [video-format-code]+[audio-format-code]` to download the video and audio files and merge them together
+        ```console
+        yt-dlp -f [format(s)] [video-url]
+        ```
+- Download from Source 
+    - Teachables
+        - Pre-Requisites
+            1. Obtain the URL of the video's page
+            2. Obtain the link of the m3u8 encoded video cache file
+                + Open the `Developers Tools`/`Web Tools`
+                + Go to the `Network` tab
+                + Type into the filter 'm3u8'
+                - Refresh the webpage and startup the video
+                    + Wait for a m3u8 row containing the word/substring 'master' somewhere in the text
+                    - Once you see the 'master' item
+                        + Right click on that row
+                        - Select "Copy"
+                            + Select "to Link" to copy the path to the cache
+        - Synopsis/Syntax
             ```console
-            yt-dlp --referer [video-page-URL] [m3u8-cache-link]
+            yt-dlp {options} --referer [video-page-URL] [mu8r-cache-link]
             ```
-        - Output custom file name
-            ```console
-            yt-dlp -o [output-file-name] --referer [video-page-URL] [m3u8-cache-link]
-            ```
+        - Usage
+            - Default
+                ```console
+                yt-dlp --referer [video-page-URL] [m3u8-cache-link]
+                ```
+            - Output custom file name
+                ```console
+                yt-dlp -o [output-file-name] --referer [video-page-URL] [m3u8-cache-link]
+                ```
 
 ## Wiki
 
