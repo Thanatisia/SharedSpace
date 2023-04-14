@@ -201,6 +201,16 @@ Comparing with cp,
                 rsync --dry-run --remove-source-files -ve ssh username@domain:/path/to/source/directory-or-filename /path/to/destination/directory-or-filename
                 ```
 
+- Migration and Backup
+    - For example
+        + If you are transferring from 1 NAS hard drive => another NAS hard drive
+    - Pre-Requisite
+        + Mount your target remote path
+    - rsync
+        ```console
+        rsync --progress -arv [source-directory] [target-destination-path]
+        ```
+
 ## Wiki
 
 ## Resources

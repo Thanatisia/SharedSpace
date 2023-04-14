@@ -142,10 +142,20 @@ pv monitors data sent through the pipe, afterwhich, gives the user a visual disp
 			```console
 			tar -cvzf - [archive-files...] | (pv -p --timer --rate --bytes > [output-tar-file.tar.gz])
 			```
+			- With TUI (i.e. dialog)
+				- Dialog
+					```console
+					(pv -n [output-file] | tar -cvzf - -C [target-directories ...]) 2>&1 | dialog --gauge "Archiving/Compressing files..." 6 50
+					```
 		- Extracting
 			```console
 			tar -xvzf [target-file-name] | pv -p --timer --rate --bytes
 			```
+			- With TUI (i.e. dialog)
+				- Dialog
+					```console
+					(pv -n [output-file] | tar -xvzf - -C [target-directories ...]) 2>&1 | dialog --gauge "Extracting files..." 6 50
+					```
 	- Copying files
 		```console
 		cp [source-file] [destination-filepath] | pv {options}
