@@ -4,12 +4,32 @@
 ### Pre-Requisites
 - Ensure is installed
     - C++ (if using C++)
-        + MinGW w64 (g++, gcc)
-    - OpenCL API v1.2 SDK
-        - Download AMD APP SDK
-        - Copy AMD APP SDK
-            - Paste in C drive
-+ Download GPU Caps
+        - Windows
+            + MinGW w64 (g++, gcc)
+        - Linux
+            - Using package manager
+                + apt
+                    ```console
+                    sudo apt install gcc g++ make build-essentials
+                    ```
+                + pacman
+                    ```console
+                    sudo pacman -S gcc g++ make base-devel
+                    ```
+    - Install OpenCL API Header/SDK
+        - If using Windows
+            - OpenCL API v1.2 SDK
+                - Download AMD APP SDK
+                - Copy AMD APP SDK
+                - Paste in C drive
+                - Add path of AMD APP SDK to Environment Variable
+        - If using Linux
+            - OpenCL Headers
+                + Intel: begnet-dev
+                + AMD: amd-opencl-dev
+                + Nvidia: nvidia-opencl-dev
+- Windows
+    + Download GPU Caps
 
 ## Documentation
 ### Synopsis/Syntax
@@ -63,6 +83,7 @@
 ## Resources
 + [VS Code - cpp](https://code.visualstudio.com/docs/languages/cpp)
 + [StackOverflow - GCC: Compiling an OpenCL host on Windows](https://stackoverflow.com/questions/12437776/gcc-compiling-an-opencl-host-on-windows)
++ [GitHub - michel-meneses - Great OpenCL examples](https://github.com/michel-meneses/great-opencl-examples)
 
 ## References
 
