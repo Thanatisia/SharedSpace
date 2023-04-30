@@ -13,6 +13,7 @@ Skyline Emulator is an experimental Nintendo Switch emulator for ARM devices (i.
 
 ## Table of Contents
 + [Setup](setup.md)
++ [Potential Bugs](bugs-encountered.md)
 
 ## Resources
 + [Skyline Download Builds](https://skyline-emu.one/download/)
