@@ -40,6 +40,10 @@ This folder is for all git-related notes and documents
 - 16. Handling Personal Access Tokens.txt
 - 17. Licenses.txt
 - 18. Tags
+- 19. Deployments
+- 20. Git Submodules
+- 21. Git logs
+- 22. Git worktree
 - cheatsheet
 - EX1. create new repository.txt
 - EX2. push existing repository.txt
