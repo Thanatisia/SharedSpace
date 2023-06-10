@@ -107,3 +107,19 @@ When you connect your target system to backup to another operating system
 	tar -xvzf ~/backup.bak.tar.gz
 	```
 
+- Using tar command over ssh
+    - SSH into a remote machine and tar compress the specified folder/files, and output the backup file in your local machine
+        ```console
+        ssh [username]@[domain-or-ip] tar -cvzf - [directories-or-files] > destination/file.tar.gz
+        ```
+    - SSH into a remote machine and tar extract a tar file into the remote machine
+        ```console
+        cat source/file.tar.gz | ssh [username]@[domain-or-ip] 'tar -xvzf - -C destination/file.tar.gz'
+        ```
+
+## Resources
+
+## References
++ [Cyberciti - How to use tar command through network over SSH session](https://www.cyberciti.biz/faq/howto-use-tar-command-through-network-over-ssh-session/)
+
+## Remarks
