@@ -18,8 +18,18 @@ sudo docker {actions} [image-name]
 
 ### Parameters
 + build [path-to-build] : Build a container/image recipe found in the specified path
+- compose {options} : Implementation of 'docker-compose' within docker itself (released in a latest version of docker)
+    - Options
+        + Same as docker-compose
 + images : To list all available Docker images on your host
 + info : To get information about docker
+- inspect : `docker inspect` prints out the details of a specified docker container
+    - Synopsis/Syntax
+        ```console
+        docker inspect {options} [container-name]
+        ````
+    - Options
+        + TBC
 + network {options} : Display Network Information and Handle Docker networks
 	- Options
 		+ create {options} {bridge-templates} [new-bridge-name] : To create a new bridge network by using existing networks as templates. Using user-defined bridge networks allows the user to control which containers can communicate with each other and containers can be connected to multiple networks at the same time
