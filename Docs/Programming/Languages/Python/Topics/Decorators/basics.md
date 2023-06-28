@@ -10,6 +10,10 @@
 
 ### Notes
 + Unless used with args and kwargs, the decorator function must contain the same number of parameters
+- A decorator function must return a nested function to ensure that it meets the correct structure
+    - When `caller_function()` is called,
+        + `result = outer(caller_function)` will be executed first
+        + then `result()` will be executed
 
 ## Documentation
 ### Synopsis/Syntax
@@ -93,9 +97,51 @@
         class_Obj.object = new_Value
         ```
 
+### Snippets
+- Nested Functions vs Decorator using '@'
+    - Nested Function
+        - The function 'outer' will take in an argument called 'func' of type callable (represented by '__call__') that is effectively a function object
+            + The function contains a nested 'inner function' called 'inner' that executes the 'func' object that is passed in by the caller
+            + The function 'outer' will then return the function 'inner' to the caller 'ordinary'
+        - As such, the line `inner = outer(ordinary)` is equivalent to using `@outer` on top of `def ordinary()`
+        ```python
+        def outer(func):
+            def inner():
+                print("Decorator")
+                func()
+            return inner
+
+        def ordinary():
+            print("I am ordinary")
+
+        # decorate the ordinary function
+        inner = outer(ordinary)
+
+        # call the decorated function
+        inner()
+        ```
+    - Decorator Assignment
+        - When 'decorated' (aka assigned) the decorator function 'outer', 
+            - the function assigned - in this case, 'ordinary' - will be automatically passed into the parameter of the decorator as an argument.
+                + Basically, this is the same as `result = outer(ordinary)`, and
+            - When `ordinary()` is called,
+                + `result = outer(ordinary)` will be executed first
+                + then `result()` will be executed
+        ```python
+        def outer(func):
+            def inner():
+                print("Decorator")
+                func()
+            return inner
+
+        @outer
+        def ordinary():
+            print("I am ordinary")
+        ```
+
 ## References
-- YouTube | Corey Shafer | 
-    + [Python Tutorial: Decorators -  Dynamically Alter the Functionality of your Functions](https://youtu.be/FsAPt_9Bf3U)
++ YouTube | Corey Shafer | Python Tutorial: Decorators -  Dynamically Alter the Functionality of your Functions](https://youtu.be/FsAPt_9Bf3U)
++ programiz | [Python Decorators](https://www.programiz.com/python-programming/decorator)
 
 ## Resources
 

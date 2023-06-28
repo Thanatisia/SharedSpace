@@ -8,6 +8,11 @@
 + Repository Name: yt-dlp
 + Repository URL: https://github.com/yt-dlp/yt-dlp
 
+### Project Filesystem Structure
+- Configuration Files
+    + System-wide configuration file: /etc/yt-dlp.conf
+    + User-specific configuration file: ~/.config/yt-dlp/config
+
 ## Setup
 ### Pre-Requisites
 
@@ -88,6 +93,22 @@
         ```
 
 ### Installing
+> If you are installing from a pre-built binary
+- Using package manager
+    - apt
+        - Package: 
+            + yt-dlp : Stable
+            + yt-dlp-git : Development
+        ```console
+        sudo apt install yt-dlp{-git}
+        ```
+    - pacman
+        - Package: 
+            + yt-dlp : Stable
+            + yt-dlp-git : Development
+        ```console
+        sudo pacman -S yt-dlp{-git}
+        ```
 
 ## Documentation
 ### Synopsis/Syntax
@@ -102,16 +123,42 @@ yt-dlp {options} <arguments> [video-url]
         + Type: URL String
 - Optionals
     - With Arguments
+        - General Options
+            + -o [output-filepath] | --output [output-filepath] : Specify an output filepath
+        - Browser Options
+            + --cookies-from-browser <browser> : To import cookies from the specified browser
+        - Download Options
+            + --download-archive [archive-file-name] : Download all videos from the list of video URLs specified in the provided `archive-file-name`
+        - External Usages
+            + --external-downloader [external-downloader] : Specify the external downloader you want to use instead of the default website; Examples: aria2
+            + --external-downloader-args '[arguments ...]' : Specify the arguments to parse into the external downloader of choice
+        - Subtitles
+            + --sub-lang [LANGUAGE,] : to specify the subtitles to download (comma separated)
         - Video Format Options
             + -f [format] | --format [format] : Specify the video/audio encoding format codes to download; Use '[video-format]+[audio-format]' operator/structure to download the video and audio files and merge them together
     - Flags
-        - Video Format Options
-            + -F | --list-formats : List all available video/audio encoding format codes
+        - Audio Options
+            + -k : If an audio-only stream is not available; Use this to keep the downloaded video as by default, that scenario will download the video and copy its audio as post process and remove the downloaded video
+            + -x : For Audio-only downloads; Use this alongside `-f <Best Audio>` to select the audio codec you want to download; Requires ffmpeg
+        - Download Options
+            + --continue : To continue downloading even after interruption
+            + --ignore-errors : Ignore any error or interruptions
+            + --no-overwrites : Do not overwrite files even after interruption
         - General Options
             + -h | --help   : Display help and all options
             + -U | --update : Update this program to the latest stable version
             + --no-update   : Do not check for updates (Default)
             + --version     : Display program version and exit
+        - Metadata and Information Options
+            + --add-metadata : Download the video with metadata included
+            + --embed-thumbnail : TO also include album art; Requires package 'atomicparsley'
+        - Subtitles
+            + --list-subs : List all available subtitle languages
+            + --write-sub : To download a video with selected subtitles; Used with '--sub-lang <LANGUAGE>' to specify the subtitles to download (comma separated)
+            + --write-auto-sub : To download auto-generated subtitles
+            + --skip-download : To get only subtitles
+        - Video Format Options
+            + -F | --list-formats : List all available video/audio encoding format codes
 
 ### Snippets and Examples
 - Download specific video/audio encoding format(s)
@@ -152,6 +199,92 @@ yt-dlp {options} <arguments> [video-url]
                 ```console
                 yt-dlp -o [output-file-name] --referer [video-page-URL] [m3u8-cache-link]
                 ```
+- Faster Downloads using External Downloader
+    - Some websites throttle transfer speeds
+        - You can often get around this by
+            + Choosing non-DASH streams or
+            + by using 'aria2' : An external downloader that supports multi-connection downloads
+                ```console
+                yt-dlp --external-downloader aria2c --external-downloader-args '-c -j 3 -x 3 -s 3 -k 1M' [URL]
+                ```
+- Extract Audio
+    - Notes
+        + Requires ffmpeg
+    - Parameters
+        + Use '-x' for Audio-only downloads by extracting the audio
+        + Use '-F' to search for a list of available audio
+        - Use '-f <best audio>' to select the best audio to download
+            + Append an '[ext=<extension>]' behind the <best audio> to rename it to the extension
+        ```console
+        yt-dlp -x -f <best audio>[ext=<extension>] [URL]
+        ```
+    - If an audio-only stream is not available
+        - Exclude '-f <best audio>'
+            + By default, this will remove the downloaded video, include '-k' to keep the downloaded video
+        ```console
+        yt-dlp -x -k [URL]
+        ```
+    - To also include album art
+        - Notes
+            + Requires package 'atomicparsley'
+        - Parameters
+            + Use '--add-metadata' to include metadata into the audio
+            + Use '--embed-thumbnail' to add the album art/thumbnail into the audio file
+        ```console
+        yt-dlp -x -f <best audio>[ext=m4a] --add-metadata --embed-thumbnail [URL]
+        ```
+- Subtitles
+    - To see which languages are available
+        ```console
+        yt-dlp --list-subs [URL]
+        ```
+    - To download a video with selected subtitles (comma separated)
+        ```console
+        yt-dlp --write-sub --sub-lang <LANGUAGES,...> [URL]
+        ```
+    - To download auto-generated subtitles
+        ```console
+        yt-dlp --write-auto-sub --sub-lang <LANGUAGES,...> [URL]
+        ```
+    - To download only subtitles
+        ```console
+        yt-dlp --skip-download --write{-auto}-sub --sub-lang <LANGUAGES,...> [URL]
+        ```
+- Cookies
+    - To import cookies from a browser
+        ```console
+        yt-dlp --cookies-from-browser <browser-name> [URL]
+        ```
+- Playlist
+    - Typical options
+        ```console
+        yt-dlp --ignore-errors --continue --no-overwrites --download-archive progress.txt <other options> [URL]
+        ```
+
+### Configuration
+- Structure
+    - Basically you add each option in a new line within the configuration file and
+        + The specified options will be loaded on runtime and ran by default
+    + One command-line option per line
+
+- Comments
+    + Use '#'
+
+- Syntax/Synopsis
+    ```
+    option-1 <argument>
+    option-2 <argument>
+    flag-3
+    flag-4
+    ...
+    ```
+
+- Snippets
+    - Save in ~/Videos by default
+        ```
+        # Save in ~/Videos
+        -o ~/Videos/%(title)s.%(ext)s
+        ```
 
 ## Wiki
 
@@ -161,5 +294,6 @@ yt-dlp {options} <arguments> [video-url]
 + [Reddit - youtubedl - teachable hack](https://www.reddit.com/r/youtubedl/comments/105zhx1/teachable_hack/)
 + [Reddit - ytdlp FAQ and basic operations](https://old.reddit.com/user/krimsen/comments/uzpaaq/ytdlp_faq_and_basic_operation_tips_and_tricks/)
 + [Reddit - Not able to download from teachable](https://old.reddit.com/r/youtubedl/comments/v0h7su/not_able_to_download_from_teachable/iah7606/)
++ [ArchWiki - yt-dlp](https://wiki.archlinux.org/title/Yt-dlp)
 
 ## Remarks
