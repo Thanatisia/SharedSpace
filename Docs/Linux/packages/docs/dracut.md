@@ -53,7 +53,9 @@ dracut {options} [output-image-file-name]
             + '/boot/[output-image-file].img'
 - Optionals
     - With Arguments
+        + --kver <kernel-version> : Explicitly specify the target kernel version; Please check for the linux kernel modules in '/lib/modules' for the available versions
     - Flags
+        + --force : Force the generating of the initramfs image file
         + --hostonly : To generate an initramfs for the running kernel
         + --no-hostonly-cmdline : Disable command line
 
@@ -66,6 +68,12 @@ dracut {options} [output-image-file-name]
 - To generate an initramfs for the running kernel
     ```console
     dracut --hostonly --no-hostonly-cmdline /boot/initramfs-linux.img
+    ```
+
+- To update the initramfs with a target kernel version
+    + This will generate an initramfs image file in '/boot/initramfs-<version>.img'
+    ```console
+    dracut --force --hostonly --kver <version-number>
     ```
 
 ## Wiki
