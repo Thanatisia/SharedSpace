@@ -12,7 +12,7 @@ However, it is actually possible to create your own command line argument suppor
 + shift [n] function    : Shift/move the current cli argument/parameter index to the left by n-position.
 
 ## Snippets
-- Main function
+- Command Line Argument and option parsing
     ```shellscript
     main()
     {
@@ -23,23 +23,34 @@ However, it is actually possible to create your own command line argument suppor
         argv=("$@")
         argc="${#argv[@]}"
 
-        # Check that there are arguments
-        if [[ "${argc}" -gt 0 ]]; then
-            # There are arguments
+        # Check if there are arguments
+        if [[ "$argc" -gt 0 ]]; then
+            ## There are arguments
+            ## Proceed to loop
             while [[ "$1" != "" ]]; do
-                # Loop through all arguments until there are no more
+                ## While there are still arguments
+                ## Loop through all arguments until there are no more
                 case $1 in
+                    "option")
+                        # Statements here
+
+                        # Shift argument left-wards by 1 position after using it (the argument) to shuffle to the next option/argument in the list
+                        shift 1
+                        ;;
                     "-h" | "--help")
                         # Display this help menu and all commands/command line arguments
                         echo -e "Display Help"
                         display_help
+
+                        # Shift argument left-wards by 1 position after using it (the argument) to shuffle to the next option/argument in the list
                         shift 1
                         ;;
                     *)
                         # Invalid arguments provided
-                        echo -e "Invalid parameter : $1"
+                        echo -e "Invalid argument [$1] provided."
+
+                        # Shift argument left-wards by 1 position after using it (the argument) to shuffle to the next option/argument in the list
                         shift 1
-                        exit 1
                         ;;
                 esac
             done
@@ -49,11 +60,26 @@ However, it is actually possible to create your own command line argument suppor
     }
     ```
 
-- Equivalent to python's 'if __name__ == "__main__":' check
-    + Check if the script is being called, and not being imported/sourced as a module/library/class
+- Entry point/main runner
+    - Notes
+        + Equivalent to python's 'if __name__ == "__main__":'
+        + Checks if the script is being called, and not being imported/sourced as a module/library/class
     ```shellscript
+    init()
+    {
+        # Setup/initialization/pre-loading function
+    }
+
+    main() 
+    {
+        # Main runner
+        argv=("$@")
+        argc="${#argv[@]}"
+    }
+
     if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-        # Start
+        # Only run this if it is called and not sourced
+        init
         main "$@"
     fi
     ```
