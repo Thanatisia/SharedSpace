@@ -11,8 +11,70 @@
     + Startup VNC Server
 
 ## Dependencies
-+ novnc
-+ websockify
+- If building from source with python
+    - python3
+    - python3
+    - python{3}-setuptools
+- novnc
+    - Obtain repository
+        ```console
+        git clone https://github.com/novnc/novnc
+        ```
+    - Install
+        - Using package manager
+            - apt-based (Debian)
+                ```console
+                sudo apt install novnc
+                ```
+        - (Optional) Manual build from source
+            + NoVNC is just a webUI application that you can just run from the main runner file
+            + hence, just copy it to your '/usr/share/novnc' folder
+            + However, websockify allows you to specify the path to the novnc folder, so you dont have to do this
+            ```console
+            sudo cp -r /folder/to/novnc /usr/share/novnc
+            ```
+- websockify
+    - Obtain repository
+        ```console
+        git clone https://github.com/websockify/websockify
+        ```
+    - (Recommended) Creating Virtual Environment
+        + Good for testing installation before committing to bare metal
+        - Generate Virtual Environment
+            ```console
+            python3 -m venv env
+            ```
+        - chroot/source into Virtual Environment
+            ```console
+            . env/bin/activate
+            ```
+    - Installing
+        - Using package manager
+            - apt-based (Debian)
+                ```console
+                sudo apt install websockify
+                ```
+        - Using Python PyPi
+            + websockify is a Websocket written in python
+            ```console
+            python{3} -m pip install websockify
+            ```
+        - Using Python setup.py (Manual Installation/Build from Source)
+            + websockify is a Websocket written in python
+            ```console
+            sudo python{3} setup.py install
+            ```
+    - Uninstallation/Removal
+        - Using package manager
+            - apt-based (Debian)
+                ```console
+                sudo apt remove websockify
+                ```
+        - Using Python PyPi
+            + websockify is a Websocket written in python
+            ```console
+            python{3} -m pip uninstall websockify
+            ```
 
 ## Preparation
 ### (Optional) Creating self-signed SSL certificate for TLS/SSL Encryption

@@ -34,7 +34,7 @@
     + [Github - websockify](https://github.com/novnc/websockify)
 
 - URLs
-    + [novnc](novnc.com)
+    + [novnc](https://novnc.com)
 
 
 ## Contents

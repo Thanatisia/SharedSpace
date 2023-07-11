@@ -2,13 +2,20 @@
 
 ## Setup
 
+### Dependencies
+> TBC
+
 ### Pre-Requisites
+> TBC
 
 ### Installing
-
-### Setup
+> TBC
 
 ### Compilation
+> TBC
+
+### Post-Installation Setup
+> TBC
 
 ## Resources
 
