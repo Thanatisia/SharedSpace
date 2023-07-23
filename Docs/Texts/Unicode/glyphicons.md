@@ -13,6 +13,7 @@ These characters can also be known as
 
 ## Greek
 + ∆ : Delta; Difference; Change
++ λ : Lambda
 + μ : Mu; Mean; Average
 + ∑ : Sigma; Sum
 + σ : lowercase Sigma (lower; Variance; finding Standard Deviation
