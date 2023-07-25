@@ -271,6 +271,11 @@
     spotdl download 'Name of Song' https://open.spotify.com/playlist/[playlist-id] ...
     ```
 
+- Download with logs
+    ```console
+    spotdl download [track|album|playlist|artist|query|<youtube-url-with-spotify-metadata>] | tee -a download.logs
+    ```
+
 ### Configuration
 - Generate a config file
     - Notes
