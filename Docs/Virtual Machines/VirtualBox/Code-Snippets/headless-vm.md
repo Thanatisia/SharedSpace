@@ -31,10 +31,10 @@
 ## Snippets
 ### Start VM with Hypervisor RDP support
 - Modify VBox Virtual Machine 
-    - Enable Virtual RDP Engine (VRDE): vboxmanage modifyvm "Gentoo TestBench" --vrde on --vrdeport [custom-RDP-port-number (default: 3389)] --vrdeaddress [your-host-ip-address]
+    - Enable Virtual RDP Engine (VRDE): vboxmanage modifyvm "vm-name" --vrde on --vrdeport [custom-RDP-port-number (default: 3389)] --vrdeaddress [your-host-ip-address]
 
 - Start VBox Virtual Machine: 
-    - Headless:  vboxheadless --startvm "Gentoo TestBench"
+    - Headless:  vboxheadless --startvm "vm-name"
 
 - Access VM RDP instance
     - Open RDP client
