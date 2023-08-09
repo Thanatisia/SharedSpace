@@ -28,6 +28,7 @@
     - \frac{numerator}{denominator}  : To display a fraction
     - \int            : To display an Integral; 
     - \limits         : Enable display a limit at the top (When required; i.e. with a Sigma/Summation equation)
+    - \mod            : To display the 'mod' modulus operator keyword
     - \nolimits       : The negative/opposite of `\limits`; When used with a Sigma/Summation equation, it is a superscript
     - \oint           : To display a loop integral
     - \prod           : To display a Product Expression (Multiply instead of Sum) (Big Pi)
@@ -36,6 +37,7 @@
     - \sum            : To display a Summation Expression (Big Sigma)
     - _<subscript>    : To display a subscript (bottom right corner)
     - _{subscript-equation}^superscript : To display both a subscript and a superscript (top right corner); Used for equations like a Sum, or a Sigma
+    - \pm             : Plus-Minus (+-)
 - Binary Operators
     - \times          : Multiply; Times 'X' 
     - \otimes         : XOR multiplicative
@@ -99,6 +101,9 @@
         \[ your Body Here \]
     \end{document}
     ```
+
+- Quadratic Equation/Formula
+    + $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
 
 ## Resources
 

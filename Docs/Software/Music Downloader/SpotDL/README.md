@@ -271,6 +271,16 @@
     spotdl download 'Name of Song' https://open.spotify.com/playlist/[playlist-id] ...
     ```
 
+- Download with logs
+    - Parameters
+        + --output [output-folder-path]: Specify the custom output folder to store all the music
+    - Notes
+        - Sometimes, certain songs/artists may actually be found in YouTube music but spotdl filtered it away and says it cannot be found
+            + Try adding the '--dont-filter-results' flag into the CLI options
+    ```console
+    spotdl {--dont-filter-results} --output downloads download [track|album|playlist|artist|query|<youtube-url-with-spotify-metadata>] | tee -a downloads.logs
+    ```
+
 ### Configuration
 - Generate a config file
     - Notes

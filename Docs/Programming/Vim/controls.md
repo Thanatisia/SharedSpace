@@ -33,10 +33,43 @@
 #### Selection
 + <C-Q>G : Start Visual Block Mode and Select entire column
 
+#### Split Panes
+##### Pane/Window Management
++ <C-W>n : Create new empty split pane/window horizontally (top/bottom)
++ <C-W>q : Close a buffer pane/window
+##### Splitting
++ <C-W>v : Split Vim screen vertically (left/right)
++ <C-W>s : Split Vim screen horizontally (top/bottom)
+##### Switching
++ <C-W>w : Switch between Split Panes
++ <C-W>h : Switch to the left split pane
++ <C-W>j : Switch to the bottom split pane
++ <C-W>k : Switch to the top split pane
++ <C-W>l : Switch to the right split pane
+##### Dimensions/Geometry
++ <C-W> > : Increase Width of current workspace 
++ <C-W> < : Reduce Width of current workspace 
++ <C-W> + : Increase height of current workspace 
++ <C-W> - : Increase height of current workspace 
++ <C-W> = : Equalize the height of the upper and lower workspaces
+
+#### Buffers
++ <C-W>o : Closes all other active buffers other than the current one; Equivalent to ':only'
+
 ### Visual Mode
 #### Mode
 + <Esc> : Exit back to Normal Mode
 + <Shift>v : Start Visual Line Mode and Select by entire Line
 
 ## Useful Controls
+
+
+## Wiki
+
+## Resources
+
+## References
++ [Tecmint - Split Vim screen](https://www.tecmint.com/split-vim-screen/)
+
+## Remarks
 
