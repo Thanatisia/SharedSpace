@@ -89,3 +89,32 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - README.md
         - Docs/README.md
     ```
+
+- 2023-08-29 1342H, Asura
+    ```
+    [New]
+    - Added folders into 'Docs/CyberSecurity' 
+        - Network Security: for all Network Security-related documentations and guides
+            - Added folder 'Protocols' for all protocol information
+                - Added folder 'IPSec'
+        - Roles: for all files and information pertaining to various roles within cybersecurity
+            - Added folder 'Cryptography' for Cryptographical-roles and skillsets such as Cryptographers and Cryptanalysts
+    - Added folder 'Spoofing' into 'Docs/CyberSecurity/Techniques' for spoofing-related techniques such as ip spoofing
+    - Added a playbook for Home Lab in 'Docs/Home Lab'
+    - Added a playbook for using x11vnc VNC server in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc'
+    - Added folder 'Staged Build' in 'Docs/Linux/Linux-From-Scratch' for storing all guides and steps for Linux From Scratch (LFS)
+    - Added compilation guide for package 'binutils' in 'Docs/Linux/packages/package-compile-guides'
+    - Added guide for generating new project from scratch in tty/command line (generating-new-project-from-scratch.md) in 'Docs/Programming/Mobile-App-Development/Android/Project'
+    - Added folder 'templates' for storing all Android Project workspace/filesystem structure templates files in 'Docs/Programming/Mobile-App-Development/Android/Project/'
+    - Added 'buildx' manual for using the new and recommended 'docker buildx build' over 'docker buildx' in 'Docs/Technology/Containers/Docker/Guides/Manuals'
+    - Added a playbook for Docker in 'Docs/Technology/Containers/Docker'
+    - Added code snippets for multiarchitecture virtual machine startup with QEMU/KVM in 'Docs/Virtual Machines/QEMU-KVM/Snippets'
+    - Added a playbook for Virtual Machine hypervisor QEMU/KVM
+
+    [Updates]
+    - Updated setup guide for NoVNC (+ Websockify)
+        - Fix Repository URL for Websockify (websockify/websockify => novnc/websockify)
+    - Updated 'docker' command manual with extra options (build), extra usage and snippets
+    ```
+
+

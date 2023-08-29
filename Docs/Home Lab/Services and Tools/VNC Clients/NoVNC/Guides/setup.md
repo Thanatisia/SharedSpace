@@ -36,7 +36,7 @@
 - websockify
     - Obtain repository
         ```console
-        git clone https://github.com/websockify/websockify
+        git clone https://github.com/novnc/websockify
         ```
     - (Recommended) Creating Virtual Environment
         + Good for testing installation before committing to bare metal
