@@ -2,12 +2,22 @@
 
 ## Setup
 
+### Dependencies
++ docker
+
 ### Pre-Requisites
-+ Dockerfile
++ Prepare Dockerfile: If you are building your own image
+
+### Security and User Permissions
+- Add docker user to group 'dockergroup'
+    + To be able to use docker without 'sudo'
+    ```console
+    adduser -aG dockergroup [username]
+    ```
 
 ## Documentation
 
-### Services
+### System Services
 + docker
 
 ### Synopsis/Syntax
@@ -17,7 +27,23 @@ sudo docker {actions} [image-name]
 ```
 
 ### Parameters
-+ build [path-to-build] : Build a container/image recipe found in the specified path
+- `build {options} <arguments> [path-to-build]` : Build a container/image recipe found in the specified path; To be replaced with buildx (if possible)
+    - Options
+        - With Arguments
+            - `-t [target-image (author/image-name)]` : Specify the target image
+            - `--build-arg ARCH=[target-architecture]`: Specify the target platfom/architecture you want to multiarch build for using docker manifests
+            - `--platform [architectures (platform/architecture,...)]` : Specify the target platform/architectures; Please separate all platforms with a ',' delimiter
+                - Platforms
+                    + linux
+                - Architectures
+                    + amd64
+                    + arm64
+                    + x86_64
+            - `--push [remote-repository-url]` : Push to the specified remote repository URL; Default: DockerHub (aka '.')
+                - Remote Docker container Repository URL
+                    + DockerHub (Default; represented with '.')
+                    + GitHub
+        - Flags
 - compose {options} : Implementation of 'docker-compose' within docker itself (released in a latest version of docker)
     - Options
         + Same as docker-compose
@@ -107,3 +133,167 @@ sudo docker {actions} [image-name]
     ```console
     sudo docker network create [network-name] --subnet [subnet-mask/prefix]
     ```
+
+## Wiki
+### Snippets and Examples
+#### Basic Operations
+- Startup    
+    - Recommended
+        + Startup docker container in interactive mode, tty and in the background, with a custom name
+        ```console
+        docker run -itd --name=[container-name] {-p|--publish "ip-address:host-system-port:container-port"} {-v|--volumes "host-system-volume:container-volume"} ... [image-author/image-name:tag] {commands ...}
+        ```
+    - Foreground
+        + Startup the containers in the docker-compose group in interactive mode
+        ```console
+        docker run -it --name=[container-name] ... [image-author/image-name:tag] {commands ...}
+        ```
+    - Background process (as a Daemon)
+        + Startup the containers in the docker-compose group in daemon/background mode
+        ```console
+        docker run -itd ... [image-author/image-name:tag] {commands ...}
+        ```
+
+- Start a stopped container
+    ```console
+    docker container start [container-name]
+    ```
+
+- Stop a running container
+    ```console
+    docker container stop [container-name]
+    ```
+
+- Restart a container
+    ```console
+    docker container restart [container-name]
+    ```
+
+- Tear/Shutdown containers in compose group
+    + This will stop and remove the containers
+    ```console
+    docker container stop container-name && docker container rm container-name
+    ```
+
+- Remove containers
+    - Individual
+        ```console
+        docker container rm [image-tag/name]
+        ```
+    - Multiple
+        - All
+            ```console
+            docker container prune --all
+            ```
+        - General
+            ```console
+            docker container prune
+            ```
+
+- Remove images
+    - Individual
+        ```console
+        docker image rm [image-tag/name]
+        ```
+    - Multiple
+        - All
+            ```console
+            docker image prune --all
+            ```
+        - General
+            ```console
+            docker image prune
+            ```
+
+#### Analysis
+- List images
+    - All
+        ```console
+        docker image ls --all
+        ```
+    - Currently Running
+        ```console
+        docker image ls
+        ```
+
+- Check container processes
+    - All
+        ```console
+        docker ps --all
+        ```
+    - Currently Running
+        ```console
+        docker ps
+        ```
+
+- Inspect container internal information
+    ```console
+    docker inspect [container|image-name]
+    ```
+
+- Builders
+    - Inspect images and their information
+        ```console
+        docker buildx imagetools inspect author/repository:version
+        ```
+
+#### Building
+- Build Dockerfile image
+    - Default
+        ```console
+        docker build [context]
+        ```
+    - Specify a tag (name) for the image
+        ```console
+        docker build --tag=[author/image:tag] [context]
+        ```
+    - Specify a target platform (aka custom CPU architecture) to build for
+        - Use the '--platform [platform/architecture]' flag
+            + You can specify multiple platform and CPU architectures by separating each entry with a ',' delimiter
+        ```console
+        docker build --platform [platform/architecture,] [context]
+        ```
+
+- Push built docker image from local repository to remote repository server (i.e. Dockerhub)
+    + Use the '--push' flag' to generate a multi-arch manifest and pushes all the images to the remote repository server
+    + Default remote repository server: Dockerhub (you can just use '.')
+    - Synopsis/Syntax
+        ```console
+        docker buildx build -t author/repository:version --platform platform/architecture --push [remote-repository-url (default: '.')]
+        ```
+    - Push to Dockerhub
+        ```console
+        docker buildx build -t author/repository:version --platform platform/architecture --push .
+        ```
+    - Push to GitHub
+        ```console
+        docker buildx build -t author/repository:version --platform platform/architecture --push github.com/author/repository-name
+        ```
+
+#### Testing
+- Inspect image using docker image
+    ```console
+    docker inspect {remote-repository-server}/author/repository-name | jq .[].Architecture
+    ```
+
+- Pull the pushed image
+    ```console
+    docker pull author/repository-name --platform [platform/architecture]
+    ```
+
+- Test run and check the image
+    - Test Run
+        ```console
+        docker run -dit --rm -p "ip-address:host-system-port:container-port" --platform [platform/architectures,...] [image (author/repository-name)]
+        ```
+    - Check Webserver
+        ```console
+        curl -sL [server-ip-address]:[port]
+        ```
+
+## Resources
+
+## References
++ [StackOverflow - how to run arm64 docker images on amd64 host platform](https://stackoverflow.com/questions/68675532/how-to-run-arm64-docker-images-on-amd64-host-platform?rq=3)
+
+## Remarks
