@@ -1,37 +1,82 @@
-# Server must do after installation
+# Home Lab/Server - Essential things to do after installation
 
 ```
 Things to do after base installation of home lab/server before proceeding
 ```
-
-## General TODO
-1. Update system packages
-    - Using apt-based
+## Setup
+### General
+- Update system packages
+    - Using apt
         ```console
         sudo apt update && sudo apt upgrade
         ```
-    - Using Pacman
+    - Using pacman
         ```console
         sudo pacman -Syu
         ```
-2. Setup XDG User Direcrtories
-    - Install package
-        + Package Name: xdg-user-dirs
-        - Using apt-based
+
+- Install essential packages
+    + vim
+    + xdg-user-dirs : For XDG directories
+
+- (Optional) Setup XDG User Directories
+    + Update and Create home directory
+    ```console
+    xdg-user-dirs-update
+    ```
+
+- Set Static IP address
+    - Information
+        - (Recommended) Ensure that you are using Ethernet. 
+            + This is because setting static IP address using Ethernet has better reliability plus stability.
+        - When setting the DNS server IP addresses, please seperate all ip addresses with a space (' ') delimiter
+    - Steps
+        - Edit Network Interfaces 
+            - Synopsis/Syntax of Network Interface configuration
+                ```
+                # Network Interfaces for Ethernet Interface [interface-name]
+                auto [interface]
+                iface [interface] inet static
+                    address [ipv4-address]
+                    netmask [subnet-mask (i.e. /24 = 255.255.255.0)]
+                    gateway 192.168.1.254
+                    nameservers 8.8.8.8 8.8.4.4
+                ```
+            - Add network definition in '/etc/network/interfaces'
+                + This is the file NetworkManager will source
+                ```console
+                sudo $EDITOR /etc/network/interfaces
+                ```
+            - Add network definition in '/etc/network/interfaces.d'
+                + This folder is one location where you define network interfaces as individual files
+                ```console
+                sudo $EDITOR /etc/network/interfaces.d/[your-network-interface-name]
+                ```
+        - Teardown Network Interface
+            + If up
             ```console
-            sudo apt install xdg-user-dirs
+            ifdown [network-interface]
             ```
-        - Using Pacman
+        - Startup Network Interface
+            + If down
             ```console
-            sudo pacman -S xdg-user-dirs
+            ifup [network-interface]
             ```
-    - Update and Create home directory
-        ```console
-        xdg-user-dirs-update
-        ```
-3. Setup Swapfiles
-    + This step is exceptionally important for low-power SOC like Raspberry Pi where memory is a constraint
-    > The following steps are mirrored from my [Swapfile setup guide/documentation](https://github.com/Thanatisia/SharedSpace/blob/main/Docs/Linux/Guides/Setup/Swapfile.txt)
+        - If using NetworkManager
+            - (Optional) Restart NetworkManager
+                - Using service
+                    ```console
+                    service networking restart
+                    ```
+                - Using systemd
+                    ```console
+                    systemctl restart NetworkManager
+                    ```
+
+- (Optional) Create swapfile
+    - This step is exceptionally important for low-power SOC like Raspberry Pi where memory is a constraint
+        + Unnecessary if you have sufficient RAM
+        + The following steps are mirrored from my [Swapfile setup guide/documentation](https://github.com/Thanatisia/SharedSpace/blob/main/Docs/Linux/Guides/Setup/Swapfile.txt)
     - Allocate and create swapfile
         - Using fallocate
             ```console
@@ -58,7 +103,17 @@ Things to do after base installation of home lab/server before proceeding
         ```console
         free -h
         ```
-4. Enable SSH
+
+- Setup configurations and dotfiles
+    - Examples
+        + neovim
+        + tmux
+
+- User Management
+
+- (Optional) Enable SSH
+    - Notes
+        + If you are currently working on this with a monitor
     - Install dependencies
         + openssh
     - Enable SSHD
@@ -70,49 +125,29 @@ Things to do after base installation of home lab/server before proceeding
         service sshd start
         ```
 
-## Server TODO
-1. Set Static IP Address
-    - Information
-        - (Recommended) Ensure that you are using Ethernet. 
-            + This is because setting static IP address using Ethernet has better reliability plus stability.
-        - When setting the DNS server IP addresses, please seperate all ip addresses with a space (' ') delimiter
-    - Steps
-        - Edit Network Interfaces 
-            - Synopsis/Syntax of Network Interface configuration
-                ```
-                auto [network-interface]
-                iface [network-interface] 
-                    address [ipv4-address]
-                    netmask [subnet-mask]
-                    gateway [default-gateway]
-                    dns-nameservers [your-dns-server-IP-addresses ]
-                ```
-            - Add network definition in '/etc/network/interfaces'
-                + This is the file NetworkManager will source
-                ```console
-                sudo $EDITOR /etc/network/interfaces
-                ```
-            - Add network definition in '/etc/network/interfaces.d'
-                + This folder is one location where you define network interfaces as individual files
-                ```console
-                sudo $EDITOR /etc/network/interfaces.d/[your-network-interface-name]
-                ```
-        - Teardown Network Interface
-            + If up
-            ```console
-            ifdown [network-interface]
-            ```
-        - Startup Network Interface
-            + If down
-            ```console
-            ifup [network-interface]
-            ```
-        - Restart NetworkManager
-            - Using service
-                ```console
-                service networking restart
-                ```
-            - Using systemd
-                ```console
-                systemctl restart NetworkManager
-                ```
+### For Raspberry Pi
+- Open 'rpi-config'
+    - Set timezone
+    - Set hostname (OPTIONAL) - rpi4b-network
+
+### Servers
+- Setup Docker
+    - Install packages
+        + docker
+        + docker-compose
+    - Add user to group 'docker'
+        ```console
+        sudo usermod -aG docker [user-name]
+        ```
+    - Restart system
+        ```console
+        sudo reboot now
+        ```
+
+## Resources
+
+## References
+
+## Remarks
+
+
