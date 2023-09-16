@@ -197,8 +197,63 @@ Docker however, allows you to create your own custom network bridges and use the
                 networks:
                     ipv4_address: "192.168.1.X"
         ```
-   - To initialize macvlan
+    - Create a custom network 
+        - a new user-defined network bridge
+            + Assign all networks you wish to set the container in the 'networks' label
+            ```yaml
+            version: "3.7"
+            service:
+                service-name:
+                    image: author/name:version-tag
+                    container_name: container-name
+                    networks:
+                        - network-name
 
+            networks:
+                network-name:
+                    name: network-name
+                    driver: [network-type]
+                    driver_opts:
+                        subnet_address: 192.168.1.0/24
+                        parent=en0p0s3
+            ```
+        - To initialize macvlan
+            ```yaml
+            version: "3.7"
+            service:
+                service-name:
+                    image: 
+                    networks:
+                        - network-name
+
+            networks:
+                network-name:
+                    name: network-name
+                    driver: macvlan
+                    driver_opts:
+                        subnet: 192.168.1.0/24
+                        gateway: 192.168.1.X
+                        parent=en0p0s3
+            ```
+        - To initialize ipvlan
+            + Similar to macvlan but ipvlan shared the same mac address as the host with all the containers
+            ```yaml
+            version: "3.7"
+            service:
+                service-name:
+                    image: 
+                    networks:
+                        - network-name
+
+            networks:
+                network-name:
+                    name: network-name
+                    driver: ipvlan
+                    driver_opts:
+                        subnet: 192.168.1.0/24
+                        gateway: 192.168.1.X
+                        parent=en0p0s3
+            ```
 
 ## Wiki
 ### Terminologies
