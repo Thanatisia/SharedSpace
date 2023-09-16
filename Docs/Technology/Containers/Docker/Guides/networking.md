@@ -1,8 +1,6 @@
 # Docker - Networking
 
 ## Information
-### Requirements
-+ docker.io
 
 ### Basics
 ```
@@ -16,12 +14,52 @@ By default, when docker is installed and a container is created,
 Docker however, allows you to create your own custom network bridges and use them, these will act as "Subnets" within the docker network.
 ```
 
+### Drivers
+- bridge : the default network type
+    + will be automatically created and assigned a virtual docker network ethernet interfaces when each docker container is started up
+- host : The container is attached to the host network
+    + the container will not have its own network
+    + there are no isolations, but is easier to use
+- user-defined bridge
+    + Allows users to effectively assign multiple containers to a network
+    + also allows users to isolate networks from each other if not assigned by using a bridge
+- macvlan
+    + Connect the container's networks directly to the home network with its own MAC address
+    - Creates a new MAC address for each container created
+        + Sharing ports with the host
+        - Issues
+            - Some networks may not allow more than one ports
+                + requires promiscuous mode enabled on the network device
+            - No DHCP
+                + If you dont specify a custom IP address, docker will specify for you
+    - Has 2 modes
+        + Bridge (default)
+        + Trunking and VLAN (802.1q etc)
+- ipvlan
+    - Has 2 modes
+        + L2 : Layer 2 connections
+        + L3 : Layer 3 connections
+    - Same as MACVLAN except
+        - Connects to network and gets a real IP address
+        - Shares the host MAC address with the container
+           + Solves the Promiscuous Mode issue of MACVLAN
+- overlay
+    + Used with docker swarm
+- none
+    + Literally no networking
+
+### Port Mapping
++ aka Port Forwarding/Translation
++ The idea is that you are port forwarding/translation/mapping a port (door) from the host system to the container with a layer of isolation
+
 ## Setup
+### Dependencies
++ docker
++ docker-compose
+
 ### Pre-Requisites
 
-### Dependencies
-
-### Setting Up
+### Quickstart flow
 - Install docker.io
     + Will provide a Docker default network interface
     - Using Package Manager
@@ -53,10 +91,118 @@ Docker however, allows you to create your own custom network bridges and use the
         sudo docker run -idt --name "HelloWorld" -p 80:80 --network [new-bridge-name]
         ```
 
+## Documentation
+### Usage
+- Host system
+    - To enable promiscuous mode
+        ```console
+        ip link set [network-interface] promisc on
+        ```
+    - To list all network bridges
+        ```console
+        bridge link
+        ```
+
+- docker run
+    - Create a custom network 
+        - a new user-defined network bridge
+            ```console
+            docker network create [network-name]
+            ```
+        - macvlan
+            - To make a macvlan, you must specify
+                + The network type (driver)
+                + home network subnet network address and prefix
+                + home network router default gateway IP
+                - Tie the MACVLAN to our host network interface
+                    - i.e.
+                        - if my host is using enp0s3
+                            + The parent interface = enp0s3
+           ```console
+           docker network create \
+               -d macvlan \
+               --subnet [network-address]/[prefix] \
+               --gateway [gateway-ip] \
+               -o parent=[host-network-interface] \
+               [network-name]
+           ```
+         - ipvlan
+             - L2
+                 + Same as MACVLAN
+                 - you must specify
+                    + The network type (driver)
+                    + home network subnet network address and prefix
+                    + home network router default gateway IP
+                    - Tie the IPVLAN to our host network interface
+                        - i.e.
+                            - if my host is using enp0s3
+                                + The parent interface = enp0s3
+                ```console
+                docker network create \ 
+                    -d ipvlan \
+                    --subnet [network-address]/[prefix] \
+                    --gateway [gateway-ip] \
+                    -o parent=[host-network-interface] \
+                    [network-name]
+                ```
+            - L3
+                + Same as MACVLAN
+                - you must specify
+                    + The network type (driver)
+                    + brand new subnet network address and prefix
+                    - You do not need to specify the default gateway
+                        + In Layer 3, the gateway is the parent interface we tied to
+                    - Tie the IPVLAN to our host network interface
+                        - i.e.
+                            - if my host is using enp0s3
+                                + The parent interface = enp0s3
+                    - Specify another additional option
+                        - Specify IPVLAN Mode "L3"
+                    - (Optional) Specify additional subnet network addresses as required
+                        - To specify which subnet to use in the network (if you have multiple)
+                            + specify a custom IP that matches the range of the subnet of choice
+                ```console
+                docker network create \ 
+                    -d ipvlan \
+                    --subnet [new-network-subnet-address]/[prefix] \
+                    -o parent=[host-network-interface] \
+                    -o ipvlan_mode=l3 \
+                    --subnet [second-new-network-subnet-address]/[prefix] \
+                    [network-name]
+                ```
+    - List all docker networks
+        ```console
+        docker network ls
+        ```
+    - Specify IP address to assign to the container
+        ```console
+        docker run -itd --name=[container-name] --ip [custom-ip-address] image-author/image-name
+        ```
+    - Specify ports to forward/translate/map
+        + Use the '`-p | --publish host-system-port:container-port`' argument
+        ```console
+        docker run -itd --name=container-name {-p | --publish} [port]
+        ```
+    - Specify custom network to attach the container to
+        ```console
+        docker run -itd --name=container-name --network=[custom-network-name] image-author/image-name [commands]
+        ```
+
+- docker-compose
+    - Specify custom IP address to assign to the container on the network
+        ```yaml
+        version: "3.7"
+        service:
+            service-name:
+                networks:
+                    ipv4_address: "192.168.1.X"
+        ```
+   - To initialize macvlan
+
 
 ## Wiki
 ### Terminologies
-+ driver = Network Type 
++ drivers = Network Types
 
 ### Network Types
 + bridge
@@ -64,6 +210,7 @@ Docker however, allows you to create your own custom network bridges and use the
 ## Resources
 
 ## References
++ [YouTube | NetworkChuck | Docker Compose will blow your mind (a tutorial)](https://youtu.be/DM65_JyGxCo?si=cDhTbQqiT55F1CIs)
 + [YouTube | Networkchuck | Docker Networking is crazy!! (You need to learn it)](https://youtu.be/bKFMS5C4CG0)
 
 ## Remarks
