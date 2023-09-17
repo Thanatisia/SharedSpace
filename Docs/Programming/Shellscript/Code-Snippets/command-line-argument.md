@@ -189,3 +189,43 @@ However, it is actually possible to create your own command line argument suppor
         main "$@"
     fi
     ```
+
+## Wiki
+### Snippets and Variant Examples
++ This contains various types of command line argument parsing methods used by developers
+
+- Using infinite while
+    - Styles 
+        - `while :;`
+            ```console
+            while :; do
+                case $1 in
+                    -h | --help)
+                        # Call a "show_help" function to display a synopsis, then exit.
+                        show_help
+                        exit 0
+                        ;;
+                    -v | --verbose)
+                        shift
+                        verbose=1
+                        ;;
+                    -V | --version)
+                        printf "distrobox: %s\n" "${version}"
+                        exit 0
+                        ;;
+                    -*) # Invalid options.
+                        printf >&2 "ERROR: Invalid flag '%s'\n\n" "$1"
+                        show_help
+                        exit 1
+                        ;;
+                    *) # Default case: If no more options then break out of the loop.
+                        break ;;
+                esac
+            done
+            ```
+
+## Resources
+
+## References
+
+## Remarks
