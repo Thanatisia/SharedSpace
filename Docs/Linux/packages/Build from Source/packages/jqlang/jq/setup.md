@@ -20,11 +20,15 @@
 ### Dependencies
 + gcc
 + make
-+ autotools
++ autotools/libtool
++ automake
++ autoconf
 - Development Essentials 
     + build-essential : for apt-based 
     + base-devel : for pacman-based
 + python : (Optional) for building the documentation
++ flex
++ bison
 
 ### Pre-Requisites
 - Obtain repository
@@ -38,16 +42,41 @@
         cd jq
         ```
 
+- (Optional) Initialize and clone submodules 
+    + if building from git to get oniguruma
+    ```console
+    git submodule update --init
+    ```
+
 ### Configuration
 - Reconfigure source files for building/compilation
+    - Notes
+        + Skip this if you're not using the latest git version but instead building a released tarball (available on the release page)
     ```console
     autoreconf -i
     ```
 
+- Configure project
+    ```console
+    ./configure
+    ```
+
 ### Compilation
++ For Cross-Compilation, Please proceed to [Cross-Compilation](cross-compilation.md)
+
 - Make/Build source project
     ```console
-    make
+    make {-jN}
+    ```
+
+- Check if output is valid 
+    ```console
+    make check 
+    ```
+
+- Make/Build a statically-linked version
+    ```console
+    make LDFLAGS=-all-static
     ```
 
 ### Installation
