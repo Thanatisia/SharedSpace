@@ -12,3 +12,4 @@ Current list of created/work-in-progress package build guides
 + apache/httpd
 
 ## Staging/Testing
++ jqlang/jq
