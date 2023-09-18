@@ -210,7 +210,7 @@ However, it is actually possible to create your own command line argument suppor
                         verbose=1
                         ;;
                     -V | --version)
-                        printf "distrobox: %s\n" "${version}"
+                        printf "your-application-here: %s\n" "${version}"
                         exit 0
                         ;;
                     -*) # Invalid options.
