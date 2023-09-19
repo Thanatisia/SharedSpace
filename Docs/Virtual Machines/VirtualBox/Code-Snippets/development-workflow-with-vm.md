@@ -94,6 +94,9 @@
 
 - Attach the newly created RAW disk to the Virtual Machine
     - Options
+        - storage-controller-type: The type of storage controller to hold the disk
+            - Valid Values
+                + SATA / AHCI
         - port-number: Specify the port to attach the Storage Controller to the Virtual Machine; typically 0
         - device-number: Specify the device position to attach the Storage Controller to the Virtual Machine's configuration storage order; Typically 0
         - storage-medium-type: The type of storage to attach to the Virtual Machine
@@ -124,7 +127,7 @@ vboxmanage modifymedium disk [vdi-disk-file] --resize [new-file-size]
     - virtual-machine-name: Name of the target virtual machine
     - storage-controller-type: The type of storage controller to hold the disk
         - Valid Values
-            + SATA
+            + SATA / AHCI
     - port-number: Specify the port to attach the Storage Controller to the Virtual Machine; typically 0
     - virtual-disk-file: This is the path to the new vdi file you want to attach; Format: file.vdi
     - medium-type: Specify the type of storage medium you want to attach
@@ -139,7 +142,7 @@ vboxmanage storageattach [virtual-machine-name] --storagectl [storage-controller
     - virtual-machine-name: Name of the target virtual machine
     - storage-controller-type: The type of storage controller to hold the disk
         - Valid Values
-            + SATA
+            + SATA / AHCI
     - port-number: Specify the port to attach the Storage Controller to the Virtual Machine; typically 0
     - virtual-disk-file: This is the path to the new vdi file you want to attach; Set to 'none' to unmount the virtual disk
 ```console
