@@ -53,6 +53,10 @@
         ```console
         cat source/file.tar.gz | ssh [username]@[domain-or-ip] 'tar -xvzf - -C destination/file.tar.gz'
         ```
+    - Archive files from your local host system and SSH the archive output into a remote machine via SSH
+        ```console
+        tar -cvzf - [directories-or-files] | ssh [username]@[domain-or-ip] 'cat > [destination-filepath].tar.gz'
+        ```
 
 - Using tar with parallelism/multithreading (Example in Code Snippets)
     - Check contents of the tar archive and list all the files into a log 

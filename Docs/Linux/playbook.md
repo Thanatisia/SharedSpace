@@ -1,5 +1,22 @@
 # Linux - Playbook
 
+## Data Management
+### File Transfer
+- Archive files from your local host system and SSH the archive output into a remote machine via SSH
+    ```console
+    tar -cvzf - [directories-or-files] | ssh [username]@[domain-or-ip] 'cat > [destination-filepath].tar.gz'
+    ```
+
+- SSH into a remote machine and tar compress the specified folder/files, and output the backup file in your local machine
+    ```console
+    ssh [username]@[domain-or-ip] tar -cvzf - [directories-or-files] > destination/file.tar.gz
+    ```
+
+- SSH into a remote machine and tar extract a tar file into the remote machine
+    ```console
+    cat source/file.tar.gz | ssh [username]@[domain-or-ip] 'tar -xvzf - -C destination/file.tar.gz'
+    ```
+
 ## Jobs/Processes
 - Keybindings
     - 'Ctrl-C' : Terminate a background process by sending the signal SIGINT; Similar to using 'kill -9 [PID]'
