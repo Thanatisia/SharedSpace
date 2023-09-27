@@ -17,6 +17,11 @@
     cat source/file.tar.gz | ssh [username]@[domain-or-ip] 'tar -xvzf - -C destination/file.tar.gz'
     ```
 
+## Environment Variables
+### Keywords
++ USER : To get the user's name
++ SUDO_USER : To get the superuser's name
+
 ## Jobs/Processes
 - Keybindings
     - 'Ctrl-C' : Terminate a background process by sending the signal SIGINT; Similar to using 'kill -9 [PID]'
