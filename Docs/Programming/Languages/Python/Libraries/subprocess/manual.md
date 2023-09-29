@@ -54,10 +54,15 @@ The Subprocess module class allows python to
 #### Subprocess
 + CompletedProcess.returncode : Get the return code value stored in the [CompletedProcess] class object
 + CompletedProcess.stdout : Get the standard output attribute of the command's result
++ CompletedProcess.stdin  : Get the subprocess' standard input stream buffer (memory container) object
 + subprocess.PIPE : The PIPE constant; a number that indicates to subprocess that a pipe should be created
 
 #### Subprocess.Popen
-+ subprocess.Popen().stdout: Get the standard output attribute of the process' result while it is still polling/running
++ subprocess.Popen()
+    + .stdout: Get the standard output attribute of the process' result while it is still polling/running
+    - .stdin : Set the subprocess' standard input method while it is still polling/running
+        + .write(buffer-string) : Write the specified buffer string into the subprocess' standard input stream
+        + .flush() : Remove and clear all remaining string that were entered into the standard input stream
 
 ### Functions
 
@@ -198,6 +203,178 @@ The Subprocess module class allows python to
 			# print result
 			print(stripped_line)
 		```
+
+- Checking if a process is alive
+    - Explanation
+        + Polling is the process where the computer or controlling device waits for an external device to check for its readiness or state, often with low-level hardware
+        - To check if the process is alive or dead/ended
+            + Use the '.poll()' functions
+            - If it returns None:
+                + Alive
+            - If it doesnt return None:
+                + Dead
+    ```python
+    from subprocess import Popen, PIPE
+
+    # Initialize Variables
+    cmd = "your command here"
+    line = "" # Temporary storage for each new line
+
+    # Open Subprocess
+    proc = Popen(cmd.split(), stdout=process.PIPE, **opts)
+
+    # Poll the process to check if it is alive
+    # If it returns None == Alive
+    # If it doesnt return None == Ended/Dead
+    is_alive = proc.poll()
+    while is_alive is None:
+        # While the process is still working
+        print("Loading...")
+
+        # Still working
+        print("Line: {}".format(line))
+        
+        # Check if standard output stream is empty
+        if proc.stdout != None:
+            line = proc.stdout.readline()
+
+        # Poll and check if is alive
+        # If poll == None: Alive, else not Alive
+        is_alive = proc.poll()
+        print("Status: {}".format(is_alive))
+
+    # Get output, error and status code
+    stdout = proc.stdout
+    stderr = proc.stderr
+    resultcode = proc.returncode
+    # stdout, stderr, resultcode = process.chroot_exec(root_passwd_change)
+    if resultcode == 0:
+        # Success
+        print("Standard Output: {}".format(stdout))
+    else:
+        # Error
+        print("Error: {}".format(stderr))
+    ```
+
+- Terminal I/O (Input/Output) Operations within a subprocess
+    - Explanations
+        - stdin
+            - Use Popen().stdin.write("buffer-string") to effectively input/write the target string into the subprocess' stdin buffer stream
+                + Entering text into the stdin buffer stream via '.write()' is equivalent to you entering the tty via SSH, running the command and typing, and then pressing 'Enter'
+                + You can repeat `proc.stdin.write(line)` as many times as you need to enter into the system
+            - However, after using .stdin.write()
+                + you need to clear/"flush" the remaining string/text cache that you have entered so that it does not overflow to the next command
+        - Useful for subprocess/terminal operations that requires stdin and confirmations
+            - such as
+                + passwd
+    - Using Popen
+        ```python
+        from subprocess import Popen, PIPE
+
+        # Initialize Variables
+        cmd = "your command here"
+        line = "" # Temporary storage for each new line
+
+        # Open Subprocess
+        proc = Popen(cmd.split(), stdout=process.PIPE, **opts)
+
+        # Poll the process to check if it is alive
+        # If it returns None == Alive
+        # If it doesnt return None == Ended/Dead
+        is_alive = proc.poll()
+        while is_alive is None:
+            # While the process is still working
+            print("Loading...")
+
+            # Still working
+            print("Line: {}".format(line))
+            
+            # Check if standard output stream is empty
+            if proc.stdout != None:
+                line = proc.stdout.readline()
+
+            # Check if standard input stream is empty
+            if proc.stdin != None:
+                # Check if line is entered
+                if line != "":
+                    # Write this buffer string into the process' stdin
+                    # Repeat this as many times as you need to enter into the system
+                    proc.stdin.write('{}\n'.format(line))
+
+                    # Flush the standard input stream
+                    proc.stdin.flush()
+
+            # Poll and check if is alive
+            # If poll == None: Alive, else not Alive
+            is_alive = proc.poll()
+            print("Status: {}".format(is_alive))
+
+        # Get output, error and status code
+        stdout = proc.stdout
+        stderr = proc.stderr
+        resultcode = proc.returncode
+        # stdout, stderr, resultcode = process.chroot_exec(root_passwd_change)
+        if resultcode == 0:
+            # Success
+            print("Standard Output: {}".format(stdout))
+        else:
+            # Error
+            print("Error: {}".format(stderr))
+        ```
+
+- To execute commands into a subprocess running chroot
+    - Using Popen
+        ```python
+        from subprocess import Popen, PIPE
+
+        # Initialize Variables
+        chroot_exec = "chroot"   # Your chroot executable of choice
+        dir_Mount = "/mnt"       # Mount point to chroot
+        shell = "/bin/bash"      # Your shell
+        cmd_str = "some-command" # Your command of choice to execute
+
+        # Design and formulate your command list
+        cmd = [chroot_exec, dir_Mount, shell, "-c", cmd_str]
+
+        # Open Subprocess
+        proc = subprocess.Popen(cmd, stdout=PIPE, stdin=PIPE, **opts)
+
+        # Execute process in sync - check if the previous command is completed before proceeding
+        stdout, stderr = proc.communicate(**opts)
+
+        # Decode and clean-up output
+        stdout = stdout.decode("utf-8")
+        stderr = stderr.decode("utf-8")
+
+        # Get result code from process pipe
+        resultcode = proc.returncode
+
+        print("Standard Output    : {}".format(stdout))
+        print("Standard Error     : {}".format(stdout))
+        print("Result/Status Code : {}".format(stdout))
+        ```
+
+- Operate within a lifetime of the subprocess
+    - Explanation
+        - Use the 'with' keyword
+            + The class will exit and close once the operation has ended
+    - Using Popen
+        ```python
+        from subprocess import Popen, PIPE
+
+        # Initialize Variables
+
+        # Open Subprocess
+        with Popen(cmd_str.split(), **opts) as proc:
+            # Operations here
+            # ...
+            stdout, stderr = proc.communicate()
+            print(stdout.decode("utf-8"))
+            print(stderr.decode("utf-8"))
+
+        # On completion, the process 'proc' will exit and end
+        print("End")
+        ```
 
 ## References
 

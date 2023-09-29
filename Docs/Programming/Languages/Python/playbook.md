@@ -24,3 +24,6 @@
         print("Environment Variable: {}".format(env))
         ```
 
+## Wiki
+### Terminologies
++ Polling : the process where the computer or controlling device waits for an external device to check for its readiness or state, often with low-level hardware
