@@ -1,34 +1,41 @@
 # CHANGELOGS
 
+## Table of Contents
+> [date       time, author, Notes]
++ [2021-05-23 2154H, Asura, v0.1.0](#2021-05-23-2154H)
++ [2021-05-23 2220H, Asura, v0.2.0](#2021-05-23-2200H)
++ [2021-05-23 2322H, Asura, v0.3.0](#2021-05-23-2322H)
++ [2023-10-14 1150H, Asura](#2023-10-14-1150H)
+
 ## Version History
 ```
 Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 ```
 
-- v0.1.0, 2021-05-23 2154H, Asura
-    - Created 
-        - README
-    - Added 
-        - Basic Information (Description)
-        - To Note
+### 2021-05-23 2154H
+- Created 
+    - README
+- Added 
+    - Basic Information (Description)
+    - To Note
 
-- v0.2.0, 2021-05-23 2220H, Asura
-    - Added 
-      - Documentations
-          - Getting Started
-          - Help
-      - Authors
-      - Version History (Changelogs)
-      - License
-      - Acknowledgements
+### 2021-05-23 2200H
+- Added 
+  - Documentations
+      - Getting Started
+      - Help
+  - Authors
+  - Version History (Changelogs)
+  - License
+  - Acknowledgements
 
-- v0.3.0, 2021-05-23 2322H, Asura
-    - Added
-      - Documentations
-        - Folders
-    - Modified
-      - Indentation of [Documentations]
-        - "<h3></h3>" to "###" 
+### 2021-05-23 2322H
+- Added
+  - Documentations
+    - Folders
+- Modified
+  - Indentation of [Documentations]
+    - "<h3></h3>" to "###" 
 
 - v0.3.1, 2021-06-15 2004H, Asura
     - Modified
@@ -117,4 +124,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated 'docker' command manual with extra options (build), extra usage and snippets
     ```
 
+### 2023-10-14 1150H
+- New
+    + Added new document 'networking-types.md' at 'Docs/Linux/Guides/Networking'
+    + Added new document 'monitoring.md' at 'Docs/Linux/Guides/System Administration'
+    + Added new document 'tail.md' at 'Docs/Linux/commands'
+    + Added new document 'package-name-reference.md' at 'Docs/Linux/packages'
+    + Added new document 'formatting.md' at 'Docs/Programming/Languages/Python/Guides/Types/string'
+    + Added new document 'playbook.md' at 'Docs/Programming/Shellscript'
+    - Added new folder 'Guides' for QEMU/KVM in 'Docs/Virtual Machines/QEMU-KVM/'
+        + Added new files 'Headless-Using-QEMU.md', 'Headless-Using-Virsh.md (WIP)' at 'Docs/Virtual Machines/QEMU-KVM/Guides/Headless'
+        + Added new files 'bridge-networking.md' at Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system'
+        + Added new files 'differences.md' at 'Docs/Virtual Machines/QEMU-KVM/Guides'
+- Updates
+    + Added new tips and tricks to 'Docs/Virtual Machines/QEMU-KVM/Snippets/development-workflow-with-vm.md'
 
