@@ -6,6 +6,7 @@
 + [2021-05-23 2220H, Asura, v0.2.0](#2021-05-23-2200H)
 + [2021-05-23 2322H, Asura, v0.3.0](#2021-05-23-2322H)
 + [2023-10-14 1150H, Asura](#2023-10-14-1150H)
++ [2023-10-21 2136H, Asura](#2023-10-21-2136H)
 
 ## Version History
 ```
@@ -134,8 +135,38 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     + Added new document 'playbook.md' at 'Docs/Programming/Shellscript'
     - Added new folder 'Guides' for QEMU/KVM in 'Docs/Virtual Machines/QEMU-KVM/'
         + Added new files 'Headless-Using-QEMU.md', 'Headless-Using-Virsh.md (WIP)' at 'Docs/Virtual Machines/QEMU-KVM/Guides/Headless'
-        + Added new files 'bridge-networking.md' at Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system'
+        + Added new files 'bridge-networking.md' at 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system'
         + Added new files 'differences.md' at 'Docs/Virtual Machines/QEMU-KVM/Guides'
 - Updates
     + Added new tips and tricks to 'Docs/Virtual Machines/QEMU-KVM/Snippets/development-workflow-with-vm.md'
+
+### 2023-10-21 2136H
+- New
+    - Added new document 'find.md' at 'Docs/Linux/commands'
+    - Added new document 'project-filesystem-structure.md' in 'Docs/Programming/Languages/C'
+    - Added new document 'README.md' in 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system'
+    - Added new document 'ports.md' in 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system'
+    - Added new folder 'Shin Megami Tensei V' for SMT V Game Guides in 'Docs/Gaming/Games/Platforms/Nintendo Switch (NSW)'
+        + Added new document 'strategies.md' at 'Docs/Gaming/Games/Platforms/Nintendo Switch (NSW)/Shin Megami Tensei V/Game Guides'
+    - Added new folder 'SSH' for SSH documentations in 'Docs/Linux/Guides/System Administration'
+        + Added new document 'adding-key-entries-into-known-hosts.md' at 'Docs/Linux/Guides/System Administration/SSH'
+    - Added new folder 'Guides' for C# in 'Docs/Programming/Languages/C#'
+        - Added new subfolder 'Compilation' for C# Compilation-related documentations
+            - Added new subfolder 'Linux' for C# Linux-related compilation documentations
+                + Added new files 'mono.md' at 'Docs/Programming/Languages/C#/Guides/Compilation/Linux'
+            - Added new subfolder 'Steps' for C# compilation steps
+                + Added new files 'compiling-from-command-line.md', 'compiling-gui-from-command-line.md' at 'Docs/Programming/Languages/C#/Guides/Compilation/Steps'
+            - Added new subfolder 'Windows' for C# Windows-related compilation documentations
+                + Added new files 'csc.md' at 'Docs/Programming/Languages/C#/Guides/Compilation/Windows'
+    - Added new folder 'Templates' for C# in 'Docs/Programming/Languages/C#'
+        + Added new files 'project-sources.md' at 'Docs/Programming/Languages/C#/Templates'
+    - Added new folder 'utilities' for C in 'Docs/Programming/Languages/C/'
+        + Added new files 'gcc.md' at 'Docs/Programming/Languages/C/utilities'
+- Updates
+    - Split documentation, syntaxes from 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system/bridge-networking.md' into 
+        + 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system/README.md' : for a general README and basic startup information that then leads into the specifics (i.e. ports or bridge networking) and
+        + 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system/ports.md'  : for QEMU/KVM Port Management and Utility
+    - Added new Environment Variables into 'Docs/Linux/Files/environment-variables.md'
+    - Added Wi-Fi Profile usages in 'Docs/Operating Systems/Windows/commands/netsh.md'
+    - Added extra options in 'Docs/Operating Systems/Windows/commands/wmic.md'
 

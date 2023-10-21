@@ -10,6 +10,9 @@
 
 ## Information
 
+### Setup
++ Built-in
+
 ### Description
 ```
 netsh, also known as Net Shell, is a Windows Command Line Utility that is not only older than ipconfig, it is more powerful - similar to how ufw (the Uncomplicated Firewall) is based on iptables.
@@ -87,6 +90,7 @@ Note:
         - Action
             - show [format] : Generate a report on your Wireless LAN status according to the format specified
                 - Formats
+                    + `profile [network-ssid/name] {options}`: Displays all information related to your Network Wi-Fi profile
                     + wlanreport : In a report document; Save it in "C:/ProgramData/Microsoft/Windows/WlanReport"
         
 
@@ -124,6 +128,13 @@ Note:
 - Generate a formatted wireless report file about your Wireless LAN status
     ```batchdos
     netsh wlan show wlanreport
+    ```
+
+- Show Wi-Fi network profile
+    + This will show all information pertaining to your WiFi
+    + Add the 'key=clear' to display your Wi-Fi password in clear text
+    ```batchdos
+    netsh wlan show profile [network name/ssid] {key=clear}
     ```
 
 - Show your current Network Interfaces

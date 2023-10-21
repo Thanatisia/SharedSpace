@@ -11,7 +11,11 @@ wmic [queries] {options} <arguments>
 
 ### Parameters
 - queries
-    + path [key] get [value] : Query details from the Registry Keys and Nodes and return information
+    - path [key] get [value] : Query details from the Registry Keys and Nodes and return information
+        - Keys
+            - softwarelicensingservice : Software Licensing Key-related configuration values
+                - Values
+                    + OA3xOriginalProductKey : Windows Product Key
     + cpu  : Return information on the local CPU
 - Optionals
 

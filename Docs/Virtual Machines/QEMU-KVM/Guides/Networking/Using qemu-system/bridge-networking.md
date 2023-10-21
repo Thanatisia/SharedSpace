@@ -21,45 +21,6 @@
         + -cpu host  : Passthrough host's CPU
         + -enable-kvm : Enable and run Virtual Machine with KVM accelerator
 
-### Synopsis/Syntax
-+ -net [type] : To initialize a new network of the specified type and assign/attach a Network Interface to the Network
-+ -netdev [type],{options=value,...} : To Initialize and define a new network device for use
-+ -device [device],{options=value,...} : To initialize a new device of a specified device type
-
-### Options
-- -net 
-    - Types
-        + nic : To attach the host's Network Interface Card (NIC)
-- -netdev
-    - General Options
-        - id=[network-device-id] : Specify the Network Device ID
-    - Types
-        - bridge : Create a new bridge network interface
-            - Options
-                + br=[bridge-network-interface] : Specify the Bridge Network Interface to use from the host system
-        - user
-            - Options
-                + hostfwd=[protocol]::[host-system-port]-:[virtual-machine-port] : Port forward/map/translate from the Host System Port to the Virtual Machine Guest Port (similar to docker's "-p | --publish" option)
-- -device
-    - Device Type
-        + e1000
-    - Options
-        + netdev=[target-network-device] : Specify a Network Device ID to attach to this new device
-
-### Usages
-+ -net nic
-+ -net bridge,br=br0 : Initialize a bridge network and assign/attach a bridge network interface to the network
-+ -netdev bridge,id=hn0,br=[bridge-network-interface] : Initialize and define Network Device for the Bridge Network Interface
-+ -netdev user,id=[network-device-id-e1000],hostfwd=tcp::[host-system-port]-:[virtual-machine-port] : Define and Initialize a new Network Device for the user/host-level network infrastructure; Initialize the Network Device ID for reuse/labelling and port forwarding from the host system port to the virtual machine guest port (similar to docker's "-p | --publish" option)
-+ -device e1000,netdev=[network-device-id-e1000] : Initialize a new device of type 'e1000' and attach the network device 'network-device-id-e1000' as created previously
-
-### Port Forward/Translation/Mapping
-#### Host System Usage
-- To utilize an application from a certain port
-    - SSH (Port 22): `ssh [server-ip] -p [service-port-number]`
-        + -p will perform a port forward from port 22 to the specified service port number; In this case, the custom port for the guest vm's SSH instance
-    + Web Server: `[protocol]://[server-ip]:[service-port-number]`
-
 ## Creating Bridge Network Interface/Adapters for Virtual Machine Guests
 
 ### Steps
