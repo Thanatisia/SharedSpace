@@ -7,6 +7,7 @@
 + [2021-05-23 2322H, Asura, v0.3.0](#2021-05-23-2322H)
 + [2023-10-14 1150H, Asura](#2023-10-14-1150H)
 + [2023-10-21 2136H, Asura](#2023-10-21-2136H)
++ [2023-10-22 2232H, Asura](#2023-10-22-2232H)
 
 ## Version History
 ```
@@ -169,4 +170,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new Environment Variables into 'Docs/Linux/Files/environment-variables.md'
     - Added Wi-Fi Profile usages in 'Docs/Operating Systems/Windows/commands/netsh.md'
     - Added extra options in 'Docs/Operating Systems/Windows/commands/wmic.md'
+
+### 2023-10-22 2232H
+- New
+    - Added new folder 'dpkg' at 'Docs/Linux/package-manager'
+    - Added new document 'operational-flow.md' at 'Docs/Home Lab'
+- Updates
 
