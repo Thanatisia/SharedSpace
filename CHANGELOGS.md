@@ -177,3 +177,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new document 'operational-flow.md' at 'Docs/Home Lab'
 - Updates
 
+### 2023-10-23 1049H
+- New
+    - Added new folder 'Webservers' at 'Docs/Home Lab/Services and Tools' for all WebServers
+        - Added new folder 'Jupyter Server' for Jupyter Server setup and documentations at 'Docs/Home Lab/Services and Tools/Webservers'
+
+- Updated
+
