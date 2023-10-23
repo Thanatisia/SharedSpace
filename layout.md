@@ -1,7 +1,7 @@
 # Repository 'docs' folder Layout
 
 ## Notes
-+ Generated using Windows 'tree /A /F' 
++ Generated using Windows 'tree /A /F'
 
 ## Layout
 ```
@@ -9,11 +9,11 @@
 |   CHANGELOGS.md
 |   CONTRIBUTING.md
 |   CONTRIBUTION.md
+|   layout.md
 |   README.md
 |   
 \---Docs
     |   CHANGELOGS.md
-    |   layout.md
     |   README.md
     |   
     +---Anime
@@ -27,8 +27,11 @@
     |   |       systems-archicture.md
     |   |       
     |   +---Computer Hardware
-    |   |       PC Parts List.md
-    |   |       
+    |   |   |   PC Parts List.md
+    |   |   |   
+    |   |   \---Components
+    |   |           motherboard.md
+    |   |           
     |   +---Data Recovery
     |   |   \---Methods
     |   |           using-tar.md
@@ -41,13 +44,18 @@
     |   |   \---Partitions
     |   |           terminologies.txt
     |   |           
-    |   \---Servers
-    |       |   server-types.md
-    |       |   
-    |       \---NAS
-    |               setup.md
+    |   +---Servers
+    |   |   |   server-types.md
+    |   |   |   
+    |   |   \---NAS
+    |   |           setup.md
+    |   |           
+    |   \---Single Board Computers
+    |       \---Raspberry Pi
+    |               troubleshooting.md
     |               
     +---CyberSecurity
+    |   |   roles-and-jobs.md
     |   |   tools.txt
     |   |   
     |   +---Cheatsheets
@@ -57,6 +65,9 @@
     |   |   \---Resources
     |   |           websites.txt
     |   |           
+    |   +---Disaster Recovery
+    |   |       disaster-recovery-plan.md
+    |   |       
     |   +---Examples
     |   |   \---Malware
     |   |       |   README.md
@@ -77,6 +88,10 @@
     |   |       website-tools.md
     |   |       
     |   +---Guides
+    |   |   +---TLS-SSL
+    |   |   |   \---Self-Sign SSL Certificate
+    |   |   |           README.md
+    |   |   |           
     |   |   \---Vulnerabilities
     |   |           Vulnerabilities.md
     |   |           Vulnerability Scanning.md
@@ -88,6 +103,37 @@
     |   |   \---Penetration Testing
     |   |           LAN_turtle.md
     |   |           
+    |   +---Network Security
+    |   |   \---Protocols
+    |   |       \---IPSec
+    |   |               basics.md
+    |   |               
+    |   +---Roles
+    |   |   \---Cryptography
+    |   |       +---Fast Exponentiation - Square and Multiply
+    |   |       |       fast-exponentiation.py
+    |   |       |       README.md
+    |   |       |       
+    |   |       +---Hash Collision
+    |   |       |       hash-collision.py
+    |   |       |       README.md
+    |   |       |       
+    |   |       +---Knapsack Trapdoor Encryption Scheme
+    |   |       |       knapsack.py
+    |   |       |       README.md
+    |   |       |       
+    |   |       +---Lehman's Primality Test
+    |   |       |       lehman.py
+    |   |       |       README.txt
+    |   |       |       
+    |   |       \---Ring Signature
+    |   |               message.txt
+    |   |               privateKey.txt
+    |   |               publickey.txt
+    |   |               README.md
+    |   |               requirements.txt
+    |   |               ring-signature.py
+    |   |               
     |   +---Techniques
     |   |   |   ARP-poisoning.md
     |   |   |   Man-in-the-Middle.md
@@ -123,6 +169,9 @@
     |   |   |       \---Windows
     |   |   |               1-with netcat using powershell.md
     |   |   |               
+    |   |   +---Spoofing
+    |   |   |       ip-spoofing.md
+    |   |   |       
     |   |   \---Web Penetration
     |   |       \---SQL Injection
     |   |               examples.md
@@ -136,6 +185,7 @@
     |   |   |   dmitry.md
     |   |   |   hydra.md
     |   |   |   john-the-ripper.md
+    |   |   |   lazagne.md
     |   |   |   netcat.md
     |   |   |   netdiscover.md
     |   |   |   nmap.md
@@ -155,16 +205,14 @@
     |   |   \---Suites
     |   |           airmon-ng.md
     |   |           hashcat.md
+    |   |           kbd-audio.md
     |   |           rainbowcrack.md
     |   |           
     |   \---Topics
     |       +---Blue-Team
-    |       |   +---Incident Response
-    |       |   +---Malware-Analysis
-    |       |   |       commands.txt
-    |       |   |       
-    |       |   +---Reverse-Engineering
-    |       |   \---SOC
+    |       |   \---Malware-Analysis
+    |       |           commands.txt
+    |       |           
     |       +---DNS-Sinkhole
     |       |       README.md
     |       |       
@@ -183,6 +231,10 @@
     +---Data Recovery and Validation
     |       tools.txt
     |       
+    +---Data Science
+    |   \---Data Analytics
+    |           da-basics.md
+    |           
     +---Database Systems
     |   |   cheatsheet.txt
     |   |   README.md
@@ -208,6 +260,47 @@
     |           \---Cable
     |                   types.md
     |                   
+    +---Gaming
+    |   +---Emulation
+    |   |   |   lookup-registry.md
+    |   |   |   resources.md
+    |   |   |   
+    |   |   +---Platforms
+    |   |   |   +---Nintendo 3DS
+    |   |   |   |   \---Emulators
+    |   |   |   |           emulators.md
+    |   |   |   |           
+    |   |   |   \---Nintendo Switch (NSW)
+    |   |   |       |   tools-and-utilities.md
+    |   |   |       |   
+    |   |   |       +---Emulators
+    |   |   |       |   |   emulators.md
+    |   |   |       |   |   
+    |   |   |       |   \---Skyline-Emulator
+    |   |   |       |           bugs-encountered.md
+    |   |   |       |           README.md
+    |   |   |       |           setup.md
+    |   |   |       |           
+    |   |   |       \---Utilities
+    |   |   |           \---NSC_BUILDER
+    |   |   |                   examples.md
+    |   |   |                   README.md
+    |   |   |                   setup.md
+    |   |   |                   
+    |   |   \---ROM Hacking, Translation and Patches
+    |   |           translation-patch-groups.md
+    |   |           
+    |   \---Games
+    |       \---Platforms
+    |           \---Nintendo Switch (NSW)
+    |               +---Shin Megami Tensei V
+    |               |   \---Game Guides
+    |               |           strategies.md
+    |               |           
+    |               \---The Legend of Zelda - Breath of the Wild
+    |                   \---Game Guides
+    |                           boss-guide.md
+    |                           
     +---General
     |       note-taking.txt
     |       resources.md
@@ -227,6 +320,8 @@
     |   |   19. Deployments.txt
     |   |   2. Adding files.txt
     |   |   20. Git submodules.md
+    |   |   21. Git logs.md
+    |   |   22. Git Worktree.md
     |   |   3. Commit files.txt
     |   |   4. Create new Branch.txt
     |   |   5. Create new Repository on Github.txt
@@ -244,45 +339,114 @@
     |   |   Issues-1. Bypass - Untracked working tree files overwriting warning.txt
     |   |   Issues-2. Bypass - Filename too long.txt
     |   |   Open Source Contributions.txt
+    |   |   playbook.md
     |   |   README.md
     |   |   Starters-Guide.txt
     |   |   User-Example.sh
     |   |   
+    |   +---commands
+    |   |       git.md
+    |   |       
     |   \---Remote Repository Hosts
-    |       +---GitHub
-    |       |   |   layout.md
-    |       |   |   
-    |       |   \---Tools
-    |       |           gh.md
-    |       |           
-    |       \---GitLab
+    |       \---GitHub
+    |           |   layout.md
+    |           |   
+    |           +---GitHub Actions
+    |           |       README.md
+    |           |       
+    |           \---Tools
+    |                   gh.md
+    |                   
     +---Home Lab
     |   |   infrastructure-design-specs.md
+    |   |   operational-flow.md
+    |   |   playbook.md
+    |   |   resources.md
+    |   |   writing-documentations.md
     |   |   
-    |   \---Services and Tools
-    |       |   pipeline-and-ideas.md
-    |       |   
-    |       +---Dashboard
-    |       |   +---Dashy
-    |       |   \---Heimdall
-    |       \---System Monitoring
-    |           +---Grafana
-    |           \---Uptime Kuma
+    |   +---Ideas and Concepts
+    |   |       dns-wide-adblocking.txt
+    |   |       
+    |   +---Pre-Requisites
+    |   |       postinstallation-setup.md
+    |   |       
+    |   +---Services and Tools
+    |   |   |   pipeline-and-ideas.md
+    |   |   |   services.md
+    |   |   |   
+    |   |   +---Cloud Server
+    |   |   |   \---Nextcloud
+    |   |   |       \---Guides
+    |   |   |               tips-and-tricks.md
+    |   |   |               
+    |   |   +---Proxy Server
+    |   |   |   \---nginx
+    |   |   |       \---Reverse Proxy
+    |   |   |           |   configurations.md
+    |   |   |           |   README.md
+    |   |   |           |   
+    |   |   |           \---Service Configuration Snippets
+    |   |   |                   jellyfin.md
+    |   |   |                   
+    |   |   +---System Monitoring
+    |   |   |   \---Uptime Kuma
+    |   |   |       +---bare-metal
+    |   |   |       |       setup.md
+    |   |   |       |       
+    |   |   |       \---docker
+    |   |   |               setup.md
+    |   |   |               
+    |   |   +---VNC Clients
+    |   |   |   \---NoVNC
+    |   |   |       |   layering-and-implementations.md
+    |   |   |       |   README.md
+    |   |   |       |   
+    |   |   |       \---Guides
+    |   |   |               setup.md
+    |   |   |               
+    |   |   \---Webservers
+    |   |       \---Jupyter Server
+    |   |           |   README.md
+    |   |           |   
+    |   |           +---docs
+    |   |           |   |   README.md
+    |   |           |   |   
+    |   |           |   +---containerization
+    |   |           |   |   \---docker
+    |   |           |   |       |   README.md
+    |   |           |   |       |   
+    |   |           |   |       \---images
+    |   |           |   |           \---Base-Notebook
+    |   |           |   |                   docker-compose.yaml
+    |   |           |   |                   README.md
+    |   |           |   |                   
+    |   |           |   \---development
+    |   |           |       \---api-framework
+    |   |           |               python.md
+    |   |           |               
+    |   |           \---setup
+    |   |                   bare-metal.md
+    |   |                   containerization.md
+    |   |                   
+    |   \---Snippets-and-Examples
+    |           basic-setup.md
+    |           
     +---Language
+    |   +---Chinese
+    |   |       hokkien.md
+    |   |       
     |   +---French
     |   |       compilation.md
     |   |       
     |   \---Japanese
     |       |   japanese.md
     |       |   
-    |       +---Chinese
-    |       |       hokkien.md
-    |       |       
     |       \---compilation
     |               grammar.md
     |               
     +---Linux
     |   |   filesystem-structure.md
+    |   |   playbook.md
     |   |   README.md
     |   |   
     |   +---commands
@@ -291,20 +455,25 @@
     |   |       dd.md
     |   |       declare.md
     |   |       diff.md
+    |   |       find.md
     |   |       getopts.md
     |   |       gpg.md
     |   |       hexdump.md
+    |   |       install.md
     |   |       ln.txt
     |   |       masterlist.md
+    |   |       nl.md
     |   |       notify-send.md
     |   |       openssl.md
     |   |       parted.md
     |   |       patch.md
     |   |       printf.md
     |   |       README.md
+    |   |       rsync.md
     |   |       sed
     |   |       shift.md
     |   |       su
+    |   |       tail.md
     |   |       tar.md
     |   |       template.md
     |   |       tr.md
@@ -312,6 +481,13 @@
     |   |       use-cases.md
     |   |       xargs.md
     |   |       
+    |   +---Development
+    |   |   \---Terminal-User-Interface
+    |   |       |   README.md
+    |   |       |   
+    |   |       \---frameworks
+    |   |               whiptail.md
+    |   |               
     |   +---distros
     |   |   |   README.md
     |   |   |   
@@ -321,11 +497,10 @@
     |   |   |   +---AUR
     |   |   |   |   |   README.md
     |   |   |   |   |   
-    |   |   |   |   +---AUR Helpers
-    |   |   |   |   |   \---yay
-    |   |   |   |   |           README.md
-    |   |   |   |   |           
-    |   |   |   |   \---Packaging
+    |   |   |   |   \---AUR Helpers
+    |   |   |   |       \---yay
+    |   |   |   |               README.md
+    |   |   |   |               
     |   |   |   +---guides
     |   |   |   |   |   Issues-and-Fixes.txt
     |   |   |   |   |   Remounting.txt
@@ -365,18 +540,7 @@
     |   |   |   |   |   remount.sh
     |   |   |   |   |   setup_debootstrap.sh
     |   |   |   |   |   
-    |   |   |   |   +---ARCHIVE
-    |   |   |   |   |   +---2021-08-16_1359H
-    |   |   |   |   |   |       setup_debootstrap.sh
-    |   |   |   |   |   |       
-    |   |   |   |   |   \---2021-08-19_0852H
-    |   |   |   |   |       |   installation-guide-Debian via another unix system.txt
-    |   |   |   |   |       |   
-    |   |   |   |   |       \---setup_profiles
-    |   |   |   |   |               1. Asura.txt
-    |   |   |   |   |               Template-1_2021-08-18_2104H.txt
-    |   |   |   |   |               
-    |   |   |   |   \---setup_profiles
+    |   |   |   |   \---Plannings
     |   |   |   |           1. Asura - draft.txt
     |   |   |   |           1. Asura.txt
     |   |   |   |           1. Asura_2021-08-19_0848H.txt
@@ -393,6 +557,311 @@
     |   |   |           Setup.md
     |   |   |           sources-list.md
     |   |   |           
+    |   |   +---Fedora
+    |   |   |   \---setup
+    |   |   |       \---LiveCD Templates
+    |   |   |           \---Fedora Workstation 37
+    |   |   |               +---dnf
+    |   |   |               |   |   dnf.conf
+    |   |   |               |   |   
+    |   |   |               |   +---plugins
+    |   |   |               |   |       copr.conf
+    |   |   |               |   |       debuginfo-install.conf
+    |   |   |               |   |       
+    |   |   |               |   \---protected.d
+    |   |   |               |           dnf.conf
+    |   |   |               |           fedora-workstation.conf
+    |   |   |               |           grub2-efi-ia32.conf
+    |   |   |               |           grub2-efi-x64.conf
+    |   |   |               |           grub2-pc.conf
+    |   |   |               |           grub2-tools-minimal.conf
+    |   |   |               |           shim.conf
+    |   |   |               |           sudo.conf
+    |   |   |               |           systemd.conf
+    |   |   |               |           
+    |   |   |               +---rpm-gpg
+    |   |   |               |       RPM-GPG-KEY-37-fedora
+    |   |   |               |       RPM-GPG-KEY-fedora-10-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-10-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-10-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-10-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-10-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-11-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-11-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-11-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-11-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-11-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-12-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-12-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-12-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-12-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-12-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-13-arm
+    |   |   |               |       RPM-GPG-KEY-fedora-13-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-13-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-13-mips
+    |   |   |               |       RPM-GPG-KEY-fedora-13-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-13-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-13-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-14-arm
+    |   |   |               |       RPM-GPG-KEY-fedora-14-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-14-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-14-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-14-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-15-arm
+    |   |   |               |       RPM-GPG-KEY-fedora-15-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-15-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-15-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-15-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-15-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-15-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-15-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-15-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-15-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-16-arm
+    |   |   |               |       RPM-GPG-KEY-fedora-16-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-16-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-16-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-16-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-16-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-16-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-16-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-16-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-16-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-17-arm
+    |   |   |               |       RPM-GPG-KEY-fedora-17-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-17-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-17-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-17-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-17-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-17-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-17-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-17-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-17-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-18-arm
+    |   |   |               |       RPM-GPG-KEY-fedora-18-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-18-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-18-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-18-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-18-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-18-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-18-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-18-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-18-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-19-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-19-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-19-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-19-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-19-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-19-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-19-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-19-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-19-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-20-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-20-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-20-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-20-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-20-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-20-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-20-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-20-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-20-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-21-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-21-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-21-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-21-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-21-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-21-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-21-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-21-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-21-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-21-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-22-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-22-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-22-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-22-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-22-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-22-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-22-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-22-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-22-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-22-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-23-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-23-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-23-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-23-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-23-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-23-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-23-s390
+    |   |   |               |       RPM-GPG-KEY-fedora-23-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-23-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-23-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-24-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-24-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-24-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-24-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-24-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-24-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-24-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-24-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-24-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-25-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-25-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-25-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-25-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-25-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-25-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-25-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-25-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-25-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-26-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-26-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-26-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-26-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-26-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-26-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-26-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-26-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-26-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-27-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-27-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-27-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-27-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-27-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-27-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-27-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-27-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-28-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-28-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-28-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-28-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-28-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-28-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-28-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-28-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-29-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-29-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-29-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-29-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-29-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-29-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-29-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-29-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-30-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-30-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-30-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-30-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-30-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-30-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-30-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-31-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-31-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-31-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-31-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-31-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-31-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-31-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-32-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-32-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-32-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-32-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-32-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-32-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-32-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-33-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-33-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-33-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-33-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-33-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-33-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-33-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-34-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-34-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-34-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-34-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-34-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-34-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-34-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-35-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-35-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-35-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-35-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-35-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-35-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-36-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-36-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-36-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-36-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-36-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-36-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-37-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-37-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-37-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-37-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-37-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-37-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-38-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-38-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-38-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-38-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-38-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-39-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-39-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-39-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-39-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-39-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-7-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-7-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-7-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-7-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-7-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-8-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-8-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-8-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-8-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-8-primary-original
+    |   |   |               |       RPM-GPG-KEY-fedora-8-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-9-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-9-ia64
+    |   |   |               |       RPM-GPG-KEY-fedora-9-ppc
+    |   |   |               |       RPM-GPG-KEY-fedora-9-ppc64
+    |   |   |               |       RPM-GPG-KEY-fedora-9-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-9-primary-original
+    |   |   |               |       RPM-GPG-KEY-fedora-9-secondary
+    |   |   |               |       RPM-GPG-KEY-fedora-9-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-eln-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-eln-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-eln-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-eln-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-eln-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-iot-2019
+    |   |   |               |       RPM-GPG-KEY-fedora-iot-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-iot-armhfp
+    |   |   |               |       RPM-GPG-KEY-fedora-iot-i386
+    |   |   |               |       RPM-GPG-KEY-fedora-iot-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-iot-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-iot-x86_64
+    |   |   |               |       RPM-GPG-KEY-fedora-modularity
+    |   |   |               |       RPM-GPG-KEY-fedora-rawhide-aarch64
+    |   |   |               |       RPM-GPG-KEY-fedora-rawhide-ppc64le
+    |   |   |               |       RPM-GPG-KEY-fedora-rawhide-primary
+    |   |   |               |       RPM-GPG-KEY-fedora-rawhide-s390x
+    |   |   |               |       RPM-GPG-KEY-fedora-rawhide-x86_64
+    |   |   |               |       RPM-GPG-KEY-redhat-release
+    |   |   |               |       
+    |   |   |               \---yum.repos.d
+    |   |   |                       fedora-cisco-openh264.repo
+    |   |   |                       fedora-modular.repo
+    |   |   |                       fedora-updates-modular.repo
+    |   |   |                       fedora-updates-testing-modular.repo
+    |   |   |                       fedora-updates-testing.repo
+    |   |   |                       fedora-updates.repo
+    |   |   |                       fedora.repo
+    |   |   |                       google-chrome.repo
+    |   |   |                       rpmfusion-nonfree-nvidia-driver.repo
+    |   |   |                       rpmfusion-nonfree-steam.repo
+    |   |   |                       _copr_phracek-PyCharm.repo
+    |   |   |                       
     |   |   +---Gentoo
     |   |   |   |   installguide
     |   |   |   |   package-masterlist.md
@@ -442,6 +911,7 @@
     |   |               
     |   +---Files
     |   |       architectures.md
+    |   |       environment-variables.md
     |   |       font-icons-masterlist.md
     |   |       my-essentials.md
     |   |       packages-masterlist.md
@@ -514,9 +984,16 @@
     |   |   |       
     |   |   +---Initialization Systems
     |   |   |   \---SystemD
-    |   |   |           basics.md
-    |   |   |           configurations.md
-    |   |   |           
+    |   |   |       |   basics.md
+    |   |   |       |   configurations.md
+    |   |   |       |   services.md
+    |   |   |       |   
+    |   |   |       +---commands
+    |   |   |       |       journalctl.md
+    |   |   |       |       
+    |   |   |       \---services
+    |   |   |               systemd-service-config.md
+    |   |   |               
     |   |   +---Linux Live CD-ISO
     |   |   |   |   mkisofs.txt
     |   |   |   |   README.md
@@ -526,6 +1003,8 @@
     |   |   |           unsquashing live cd.txt
     |   |   |           
     |   |   +---Networking
+    |   |   |   |   networking-types.md
+    |   |   |   |   ports.md
     |   |   |   |   README.md
     |   |   |   |   
     |   |   |   +---DNS Resolvers
@@ -554,8 +1033,12 @@
     |   |   |   |       |   setup.md
     |   |   |   |       |   
     |   |   |   |       \---Unbound
-    |   |   |   |               dns-server-setup.md
-    |   |   |   |               
+    |   |   |   |           |   dns-server-setup.md
+    |   |   |   |           |   docker-setup.md
+    |   |   |   |           |   
+    |   |   |   |           \---Configurations
+    |   |   |   |                   pi-hole.conf
+    |   |   |   |                   
     |   |   |   +---Email Servers
     |   |   |   |       basics.md
     |   |   |   |       postfix.md
@@ -592,82 +1075,168 @@
     |   |   |   |           
     |   |   |   +---Proxy Server
     |   |   |   |   \---nginx
-    |   |   |   |       \---Guides
-    |   |   |   |           \---Configuration
-    |   |   |   |                   reverse-proxy.md
+    |   |   |   |       +---Guides
+    |   |   |   |       |   \---Configuration
+    |   |   |   |       |           reverse-proxy.md
+    |   |   |   |       |           using-subdomains.md
+    |   |   |   |       |           
+    |   |   |   |       +---Resources
+    |   |   |   |       |       reverse-proxy-guides-for-services.md
+    |   |   |   |       |       
+    |   |   |   |       \---Snippets-and-Examples
+    |   |   |   |           +---1-Reverse Proxy
+    |   |   |   |           |   \---multiple_locations
+    |   |   |   |           |       +---etc
+    |   |   |   |           |       |   |   hosts
+    |   |   |   |           |       |   |   
+    |   |   |   |           |       |   \---nginx
+    |   |   |   |           |       |       |   nginx.conf
+    |   |   |   |           |       |       |   
+    |   |   |   |           |       |       +---conf.d
+    |   |   |   |           |       |       |       default.conf
+    |   |   |   |           |       |       |       
+    |   |   |   |           |       |       +---includes
+    |   |   |   |           |       |       |       proxy.conf
+    |   |   |   |           |       |       |       ssl.conf
+    |   |   |   |           |       |       |       
+    |   |   |   |           |       |       \---ssl
+    |   |   |   |           |       |               gen_rsa.sh
+    |   |   |   |           |       |               README.md
+    |   |   |   |           |       |               
+    |   |   |   |           |       \---var
+    |   |   |   |           |           \---www
+    |   |   |   |           |               \---html
+    |   |   |   |           |                       backend-not-found.html
+    |   |   |   |           |                       index.html
+    |   |   |   |           |                       
+    |   |   |   |           \---default
+    |   |   |   |               \---nginx
+    |   |   |   |                   |   fastcgi_params
+    |   |   |   |                   |   mime.types
+    |   |   |   |                   |   nginx.conf
+    |   |   |   |                   |   scgi_params
+    |   |   |   |                   |   uwsgi_params
+    |   |   |   |                   |   
+    |   |   |   |                   \---conf.d
+    |   |   |   |                           default.conf
+    |   |   |   |                           
+    |   |   |   +---RDP
+    |   |   |   |   |   README.md
+    |   |   |   |   |   
+    |   |   |   |   \---projects
+    |   |   |   |       \---xrdp
+    |   |   |   |           |   README.md
+    |   |   |   |           |   
+    |   |   |   |           \---packages
+    |   |   |   |                   xorgxrdp.md
     |   |   |   |                   
     |   |   |   +---Samba Network File Sharing Server
     |   |   |   |       README.md
     |   |   |   |       setup.md
     |   |   |   |       
-    |   |   |   +---Self-Hosted
-    |   |   |   |   \---Mastodon
+    |   |   |   +---VNC-Servers
+    |   |   |   |   +---TigerVNC
+    |   |   |   |   |       README.md
+    |   |   |   |   |       
+    |   |   |   |   \---x11vnc
+    |   |   |   |           playbook.md
+    |   |   |   |           README.md
+    |   |   |   |           
     |   |   |   +---VPN-Server
     |   |   |   |   |   README.md
     |   |   |   |   |   
-    |   |   |   |   \---IPSEC
-    |   |   |   |       +---Automatic
-    |   |   |   |       |   \---hwdsl2
-    |   |   |   |       |       \---linux-setup-ipsec-vpn
-    |   |   |   |       |               ikev2.md
-    |   |   |   |       |               setup.txt
-    |   |   |   |       |               
-    |   |   |   |       \---L2TP
-    |   |   |   |           \---Errors
-    |   |   |   |                   error reading xl2ptd-control.md
-    |   |   |   |                   
+    |   |   |   |   +---IPSEC
+    |   |   |   |   |   +---Automatic
+    |   |   |   |   |   |   \---hwdsl2
+    |   |   |   |   |   |       \---linux-setup-ipsec-vpn
+    |   |   |   |   |   |               ikev2.md
+    |   |   |   |   |   |               setup.txt
+    |   |   |   |   |   |               
+    |   |   |   |   |   \---L2TP
+    |   |   |   |   |       \---Errors
+    |   |   |   |   |               error reading xl2ptd-control.md
+    |   |   |   |   |               
+    |   |   |   |   \---WireGuard
+    |   |   |   |           basics.md
+    |   |   |   |           setup.md
+    |   |   |   |           
     |   |   |   +---Wake-on-Lan Server
     |   |   |   |   |   README.md
     |   |   |   |   |   
     |   |   |   |   \---etherwake
-    |   |   |   |           etherwake.md
-    |   |   |   |           setup.md
-    |   |   |   |           
+    |   |   |   |       |   etherwake.md
+    |   |   |   |       |   setup.md
+    |   |   |   |       |   wakeonlan.md
+    |   |   |   |       |   
+    |   |   |   |       \---config
+    |   |   |   |               wol.template
+    |   |   |   |               
     |   |   |   \---Web Server
     |   |   |       |   basics.md
     |   |   |       |   README.md
     |   |   |       |   setup.md
     |   |   |       |   
-    |   |   |       +---apache2
     |   |   |       \---nginx
     |   |   |           |   nginx.md
     |   |   |           |   
     |   |   |           \---Guides
     |   |   |               \---Configuration
-    |   |   |                   |   configuration.md
-    |   |   |                   |   load-balancer.md
-    |   |   |                   |   
-    |   |   |                   \---Configuration Files
-    |   |   |                       +---Load Balancer
-    |   |   |                       \---Reverse Proxy
-    |   |   \---Setup
-    |   |           Enable Sudo.txt
-    |   |           General Flow.md
-    |   |           Localization.txt
-    |   |           Network.txt
-    |   |           Preparation.txt
-    |   |           Swapfile.txt
-    |   |           
+    |   |   |                       configuration.md
+    |   |   |                       load-balancer.md
+    |   |   |                       self-signed-SSL-encryption.md
+    |   |   |                       
+    |   |   +---Setup
+    |   |   |       Enable Sudo.txt
+    |   |   |       General Flow.md
+    |   |   |       Localization.txt
+    |   |   |       Network.txt
+    |   |   |       post-installation.md
+    |   |   |       Preparation.txt
+    |   |   |       Swapfile.txt
+    |   |   |       
+    |   |   \---System Administration
+    |   |       |   faq.md
+    |   |       |   monitoring.md
+    |   |       |   playbook.md
+    |   |       |   system-cleanup.md
+    |   |       |   
+    |   |       \---SSH
+    |   |               adding-key-entries-into-known-hosts.md
+    |   |               
     |   +---Issues-and-Solutions
     |   |       Basic Backup Recovery to another device.txt
     |   |       Kernel Panic.txt
     |   |       
+    |   +---Linux Kernel
+    |   |   |   README.md
+    |   |   |   
+    |   |   \---Customization
+    |   |           customization-settings.md
+    |   |           
     |   +---Linux-From-Scratch
     |   |   |   install-guide.txt
     |   |   |   lfs.sh
     |   |   |   package-list.md
     |   |   |   post-installation.txt
     |   |   |   
-    |   |   \---Guides
-    |   |       \---Versions
-    |   |           \---LFS-11.1
+    |   |   \---Staged Build
+    |   |           3-packages-and-patches.md
+    |   |           
     |   +---package-manager
-    |   |       aptitude
-    |   |       emerge
-    |   |       pacman
-    |   |       xbps
-    |   |       
+    |   |   |   aptitude
+    |   |   |   emerge
+    |   |   |   pacman
+    |   |   |   xbps
+    |   |   |   
+    |   |   +---dnf
+    |   |   |       dnf-setup.md
+    |   |   |       
+    |   |   \---dpkg
+    |   |           dpkg.md
+    |   |           
     |   +---packages
+    |   |   |   package-name-reference.md
+    |   |   |   
     |   |   +---Build from Source
     |   |   |   |   CHANGELOGS.md
     |   |   |   |   package-list.md
@@ -679,18 +1248,48 @@
     |   |   |       |   \---httpd
     |   |   |       |           compilation.md
     |   |   |       |           
-    |   |   |       \---torvalds
-    |   |   |           \---linux
+    |   |   |       +---archlinux
+    |   |   |       |   \---arch-install-scripts
+    |   |   |       |           compilation.md
+    |   |   |       |           
+    |   |   |       +---jqlang
+    |   |   |       |   \---jq
+    |   |   |       |           cross-compilation.md
+    |   |   |       |           README.md
+    |   |   |       |           setup.md
+    |   |   |       |           usage.md
+    |   |   |       |           
+    |   |   |       +---torvalds
+    |   |   |       |   \---linux
+    |   |   |       |           compilation.md
+    |   |   |       |           
+    |   |   |       \---void-linux
+    |   |   |           \---xbps
     |   |   |                   compilation.md
     |   |   |                   
+    |   |   +---Display Server
+    |   |   |   \---xorg
+    |   |   |       |   README.md
+    |   |   |       |   
+    |   |   |       \---Configurations
+    |   |   |               setup-headless.md
+    |   |   |               xinitrc.md
+    |   |   |               
     |   |   +---docs
+    |   |   |       dracut.md
     |   |   |       ffmpeg.txt
-    |   |   |       nmcli.md
+    |   |   |       pv.md
     |   |   |       summary.txt
     |   |   |       xautolock.md
     |   |   |       xdotools.md
     |   |   |       xidlehook.md
     |   |   |       
+    |   |   +---fzf
+    |   |   |   |   README.md
+    |   |   |   |   
+    |   |   |   \---commands
+    |   |   |           fzf.md
+    |   |   |           
     |   |   +---GitHub-CLI
     |   |   |   |   gh.md
     |   |   |   |   
@@ -701,16 +1300,23 @@
     |   |   |   \---docs
     |   |   |           convert.md
     |   |   |           
+    |   |   +---Network-Manager
+    |   |   |   |   package-structure.md
+    |   |   |   |   
+    |   |   |   \---commands
+    |   |   |           nmcli.md
+    |   |   |           nmtui.md
+    |   |   |           
     |   |   +---package-compile-guides
+    |   |   |       binutils.md
     |   |   |       README.md
     |   |   |       
-    |   |   +---Picom
-    |   |   |   |   forks.txt
-    |   |   |   |   
-    |   |   |   \---settings
-    |   |   |           set-blur.md
-    |   |   |           
-    |   |   \---qtile
+    |   |   \---Picom
+    |   |       |   forks.txt
+    |   |       |   
+    |   |       \---settings
+    |   |               set-blur.md
+    |   |               
     |   +---ricing
     |   |   |   basic-initial-setup.md
     |   |   |   general-info.txt
@@ -727,2758 +1333,9 @@
     |   |   |               installation.txt
     |   |   |               setup.txt
     |   |   |               
-    |   |   +---Dotfiles
-    |   |   |   +---distros
-    |   |   |   |   +---ArchLinux
-    |   |   |   |   |   \---profiles
-    |   |   |   |   |       +---ArchLinux_VM_Build-1
-    |   |   |   |   |       |   +---2021-06-12_0638H
-    |   |   |   |   |       |   |   +---.config
-    |   |   |   |   |       |   |   |   +---bspwm
-    |   |   |   |   |       |   |   |   |       bspwmrc
-    |   |   |   |   |       |   |   |   |       
-    |   |   |   |   |       |   |   |   +---conky
-    |   |   |   |   |       |   |   |   |       conky.conf
-    |   |   |   |   |       |   |   |   |       
-    |   |   |   |   |       |   |   |   +---gtk-2.0
-    |   |   |   |   |       |   |   |   |       gtkfilechooser.ini
-    |   |   |   |   |       |   |   |   |       
-    |   |   |   |   |       |   |   |   +---gtk-3.0
-    |   |   |   |   |       |   |   |   |       settings.ini
-    |   |   |   |   |       |   |   |   |       
-    |   |   |   |   |       |   |   |   +---herbstluftwm
-    |   |   |   |   |       |   |   |   |       autostart
-    |   |   |   |   |       |   |   |   |       
-    |   |   |   |   |       |   |   |   +---libfm
-    |   |   |   |   |       |   |   |   |       libfm.conf
-    |   |   |   |   |       |   |   |   |       
-    |   |   |   |   |       |   |   |   +---nitrogen
-    |   |   |   |   |       |   |   |   |       bg-saved.cfg
-    |   |   |   |   |       |   |   |   |       nitrogen.cfg
-    |   |   |   |   |       |   |   |   |       
-    |   |   |   |   |       |   |   |   +---pcmanfm
-    |   |   |   |   |       |   |   |   |   \---default
-    |   |   |   |   |       |   |   |   |           pcmanfm.conf
-    |   |   |   |   |       |   |   |   |           
-    |   |   |   |   |       |   |   |   +---qtile
-    |   |   |   |   |       |   |   |   |   |   config.py
-    |   |   |   |   |       |   |   |   |   |   config.py.default
-    |   |   |   |   |       |   |   |   |   |   extlib.py
-    |   |   |   |   |       |   |   |   |   |   extlib.sh
-    |   |   |   |   |       |   |   |   |   |   
-    |   |   |   |   |       |   |   |   |   \---__pycache__
-    |   |   |   |   |       |   |   |   |           config.cpython-39.pyc
-    |   |   |   |   |       |   |   |   |           extlib.cpython-39.pyc
-    |   |   |   |   |       |   |   |   |           
-    |   |   |   |   |       |   |   |   \---sxhkd
-    |   |   |   |   |       |   |   |           sxhkdrc
-    |   |   |   |   |       |   |   |           
-    |   |   |   |   |       |   |   +---release
-    |   |   |   |   |       |   |   |       2021-06-12_0638H.zip
-    |   |   |   |   |       |   |   |       
-    |   |   |   |   |       |   |   \---root
-    |   |   |   |   |       |   |           .bashrc
-    |   |   |   |   |       |   |           .bash_logout
-    |   |   |   |   |       |   |           .bash_profile
-    |   |   |   |   |       |   |           .gtkrc-2.0
-    |   |   |   |   |       |   |           .xinitrc
-    |   |   |   |   |       |   |           
-    |   |   |   |   |       |   \---2021-07-12_0914H
-    |   |   |   |   |       |       \---root
-    |   |   |   |   |       |           |   .bashrc
-    |   |   |   |   |       |           |   .bash_logout
-    |   |   |   |   |       |           |   .bash_profile
-    |   |   |   |   |       |           |   .gtkrc-2.0
-    |   |   |   |   |       |           |   .xinitrc
-    |   |   |   |   |       |           |   pkglist
-    |   |   |   |   |       |           |   
-    |   |   |   |   |       |           +---.config
-    |   |   |   |   |       |           |   +---bspwm
-    |   |   |   |   |       |           |   |       bspwmrc
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---conky
-    |   |   |   |   |       |           |   |       conky.conf
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---dconf
-    |   |   |   |   |       |           |   |       user
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---gtk-2.0
-    |   |   |   |   |       |           |   |       gtkfilechooser.ini
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---gtk-3.0
-    |   |   |   |   |       |           |   |       settings.ini
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---herbstluftwm
-    |   |   |   |   |       |           |   |       autostart
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---libfm
-    |   |   |   |   |       |           |   |       libfm.conf
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---nitrogen
-    |   |   |   |   |       |           |   |       bg-saved.cfg
-    |   |   |   |   |       |           |   |       nitrogen.cfg
-    |   |   |   |   |       |           |   |       
-    |   |   |   |   |       |           |   +---pcmanfm
-    |   |   |   |   |       |           |   |   \---default
-    |   |   |   |   |       |           |   |           pcmanfm.conf
-    |   |   |   |   |       |           |   |           
-    |   |   |   |   |       |           |   +---qtile
-    |   |   |   |   |       |           |   |   |   config.py
-    |   |   |   |   |       |           |   |   |   config.py.default
-    |   |   |   |   |       |           |   |   |   extlib.py
-    |   |   |   |   |       |           |   |   |   extlib.sh
-    |   |   |   |   |       |           |   |   |   
-    |   |   |   |   |       |           |   |   \---__pycache__
-    |   |   |   |   |       |           |   |           config.cpython-39.pyc
-    |   |   |   |   |       |           |   |           extlib.cpython-39.pyc
-    |   |   |   |   |       |           |   |           
-    |   |   |   |   |       |           |   \---sxhkd
-    |   |   |   |   |       |           |           sxhkdrc
-    |   |   |   |   |       |           |           
-    |   |   |   |   |       |           +---.icons
-    |   |   |   |   |       |           |   \---default
-    |   |   |   |   |       |           |           index.theme
-    |   |   |   |   |       |           |           
-    |   |   |   |   |       |           +---.local
-    |   |   |   |   |       |           |   \---share
-    |   |   |   |   |       |           |       |   recently-used.xbel
-    |   |   |   |   |       |           |       |   
-    |   |   |   |   |       |           |       +---qtile
-    |   |   |   |   |       |           |       |       qtile.log
-    |   |   |   |   |       |           |       |       
-    |   |   |   |   |       |           |       \---xorg
-    |   |   |   |   |       |           |               Xorg.0.log
-    |   |   |   |   |       |           |               Xorg.0.log.old
-    |   |   |   |   |       |           |               Xorg.1.log
-    |   |   |   |   |       |           |               Xorg.1.log.old
-    |   |   |   |   |       |           |               
-    |   |   |   |   |       |           +---.vim
-    |   |   |   |   |       |           |       .netrwhist
-    |   |   |   |   |       |           |       
-    |   |   |   |   |       |           \---Personal
-    |   |   |   |   |       |               \---Rices
-    |   |   |   |   |       |                   +---2021-06-12_0638H
-    |   |   |   |   |       |                   |   |   .bashrc
-    |   |   |   |   |       |                   |   |   .bash_logout
-    |   |   |   |   |       |                   |   |   .bash_profile
-    |   |   |   |   |       |                   |   |   .gtkrc-2.0
-    |   |   |   |   |       |                   |   |   .xinitrc
-    |   |   |   |   |       |                   |   |   start-commands.log
-    |   |   |   |   |       |                   |   |   start-sys-svc.log
-    |   |   |   |   |       |                   |   |   
-    |   |   |   |   |       |                   |   +---.config
-    |   |   |   |   |       |                   |   |   +---bspwm
-    |   |   |   |   |       |                   |   |   |       bspwmrc
-    |   |   |   |   |       |                   |   |   |       
-    |   |   |   |   |       |                   |   |   +---conky
-    |   |   |   |   |       |                   |   |   |       conky.conf
-    |   |   |   |   |       |                   |   |   |       
-    |   |   |   |   |       |                   |   |   +---gtk-2.0
-    |   |   |   |   |       |                   |   |   |       gtkfilechooser.ini
-    |   |   |   |   |       |                   |   |   |       
-    |   |   |   |   |       |                   |   |   +---gtk-3.0
-    |   |   |   |   |       |                   |   |   |       settings.ini
-    |   |   |   |   |       |                   |   |   |       
-    |   |   |   |   |       |                   |   |   +---herbstluftwm
-    |   |   |   |   |       |                   |   |   |       autostart
-    |   |   |   |   |       |                   |   |   |       
-    |   |   |   |   |       |                   |   |   +---libfm
-    |   |   |   |   |       |                   |   |   |       libfm.conf
-    |   |   |   |   |       |                   |   |   |       
-    |   |   |   |   |       |                   |   |   +---nitrogen
-    |   |   |   |   |       |                   |   |   |       bg-saved.cfg
-    |   |   |   |   |       |                   |   |   |       nitrogen.cfg
-    |   |   |   |   |       |                   |   |   |       
-    |   |   |   |   |       |                   |   |   +---pcmanfm
-    |   |   |   |   |       |                   |   |   |   \---default
-    |   |   |   |   |       |                   |   |   |           pcmanfm.conf
-    |   |   |   |   |       |                   |   |   |           
-    |   |   |   |   |       |                   |   |   +---qtile
-    |   |   |   |   |       |                   |   |   |   |   config.py
-    |   |   |   |   |       |                   |   |   |   |   config.py.default
-    |   |   |   |   |       |                   |   |   |   |   extlib.py
-    |   |   |   |   |       |                   |   |   |   |   extlib.sh
-    |   |   |   |   |       |                   |   |   |   |   
-    |   |   |   |   |       |                   |   |   |   \---__pycache__
-    |   |   |   |   |       |                   |   |   |           config.cpython-39.pyc
-    |   |   |   |   |       |                   |   |   |           extlib.cpython-39.pyc
-    |   |   |   |   |       |                   |   |   |           
-    |   |   |   |   |       |                   |   |   \---sxhkd
-    |   |   |   |   |       |                   |   |           sxhkdrc
-    |   |   |   |   |       |                   |   |           
-    |   |   |   |   |       |                   |   +---.icons
-    |   |   |   |   |       |                   |   |   \---default
-    |   |   |   |   |       |                   |   |           index.theme
-    |   |   |   |   |       |                   |   |           
-    |   |   |   |   |       |                   |   +---.local
-    |   |   |   |   |       |                   |   |   \---share
-    |   |   |   |   |       |                   |   |       |   recently-used.xbel
-    |   |   |   |   |       |                   |   |       |   
-    |   |   |   |   |       |                   |   |       +---qtile
-    |   |   |   |   |       |                   |   |       |       qtile.log
-    |   |   |   |   |       |                   |   |       |       
-    |   |   |   |   |       |                   |   |       \---xorg
-    |   |   |   |   |       |                   |   |               Xorg.0.log
-    |   |   |   |   |       |                   |   |               Xorg.0.log.old
-    |   |   |   |   |       |                   |   |               Xorg.1.log
-    |   |   |   |   |       |                   |   |               Xorg.1.log.old
-    |   |   |   |   |       |                   |   |               
-    |   |   |   |   |       |                   |   \---.vim
-    |   |   |   |   |       |                   |           .netrwhist
-    |   |   |   |   |       |                   |           
-    |   |   |   |   |       |                   \---zips
-    |   |   |   |   |       |                           2021-06-12_0638H.zip
-    |   |   |   |   |       |                           
-    |   |   |   |   |       +---Reference_Profile-1
-    |   |   |   |   |       |   +---Documents
-    |   |   |   |   |       |   |       distro-planner
-    |   |   |   |   |       |   |       profile-list
-    |   |   |   |   |       |   |       
-    |   |   |   |   |       |   \---install-scripts
-    |   |   |   |   |       |           example.sh
-    |   |   |   |   |       |           installer-manual.sh
-    |   |   |   |   |       |           installer-ux.min.sh
-    |   |   |   |   |       |           installer.sh
-    |   |   |   |   |       |           postinstallation-core-packages.sh
-    |   |   |   |   |       |           postinstallations-root.sh
-    |   |   |   |   |       |           postinstallations.sh
-    |   |   |   |   |       |           
-    |   |   |   |   |       \---VBox_USBoot-1
-    |   |   |   |   |           +---Documents
-    |   |   |   |   |           |       profile-list
-    |   |   |   |   |           |       
-    |   |   |   |   |           +---Dotfiles
-    |   |   |   |   |           |   +---2021-06-20_1148H
-    |   |   |   |   |           |   |   |   .bashrc
-    |   |   |   |   |           |   |   |   .xinitrc
-    |   |   |   |   |           |   |   |   .Xresources
-    |   |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   +---.config
-    |   |   |   |   |           |   |   |   +---bspwm
-    |   |   |   |   |           |   |   |   |       bspwmrc
-    |   |   |   |   |           |   |   |   |       bspwmrc.test
-    |   |   |   |   |           |   |   |   |       panel
-    |   |   |   |   |           |   |   |   |       panel_bar
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---conky
-    |   |   |   |   |           |   |   |   |       conky-keybindings.conf
-    |   |   |   |   |           |   |   |   |       conky-middle_left.conf
-    |   |   |   |   |           |   |   |   |       conky-middle_right.conf
-    |   |   |   |   |           |   |   |   |       conky-TODOList.conf
-    |   |   |   |   |           |   |   |   |       conky.conf.default
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---dunst
-    |   |   |   |   |           |   |   |   |       dunstrc
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---eww
-    |   |   |   |   |           |   |   |   |   |   eww-bar.png
-    |   |   |   |   |           |   |   |   |   |   eww.scss
-    |   |   |   |   |           |   |   |   |   |   eww.xml
-    |   |   |   |   |           |   |   |   |   |   
-    |   |   |   |   |           |   |   |   |   \---scripts
-    |   |   |   |   |           |   |   |   |           getram
-    |   |   |   |   |           |   |   |   |           getvol
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   +---htop
-    |   |   |   |   |           |   |   |   |       htoprc
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---libfm
-    |   |   |   |   |           |   |   |   |       libfm.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---libreoffice
-    |   |   |   |   |           |   |   |   |   \---4
-    |   |   |   |   |           |   |   |   |       \---user
-    |   |   |   |   |           |   |   |   |           |   registrymodifications.xcu
-    |   |   |   |   |           |   |   |   |           |   
-    |   |   |   |   |           |   |   |   |           +---autotext
-    |   |   |   |   |           |   |   |   |           |       mytexts.bau
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---basic
-    |   |   |   |   |           |   |   |   |           |   |   dialog.xlc
-    |   |   |   |   |           |   |   |   |           |   |   script.xlc
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   \---Standard
-    |   |   |   |   |           |   |   |   |           |           dialog.xlb
-    |   |   |   |   |           |   |   |   |           |           Module1.xba
-    |   |   |   |   |           |   |   |   |           |           script.xlb
-    |   |   |   |   |           |   |   |   |           |           
-    |   |   |   |   |           |   |   |   |           +---config
-    |   |   |   |   |           |   |   |   |           |       autotbl.fmt
-    |   |   |   |   |           |   |   |   |           |       javasettings_Linux_X86_64.xml
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---database
-    |   |   |   |   |           |   |   |   |           |   |   biblio.odb
-    |   |   |   |   |           |   |   |   |           |   |   evolocal.odb
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   \---biblio
-    |   |   |   |   |           |   |   |   |           |           biblio.dbf
-    |   |   |   |   |           |   |   |   |           |           biblio.dbt
-    |   |   |   |   |           |   |   |   |           |           
-    |   |   |   |   |           |   |   |   |           +---extensions
-    |   |   |   |   |           |   |   |   |           |   |   buildid
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   +---bundled
-    |   |   |   |   |           |   |   |   |           |   |   |   extensions.pmap
-    |   |   |   |   |           |   |   |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---registry
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.bundle.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.component.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       unorc
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       configmgr.ini
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       \---com.sun.star.comp.deployment.script.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |               backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |               
-    |   |   |   |   |           |   |   |   |           |   +---shared
-    |   |   |   |   |           |   |   |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---registry
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |               backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |               
-    |   |   |   |   |           |   |   |   |           |   \---tmp
-    |   |   |   |   |           |   |   |   |           |       \---registry
-    |   |   |   |   |           |   |   |   |           |           +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |           |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |           |       
-    |   |   |   |   |           |   |   |   |           |           \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |                   backenddb.xml
-    |   |   |   |   |           |   |   |   |           |                   
-    |   |   |   |   |           |   |   |   |           +---gallery
-    |   |   |   |   |           |   |   |   |           |       sg30.sdv
-    |   |   |   |   |           |   |   |   |           |       sg30.thm
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---pack
-    |   |   |   |   |           |   |   |   |           |   |   ExtensionInfo.pack
-    |   |   |   |   |           |   |   |   |           |   |   registrymodifications.pack
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   +---autotext
-    |   |   |   |   |           |   |   |   |           |   |       mytexts.pack
-    |   |   |   |   |           |   |   |   |           |   |       
-    |   |   |   |   |           |   |   |   |           |   +---basic
-    |   |   |   |   |           |   |   |   |           |   |   |   dialog.pack
-    |   |   |   |   |           |   |   |   |           |   |   |   script.pack
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---Standard
-    |   |   |   |   |           |   |   |   |           |   |           dialog.pack
-    |   |   |   |   |           |   |   |   |           |   |           Module1.pack
-    |   |   |   |   |           |   |   |   |           |   |           script.pack
-    |   |   |   |   |           |   |   |   |           |   |           
-    |   |   |   |   |           |   |   |   |           |   +---config
-    |   |   |   |   |           |   |   |   |           |   |       autotbl.pack
-    |   |   |   |   |           |   |   |   |           |   |       javasettings_Linux_X86_64.pack
-    |   |   |   |   |           |   |   |   |           |   |       
-    |   |   |   |   |           |   |   |   |           |   \---database
-    |   |   |   |   |           |   |   |   |           |       |   biblio.pack
-    |   |   |   |   |           |   |   |   |           |       |   evolocal.pack
-    |   |   |   |   |           |   |   |   |           |       |   
-    |   |   |   |   |           |   |   |   |           |       \---biblio
-    |   |   |   |   |           |   |   |   |           |               biblio.pack
-    |   |   |   |   |           |   |   |   |           |               
-    |   |   |   |   |           |   |   |   |           \---uno_packages
-    |   |   |   |   |           |   |   |   |               \---cache
-    |   |   |   |   |           |   |   |   |                   \---registry
-    |   |   |   |   |           |   |   |   |                       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |                       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |                       |       
-    |   |   |   |   |           |   |   |   |                       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |                               backenddb.xml
-    |   |   |   |   |           |   |   |   |                               
-    |   |   |   |   |           |   |   |   +---neofetch
-    |   |   |   |   |           |   |   |   |       config.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---nitrogen
-    |   |   |   |   |           |   |   |   |       nitrogen.cfg
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---pcmanfm
-    |   |   |   |   |           |   |   |   |   +---asura
-    |   |   |   |   |           |   |   |   |   |       desktop-items-0.conf
-    |   |   |   |   |           |   |   |   |   |       pcmanfm.conf
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   \---default
-    |   |   |   |   |           |   |   |   |           desktop-items-0.conf
-    |   |   |   |   |           |   |   |   |           pcmanfm.conf
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   +---picom
-    |   |   |   |   |           |   |   |   |       picom.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---sxhkd
-    |   |   |   |   |           |   |   |   |       bspwm_smart_move
-    |   |   |   |   |           |   |   |   |       sxhkdrc
-    |   |   |   |   |           |   |   |   |       sxhkdrc.default
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---vifm
-    |   |   |   |   |           |   |   |   |   |   vifm-help.txt
-    |   |   |   |   |           |   |   |   |   |   vifminfo.json
-    |   |   |   |   |           |   |   |   |   |   vifmrc
-    |   |   |   |   |           |   |   |   |   |   
-    |   |   |   |   |           |   |   |   |   +---colors
-    |   |   |   |   |           |   |   |   |   |       Default.vifm
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   +---defaults
-    |   |   |   |   |           |   |   |   |   |       vifm-help.txt
-    |   |   |   |   |           |   |   |   |   |       vifmrc
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   \---scripts
-    |   |   |   |   |           |   |   |   |           README
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   \---vis
-    |   |   |   |   |           |   |   |       |   config
-    |   |   |   |   |           |   |   |       |   vis.log
-    |   |   |   |   |           |   |   |       |   
-    |   |   |   |   |           |   |   |       \---colors
-    |   |   |   |   |           |   |   |               basic_colors
-    |   |   |   |   |           |   |   |               rainbow
-    |   |   |   |   |           |   |   |               
-    |   |   |   |   |           |   |   +---.icons
-    |   |   |   |   |           |   |   |   |   cursors
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   \---default
-    |   |   |   |   |           |   |   |           cursors
-    |   |   |   |   |           |   |   |           index.theme
-    |   |   |   |   |           |   |   |           setcursor.sh
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.scripts
-    |   |   |   |   |           |   |   |   |   clipkger.sh
-    |   |   |   |   |           |   |   |   |   dotfilemgr.sh
-    |   |   |   |   |           |   |   |   |   gitmgr.sh
-    |   |   |   |   |           |   |   |   |   gtk_util.sh
-    |   |   |   |   |           |   |   |   |   notepad.sh
-    |   |   |   |   |           |   |   |   |   screenlocker.sh
-    |   |   |   |   |           |   |   |   |   suckless_downloadpatches.sh
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   +---libraries
-    |   |   |   |   |           |   |   |   |       extlib.sh
-    |   |   |   |   |           |   |   |   |       maths.sh
-    |   |   |   |   |           |   |   |   |       pacman.sh
-    |   |   |   |   |           |   |   |   |       rice.sh
-    |   |   |   |   |           |   |   |   |       strutil.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---st
-    |   |   |   |   |           |   |   |   |       ff-blur
-    |   |   |   |   |           |   |   |   |       ff-border
-    |   |   |   |   |           |   |   |   |       ff-bright
-    |   |   |   |   |           |   |   |   |       to_ff.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---vim
-    |   |   |   |   |           |   |   |           templatesel.sh
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.urxvt
-    |   |   |   |   |           |   |   |   \---ext
-    |   |   |   |   |           |   |   |           resize-font
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.vim
-    |   |   |   |   |           |   |   |   |   .netrwhist
-    |   |   |   |   |           |   |   |   |   vimrc
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   +---autoload
-    |   |   |   |   |           |   |   |   |       plug.vim
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---templates
-    |   |   |   |   |           |   |   |           index.html
-    |   |   |   |   |           |   |   |           main.c
-    |   |   |   |   |           |   |   |           main.cpp
-    |   |   |   |   |           |   |   |           main.cs
-    |   |   |   |   |           |   |   |           main.css
-    |   |   |   |   |           |   |   |           main.h
-    |   |   |   |   |           |   |   |           main.java
-    |   |   |   |   |           |   |   |           main.js
-    |   |   |   |   |           |   |   |           main.min.sh
-    |   |   |   |   |           |   |   |           main.py
-    |   |   |   |   |           |   |   |           main.sh
-    |   |   |   |   |           |   |   |           README.md
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---Desktop
-    |   |   |   |   |           |   |   |   +---apps
-    |   |   |   |   |           |   |   |   |       rar
-    |   |   |   |   |           |   |   |   |       unrar
-    |   |   |   |   |           |   |   |   |       xmenu.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---drafts
-    |   |   |   |   |           |   |   |   |       archwiki-pages.sh
-    |   |   |   |   |           |   |   |   |       bspwm_designer.sh
-    |   |   |   |   |           |   |   |   |       cowsayer.sh
-    |   |   |   |   |           |   |   |   |       pages
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---portable
-    |   |   |   |   |           |   |   |       +---doc
-    |   |   |   |   |           |   |   |       |   \---defaults
-    |   |   |   |   |           |   |   |       |           sofficerc
-    |   |   |   |   |           |   |   |       |           
-    |   |   |   |   |           |   |   |       +---media
-    |   |   |   |   |           |   |   |       |   \---Images
-    |   |   |   |   |           |   |   |       |       +---JPG
-    |   |   |   |   |           |   |   |       |       |       wallhaven-nature.jpg
-    |   |   |   |   |           |   |   |       |       |       wallhaven-Ocean.jpg
-    |   |   |   |   |           |   |   |       |       |       wallhaven-Tokyo.jpg
-    |   |   |   |   |           |   |   |       |       |       
-    |   |   |   |   |           |   |   |       |       \---PNG
-    |   |   |   |   |           |   |   |       |               DigitalOcean
-    |   |   |   |   |           |   |   |       |               nier-automata-menu-background.png
-    |   |   |   |   |           |   |   |       |               wallhaven-win10.png
-    |   |   |   |   |           |   |   |       |               
-    |   |   |   |   |           |   |   |       +---projects
-    |   |   |   |   |           |   |   |       |   +---coding
-    |   |   |   |   |           |   |   |       |   |   +---cli
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |   |   |       |   |   |       +---cpp
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---src
-    |   |   |   |   |           |   |   |       |   |   |       |           |   extlib.h
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |   |   |       |   |   |       |           |   
-    |   |   |   |   |           |   |   |       |   |   |       |           \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |               |   changelogs
-    |   |   |   |   |           |   |   |       |   |   |       |               |   
-    |   |   |   |   |           |   |   |       |   |   |       |               \---out
-    |   |   |   |   |           |   |   |       |   |   |       |                       out.txt
-    |   |   |   |   |           |   |   |       |   |   |       |                       
-    |   |   |   |   |           |   |   |       |   |   |       +---python
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |       |                   lang.py
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |               README.md
-    |   |   |   |   |           |   |   |       |   |   |               
-    |   |   |   |   |           |   |   |       |   |   +---gui
-    |   |   |   |   |           |   |   |       |   |   |   +---AutoGUI
-    |   |   |   |   |           |   |   |       |   |   |   |   \---C++
-    |   |   |   |   |           |   |   |       |   |   |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |   |   |           +---resources
-    |   |   |   |   |           |   |   |       |   |   |   |           |       README.md
-    |   |   |   |   |           |   |   |       |   |   |   |           |       
-    |   |   |   |   |           |   |   |       |   |   |   |           \---src
-    |   |   |   |   |           |   |   |       |   |   |   |                   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |   |                   main.exe
-    |   |   |   |   |           |   |   |       |   |   |   |                   make.sh
-    |   |   |   |   |           |   |   |       |   |   |   |                   
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |   |   |       |   |   |       +---cpp
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---src
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |   |   |       |   |   |       |           |   wxGUI.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   wxGUI.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   
-    |   |   |   |   |           |   |   |       |   |   |       |           +---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           |   \---out
-    |   |   |   |   |           |   |   |       |   |   |       |           |           out.txt
-    |   |   |   |   |           |   |   |       |   |   |       |           |           
-    |   |   |   |   |           |   |   |       |   |   |       |           \---samples
-    |   |   |   |   |           |   |   |       |   |   |       |                   minimal.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |                   minimal.exe
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       +---python
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |       |                   lang.py
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |               README.md
-    |   |   |   |   |           |   |   |       |   |   |               
-    |   |   |   |   |           |   |   |       |   |   +---python
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround-TestBench
-    |   |   |   |   |           |   |   |       |   |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |   |           |   main.py
-    |   |   |   |   |           |   |   |       |   |   |           |   
-    |   |   |   |   |           |   |   |       |   |   |           \---resources
-    |   |   |   |   |           |   |   |       |   |   |               \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |                       lang.py
-    |   |   |   |   |           |   |   |       |   |   |                       
-    |   |   |   |   |           |   |   |       |   |   \---Template
-    |   |   |   |   |           |   |   |       |   |       +---files
-    |   |   |   |   |           |   |   |       |   |       |   |   make.sh
-    |   |   |   |   |           |   |   |       |   |       |   |   
-    |   |   |   |   |           |   |   |       |   |       |   +---ARCHIVE
-    |   |   |   |   |           |   |   |       |   |       |   |   \---2021-04-25 0011H
-    |   |   |   |   |           |   |   |       |   |       |   |           make.sh
-    |   |   |   |   |           |   |   |       |   |       |   |           
-    |   |   |   |   |           |   |   |       |   |       |   \---cpp
-    |   |   |   |   |           |   |   |       |   |       |       \---GUI
-    |   |   |   |   |           |   |   |       |   |       |           \---wxWidgets
-    |   |   |   |   |           |   |   |       |   |       |                   main.cpp
-    |   |   |   |   |           |   |   |       |   |       |                   
-    |   |   |   |   |           |   |   |       |   |       \---structure
-    |   |   |   |   |           |   |   |       |   |           +---cli
-    |   |   |   |   |           |   |   |       |   |           |   \---cpp
-    |   |   |   |   |           |   |   |       |   |           |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           |           +---resources
-    |   |   |   |   |           |   |   |       |   |           |           |       README.md
-    |   |   |   |   |           |   |   |       |   |           |           |       
-    |   |   |   |   |           |   |   |       |   |           |           \---src
-    |   |   |   |   |           |   |   |       |   |           |                   make.sh
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           +---gui
-    |   |   |   |   |           |   |   |       |   |           |   \---cpp
-    |   |   |   |   |           |   |   |       |   |           |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           |           +---resources
-    |   |   |   |   |           |   |   |       |   |           |           |       README.md
-    |   |   |   |   |           |   |   |       |   |           |           |       
-    |   |   |   |   |           |   |   |       |   |           |           \---src
-    |   |   |   |   |           |   |   |       |   |           |                   make.sh
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           +---java
-    |   |   |   |   |           |   |   |       |   |           |   \---workspace
-    |   |   |   |   |           |   |   |       |   |           |       |   README.md
-    |   |   |   |   |           |   |   |       |   |           |       |   
-    |   |   |   |   |           |   |   |       |   |           |       \---src
-    |   |   |   |   |           |   |   |       |   |           |               make.sh
-    |   |   |   |   |           |   |   |       |   |           |               
-    |   |   |   |   |           |   |   |       |   |           +---python
-    |   |   |   |   |           |   |   |       |   |           |   \---workspace
-    |   |   |   |   |           |   |   |       |   |           |       |   README.md
-    |   |   |   |   |           |   |   |       |   |           |       |   
-    |   |   |   |   |           |   |   |       |   |           |       \---resources
-    |   |   |   |   |           |   |   |       |   |           |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |           |                   lang.py
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           \---web-design
-    |   |   |   |   |           |   |   |       |   |               \---workspace
-    |   |   |   |   |           |   |   |       |   |                   |   index.html
-    |   |   |   |   |           |   |   |       |   |                   |   run.sh
-    |   |   |   |   |           |   |   |       |   |                   |   
-    |   |   |   |   |           |   |   |       |   |                   +---resources
-    |   |   |   |   |           |   |   |       |   |                   |   +---docs
-    |   |   |   |   |           |   |   |       |   |                   |   |       README.md
-    |   |   |   |   |           |   |   |       |   |                   |   |       
-    |   |   |   |   |           |   |   |       |   |                   |   \---styles
-    |   |   |   |   |           |   |   |       |   |                   |           main.css
-    |   |   |   |   |           |   |   |       |   |                   |           
-    |   |   |   |   |           |   |   |       |   |                   \---scripts
-    |   |   |   |   |           |   |   |       |   |                           main.js
-    |   |   |   |   |           |   |   |       |   |                           
-    |   |   |   |   |           |   |   |       |   +---Game-Guides
-    |   |   |   |   |           |   |   |       |   |   \---AllGames
-    |   |   |   |   |           |   |   |       |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           \---Python
-    |   |   |   |   |           |   |   |       |   |               \---ProjEDEN
-    |   |   |   |   |           |   |   |       |   |                   \---src
-    |   |   |   |   |           |   |   |       |   |                           autorun.sh
-    |   |   |   |   |           |   |   |       |   |                           main.py
-    |   |   |   |   |           |   |   |       |   |                           out_data.txt
-    |   |   |   |   |           |   |   |       |   |                           
-    |   |   |   |   |           |   |   |       |   +---Linux
-    |   |   |   |   |           |   |   |       |   |   +---general
-    |   |   |   |   |           |   |   |       |   |   |       shlib.sh
-    |   |   |   |   |           |   |   |       |   |   |       
-    |   |   |   |   |           |   |   |       |   |   \---utilities
-    |   |   |   |   |           |   |   |       |   |       +---cronjob-scripts
-    |   |   |   |   |           |   |   |       |   |       |       debug.sh
-    |   |   |   |   |           |   |   |       |   |       |       debug_21-04-16.log
-    |   |   |   |   |           |   |   |       |   |       |       pkg-autoupdater.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       +---dmenu
-    |   |   |   |   |           |   |   |       |   |       |   \---scripts
-    |   |   |   |   |           |   |   |       |   |       |           templates
-    |   |   |   |   |           |   |   |       |   |       |           
-    |   |   |   |   |           |   |   |       |   |       +---git
-    |   |   |   |   |           |   |   |       |   |       |       gitlib.sh
-    |   |   |   |   |           |   |   |       |   |       |       gitmgr.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       +---setups
-    |   |   |   |   |           |   |   |       |   |       |       install-aur.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       \---wrappers
-    |   |   |   |   |           |   |   |       |   |           |   makelib.sh
-    |   |   |   |   |           |   |   |       |   |           |   pacinstaller.sh
-    |   |   |   |   |           |   |   |       |   |           |   screenshot.sh
-    |   |   |   |   |           |   |   |       |   |           |   surfer.sh
-    |   |   |   |   |           |   |   |       |   |           |   vimopen.sh
-    |   |   |   |   |           |   |   |       |   |           |   
-    |   |   |   |   |           |   |   |       |   |           +---apps
-    |   |   |   |   |           |   |   |       |   |           |   \---eww
-    |   |   |   |   |           |   |   |       |   |           |           wreww.sh
-    |   |   |   |   |           |   |   |       |   |           |           
-    |   |   |   |   |           |   |   |       |   |           \---multi-maker
-    |   |   |   |   |           |   |   |       |   |                   make.sh
-    |   |   |   |   |           |   |   |       |   |                   README.md
-    |   |   |   |   |           |   |   |       |   |                   
-    |   |   |   |   |           |   |   |       |   \---Templates
-    |   |   |   |   |           |   |   |       |       |   autorun.sh
-    |   |   |   |   |           |   |   |       |       |   make.sh
-    |   |   |   |   |           |   |   |       |       |   
-    |   |   |   |   |           |   |   |       |       \---ARCHIVE
-    |   |   |   |   |           |   |   |       |           +---autorunner
-    |   |   |   |   |           |   |   |       |           |   \---2021-03-31 0934H
-    |   |   |   |   |           |   |   |       |           |           autorun.sh
-    |   |   |   |   |           |   |   |       |           |           
-    |   |   |   |   |           |   |   |       |           \---make_shellscript
-    |   |   |   |   |           |   |   |       |               \---2021-04-25 0011H
-    |   |   |   |   |           |   |   |       |                       make.sh
-    |   |   |   |   |           |   |   |       |                       
-    |   |   |   |   |           |   |   |       \---repos
-    |   |   |   |   |           |   |   |           \---rar
-    |   |   |   |   |           |   |   |                   nier_automata_cursor__hack_edition__v2_by_juliodrai_dc6aarz.rar
-    |   |   |   |   |           |   |   |                   
-    |   |   |   |   |           |   |   \---personal
-    |   |   |   |   |           |   |       +---autostart
-    |   |   |   |   |           |   |       |       autostart.sh
-    |   |   |   |   |           |   |       |       wallpaper.jpg
-    |   |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |       +---codes
-    |   |   |   |   |           |   |       |       compilers.sh
-    |   |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |       +---designs
-    |   |   |   |   |           |   |       |   \---XOrg
-    |   |   |   |   |           |   |       |       \---xresources
-    |   |   |   |   |           |   |       |               genera.xresources
-    |   |   |   |   |           |   |       |               gruvbox-dark.xresources
-    |   |   |   |   |           |   |       |               matrix-green.xresources
-    |   |   |   |   |           |   |       |               wal-nature.xresources
-    |   |   |   |   |           |   |       |               
-    |   |   |   |   |           |   |       +---dotfiles
-    |   |   |   |   |           |   |       |   +---bars
-    |   |   |   |   |           |   |       |   |   |   bar
-    |   |   |   |   |           |   |       |   |   |   
-    |   |   |   |   |           |   |       |   |   +---ARCHIVE
-    |   |   |   |   |           |   |       |   |   |   \---2021-04-18 1207H
-    |   |   |   |   |           |   |       |   |   |           bar
-    |   |   |   |   |           |   |       |   |   |           
-    |   |   |   |   |           |   |       |   |   \---lemonbar
-    |   |   |   |   |           |   |       |   |       |   bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   widgets.sh
-    |   |   |   |   |           |   |       |   |       |   
-    |   |   |   |   |           |   |       |   |       +---profiles
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-17 2237H
-    |   |   |   |   |           |   |       |   |       |   |       bar
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-18 0946H
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-19 1007H
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-19 1130H
-    |   |   |   |   |           |   |       |   |       |   |       bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   \---2021-04-20 1001H
-    |   |   |   |   |           |   |       |   |       |           bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |           widgets.sh
-    |   |   |   |   |           |   |       |   |       |           
-    |   |   |   |   |           |   |       |   |       \---Templates
-    |   |   |   |   |           |   |       |   |               bar
-    |   |   |   |   |           |   |       |   |               bar-1
-    |   |   |   |   |           |   |       |   |               lemonbar.sh
-    |   |   |   |   |           |   |       |   |               widgets.sh
-    |   |   |   |   |           |   |       |   |               
-    |   |   |   |   |           |   |       |   +---bash
-    |   |   |   |   |           |   |       |   |   |   .bashrc-personal
-    |   |   |   |   |           |   |       |   |   |   .custom-paths
-    |   |   |   |   |           |   |       |   |   |   .custom-scripts
-    |   |   |   |   |           |   |       |   |   |   .custom-variables
-    |   |   |   |   |           |   |       |   |   |   .installers
-    |   |   |   |   |           |   |       |   |   |   
-    |   |   |   |   |           |   |       |   |   +---aliases
-    |   |   |   |   |           |   |       |   |   |       .build
-    |   |   |   |   |           |   |       |   |   |       .customization
-    |   |   |   |   |           |   |       |   |   |       .files
-    |   |   |   |   |           |   |       |   |   |       .general
-    |   |   |   |   |           |   |       |   |   |       .paths
-    |   |   |   |   |           |   |       |   |   |       .pkgmgr
-    |   |   |   |   |           |   |       |   |   |       .programs
-    |   |   |   |   |           |   |       |   |   |       .services
-    |   |   |   |   |           |   |       |   |   |       .systems
-    |   |   |   |   |           |   |       |   |   |       .view_edit
-    |   |   |   |   |           |   |       |   |   |       .windows
-    |   |   |   |   |           |   |       |   |   |       .xorg
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   +---customs
-    |   |   |   |   |           |   |       |   |   |   |   .custom-aliases
-    |   |   |   |   |           |   |       |   |   |   |   .custom-autostart
-    |   |   |   |   |           |   |       |   |   |   |   .custom-variables
-    |   |   |   |   |           |   |       |   |   |   |   .edit-aliases
-    |   |   |   |   |           |   |       |   |   |   |   
-    |   |   |   |   |           |   |       |   |   |   \---progs
-    |   |   |   |   |           |   |       |   |   |           .compilers
-    |   |   |   |   |           |   |       |   |   |           .runner
-    |   |   |   |   |           |   |       |   |   |           
-    |   |   |   |   |           |   |       |   |   +---functions
-    |   |   |   |   |           |   |       |   |   |       datetimectl
-    |   |   |   |   |           |   |       |   |   |       general
-    |   |   |   |   |           |   |       |   |   |       package_manager
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   +---package_manager
-    |   |   |   |   |           |   |       |   |   |       .apt
-    |   |   |   |   |           |   |       |   |   |       .pacman
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   \---variables
-    |   |   |   |   |           |   |       |   |           arrays
-    |   |   |   |   |           |   |       |   |           commands
-    |   |   |   |   |           |   |       |   |           general
-    |   |   |   |   |           |   |       |   |           paths
-    |   |   |   |   |           |   |       |   |           
-    |   |   |   |   |           |   |       |   \---setup
-    |   |   |   |   |           |   |       |       +---conky
-    |   |   |   |   |           |   |       |       |       start.sh
-    |   |   |   |   |           |   |       |       |       
-    |   |   |   |   |           |   |       |       \---samba
-    |   |   |   |   |           |   |       |               setup.sh
-    |   |   |   |   |           |   |       |               
-    |   |   |   |   |           |   |       \---scripts
-    |   |   |   |   |           |   |           \---bash
-    |   |   |   |   |           |   |               +---dmenu
-    |   |   |   |   |           |   |               |       dmenu_Browsers.sh
-    |   |   |   |   |           |   |               |       dmenu_fopener.sh
-    |   |   |   |   |           |   |               |       dmenu_git.sh
-    |   |   |   |   |           |   |               |       dmenu_pacman.sh
-    |   |   |   |   |           |   |               |       dmenu_proc_ctrl.sh
-    |   |   |   |   |           |   |               |       dmenu_Template.sh
-    |   |   |   |   |           |   |               |       indexmenu.sh
-    |   |   |   |   |           |   |               |       
-    |   |   |   |   |           |   |               \---Tutorials_and_Guides
-    |   |   |   |   |           |   |                   |   indexmenu-tutorials.sh
-    |   |   |   |   |           |   |                   |   README.md
-    |   |   |   |   |           |   |                   |   
-    |   |   |   |   |           |   |                   \---Terminal
-    |   |   |   |   |           |   |                           arrays.sh
-    |   |   |   |   |           |   |                           receiving_pipe.sh
-    |   |   |   |   |           |   |                           
-    |   |   |   |   |           |   +---2021-06-26_1308H
-    |   |   |   |   |           |   |   |   .bashrc
-    |   |   |   |   |           |   |   |   .xinitrc
-    |   |   |   |   |           |   |   |   .Xresources
-    |   |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   +---.config
-    |   |   |   |   |           |   |   |   +---bspwm
-    |   |   |   |   |           |   |   |   |       bspwmrc
-    |   |   |   |   |           |   |   |   |       bspwmrc.test
-    |   |   |   |   |           |   |   |   |       panel
-    |   |   |   |   |           |   |   |   |       panel_bar
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---conky
-    |   |   |   |   |           |   |   |   |       conky-keybindings.conf
-    |   |   |   |   |           |   |   |   |       conky-middle_left.conf
-    |   |   |   |   |           |   |   |   |       conky-middle_right.conf
-    |   |   |   |   |           |   |   |   |       conky-TODOList.conf
-    |   |   |   |   |           |   |   |   |       conky.conf.default
-    |   |   |   |   |           |   |   |   |       conky.general.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---dunst
-    |   |   |   |   |           |   |   |   |       dunstrc
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---eww
-    |   |   |   |   |           |   |   |   |   |   eww-bar.png
-    |   |   |   |   |           |   |   |   |   |   eww.scss
-    |   |   |   |   |           |   |   |   |   |   eww.xml
-    |   |   |   |   |           |   |   |   |   |   
-    |   |   |   |   |           |   |   |   |   \---scripts
-    |   |   |   |   |           |   |   |   |           getram
-    |   |   |   |   |           |   |   |   |           getvol
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   +---htop
-    |   |   |   |   |           |   |   |   |       htoprc
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---libfm
-    |   |   |   |   |           |   |   |   |       libfm.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---libreoffice
-    |   |   |   |   |           |   |   |   |   \---4
-    |   |   |   |   |           |   |   |   |       \---user
-    |   |   |   |   |           |   |   |   |           |   registrymodifications.xcu
-    |   |   |   |   |           |   |   |   |           |   
-    |   |   |   |   |           |   |   |   |           +---autotext
-    |   |   |   |   |           |   |   |   |           |       mytexts.bau
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---basic
-    |   |   |   |   |           |   |   |   |           |   |   dialog.xlc
-    |   |   |   |   |           |   |   |   |           |   |   script.xlc
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   \---Standard
-    |   |   |   |   |           |   |   |   |           |           dialog.xlb
-    |   |   |   |   |           |   |   |   |           |           Module1.xba
-    |   |   |   |   |           |   |   |   |           |           script.xlb
-    |   |   |   |   |           |   |   |   |           |           
-    |   |   |   |   |           |   |   |   |           +---config
-    |   |   |   |   |           |   |   |   |           |       autotbl.fmt
-    |   |   |   |   |           |   |   |   |           |       javasettings_Linux_X86_64.xml
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---database
-    |   |   |   |   |           |   |   |   |           |   |   biblio.odb
-    |   |   |   |   |           |   |   |   |           |   |   evolocal.odb
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   \---biblio
-    |   |   |   |   |           |   |   |   |           |           biblio.dbf
-    |   |   |   |   |           |   |   |   |           |           biblio.dbt
-    |   |   |   |   |           |   |   |   |           |           
-    |   |   |   |   |           |   |   |   |           +---extensions
-    |   |   |   |   |           |   |   |   |           |   |   buildid
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   +---bundled
-    |   |   |   |   |           |   |   |   |           |   |   |   extensions.pmap
-    |   |   |   |   |           |   |   |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---registry
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.bundle.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.component.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       unorc
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       configmgr.ini
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       \---com.sun.star.comp.deployment.script.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |               backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |               
-    |   |   |   |   |           |   |   |   |           |   +---shared
-    |   |   |   |   |           |   |   |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---registry
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |               backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |               
-    |   |   |   |   |           |   |   |   |           |   \---tmp
-    |   |   |   |   |           |   |   |   |           |       \---registry
-    |   |   |   |   |           |   |   |   |           |           +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |           |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |           |       
-    |   |   |   |   |           |   |   |   |           |           \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |                   backenddb.xml
-    |   |   |   |   |           |   |   |   |           |                   
-    |   |   |   |   |           |   |   |   |           +---gallery
-    |   |   |   |   |           |   |   |   |           |       sg30.sdv
-    |   |   |   |   |           |   |   |   |           |       sg30.thm
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---pack
-    |   |   |   |   |           |   |   |   |           |   |   ExtensionInfo.pack
-    |   |   |   |   |           |   |   |   |           |   |   registrymodifications.pack
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   +---autotext
-    |   |   |   |   |           |   |   |   |           |   |       mytexts.pack
-    |   |   |   |   |           |   |   |   |           |   |       
-    |   |   |   |   |           |   |   |   |           |   +---basic
-    |   |   |   |   |           |   |   |   |           |   |   |   dialog.pack
-    |   |   |   |   |           |   |   |   |           |   |   |   script.pack
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---Standard
-    |   |   |   |   |           |   |   |   |           |   |           dialog.pack
-    |   |   |   |   |           |   |   |   |           |   |           Module1.pack
-    |   |   |   |   |           |   |   |   |           |   |           script.pack
-    |   |   |   |   |           |   |   |   |           |   |           
-    |   |   |   |   |           |   |   |   |           |   +---config
-    |   |   |   |   |           |   |   |   |           |   |       autotbl.pack
-    |   |   |   |   |           |   |   |   |           |   |       javasettings_Linux_X86_64.pack
-    |   |   |   |   |           |   |   |   |           |   |       
-    |   |   |   |   |           |   |   |   |           |   \---database
-    |   |   |   |   |           |   |   |   |           |       |   biblio.pack
-    |   |   |   |   |           |   |   |   |           |       |   evolocal.pack
-    |   |   |   |   |           |   |   |   |           |       |   
-    |   |   |   |   |           |   |   |   |           |       \---biblio
-    |   |   |   |   |           |   |   |   |           |               biblio.pack
-    |   |   |   |   |           |   |   |   |           |               
-    |   |   |   |   |           |   |   |   |           \---uno_packages
-    |   |   |   |   |           |   |   |   |               \---cache
-    |   |   |   |   |           |   |   |   |                   \---registry
-    |   |   |   |   |           |   |   |   |                       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |                       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |                       |       
-    |   |   |   |   |           |   |   |   |                       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |                               backenddb.xml
-    |   |   |   |   |           |   |   |   |                               
-    |   |   |   |   |           |   |   |   +---neofetch
-    |   |   |   |   |           |   |   |   |       config.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---nitrogen
-    |   |   |   |   |           |   |   |   |       nitrogen.cfg
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---pcmanfm
-    |   |   |   |   |           |   |   |   |   +---asura
-    |   |   |   |   |           |   |   |   |   |       desktop-items-0.conf
-    |   |   |   |   |           |   |   |   |   |       pcmanfm.conf
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   \---default
-    |   |   |   |   |           |   |   |   |           desktop-items-0.conf
-    |   |   |   |   |           |   |   |   |           pcmanfm.conf
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   +---picom
-    |   |   |   |   |           |   |   |   |       picom.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---sxhkd
-    |   |   |   |   |           |   |   |   |       bspwm_smart_move
-    |   |   |   |   |           |   |   |   |       sxhkdrc
-    |   |   |   |   |           |   |   |   |       sxhkdrc.default
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---vifm
-    |   |   |   |   |           |   |   |   |   |   vifm-help.txt
-    |   |   |   |   |           |   |   |   |   |   vifminfo.json
-    |   |   |   |   |           |   |   |   |   |   vifmrc
-    |   |   |   |   |           |   |   |   |   |   
-    |   |   |   |   |           |   |   |   |   +---colors
-    |   |   |   |   |           |   |   |   |   |       Default.vifm
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   +---defaults
-    |   |   |   |   |           |   |   |   |   |       vifm-help.txt
-    |   |   |   |   |           |   |   |   |   |       vifmrc
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   \---scripts
-    |   |   |   |   |           |   |   |   |           README
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   \---vis
-    |   |   |   |   |           |   |   |       |   config
-    |   |   |   |   |           |   |   |       |   vis.log
-    |   |   |   |   |           |   |   |       |   
-    |   |   |   |   |           |   |   |       \---colors
-    |   |   |   |   |           |   |   |               basic_colors
-    |   |   |   |   |           |   |   |               rainbow
-    |   |   |   |   |           |   |   |               
-    |   |   |   |   |           |   |   +---.icons
-    |   |   |   |   |           |   |   |   |   cursors
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   \---default
-    |   |   |   |   |           |   |   |           cursors
-    |   |   |   |   |           |   |   |           index.theme
-    |   |   |   |   |           |   |   |           setcursor.sh
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.scripts
-    |   |   |   |   |           |   |   |   |   clipkger.sh
-    |   |   |   |   |           |   |   |   |   dotfilemgr.sh
-    |   |   |   |   |           |   |   |   |   gitmgr.sh
-    |   |   |   |   |           |   |   |   |   gtk_util.sh
-    |   |   |   |   |           |   |   |   |   notepad.sh
-    |   |   |   |   |           |   |   |   |   screenlocker.sh
-    |   |   |   |   |           |   |   |   |   suckless_downloadpatches.sh
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   +---libraries
-    |   |   |   |   |           |   |   |   |       extlib.sh
-    |   |   |   |   |           |   |   |   |       maths.sh
-    |   |   |   |   |           |   |   |   |       pacman.sh
-    |   |   |   |   |           |   |   |   |       rice.sh
-    |   |   |   |   |           |   |   |   |       strutil.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---st
-    |   |   |   |   |           |   |   |   |       ff-blur
-    |   |   |   |   |           |   |   |   |       ff-border
-    |   |   |   |   |           |   |   |   |       ff-bright
-    |   |   |   |   |           |   |   |   |       to_ff.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---vim
-    |   |   |   |   |           |   |   |           templatesel.sh
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.urxvt
-    |   |   |   |   |           |   |   |   \---ext
-    |   |   |   |   |           |   |   |           resize-font
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.vim
-    |   |   |   |   |           |   |   |   |   .netrwhist
-    |   |   |   |   |           |   |   |   |   vimrc
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   +---autoload
-    |   |   |   |   |           |   |   |   |       plug.vim
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---templates
-    |   |   |   |   |           |   |   |           index.html
-    |   |   |   |   |           |   |   |           main.c
-    |   |   |   |   |           |   |   |           main.cpp
-    |   |   |   |   |           |   |   |           main.cs
-    |   |   |   |   |           |   |   |           main.css
-    |   |   |   |   |           |   |   |           main.h
-    |   |   |   |   |           |   |   |           main.java
-    |   |   |   |   |           |   |   |           main.js
-    |   |   |   |   |           |   |   |           main.min.sh
-    |   |   |   |   |           |   |   |           main.py
-    |   |   |   |   |           |   |   |           main.sh
-    |   |   |   |   |           |   |   |           README.md
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---Desktop
-    |   |   |   |   |           |   |   |   +---apps
-    |   |   |   |   |           |   |   |   |       rar
-    |   |   |   |   |           |   |   |   |       unrar
-    |   |   |   |   |           |   |   |   |       xmenu.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---drafts
-    |   |   |   |   |           |   |   |   |       archwiki-pages.sh
-    |   |   |   |   |           |   |   |   |       bspwm_designer.sh
-    |   |   |   |   |           |   |   |   |       cowsayer.sh
-    |   |   |   |   |           |   |   |   |       pages
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---portable
-    |   |   |   |   |           |   |   |       +---doc
-    |   |   |   |   |           |   |   |       |   \---defaults
-    |   |   |   |   |           |   |   |       |           sofficerc
-    |   |   |   |   |           |   |   |       |           
-    |   |   |   |   |           |   |   |       +---media
-    |   |   |   |   |           |   |   |       |   \---Images
-    |   |   |   |   |           |   |   |       |       +---JPG
-    |   |   |   |   |           |   |   |       |       |       wallhaven-nature.jpg
-    |   |   |   |   |           |   |   |       |       |       wallhaven-Ocean.jpg
-    |   |   |   |   |           |   |   |       |       |       wallhaven-Tokyo.jpg
-    |   |   |   |   |           |   |   |       |       |       
-    |   |   |   |   |           |   |   |       |       \---PNG
-    |   |   |   |   |           |   |   |       |               DigitalOcean
-    |   |   |   |   |           |   |   |       |               nier-automata-menu-background.png
-    |   |   |   |   |           |   |   |       |               wallhaven-win10.png
-    |   |   |   |   |           |   |   |       |               
-    |   |   |   |   |           |   |   |       +---projects
-    |   |   |   |   |           |   |   |       |   +---coding
-    |   |   |   |   |           |   |   |       |   |   +---cli
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |   |   |       |   |   |       +---cpp
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---src
-    |   |   |   |   |           |   |   |       |   |   |       |           |   extlib.h
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |   |   |       |   |   |       |           |   
-    |   |   |   |   |           |   |   |       |   |   |       |           \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |               |   changelogs
-    |   |   |   |   |           |   |   |       |   |   |       |               |   
-    |   |   |   |   |           |   |   |       |   |   |       |               \---out
-    |   |   |   |   |           |   |   |       |   |   |       |                       out.txt
-    |   |   |   |   |           |   |   |       |   |   |       |                       
-    |   |   |   |   |           |   |   |       |   |   |       +---python
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |       |                   lang.py
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |               README.md
-    |   |   |   |   |           |   |   |       |   |   |               
-    |   |   |   |   |           |   |   |       |   |   +---gui
-    |   |   |   |   |           |   |   |       |   |   |   +---AutoGUI
-    |   |   |   |   |           |   |   |       |   |   |   |   \---C++
-    |   |   |   |   |           |   |   |       |   |   |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |   |   |           +---resources
-    |   |   |   |   |           |   |   |       |   |   |   |           |       README.md
-    |   |   |   |   |           |   |   |       |   |   |   |           |       
-    |   |   |   |   |           |   |   |       |   |   |   |           \---src
-    |   |   |   |   |           |   |   |       |   |   |   |                   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |   |                   main.exe
-    |   |   |   |   |           |   |   |       |   |   |   |                   make.sh
-    |   |   |   |   |           |   |   |       |   |   |   |                   
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |   |   |       |   |   |       +---cpp
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---src
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |   |   |       |   |   |       |           |   wxGUI.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   wxGUI.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   
-    |   |   |   |   |           |   |   |       |   |   |       |           +---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           |   \---out
-    |   |   |   |   |           |   |   |       |   |   |       |           |           out.txt
-    |   |   |   |   |           |   |   |       |   |   |       |           |           
-    |   |   |   |   |           |   |   |       |   |   |       |           \---samples
-    |   |   |   |   |           |   |   |       |   |   |       |                   minimal.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |                   minimal.exe
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       +---python
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |       |                   lang.py
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |               README.md
-    |   |   |   |   |           |   |   |       |   |   |               
-    |   |   |   |   |           |   |   |       |   |   +---python
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround-TestBench
-    |   |   |   |   |           |   |   |       |   |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |   |           |   main.py
-    |   |   |   |   |           |   |   |       |   |   |           |   
-    |   |   |   |   |           |   |   |       |   |   |           \---resources
-    |   |   |   |   |           |   |   |       |   |   |               \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |                       lang.py
-    |   |   |   |   |           |   |   |       |   |   |                       
-    |   |   |   |   |           |   |   |       |   |   \---Template
-    |   |   |   |   |           |   |   |       |   |       +---files
-    |   |   |   |   |           |   |   |       |   |       |   |   make.sh
-    |   |   |   |   |           |   |   |       |   |       |   |   
-    |   |   |   |   |           |   |   |       |   |       |   +---ARCHIVE
-    |   |   |   |   |           |   |   |       |   |       |   |   \---2021-04-25 0011H
-    |   |   |   |   |           |   |   |       |   |       |   |           make.sh
-    |   |   |   |   |           |   |   |       |   |       |   |           
-    |   |   |   |   |           |   |   |       |   |       |   \---cpp
-    |   |   |   |   |           |   |   |       |   |       |       \---GUI
-    |   |   |   |   |           |   |   |       |   |       |           \---wxWidgets
-    |   |   |   |   |           |   |   |       |   |       |                   main.cpp
-    |   |   |   |   |           |   |   |       |   |       |                   
-    |   |   |   |   |           |   |   |       |   |       \---structure
-    |   |   |   |   |           |   |   |       |   |           +---cli
-    |   |   |   |   |           |   |   |       |   |           |   \---cpp
-    |   |   |   |   |           |   |   |       |   |           |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           |           +---resources
-    |   |   |   |   |           |   |   |       |   |           |           |       README.md
-    |   |   |   |   |           |   |   |       |   |           |           |       
-    |   |   |   |   |           |   |   |       |   |           |           \---src
-    |   |   |   |   |           |   |   |       |   |           |                   make.sh
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           +---gui
-    |   |   |   |   |           |   |   |       |   |           |   \---cpp
-    |   |   |   |   |           |   |   |       |   |           |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           |           +---resources
-    |   |   |   |   |           |   |   |       |   |           |           |       README.md
-    |   |   |   |   |           |   |   |       |   |           |           |       
-    |   |   |   |   |           |   |   |       |   |           |           \---src
-    |   |   |   |   |           |   |   |       |   |           |                   make.sh
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           +---java
-    |   |   |   |   |           |   |   |       |   |           |   \---workspace
-    |   |   |   |   |           |   |   |       |   |           |       |   README.md
-    |   |   |   |   |           |   |   |       |   |           |       |   
-    |   |   |   |   |           |   |   |       |   |           |       \---src
-    |   |   |   |   |           |   |   |       |   |           |               make.sh
-    |   |   |   |   |           |   |   |       |   |           |               
-    |   |   |   |   |           |   |   |       |   |           +---python
-    |   |   |   |   |           |   |   |       |   |           |   \---workspace
-    |   |   |   |   |           |   |   |       |   |           |       |   README.md
-    |   |   |   |   |           |   |   |       |   |           |       |   
-    |   |   |   |   |           |   |   |       |   |           |       \---resources
-    |   |   |   |   |           |   |   |       |   |           |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |           |                   lang.py
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           \---web-design
-    |   |   |   |   |           |   |   |       |   |               \---workspace
-    |   |   |   |   |           |   |   |       |   |                   |   index.html
-    |   |   |   |   |           |   |   |       |   |                   |   run.sh
-    |   |   |   |   |           |   |   |       |   |                   |   
-    |   |   |   |   |           |   |   |       |   |                   +---resources
-    |   |   |   |   |           |   |   |       |   |                   |   +---docs
-    |   |   |   |   |           |   |   |       |   |                   |   |       README.md
-    |   |   |   |   |           |   |   |       |   |                   |   |       
-    |   |   |   |   |           |   |   |       |   |                   |   \---styles
-    |   |   |   |   |           |   |   |       |   |                   |           main.css
-    |   |   |   |   |           |   |   |       |   |                   |           
-    |   |   |   |   |           |   |   |       |   |                   \---scripts
-    |   |   |   |   |           |   |   |       |   |                           main.js
-    |   |   |   |   |           |   |   |       |   |                           
-    |   |   |   |   |           |   |   |       |   +---Game-Guides
-    |   |   |   |   |           |   |   |       |   |   \---AllGames
-    |   |   |   |   |           |   |   |       |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           \---Python
-    |   |   |   |   |           |   |   |       |   |               \---ProjEDEN
-    |   |   |   |   |           |   |   |       |   |                   \---src
-    |   |   |   |   |           |   |   |       |   |                           autorun.sh
-    |   |   |   |   |           |   |   |       |   |                           main.py
-    |   |   |   |   |           |   |   |       |   |                           out_data.txt
-    |   |   |   |   |           |   |   |       |   |                           
-    |   |   |   |   |           |   |   |       |   +---Linux
-    |   |   |   |   |           |   |   |       |   |   +---general
-    |   |   |   |   |           |   |   |       |   |   |       shlib.sh
-    |   |   |   |   |           |   |   |       |   |   |       
-    |   |   |   |   |           |   |   |       |   |   \---utilities
-    |   |   |   |   |           |   |   |       |   |       +---cronjob-scripts
-    |   |   |   |   |           |   |   |       |   |       |       debug.sh
-    |   |   |   |   |           |   |   |       |   |       |       debug_21-04-16.log
-    |   |   |   |   |           |   |   |       |   |       |       pkg-autoupdater.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       +---dmenu
-    |   |   |   |   |           |   |   |       |   |       |   \---scripts
-    |   |   |   |   |           |   |   |       |   |       |           templates
-    |   |   |   |   |           |   |   |       |   |       |           
-    |   |   |   |   |           |   |   |       |   |       +---git
-    |   |   |   |   |           |   |   |       |   |       |       gitlib.sh
-    |   |   |   |   |           |   |   |       |   |       |       gitmgr.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       +---setups
-    |   |   |   |   |           |   |   |       |   |       |       install-aur.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       \---wrappers
-    |   |   |   |   |           |   |   |       |   |           |   makelib.sh
-    |   |   |   |   |           |   |   |       |   |           |   pacinstaller.sh
-    |   |   |   |   |           |   |   |       |   |           |   screenshot.sh
-    |   |   |   |   |           |   |   |       |   |           |   surfer.sh
-    |   |   |   |   |           |   |   |       |   |           |   vimopen.sh
-    |   |   |   |   |           |   |   |       |   |           |   
-    |   |   |   |   |           |   |   |       |   |           +---apps
-    |   |   |   |   |           |   |   |       |   |           |   \---eww
-    |   |   |   |   |           |   |   |       |   |           |           wreww.sh
-    |   |   |   |   |           |   |   |       |   |           |           
-    |   |   |   |   |           |   |   |       |   |           \---multi-maker
-    |   |   |   |   |           |   |   |       |   |                   make.sh
-    |   |   |   |   |           |   |   |       |   |                   README.md
-    |   |   |   |   |           |   |   |       |   |                   
-    |   |   |   |   |           |   |   |       |   \---Templates
-    |   |   |   |   |           |   |   |       |       |   autorun.sh
-    |   |   |   |   |           |   |   |       |       |   make.sh
-    |   |   |   |   |           |   |   |       |       |   
-    |   |   |   |   |           |   |   |       |       \---ARCHIVE
-    |   |   |   |   |           |   |   |       |           +---autorunner
-    |   |   |   |   |           |   |   |       |           |   \---2021-03-31 0934H
-    |   |   |   |   |           |   |   |       |           |           autorun.sh
-    |   |   |   |   |           |   |   |       |           |           
-    |   |   |   |   |           |   |   |       |           \---make_shellscript
-    |   |   |   |   |           |   |   |       |               \---2021-04-25 0011H
-    |   |   |   |   |           |   |   |       |                       make.sh
-    |   |   |   |   |           |   |   |       |                       
-    |   |   |   |   |           |   |   |       \---repos
-    |   |   |   |   |           |   |   |           \---rar
-    |   |   |   |   |           |   |   |                   nier_automata_cursor__hack_edition__v2_by_juliodrai_dc6aarz.rar
-    |   |   |   |   |           |   |   |                   
-    |   |   |   |   |           |   |   \---personal
-    |   |   |   |   |           |   |       +---autostart
-    |   |   |   |   |           |   |       |       autostart.sh
-    |   |   |   |   |           |   |       |       wallpaper.jpg
-    |   |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |       +---codes
-    |   |   |   |   |           |   |       |       compilers.sh
-    |   |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |       +---designs
-    |   |   |   |   |           |   |       |   \---XOrg
-    |   |   |   |   |           |   |       |       \---xresources
-    |   |   |   |   |           |   |       |               genera.xresources
-    |   |   |   |   |           |   |       |               gruvbox-dark.xresources
-    |   |   |   |   |           |   |       |               matrix-green.xresources
-    |   |   |   |   |           |   |       |               wal-nature.xresources
-    |   |   |   |   |           |   |       |               
-    |   |   |   |   |           |   |       +---dotfiles
-    |   |   |   |   |           |   |       |   +---bars
-    |   |   |   |   |           |   |       |   |   |   bar
-    |   |   |   |   |           |   |       |   |   |   
-    |   |   |   |   |           |   |       |   |   +---ARCHIVE
-    |   |   |   |   |           |   |       |   |   |   \---2021-04-18 1207H
-    |   |   |   |   |           |   |       |   |   |           bar
-    |   |   |   |   |           |   |       |   |   |           
-    |   |   |   |   |           |   |       |   |   \---lemonbar
-    |   |   |   |   |           |   |       |   |       |   bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   widgets.sh
-    |   |   |   |   |           |   |       |   |       |   
-    |   |   |   |   |           |   |       |   |       +---profiles
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-17 2237H
-    |   |   |   |   |           |   |       |   |       |   |       bar
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-18 0946H
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-19 1007H
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-19 1130H
-    |   |   |   |   |           |   |       |   |       |   |       bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   \---2021-04-20 1001H
-    |   |   |   |   |           |   |       |   |       |           bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |           widgets.sh
-    |   |   |   |   |           |   |       |   |       |           
-    |   |   |   |   |           |   |       |   |       \---Templates
-    |   |   |   |   |           |   |       |   |               bar
-    |   |   |   |   |           |   |       |   |               bar-1
-    |   |   |   |   |           |   |       |   |               lemonbar.sh
-    |   |   |   |   |           |   |       |   |               widgets.sh
-    |   |   |   |   |           |   |       |   |               
-    |   |   |   |   |           |   |       |   +---bash
-    |   |   |   |   |           |   |       |   |   |   .bashrc-personal
-    |   |   |   |   |           |   |       |   |   |   .custom-paths
-    |   |   |   |   |           |   |       |   |   |   .custom-scripts
-    |   |   |   |   |           |   |       |   |   |   .custom-variables
-    |   |   |   |   |           |   |       |   |   |   .installers
-    |   |   |   |   |           |   |       |   |   |   
-    |   |   |   |   |           |   |       |   |   +---aliases
-    |   |   |   |   |           |   |       |   |   |       .build
-    |   |   |   |   |           |   |       |   |   |       .customization
-    |   |   |   |   |           |   |       |   |   |       .files
-    |   |   |   |   |           |   |       |   |   |       .general
-    |   |   |   |   |           |   |       |   |   |       .paths
-    |   |   |   |   |           |   |       |   |   |       .pkgmgr
-    |   |   |   |   |           |   |       |   |   |       .programs
-    |   |   |   |   |           |   |       |   |   |       .services
-    |   |   |   |   |           |   |       |   |   |       .systems
-    |   |   |   |   |           |   |       |   |   |       .view_edit
-    |   |   |   |   |           |   |       |   |   |       .windows
-    |   |   |   |   |           |   |       |   |   |       .xorg
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   +---customs
-    |   |   |   |   |           |   |       |   |   |   |   .custom-aliases
-    |   |   |   |   |           |   |       |   |   |   |   .custom-autostart
-    |   |   |   |   |           |   |       |   |   |   |   .custom-variables
-    |   |   |   |   |           |   |       |   |   |   |   .edit-aliases
-    |   |   |   |   |           |   |       |   |   |   |   
-    |   |   |   |   |           |   |       |   |   |   \---progs
-    |   |   |   |   |           |   |       |   |   |           .compilers
-    |   |   |   |   |           |   |       |   |   |           .runner
-    |   |   |   |   |           |   |       |   |   |           
-    |   |   |   |   |           |   |       |   |   +---functions
-    |   |   |   |   |           |   |       |   |   |       datetimectl
-    |   |   |   |   |           |   |       |   |   |       general
-    |   |   |   |   |           |   |       |   |   |       package_manager
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   +---package_manager
-    |   |   |   |   |           |   |       |   |   |       .apt
-    |   |   |   |   |           |   |       |   |   |       .pacman
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   \---variables
-    |   |   |   |   |           |   |       |   |           arrays
-    |   |   |   |   |           |   |       |   |           commands
-    |   |   |   |   |           |   |       |   |           general
-    |   |   |   |   |           |   |       |   |           paths
-    |   |   |   |   |           |   |       |   |           
-    |   |   |   |   |           |   |       |   \---setup
-    |   |   |   |   |           |   |       |       +---conky
-    |   |   |   |   |           |   |       |       |       start.sh
-    |   |   |   |   |           |   |       |       |       
-    |   |   |   |   |           |   |       |       \---samba
-    |   |   |   |   |           |   |       |               setup.sh
-    |   |   |   |   |           |   |       |               
-    |   |   |   |   |           |   |       \---scripts
-    |   |   |   |   |           |   |           \---bash
-    |   |   |   |   |           |   |               +---dmenu
-    |   |   |   |   |           |   |               |       dmenu_Browsers.sh
-    |   |   |   |   |           |   |               |       dmenu_fopener.sh
-    |   |   |   |   |           |   |               |       dmenu_git.sh
-    |   |   |   |   |           |   |               |       dmenu_pacman.sh
-    |   |   |   |   |           |   |               |       dmenu_proc_ctrl.sh
-    |   |   |   |   |           |   |               |       dmenu_Template.sh
-    |   |   |   |   |           |   |               |       indexmenu.sh
-    |   |   |   |   |           |   |               |       
-    |   |   |   |   |           |   |               \---Tutorials_and_Guides
-    |   |   |   |   |           |   |                   |   indexmenu-tutorials.sh
-    |   |   |   |   |           |   |                   |   README.md
-    |   |   |   |   |           |   |                   |   
-    |   |   |   |   |           |   |                   \---Terminal
-    |   |   |   |   |           |   |                           arrays.sh
-    |   |   |   |   |           |   |                           receiving_pipe.sh
-    |   |   |   |   |           |   |                           
-    |   |   |   |   |           |   +---2021-06-28_1012H
-    |   |   |   |   |           |   |   |   .bashrc
-    |   |   |   |   |           |   |   |   .xinitrc
-    |   |   |   |   |           |   |   |   .Xresources
-    |   |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   +---.config
-    |   |   |   |   |           |   |   |   +---bspwm
-    |   |   |   |   |           |   |   |   |       bspwmrc
-    |   |   |   |   |           |   |   |   |       bspwmrc.test
-    |   |   |   |   |           |   |   |   |       panel
-    |   |   |   |   |           |   |   |   |       panel_bar
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---conky
-    |   |   |   |   |           |   |   |   |       conky-keybindings.conf
-    |   |   |   |   |           |   |   |   |       conky-middle_left.conf
-    |   |   |   |   |           |   |   |   |       conky-middle_right.conf
-    |   |   |   |   |           |   |   |   |       conky-TODOList.conf
-    |   |   |   |   |           |   |   |   |       conky.conf.default
-    |   |   |   |   |           |   |   |   |       conky.general.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---dunst
-    |   |   |   |   |           |   |   |   |       dunstrc
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---eww
-    |   |   |   |   |           |   |   |   |   |   eww-bar.png
-    |   |   |   |   |           |   |   |   |   |   eww.scss
-    |   |   |   |   |           |   |   |   |   |   eww.xml
-    |   |   |   |   |           |   |   |   |   |   
-    |   |   |   |   |           |   |   |   |   \---scripts
-    |   |   |   |   |           |   |   |   |           getram
-    |   |   |   |   |           |   |   |   |           getvol
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   +---htop
-    |   |   |   |   |           |   |   |   |       htoprc
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---libfm
-    |   |   |   |   |           |   |   |   |       libfm.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---libreoffice
-    |   |   |   |   |           |   |   |   |   \---4
-    |   |   |   |   |           |   |   |   |       \---user
-    |   |   |   |   |           |   |   |   |           |   registrymodifications.xcu
-    |   |   |   |   |           |   |   |   |           |   
-    |   |   |   |   |           |   |   |   |           +---autotext
-    |   |   |   |   |           |   |   |   |           |       mytexts.bau
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---basic
-    |   |   |   |   |           |   |   |   |           |   |   dialog.xlc
-    |   |   |   |   |           |   |   |   |           |   |   script.xlc
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   \---Standard
-    |   |   |   |   |           |   |   |   |           |           dialog.xlb
-    |   |   |   |   |           |   |   |   |           |           Module1.xba
-    |   |   |   |   |           |   |   |   |           |           script.xlb
-    |   |   |   |   |           |   |   |   |           |           
-    |   |   |   |   |           |   |   |   |           +---config
-    |   |   |   |   |           |   |   |   |           |       autotbl.fmt
-    |   |   |   |   |           |   |   |   |           |       javasettings_Linux_X86_64.xml
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---database
-    |   |   |   |   |           |   |   |   |           |   |   biblio.odb
-    |   |   |   |   |           |   |   |   |           |   |   evolocal.odb
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   \---biblio
-    |   |   |   |   |           |   |   |   |           |           biblio.dbf
-    |   |   |   |   |           |   |   |   |           |           biblio.dbt
-    |   |   |   |   |           |   |   |   |           |           
-    |   |   |   |   |           |   |   |   |           +---extensions
-    |   |   |   |   |           |   |   |   |           |   |   buildid
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   +---bundled
-    |   |   |   |   |           |   |   |   |           |   |   |   extensions.pmap
-    |   |   |   |   |           |   |   |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---registry
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.bundle.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.component.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       unorc
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       configmgr.ini
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       \---com.sun.star.comp.deployment.script.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |               backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |               
-    |   |   |   |   |           |   |   |   |           |   +---shared
-    |   |   |   |   |           |   |   |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---registry
-    |   |   |   |   |           |   |   |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |   |   |           |   |       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |   |               backenddb.xml
-    |   |   |   |   |           |   |   |   |           |   |               
-    |   |   |   |   |           |   |   |   |           |   \---tmp
-    |   |   |   |   |           |   |   |   |           |       \---registry
-    |   |   |   |   |           |   |   |   |           |           +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |           |       backenddb.xml
-    |   |   |   |   |           |   |   |   |           |           |       
-    |   |   |   |   |           |   |   |   |           |           \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |           |                   backenddb.xml
-    |   |   |   |   |           |   |   |   |           |                   
-    |   |   |   |   |           |   |   |   |           +---gallery
-    |   |   |   |   |           |   |   |   |           |       sg30.sdv
-    |   |   |   |   |           |   |   |   |           |       sg30.thm
-    |   |   |   |   |           |   |   |   |           |       
-    |   |   |   |   |           |   |   |   |           +---pack
-    |   |   |   |   |           |   |   |   |           |   |   ExtensionInfo.pack
-    |   |   |   |   |           |   |   |   |           |   |   registrymodifications.pack
-    |   |   |   |   |           |   |   |   |           |   |   
-    |   |   |   |   |           |   |   |   |           |   +---autotext
-    |   |   |   |   |           |   |   |   |           |   |       mytexts.pack
-    |   |   |   |   |           |   |   |   |           |   |       
-    |   |   |   |   |           |   |   |   |           |   +---basic
-    |   |   |   |   |           |   |   |   |           |   |   |   dialog.pack
-    |   |   |   |   |           |   |   |   |           |   |   |   script.pack
-    |   |   |   |   |           |   |   |   |           |   |   |   
-    |   |   |   |   |           |   |   |   |           |   |   \---Standard
-    |   |   |   |   |           |   |   |   |           |   |           dialog.pack
-    |   |   |   |   |           |   |   |   |           |   |           Module1.pack
-    |   |   |   |   |           |   |   |   |           |   |           script.pack
-    |   |   |   |   |           |   |   |   |           |   |           
-    |   |   |   |   |           |   |   |   |           |   +---config
-    |   |   |   |   |           |   |   |   |           |   |       autotbl.pack
-    |   |   |   |   |           |   |   |   |           |   |       javasettings_Linux_X86_64.pack
-    |   |   |   |   |           |   |   |   |           |   |       
-    |   |   |   |   |           |   |   |   |           |   \---database
-    |   |   |   |   |           |   |   |   |           |       |   biblio.pack
-    |   |   |   |   |           |   |   |   |           |       |   evolocal.pack
-    |   |   |   |   |           |   |   |   |           |       |   
-    |   |   |   |   |           |   |   |   |           |       \---biblio
-    |   |   |   |   |           |   |   |   |           |               biblio.pack
-    |   |   |   |   |           |   |   |   |           |               
-    |   |   |   |   |           |   |   |   |           \---uno_packages
-    |   |   |   |   |           |   |   |   |               \---cache
-    |   |   |   |   |           |   |   |   |                   \---registry
-    |   |   |   |   |           |   |   |   |                       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |                       |       backenddb.xml
-    |   |   |   |   |           |   |   |   |                       |       
-    |   |   |   |   |           |   |   |   |                       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |   |   |   |                               backenddb.xml
-    |   |   |   |   |           |   |   |   |                               
-    |   |   |   |   |           |   |   |   +---neofetch
-    |   |   |   |   |           |   |   |   |       config.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---nitrogen
-    |   |   |   |   |           |   |   |   |       nitrogen.cfg
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---pcmanfm
-    |   |   |   |   |           |   |   |   |   +---asura
-    |   |   |   |   |           |   |   |   |   |       desktop-items-0.conf
-    |   |   |   |   |           |   |   |   |   |       pcmanfm.conf
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   \---default
-    |   |   |   |   |           |   |   |   |           desktop-items-0.conf
-    |   |   |   |   |           |   |   |   |           pcmanfm.conf
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   +---picom
-    |   |   |   |   |           |   |   |   |       picom.conf
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---sxhkd
-    |   |   |   |   |           |   |   |   |       bspwm_smart_move
-    |   |   |   |   |           |   |   |   |       sxhkdrc
-    |   |   |   |   |           |   |   |   |       sxhkdrc.default
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---vifm
-    |   |   |   |   |           |   |   |   |   |   vifm-help.txt
-    |   |   |   |   |           |   |   |   |   |   vifminfo.json
-    |   |   |   |   |           |   |   |   |   |   vifmrc
-    |   |   |   |   |           |   |   |   |   |   
-    |   |   |   |   |           |   |   |   |   +---colors
-    |   |   |   |   |           |   |   |   |   |       Default.vifm
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   +---defaults
-    |   |   |   |   |           |   |   |   |   |       vifm-help.txt
-    |   |   |   |   |           |   |   |   |   |       vifmrc
-    |   |   |   |   |           |   |   |   |   |       
-    |   |   |   |   |           |   |   |   |   \---scripts
-    |   |   |   |   |           |   |   |   |           README
-    |   |   |   |   |           |   |   |   |           
-    |   |   |   |   |           |   |   |   \---vis
-    |   |   |   |   |           |   |   |       |   config
-    |   |   |   |   |           |   |   |       |   vis.log
-    |   |   |   |   |           |   |   |       |   
-    |   |   |   |   |           |   |   |       \---colors
-    |   |   |   |   |           |   |   |               basic_colors
-    |   |   |   |   |           |   |   |               rainbow
-    |   |   |   |   |           |   |   |               
-    |   |   |   |   |           |   |   +---.icons
-    |   |   |   |   |           |   |   |   |   cursors
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   \---default
-    |   |   |   |   |           |   |   |           cursors
-    |   |   |   |   |           |   |   |           index.theme
-    |   |   |   |   |           |   |   |           setcursor.sh
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.scripts
-    |   |   |   |   |           |   |   |   |   clipkger.sh
-    |   |   |   |   |           |   |   |   |   dotfilemgr.sh
-    |   |   |   |   |           |   |   |   |   gitmgr.sh
-    |   |   |   |   |           |   |   |   |   gtk_util.sh
-    |   |   |   |   |           |   |   |   |   notepad.sh
-    |   |   |   |   |           |   |   |   |   screenlocker.sh
-    |   |   |   |   |           |   |   |   |   suckless_downloadpatches.sh
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   +---libraries
-    |   |   |   |   |           |   |   |   |       extlib.sh
-    |   |   |   |   |           |   |   |   |       maths.sh
-    |   |   |   |   |           |   |   |   |       pacman.sh
-    |   |   |   |   |           |   |   |   |       rice.sh
-    |   |   |   |   |           |   |   |   |       strutil.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---st
-    |   |   |   |   |           |   |   |   |       ff-blur
-    |   |   |   |   |           |   |   |   |       ff-border
-    |   |   |   |   |           |   |   |   |       ff-bright
-    |   |   |   |   |           |   |   |   |       to_ff.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---vim
-    |   |   |   |   |           |   |   |           templatesel.sh
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.urxvt
-    |   |   |   |   |           |   |   |   \---ext
-    |   |   |   |   |           |   |   |           resize-font
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---.vim
-    |   |   |   |   |           |   |   |   |   .netrwhist
-    |   |   |   |   |           |   |   |   |   vimrc
-    |   |   |   |   |           |   |   |   |   
-    |   |   |   |   |           |   |   |   +---autoload
-    |   |   |   |   |           |   |   |   |       plug.vim
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---templates
-    |   |   |   |   |           |   |   |           index.html
-    |   |   |   |   |           |   |   |           main.c
-    |   |   |   |   |           |   |   |           main.cpp
-    |   |   |   |   |           |   |   |           main.cs
-    |   |   |   |   |           |   |   |           main.css
-    |   |   |   |   |           |   |   |           main.h
-    |   |   |   |   |           |   |   |           main.java
-    |   |   |   |   |           |   |   |           main.js
-    |   |   |   |   |           |   |   |           main.min.sh
-    |   |   |   |   |           |   |   |           main.py
-    |   |   |   |   |           |   |   |           main.sh
-    |   |   |   |   |           |   |   |           README.md
-    |   |   |   |   |           |   |   |           
-    |   |   |   |   |           |   |   +---Desktop
-    |   |   |   |   |           |   |   |   +---apps
-    |   |   |   |   |           |   |   |   |       rar
-    |   |   |   |   |           |   |   |   |       unrar
-    |   |   |   |   |           |   |   |   |       xmenu.sh
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   +---drafts
-    |   |   |   |   |           |   |   |   |       archwiki-pages.sh
-    |   |   |   |   |           |   |   |   |       bspwm_designer.sh
-    |   |   |   |   |           |   |   |   |       cowsayer.sh
-    |   |   |   |   |           |   |   |   |       pages
-    |   |   |   |   |           |   |   |   |       
-    |   |   |   |   |           |   |   |   \---portable
-    |   |   |   |   |           |   |   |       +---doc
-    |   |   |   |   |           |   |   |       |   \---defaults
-    |   |   |   |   |           |   |   |       |           sofficerc
-    |   |   |   |   |           |   |   |       |           
-    |   |   |   |   |           |   |   |       +---media
-    |   |   |   |   |           |   |   |       |   \---Images
-    |   |   |   |   |           |   |   |       |       +---JPG
-    |   |   |   |   |           |   |   |       |       |       wallhaven-nature.jpg
-    |   |   |   |   |           |   |   |       |       |       wallhaven-Ocean.jpg
-    |   |   |   |   |           |   |   |       |       |       wallhaven-Tokyo.jpg
-    |   |   |   |   |           |   |   |       |       |       
-    |   |   |   |   |           |   |   |       |       \---PNG
-    |   |   |   |   |           |   |   |       |               DigitalOcean
-    |   |   |   |   |           |   |   |       |               nier-automata-menu-background.png
-    |   |   |   |   |           |   |   |       |               wallhaven-win10.png
-    |   |   |   |   |           |   |   |       |               
-    |   |   |   |   |           |   |   |       +---projects
-    |   |   |   |   |           |   |   |       |   +---coding
-    |   |   |   |   |           |   |   |       |   |   +---cli
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |   |   |       |   |   |       +---cpp
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---src
-    |   |   |   |   |           |   |   |       |   |   |       |           |   extlib.h
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |   |   |       |   |   |       |           |   
-    |   |   |   |   |           |   |   |       |   |   |       |           \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |               |   changelogs
-    |   |   |   |   |           |   |   |       |   |   |       |               |   
-    |   |   |   |   |           |   |   |       |   |   |       |               \---out
-    |   |   |   |   |           |   |   |       |   |   |       |                       out.txt
-    |   |   |   |   |           |   |   |       |   |   |       |                       
-    |   |   |   |   |           |   |   |       |   |   |       +---python
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |       |                   lang.py
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |               README.md
-    |   |   |   |   |           |   |   |       |   |   |               
-    |   |   |   |   |           |   |   |       |   |   +---gui
-    |   |   |   |   |           |   |   |       |   |   |   +---AutoGUI
-    |   |   |   |   |           |   |   |       |   |   |   |   \---C++
-    |   |   |   |   |           |   |   |       |   |   |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |   |   |           +---resources
-    |   |   |   |   |           |   |   |       |   |   |   |           |       README.md
-    |   |   |   |   |           |   |   |       |   |   |   |           |       
-    |   |   |   |   |           |   |   |       |   |   |   |           \---src
-    |   |   |   |   |           |   |   |       |   |   |   |                   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |   |                   main.exe
-    |   |   |   |   |           |   |   |       |   |   |   |                   make.sh
-    |   |   |   |   |           |   |   |       |   |   |   |                   
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |   |   |       |   |   |       +---cpp
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---src
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |   |   |       |   |   |       |           |   wxGUI.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |           |   wxGUI.exe
-    |   |   |   |   |           |   |   |       |   |   |       |           |   
-    |   |   |   |   |           |   |   |       |   |   |       |           +---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           |   \---out
-    |   |   |   |   |           |   |   |       |   |   |       |           |           out.txt
-    |   |   |   |   |           |   |   |       |   |   |       |           |           
-    |   |   |   |   |           |   |   |       |   |   |       |           \---samples
-    |   |   |   |   |           |   |   |       |   |   |       |                   minimal.cpp
-    |   |   |   |   |           |   |   |       |   |   |       |                   minimal.exe
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       +---python
-    |   |   |   |   |           |   |   |       |   |   |       |   \---workspace
-    |   |   |   |   |           |   |   |       |   |   |       |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |       |                   lang.py
-    |   |   |   |   |           |   |   |       |   |   |       |                   
-    |   |   |   |   |           |   |   |       |   |   |       \---resources
-    |   |   |   |   |           |   |   |       |   |   |               README.md
-    |   |   |   |   |           |   |   |       |   |   |               
-    |   |   |   |   |           |   |   |       |   |   +---python
-    |   |   |   |   |           |   |   |       |   |   |   \---PracticeGround-TestBench
-    |   |   |   |   |           |   |   |       |   |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |   |           |   main.py
-    |   |   |   |   |           |   |   |       |   |   |           |   
-    |   |   |   |   |           |   |   |       |   |   |           \---resources
-    |   |   |   |   |           |   |   |       |   |   |               \---Dictionary
-    |   |   |   |   |           |   |   |       |   |   |                       lang.py
-    |   |   |   |   |           |   |   |       |   |   |                       
-    |   |   |   |   |           |   |   |       |   |   \---Template
-    |   |   |   |   |           |   |   |       |   |       +---files
-    |   |   |   |   |           |   |   |       |   |       |   |   make.sh
-    |   |   |   |   |           |   |   |       |   |       |   |   
-    |   |   |   |   |           |   |   |       |   |       |   +---ARCHIVE
-    |   |   |   |   |           |   |   |       |   |       |   |   \---2021-04-25 0011H
-    |   |   |   |   |           |   |   |       |   |       |   |           make.sh
-    |   |   |   |   |           |   |   |       |   |       |   |           
-    |   |   |   |   |           |   |   |       |   |       |   \---cpp
-    |   |   |   |   |           |   |   |       |   |       |       \---GUI
-    |   |   |   |   |           |   |   |       |   |       |           \---wxWidgets
-    |   |   |   |   |           |   |   |       |   |       |                   main.cpp
-    |   |   |   |   |           |   |   |       |   |       |                   
-    |   |   |   |   |           |   |   |       |   |       \---structure
-    |   |   |   |   |           |   |   |       |   |           +---cli
-    |   |   |   |   |           |   |   |       |   |           |   \---cpp
-    |   |   |   |   |           |   |   |       |   |           |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           |           +---resources
-    |   |   |   |   |           |   |   |       |   |           |           |       README.md
-    |   |   |   |   |           |   |   |       |   |           |           |       
-    |   |   |   |   |           |   |   |       |   |           |           \---src
-    |   |   |   |   |           |   |   |       |   |           |                   make.sh
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           +---gui
-    |   |   |   |   |           |   |   |       |   |           |   \---cpp
-    |   |   |   |   |           |   |   |       |   |           |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           |           +---resources
-    |   |   |   |   |           |   |   |       |   |           |           |       README.md
-    |   |   |   |   |           |   |   |       |   |           |           |       
-    |   |   |   |   |           |   |   |       |   |           |           \---src
-    |   |   |   |   |           |   |   |       |   |           |                   make.sh
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           +---java
-    |   |   |   |   |           |   |   |       |   |           |   \---workspace
-    |   |   |   |   |           |   |   |       |   |           |       |   README.md
-    |   |   |   |   |           |   |   |       |   |           |       |   
-    |   |   |   |   |           |   |   |       |   |           |       \---src
-    |   |   |   |   |           |   |   |       |   |           |               make.sh
-    |   |   |   |   |           |   |   |       |   |           |               
-    |   |   |   |   |           |   |   |       |   |           +---python
-    |   |   |   |   |           |   |   |       |   |           |   \---workspace
-    |   |   |   |   |           |   |   |       |   |           |       |   README.md
-    |   |   |   |   |           |   |   |       |   |           |       |   
-    |   |   |   |   |           |   |   |       |   |           |       \---resources
-    |   |   |   |   |           |   |   |       |   |           |           \---Dictionary
-    |   |   |   |   |           |   |   |       |   |           |                   lang.py
-    |   |   |   |   |           |   |   |       |   |           |                   
-    |   |   |   |   |           |   |   |       |   |           \---web-design
-    |   |   |   |   |           |   |   |       |   |               \---workspace
-    |   |   |   |   |           |   |   |       |   |                   |   index.html
-    |   |   |   |   |           |   |   |       |   |                   |   run.sh
-    |   |   |   |   |           |   |   |       |   |                   |   
-    |   |   |   |   |           |   |   |       |   |                   +---resources
-    |   |   |   |   |           |   |   |       |   |                   |   +---docs
-    |   |   |   |   |           |   |   |       |   |                   |   |       README.md
-    |   |   |   |   |           |   |   |       |   |                   |   |       
-    |   |   |   |   |           |   |   |       |   |                   |   \---styles
-    |   |   |   |   |           |   |   |       |   |                   |           main.css
-    |   |   |   |   |           |   |   |       |   |                   |           
-    |   |   |   |   |           |   |   |       |   |                   \---scripts
-    |   |   |   |   |           |   |   |       |   |                           main.js
-    |   |   |   |   |           |   |   |       |   |                           
-    |   |   |   |   |           |   |   |       |   +---Game-Guides
-    |   |   |   |   |           |   |   |       |   |   \---AllGames
-    |   |   |   |   |           |   |   |       |   |       \---workspace
-    |   |   |   |   |           |   |   |       |   |           \---Python
-    |   |   |   |   |           |   |   |       |   |               \---ProjEDEN
-    |   |   |   |   |           |   |   |       |   |                   \---src
-    |   |   |   |   |           |   |   |       |   |                           autorun.sh
-    |   |   |   |   |           |   |   |       |   |                           main.py
-    |   |   |   |   |           |   |   |       |   |                           out_data.txt
-    |   |   |   |   |           |   |   |       |   |                           
-    |   |   |   |   |           |   |   |       |   +---Linux
-    |   |   |   |   |           |   |   |       |   |   +---general
-    |   |   |   |   |           |   |   |       |   |   |       shlib.sh
-    |   |   |   |   |           |   |   |       |   |   |       
-    |   |   |   |   |           |   |   |       |   |   \---utilities
-    |   |   |   |   |           |   |   |       |   |       +---cronjob-scripts
-    |   |   |   |   |           |   |   |       |   |       |       debug.sh
-    |   |   |   |   |           |   |   |       |   |       |       debug_21-04-16.log
-    |   |   |   |   |           |   |   |       |   |       |       pkg-autoupdater.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       +---dmenu
-    |   |   |   |   |           |   |   |       |   |       |   \---scripts
-    |   |   |   |   |           |   |   |       |   |       |           templates
-    |   |   |   |   |           |   |   |       |   |       |           
-    |   |   |   |   |           |   |   |       |   |       +---git
-    |   |   |   |   |           |   |   |       |   |       |       gitlib.sh
-    |   |   |   |   |           |   |   |       |   |       |       gitmgr.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       +---setups
-    |   |   |   |   |           |   |   |       |   |       |       install-aur.sh
-    |   |   |   |   |           |   |   |       |   |       |       
-    |   |   |   |   |           |   |   |       |   |       \---wrappers
-    |   |   |   |   |           |   |   |       |   |           |   makelib.sh
-    |   |   |   |   |           |   |   |       |   |           |   pacinstaller.sh
-    |   |   |   |   |           |   |   |       |   |           |   screenshot.sh
-    |   |   |   |   |           |   |   |       |   |           |   surfer.sh
-    |   |   |   |   |           |   |   |       |   |           |   vimopen.sh
-    |   |   |   |   |           |   |   |       |   |           |   
-    |   |   |   |   |           |   |   |       |   |           +---apps
-    |   |   |   |   |           |   |   |       |   |           |   \---eww
-    |   |   |   |   |           |   |   |       |   |           |           wreww.sh
-    |   |   |   |   |           |   |   |       |   |           |           
-    |   |   |   |   |           |   |   |       |   |           \---multi-maker
-    |   |   |   |   |           |   |   |       |   |                   make.sh
-    |   |   |   |   |           |   |   |       |   |                   README.md
-    |   |   |   |   |           |   |   |       |   |                   
-    |   |   |   |   |           |   |   |       |   \---Templates
-    |   |   |   |   |           |   |   |       |       |   autorun.sh
-    |   |   |   |   |           |   |   |       |       |   make.sh
-    |   |   |   |   |           |   |   |       |       |   
-    |   |   |   |   |           |   |   |       |       \---ARCHIVE
-    |   |   |   |   |           |   |   |       |           +---autorunner
-    |   |   |   |   |           |   |   |       |           |   \---2021-03-31 0934H
-    |   |   |   |   |           |   |   |       |           |           autorun.sh
-    |   |   |   |   |           |   |   |       |           |           
-    |   |   |   |   |           |   |   |       |           \---make_shellscript
-    |   |   |   |   |           |   |   |       |               \---2021-04-25 0011H
-    |   |   |   |   |           |   |   |       |                       make.sh
-    |   |   |   |   |           |   |   |       |                       
-    |   |   |   |   |           |   |   |       \---repos
-    |   |   |   |   |           |   |   |           \---rar
-    |   |   |   |   |           |   |   |                   nier_automata_cursor__hack_edition__v2_by_juliodrai_dc6aarz.rar
-    |   |   |   |   |           |   |   |                   
-    |   |   |   |   |           |   |   \---personal
-    |   |   |   |   |           |   |       +---autostart
-    |   |   |   |   |           |   |       |       autostart.sh
-    |   |   |   |   |           |   |       |       wallpaper.jpg
-    |   |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |       +---codes
-    |   |   |   |   |           |   |       |       compilers.sh
-    |   |   |   |   |           |   |       |       
-    |   |   |   |   |           |   |       +---designs
-    |   |   |   |   |           |   |       |   \---XOrg
-    |   |   |   |   |           |   |       |       \---xresources
-    |   |   |   |   |           |   |       |               genera.xresources
-    |   |   |   |   |           |   |       |               gruvbox-dark.xresources
-    |   |   |   |   |           |   |       |               matrix-green.xresources
-    |   |   |   |   |           |   |       |               wal-nature.xresources
-    |   |   |   |   |           |   |       |               
-    |   |   |   |   |           |   |       +---dotfiles
-    |   |   |   |   |           |   |       |   +---bars
-    |   |   |   |   |           |   |       |   |   |   bar
-    |   |   |   |   |           |   |       |   |   |   
-    |   |   |   |   |           |   |       |   |   +---ARCHIVE
-    |   |   |   |   |           |   |       |   |   |   \---2021-04-18 1207H
-    |   |   |   |   |           |   |       |   |   |           bar
-    |   |   |   |   |           |   |       |   |   |           
-    |   |   |   |   |           |   |       |   |   \---lemonbar
-    |   |   |   |   |           |   |       |   |       |   bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |   lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   widgets.sh
-    |   |   |   |   |           |   |       |   |       |   
-    |   |   |   |   |           |   |       |   |       +---profiles
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-17 2237H
-    |   |   |   |   |           |   |       |   |       |   |       bar
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-18 0946H
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-19 1007H
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   +---2021-04-19 1130H
-    |   |   |   |   |           |   |       |   |       |   |       bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |   |       widgets.sh
-    |   |   |   |   |           |   |       |   |       |   |       
-    |   |   |   |   |           |   |       |   |       |   \---2021-04-20 1001H
-    |   |   |   |   |           |   |       |   |       |           bspwm-widgets.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Desc.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Func.sh
-    |   |   |   |   |           |   |       |   |       |           lemonbar_Run.sh
-    |   |   |   |   |           |   |       |   |       |           widgets.sh
-    |   |   |   |   |           |   |       |   |       |           
-    |   |   |   |   |           |   |       |   |       \---Templates
-    |   |   |   |   |           |   |       |   |               bar
-    |   |   |   |   |           |   |       |   |               bar-1
-    |   |   |   |   |           |   |       |   |               lemonbar.sh
-    |   |   |   |   |           |   |       |   |               widgets.sh
-    |   |   |   |   |           |   |       |   |               
-    |   |   |   |   |           |   |       |   +---bash
-    |   |   |   |   |           |   |       |   |   |   .bashrc-personal
-    |   |   |   |   |           |   |       |   |   |   .custom-paths
-    |   |   |   |   |           |   |       |   |   |   .custom-scripts
-    |   |   |   |   |           |   |       |   |   |   .custom-variables
-    |   |   |   |   |           |   |       |   |   |   .installers
-    |   |   |   |   |           |   |       |   |   |   
-    |   |   |   |   |           |   |       |   |   +---aliases
-    |   |   |   |   |           |   |       |   |   |       .build
-    |   |   |   |   |           |   |       |   |   |       .customization
-    |   |   |   |   |           |   |       |   |   |       .files
-    |   |   |   |   |           |   |       |   |   |       .general
-    |   |   |   |   |           |   |       |   |   |       .paths
-    |   |   |   |   |           |   |       |   |   |       .pkgmgr
-    |   |   |   |   |           |   |       |   |   |       .programs
-    |   |   |   |   |           |   |       |   |   |       .services
-    |   |   |   |   |           |   |       |   |   |       .systems
-    |   |   |   |   |           |   |       |   |   |       .view_edit
-    |   |   |   |   |           |   |       |   |   |       .windows
-    |   |   |   |   |           |   |       |   |   |       .xorg
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   +---customs
-    |   |   |   |   |           |   |       |   |   |   |   .custom-aliases
-    |   |   |   |   |           |   |       |   |   |   |   .custom-autostart
-    |   |   |   |   |           |   |       |   |   |   |   .custom-variables
-    |   |   |   |   |           |   |       |   |   |   |   .edit-aliases
-    |   |   |   |   |           |   |       |   |   |   |   
-    |   |   |   |   |           |   |       |   |   |   \---progs
-    |   |   |   |   |           |   |       |   |   |           .compilers
-    |   |   |   |   |           |   |       |   |   |           .runner
-    |   |   |   |   |           |   |       |   |   |           
-    |   |   |   |   |           |   |       |   |   +---functions
-    |   |   |   |   |           |   |       |   |   |       datetimectl
-    |   |   |   |   |           |   |       |   |   |       general
-    |   |   |   |   |           |   |       |   |   |       package_manager
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   +---package_manager
-    |   |   |   |   |           |   |       |   |   |       .apt
-    |   |   |   |   |           |   |       |   |   |       .pacman
-    |   |   |   |   |           |   |       |   |   |       
-    |   |   |   |   |           |   |       |   |   \---variables
-    |   |   |   |   |           |   |       |   |           arrays
-    |   |   |   |   |           |   |       |   |           commands
-    |   |   |   |   |           |   |       |   |           general
-    |   |   |   |   |           |   |       |   |           paths
-    |   |   |   |   |           |   |       |   |           
-    |   |   |   |   |           |   |       |   \---setup
-    |   |   |   |   |           |   |       |       +---conky
-    |   |   |   |   |           |   |       |       |       start.sh
-    |   |   |   |   |           |   |       |       |       
-    |   |   |   |   |           |   |       |       \---samba
-    |   |   |   |   |           |   |       |               setup.sh
-    |   |   |   |   |           |   |       |               
-    |   |   |   |   |           |   |       \---scripts
-    |   |   |   |   |           |   |           \---bash
-    |   |   |   |   |           |   |               +---dmenu
-    |   |   |   |   |           |   |               |       dmenu_Browsers.sh
-    |   |   |   |   |           |   |               |       dmenu_fopener.sh
-    |   |   |   |   |           |   |               |       dmenu_git.sh
-    |   |   |   |   |           |   |               |       dmenu_pacman.sh
-    |   |   |   |   |           |   |               |       dmenu_proc_ctrl.sh
-    |   |   |   |   |           |   |               |       dmenu_Template.sh
-    |   |   |   |   |           |   |               |       indexmenu.sh
-    |   |   |   |   |           |   |               |       
-    |   |   |   |   |           |   |               \---Tutorials_and_Guides
-    |   |   |   |   |           |   |                   |   indexmenu-tutorials.sh
-    |   |   |   |   |           |   |                   |   README.md
-    |   |   |   |   |           |   |                   |   
-    |   |   |   |   |           |   |                   \---Terminal
-    |   |   |   |   |           |   |                           arrays.sh
-    |   |   |   |   |           |   |                           receiving_pipe.sh
-    |   |   |   |   |           |   |                           
-    |   |   |   |   |           |   \---2021-07-08_1522H
-    |   |   |   |   |           |       |   .bashrc
-    |   |   |   |   |           |       |   .xinitrc
-    |   |   |   |   |           |       |   .Xresources
-    |   |   |   |   |           |       |   
-    |   |   |   |   |           |       +---.config
-    |   |   |   |   |           |       |   +---bspwm
-    |   |   |   |   |           |       |   |       bspwmrc
-    |   |   |   |   |           |       |   |       bspwmrc.test
-    |   |   |   |   |           |       |   |       panel
-    |   |   |   |   |           |       |   |       panel_bar
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---conky
-    |   |   |   |   |           |       |   |       conky-keybindings.conf
-    |   |   |   |   |           |       |   |       conky-middle_left.conf
-    |   |   |   |   |           |       |   |       conky-middle_right.conf
-    |   |   |   |   |           |       |   |       conky-TODOList.conf
-    |   |   |   |   |           |       |   |       conky.conf.default
-    |   |   |   |   |           |       |   |       conky.general.conf
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---dunst
-    |   |   |   |   |           |       |   |       dunstrc
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---eww
-    |   |   |   |   |           |       |   |   |   eww-bar.png
-    |   |   |   |   |           |       |   |   |   eww.scss
-    |   |   |   |   |           |       |   |   |   eww.xml
-    |   |   |   |   |           |       |   |   |   
-    |   |   |   |   |           |       |   |   \---scripts
-    |   |   |   |   |           |       |   |           getram
-    |   |   |   |   |           |       |   |           getvol
-    |   |   |   |   |           |       |   |           
-    |   |   |   |   |           |       |   +---htop
-    |   |   |   |   |           |       |   |       htoprc
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---libfm
-    |   |   |   |   |           |       |   |       libfm.conf
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---libreoffice
-    |   |   |   |   |           |       |   |   \---4
-    |   |   |   |   |           |       |   |       \---user
-    |   |   |   |   |           |       |   |           |   registrymodifications.xcu
-    |   |   |   |   |           |       |   |           |   
-    |   |   |   |   |           |       |   |           +---autotext
-    |   |   |   |   |           |       |   |           |       mytexts.bau
-    |   |   |   |   |           |       |   |           |       
-    |   |   |   |   |           |       |   |           +---basic
-    |   |   |   |   |           |       |   |           |   |   dialog.xlc
-    |   |   |   |   |           |       |   |           |   |   script.xlc
-    |   |   |   |   |           |       |   |           |   |   
-    |   |   |   |   |           |       |   |           |   \---Standard
-    |   |   |   |   |           |       |   |           |           dialog.xlb
-    |   |   |   |   |           |       |   |           |           Module1.xba
-    |   |   |   |   |           |       |   |           |           script.xlb
-    |   |   |   |   |           |       |   |           |           
-    |   |   |   |   |           |       |   |           +---config
-    |   |   |   |   |           |       |   |           |       autotbl.fmt
-    |   |   |   |   |           |       |   |           |       javasettings_Linux_X86_64.xml
-    |   |   |   |   |           |       |   |           |       
-    |   |   |   |   |           |       |   |           +---database
-    |   |   |   |   |           |       |   |           |   |   biblio.odb
-    |   |   |   |   |           |       |   |           |   |   evolocal.odb
-    |   |   |   |   |           |       |   |           |   |   
-    |   |   |   |   |           |       |   |           |   \---biblio
-    |   |   |   |   |           |       |   |           |           biblio.dbf
-    |   |   |   |   |           |       |   |           |           biblio.dbt
-    |   |   |   |   |           |       |   |           |           
-    |   |   |   |   |           |       |   |           +---extensions
-    |   |   |   |   |           |       |   |           |   |   buildid
-    |   |   |   |   |           |       |   |           |   |   
-    |   |   |   |   |           |       |   |           |   +---bundled
-    |   |   |   |   |           |       |   |           |   |   |   extensions.pmap
-    |   |   |   |   |           |       |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |       |   |           |   |   |   
-    |   |   |   |   |           |       |   |           |   |   \---registry
-    |   |   |   |   |           |       |   |           |   |       +---com.sun.star.comp.deployment.bundle.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |       |   |           |   |       |       
-    |   |   |   |   |           |       |   |           |   |       +---com.sun.star.comp.deployment.component.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |   |       |       unorc
-    |   |   |   |   |           |       |   |           |   |       |       
-    |   |   |   |   |           |       |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |       |   |           |   |       |       configmgr.ini
-    |   |   |   |   |           |       |   |           |   |       |       
-    |   |   |   |   |           |       |   |           |   |       +---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |       |   |           |   |       |       
-    |   |   |   |   |           |       |   |           |   |       \---com.sun.star.comp.deployment.script.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |   |               backenddb.xml
-    |   |   |   |   |           |       |   |           |   |               
-    |   |   |   |   |           |       |   |           |   +---shared
-    |   |   |   |   |           |       |   |           |   |   |   lastsynchronized
-    |   |   |   |   |           |       |   |           |   |   |   
-    |   |   |   |   |           |       |   |           |   |   \---registry
-    |   |   |   |   |           |       |   |           |   |       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |   |       |       backenddb.xml
-    |   |   |   |   |           |       |   |           |   |       |       
-    |   |   |   |   |           |       |   |           |   |       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |   |               backenddb.xml
-    |   |   |   |   |           |       |   |           |   |               
-    |   |   |   |   |           |       |   |           |   \---tmp
-    |   |   |   |   |           |       |   |           |       \---registry
-    |   |   |   |   |           |       |   |           |           +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |           |       backenddb.xml
-    |   |   |   |   |           |       |   |           |           |       
-    |   |   |   |   |           |       |   |           |           \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |       |   |           |                   backenddb.xml
-    |   |   |   |   |           |       |   |           |                   
-    |   |   |   |   |           |       |   |           +---gallery
-    |   |   |   |   |           |       |   |           |       sg30.sdv
-    |   |   |   |   |           |       |   |           |       sg30.thm
-    |   |   |   |   |           |       |   |           |       
-    |   |   |   |   |           |       |   |           +---pack
-    |   |   |   |   |           |       |   |           |   |   ExtensionInfo.pack
-    |   |   |   |   |           |       |   |           |   |   registrymodifications.pack
-    |   |   |   |   |           |       |   |           |   |   
-    |   |   |   |   |           |       |   |           |   +---autotext
-    |   |   |   |   |           |       |   |           |   |       mytexts.pack
-    |   |   |   |   |           |       |   |           |   |       
-    |   |   |   |   |           |       |   |           |   +---basic
-    |   |   |   |   |           |       |   |           |   |   |   dialog.pack
-    |   |   |   |   |           |       |   |           |   |   |   script.pack
-    |   |   |   |   |           |       |   |           |   |   |   
-    |   |   |   |   |           |       |   |           |   |   \---Standard
-    |   |   |   |   |           |       |   |           |   |           dialog.pack
-    |   |   |   |   |           |       |   |           |   |           Module1.pack
-    |   |   |   |   |           |       |   |           |   |           script.pack
-    |   |   |   |   |           |       |   |           |   |           
-    |   |   |   |   |           |       |   |           |   +---config
-    |   |   |   |   |           |       |   |           |   |       autotbl.pack
-    |   |   |   |   |           |       |   |           |   |       javasettings_Linux_X86_64.pack
-    |   |   |   |   |           |       |   |           |   |       
-    |   |   |   |   |           |       |   |           |   \---database
-    |   |   |   |   |           |       |   |           |       |   biblio.pack
-    |   |   |   |   |           |       |   |           |       |   evolocal.pack
-    |   |   |   |   |           |       |   |           |       |   
-    |   |   |   |   |           |       |   |           |       \---biblio
-    |   |   |   |   |           |       |   |           |               biblio.pack
-    |   |   |   |   |           |       |   |           |               
-    |   |   |   |   |           |       |   |           \---uno_packages
-    |   |   |   |   |           |       |   |               \---cache
-    |   |   |   |   |           |       |   |                   \---registry
-    |   |   |   |   |           |       |   |                       +---com.sun.star.comp.deployment.configuration.PackageRegistryBackend
-    |   |   |   |   |           |       |   |                       |       backenddb.xml
-    |   |   |   |   |           |       |   |                       |       
-    |   |   |   |   |           |       |   |                       \---com.sun.star.comp.deployment.help.PackageRegistryBackend
-    |   |   |   |   |           |       |   |                               backenddb.xml
-    |   |   |   |   |           |       |   |                               
-    |   |   |   |   |           |       |   +---neofetch
-    |   |   |   |   |           |       |   |       config.conf
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---nitrogen
-    |   |   |   |   |           |       |   |       nitrogen.cfg
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---pcmanfm
-    |   |   |   |   |           |       |   |   +---asura
-    |   |   |   |   |           |       |   |   |       desktop-items-0.conf
-    |   |   |   |   |           |       |   |   |       pcmanfm.conf
-    |   |   |   |   |           |       |   |   |       
-    |   |   |   |   |           |       |   |   \---default
-    |   |   |   |   |           |       |   |           desktop-items-0.conf
-    |   |   |   |   |           |       |   |           pcmanfm.conf
-    |   |   |   |   |           |       |   |           
-    |   |   |   |   |           |       |   +---picom
-    |   |   |   |   |           |       |   |       picom.conf
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---sxhkd
-    |   |   |   |   |           |       |   |       bspwm_smart_move
-    |   |   |   |   |           |       |   |       sxhkdrc
-    |   |   |   |   |           |       |   |       sxhkdrc.default
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---vifm
-    |   |   |   |   |           |       |   |   |   vifm-help.txt
-    |   |   |   |   |           |       |   |   |   vifminfo.json
-    |   |   |   |   |           |       |   |   |   vifmrc
-    |   |   |   |   |           |       |   |   |   
-    |   |   |   |   |           |       |   |   +---colors
-    |   |   |   |   |           |       |   |   |       Default.vifm
-    |   |   |   |   |           |       |   |   |       
-    |   |   |   |   |           |       |   |   +---defaults
-    |   |   |   |   |           |       |   |   |       vifm-help.txt
-    |   |   |   |   |           |       |   |   |       vifmrc
-    |   |   |   |   |           |       |   |   |       
-    |   |   |   |   |           |       |   |   \---scripts
-    |   |   |   |   |           |       |   |           README
-    |   |   |   |   |           |       |   |           
-    |   |   |   |   |           |       |   \---vis
-    |   |   |   |   |           |       |       |   config
-    |   |   |   |   |           |       |       |   vis.log
-    |   |   |   |   |           |       |       |   
-    |   |   |   |   |           |       |       \---colors
-    |   |   |   |   |           |       |               basic_colors
-    |   |   |   |   |           |       |               rainbow
-    |   |   |   |   |           |       |               
-    |   |   |   |   |           |       +---.icons
-    |   |   |   |   |           |       |   |   cursors
-    |   |   |   |   |           |       |   |   
-    |   |   |   |   |           |       |   \---default
-    |   |   |   |   |           |       |           cursors
-    |   |   |   |   |           |       |           index.theme
-    |   |   |   |   |           |       |           setcursor.sh
-    |   |   |   |   |           |       |           
-    |   |   |   |   |           |       +---.scripts
-    |   |   |   |   |           |       |   |   clipkger.sh
-    |   |   |   |   |           |       |   |   dotfilemgr.sh
-    |   |   |   |   |           |       |   |   gitmgr.sh
-    |   |   |   |   |           |       |   |   gtk_util.sh
-    |   |   |   |   |           |       |   |   notepad.sh
-    |   |   |   |   |           |       |   |   scratchtermtoggle
-    |   |   |   |   |           |       |   |   screenlocker.sh
-    |   |   |   |   |           |       |   |   suckless_downloadpatches.sh
-    |   |   |   |   |           |       |   |   
-    |   |   |   |   |           |       |   +---libraries
-    |   |   |   |   |           |       |   |       extlib.sh
-    |   |   |   |   |           |       |   |       maths.sh
-    |   |   |   |   |           |       |   |       pacman.sh
-    |   |   |   |   |           |       |   |       rice.sh
-    |   |   |   |   |           |       |   |       strutil.sh
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---st
-    |   |   |   |   |           |       |   |       ff-blur
-    |   |   |   |   |           |       |   |       ff-border
-    |   |   |   |   |           |       |   |       ff-bright
-    |   |   |   |   |           |       |   |       to_ff.sh
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   \---vim
-    |   |   |   |   |           |       |           templatesel.sh
-    |   |   |   |   |           |       |           
-    |   |   |   |   |           |       +---.urxvt
-    |   |   |   |   |           |       |   \---ext
-    |   |   |   |   |           |       |           resize-font
-    |   |   |   |   |           |       |           
-    |   |   |   |   |           |       +---.vim
-    |   |   |   |   |           |       |   |   .netrwhist
-    |   |   |   |   |           |       |   |   vimrc
-    |   |   |   |   |           |       |   |   
-    |   |   |   |   |           |       |   +---autoload
-    |   |   |   |   |           |       |   |       plug.vim
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   \---templates
-    |   |   |   |   |           |       |           index.html
-    |   |   |   |   |           |       |           main.c
-    |   |   |   |   |           |       |           main.cpp
-    |   |   |   |   |           |       |           main.cs
-    |   |   |   |   |           |       |           main.css
-    |   |   |   |   |           |       |           main.h
-    |   |   |   |   |           |       |           main.java
-    |   |   |   |   |           |       |           main.js
-    |   |   |   |   |           |       |           main.min.sh
-    |   |   |   |   |           |       |           main.py
-    |   |   |   |   |           |       |           main.sh
-    |   |   |   |   |           |       |           README.md
-    |   |   |   |   |           |       |           
-    |   |   |   |   |           |       +---Desktop
-    |   |   |   |   |           |       |   +---apps
-    |   |   |   |   |           |       |   |       rar
-    |   |   |   |   |           |       |   |       unrar
-    |   |   |   |   |           |       |   |       xmenu.sh
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   +---drafts
-    |   |   |   |   |           |       |   |       archwiki-pages.sh
-    |   |   |   |   |           |       |   |       bspwm_designer.sh
-    |   |   |   |   |           |       |   |       cowsayer.sh
-    |   |   |   |   |           |       |   |       pages
-    |   |   |   |   |           |       |   |       
-    |   |   |   |   |           |       |   \---portable
-    |   |   |   |   |           |       |       +---doc
-    |   |   |   |   |           |       |       |   \---defaults
-    |   |   |   |   |           |       |       |           sofficerc
-    |   |   |   |   |           |       |       |           
-    |   |   |   |   |           |       |       +---media
-    |   |   |   |   |           |       |       |   \---Images
-    |   |   |   |   |           |       |       |       +---JPG
-    |   |   |   |   |           |       |       |       |       wallhaven-nature.jpg
-    |   |   |   |   |           |       |       |       |       wallhaven-Ocean.jpg
-    |   |   |   |   |           |       |       |       |       wallhaven-Tokyo.jpg
-    |   |   |   |   |           |       |       |       |       
-    |   |   |   |   |           |       |       |       \---PNG
-    |   |   |   |   |           |       |       |               DigitalOcean
-    |   |   |   |   |           |       |       |               nier-automata-menu-background.png
-    |   |   |   |   |           |       |       |               wallhaven-win10.png
-    |   |   |   |   |           |       |       |               
-    |   |   |   |   |           |       |       +---projects
-    |   |   |   |   |           |       |       |   +---coding
-    |   |   |   |   |           |       |       |   |   +---cli
-    |   |   |   |   |           |       |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |       |       |   |   |       +---cpp
-    |   |   |   |   |           |       |       |   |   |       |   \---workspace
-    |   |   |   |   |           |       |       |   |   |       |       \---src
-    |   |   |   |   |           |       |       |   |   |       |           |   extlib.h
-    |   |   |   |   |           |       |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |       |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |       |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |       |       |   |   |       |           |   
-    |   |   |   |   |           |       |       |   |   |       |           \---resources
-    |   |   |   |   |           |       |       |   |   |       |               |   changelogs
-    |   |   |   |   |           |       |       |   |   |       |               |   
-    |   |   |   |   |           |       |       |   |   |       |               \---out
-    |   |   |   |   |           |       |       |   |   |       |                       out.txt
-    |   |   |   |   |           |       |       |   |   |       |                       
-    |   |   |   |   |           |       |       |   |   |       +---python
-    |   |   |   |   |           |       |       |   |   |       |   \---workspace
-    |   |   |   |   |           |       |       |   |   |       |       \---resources
-    |   |   |   |   |           |       |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |       |       |   |   |       |                   lang.py
-    |   |   |   |   |           |       |       |   |   |       |                   
-    |   |   |   |   |           |       |       |   |   |       \---resources
-    |   |   |   |   |           |       |       |   |   |               README.md
-    |   |   |   |   |           |       |       |   |   |               
-    |   |   |   |   |           |       |       |   |   +---gui
-    |   |   |   |   |           |       |       |   |   |   +---AutoGUI
-    |   |   |   |   |           |       |       |   |   |   |   \---C++
-    |   |   |   |   |           |       |       |   |   |   |       \---workspace
-    |   |   |   |   |           |       |       |   |   |   |           +---resources
-    |   |   |   |   |           |       |       |   |   |   |           |       README.md
-    |   |   |   |   |           |       |       |   |   |   |           |       
-    |   |   |   |   |           |       |       |   |   |   |           \---src
-    |   |   |   |   |           |       |       |   |   |   |                   main.cpp
-    |   |   |   |   |           |       |       |   |   |   |                   main.exe
-    |   |   |   |   |           |       |       |   |   |   |                   make.sh
-    |   |   |   |   |           |       |       |   |   |   |                   
-    |   |   |   |   |           |       |       |   |   |   \---PracticeGround_TestBench
-    |   |   |   |   |           |       |       |   |   |       +---cpp
-    |   |   |   |   |           |       |       |   |   |       |   \---workspace
-    |   |   |   |   |           |       |       |   |   |       |       \---src
-    |   |   |   |   |           |       |       |   |   |       |           |   main.cpp
-    |   |   |   |   |           |       |       |   |   |       |           |   main.exe
-    |   |   |   |   |           |       |       |   |   |       |           |   make.sh
-    |   |   |   |   |           |       |       |   |   |       |           |   wxGUI.cpp
-    |   |   |   |   |           |       |       |   |   |       |           |   wxGUI.exe
-    |   |   |   |   |           |       |       |   |   |       |           |   
-    |   |   |   |   |           |       |       |   |   |       |           +---resources
-    |   |   |   |   |           |       |       |   |   |       |           |   \---out
-    |   |   |   |   |           |       |       |   |   |       |           |           out.txt
-    |   |   |   |   |           |       |       |   |   |       |           |           
-    |   |   |   |   |           |       |       |   |   |       |           \---samples
-    |   |   |   |   |           |       |       |   |   |       |                   minimal.cpp
-    |   |   |   |   |           |       |       |   |   |       |                   minimal.exe
-    |   |   |   |   |           |       |       |   |   |       |                   
-    |   |   |   |   |           |       |       |   |   |       +---python
-    |   |   |   |   |           |       |       |   |   |       |   \---workspace
-    |   |   |   |   |           |       |       |   |   |       |       \---resources
-    |   |   |   |   |           |       |       |   |   |       |           \---Dictionary
-    |   |   |   |   |           |       |       |   |   |       |                   lang.py
-    |   |   |   |   |           |       |       |   |   |       |                   
-    |   |   |   |   |           |       |       |   |   |       \---resources
-    |   |   |   |   |           |       |       |   |   |               README.md
-    |   |   |   |   |           |       |       |   |   |               
-    |   |   |   |   |           |       |       |   |   +---python
-    |   |   |   |   |           |       |       |   |   |   \---PracticeGround-TestBench
-    |   |   |   |   |           |       |       |   |   |       \---workspace
-    |   |   |   |   |           |       |       |   |   |           |   main.py
-    |   |   |   |   |           |       |       |   |   |           |   
-    |   |   |   |   |           |       |       |   |   |           \---resources
-    |   |   |   |   |           |       |       |   |   |               \---Dictionary
-    |   |   |   |   |           |       |       |   |   |                       lang.py
-    |   |   |   |   |           |       |       |   |   |                       
-    |   |   |   |   |           |       |       |   |   \---Template
-    |   |   |   |   |           |       |       |   |       +---files
-    |   |   |   |   |           |       |       |   |       |   |   make.sh
-    |   |   |   |   |           |       |       |   |       |   |   
-    |   |   |   |   |           |       |       |   |       |   +---ARCHIVE
-    |   |   |   |   |           |       |       |   |       |   |   \---2021-04-25 0011H
-    |   |   |   |   |           |       |       |   |       |   |           make.sh
-    |   |   |   |   |           |       |       |   |       |   |           
-    |   |   |   |   |           |       |       |   |       |   \---cpp
-    |   |   |   |   |           |       |       |   |       |       \---GUI
-    |   |   |   |   |           |       |       |   |       |           \---wxWidgets
-    |   |   |   |   |           |       |       |   |       |                   main.cpp
-    |   |   |   |   |           |       |       |   |       |                   
-    |   |   |   |   |           |       |       |   |       \---structure
-    |   |   |   |   |           |       |       |   |           +---cli
-    |   |   |   |   |           |       |       |   |           |   \---cpp
-    |   |   |   |   |           |       |       |   |           |       \---workspace
-    |   |   |   |   |           |       |       |   |           |           +---resources
-    |   |   |   |   |           |       |       |   |           |           |       README.md
-    |   |   |   |   |           |       |       |   |           |           |       
-    |   |   |   |   |           |       |       |   |           |           \---src
-    |   |   |   |   |           |       |       |   |           |                   make.sh
-    |   |   |   |   |           |       |       |   |           |                   
-    |   |   |   |   |           |       |       |   |           +---gui
-    |   |   |   |   |           |       |       |   |           |   \---cpp
-    |   |   |   |   |           |       |       |   |           |       \---workspace
-    |   |   |   |   |           |       |       |   |           |           +---resources
-    |   |   |   |   |           |       |       |   |           |           |       README.md
-    |   |   |   |   |           |       |       |   |           |           |       
-    |   |   |   |   |           |       |       |   |           |           \---src
-    |   |   |   |   |           |       |       |   |           |                   make.sh
-    |   |   |   |   |           |       |       |   |           |                   
-    |   |   |   |   |           |       |       |   |           +---java
-    |   |   |   |   |           |       |       |   |           |   \---workspace
-    |   |   |   |   |           |       |       |   |           |       |   README.md
-    |   |   |   |   |           |       |       |   |           |       |   
-    |   |   |   |   |           |       |       |   |           |       \---src
-    |   |   |   |   |           |       |       |   |           |               make.sh
-    |   |   |   |   |           |       |       |   |           |               
-    |   |   |   |   |           |       |       |   |           +---python
-    |   |   |   |   |           |       |       |   |           |   \---workspace
-    |   |   |   |   |           |       |       |   |           |       |   README.md
-    |   |   |   |   |           |       |       |   |           |       |   
-    |   |   |   |   |           |       |       |   |           |       \---resources
-    |   |   |   |   |           |       |       |   |           |           \---Dictionary
-    |   |   |   |   |           |       |       |   |           |                   lang.py
-    |   |   |   |   |           |       |       |   |           |                   
-    |   |   |   |   |           |       |       |   |           \---web-design
-    |   |   |   |   |           |       |       |   |               \---workspace
-    |   |   |   |   |           |       |       |   |                   |   index.html
-    |   |   |   |   |           |       |       |   |                   |   run.sh
-    |   |   |   |   |           |       |       |   |                   |   
-    |   |   |   |   |           |       |       |   |                   +---resources
-    |   |   |   |   |           |       |       |   |                   |   +---docs
-    |   |   |   |   |           |       |       |   |                   |   |       README.md
-    |   |   |   |   |           |       |       |   |                   |   |       
-    |   |   |   |   |           |       |       |   |                   |   \---styles
-    |   |   |   |   |           |       |       |   |                   |           main.css
-    |   |   |   |   |           |       |       |   |                   |           
-    |   |   |   |   |           |       |       |   |                   \---scripts
-    |   |   |   |   |           |       |       |   |                           main.js
-    |   |   |   |   |           |       |       |   |                           
-    |   |   |   |   |           |       |       |   +---Game-Guides
-    |   |   |   |   |           |       |       |   |   \---AllGames
-    |   |   |   |   |           |       |       |   |       \---workspace
-    |   |   |   |   |           |       |       |   |           \---Python
-    |   |   |   |   |           |       |       |   |               \---ProjEDEN
-    |   |   |   |   |           |       |       |   |                   \---src
-    |   |   |   |   |           |       |       |   |                           autorun.sh
-    |   |   |   |   |           |       |       |   |                           main.py
-    |   |   |   |   |           |       |       |   |                           out_data.txt
-    |   |   |   |   |           |       |       |   |                           
-    |   |   |   |   |           |       |       |   +---Linux
-    |   |   |   |   |           |       |       |   |   +---general
-    |   |   |   |   |           |       |       |   |   |       shlib.sh
-    |   |   |   |   |           |       |       |   |   |       
-    |   |   |   |   |           |       |       |   |   \---utilities
-    |   |   |   |   |           |       |       |   |       +---cronjob-scripts
-    |   |   |   |   |           |       |       |   |       |       debug.sh
-    |   |   |   |   |           |       |       |   |       |       debug_21-04-16.log
-    |   |   |   |   |           |       |       |   |       |       pkg-autoupdater.sh
-    |   |   |   |   |           |       |       |   |       |       
-    |   |   |   |   |           |       |       |   |       +---dmenu
-    |   |   |   |   |           |       |       |   |       |   \---scripts
-    |   |   |   |   |           |       |       |   |       |           templates
-    |   |   |   |   |           |       |       |   |       |           
-    |   |   |   |   |           |       |       |   |       +---git
-    |   |   |   |   |           |       |       |   |       |       gitlib.sh
-    |   |   |   |   |           |       |       |   |       |       gitmgr.sh
-    |   |   |   |   |           |       |       |   |       |       
-    |   |   |   |   |           |       |       |   |       +---setups
-    |   |   |   |   |           |       |       |   |       |       install-aur.sh
-    |   |   |   |   |           |       |       |   |       |       
-    |   |   |   |   |           |       |       |   |       \---wrappers
-    |   |   |   |   |           |       |       |   |           |   makelib.sh
-    |   |   |   |   |           |       |       |   |           |   pacinstaller.sh
-    |   |   |   |   |           |       |       |   |           |   screenshot.sh
-    |   |   |   |   |           |       |       |   |           |   surfer.sh
-    |   |   |   |   |           |       |       |   |           |   vimopen.sh
-    |   |   |   |   |           |       |       |   |           |   
-    |   |   |   |   |           |       |       |   |           +---apps
-    |   |   |   |   |           |       |       |   |           |   \---eww
-    |   |   |   |   |           |       |       |   |           |           wreww.sh
-    |   |   |   |   |           |       |       |   |           |           
-    |   |   |   |   |           |       |       |   |           \---multi-maker
-    |   |   |   |   |           |       |       |   |                   make.sh
-    |   |   |   |   |           |       |       |   |                   README.md
-    |   |   |   |   |           |       |       |   |                   
-    |   |   |   |   |           |       |       |   \---Templates
-    |   |   |   |   |           |       |       |       |   autorun.sh
-    |   |   |   |   |           |       |       |       |   make.sh
-    |   |   |   |   |           |       |       |       |   
-    |   |   |   |   |           |       |       |       \---ARCHIVE
-    |   |   |   |   |           |       |       |           +---autorunner
-    |   |   |   |   |           |       |       |           |   \---2021-03-31 0934H
-    |   |   |   |   |           |       |       |           |           autorun.sh
-    |   |   |   |   |           |       |       |           |           
-    |   |   |   |   |           |       |       |           \---make_shellscript
-    |   |   |   |   |           |       |       |               \---2021-04-25 0011H
-    |   |   |   |   |           |       |       |                       make.sh
-    |   |   |   |   |           |       |       |                       
-    |   |   |   |   |           |       |       \---repos
-    |   |   |   |   |           |       |           \---rar
-    |   |   |   |   |           |       |                   nier_automata_cursor__hack_edition__v2_by_juliodrai_dc6aarz.rar
-    |   |   |   |   |           |       |                   
-    |   |   |   |   |           |       \---personal
-    |   |   |   |   |           |           +---autostart
-    |   |   |   |   |           |           |       autostart.sh
-    |   |   |   |   |           |           |       wallpaper.jpg
-    |   |   |   |   |           |           |       
-    |   |   |   |   |           |           +---codes
-    |   |   |   |   |           |           |       compilers.sh
-    |   |   |   |   |           |           |       
-    |   |   |   |   |           |           +---designs
-    |   |   |   |   |           |           |   \---XOrg
-    |   |   |   |   |           |           |       \---xresources
-    |   |   |   |   |           |           |               genera.xresources
-    |   |   |   |   |           |           |               gruvbox-dark.xresources
-    |   |   |   |   |           |           |               matrix-green.xresources
-    |   |   |   |   |           |           |               wal-nature.xresources
-    |   |   |   |   |           |           |               
-    |   |   |   |   |           |           +---dotfiles
-    |   |   |   |   |           |           |   +---bars
-    |   |   |   |   |           |           |   |   |   bar
-    |   |   |   |   |           |           |   |   |   
-    |   |   |   |   |           |           |   |   +---ARCHIVE
-    |   |   |   |   |           |           |   |   |   \---2021-04-18 1207H
-    |   |   |   |   |           |           |   |   |           bar
-    |   |   |   |   |           |           |   |   |           
-    |   |   |   |   |           |           |   |   \---lemonbar
-    |   |   |   |   |           |           |   |       |   bspwm-widgets.sh
-    |   |   |   |   |           |           |   |       |   lemonbar_Desc.sh
-    |   |   |   |   |           |           |   |       |   lemonbar_Func.sh
-    |   |   |   |   |           |           |   |       |   lemonbar_Run.sh
-    |   |   |   |   |           |           |   |       |   widgets.sh
-    |   |   |   |   |           |           |   |       |   
-    |   |   |   |   |           |           |   |       +---profiles
-    |   |   |   |   |           |           |   |       |   +---2021-04-17 2237H
-    |   |   |   |   |           |           |   |       |   |       bar
-    |   |   |   |   |           |           |   |       |   |       lemonbar.sh
-    |   |   |   |   |           |           |   |       |   |       widgets.sh
-    |   |   |   |   |           |           |   |       |   |       
-    |   |   |   |   |           |           |   |       |   +---2021-04-18 0946H
-    |   |   |   |   |           |           |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |           |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |           |   |       |   |       widgets.sh
-    |   |   |   |   |           |           |   |       |   |       
-    |   |   |   |   |           |           |   |       |   +---2021-04-19 1007H
-    |   |   |   |   |           |           |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |           |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |           |   |       |   |       widgets.sh
-    |   |   |   |   |           |           |   |       |   |       
-    |   |   |   |   |           |           |   |       |   +---2021-04-19 1130H
-    |   |   |   |   |           |           |   |       |   |       bspwm-widgets.sh
-    |   |   |   |   |           |           |   |       |   |       lemonbar_Desc.sh
-    |   |   |   |   |           |           |   |       |   |       lemonbar_Func.sh
-    |   |   |   |   |           |           |   |       |   |       lemonbar_Run.sh
-    |   |   |   |   |           |           |   |       |   |       widgets.sh
-    |   |   |   |   |           |           |   |       |   |       
-    |   |   |   |   |           |           |   |       |   \---2021-04-20 1001H
-    |   |   |   |   |           |           |   |       |           bspwm-widgets.sh
-    |   |   |   |   |           |           |   |       |           lemonbar_Desc.sh
-    |   |   |   |   |           |           |   |       |           lemonbar_Func.sh
-    |   |   |   |   |           |           |   |       |           lemonbar_Run.sh
-    |   |   |   |   |           |           |   |       |           widgets.sh
-    |   |   |   |   |           |           |   |       |           
-    |   |   |   |   |           |           |   |       \---Templates
-    |   |   |   |   |           |           |   |               bar
-    |   |   |   |   |           |           |   |               bar-1
-    |   |   |   |   |           |           |   |               lemonbar.sh
-    |   |   |   |   |           |           |   |               widgets.sh
-    |   |   |   |   |           |           |   |               
-    |   |   |   |   |           |           |   +---bash
-    |   |   |   |   |           |           |   |   |   .bashrc-personal
-    |   |   |   |   |           |           |   |   |   .custom-paths
-    |   |   |   |   |           |           |   |   |   .custom-scripts
-    |   |   |   |   |           |           |   |   |   .custom-variables
-    |   |   |   |   |           |           |   |   |   .installers
-    |   |   |   |   |           |           |   |   |   
-    |   |   |   |   |           |           |   |   +---aliases
-    |   |   |   |   |           |           |   |   |       .build
-    |   |   |   |   |           |           |   |   |       .customization
-    |   |   |   |   |           |           |   |   |       .files
-    |   |   |   |   |           |           |   |   |       .general
-    |   |   |   |   |           |           |   |   |       .paths
-    |   |   |   |   |           |           |   |   |       .pkgmgr
-    |   |   |   |   |           |           |   |   |       .programs
-    |   |   |   |   |           |           |   |   |       .services
-    |   |   |   |   |           |           |   |   |       .systems
-    |   |   |   |   |           |           |   |   |       .view_edit
-    |   |   |   |   |           |           |   |   |       .windows
-    |   |   |   |   |           |           |   |   |       .xorg
-    |   |   |   |   |           |           |   |   |       
-    |   |   |   |   |           |           |   |   +---customs
-    |   |   |   |   |           |           |   |   |   |   .custom-aliases
-    |   |   |   |   |           |           |   |   |   |   .custom-autostart
-    |   |   |   |   |           |           |   |   |   |   .custom-variables
-    |   |   |   |   |           |           |   |   |   |   .edit-aliases
-    |   |   |   |   |           |           |   |   |   |   
-    |   |   |   |   |           |           |   |   |   \---progs
-    |   |   |   |   |           |           |   |   |           .compilers
-    |   |   |   |   |           |           |   |   |           .runner
-    |   |   |   |   |           |           |   |   |           
-    |   |   |   |   |           |           |   |   +---functions
-    |   |   |   |   |           |           |   |   |       datetimectl
-    |   |   |   |   |           |           |   |   |       general
-    |   |   |   |   |           |           |   |   |       package_manager
-    |   |   |   |   |           |           |   |   |       
-    |   |   |   |   |           |           |   |   +---package_manager
-    |   |   |   |   |           |           |   |   |       .apt
-    |   |   |   |   |           |           |   |   |       .pacman
-    |   |   |   |   |           |           |   |   |       
-    |   |   |   |   |           |           |   |   \---variables
-    |   |   |   |   |           |           |   |           arrays
-    |   |   |   |   |           |           |   |           commands
-    |   |   |   |   |           |           |   |           general
-    |   |   |   |   |           |           |   |           paths
-    |   |   |   |   |           |           |   |           
-    |   |   |   |   |           |           |   \---setup
-    |   |   |   |   |           |           |       +---conky
-    |   |   |   |   |           |           |       |       start.sh
-    |   |   |   |   |           |           |       |       
-    |   |   |   |   |           |           |       \---samba
-    |   |   |   |   |           |           |               setup.sh
-    |   |   |   |   |           |           |               
-    |   |   |   |   |           |           \---scripts
-    |   |   |   |   |           |               \---bash
-    |   |   |   |   |           |                   +---dmenu
-    |   |   |   |   |           |                   |       dmenu_Browsers.sh
-    |   |   |   |   |           |                   |       dmenu_fopener.sh
-    |   |   |   |   |           |                   |       dmenu_git.sh
-    |   |   |   |   |           |                   |       dmenu_pacman.sh
-    |   |   |   |   |           |                   |       dmenu_proc_ctrl.sh
-    |   |   |   |   |           |                   |       dmenu_Template.sh
-    |   |   |   |   |           |                   |       indexmenu.sh
-    |   |   |   |   |           |                   |       
-    |   |   |   |   |           |                   \---Tutorials_and_Guides
-    |   |   |   |   |           |                       |   indexmenu-tutorials.sh
-    |   |   |   |   |           |                       |   README.md
-    |   |   |   |   |           |                       |   
-    |   |   |   |   |           |                       \---Terminal
-    |   |   |   |   |           |                               arrays.sh
-    |   |   |   |   |           |                               receiving_pipe.sh
-    |   |   |   |   |           |                               
-    |   |   |   |   |           \---install-scripts
-    |   |   |   |   |                   example.sh
-    |   |   |   |   |                   installer-manual.sh
-    |   |   |   |   |                   installer-ux.min.sh
-    |   |   |   |   |                   installer.sh
-    |   |   |   |   |                   postinstallation-core-packages.sh
-    |   |   |   |   |                   
-    |   |   |   |   \---Gentoo
-    |   |   |   |       \---Reference_Profile-1
-    |   |   |   |           +---Documents
-    |   |   |   |           |       profile-list
-    |   |   |   |           |       
-    |   |   |   |           \---install-scripts
-    |   |   |   |                   example.sh
-    |   |   |   |                   installer-manual.sh
-    |   |   |   |                   installer-ux.min.sh
-    |   |   |   |                   installer.sh
-    |   |   |   |                   postinstallation-core-packages.sh
-    |   |   |   |                   postinstallations-root.sh
-    |   |   |   |                   postinstallations.sh
-    |   |   |   |                   
-    |   |   |   \---profiles
-    |   |   |       |   README.md
-    |   |   |       |   
-    |   |   |       +---Asura-1
-    |   |   |       |   +---Dotfiles
-    |   |   |       |   |       dotfiles_here
-    |   |   |       |   |       pkglist
-    |   |   |       |   |       
-    |   |   |       |   \---install-scripts
-    |   |   |       |           customDE-designer.txt
-    |   |   |       |           customDE-REMAKE.sh
-    |   |   |       |           customDE-simple_flow.sh
-    |   |   |       |           customDE.sh
-    |   |   |       |           
-    |   |   |       \---Reference_Profile_1_Name
-    |   |   |           +---Dotfiles
-    |   |   |           |       dotfiles_here
-    |   |   |           |       pkglist
-    |   |   |           |       
-    |   |   |           \---install-scripts
-    |   |   |                   customDE.sh
-    |   |   |                   
     |   |   +---GTK
-    |   |   |   |   README.md
-    |   |   |   |   
-    |   |   |   \---Themeing
+    |   |   |       README.md
+    |   |   |       
     |   |   +---Guides
     |   |   |       customization-packages-masterlist.md
     |   |   |       essential-steps.md
@@ -3487,12 +1344,8 @@
     |   |   |       ricing-recommendations.md
     |   |   |       
     |   |   +---Resources
-    |   |   |   |   resources-masterlist.txt
-    |   |   |   |   
-    |   |   |   +---Fonts
-    |   |   |   \---Icons
-    |   |   |       +---Cursor Icons
-    |   |   |       \---Font Icons (Glyphs)
+    |   |   |       resources-masterlist.txt
+    |   |   |       
     |   |   \---Templates
     |   |       \---Designs
     |   |               rice-design-chart.md
@@ -3510,6 +1363,10 @@
     |   |   \---Xonsh
     |   |           README.md
     |   |           
+    |   +---Snippets-and-Examples
+    |   |       README.md
+    |   |       Samba-NAS-Fileserver.md
+    |   |       
     |   \---tips-n-tricks
     |       |   colour-definitions.sh
     |       |   linux
@@ -3527,13 +1384,10 @@
     |                   Checking for a specific package manager.txt
     |                   
     +---Mathematics
-    |   +---Cheatsheets
     |   \---Formulas
     |           probability-and-statistics.md
     |           trigonometry.md
     |           
-    +---Music
-    |   \---Lyrics
     +---Networking
     |   +---Commands
     |   |       arp.md
@@ -3566,6 +1420,9 @@
     |                   |   setup.md
     |                   |   things-to-do-after-installing.md
     |                   |   
+    |                   +---Code Snippets
+    |                   |       port-forwarding.md
+    |                   |       
     |                   \---commands
     |                           scp.md
     |                           sftp.md
@@ -3601,6 +1458,8 @@
     |   |           tools.md
     |   |           
     |   \---Windows
+    |       |   playbook.md
+    |       |   
     |       +---commands
     |       |       assoc.md
     |       |       chkdsk.md
@@ -3617,24 +1476,31 @@
     |       |       taskkill.md
     |       |       tasklist.md
     |       |       template.md
+    |       |       wmic.md
     |       |       
     |       +---Guides
     |       |   +---Network
     |       |   |   \---Usages
     |       |   |           mounting.md
     |       |   |           
-    |       |   \---Servers
-    |       |       \---File Server
+    |       |   \---System
+    |       |           special-paths-and-environment-variables.md
+    |       |           
     |       +---Registry
     |       |       basics.md
     |       |       
+    |       +---Tips-and-Tricks
+    |       |       Keybindings.md
+    |       |       
+    |       +---Versions
+    |       |   \---Windows Server
+    |       |           base-installation-guide.md
+    |       |           
     |       +---Windows 10
     |       |       Changing System Fonts.txt
     |       |       Environment Variables.txt
     |       |       KMS Servers.txt
     |       |       
-    |       +---Windows-PE
-    |       |   \---commands
     |       +---WinGet-CLI
     |       |       basics.md
     |       |       
@@ -3664,6 +1530,7 @@
     |   |       |       make.md
     |   |       |       makefile-background-information.txt
     |   |       |       makefile.md
+    |   |       |       quick-reference.md
     |   |       |       
     |   |       +---Implementations
     |   |       |       C-Lang.md
@@ -3696,15 +1563,18 @@
     |   |       sql.txt
     |   |       vim.txt
     |   |       
+    |   +---Computer Science
+    |   |   \---Theory
+    |   |           Big-O Notation.md
+    |   |           
     |   +---Configuration-Files
     |   |       file-formats.md
     |   |       
     |   +---Data-Serialization
     |   |   \---Languages
-    |   |       +---cheatsheets
-    |   |       |       yaml.md
-    |   |       |       
-    |   |       \---YAML
+    |   |       \---cheatsheets
+    |   |               yaml.md
+    |   |               
     |   +---Designing
     |   |       color-codes.md
     |   |       program_designer.md
@@ -3715,6 +1585,7 @@
     |   +---Files
     |   |   |   resources-masterlist.txt
     |   |   |   snippets.txt
+    |   |   |   terminologies.md
     |   |   |   
     |   |   +---Plans
     |   |   |   \---Project Ideas
@@ -3733,6 +1604,30 @@
     |   |           README.md
     |   |           template-generator
     |   |           
+    |   +---GPU Programming
+    |   |   |   terminologies.md
+    |   |   |   
+    |   |   \---API
+    |   |       |   README.md
+    |   |       |   
+    |   |       \---OpenCL
+    |   |           |   objects.md
+    |   |           |   terminologies.md
+    |   |           |   use-cases.md
+    |   |           |   
+    |   |           +---Concepts
+    |   |           |       data-management.md
+    |   |           |       
+    |   |           +---Kernel Code
+    |   |           |       syntax.md
+    |   |           |       
+    |   |           +---Snippet and Examples
+    |   |           |       compile-opencl-cpp.bat
+    |   |           |       
+    |   |           \---v1.2
+    |   |                   cpp.md
+    |   |                   setup.md
+    |   |                   
     |   +---Guides
     |   |   |   project-ideas.md
     |   |   |   promoting.md
@@ -3742,7 +1637,15 @@
     |   |               basics.md
     |   |               signals.md
     |   |               
-    |   +---IoT
+    |   +---Language-Server-Packs
+    |   |   |   README.md
+    |   |   |   
+    |   |   \---Languages
+    |   |       \---C++
+    |   |           \---LLVM-clang
+    |   |                   README.md
+    |   |                   setup.md
+    |   |                   
     |   +---Languages
     |   |   +---ASSEMBLY
     |   |   |   |   README.md
@@ -3752,6 +1655,8 @@
     |   |   |           basics.md
     |   |   |           
     |   |   +---Batch
+    |   |   |   |   documentations-and-playbook.md
+    |   |   |   |   
     |   |   |   +---Code-Snippets
     |   |   |   |   \---Startup Workspace
     |   |   |   |           start.bat
@@ -3764,34 +1669,56 @@
     |   |   |           tee.bat
     |   |   |           
     |   |   +---C
+    |   |   |   |   project-filesystem-structure.md
+    |   |   |   |   
     |   |   |   +---Code-Snippets
     |   |   |   |   \---HelloWorld
     |   |   |   |           compile.bat
     |   |   |   |           main.c
     |   |   |   |           main.exe
     |   |   |   |           
-    |   |   |   \---Templates
-    |   |   |       \---Project structure
-    |   |   |           \---Project_Name
-    |   |   |               +---app
-    |   |   |               |   \---src
-    |   |   |               |           main.c
-    |   |   |               |           
-    |   |   |               \---docs
-    |   |   |                       program_designer.md
-    |   |   |                       
+    |   |   |   +---Templates
+    |   |   |   |   \---Project structure
+    |   |   |   |       \---Project_Name
+    |   |   |   |           +---app
+    |   |   |   |           |   \---src
+    |   |   |   |           |           main.c
+    |   |   |   |           |           
+    |   |   |   |           \---docs
+    |   |   |   |                   program_designer.md
+    |   |   |   |                   
+    |   |   |   \---utilities
+    |   |   |           gcc.md
+    |   |   |           
     |   |   +---C#
     |   |   |   +---Basics
     |   |   |   |       syntax.txt
     |   |   |   |       
-    |   |   |   \---IDE
-    |   |   |       \---Visual-Studio
-    |   |   |               keybindings.txt
-    |   |   |               
+    |   |   |   +---Guides
+    |   |   |   |   \---Compilation
+    |   |   |   |       +---Linux
+    |   |   |   |       |       mono.md
+    |   |   |   |       |       
+    |   |   |   |       +---Steps
+    |   |   |   |       |       compiling-from-command-line.md
+    |   |   |   |       |       compiling-gui-from-command-line.md
+    |   |   |   |       |       
+    |   |   |   |       \---Windows
+    |   |   |   |               csc.md
+    |   |   |   |               
+    |   |   |   +---IDE
+    |   |   |   |   \---Visual-Studio
+    |   |   |   |           keybindings.txt
+    |   |   |   |           
+    |   |   |   \---Templates
+    |   |   |           project-sources.md
+    |   |   |           
     |   |   +---CPP
     |   |   |   |   best-practices.txt
     |   |   |   |   
     |   |   |   +---Code-Snippets
+    |   |   |   |   |   string-manipulation.md
+    |   |   |   |   |   
     |   |   |   |   \---HelloWorld
     |   |   |   |           compile.bat
     |   |   |   |           main.cpp
@@ -3825,30 +1752,40 @@
     |   |   |   |       Compile using seperate files.txt
     |   |   |   |       Encapsulation - To share your function.txt
     |   |   |   |       
-    |   |   |   \---topics
-    |   |   |           encapsulation.txt
-    |   |   |           macros.txt
-    |   |   |           vector.txt
+    |   |   |   +---topics
+    |   |   |   |       encapsulation.txt
+    |   |   |   |       header-guards.md
+    |   |   |   |       macros.txt
+    |   |   |   |       vector.txt
+    |   |   |   |       
+    |   |   |   +---utilities
+    |   |   |   |       g++.md
+    |   |   |   |       
+    |   |   |   \---wiki
+    |   |   |           cli-argument-parsing.md
+    |   |   |           README.md
+    |   |   |           system-command-calls.md
+    |   |   |           using-pipes.md
     |   |   |           
+    |   |   +---Golang
+    |   |   |       basics.md
+    |   |   |       
     |   |   +---Java
     |   |   |   +---Guides
     |   |   |   |       android-java-guides.md
     |   |   |   |       class.md
     |   |   |   |       
-    |   |   |   +---Libraries
-    |   |   |   |   |   external-libraries-masterlist.txt
-    |   |   |   |   |   
-    |   |   |   |   +---Built-In
-    |   |   |   |   \---External Libraries
-    |   |   |   |       +---Apache
-    |   |   |   |       |   \---HttpClient
-    |   |   |   |       \---JUnit
-    |   |   |   |               basics.txt
-    |   |   |   |               
-    |   |   |   \---Topics
-    |   |   |       \---JSON
+    |   |   |   \---Libraries
+    |   |   |       |   external-libraries-masterlist.txt
+    |   |   |       |   
+    |   |   |       \---External Libraries
+    |   |   |           \---JUnit
+    |   |   |                   basics.txt
+    |   |   |                   
     |   |   +---LaTeX
-    |   |   |       basics.txt
+    |   |   |       docs.md
+    |   |   |       README.md
+    |   |   |       setup.md
     |   |   |       
     |   |   +---Lua
     |   |   |   \---APIs
@@ -3856,6 +1793,7 @@
     |   |   |               basics.md
     |   |   |               
     |   |   +---Markdown
+    |   |   |       extended-syntax.md
     |   |   |       syntax.txt
     |   |   |       
     |   |   +---PHP
@@ -3875,8 +1813,12 @@
     |   |   |       commands.md
     |   |   |       
     |   |   +---Python
+    |   |   |   |   playbook.md
+    |   |   |   |   syntax-changes.md
+    |   |   |   |   
     |   |   |   +---Examples
     |   |   |   |   +---Code-Snippets
+    |   |   |   |   |   |   command-line-argument.md
     |   |   |   |   |   |   Substitution-Cipher.py
     |   |   |   |   |   |   web-scraping.md
     |   |   |   |   |   |   
@@ -3885,11 +1827,10 @@
     |   |   |   |   |   |   |   
     |   |   |   |   |   |   +---app
     |   |   |   |   |   |   |   \---src
-    |   |   |   |   |   |   |       |   Contact.csv
-    |   |   |   |   |   |   |       |   main.py
-    |   |   |   |   |   |   |       |   setup.py
-    |   |   |   |   |   |   |       |   
-    |   |   |   |   |   |   |       \---lib
+    |   |   |   |   |   |   |           Contact.csv
+    |   |   |   |   |   |   |           main.py
+    |   |   |   |   |   |   |           setup.py
+    |   |   |   |   |   |   |           
     |   |   |   |   |   |   \---docs
     |   |   |   |   |   |           program_designer.md
     |   |   |   |   |   |           
@@ -3987,6 +1928,7 @@
     |   |   |   |   |   |       lists.md
     |   |   |   |   |   |       
     |   |   |   |   |   \---string
+    |   |   |   |   |           formatting.md
     |   |   |   |   |           strings.md
     |   |   |   |   |           
     |   |   |   |   \---Version-Specific
@@ -4153,16 +2095,32 @@
     |   |   |   |   \---Testing
     |   |   |   |           unit-tests.md
     |   |   |   |           
-    |   |   |   \---Virtual Environments
-    |   |   |           start_venv.bat
-    |   |   |           start_venv.sh
-    |   |   |           venv-setup.md
+    |   |   |   +---Virtual Environments
+    |   |   |   |       start_venv.bat
+    |   |   |   |       start_venv.sh
+    |   |   |   |       venv-setup.md
+    |   |   |   |       
+    |   |   |   \---wiki
+    |   |   |           cli-argument-parsing.md
+    |   |   |           README.md
+    |   |   |           system-command-calls.md
+    |   |   |           using-pipes.md
     |   |   |           
-    |   |   \---Rust
-    |   |       \---Basics
-    |   |               Built-in Libraries.md
-    |   |               Syntax.md
-    |   |               
+    |   |   +---Rust
+    |   |   |   \---Basics
+    |   |   |           Built-in Libraries.md
+    |   |   |           Syntax.md
+    |   |   |           
+    |   |   \---Templates
+    |   |       |   programming-concepts-and-beginner's-guide.md
+    |   |       |   
+    |   |       \---programming-language
+    |   |           +---Code-Snippets
+    |   |           |       README.md
+    |   |           |       
+    |   |           \---Guides
+    |   |                   README.md
+    |   |                   
     |   +---Mobile-App-Development
     |   |   |   designing-a-good-looking-app.md
     |   |   |   
@@ -4223,23 +2181,26 @@
     |   |       |                   release-to-market.txt
     |   |       |                   
     |   |       +---Libraries
-    |   |       |   +---androidx
     |   |       |   \---Volley
     |   |       |           README.md
     |   |       |           
     |   |       +---Project
-    |   |       |       File Structure.txt
-    |   |       |       Files.txt
-    |   |       |       Makefile.gen-android-fs
-    |   |       |       things-to-do-before-proceeding.md
-    |   |       |       
+    |   |       |   |   File Structure.txt
+    |   |       |   |   Files.txt
+    |   |       |   |   generating-new-project-from-scratch.md
+    |   |       |   |   Makefile.gen-android-fs
+    |   |       |   |   things-to-do-before-proceeding.md
+    |   |       |   |   
+    |   |       |   \---templates
+    |   |       |           MainActivity.java
+    |   |       |           MainActivity.kt
+    |   |       |           NewActivity.java
+    |   |       |           NewActivity.kt
+    |   |       |           
     |   |       \---Snippets
-    |   |           +---HTTP REST
-    |   |           +---Options Menu
-    |   |           |       README.md
-    |   |           |       
-    |   |           +---SharedPreferences
-    |   |           \---SQLite
+    |   |           \---Options Menu
+    |   |                   README.md
+    |   |                   
     |   +---Open Source Software
     |   |   |   README.md
     |   |   |   
@@ -4260,13 +2221,16 @@
     |   +---Regular Expressions
     |   |       regular-expressions-list.md
     |   |       
-    |   +---Security
     |   +---Shellscript
     |   |   |   best-practices.md
+    |   |   |   playbook.md
     |   |   |   
     |   |   +---Code-Snippets
     |   |   |       check-sudo.md
     |   |   |       command-line-argument.md
+    |   |   |       map-objects.md
+    |   |   |       permissions.md
+    |   |   |       string-handling.md
     |   |   |       
     |   |   +---guides
     |   |   |   |   Comments.md
@@ -4305,8 +2269,6 @@
     |   |   |   |   unittest.sh
     |   |   |   |   vimopen.sh
     |   |   |   |   
-    |   |   |   +---distro_specific
-    |   |   |   |   \---ArchLinux
     |   |   |   \---whiptail
     |   |   |           sleep-n-run.sh
     |   |   |           
@@ -4338,58 +2300,110 @@
     |   |       +---CI-CD
     |   |       |       tools.txt
     |   |       |       
-    |   |       +---Frameworks
     |   |       \---Planning
     |   |               Design Template.txt
     |   |               guide-naming-version-release.txt
     |   |               software-development-lifecycle.txt
     |   |               specs-list.txt
     |   |               
-    |   \---Vim
-    |       |   base-information.txt
-    |       |   controls.md
-    |       |   fullguide.md
-    |       |   README.md
-    |       |   
-    |       +---Configuration
-    |       |       Autocommands.md
-    |       |       Functions_and_Commands.md
-    |       |       Highlight.md
-    |       |       Remappings.md
-    |       |       Settings.md
+    |   +---Vim
+    |   |   |   base-information.txt
+    |   |   |   concepts.md
+    |   |   |   controls.md
+    |   |   |   fullguide.md
+    |   |   |   README.md
+    |   |   |   
+    |   |   +---Configuration
+    |   |   |       Autocommands.md
+    |   |   |       Functions_and_Commands.md
+    |   |   |       Highlight.md
+    |   |   |       Remappings.md
+    |   |   |       Settings.md
+    |   |   |       
+    |   |   +---Distros
+    |   |   |   \---Neovim
+    |   |   |       |   base-information.md
+    |   |   |       |   
+    |   |   |       +---Lua
+    |   |   |       |       api.md
+    |   |   |       |       terminologies.md
+    |   |   |       |       
+    |   |   |       \---Plugins
+    |   |   |               plugins-compilation.md
+    |   |   |               
+    |   |   +---Documents
+    |   |   |       devhints.io-Vim scripting cheatsheet.pdf
+    |   |   |       turn-vim-into-an-ide.txt
+    |   |   |       vim-must-haves.txt
+    |   |   |       
+    |   |   +---Guides
+    |   |   |   |   buffers.md
+    |   |   |   |   
+    |   |   |   +---Beginner's Guide
+    |   |   |   |       basic-keybindings.txt
+    |   |   |   |       
+    |   |   |   \---Plugins
+    |   |   |           basics.txt
+    |   |   |           
+    |   |   +---Tips-n-Tricks
+    |   |   |   \---Essentials
+    |   |   |           Autocommands.txt
+    |   |   |           Remappings.txt
+    |   |   |           Settings.txt
+    |   |   |           
+    |   |   \---Vimscript
+    |   |       \---Topics
+    |   |               Using Dictionary.txt
+    |   |               Using Lists.txt
+    |   |               
+    |   \---Web-Development
+    |       +---Cheatsheets
+    |       |       css.md
+    |       |       html.txt
+    |       |       javascript.txt
     |       |       
-    |       +---Distros
-    |       |   \---Neovim
-    |       |       |   base-information.md
-    |       |       |   
-    |       |       +---Guides
-    |       |       |   \---api
-    |       |       \---Lua
-    |       |               autocmds.md
-    |       |               terminologies.md
-    |       |               
-    |       +---Documents
-    |       |       devhints.io-Vim scripting cheatsheet.pdf
-    |       |       turn-vim-into-an-ide.txt
-    |       |       vim-must-haves.txt
-    |       |       
+    |       +---Frameworks
+    |       |   \---ReactJS
+    |       |           setup.txt
+    |       |           
+    |       +---Github
+    |       |   \---Pages
+    |       |           1. How to deploy on GitHub Pages
+    |       |           
     |       +---Guides
-    |       |   +---Beginner's Guide
-    |       |   |       basic-keybindings.txt
-    |       |   |       
-    |       |   \---Plugins
-    |       |           basics.txt
+    |       |       software-stacks.md
+    |       |       
+    |       +---HTML
+    |       |       basics.txt
+    |       |       tags.md
+    |       |       
+    |       +---Javascript
+    |       |   |   tips-n-tricks.txt
+    |       |   |   
+    |       |   \---Frameworks
+    |       |       |   README.md
+    |       |       |   
+    |       |       \---Node-JS
+    |       |           +---express-js
+    |       |           |       README.md
+    |       |           |       
+    |       |           \---npm
+    |       |                   cheatsheet.txt
+    |       |                   
+    |       +---Languages
+    |       |   \---CSS
+    |       |       \---Guides
+    |       |               importing-css.md
+    |       |               
+    |       +---PHP
+    |       |   \---libraries
+    |       |           phpext.php
     |       |           
-    |       +---Tips-n-Tricks
-    |       |   \---Essentials
-    |       |           Autocommands.txt
-    |       |           Remappings.txt
-    |       |           Settings.txt
-    |       |           
-    |       \---Vimscript
-    |           \---Topics
-    |                   Using Dictionary.txt
-    |                   Using Lists.txt
+    |       \---Web Hosting
+    |           \---Files
+    |                   free-dns-services.txt
+    |                   free-dynamic-web-services.txt
+    |                   free-static-web-services.txt
     |                   
     +---Recreational
     |   \---Books
@@ -4400,24 +2414,39 @@
     |           dilemmas.md
     |           
     +---Services
+    |   +---Cloud Infrastructure
+    |   |   \---Amazon Web Services
+    |   |       +---commands
+    |   |       |       aws.md
+    |   |       |       
+    |   |       +---Guides
+    |   |       |       aws-connecting-via-ssh.md
+    |   |       |       categories-and-services.md
+    |   |       |       
+    |   |       \---SDK
+    |   |               python.md
+    |   |               
     |   \---Developer-API
     |       \---PubNub
     |           \---API
     |                   python.md
     |                   
     +---Software
-    |   +---Bootable Live-USB
-    |   |   +---Etcher
-    |   |   +---Multiboot
-    |   |   |   \---Ventoy
-    |   |   \---Rufus
     |   +---Browsers
     |   |   \---FireFox
     |   |           plugins.txt
     |   |           
+    |   +---Image Downloader
+    |   |   \---gallery-dl
+    |   |           README.md
+    |   |           
     |   +---Microsoft
     |   |   \---Excel
     |   |           automation-and-QoL.md
+    |   |           
+    |   +---Music Downloader
+    |   |   \---SpotDL
+    |   |           README.md
     |   |           
     |   +---OBS
     |   |       Keybindings.txt
@@ -4428,11 +2457,17 @@
     |   |           setup.md
     |   |           
     |   +---Tmux
-    |   |       basics.txt
-    |   |       
+    |   |   |   basics.txt
+    |   |   |   commands.md
+    |   |   |   settings.md
+    |   |   |   
+    |   |   \---Configuration
+    |   |           README.md
+    |   |           
     |   \---Video Downloader
     |       \---yt-dlp
     |               cheatsheet.txt
+    |               README.md
     |               
     +---Technology
     |   +---Blockchain
@@ -4451,18 +2486,39 @@
     |       |   README.md
     |       |   
     |       \---Docker
+    |           |   faq-and-system-debugging.md
+    |           |   playbook.md
     |           |   README.md
     |           |   
+    |           +---docker-docs
+    |           |   |   README.md
+    |           |   |   
+    |           |   \---services
+    |           |       |   README.md
+    |           |       |   
+    |           |       +---Development
+    |           |       |   \---Programming
+    |           |       |       \---Rust
+    |           |       |               docker-compose.md
+    |           |       |               README.md
+    |           |       |               snippets-and-examples.md
+    |           |       |               
+    |           |       \---docs
+    |           |               benefits.md
+    |           |               
     |           +---Files
-    |           |       dictionary.md
-    |           |       docker-images.md
-    |           |       error-codes.txt
-    |           |       file-locations.md
-    |           |       packages.md
-    |           |       parameter-comparison.md
-    |           |       resources.md
-    |           |       things to do after installing.md
-    |           |       
+    |           |   |   dictionary.md
+    |           |   |   docker-images.md
+    |           |   |   error-codes.txt
+    |           |   |   file-locations.md
+    |           |   |   packages.md
+    |           |   |   parameter-comparison.md
+    |           |   |   resources.md
+    |           |   |   things to do after installing.md
+    |           |   |   
+    |           |   \---Templates
+    |           |           docker-compose.yaml
+    |           |           
     |           +---Guides
     |           |   |   basics.md
     |           |   |   docker.md
@@ -4472,110 +2528,97 @@
     |           |   |   setup.md
     |           |   |   usage.md
     |           |   |   
-    |           |   +---Components
     |           |   +---Docker Compose
     |           |   |       docker-compose YAML Configuration.md
     |           |   |       docker-compose.md
     |           |   |       Named Volumes.md
     |           |   |       
-    |           |   +---Fundamentals
     |           |   \---Manuals
+    |           |           buildx.md
     |           |           container.md
     |           |           volumes.md
     |           |           
-    |           \---Snippets
-    |               \---docker-compose
+    |           \---Using Docker
+    |                   Snippets.md
+    |                   
     +---Texts
     |   \---Unicode
     |           glyphicons.md
+    |           kaomoji.md
     |           
-    +---Virtual Machines
-    |   |   README.md
-    |   |   
-    |   +---QEMU-KVM
-    |   |   |   cheatsheets.txt
-    |   |   |   setup.txt
-    |   |   |   
-    |   |   \---scripts
-    |   |       +---Linux
-    |   |       |       conv_img.sh
-    |   |       |       start_kvm.sh
-    |   |       |       
-    |   |       \---Windows
-    |   |               conv_img.bat
-    |   |               start_kvm.bat
-    |   |               
-    |   \---VirtualBox
-    |       |   Guest Additions.md
-    |       |   
-    |       +---Command-Line
-    |       |       vboxheadless.md
-    |       |       vboxmanage.md
-    |       |       
-    |       \---Scripts
-    |           +---Batch-DOS
-    |           |       convert_usb_to_vmdk.bat
-    |           |       convert_vdi_to_img.bat
-    |           |       create_virtualmachine.bat
-    |           |       launch_usb_boot.bat
-    |           |       start_vbox_with_personal_config.bat
-    |           |       
-    |           \---Shellscript
-    |                   install-vbox-guest-additions.sh
-    |                   
-    \---WebDevelopment
-        +---Cheatsheets
-        |       css.md
-        |       html.txt
-        |       javascript.txt
-        |       
-        +---Frameworks
-        |   \---ReactJS
-        |           setup.txt
-        |           
-        +---Github
-        |   \---Pages
-        |           1. How to deploy on GitHub Pages
-        |           
-        +---Guides
-        |   |   software-stacks.md
+    \---Virtual Machines
+        |   README.md
+        |   
+        +---QEMU-KVM
+        |   |   cheatsheets.txt
+        |   |   playbook.md
+        |   |   README.md
+        |   |   setup.md
         |   |   
-        |   \---Dynamic-Websites
-        +---HTML
-        |       basics.txt
-        |       tags.md
-        |       
-        +---Javascript
-        |   |   tips-n-tricks.txt
-        |   |   
-        |   \---Frameworks
-        |       |   README.md
-        |       |   
-        |       +---Angular-JS
-        |       +---Node-JS
-        |       |   +---express-js
-        |       |   |       README.md
-        |       |   |       
-        |       |   \---npm
-        |       |           cheatsheet.txt
-        |       |           
-        |       +---React-JS
-        |       \---Vue-JS
-        +---Languages
-        |   \---CSS
-        |       \---Guides
-        |               importing-css.md
-        |               
-        +---PHP
-        |   \---libraries
-        |           phpext.php
+        |   +---Commands-and-Packages
+        |   |       qemu-img.md
+        |   |       qemu-system-[architecture].md
+        |   |       virsh.md
+        |   |       virt-install.md
+        |   |       
+        |   +---Guides
+        |   |   |   differences.md
+        |   |   |   
+        |   |   +---Headless
+        |   |   |       Headless-Using-QEMU.md
+        |   |   |       Headless-Using-Virsh.md
+        |   |   |       
+        |   |   \---Networking
+        |   |       \---Using qemu-system
+        |   |               bridge-networking.md
+        |   |               ports.md
+        |   |               README.md
+        |   |               
+        |   +---scripts
+        |   |   +---Linux
+        |   |   |   |   conv_img.sh
+        |   |   |   |   start_kvm.sh
+        |   |   |   |   
+        |   |   |   \---headless-vm
+        |   |   |           manage_vm.sh
+        |   |   |           settings.sh
+        |   |   |           start_vm.sh
+        |   |   |           
+        |   |   \---Windows
+        |   |           conv_img.bat
+        |   |           start_kvm.bat
+        |   |           
+        |   \---Snippets
+        |           development-workflow-with-vm.md
+        |           headless-vm.md
+        |           multiple-architectures.md
         |           
-        +---Utilities
-        |   \---Static Site Generators
-        |       \---Jekyll
-        \---Web Hosting
-            \---Files
-                    free-dns-services.txt
-                    free-dynamic-web-services.txt
-                    free-static-web-services.txt
-```
+        \---VirtualBox
+            |   Guest Additions.md
+            |   
+            +---Code-Snippets
+            |       development-workflow-with-vm.md
+            |       headless-vm.md
+            |       vbox-attach-storage-devices.md
+            |       vbox-attach-vdi_vhd-files.md
+            |       vbox-detach-storage-devices.md
+            |       vbox-detach-vdi_vhd-files.md
+            |       
+            +---Command-Line
+            |       use-cases-and-snippets.md
+            |       vboxheadless.md
+            |       vboxmanage.md
+            |       
+            \---Scripts
+                +---Batch-DOS
+                |       convert_usb_to_vmdk.bat
+                |       convert_vdi_to_img.bat
+                |       create_virtualmachine.bat
+                |       launch_usb_boot.bat
+                |       start_vbox_with_personal_config.bat
+                |       
+                \---Shellscript
+                        install-vbox-guest-additions.sh
+``` 
+
+
