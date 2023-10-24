@@ -8,6 +8,7 @@
 + [2023-10-14 1150H, Asura](#2023-10-14-1150H)
 + [2023-10-21 2136H, Asura](#2023-10-21-2136H)
 + [2023-10-22 2232H, Asura](#2023-10-22-2232H)
++ [2023-10-24 1105H, Asura](#2023-10-24-1105H)
 
 ## Version History
 ```
@@ -183,4 +184,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new folder 'Jupyter Server' for Jupyter Server setup and documentations at 'Docs/Home Lab/Services and Tools/Webservers'
 
 - Updated
+
+### 2023-10-24 1105H
+- New
+    + Added new folder 'manuals' for holding manuals to Jupyter(Labs)-related actions in 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs'
+    + Added new document 'quickstart-and-operational-flow.md' at 'Docs/Virtual Machines/VirtualBox/Command-Line'
+- Updates
+    + Updated Jupyter Documentations 'README.md' at 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs'
 
