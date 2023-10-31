@@ -50,6 +50,17 @@ git {options} [actions]
                 ```
             - Options
                 + -b | --branch [branch-name] : Specify to checkout a branch and specify the branch name; Checkout will create the new branch and switch to it automatically
+        - clone : Clone a git repository from a remote repository server
+            - Synopsis/Syntax
+                ```console
+                git clone {options} [repository-url]
+                ```
+            - Options
+                - Flags
+                    + 
+                - With Arguments
+                    + -b | --branch [branch-name] : Clone a specific branch into your local git repository
+                    + --depth=[depth] : Clone the repository starting from a specific depth
         - commit : To commit and confirm all changes added into the tree buffer; Similar to a database - you need to "confirm" by "committing" all changes made into the git database
             - Synopsis/Syntax
                 ```console
@@ -60,12 +71,47 @@ git {options} [actions]
                      + -a | --ammend : To edit the most recent commit message
                 - With Arguments
                      + -m | --message [message] : To specify the commit message
+        - config : Manage configurations for the current system's git local repositor(ies)
+            - Synopsis/Syntx
+                ```console
+                git config {options} {setting-key}.{setting-values} [values]
+                ```
+            - Options
+                - Flags
+                    + --global : Apply the settings globally into the system git directory
+                - With Arguments
+                    - setting key-values:
+                        - user
+                            - setting values
+                                + email : Set/Get the repository's linked user email
+                                + name : Set/Get the repository's linked user name
         - diff : List all changes made to committed files; Similar to the command 'diff' but for git files
             - Synopsis/Syntax
                 ```console
                 git diff {options} [file-pathname-source] [file-pathname-target]
                 ```
+        - lfs : Stands for "Large File System", LFS is a file storage solution that prevents large binary files in the repository history to prevent bottlenecks and bulk
+            - Pre-Requisites
+                + [Git LFS](https://git-lfs.com/)
+            - Synopsis/Syntax
+                ```console
+                git lfs [action] {options}
+                ```
+            - Options
+                + fetch : Find any new/missing blob files which have been replaced with smaller files
+                + merge : Merges all found blob files
+                + pull  : Fetch and merges any new/missing blob files; alias for 'git lfs fetch && git lfs merge'
         - log : List a log of all git commits made in the repository
+        - remote : Manage git remote repository server settings
+            - Synopsis/Syntax
+                ```console
+                git remote [action] {options}
+                ```
+            - Options
+                + add [origin-alias-name] [remote-repository-url] : Add and map the specified origin/URL to the origin alias
+                + set-url [remote-repository-server]              : Set and add the remote repository server URL only
+                + show [origin-alias]                             : Show entries for that origin/URL
+                + remove [origin-alias]                           : Remove the specific origin/URL
         - status : Specify current git status
         - switch : Switch to another branch
             - Synopsis/Syntax
@@ -84,6 +130,20 @@ git {options} [actions]
     ```console
     git logs
     ```
+
+- Cloning repository
+    - Clone full repository
+        ```console
+        git clone [repository-url]
+        ```
+    - Clone a specific branch
+        ```console
+        git clone [repository-url] -b [branch-name]
+        ```
+    - Clone a specific depth
+        ```console
+        git clone [repository-url] --depth=1
+        ```
 
 - Create new branch
     - Checkout branch

@@ -25,7 +25,7 @@
 ## Documentation
 - Pull latest image
     ```console
-    docker pull rust
+    docker pull jupyter/base-notebook
     ```
 
 - (OPTIONAL) Build Dockerfile image

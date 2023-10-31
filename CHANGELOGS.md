@@ -9,6 +9,7 @@
 + [2023-10-21 2136H, Asura](#2023-10-21-2136H)
 + [2023-10-22 2232H, Asura](#2023-10-22-2232H)
 + [2023-10-24 1105H, Asura](#2023-10-24-1105H)
++ [2023-10-31 2322H, Asura](#2023-10-31-2322H)
 
 ## Version History
 ```
@@ -191,4 +192,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     + Added new document 'quickstart-and-operational-flow.md' at 'Docs/Virtual Machines/VirtualBox/Command-Line'
 - Updates
     + Updated Jupyter Documentations 'README.md' at 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs'
+
+### 2023-10-31 2322H
+- New
+    - Added new document 'README.md' at 'Docs/Linux/Guides/Setup'
+    - Added new folder 'Data Structures and Algorithms' for DSA information at 'Docs/Programming'
+    - Added new folder 'Resources' for containing resources at 'Docs'
+
+- Updates
+    - Updated git command documentation 'git.md' at 'Docs/Git/commands'
+    - Updated image in 'README.md' at 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs/containerization/docker/images/Base-Notebook'
 
