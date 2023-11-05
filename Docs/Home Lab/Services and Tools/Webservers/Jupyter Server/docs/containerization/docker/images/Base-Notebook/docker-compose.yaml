@@ -1,0 +1,16 @@
+# docker-compose for jupyter notebook (base)
+version: "3.7"
+services:
+  jupyter-base-notebook:
+    image: jupyter/base-notebook:latest
+    container_name: jupyter-base-notebook
+    restart: unless-stopped
+    ports:
+      ## Port Forward/Translate/Map from Host System to Container
+      ## [ip-address]:[host-system-port]:[container-port]
+      - "10000:8888"
+    volumes:
+      ## Mount volume from host system into container
+      ## [host-system-volume]:[container-volume]:[permission]
+      - "${PWD}/jupyter/work:/home/jovyan" # Mount work directory; By default, jupyter's root directorty is '/home/jovyan'
+

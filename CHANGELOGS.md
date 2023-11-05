@@ -7,6 +7,10 @@
 + [2021-05-23 2322H, Asura, v0.3.0](#2021-05-23-2322H)
 + [2023-10-14 1150H, Asura](#2023-10-14-1150H)
 + [2023-10-21 2136H, Asura](#2023-10-21-2136H)
++ [2023-10-22 2232H, Asura](#2023-10-22-2232H)
++ [2023-10-24 1105H, Asura](#2023-10-24-1105H)
++ [2023-10-31 2322H, Asura](#2023-10-31-2322H)
++ [2023-11-05 1556H, Asura](#2023-11-05-1556H)
 
 ## Version History
 ```
@@ -169,4 +173,41 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new Environment Variables into 'Docs/Linux/Files/environment-variables.md'
     - Added Wi-Fi Profile usages in 'Docs/Operating Systems/Windows/commands/netsh.md'
     - Added extra options in 'Docs/Operating Systems/Windows/commands/wmic.md'
+
+### 2023-10-22 2232H
+- New
+    - Added new folder 'dpkg' at 'Docs/Linux/package-manager'
+    - Added new document 'operational-flow.md' at 'Docs/Home Lab'
+- Updates
+
+### 2023-10-23 1049H
+- New
+    - Added new folder 'Webservers' at 'Docs/Home Lab/Services and Tools' for all WebServers
+        - Added new folder 'Jupyter Server' for Jupyter Server setup and documentations at 'Docs/Home Lab/Services and Tools/Webservers'
+
+- Updated
+
+### 2023-10-24 1105H
+- New
+    + Added new folder 'manuals' for holding manuals to Jupyter(Labs)-related actions in 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs'
+    + Added new document 'quickstart-and-operational-flow.md' at 'Docs/Virtual Machines/VirtualBox/Command-Line'
+- Updates
+    + Updated Jupyter Documentations 'README.md' at 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs'
+
+### 2023-10-31 2322H
+- New
+    - Added new document 'README.md' at 'Docs/Linux/Guides/Setup'
+    - Added new folder 'Data Structures and Algorithms' for DSA information at 'Docs/Programming'
+    - Added new folder 'Resources' for containing resources at 'Docs'
+
+- Updates
+    - Updated git command documentation 'git.md' at 'Docs/Git/commands'
+    - Updated image in 'README.md' at 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs/containerization/docker/images/Base-Notebook'
+
+### 2023-11-05 1556H
+- New
+    - Added new folder 'Guides' for Proxmox-related documentations at 'Docs/Linux/Guides/Server/Home Lab/Proxmox'
+        - Added new installation guide for installing Proxmox from scratch/bootstrapping via Command Line (like ArchLinux)
+    - Added new document 'syntax-equivalence.md' at 'Docs/Programming'
+
 
