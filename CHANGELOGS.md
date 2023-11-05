@@ -10,6 +10,7 @@
 + [2023-10-22 2232H, Asura](#2023-10-22-2232H)
 + [2023-10-24 1105H, Asura](#2023-10-24-1105H)
 + [2023-10-31 2322H, Asura](#2023-10-31-2322H)
++ [2023-11-05 1556H, Asura](#2023-11-05-1556H)
 
 ## Version History
 ```
@@ -202,4 +203,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated git command documentation 'git.md' at 'Docs/Git/commands'
     - Updated image in 'README.md' at 'Docs/Home Lab/Services and Tools/Webservers/Jupyter Server/docs/containerization/docker/images/Base-Notebook'
+
+### 2023-11-05 1556H
+- New
+    - Added new folder 'Guides' for Proxmox-related documentations at 'Docs/Linux/Guides/Server/Home Lab/Proxmox'
+        - Added new installation guide for installing Proxmox from scratch/bootstrapping via Command Line (like ArchLinux)
+    - Added new document 'syntax-equivalence.md' at 'Docs/Programming'
+
 
