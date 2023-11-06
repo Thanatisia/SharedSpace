@@ -10,13 +10,20 @@ wmic [queries] {options} <arguments>
 ```
 
 ### Parameters
-- queries
-    - path [key] get [value] : Query details from the Registry Keys and Nodes and return information
-        - Keys
-            - softwarelicensingservice : Software Licensing Key-related configuration values
-                - Values
-                    + OA3xOriginalProductKey : Windows Product Key
-    + cpu  : Return information on the local CPU
+- Positionals
+    - Queries
+        - `baseboard [action] <keyword,...>` : Get values of a specified motherboard option; Separate each keyword with a comma (',') delimiiter
+            - Action
+                - get : Return information of the specified keyword
+                    - Keywords
+                        + product : Get the product specification of the motherboard
+                        + Manufacturer : Get the manufacturer of the motherboard
+        - `path [key] get [value]` : Query details from the Registry Keys and Nodes and return information
+            - Keys
+                - softwarelicensingservice : Software Licensing Key-related configuration values
+                    - Values
+                        + OA3xOriginalProductKey : Windows Product Key
+        + cpu  : Return information on the local CPU
 - Optionals
 
 ### Usage
@@ -25,6 +32,16 @@ wmic [queries] {options} <arguments>
     ```console
     wmic path softwarelicensingservice get OA3xOriginalProductKey
     ```
+
+- Get Motherboard specifications
+    - Product
+        ```console
+        wmic baseboard get product
+        ```
+    - Manufacturer
+        ```console
+        wmic baseboard get Manufacturer
+        ```
 
 ## Resources
 

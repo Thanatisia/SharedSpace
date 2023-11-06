@@ -11,6 +11,7 @@
 + [2023-10-24 1105H, Asura](#2023-10-24-1105H)
 + [2023-10-31 2322H, Asura](#2023-10-31-2322H)
 + [2023-11-05 1556H, Asura](#2023-11-05-1556H)
++ [2023-11-06 1549H, Asura](#2023-11-06-1549H)
 
 ## Version History
 ```
@@ -209,5 +210,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new folder 'Guides' for Proxmox-related documentations at 'Docs/Linux/Guides/Server/Home Lab/Proxmox'
         - Added new installation guide for installing Proxmox from scratch/bootstrapping via Command Line (like ArchLinux)
     - Added new document 'syntax-equivalence.md' at 'Docs/Programming'
+
+### 2023-11-06 1549H
+- New
+    + Added new document 'systeminfo.md' for documentation of windows command 'systeminfo' at 'Docs/Operating Systems/Windows/commands' 
+- Updates
+    + Updated 'wmic.md' at 'Docs/Operating Systems/Windows/commands/wmic.md b/Docs/Operating Systems/Windows/commands' with new usage information and options
 
 
