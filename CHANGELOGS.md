@@ -12,6 +12,7 @@
 + [2023-10-31 2322H, Asura](#2023-10-31-2322H)
 + [2023-11-05 1556H, Asura](#2023-11-05-1556H)
 + [2023-11-06 1549H, Asura](#2023-11-06-1549H)
++ [2023-11-06 1559H, Asura](#2023-11-06-1559H)
 
 ## Version History
 ```
@@ -217,4 +218,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     + Updated 'wmic.md' at 'Docs/Operating Systems/Windows/commands/wmic.md b/Docs/Operating Systems/Windows/commands' with new usage information and options
 
+### 2023-11-06 1559H
+- New
+    - Added new folder 'System-Administration' in 'Docs/Operating Systems/Windows/Guides/'
+        - Added new folder 'maintenance-and-servicing' in 'Docs/Operating Systems/Windows/Guides/System-Administration' for maintenance, servicing and diagnostics-related information
+            + Added new document 'utilities.md' in 'maintenance-and-servicing' for all utilities
 
