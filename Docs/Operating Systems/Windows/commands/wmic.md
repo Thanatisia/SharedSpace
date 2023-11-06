@@ -23,6 +23,11 @@ wmic [queries] {options} <arguments>
                 - softwarelicensingservice : Software Licensing Key-related configuration values
                     - Values
                         + OA3xOriginalProductKey : Windows Product Key
+        - `memphysical [action] {options}` : Return information related to the physical memory (RAM) slots
+            - Action
+                - `get <keyword,...>` : Get information from a specified filter/keyword relating to the physical memory (RAM)
+                    - Keywords
+                        + maxcapacity : The maximum supported physical RAM size/capacity (with all channels combined); This will display in bytes - Divide by 1024 for each layer (i.e. bytes => kilobytes => megabytes)
         + cpu  : Return information on the local CPU
 - Optionals
 
@@ -43,9 +48,16 @@ wmic [queries] {options} <arguments>
         wmic baseboard get Manufacturer
         ```
 
+- Get supported physical RAM size/capacity (with all channels combined)
+    - Maximum
+        ```console
+        wmic memphysical get maxcapacity
+        ```
+
 ## Resources
 
 ## References
 + [FreeCodeCamp - News - How to find a windows 10 product key](https://www.freecodecamp.org/news/how-to-find-a-windows-10-product-key/)
++ [myfixguide - Check laptop maximum supported RAM](https://www.myfixguide.com/check-max-ram-support-laptop/)
 
 ## Remarks

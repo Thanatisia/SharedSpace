@@ -13,6 +13,7 @@
 + [2023-11-05 1556H, Asura](#2023-11-05-1556H)
 + [2023-11-06 1549H, Asura](#2023-11-06-1549H)
 + [2023-11-06 1559H, Asura](#2023-11-06-1559H)
++ [2023-11-06 1637H, Asura](#2023-11-06-1637H)
 
 ## Version History
 ```
@@ -223,4 +224,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new folder 'System-Administration' in 'Docs/Operating Systems/Windows/Guides/'
         - Added new folder 'maintenance-and-servicing' in 'Docs/Operating Systems/Windows/Guides/System-Administration' for maintenance, servicing and diagnostics-related information
             + Added new document 'utilities.md' in 'maintenance-and-servicing' for all utilities
+
+### 2023-11-06 1637H
+- Updates
+    + Updated 'wmic.md' at 'Docs/Operating Systems/Windows/commands/wmic.md b/Docs/Operating Systems/Windows/commands' with options and usages about sysadmin - checking maximum supported physical memory (RAM) on motherboard
 
