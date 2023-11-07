@@ -227,5 +227,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 
 ### 2023-11-06 1637H
 - Updates
-    + Updated 'wmic.md' at 'Docs/Operating Systems/Windows/commands/wmic.md b/Docs/Operating Systems/Windows/commands' with options and usages about sysadmin - checking maximum supported physical memory (RAM) on motherboard
+    + Updated 'wmic.md' at 'Docs/Operating Systems/Windows/commands' with options and usages about sysadmin - checking maximum supported physical memory (RAM) on motherboard
+
+### 2023-11-07 1736H
+- New
+    - Added new folder 'Static Website' in 'Docs/Programming/Web-Development' for Static Web Development (No Database, No Server)
+        - Added new folder 'Static Site Generators' in 'Static Website' for static site generators
+            - Added new folder 'Hugo' for Static Site Generator framework 'hugo'
+                + Added new document 'README.md' for 'Hugo'
 
