@@ -14,6 +14,7 @@
 + [2023-11-06 1549H, Asura](#2023-11-06-1549H)
 + [2023-11-06 1559H, Asura](#2023-11-06-1559H)
 + [2023-11-06 1637H, Asura](#2023-11-06-1637H)
++ [2023-11-08 1747H, Asura](#2023-11-08-1747H)
 
 ## Version History
 ```
@@ -235,4 +236,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new folder 'Static Site Generators' in 'Static Website' for static site generators
             - Added new folder 'Hugo' for Static Site Generator framework 'hugo'
                 + Added new document 'README.md' for 'Hugo'
+
+### 2023-11-08 1747H
+- New
+    - Added new folder 'design-snippets' for CSS Snippets and examples for designs in 'Docs/Programming/Web-Development/Guides'
+    - Added new folder 'Basics' for CSS Basics and fundamentals in 'Docs/Programming/Web-Development/Languages/CSS'
+    - Added new folder 'layouts' for containing CSS layout documentations, guides, snippets and usage examples in 'Docs/Programming/Web-Development/Languages/CSS/Guides'
 
