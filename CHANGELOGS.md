@@ -16,6 +16,7 @@
 + [2023-11-06 1637H, Asura](#2023-11-06-1637H)
 + [2023-11-08 1747H, Asura](#2023-11-08-1747H)
 + [2023-11-09 1631H, Asura](#2023-11-09-1631H)
++ [2023-11-09 2044H, Asura](#2023-11-09-2044H)
 
 ## Version History
 ```
@@ -247,4 +248,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 ### 2023-11-09 1631H
 - New
     - Added new folder 'Ideas' for containing ideas regarding different unique usages such as 'starting GUI applications in VNC server from tty' in 'Docs/Linux'
+
+### 2023-11-09 2044H
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/Ideas/starting-GUI-apps-from-tty'
+        - Rearranged order of operation in 'steps'
+            + Moved step 5 (GUI Applications) to the last step
+        - Added new troubleshooting and documentation
 

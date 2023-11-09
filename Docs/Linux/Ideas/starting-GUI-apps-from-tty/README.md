@@ -21,9 +21,9 @@ Of course, with this, theoretically you do not need a websocket server as once y
 ## Steps
 1. Startup a Xvfb instance
 2. Export '$DISPLAY' environment variable
-3. Startup your GUI applications
-4. Startup VNC server
-5. (Optional) Startup Websocket server + Browser/web-based VNC client
+3. Startup VNC server
+4. (Optional) Startup Websocket server + Browser/web-based VNC client
+5. Startup your GUI applications
 
 ## Setup
 ### Dependencies
@@ -48,16 +48,6 @@ Of course, with this, theoretically you do not need a websocket server as once y
 ```console
 export DISPLAY=":[display]"
 ```
-
-### GUI applications
-- Now that you are inside the X virtual framebuffer, you can run commands and startup GUI applications from the tty and it would draw on the virtual framebuffer 
-    + which is, at this stage, currently drawn in the background that can be viewed from a VNC instance
-
-- To run the GUI applications from the tty and still hold control of the tty
-    + Use the '&' keyword
-    ```console
-    [GUI] &
-    ```
 
 ### Startup VNC server
 - x11vnc
@@ -88,6 +78,16 @@ export DISPLAY=":[display]"
         + vnc-server-port : The Port number of the VNC server you wish to point to; Format: 5900+[display-number]
     ```console
     websockify -D --web=[/path/to/novnc] [websocket-server-port] [vnc-server-ip (localhost=127.0.0.1)]:[vnc-server-port]
+    ```
+
+### GUI applications
+- Now that you are inside the X virtual framebuffer, you can run commands and startup GUI applications from the tty and it would draw on the virtual framebuffer 
+    + which is, at this stage, currently drawn in the background that can be viewed from a VNC instance
+
+- To run the GUI applications from the tty and still hold control of the tty
+    + Use the '&' keyword
+    ```console
+    [GUI] &
     ```
 
 ## Documentation
@@ -133,6 +133,12 @@ export DISPLAY=":[display]"
         netstat -tuln | grep 6080
         ```
 
+- To verify process ID
+    ```console
+    process_ID=$(pgrep [application])
+    echo -e "${process_ID}"
+    ```
+
 ## Wiki
 ### Related
 - Xorg Display Server
@@ -143,6 +149,20 @@ export DISPLAY=":[display]"
 + Run the Xvfb in tmux to allow multi-tty control
 
 ### Troubleshooting
+- Application process unable to start
+    - Possible Issues/Solution
+        - Process is still running
+            + Validate process ID
+                ```console
+                process_ID=$(pgrep [application])
+                ```
+            + Force kill if regular `kill $process_ID` does not work
+                ```console
+                if [[ ! -z "$process_ID" ]]; then
+                    # Force kill
+                    kill -9 ${process_ID}
+                fi
+                ```
 
 ### Finding and Notes
 - Using this, it might actually be possible to use this concept in docker and 
