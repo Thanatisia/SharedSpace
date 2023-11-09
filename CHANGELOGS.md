@@ -15,6 +15,7 @@
 + [2023-11-06 1559H, Asura](#2023-11-06-1559H)
 + [2023-11-06 1637H, Asura](#2023-11-06-1637H)
 + [2023-11-08 1747H, Asura](#2023-11-08-1747H)
++ [2023-11-09 1631H, Asura](#2023-11-09-1631H)
 
 ## Version History
 ```
@@ -242,4 +243,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new folder 'design-snippets' for CSS Snippets and examples for designs in 'Docs/Programming/Web-Development/Guides'
     - Added new folder 'Basics' for CSS Basics and fundamentals in 'Docs/Programming/Web-Development/Languages/CSS'
     - Added new folder 'layouts' for containing CSS layout documentations, guides, snippets and usage examples in 'Docs/Programming/Web-Development/Languages/CSS/Guides'
+
+### 2023-11-09 1631H
+- New
+    - Added new folder 'Ideas' for containing ideas regarding different unique usages such as 'starting GUI applications in VNC server from tty' in 'Docs/Linux'
 
