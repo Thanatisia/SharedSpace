@@ -17,6 +17,7 @@
 + [2023-11-08 1747H, Asura](#2023-11-08-1747H)
 + [2023-11-09 1631H, Asura](#2023-11-09-1631H)
 + [2023-11-09 2044H, Asura](#2023-11-09-2044H)
++ [2023-11-10 0841H, Asura](#2023-11-10-0841H)
 
 ## Version History
 ```
@@ -255,4 +256,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Rearranged order of operation in 'steps'
             + Moved step 5 (GUI Applications) to the last step
         - Added new troubleshooting and documentation
+
+### 2023-11-10 0841H
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/Ideas/starting-GUI-apps-from-tty'
+        - Added new troubleshooting and documentation
+        - Added new finding and notes
 

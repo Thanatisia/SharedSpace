@@ -164,6 +164,13 @@ export DISPLAY=":[display]"
                 fi
                 ```
 
+- GUI applications are unable to be started
+    - Possible Issues/Solution
+        + '$DISPLAY' environment variable is not set to the target virtual display
+            ```console
+            export DISPLAY=:[display-number]
+            ```
+
 ### Finding and Notes
 - Using this, it might actually be possible to use this concept in docker and 
     - run GUI applications and using them via VNC servers within docker containers by 
@@ -176,6 +183,18 @@ export DISPLAY=":[display]"
         + starting up a VNC server pointing to the Virtual Framebuffer environment
         + starting up a Websocket server pointing to the VNC server
         + Access the websocket URL to view the GUI application
+
+- '$DISPLAY' environment variable 
+    - The '$DISPLAY' environment variable is used in Linux to specify the current TTY/Terminal Console it is working on
+        + To use a GUI application, you need to set the DISPLAY environment variable to point to the virtual monitor you wish to render the graphical environment on
+        + This is also used by 'xinit' and 'startx' to run Graphical environments/applications on a host
+    - To switch different Virtual Framebuffers 
+        - Switch the Virtual 'DISPLAY' monitors
+            ```console
+            export DISPLAY=:[your-target-monitor]
+            ```
+        - This means that you can startup as many Virtual Framebuffers as you require (or indeed, as the system can handle)
+            + And you just have to change the virtual display value
 
 ## Resources
 
