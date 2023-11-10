@@ -276,4 +276,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 1316H
 - Updates
     + Updated document 'Xvfb.md' in 'Docs/Linux/packages/Display Server/xorg' with new option for Framebuffer file dumping
+#### 1415H
+- New
+    + Added new documents 'xwd.md' and 'xwud.md' in 'Docs/Linux/packages/Display Server/xorg' for X Window Dumping and Undumping
 
