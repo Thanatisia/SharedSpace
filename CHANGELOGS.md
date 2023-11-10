@@ -273,4 +273,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new document 'Xvfb.md' for documentations regarding the X Display Server - Virtual Framebuffer (Xvfb) renderer utility
 - Updates
     + Updated x11vnc 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options usable with X Virtual Framebuffer (Xvfb)
+#### 1316H
+- Updates
+    + Updated document 'Xvfb.md' in 'Docs/Linux/packages/Display Server/xorg' with new option for Framebuffer file dumping
 
