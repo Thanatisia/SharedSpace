@@ -63,6 +63,10 @@ trap {options} ["command/action"] [signals...]
 			+ Distribution installer
 
 ### Usage
+- Catching a specific function signal
+    ```console
+    trap "your [function] <here>" [Signal]
+    ````
 
 - cleanup on EXIT
 	```console
@@ -95,11 +99,18 @@ trap {options} ["command/action"] [signals...]
 	trap "" [signal]
 	```
 
+## Wiki
+### Signals
++ SIGINT  : This basically asks the process to stop but will not force (Default)
++ SIGTERM : A slightly more forceful SIGINT but will still politely request for the process to terminate
++ SIGKILL : This is the 'KILL' signal whereby you force kill the process regardless of return code
+
 ## Resources
 
 ## References
 + [Linuxjournal - bash trap command](https://www.linuxjournal.com/content/bash-trap-command)
 + [Phoenixnap - bash trap command](https://phoenixnap.com/kb/bash-trap-command)
++ [itsfoss - Linux signal termination codes](https://itsfoss.com/linux-exit-codes/)
 
 ## Remarks
 

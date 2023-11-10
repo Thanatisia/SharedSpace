@@ -279,4 +279,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 1415H
 - New
     + Added new documents 'xwd.md' and 'xwud.md' in 'Docs/Linux/packages/Display Server/xorg' for X Window Dumping and Undumping
+#### 1423H
+- Updates
+    + Updated document 'trap.md' in 'Docs/Linux/commands' with new trap usage example
 
