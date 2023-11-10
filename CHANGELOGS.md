@@ -17,8 +17,7 @@
 + [2023-11-08 1747H, Asura](#2023-11-08-1747H)
 + [2023-11-09 1631H, Asura](#2023-11-09-1631H)
 + [2023-11-09 2044H, Asura](#2023-11-09-2044H)
-- [2023-11-10](#2023-11-10)
-    + 0841H
++ [2023-11-10](#2023-11-10)
 
 ## Version History
 ```
@@ -268,4 +267,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     + Testing new CHANGELOGS format
     + Updated 'keybindings.md' in 'Docs/Operating Systems/Windows/Tips-and-Tricks' with Windows Keybindings
+#### 1253H
+- New
+    - Added new folder 'commands' in 'Docs/Linux/packages/Display Server/xorg' for Xorg-related packages, functions and commands
+        - Added new document 'Xvfb.md' for documentations regarding the X Display Server - Virtual Framebuffer (Xvfb) renderer utility
+- Updates
+    + Updated x11vnc 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options usable with X Virtual Framebuffer (Xvfb)
 

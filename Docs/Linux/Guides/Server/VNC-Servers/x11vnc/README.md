@@ -134,8 +134,12 @@ x11vnc {options} <values>
     - With Arguments
         + -auth [.Xauthority-file-path]  : Explicitly specify the filepath to the target .Xauthority file to use
         + -display [display-port-number] : Specify your $DISPLAY port number (i.e. :n); This display number defines what VNC port number it is mapped to (5900 + display-port-number); Default= :0 = 5900
-        + -passwd [your-password]        : Explicitly specify the password to authenticate the port number connection
+        + `-listen [platform]`           : Enable listening of the specified platform
+            - Platforms 
+                + localhost: This option ensures that the VNC server only listens on the localhost interface for added security
         + -o [output-log-file-path]      : Specify x11vnc logfile output filepath (i.e. /var/log/x11vnc.log)
+        + -passwd [your-password]        : Explicitly specify the password to authenticate the port number connection
+        + `-rfbport [vnc-port-number]` : This option is used to explicitly specify the VNC port you wish to point to; This allows you to match the display number to the VNC port you wish to use (i.e. :1 => 5901, :2 => 5902)
         + -wait [seconds]                : Wait for the specified number of seconds before allowing connections
     - Flags
         + -bg        : Run in the background
@@ -143,13 +147,20 @@ x11vnc {options} <values>
         + -localhost : Bind to the local interface
         + -loop      : Restart the server once the session is finished (client connection is closed)
         + -many      : Allow many uses to the current instance; Keep the VNC server port instance running even after connected VNC client disconnects; Similar to '-forever'
+        + -nopw      : This flag specifies that no password is required for VNC access for simplicity; You can add security as required
         + -noxdamage : Do not use the X DAMAGE extension to detect framebuffer changes even if it is available; Use '-xdamage' to enable it
         + -usepw     : Similar to vncpasswd in tigervnc; Uses the password found in '~/.vnc/passwd' or '~/.vnc/passwdfile'; If the files cannot be located, it will prompt the user for a password and it will save into '~/.vnc/passwd' and is used straight away
+        + -xkb       : This flag ensures that the XKB extension is used
 
 ### Usage
 - Just start X
     ```console
     x11vnc -display :0 -auth ~/.Xauthority
+    ```
+
+- Start VNC using a custom VNC port number
+    ```console
+    x11vnc -display :6 -rfbport 5906 -nopw -xkb -forever -bg
     ```
 
 - SSH Tunnel
