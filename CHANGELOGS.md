@@ -283,3 +283,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     + Updated document 'trap.md' in 'Docs/Linux/commands' with new trap usage example
 
+### 2023-11-11
+#### 1649H
+- Updates
+    + Updated x11vnc 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options and usage examples
+
