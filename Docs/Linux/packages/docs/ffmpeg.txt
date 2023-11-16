@@ -1,22 +1,338 @@
-#================================#
-# Linux Documentation - Packages #
-#	FFMPEG			 #
-#================================#
+# Linux package - ffmpeg
 
-Linux Documentation on package [ffmpeg]
+## Information
+### Background
+```
+FFmpeg is a feature-rich and powerful audio and video converter
+```
 
-Table of Contents:
-	Background Information
-	Project Details
-	Parameters
+### Packages
++ Base : ffmpeg : In Official Repository
++ Development : ffmpeg-git : in AUR
++ Full : ffmpeg-full : in AUR
 
-Project Details:
-	Author: 
-	Package Name: 
-		Base : ffmpeg : In Official Repository
-		Development : ffmpeg-git : in AUR
-		Full : ffmpeg-full : in AUR
-	Platforms: Windows, Linux
-	
-Parameters:
-	
+## Setup
+### Dependencies
+### Pre-Requisites
+
+## Documentations
+### Synopsis/Syntax
+```console
+ffmpeg {options} [output-file]
+```
+### Parameters
+- Positionals
+    - output-file : The name of the audio/video file to output
+        - Images
+            - Formatting : The output file name can be formatted with symbols to perform actions
+                - %2d : Automatically append 2-digit decimal/integer values to that position in the filename
+                    - i.e.
+                        + image-01.png
+                        + image-02.png ...
+                - %3d : Automatically append 3-digit decimal/integer values to that position in the filename
+                    - i.e.
+                        + image-001.png
+                        + image-002.png ...
+- Optionals
+    - With Arguments
+        - `-c:a` | `-acodec [action|codec]` : Specify the audio codec/encoder you wish to use to convert the video file
+            - Action
+                + copy : Perform a 1 to 1 copying of the audio stream
+            - Codec/Encoders
+                + aac
+        - `-ab [bitrate (default=bits)]` : Specify the Audio Bitrate (i.e. 192 = 192bps, 320 = 320bps, 192k = 192kbps, 320k = 320kbps)
+            - Bitrates
+                + 192 | 192k
+                + 320 | 320k
+        + `-ac [channel]` : Specify the Audio Channel to listen at
+        - `-an [format]` : Specify the Audio Format
+            - Formats
+                + default (Empty): No Audio Recording; Removes Audio Stream from a video
+                + h265
+        - `-af [filter]` : Specify the Audio Filters
+            - Filters
+                - volume=X.Y : Explicitly increase/decrease the volume
+                    + To decrease the volume: X=0, Y=[reduce-amount]
+                    + To increase the volume: X=1, Y=[increase-amount]
+        - `-ar [frequency (Hz)]` : Specify the Audio Frequency/Rate (Hz) of the output audio file
+            - Frequency
+                + 22050
+                + 44100
+                + 48000
+        - `-aspect [aspect-ratio (X:Y)]` : Specify the aspect ratio of the output video file to convert to
+            - Aspect Ratios
+                + 16:10
+                + 16:9
+                + 5:4
+                + 4:3
+                + 2:39:1
+                + 2:35:1
+                + 2:21:1
+        - `-c [action]` : Perform conversion
+            - Actions
+                + copy : Copy the existing video and audio streams and place them into a new container; This is the same as '-vcodec copy -acodec copy'
+        - `-crf [compress-framerate]` : Specify the compression value used to compress the video (0-100)
+            - Information
+                + Default crf: 23
+                + Highest quality crf: 17
+                + Increase crf: Makes quality worse but decreases file size
+                + Decrease crf: Makes quality better but increases file size
+                + Adjusting crf by 6 roughly doubles/halves the bitrate
+        - `-f [action|output-file-format|file-pipe-muxer]` : Explicitly specify the output file format to convert to / the output file pipe to parse through
+            - action
+                + concat : Join files specified in a text file
+            - output file format
+                + mp3
+                + image2 : 2D images
+            - file pipe muxer: Parse the output file through a pipe using a muxer to use
+                - Pipe Outputs
+                    + image2pipe : Muxer
+        - `-filter_complex ["options=value,"|format]` : Specify the filtering options/method/format to apply onto the input file process (i.e. gaussian etc). Please separate each option with a ',' delimiter
+            - Options
+                + fps=N : Set the Frames Per Second (FPS) of the output file
+                + scale=N : Set the resolution/scale of the output file; This can drastically impact the output file's file size
+                - flags=[flags] : Explicitly specify all flags to parse in; Please separate all flags with the ',' delimiter
+                    - Flags
+                        + lanczos
+                        + split
+            - Format
+                + paletteuse : Use the input PNG file as palette to filter and generate the GIF from the input video file
+        - `-i [input-video-file]` : Explicitly specify the name of the input video file to process
+        - `-loop [loop-values]` : Control the looping of the output file
+            - Looping Values
+                + -1 = No Looping
+                + 0  = Infinite Looping
+                + 1  = Will loop once (meaning it will play twice; once is the original, second is the loop)
+                + N  = Will loop and play the GIF (N+1) times
+        - `-map [stream-input-position]:[stream]:[stream-output-position]` : Makes ffmpeg only use the video stream from the specified position from the specified input and the specified audio stream
+            - Options
+                - stream-input-position : Specify the Input stream position/index
+                    + 0 = 1st Input
+                    + 1 = 2nd Input
+                - stream: 
+                    + a : Audio
+                    + v : Video
+                - stream-output-position : Specify the output stream position/index
+                    + 0 = 1st Input
+                    + 1 = 2nd Input
+        - `-pix_fmt [pixelation-format]` : Specify the pixelation format to use
+            - Formats
+                + yuv420p10le
+        - `-preset [speed]` : Set the preset video speed
+            - Speed Values
+                + veryslow : For better quality and compression
+                + slow : Default
+                + fast : For worse quality but faster compression 
+                + ultrafast : For terrible quality but relatively fast compression
+        + `-qscale [scale]` : Explicitly specify the quality scale of the source file (0-10)
+        - `-r [framerate]` : Explicitly Specify the framerate of the GIF/Video file to generate
+            - Parameters
+                + Framerate : Frames per second; 10 = 10fps, 20 = 20fps etc
+        - `-s [resolution ([width]x[height])` : Explicitly specify the size/resolution of the GIF/Video file to generate
+            - Parameters
+                - Resolution : The size of the output file
+                    + Format: `[width]x[height]`
+        + `-ss [start-time]` : Specify the starting time to convert from
+        + `-t [duration]` : Specify the duration/how long to convert for (i.e. starting time=30 seconds, duration=5 seconds, ending time=30+5=35 seconds in)
+        - `-tune [tuner]` : Specify the tuner
+            - Tuner
+                + animation
+        - `-c:v` | `-vcodec [action|codec]` : Specify the video codec/encoder you wish to use to convert the video file
+            - Action
+                + copy : Perform a 1 to 1 copying of the video stream
+            - Codecs
+                + libx264 : h264
+                + libx265 : h265
+                + pam : Image Encoder
+                + ppm
+        - `-vf "[{filters,}, actions]"` : Specify the formatting filters of the video to encode to (i.e. video resolution, framerate)
+            - Actions
+                + palettegen : Generate a PNG file from the video
+            - Filters
+                + fps=[framerate] : Specify the number of frames per second to render in the video (i.e. 30 = 30fps, 60 = 60fps, 300 = 300fps)
+                - scale=[width:height:flags=values] : Specify the scale of the output file (width:height:flags)
+                    + width  : Specify the width (Horizontal length) of the output video
+                    + height : Specify the height (Vertical height) of the output video
+                    - Flags
+                        + lanczos : Video Filter algorithm
+            - Examples
+                + `-vf "fps=10,scale=320:-1:flags=lanczos"
+        - `-x265-params [parameters:]` : Specify the X.265 Parameters to parse; Please separate each parameter with a ':' delimiter
+            - Parameters
+                + log-level=N  : Specify logging level (0-10)
+                + level-idc=N  : Specify Level of IDC (0-10)
+                + no-sao=N     : Specify number of SAO
+                + bframes=N    : Specify bframes
+                + ref=N        : Specify number of references
+                + qcomp=X.Y    : Specify qcomp rate (fractional 0.0 - 1.0)
+                + qpstep=N     : Specify qp steps
+                + rdoq-level=N : Specify rdop level (0-10)
+                + psy-rd=X.Y   : Specify the redirector Psy level (fractional 0.0 - 1.0)
+                + psy-rdoq=X.Y : Specify rdop psy level (fractional 0.0 - 1.0)
+                + aq-mode=N    : Specify mode of AQ (0-10)
+                + deblock=X,Y  : Specify deblock value (i.e. -1,-1)
+                + pools="N"    : Specify number of pools (0-10)
+    - Flags
+        + -formats : To list all supported formats by FFmpeg
+        + -hide_banner : To hide the FFmpeg banner and other details, but only the media file information
+        + -vn : Remove video stream/Disable video recording in the output file (No Video)
+        + -y : Say 'yes' to everything
+### Usage
+
+#### General Use
+- List all supported formats by FFmpeg
+    ```console
+    ffmpeg -formats
+    ```
+
+- Display details of a media file
+    ```console
+    ffmpeg -i [input-video-file]
+    ```
+
+#### Image Handling
+- Extracting Images from the Video
+    ```console
+    ffmpeg -i [input-video-file] -r [number-of-frames-to-be-extracted (recommended: 1)] -f [output-format (image2)] image-%2d.png
+    ```
+
+#### Video Recording
+
+
+#### Video Conversion
+- Convert video files to different formats
+    ```console
+    ffmpeg -i [input-video-file] [output-video-file]
+    ```
+
+- Single file conversion
+    ```console
+    ffmpeg -i [input-video-file] -c copy [output-video-file]
+    ```
+
+- Convert a input file to a different sized output
+    ```console
+    ffmpeg -i [input-file] -s [width]x[height] [output-file]
+    ```
+
+- Convert a input file to an output with different framerates
+    ```console
+    ffmpeg -i [input-file] -r [framerate (N fps)] [output-file]
+    ```
+
+- Convert a input file within a range of time
+    - Explanation
+        + -ss [start-time] : Specify the starting time to begin conversion
+        + -t [duration]    : Specify the duration/how long to convert for; Using this and '-ss' will allow you to calculate the ending time
+    ```console
+    ffmpeg -i [input-video-file] -ss [start-time] -t [duration] [output-file]
+    ```
+
+- Set the aspect ratio of a video
+    ```console
+    ffmpeg -i [input-video-file] -aspect 16:9 [output-file]
+    ```
+
+- Merge Audio and Video Files together with audio re-encoding
+    ```console
+    ffmpeg -i [input-video-file] -i [input-audio-file] -c:v copy -c:a aac [output-video-file]
+    ```
+
+- Generate GIFs from mp4 files
+    - Methods
+        - Using palettegen, paletteuse
+            - Generate a palette from the video
+                ```console
+                ffmpeg -i [input-video-file] -vf palettegen [output-png-file]
+                ```
+            - Generate mp4 files
+                ```console
+                ffmpeg -i [input-video-file] -i [output-png-file] -filter_complex paletteuse -r 10 -s 320x480 file.gif
+                ```
+        - Using Video Filter
+            - Explanation
+                + '-ss [starting-time]' : skip the first N seconds (-ss N) according to the starting time of the input
+                + '-t [duration]' : Create a N-second output based on the duration (-t [duration]).
+                - '-vf [video-filter]: 
+                    + 'fps' : Sets the frame rate (A rate of 10 frames per second is used in the example)
+                    + 'scale' : scale filter will resize the output to 320 pixels wide and automatically determine the height while preserving the aspect ratio. 
+                    - 'flags'
+                        + scaling-algorithm : The lanczos scaling algorithm is used in this example.
+                        + 'palettegen' and 'paletteuse' filters : generate and use a custom palette generated from your input.; These filters have many options, so refer to the links for a list of all available options and values. 
+                        + 'split' : will allow everything to be done in one command and avoids having to create a temporary PNG file of the palette.
+                - '-loop 0' : Control looping with -loop output option 
+                    - Values 
+                        + A value of 0 is infinite looping, 
+                        + -1 is no looping, and 
+                        + 1 will loop once meaning it will play twice. 
+                        + So a value of 10 will cause the GIF to play 11 times.
+            ```console
+            ffmpeg -i [input-video-file] -ss [starting-time] -t [duration] -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 output.gif
+            ```
+
+- Pipe the output file from ffmpeg to another converter
+    - ImageMagik
+        - convert
+            - Explanation
+                + Basically in this, we are taking the standard output from the ffmpeg operation and piping it into the standard input of the pipe command - in this case, 'convert' from 'ImageMagick'
+            ```console
+            ffmpeg -i [input-video-file] -vf "fps=10,scale=320:-1,flags=lanczos" -c:v pam -f image2pipe - | convert -delay 10 - -loop 0 -layers optimize output.gif
+            ```
+
+- Convert, encode and compress a video file using another codec
+    - Information    
+        + codec: The encoder you wish to use to convert the file
+            - Examples
+                + libx264 : h264
+                + libx265 : h265
+        - crf: Compression Framerate (0-100)
+            + Default crf: 23
+            + For the highest quality: use crf 17
+            + Increase crf: Makes quality worse but decreases file size
+            + Decrease crf: Makes quality better but increases file size
+            + Adjusting crf by 6 roughly doubles/halves the bitrate
+    ```console
+    ffmpeg -i [input-video-file] -vcodec [codec] -crf [quality] [output-video-file]
+    ```
+
+#### Audio
+- Convert a video input file to an audio output file
+    ```console
+    ffmpeg -i [input-video-file] -vn [output-audio-file]
+    ```
+
+- Explicitly specify a audio output format to convert to
+    ```console
+    ffmpeg -i [input-video-file] -vn -f mp3 [output-audio-file]
+    ```
+
+- Specify audio frequency, bitrate and channel
+    ```console
+    ffmpeg -i [input-video-file] -vn -ar 44100 -ac 2 -ab 320k -f mp3 [output-audio-file]
+    ```
+
+#### Testing
+- Preview or Test video or audio files
+    ```console
+    ffplay [file]
+    ```
+
+## Wiki
+
+### Terminologies
+- crf: Compression Framerate
+    + Increase crf: Makes quality worse but decreases file size
+    + Decrease crf: Makes quality better but increases file size
+
+## Related
++ ffplay
+
+## Resources
+
+## References
++ [FFMPEG Docs - paletteuse](https://ffmpeg.org/ffmpeg-all.html#paletteuse)
++ [Superuser - Questions - 556029 - How do I convert a video to GIF using ffmpeg with reasonable quality](https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality)
+
+## Remarks
+
+

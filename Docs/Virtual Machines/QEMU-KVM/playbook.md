@@ -36,9 +36,15 @@ TBC
         ```console
         qemu-system-[architecture] [recommended ...] -drive format=raw,index=[mount-position-index],file=[virtual-image-file (.iso)] 
         ```
+    - Startup a Samba (SMB) server in the Virtual Machine and Mount the specified volume/folder from the host system into the virtual machine
+        - Using '-net'
+            ```console
+            qemu-system-[architecture] [recommended ...] -net user,smb=/path/to/folder -net nic,model=virtio
+            ```
 
 ## Resources
 
 ## References
++ [UNIX StackExchange - Questions - 165554 - Shared folder between QEMU guest and host](https://unix.stackexchange.com/questions/165554/shared-folder-between-qemu-windows-guest-and-linux-host)
 
 ## Remarks
