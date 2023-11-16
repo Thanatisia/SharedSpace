@@ -347,4 +347,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Updated 'README.md' in 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system' with Samba (SMB) server network options
         - Updated 'playbook.md' in 'Docs/Virtual Machines/QEMU-KVM' with new instructions on starting up a Samba (SMB) server
 
+#### 2156H
+- Updates
+    - Updated 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options regarding VNC display and sharing
 
