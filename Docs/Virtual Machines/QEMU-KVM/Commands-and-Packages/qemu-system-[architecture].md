@@ -67,14 +67,18 @@ qemu-system-[architecture] {options} <arguments>
                     + none                      : VNC is initialized but not started; The monitor 'change' command can be used later to start the VNC server
             + `-vga [interface]`                : Video Graphics Appliance (Default: std) 
         - Network Options
-            - `-net [network-objects]`        : Set network objects
+            - `-net [network-objects],{options}`        : Set network objects
                 - Network Objects
-                    + network-interface
-                    + network-name
-                    + `nic,model=[NIC-model]` : Add a Network Interface Card
-                        - Models
-                            + virtio : (Default) virtio Virtualization NIC
-                    + user
+                    + `[network-interface],{options}` : Set a new network interface with options
+                    + `[network-name],{options}` : Set a new network with options
+                    + `nic,{options},...` : Set the Network Interface Card and options
+                        - Options
+                            - `model=[NIC-model]` : Add a Network Interface Card
+                                - Models
+                                    + virtio : (Default) virtio Virtualization NIC
+                    - `user,{options},...` : Set Network Options for the user
+                        - Options
+                            - `smb=/path/to/folder` : Startup a Samba (SMB) server in the Virtual Machine with the specified folder mounted from the host system into the virtual machine as a network shared drive
     - Flags
 
 ### Usage

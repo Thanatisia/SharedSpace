@@ -36,6 +36,7 @@ qemu-system-[architecture] {general-options} {networking-options}
         - user : To initialize a user network related to the user in the host system (username@hostname); This is generally focused at the host system networking (i.e. firewall) instead of device and infrastructure
             - Options
                 + hostfwd=[protocol]::[host-system-port]-:[virtual-machine-port] : Port forward/map/translate from the Host System Port to the Virtual Machine Guest Port (similar to docker's "-p | --publish" option)
+                + smb=/path/to/folder : Startup a Samba (SMB) server in the Virtual Machine and Mount the specified volume/folder from the host system into the virtual machine
 - -netdev [type],{options=value,...} : To Initialize and define a new network device for use
     - General Options
         - id=[network-device-id] : Specify the Network Device ID

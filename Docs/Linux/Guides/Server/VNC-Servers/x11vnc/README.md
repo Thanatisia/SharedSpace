@@ -132,24 +132,67 @@ x11vnc {options} <values>
 ### Parameters
 - Optionals
     - With Arguments
-        + -auth [.Xauthority-file-path]  : Explicitly specify the filepath to the target .Xauthority file to use
-        + -display [display-port-number] : Specify your $DISPLAY port number (i.e. :n); This display number defines what VNC port number it is mapped to (5900 + display-port-number); Default= :0 = 5900
-        + -passwd [your-password]        : Explicitly specify the password to authenticate the port number connection
-        + -o [output-log-file-path]      : Specify x11vnc logfile output filepath (i.e. /var/log/x11vnc.log)
-        + -wait [seconds]                : Wait for the specified number of seconds before allowing connections
+        + `-auth [.Xauthority-file-path]`    : Explicitly specify the filepath to the target .Xauthority file to use
+        + `-display [display-port-number]`   : Specify your $DISPLAY port number (i.e. :n); This display number defines what VNC port number it is mapped to (5900 + display-port-number); Default= :0 = 5900
+        + `-env [env-variable-name]=[value]` : Explicitly invoke/specify environment variables to parse into the environment on startup; Repeat for every environment variable to parse into the session
+        + `-gone [command-to-execute]`       : Explicitly specify the command to execute after x11vnc is closed.
+        + `-listen [platform]`               : Enable listening of the specified platform
+            - Platforms 
+                + localhost: This option ensures that the VNC server only listens on the localhost interface for added security
+        + `-o [output-log-file-path]`        : Specify x11vnc logfile output filepath (i.e. /var/log/x11vnc.log)
+        + `-passwd [your-password]`          : Explicitly specify the password to authenticate the port number connection
+        + `-rfbport [vnc-port-number]`       : This option is used to explicitly specify the VNC port you wish to point to; This allows you to match the display number to the VNC port you wish to use (i.e. :1 => 5901, :2 => 5902)
+        + `-wait [seconds]`                  : Wait for the specified number of seconds before allowing connections
     - Flags
         + -bg        : Run in the background
+        + -create    : Makes x11vnc automatically start an X Virtual Framebuffer instance
         + -forever   : Keep the VNC server port instance running even after connected VNC client disconnects; Similar to '-many'
         + -localhost : Bind to the local interface
         + -loop      : Restart the server once the session is finished (client connection is closed)
         + -many      : Allow many uses to the current instance; Keep the VNC server port instance running even after connected VNC client disconnects; Similar to '-forever'
+        + -nopw      : This flag specifies that no password is required for VNC access for simplicity; You can add security as required
         + -noxdamage : Do not use the X DAMAGE extension to detect framebuffer changes even if it is available; Use '-xdamage' to enable it
         + -usepw     : Similar to vncpasswd in tigervnc; Uses the password found in '~/.vnc/passwd' or '~/.vnc/passwdfile'; If the files cannot be located, it will prompt the user for a password and it will save into '~/.vnc/passwd' and is used straight away
+        + -xkb       : This flag ensures that the XKB extension is used
 
 ### Usage
 - Just start X
     ```console
     x11vnc -display :0 -auth ~/.Xauthority
+    ```
+
+- Start VNC using a custom VNC port number
+    ```console
+    x11vnc -display :6 -rfbport 5906 -nopw -xkb -forever -bg
+    ```
+
+- Automatically start VNC server with X Virtual Framebuffer (Xvfb) using a one-liner for Headless Graphical Environment
+    - Explanations
+        + `-display :[display-number]`                : Explicitly specify display number to map to
+        + -create                                     : Makes the VNC server start the X Virtual Framebuffer (Xvfb) automatically on startup
+        + `-env FD_PROG=/usr/bin/[application]`       : Set the Environment Variable value 'FD_PROG=/usr/bin/[application]' which will make the VNC server startup the specified application
+        + `-env X11VNC_FINDDISPLAY_ALWAYS_FAIL=1`     : Set the Environment Variable value 'X11VNC_FINDDISPLAY_ALWAYS_FAIL=1' which will make the VNC server go to the created Xvfb session (i.e. Display ':1' instead of ':0' which will be the normal desktop)
+        + `-env X11VNC_CREATE_GEOM=${1:-1024x768x16}` : Set the Environment Variable value 'X11VNC_CREATE_GEOM=${1:-[resolution]}' which will set the screen to the resolution and color density in the following format ([width]x[height]x[color-density-bitrate])
+        + `-gone 'killall Xvfb'`                      : Cleans up when it exits; To be used with '-create' as otherwise, Xvfb is left behind (killing Xvfb will kill all graphical applications as well)
+        - Optionals
+            + -nopw 
+            + -xkb 
+            + -forever 
+            + -bg
+    ```console
+    x11vnc -display :[display-number] -create -env FD_PROG=/usr/bin/[application] -env X11VNC_FINDDISPLAY_ALWAYS_FAIL=1 -env X11VNC_CREATE_GEOM=${1:-1024x768x16} -gone 'killall Xvfb' -nopw -xkb -forever -bg
+    ```
+
+- Start VNC server with password input support
+    - Note
+        + Websocket servers (like Websockify) and Web/Browser-based VNC clients will communicate with the VNC server to check if password input is necessary
+    ```console
+    x11vnc -display :[display-number] {other-options} -usepw -xkb -forever -bg
+    ```
+
+- Invoke and parse environment variables on startup
+    ```console
+    x11vnc -display :[display-number] {other-options} -env [ENVIRONMENT_VARIABLE_NAME]=[ENVIRONMENT_VARIABLE_VALUE]
     ```
 
 - SSH Tunnel
@@ -164,6 +207,11 @@ x11vnc {options} <values>
     ```
 
 ## Wiki
+### Environment Variables
++ `FD_PROG=/usr/bin/[application]`   : File Director program; Set this to be the full parth of the session/window manager program to startup if starting up with X Virtual Framebuffer (Xvfb)
++ `X11VNC_FINDDISPLAY_ALWAYS_FAIL=1` : Make the VNC server go to the created Xvfb session (i.e. Display ':1' instead of ':0' which will be the normal desktop)
++ `X11VNC_CREATE_GEOM=${1:-[resolution]}` : Set the screen to the resolution and color density in the following format ([width]x[height]x[color-density-bitrate])
+
 ### Snippets and Examples
 - To start up x11vnc in the background 
     - with explicitly-specified password
@@ -225,5 +273,7 @@ x11vnc {options} <values>
 
 ## References
 + [ArchWiki - x11vnc](https://wiki.archlinux.org/title/x11vnc)
++ [linux man - x11vnc](https://linux.die.net/man/1/x11vnc)
++ [StackOverflow - Questions - 12050021 - How to make Xvfb display visible](https://stackoverflow.com/questions/12050021/how-to-make-xvfb-display-visible)
 
 ## Remarks

@@ -70,3 +70,48 @@ install:
     ## - Distribute to system-wide if used with sudo 
     @make -s setup
 ```
+
+## Wiki
+### Usage
+- Typical Makefile used in projects
+    - Components
+        - Variables
+            ```makefile
+            PREFIX = /usr/local # Installation path
+            bin_dir = $(PREFIX)/bin # Binary directory
+            data_root_dir = $(PREFIX)/share # The root data directory for your project; i.e. /usr/local/share
+            man_dir = $(data_root_dir)/man # The user manual directory
+            man_1_dir = $(mandir)/man1 # The user man1 file directory
+            ```
+        - Rules/Targets
+            - Installation
+                ```makefile
+                install:
+                    ## Installation steps
+                    ### Create Directories
+                    mkdir -p -- $(DESTDIR)$(bin_dir) $(DESTDIR)$(man_1_dir)
+
+                    ### Copy binary/application into system
+                    cp -f -- [your-application] $(DESTDIR)$(bin_dir)/[your-application]
+
+                    ### Change modifier/permission of executables
+                    chmod -- +x $(DESTDIR)$(bin_dir)/[your-application]
+
+                    ### Copy man1 user manual files into system
+                    cp -f -- [your-application].1 $(DESTDIR)$(man_1_dir)/[your-application].1
+                ```
+            - Uninstallation
+                ```makefile
+                uninstall:
+                    ## Uninstallation/Removal
+
+                    ### Delete directory created
+                    rm -r $(DESTDIR)
+                ```
+
+## Resources
+
+## References
++ [GNU - Makefile Standards - DESTDIR](https://www.gnu.org/prep/standards/html_node/DESTDIR.html)
+
+## Remarks
