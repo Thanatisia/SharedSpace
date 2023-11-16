@@ -152,6 +152,8 @@ x11vnc {options} <values>
         + -many      : Allow many uses to the current instance; Keep the VNC server port instance running even after connected VNC client disconnects; Similar to '-forever'
         + -nopw      : This flag specifies that no password is required for VNC access for simplicity; You can add security as required
         + -noxdamage : Do not use the X DAMAGE extension to detect framebuffer changes even if it is available; Use '-xdamage' to enable it
+        + -once      : Exit after the first successfully connected viewer disconnects, opposite of -forever. This is the Default.
+        + -shared    : VNC  display is shared, i.e. more than one viewer can connect at the same time (default off).
         + -usepw     : Similar to vncpasswd in tigervnc; Uses the password found in '~/.vnc/passwd' or '~/.vnc/passwdfile'; If the files cannot be located, it will prompt the user for a password and it will save into '~/.vnc/passwd' and is used straight away
         + -xkb       : This flag ensures that the XKB extension is used
 
@@ -275,5 +277,6 @@ x11vnc {options} <values>
 + [ArchWiki - x11vnc](https://wiki.archlinux.org/title/x11vnc)
 + [linux man - x11vnc](https://linux.die.net/man/1/x11vnc)
 + [StackOverflow - Questions - 12050021 - How to make Xvfb display visible](https://stackoverflow.com/questions/12050021/how-to-make-xvfb-display-visible)
++ [AskUbuntu - Questions - 817970 - How to setup multiple simultaneous access to x11vnc session](https://askubuntu.com/questions/817970/how-to-setup-multiple-simultaneous-access-to-x11vnc-session)
 
 ## Remarks
