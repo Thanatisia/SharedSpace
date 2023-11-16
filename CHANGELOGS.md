@@ -18,6 +18,8 @@
 + [2023-11-09 1631H, Asura](#2023-11-09-1631H)
 + [2023-11-09 2044H, Asura](#2023-11-09-2044H)
 + [2023-11-10](#2023-11-10)
++ [2023-11-11](#2023-11-11)
++ [2023-11-16](#2023-11-16)
 
 ## Version History
 ```
@@ -287,4 +289,62 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 1649H
 - Updates
     + Updated x11vnc 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options and usage examples
+
+### 2023-11-16
+#### 2131H
+- New
+    - Update 2023-11-07 1736H
+        - Added new folder 'Static Website' in 'Docs/Programming/Web-Development' for Static Web Development (No Database, No Server)
+            - Added new folder 'Static Site Generators' in 'Static Website' for static site generators
+                - Added new folder 'Hugo' for Static Site Generator framework 'hugo'
+                    + Added new document 'README.md' for 'Hugo'
+    - Update 2023-11-08 1747H
+        - Added new folder 'design-snippets' for CSS Snippets and examples for designs in 'Docs/Programming/Web-Development/Guides'
+        - Added new folder 'Basics' for CSS Basics and fundamentals in 'Docs/Programming/Web-Development/Languages/CSS'
+        - Added new folder 'layouts' for containing CSS layout documentations, guides, snippets and usage examples in 'Docs/Programming/Web-Development/Languages/CSS/Guides'
+    - Update 2023-11-09 1631H
+        - Added new folder 'Ideas' for containing ideas regarding different unique usages such as 'starting GUI applications in VNC server from tty' in 'Docs/Linux'
+    - Update 2023-11-10 1253H
+        - Added new folder 'commands' in 'Docs/Linux/packages/Display Server/xorg' for Xorg-related packages, functions and commands
+            - Added new document 'Xvfb.md' for documentations regarding the X Display Server - Virtual Framebuffer (Xvfb) renderer utility
+    - Update 2023-11-10 1415H
+        - Added new documents 'xwd.md' and 'xwud.md' in 'Docs/Linux/packages/Display Server/xorg' for X Window Dumping and Undumping
+    - Update 2023-11-16 2109H
+        - Added new document 'xauth.md' in 'Docs/Linux/packages/Display Server/xorg/commands' for Xauthority handling
+        - Added new document 'starting-x11-from-scratch.md' in 'Docs/Linux/packages/Display Server/xorg' with steps to startup a simple Xorg Display Server instance from scratch
+        - Added new document 'calculus.md' in 'Docs/Mathematics/Formulas' with calculus-related formulas
+        - Added new folder 'Resources' in 'Docs/Programming/Languages/Markdown' for markdown-related resource files
+        - Added new document 'keywords.md' in 'Docs/Programming/Shellscript' with built-in commands, functions and keywords used in general shellscripting (i.e. if, else etc)
+        - Added new document 'quickstart.md' in 'Docs/Programming/Web-Development/Static Website/Static Site Generators/Hugo' for Hugo Quickstart setup steps
+
+- Updates
+    - Update 2023-11-09 2044H
+        - Updated document 'README.md' in 'Docs/Linux/Ideas/starting-GUI-apps-from-tty'
+            - Rearranged order of operation in 'steps'
+                + Moved step 5 (GUI Applications) to the last step
+            - Added new troubleshooting and documentation
+    - Update 2023-11-10 0841H
+        - Updated document 'README.md' in 'Docs/Linux/Ideas/starting-GUI-apps-from-tty'
+            - Added new troubleshooting and documentation
+            - Added new finding and notes
+    - Update 2023-11-10 0902H
+        + Testing new CHANGELOGS format
+        + Updated 'keybindings.md' in 'Docs/Operating Systems/Windows/Tips-and-Tricks' with Windows Keybindings
+    - Update 2023-11-10 1253H
+        - Updated x11vnc 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options usable with X Virtual Framebuffer (Xvfb)
+    - Update 2023-11-10 1316H
+        - Updated document 'Xvfb.md' in 'Docs/Linux/packages/Display Server/xorg' with new option for Framebuffer file dumping
+    - Update 2023-11-10 1423H
+        - Updated document 'trap.md' in 'Docs/Linux/commands' with new trap usage example
+    - Update 2023-11-11 1649H
+        - Updated x11vnc 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options and usage examples
+    - Update 2023-11-16 2109H
+        - Updated 'ffmpeg.txt' in 'Docs/Linux/packages/docs' with working documentations on FFmpeg; to be converted into markdown
+        - Updated 'probability-and-statistics.md' in 'Docs/Mathematics/Formulas' with new formulas pertaining to Statistical analysis and probability
+        - Updated 'makefile.md' in 'Docs/Programming/Build Systems/Make/Documentations' with new makefile usages
+        - Updated 'README.md' in 'Docs/Programming/Web-Development/Static Website/Static Site Generators/Hugo' with new Hugo-related instructions and documentations
+        - Updated 'qemu-system-[architecture].md' in 'Docs/Virtual Machines/QEMU-KVM/Commands-and-Packages' with added networking options regarding the QEMU/KVM command 'qemu-system-[architecture]'
+        - Updated 'README.md' in 'Docs/Virtual Machines/QEMU-KVM/Guides/Networking/Using qemu-system' with Samba (SMB) server network options
+        - Updated 'playbook.md' in 'Docs/Virtual Machines/QEMU-KVM' with new instructions on starting up a Samba (SMB) server
+
 
