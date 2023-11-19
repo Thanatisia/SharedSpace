@@ -39,9 +39,14 @@ Can be used for Debugging, development, testing, deployment checks, or just usin
     sdkmanager --licenses
     ```
 - Search for an AVD system image
-    ```console
-    sdkmanager --list | grep system-images
-    ```
+    - Linux
+        ```console
+        sdkmanager --list | grep system-images
+        ```
+    - Windows
+        ```console
+        sdkmanager --list | findstr system-images
+        ```
 
 - Install the chosen system image
     - Explanation

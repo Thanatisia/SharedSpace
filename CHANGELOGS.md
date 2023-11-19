@@ -372,3 +372,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Migrated and renamed 'README.md' in 'Docs/Programming/Mobile-App-Development/Android/Project' => 'android-application-development-from-the-command-line.md' in 'U:\Private\Zachary\Programming\Projects\Repositories\git\SharedSpace\main\Docs\Programming\Mobile-App-Development\Android\Quick topic and references'
 
+#### 1528H
+- New
+    - Added new document 'README.md' in 'Docs/Programming/Mobile-App-Development/Android/Project' containing quickstart information on Android Application Development Project Structure and Setup such as what is needed to setup a simple Android development environment shell on the command line
+- Updates
+    - Updated 'emulator.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator' with new options and usage snippets
+    
