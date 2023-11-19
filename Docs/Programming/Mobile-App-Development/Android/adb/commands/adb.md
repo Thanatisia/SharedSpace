@@ -31,6 +31,7 @@ adb {options [arguments...]} { shell [shell_command] | adb_command | [action] [a
 	- Options
 		+ -t : When installing a test APK
 + kill-server 							: Terminate and stop your adb host
++ logcat                                                        : To view log messages in real time and monitor your application's log output and debug it
 + pull [remote-filepath] [local-filepath]			: To copy file(s) or folder(s) from the connected device to the local host
 + push [local-filepath] [remote-filepath]			: To copy file(s) or folder(s) from the local host to the connected device
 + start-server 							: Start your adb host
@@ -88,6 +89,11 @@ To Be Continued
 	```console
 	adb [-d | -e | -s serial_number] shell
 	```
+
+- To view log messages in real time
+    ```console
+    adb logcat
+    ```
 
 ## References
 + [Android Developer Documentations - adb](https://developer.android.com/studio/command-line/adb)

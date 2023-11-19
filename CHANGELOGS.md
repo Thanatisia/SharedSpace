@@ -20,6 +20,7 @@
 + [2023-11-10](#2023-11-10)
 + [2023-11-11](#2023-11-11)
 + [2023-11-16](#2023-11-16)
++ [2023-11-19](#2023-11-19)
 
 ## Version History
 ```
@@ -350,4 +351,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 2156H
 - Updates
     - Updated 'README.md' in 'Docs/Linux/Guides/Server/VNC-Servers/x11vnc' with new options regarding VNC display and sharing
+
+### 2023-11-19
+
+#### 1448H
+- New
+    + Added new document 'avdmanager.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/cmdline-tools' for the Android SDK utility AVD Manager
+    + Added new document 'sdkmanager.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/cmdline-tools' for the Android SDK utility SDK Manager (Used for setting up Android App Development from command line without Android Studio (from scratch))
+    + Added new document 'emulator.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator' for the Android SDK Emulation utility 'emulator'
+    + Added new document 'setup.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK' for containing basic documentation to setup your host system for Android Application Development from command line without Android Studio (from scratch)
+    + Added new document 'README.md' in 'Docs/Programming/Mobile-App-Development/Android/Project' to contain go-to information for android application development project structure and for a Quickstart reference to setting up your host system for Android Application Development from command line without Android Studio (from Scratch)
+    + Added new document 'README.md' in 'Docs/Programming/Mobile-App-Development/Android/Project/templates' containing the contents of a typical/template source file
+- Updates
+    + Updated CHANGELOGS 
+    + Updated 'adb.md' in 'Docs/Programming/Mobile-App-Development/Android/adb/commands' with new options
 
