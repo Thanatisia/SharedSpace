@@ -29,9 +29,7 @@ avdmanager [action] {options} <arguments>
             - Types
                 + avd : List available Android Virtual Devices
             - Options
-                - `-n [types]` : Specify AVD type
-                    - Types
-                        + device : AVD Device
+                - `-n [avd-name]` : Specify name of the AVD to be created
                 - `--device [device-model]` : The model of the device of your choice
                     - Device Models
                         + pixel : Google Pixel
@@ -48,7 +46,7 @@ avdmanager [action] {options} <arguments>
 ### Usage
 - Create the Android Virtual Device (AVD)
     ```console
-    avdmanager create avd -n device --device [device-model] -k "[system-image-package]"
+    avdmanager create avd -n [avd-name] --device [device-model] -k "[system-image-package]"
     ```
 
 - List available Virtual Devices

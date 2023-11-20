@@ -110,32 +110,32 @@ Full documentation on Mobile Application Development entirely from the command l
 - ANDROID_NDK_ROOT : Set this to the home/root directory of the Android NDK installation
     - Linux
         ```console
-        ANDROID_HOME="/path/to/android-ndk"
+        ANDROID_NDK_ROOT="/path/to/android-ndk"
         ```
     - Windows
         ```console
-        SET ANDROID_HOME="/path/to/android-ndk"
+        SET ANDROID_NDK_ROOT="/path/to/android-ndk"
         ```
 
 #### Android Emulator
 - ANDROID_EMULATOR_HOME : Set this to the location of home/root directory of emulator-specific data files
     - Linux
         ```console
-        ANDROID_HOME="/path/to/.android"
+        ANDROID_EMULATOR_HOME="/path/to/.android"
         ```
     - Windows
         ```console
-        SET ANDROID_HOME="/path/to/.android"
+        SET ANDROID_EMULATOR_HOME="/path/to/.android"
         ```
 
 - ANDROID_AVD_HOME : Set this to the home/root location of Android Virtual Device (AVD)-specific data files
     - Linux
         ```console
-        ANDROID_HOME="/path/to/.android/avd"
+        ANDROID_AVD_HOME="/path/to/.android/avd"
         ```
     - Windows
         ```console
-        SET ANDROID_HOME="/path/to/.android/avd"
+        SET ANDROID_AVD_HOME="/path/to/.android/avd"
         ```
 
 #### Programming Language-specific configurations
@@ -327,15 +327,19 @@ Full documentation on Mobile Application Development entirely from the command l
             ```console
             mkdir -p [project-home-directory]/app/src/main/res/drawable-{densities}
             ```
+        - mipmap : Mipmaps are drawable files primarily to design launcher icons; this folder is for placing your app/launcher icons only
+            ```console
+            mkdir -p [project-home-directory]/app/src/main/res/mipmap/launcher_file
+            ```
         - values : string/text-related XML files
             ```console
             mkdir -p [project-home-directory]/app/src/main/res/values
             touch [project-home-directory]/app/src/main/res/values/strings.xml
             ```
 
-- Modify Build Configuration
+- Modify Application Build Configuration
     - configure dependencies, version numbers, custom gradle tasks and other build settings as needed. 
-        - Edit the build.gradle files
+        - Edit the Module/Application-level build.gradle file
             ```console
             $EDITOR [project-home-directory]/app/build.gradle
             ```
@@ -386,6 +390,35 @@ Full documentation on Mobile Application Development entirely from the command l
         + Initialize a version control system (e.g., Git) to track changes in your project.
         - Integrate Third-Party Libraries:
             + Add third-party libraries by specifying their dependencies in your project's build.gradle files.
+
+- Modify Top-layer Build Configurations
+    - Configure dependencies, version numbers, custom gradle tasks and other build settings as needed. 
+        - Edit the Top-level/Project-level build.gradle script
+            ```console
+            $EDITOR [project-home-directory]/build.gradle
+            ```
+        - Modifications
+            - Add Build Package and repository Dependencies
+                - Template
+                    ```gradle
+                    buildscript {
+                        repositories {
+                            google() // Google's Maven Repository
+                            jcenter() // JCenter repository
+                            // Add any other repositories here if needed
+                        }
+                        dependencies {
+                            classpath '[organization-name].[package-name]:[type (i.e. library/plugin)]:[version-number]'
+                            // Add more build dependencies here
+                        }
+                    }
+                    ```
+                - Example
+                    ```gradle
+                    dependencies {
+                        // Add more dependencies here
+                    }
+                    ```
 
 ## Development
 
@@ -468,6 +501,11 @@ Full documentation on Mobile Application Development entirely from the command l
         ```console
         adb logcat
         ```
+
+### Deployment
+#### Generate Signing Key (Private-Public Key Pair)
+
+#### 
 
 ## Documentations
 
@@ -566,8 +604,11 @@ Full documentation on Mobile Application Development entirely from the command l
                             - layout/ : Directory containing frontend code that will be linked to the backend source code
                                 + activity_main.xml
                             - drawable/ : Drawable files are assets/images that can be added into the project to be displayed in the application
-                            - values : string/text-related key-value mapping XML files
+                            - mipmap/ : Mipmaps are drawable files primarily to design launcher icons; this folder is for placing your app/launcher icons only
+                            - values/ : string/text-related key-value mapping XML files
+                                + colors.xml : Contains color name-value definitions and mappings
                                 + strings.xml : Contains string variable key-value mappings
+                                + styles.xml : Contains application themes applicable in the application
 
 - AndroidManifest.xml
     - Explanation
@@ -616,6 +657,35 @@ Full documentation on Mobile Application Development entirely from the command l
     </manifest>
     ```
 
+- colors.xml
+    - Explanation
+        + colorPrimary, colorPrimaryDark, and colorAccent are typical colors used in Material Design themes for primary, darker variant, and accent colors respectively.
+        + textColor represents a generic text color. 
+        + You can use it as a placeholder and later reference this color throughout your app's styles and layouts.
+    - Information
+        + Place this in the folder 'res/values'
+        + This file contains color name-value definition/mappings that you can reference by name instead of statically typing
+    ```xml
+    <resources>
+        <!-- Primary branding color -->
+        <color name="colorPrimary">#3F51B5</color>
+
+        <!-- Darker variant of primary color -->
+        <color name="colorPrimaryDark">#303F9F</color>
+
+        <!-- Accent color for UI elements -->
+        <color name="colorAccent">#FF4081</color>
+
+        <!-- Text color -->
+        <color name="textColor">#000000</color>
+        
+        <!-- Additional colors -->
+        <!-- <color name="secondaryColor">#2196F3</color> -->
+        <!-- <color name="highlightColor">#FFC107</color> -->
+        <!-- Add more colors as needed -->
+    </resources>
+    ```
+
 - strings.xml
     - Explanation
         + `<resources>`: The root tag that encapsulates all resource definitions.
@@ -635,6 +705,41 @@ Full documentation on Mobile Application Development entirely from the command l
 
         <!-- Other Strings -->
         <!-- Add other strings used in your app here -->
+    </resources>
+    ```
+
+- styles.xml
+    - Explanation
+    - Information
+        + Place this in the folder 'res/values'
+        + This file contains application themes (aka "styles") which you can apply to the application
+    ```xml
+    <resources>
+
+        <!-- Base application theme -->
+        <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+            <!-- Customize your theme here -->
+            <item name="colorPrimary">@color/colorPrimary</item> <!-- Primary branding color -->
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item> <!-- Darker variant of primary color -->
+            <item name="colorAccent">@color/colorAccent</item> <!-- Accent color for UI elements -->
+            <!-- Other theme attributes -->
+
+            <!-- ActionBar styles -->
+            <!-- Customize ActionBar styles here -->
+
+            <!-- App-wide text appearance -->
+            <item name="android:textAppearance">@style/AppTextAppearance</item>
+
+            <!-- Add any other customizations or overrides here -->
+        </style>
+
+        <!-- Text Appearance for the entire app -->
+        <style name="AppTextAppearance" parent="TextAppearance.AppCompat">
+            <!-- Customize text appearance here -->
+            <item name="android:textColor">@color/textColor</item> <!-- Default text color -->
+            <!-- Other text attributes -->
+        </style>
+
     </resources>
     ```
 
@@ -718,6 +823,7 @@ Full documentation on Mobile Application Development entirely from the command l
 
         android {
             compileSdkVersion [android-sdk-version]
+            namespace = "[organization-name].[project-name].[application-name]"
             defaultConfig {
                 applicationId "organization-name.project-name.application-name"
                 minSdkVersion [android-minimum-sdk-version]
@@ -741,7 +847,7 @@ Full documentation on Mobile Application Development entirely from the command l
         }
         ```
     - Kotlin
-        ```groovy
+        ```kt
         plugins {
             id '[organization-name].[project-name].[application-name]'
             id 'kotlin-android'
@@ -793,6 +899,8 @@ Full documentation on Mobile Application Development entirely from the command l
         + Remember to adjust the com.android.tools.build:gradle version to the latest available version at the time of your project setup or based on your project requirements.
         - This build.gradle file resides in the root directory of your Android project and is responsible for defining project-wide configurations and dependencies. 
             + You can modify it to add additional repositories, dependencies, or configurations that apply to all modules within your project
+        - gradle plugin version
+            + Please refer to [Android Developers Guide - Build - Releases - Gradle Plugin](https://developer.android.com/build/releases/gradle-plugin) for the latest version(s) of the Gradle Plugin
     ```groovy
     // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -804,7 +912,7 @@ Full documentation on Mobile Application Development entirely from the command l
             // Add any other repositories here if needed
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:7.0.4' // Android Gradle Plugin version
+            classpath 'com.android.tools.build:gradle:[gradle-plugin-version]' // Android Gradle Plugin version
             // Add other build dependencies here if needed
         }
     }
@@ -854,6 +962,7 @@ Full documentation on Mobile Application Development entirely from the command l
 ## References
 + [Android - Emulator Archive](https://developer.android.com/studio/emulator_archive)
 + [Android Authority - Android SDK Beginner's Tutorial](https://www.androidauthority.com/android-sdk-tutorial-beginners-634376/)
++ [Android Developers Guide - Build - Releases - Gradle Plugin](https://developer.android.com/build/releases/gradle-plugin) for the latest version(s) of the Gradle Plugin
 + [Android Developers Guide - Command Line Tools](https://developer.android.com/tools)
 + [Android Developers Guide - Command Line Tools - sdkmanager](https://developer.android.com/tools/sdkmanager)
 + [Android Developers Guide - Command Line Tools - Variables (Android SDK)](https://developer.android.com/tools/variables#android_home)

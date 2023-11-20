@@ -21,6 +21,7 @@
 + [2023-11-11](#2023-11-11)
 + [2023-11-16](#2023-11-16)
 + [2023-11-19](#2023-11-19)
++ [2023-11-20](#2023-11-20)
 
 ## Version History
 ```
@@ -377,4 +378,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new document 'README.md' in 'Docs/Programming/Mobile-App-Development/Android/Project' containing quickstart information on Android Application Development Project Structure and Setup such as what is needed to setup a simple Android development environment shell on the command line
 - Updates
     - Updated 'emulator.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator' with new options and usage snippets
-    
+
+### 2023-11-20
+#### 1710H
+- New
+    - Added new document 'packages.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK' to contain all useful Android SDK packages and components to note
+- Updates
+    - Updated 'avdmanager.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/cmdline-tools' with new options and usages
+    - Updated 'sdkmanager.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/cmdline-tools' with new options and usages
+    - Updated 'emulator.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator' with new options and usages
+    - Updated 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references' with updates and bug fixes
+

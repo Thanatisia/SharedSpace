@@ -30,6 +30,11 @@ Can be used for Debugging, development, testing, deployment checks, or just usin
             ```console
             ANDROID_AVD_HOME="/path/to/home/.android"
             ```
+    - Ensure that the following are set in the System Path (PATH)
+        + ANDROID_HOME/emulator
+        + ANDROID_HOME/tools
+        + ANDROID_HOME/platform-tools
+        + ANDROID_HOME/cmdline-tools/latest/bin
 + Installed Android SDK (Please refer to 'setup.md' in 'Android-SDK' folder or 'README.md' in 'Docs/Programming/Mobile-App-Development/Android/Project')
 - Install Android SDK packages
     ```console
@@ -57,7 +62,7 @@ Can be used for Debugging, development, testing, deployment checks, or just usin
 
 - Create the Android Virtual Device (AVD)
     - Explanation
-        - `-n device` : Specify AVD type
+        - `-n [avd-name]` : Specify name of the AVD to be created
         - `--device [device-model]` : The model of the device of your choice
             - Device Models
                 + pixel : Google Pixel
@@ -65,7 +70,7 @@ Can be used for Debugging, development, testing, deployment checks, or just usin
             - Example
                 + "system-images;[image-platform-version];[image-repository];[architecture]"
     ```console
-    avdmanager create avd -n device --device [device-model] -k "[system-image-package]"
+    avdmanager create avd -n [avd-name] --device [device-model] -k "[system-image-package]"
     ```
 
 - List available Virtual Devices
