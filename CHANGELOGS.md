@@ -369,7 +369,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 
 #### 1459H
 - New
-    - Added new folder 'Quickstart topic and references' in 'U:\Private\Zachary\Programming\Projects\Repositories\git\SharedSpace\main\Docs\Programming\Mobile-App-Development\Android' for all example snippets and quickstart references to particular use cases and topics
+    - Added new folder 'Quickstart topic and references' in 'Docs\Programming\Mobile-App-Development\Android' for all example snippets and quickstart references to particular use cases and topics
 - Updates
     - Migrated and renamed 'README.md' in 'Docs/Programming/Mobile-App-Development/Android/Project' => 'android-application-development-from-the-command-line.md' in 'U:\Private\Zachary\Programming\Projects\Repositories\git\SharedSpace\main\Docs\Programming\Mobile-App-Development\Android\Quick topic and references'
 
