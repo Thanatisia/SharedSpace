@@ -38,13 +38,13 @@
         SET ANDROID_PATHS="%ANDROID_HOME%\tools";"%ANDROID_HOME%\platform-tools";"%ANDROID_HOME%\cmdline-tools\latest\bin"
 
         :: Java-related
-        SET JDK_HOME=C:\Users\Zachary\Desktop\Main_Workspace\portable\Utilities\Programming\Java\JDK\jdk-19_windows-x64_bin\jdk-19.0.1
-        SET JAVA_HOME=C:\Users\Zachary\Desktop\Main_Workspace\portable\Utilities\Programming\Java\JDK\jdk-19_windows-x64_bin\jdk-19.0.1
+        SET JDK_HOME=[path-to-jdk]
+        SET JAVA_HOME=[path-to-java]
 
         :: File/Folder Paths
         SET SDK_PATH="%ANDROID_HOME%\cmdline-tools\latest\bin"
-        SET BUILD_SYSTEM_PATH="C:\Users\Zachary\Desktop\Main_Workspace\portable\Utilities\Programming\Gradle\gradle-8.4-bin\gradle-8.4\bin"
-        SET TOOLS="C:\Users\Zachary\Desktop\Main_Workspace\portable\Utilities\Android\Platform Tools\platform-tools_r34.0.5-windows\platform-tools"
+        SET BUILD_SYSTEM_PATH="\path\to\gradle\bin"
+        SET TOOLS="\path\to\platform-tools"
 
         :: Environment Variables
         SET PATH=%PATH%;%SDK_PATH%;%BUILD_SYSTEM_PATH%;%TOOLS%;%ANDROID_PATHS%;
