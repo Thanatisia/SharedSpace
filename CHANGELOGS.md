@@ -389,3 +389,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated 'emulator.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator' with new options and usages
     - Updated 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references' with updates and bug fixes
 
+### 2023-11-21
+#### 1747H
+- New
+    + Added new document 'build-file-customization.md' in 'Docs/Programming/Build Systems/Gradle/Guides' for Gradle file customization guides such as customizing project-level/module-level build.gradle scripts
+- Updates
+    + Updated 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references' with cleanup and additional information after testing
+
