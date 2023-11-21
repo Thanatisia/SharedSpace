@@ -161,6 +161,11 @@ Full documentation on Mobile Application Development entirely from the command l
                 SET PATH="%PATH%;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\cmdline-tools\latest\bin;\your\paths;"
                 ```
 
+- Reload shell configuration source file after updating
+    ```console
+    source $HOME/.bashrc
+    ```
+
 ### Preparation
 - (Optional) Install Android Platform Tools manually
     - Information 
@@ -179,6 +184,29 @@ Full documentation on Mobile Application Development entirely from the command l
             unzip platform-tools_r[version]-[operating-system].zip -d [destination-directory]
             ```
 
+- Install Android SDK
+    - Linux
+        - Using Package Manager
+            - apt-based
+                - Package Name: android-sdk
+                    + The package will be installed to '/usr/lib/android-sdk'
+                ```console
+                sudo apt install android-sdk
+                ```
+        - Just create a folder/directory path you wish to be the root/home of the Android SDK
+            - Information
+                + For Linux, it can be '/usr/lib/android-sdk'
+            ```console
+            mkdir -p /usr/lib/android-sdk
+            ```
+    - Windows
+        - Just create a folder/directory path you wish to be the root/home of the Android SDK
+            - Information
+                + For Windows, it can be 'C:\\Android-SDK'
+            ```console
+            mkdir -p \path\to\android\sdk
+            ```
+
 - Install Android SDK Command Line Tools
     - Information
         + This contains 'sdkmanager' which is used to install the Android SDK packages and components
@@ -189,13 +217,24 @@ Full documentation on Mobile Application Development entirely from the command l
                 + mac : Mac
                 + linux : Linux
         + The filename should be 'commandlinetools-*-*.zip'
-        ```console
-        wget https://dl.google.com/android/repository/commandlinetools-win-10406996_latest.zip
-        ```
+        - Windows
+            ```console
+            wget https://dl.google.com/android/repository/commandlinetools-win-10406996_latest.zip
+            ```
     - Extract the archive
+        - Information
+            + When extracted, the directory/folder name is 'cmdline-tools'
         - Linux
             ```console
             unzip commandlinetools-linux-*.zip -d [destination-directory]
+            ```
+    - Move extracted file into the development environment directory
+        - Linux
+            - Information
+                + Generally, the system-level path to place the android-sdk is '/usr/lib/android-sdk'
+                + Therefore, typically the system-level path to place the Android SDK's command line tools is '/usr/lib/android-sdk/cmdline-tools'
+            ```console
+            mv cmdline-tools $ANDROID_HOME/cmdline-tools
             ```
 
 - Install Android SDK packages and components
@@ -265,6 +304,7 @@ Full documentation on Mobile Application Development entirely from the command l
                 ```console
                 gradle init --type [library-name]
                 ```
+            + The build.gradle generated this way is meant for a generic Java project, as such, please refer to the build.gradle templates provided [here](#templates)
         - Generate a new Java-based Android project
             ```console
             gradle init --type java-library
@@ -394,6 +434,7 @@ Full documentation on Mobile Application Development entirely from the command l
 - Modify Top-layer Build Configurations
     - Configure dependencies, version numbers, custom gradle tasks and other build settings as needed. 
         - Edit the Top-level/Project-level build.gradle script
+            + The Project/Top-level build.gradle generated this way is meant for a generic Java project, as such, please refer to the build.gradle templates provided [here](#templates)
             ```console
             $EDITOR [project-home-directory]/build.gradle
             ```
