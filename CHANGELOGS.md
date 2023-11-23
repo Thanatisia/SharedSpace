@@ -23,6 +23,7 @@
 + [2023-11-19](#2023-11-19)
 + [2023-11-20](#2023-11-20)
 + [2023-11-21](#2023-11-21)
++ [2023-11-23](#2023-11-23)
 
 ## Version History
 ```
@@ -396,4 +397,15 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     + Added new document 'build-file-customization.md' in 'Docs/Programming/Build Systems/Gradle/Guides' for Gradle file customization guides such as customizing project-level/module-level build.gradle scripts
 - Updates
     + Updated 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references' with cleanup and additional information after testing
+
+### 2023-11-23
+#### 1500H
+- New
+    + Added new document 'terminologies.md' in 'Docs/Computers' for glossary and terminologies about Computer Engineering and Electronics
+    - Added new folder 'Servers' in 'Docs' as a dedicated server documentation folder that allows cross-platform information
+        + Added new document 'README.md' in 'Docs/Servers'
+        - Added new folder 'services/networking/Socks' in 'Docs/Servers' for Networking-related servers and the SOCKS proxy server protocol
+            + Added new document 'README.md' in 'Docs/Servers/services/networking/Socks' for a quickstart reference on using the SOCKS protocol
+- Updates
+    + Updated 'ssh.md' in 'Docs/Networking/Topics/Remote Connection/commands/SSH/commands' with SSH tunnel options and usage
 
