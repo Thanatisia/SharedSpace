@@ -414,3 +414,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new folder 'Usages' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator' for example usage and snippets for the Android SDK emulator CLI utility
         - Added new document 'starting-emulator-headless.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator/Usages': Usage/Snippet example on starting up the Android SDK emulator CLI utility headlessly using VNC
 
+#### 1748H
+- Updates
+    - Updated 'starting-emulator-headless.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator/Usages' with steps to startup headlessly using the X Virtual Framebuffer
+
