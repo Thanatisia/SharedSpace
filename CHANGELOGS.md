@@ -24,6 +24,7 @@
 + [2023-11-20](#2023-11-20)
 + [2023-11-21](#2023-11-21)
 + [2023-11-23](#2023-11-23)
++ [2023-11-25](#2023-11-25)
 
 ## Version History
 ```
@@ -417,4 +418,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 1748H
 - Updates
     - Updated 'starting-emulator-headless.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/emulator/Usages' with steps to startup headlessly using the X Virtual Framebuffer
+
+### 2023-11-25
+#### 2256H
+- New
+    - Added new folder 'SSL Certificate Signing' in 'Docs/CyberSecurity/Guides/TLS-SSL' for SSL/TLS Digital Certificate Authority and Signing guides
+        - Added new document 'https-setup-using-certbot.md' in 'Docs/CyberSecurity/Guides/TLS-SSL/SSL Certificate Signing' for accessing HTTPS with CertBot and Let's Encrypt
+    - Added new folder 'SSL-TLS Certificate' in 'Docs/Home Lab/Services and Tools' for SSL/TLS Certificate Management-related Server tools and utilities
+        - Added new folder 'certbot' in 'Docs/Home Lab/Services and Tools/SSL-TLS Certificate' for CertBot-related documentations
+            - Added new document 'README.md' in 'Docs/Home Lab/Services and Tools/SSL-TLS Certificate/certbot'
 
