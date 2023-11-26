@@ -25,6 +25,7 @@
 + [2023-11-21](#2023-11-21)
 + [2023-11-23](#2023-11-23)
 + [2023-11-25](#2023-11-25)
++ [2023-11-26](#2023-11-26)
 
 ## Version History
 ```
@@ -427,4 +428,23 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new folder 'SSL-TLS Certificate' in 'Docs/Home Lab/Services and Tools' for SSL/TLS Certificate Management-related Server tools and utilities
         - Added new folder 'certbot' in 'Docs/Home Lab/Services and Tools/SSL-TLS Certificate' for CertBot-related documentations
             - Added new document 'README.md' in 'Docs/Home Lab/Services and Tools/SSL-TLS Certificate/certbot'
+
+### 2023-11-26
+#### 2122H
+- New
+    - Added new folder 'Hardware/Consoles' in 'Docs/Gaming' for Documentations related to Gaming Hardware such as Consoles, PCs etc
+        - Added new folder '3DS' in 'Docs/Gaming/Hardware/Consoles' for 3DS Hardware-related information
+            - Added new document 'resources.md' in 'Docs/Gaming/Hardware/Consoles/3DS/Hacking-and-Mods/Files' for all Resources-related to 3DS Hacking and Modding
+        - Added new folder 'DSi' in 'Docs/Gaming/Hardware/Consoles' for DSi Hardware-related information
+            - Added new document 'resources.md' in 'Docs/Gaming/Hardware/Consoles/DSi/Hacking-and-Mods/Files' for all Resources-related to DSi Hacking and Modding
+        - Added new folder 'PS-Vita' in 'Docs/Gaming/Hardware/Consoles' for PS Vita Hardware-related information
+            - Added new document 'resources.md' in 'Docs/Gaming/Hardware/Consoles/PS-Vita/Hacking-and-Mods/Files' for all Resources-related to PS Vita Hacking and Modding
+        - Added new folder 'PS3' in 'Docs/Gaming/Hardware/Consoles' for PS3 Hardware-related information
+            - Added new document 'resources.md' in 'Docs/Gaming/Hardware/Consoles/PS3/Hacking-and-Mods/Files' for all Resources-related to PS3 Hacking and Modding
+        - Added new folder 'PSP' in 'Docs/Gaming/Hardware/Consoles' for PSP Hardware-related information
+            - Added new document 'resources.md' in 'Docs/Gaming/Hardware/Consoles/PSP/Hacking-and-Mods/Files' for all Resources-related to PSP Hacking and Modding
+    + Added new document 'creating-a-precompiled-binary-repository.md' in 'Docs/Servers/services/web-server/Ideas' : Creating a self-hosted, pre-compiled binary repository using a Web Server where you can download binaries without having to compile manually on a host
+- Updates
+    + Modified 'dd.md' in 'Docs/Linux/commands' by cleaning up syntax and polishing structure
+
 

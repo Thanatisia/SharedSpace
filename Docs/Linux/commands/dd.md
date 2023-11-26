@@ -57,48 +57,25 @@
     dd if=[source disk/partition/file] of=[destination disk/partition/file] {options}
     ```
     
-### Parameters: 
-- if : Input File
-	+ Syntax: dd if=[source]
+### Parameters
+- Positionals
+- Optionals
+    - With Arguments
+        - `bs=[block-size (bytes-per-block)]` : This contains the size (in bytes) of each block that dd will read each time
+	        + Default: 512 (bytes)
+        - `count=[maximum-number-of-blocks-to-copy]` : This specifies the number of counts to write each block in the Virtual Disk
+        - conv
+        - `ibs=[input-block-size]` : Specifies the Input Block Space/Size; Set amount of bytes read at a time
+        - `if=[input-file]` : Specify the Input file stream
+        - `obs=[output-block-size]` : Output Block Space/Size; Set amount of bytes written at a time
+        - `of=[path-to-virtual-hard-disk-img]` : Specify the output file 
+        - `seek=[number-of-blocks-to-seek]` : Skip specified blocks of data at the start of output
+        - `skip=[number-of-blocks-to-skip]` : Skip specified blocks of data at the start of input
+        - `status=[formatting]` : Method of display for status output
+            - Status Formats
+                + progress : Display status updates in a progress bar
+    - Flags
 
-- of : Output File
-	+ Syntax: dd of=[destination]
-
-- ibs : Input Block Space/Size
-	- Set amount of bytes read at a time
-	+ Syntax: dd if=[disk/partition/file] of=[disk/partition/file] ibs=N
-
-- obs : Output Block Space/Size
-	- Set amount of bytes written at a time
-	+ Syntax: dd if=[disk/partition/file] of=[disk/partition/file] obs=N
-
-- bs : Block Space
-	- amount of data that should be read at a time
-	- Syntax: dd if=[disk/partition/file] of=[disk/partition/file] bs=N
-	    + Default: 512 (bytes)
-	- Examples:
-		+ Clone MBR : dd if=/dev/sdX of=mbr.img bs=512 count=1
-
-- count : total amount of blocks to read
-	+ Syntax: dd if=[disk/partition/file] of=[disk/partition/file] count=N
-
-- skip : Skip specified blocks of data at the start of input
-	+ Syntax: dd if=[disk/partition/file] of=/path/to/file.extension count=[bytes] skip=N
-	- Examples:
-		1. (Related to seek example [1]) Backup hidden data between the MBR and the first partition on the disk WITHOUT including the MBR : sudo dd if=/dev/sdX of=file_no_mbr.img count=2047 skip=1
-
-- seek : Skip specified blocks of data at the start of output
-	+ Syntax: dd if=/path/to/file.extension of=[disk/partition/file] seek=N
-	- Examples:
-		1. (Related to skip example [1]) Restore cloned data and write it back into the disk zone [hidden between the MBR and the first partition] : sudo dd if=after_mbr.img of=/dev/sdX seek=1
-
-- conv
-
-- status : Method of display for status output
-	+ Syntax: dd if=[disk/partition/file] of=[disk/partition/file] status={options}
-	- Options:
-		+ progress : For Progress Bar
-    
 ### Usage
 - Basic/General Usage
     + Refer to this if you dont know how to start
@@ -169,11 +146,67 @@
             ```console
 			gunzip file.dd.gz
             ```
-	
+
+- To Clone an MBR
+    ```console
+    dd if=/dev/sdX of=mbr.img bs=512 count=1
+    ```
+
+- Backup hidden data between the MBR and the first partition on the disk WITHOUT including the MBR
+    ```console
+    sudo dd if=/dev/sdX of=file_no_mbr.img count=2047 skip=1
+    ```
+
+- Restore cloned data and write it back into the disk zone [hidden between the MBR and the first partition]
+    ```console
+    sudo dd if=after_mbr.img of=/dev/sdX seek=1
+    ```
+
+- To create a Virtual Hard Disk file/image and mount to use as a disk
+    - Create a Virtual Hard Disk image
+        - Explanation
+            - Parameters
+                - Positionals
+                    - path-to-virtual-hard-disk-img : This specifies the output file to create
+                - Options
+                    - bs : This contains the size (in bytes) of each block that dd will read each time
+                    - count : This specifies the number of counts to write each block in the Virtual Disk
+            - Therefore, to create a VHD of size 56gb
+                - Options
+                    - bs = 1G
+                    - count = 56
+                - 1G * 56 = 56Gb
+        ```console
+        dd if=/dev/zero of=[path-to-virtual-hard-disk-img] bs=[block-size (bytes-per-block)] count=[number-of-counts]
+        ```
+    - Format Virtual Hard Disk with a file system
+        ```console
+        mkfs -t [file-system-type] [path-to-virtual-hard-disk-img]
+        ```
+    - Mount Virtual Hard Disk
+        - Explanation
+            - Parameters
+                - -o loop : Mount the Virtual Disk Image as a loop device and mount the file in '/dev/loop<n>' where n is the remaining loop number
+                    + You can use '-o loop=/dev/loop<number>' to explicitly set a loop number
+        - As a loop
+            ```console
+            sudo mount -o loop [path-to-virtual-hard-disk-img] [mount-location]
+            ```
+        - As a typical storage medium
+            ```console
+            sudo mount -t [file-system-type] [path-to-virtual-hard-disk-img] [mount-location]
+            ```
+    + Make changes to store files in the Virtual Hard Disk
+    - Unmount Virtual Hard Disk
+        ```console
+        umount -l [mount-location]
+        ```
+
 ## Resources
 
 ## References
-    
++ [SmartTech101 - How to create and use virtual hard disk in Linux](https://smarttech101.com/how-to-create-and-use-virtual-hard-disk-in-linux/)
+
 ## Remarks
 - First partition on the disk usually starts at sector 2048 for alignment reasons
 
