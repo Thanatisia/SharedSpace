@@ -26,6 +26,8 @@
 + [2023-11-23](#2023-11-23)
 + [2023-11-25](#2023-11-25)
 + [2023-11-26](#2023-11-26)
++ [2023-11-28](#2023-11-28)
++ [2023-11-29](#2023-11-29)
 
 ## Version History
 ```
@@ -447,4 +449,17 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     + Modified 'dd.md' in 'Docs/Linux/commands' by cleaning up syntax and polishing structure
 
+### 2023-11-28
+#### 1634H
+- Updates
+    - Updated 'dd.md' in 'Docs/Linux/commands' with updated instructions to creating a Virtual (Raw) Disk Image for usage as though it is a real device as well as partition support
 
+### 2023-11-29
+#### 1446H
+- New
+    - Added new document 'losetup.md' in 'Docs/Linux/packages/docs' for Loopback Device setup 
+    - Added new folder 'creating-a-virtual-disk-image-with-filesystems' in 'Docs/Linux/Ideas' on Creating a Virtual Disk/Virtual Image using dd that can be mounted and used as a bootable ISO and usable storage
+
+- Updates
+    - Updated document 'dd.md' in 'Docs/Linux/commands' with updates to usage on creating a new Virtual Disk Image
+    - Updated document 'README.md' in 'Docs/Linux/Ideas'
