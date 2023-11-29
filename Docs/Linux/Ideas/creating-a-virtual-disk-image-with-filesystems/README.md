@@ -110,6 +110,17 @@ The benefits and use cases of this are
     umount -l [mount-location]
     ```
 
+## Documentation
+### Usage
+- Use in VirtualBox as a VDI/VHD image
+    - Pre-Requisites
+        - Ensure that the file is a .vdi | .vhd file
+            - Convert the .img/.iso file into '.vdi'
+                - Using vboxmanage
+                    ```console
+                    vboxmanage convertdd [path-to-virtual-hard-disk-img] [vdi-output-file].vdi
+                    ```
+
 ## Wiki
 
 ## Resources

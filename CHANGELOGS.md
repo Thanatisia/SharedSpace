@@ -463,3 +463,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'dd.md' in 'Docs/Linux/commands' with updates to usage on creating a new Virtual Disk Image
     - Updated document 'README.md' in 'Docs/Linux/Ideas'
+
+#### 2213H
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/Ideas/creating-a-virtual-disk-image-with-filesystems'
+        - New usage to convert a raw image created from dd into a bootable Virtual Disk Image file
+
+    - Updated document 'vboxmanage.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line'
+        - New parameter 'convertdd'
+        - New usage to convert a raw image created from dd into a bootable Virtual Disk Image file
+
