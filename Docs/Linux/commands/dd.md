@@ -179,23 +179,59 @@
         ```console
         dd if=/dev/zero of=[path-to-virtual-hard-disk-img] bs=[block-size (bytes-per-block)] count=[number-of-counts]
         ```
-    - Format Virtual Hard Disk with a file system
-        ```console
-        mkfs -t [file-system-type] [path-to-virtual-hard-disk-img]
-        ```
+    - (Optional) Create partitions in disk image
+        - Using parted
+            - Create Disk Label
+                ```console
+                parted [path-to-virtual-hard-disk-img] mklabel [msdos|gpt]
+                ```
+            - Create Partitions
+                ```console
+                parted [path-to-virtual-hard-disk-img] mkpart ...
+                ```
+    - (Optional) If Disk Image 
+        - contains partitions
+            - Mount Disk Image and Partitions as loopback devices
+                - Using losetup
+                    - Pre-Requisites
+                        + losetup
+                    - Explanation
+                        - Parameters
+                            + -P
+                            + -f : Print the first available loop device
+                    ```console
+                    sudo losetup -Pf [path-to-virtual-hard-disk-img]
+                    ```
+            - Format mounted loopback device partitions with a file system
+                ```console
+                mkfs -t [file-system-type] /dev/loop[loopback-number]p[partition-number]
+                ```
+        - is a standalone
+            - Format Virtual Hard Disk with a file system
+                ```console
+                mkfs -t [file-system-type] [path-to-virtual-hard-disk-img]
+                ```
     - Mount Virtual Hard Disk
         - Explanation
             - Parameters
                 - -o loop : Mount the Virtual Disk Image as a loop device and mount the file in '/dev/loop<n>' where n is the remaining loop number
                     + You can use '-o loop=/dev/loop<number>' to explicitly set a loop number
-        - As a loop
-            ```console
-            sudo mount -o loop [path-to-virtual-hard-disk-img] [mount-location]
-            ```
-        - As a typical storage medium
-            ```console
-            sudo mount -t [file-system-type] [path-to-virtual-hard-disk-img] [mount-location]
-            ```
+        - If just a standalone Disk Image
+            - As a loop
+                ```console
+                sudo mount -o loop [path-to-virtual-hard-disk-img] [mount-location]
+                ```
+            - As a typical storage medium
+                ```console
+                sudo mount -t [file-system-type] [path-to-virtual-hard-disk-img] [mount-location]
+                ```
+        - Disk Image contains partitions
+            - Using losetup
+                - Pre-Requisites
+                    + losetup
+                ```console
+                sudo mount -t [file-system-type] /dev/loop[loopback-number]p[partition-number] [mount-location]
+                ```
     + Make changes to store files in the Virtual Hard Disk
     - Unmount Virtual Hard Disk
         ```console

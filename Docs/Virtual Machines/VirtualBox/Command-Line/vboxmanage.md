@@ -21,6 +21,11 @@ VBoxManage [action] [options [arguments]...]
 ### Params
 
 - action : Actions you can perform
+    - convertdd : Convert a Virtual Image (i.e. created by dd)
+        - Syntax: `vboxmanage convertdd [path-to-virtual-hard-disk-img] [vdi-output-file].vdi`
+        - Positionals
+            - path-to-virtual-hard-disk-img : Specify the filepath and filename of the target image
+            - vdi-output-file : Specify the filepath and filename of the output VDI/VHD file
 	- createhd : To create a hard disk for a Virtual Machine
 		- Syntax: VBoxManage createhd [{options} {arguments}...]
 		- Options:
@@ -152,8 +157,19 @@ VBoxManage internalcommands createrawvmdk -filename [path-to-vmdk-file-to-create
 VBoxManage modifyhd file.vdi --resize N{GiB|GB|MiB|MB}
 ```
 
+### File Conversion
+- Convert the .img/.iso file into '.vdi'
+    ```console
+    vboxmanage convertdd [path-to-virtual-hard-disk-img] [vdi-output-file].vdi
+    ```
+
+## Wiki
+
+## Resources
+
 ## References
 + [VirtualBox - How to Boot from USB | How to Convert Bootable USB device to VMDK Raw file](https://www.how2shout.com/how-to/virtualbox-virtual-machine-boot-usb.html)
 + [VirtualBox - How to create a virtualbox vm from command line | How to create a VM from Terminal](https://andreafortuna.org/2019/10/24/how-to-create-a-virtualbox-vm-from-command-line/)
 + [VirtualBox - How to resize a VirtualBox VM from command line](https://www.techrepublic.com/article/how-to-resize-a-virtualbox-vm-from-the-command-line/)
 
+## Remarks
