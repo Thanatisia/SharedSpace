@@ -479,3 +479,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     - Added new document 'security.md' in 'Docs/Linux/tips-n-tricks' related to Linux System Security, Security Hardening and Validations
 
+#### 2344H
+- New
+    - Added new folder 'Snippets-and-Examples' in 'Docs/Programming/Languages/Powershell' for Write-ups, simple guides and snippets on usage for Powershell
+        - Added new document 'syntaxes.md' for Powershell Syntax
+        - Added new document 'built-in.md' for Built-in Powershell functionalities, attributes and objects
+
+    - Added new folder 'stack-setup-from-scratch' in 'Docs/Programming'
+        - Added new document 'php-mysql-apache.md' for Setting up the LAMP stack from scratch
+
