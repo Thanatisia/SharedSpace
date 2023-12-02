@@ -29,6 +29,7 @@
 + [2023-11-28](#2023-11-28)
 + [2023-11-29](#2023-11-29)
 + [2023-12-02](#2023-12-02)
++ [2023-12-03](#2023-12-03)
 
 ## Version History
 ```
@@ -487,4 +488,15 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 
     - Added new folder 'stack-setup-from-scratch' in 'Docs/Programming'
         - Added new document 'php-mysql-apache.md' for Setting up the LAMP stack from scratch
+
+### 2023-12-03
+#### 0014H
+- New
+    - Created new folder 'Keywords' in 'Docs/Programming/Languages/Python' for holding Python keywords
+        - Migrated 'match-case.md' from 'Docs/Programming/Languages/Python/Guides/Version-Specific/Python3.10/Keywords' => 'Docs/Programming/Languages/Python/Keywords'
+    - Created new folder 'Python3.10' in 'Docs/Programming/Languages/Python/Guides/Versions' to hold information about Python 3.10
+        - Added new document 'README.md'
+
+- Updates
+    - Renamed folder 'Version-Specific' in 'Docs/Programming/Languages/Python/Guides' to 'Versions' to hold information regarding each of the Python release versions
 
