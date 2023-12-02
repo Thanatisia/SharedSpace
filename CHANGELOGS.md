@@ -28,6 +28,7 @@
 + [2023-11-26](#2023-11-26)
 + [2023-11-28](#2023-11-28)
 + [2023-11-29](#2023-11-29)
++ [2023-12-02](#2023-12-02)
 
 ## Version History
 ```
@@ -472,4 +473,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'vboxmanage.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line'
         - New parameter 'convertdd'
         - New usage to convert a raw image created from dd into a bootable Virtual Disk Image file
+
+### 2023-12-02
+#### 1409H
+- New
+    - Added new document 'security.md' in 'Docs/Linux/tips-n-tricks' related to Linux System Security, Security Hardening and Validations
 
