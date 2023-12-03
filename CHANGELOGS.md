@@ -526,3 +526,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new folder 'Snippets' in 'Docs/Programming/Mobile-App-Development/Android'
         - Added new document 'views.md' to store Snippets and usages of Views (Widgets)
 
+#### 2255H
+- New
+    - Added new folder 'packages' in 'Docs/Linux/distros/ArchLinux' for all ArchLinux-related packages, tools and utilities
+        - Added new document 'devtools.md' containing build guide on how to compile ArchLinux's 'devtools' package that is used for ArchLinux development
+    - Added new document 'compile-from-scratch.md' in 'Docs/Linux/distros/ArchLinux/pacman' about compiling the ArchLinux pacman package manager from scratch
+
