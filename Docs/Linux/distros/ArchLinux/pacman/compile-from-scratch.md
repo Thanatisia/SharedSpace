@@ -185,6 +185,7 @@
 + [ArchLinux GitLab - pacman/pacman - Pacman build instructions](https://gitlab.archlinux.org/pacman/pacman/-/tree/master/doc?ref_type=heads)
 + [ArchLinux GitLab - pacman/pacman - Meson build dependencies](https://gitlab.archlinux.org/pacman/pacman/-/blob/master/meson.build?ref_type=heads)
 + [ArchWiki - Install ArchLinux from an existing Linux](https://wiki.archlinux.org/title/Install_Arch_Linux_from_existing_Linux#Using_pacman_from_the_host_system)
++ [RxOS - ReadTheDocs - Development - Creating a chrooted build environment under ArchLinux](https://rxos.readthedocs.io/en/develop/appendices/chroot_environment.html)
 
 ## Remarks
 

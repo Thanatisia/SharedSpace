@@ -532,3 +532,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new document 'devtools.md' containing build guide on how to compile ArchLinux's 'devtools' package that is used for ArchLinux development
     - Added new document 'compile-from-scratch.md' in 'Docs/Linux/distros/ArchLinux/pacman' about compiling the ArchLinux pacman package manager from scratch
 
+#### 2319H
+- New
+    - Added new folder 'Snippets' in 'Docs/Linux/distros/ArchLinux' for ArchLinux-related Snippets, Tips and Tricks
+        - Added new document 'using-archlinux-from-existing-non-arch-system.md' in 'Docs/Linux/distros/ArchLinux/Snippets' for a setup on how to use ArchLinux-related utilities (i.e. pacman, pacstrap) on an existing linux system (non-ArchLinux)
+
+- Updated
+    - Updated document 'compile-from-scratch.md' in 'Docs/Linux/distros/ArchLinux/pacman' with new references
+
