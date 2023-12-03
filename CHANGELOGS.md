@@ -540,3 +540,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updated
     - Updated document 'compile-from-scratch.md' in 'Docs/Linux/distros/ArchLinux/pacman' with new references
 
+#### 2328H
+- New
+    - Added new document 'mkarchroot.md' in 'Docs/Linux/distros/ArchLinux/packages' for the archlinux/devtools framework CLI utility 'mkarchroot' which is used to generate a clean root filesystem for chrooting into
+
