@@ -28,7 +28,7 @@
 - `-keysize [key-size (bits)]` : Specify the size (number of bits) of the key pair
     - Key Sizes
         + 2048 : 2048-bits
-- `validity [number-of-days]` : Specify the 'Time-to-Live' (aka Lifetime) of the key before the key expires and has to be re-generated
+- `-validity [number-of-days]` : Specify the 'Time-to-Live' (aka Lifetime) of the key before the key expires and has to be re-generated
 - `-alias [your-alias]` : Specify the Alias for your key
 
 ### Usage
