@@ -511,3 +511,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references'
         - Added Deployment steps for Aligning and Digitally Signing APK file 
 
+#### 1518H
+- New
+    - Created new folder 'JDK' in 'Docs/Programming/Languages/Java/Guides'
+        - Created new folder 'packages' for information on JDK binaries and packages
+            - Added new document 'keytool.md' for info on the PKE CLI utility 'keytool'
+
+- Updates
+    - Updated document 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references'
+        - Added a line in 'keytool' explanation
+

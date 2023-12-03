@@ -547,6 +547,7 @@ Full documentation on Mobile Application Development entirely from the command l
 #### Generate Signing Key (Private-Public Key Pair)
 - Using 'keytool' 
     - Explanation
+        - Used to generate a Private-Public Key Pair and Digital Certificates in a Keystore file used to sign the APK file
         - Parameters
             + -genkey : Generate Public-Private Key Pair
             + -v : Enable verbose message output
