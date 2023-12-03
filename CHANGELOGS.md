@@ -500,3 +500,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Renamed folder 'Version-Specific' in 'Docs/Programming/Languages/Python/Guides' to 'Versions' to hold information regarding each of the Python release versions
 
+#### 1507H
+- New
+    - Created new folder 'Resources in 'Docs/CyberSecurity'
+        - Added new document 'websites.md'
+    - Created new folder 'Resources in 'Docs/Programming'
+        - Added new document 'websites.md'
+
+- Updates
+    - Updated document 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references'
+        - Added Deployment steps for Aligning and Digitally Signing APK file 
+

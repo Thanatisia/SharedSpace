@@ -545,8 +545,72 @@ Full documentation on Mobile Application Development entirely from the command l
 
 ### Deployment
 #### Generate Signing Key (Private-Public Key Pair)
+- Using 'keytool' 
+    - Explanation
+        - Parameters
+            + -genkey : Generate Public-Private Key Pair
+            + -v : Enable verbose message output
+            + `-keystore [keystore-file-name]` : Specify the output keystore file name to generate; This will contain the Private Key and Digital Certificate (Signature) used to sign the APK file
+            - `-keyalg [key-generation-algorithm]` : Specify the private key encryption algorithm used to generate the Public-Private Key Pair
+                - Algorithms
+                    + RSA
+            - `-keysize [key-size (bits)]` : Specify the size (number of bits) of the key pair
+                - Key Sizes
+                    + 2048 : 2048-bits
+            - `validity [number-of-days]` : Specify the 'Time-to-Live' (aka Lifetime) of the key before the key expires and has to be re-generated
+            - `-alias [your-alias]` : Specify the Alias for your key
+        - Key Generation
+            - The tool will prompt you afew questions required to create your Public Key Encryption (PKE)-generated key pair and the Digital Signature
+    ```console
+    keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+    ```
 
-#### 
+#### Sign your application from the command line
+- Sign an app bundle
+    - Using jarsigner
+
+- Sign an APK file
+    - Align the unsigned APK file
+        - Using zipalign
+            - Explanation
+                - Ensures that all uncompressed data starts with a particular byte alignment relative to the start of the file 
+                    + This may reduce the amount of RAM consumed by the application
+                - Parameters
+                    - Positionals
+                        + unsigned-apk-input-file : Specify the original built and generated unsigned APK file you wish to align
+                        + align-apk-output-file   : Specify the filename of the target output aligned APK file
+                    - Options
+                        + `-p [number-of-padding]` : Pad the file by the number of padding spaces specified to align the bytes
+                        + -v : Enable verbose message output
+            ```console
+            [android-sdk-root-directory]/build-tools/[build-tools-version]/zipalign -v -p 4 [unsigned-apk-input-file] [aligned-apk-output-file]
+            ```
+
+    - Sign your aligned APK file with your private key generated using 'keytool'
+        - Using apksigner
+            - Explanation
+                - This will sign the target aligned APK file with a Private Key and Digital Certificate (Signature) found in the specified keystore file generated using 'keytool'
+                - Parameters
+                    - Positionals
+                        - sign : This will sign the provided target input Aligned but Unsigned APK file with the specified Private Key store file generated from the Public-Private Key Pair
+                        - aligned-unsigned-apk-file : Specify the filename of the target input Aligned but Unsigned APK file you wish to sign
+                    - Options
+                        - `--ks [release-keystore-file]` : Specify the generated keystore file (containing the Private Key and Digital Certificate/Signature) to be used to sign the unsigned APK file
+                        - `-out [aligned-signed-release-output-file]` : Specify the filename of the target aligned and signed release APK output file
+            ```console
+            [android-sdk-root-directory]/build-tools/[build-tools-version]/apksigner sign --ks my-release-key.jks --out [aligned-signed-release-output-file] [aligned-unsigned-apk-file]
+            ```
+
+    - Verify that your APK is signed
+        - Explanation
+            - Parameters
+                - Positionals
+                    - verify : This will verify and check that the APK file was signed properly
+                - Options
+                    - --print-certs : Display the Digital Certificate and Signers used to sign the APK file
+        ```console
+        [android-sdk-root-directory]/build-tools/[build-tools-version]/apksigner verify [release-apk-file]
+        ```
 
 ## Documentations
 
@@ -1003,6 +1067,7 @@ Full documentation on Mobile Application Development entirely from the command l
 ## References
 + [Android - Emulator Archive](https://developer.android.com/studio/emulator_archive)
 + [Android Authority - Android SDK Beginner's Tutorial](https://www.androidauthority.com/android-sdk-tutorial-beginners-634376/)
++ [Android Developers Guide - Build - Build your app from the Command Line](https://developer.android.com/build/building-cmdline)
 + [Android Developers Guide - Build - Releases - Gradle Plugin](https://developer.android.com/build/releases/gradle-plugin) for the latest version(s) of the Gradle Plugin
 + [Android Developers Guide - Command Line Tools](https://developer.android.com/tools)
 + [Android Developers Guide - Command Line Tools - sdkmanager](https://developer.android.com/tools/sdkmanager)
