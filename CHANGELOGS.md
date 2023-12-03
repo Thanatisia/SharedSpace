@@ -521,3 +521,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references'
         - Added a line in 'keytool' explanation
 
+#### 1543H
+- New
+    - Added new folder 'Snippets' in 'Docs/Programming/Mobile-App-Development/Android'
+        - Added new document 'views.md' to store Snippets and usages of Views (Widgets)
+
