@@ -30,6 +30,7 @@
 + [2023-11-29](#2023-11-29)
 + [2023-12-02](#2023-12-02)
 + [2023-12-03](#2023-12-03)
++ [2023-12-04](#2023-12-04)
 
 ## Version History
 ```
@@ -543,4 +544,16 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 2328H
 - New
     - Added new document 'mkarchroot.md' in 'Docs/Linux/distros/ArchLinux/packages' for the archlinux/devtools framework CLI utility 'mkarchroot' which is used to generate a clean root filesystem for chrooting into
+
+### 2023-12-04
+#### 2252H
+- Updates
+    - Updated document 'using-archlinux-from-existing-non-arch-system.md' in 'Docs/Linux/distros/ArchLinux/Snippets'
+        - Added new method of creating a chroot environment : using a container (Docker)
+    - Updated document 'docker.md' in 'Docs/Technology/Containers/Docker/Guides'
+        - Added documentation on Adding/Passthrough the disk/devices to container
+        - Added documentation Usage examples on Adding/Passthrough the disk/devices to container
+    - Updated document 'Snippets.md' in 'Docs/Technology/Containers/Docker/Using Docker'
+        - Added new snippet topic on 'Create a chroot environment using a container'
+            - Added steps and useful settings
 

@@ -48,6 +48,44 @@
             pacman -Syu
             ```
 
+- Using docker
+    - Pull latest archlinux image
+        ```console
+        docker pull archlinux:latest
+        ```
+    - Startup a container
+        - Using docker run
+            - Explanation
+                - Startup an ArchLinux docker container with the name 'arch-chroot'
+                    - Optionals
+                        - Adding/Passthrough the disk/devices to container
+                            - Examples
+                                - SATA/AHCI
+                                    ```console
+                                    --device=/dev/sdX
+                                    ```
+                                - NVME
+                                    ```console
+                                    --device=/dev/nvme[device-number]
+                                    ```
+                                - Loopback Device
+                                    ```console
+                                    --device=/dev/loop[device-number]
+                                    ```
+                            ```console
+                            --device=[disk-label]
+                            ```
+                        - Mount the following volumes from the host system to the container
+                            - [host-system-source-volume] => [container-destination-volume]
+                - Parameters
+            ```console
+            docker run -itd --name=arch-chroot {other-options} archlinux:latest
+            ```
+    - Chroot (Change root) into the container
+        ```console
+        docker exec -it [container-name] [shell]
+        ```
+
 ## Wiki
 
 ## Resources
