@@ -31,6 +31,7 @@
 + [2023-12-02](#2023-12-02)
 + [2023-12-03](#2023-12-03)
 + [2023-12-04](#2023-12-04)
++ [2023-12-18](#2023-12-18)
 
 ## Version History
 ```
@@ -556,4 +557,15 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'Snippets.md' in 'Docs/Technology/Containers/Docker/Using Docker'
         - Added new snippet topic on 'Create a chroot environment using a container'
             - Added steps and useful settings
+
+### 2023-12-18
+#### 2131H
+- New
+    - Added new document 'complete-compendium.md' in 'Docs/Linux/Guides/System Administration' for being a complete compendium of sysadmin commands, guides, snippets, syntax and usage examples. 
+    - Added new topical directory 'Media' in 'Docs/' to contain all Media-related guides and documentations
+    - Added new document 'project-structure-layout-compendium.md' in 'Docs/Programming/Files' for containing all project structure layout(s) information for various programming languages, frameworks, toolkits and programming utilities
+    - Added new documents in 'Docs/Programming/Languages/Python/Guides' 
+        + built-in-system-functionalities.md : Guide regarding Python built-in keywords and system functionalities such as handling package management etc
+        + data-structures.md : Guide about usage of Data Structures in Python
+    - Added new directory 'pip' in 'Docs/Programming/Languages/Python/Libraries' : to contain documentations regarding using Pip as a python library/module
 
