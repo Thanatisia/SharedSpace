@@ -32,6 +32,7 @@
 + [2023-12-03](#2023-12-03)
 + [2023-12-04](#2023-12-04)
 + [2023-12-18](#2023-12-18)
++ [2023-12-21](#2023-12-21)
 
 ## Version History
 ```
@@ -568,4 +569,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + built-in-system-functionalities.md : Guide regarding Python built-in keywords and system functionalities such as handling package management etc
         + data-structures.md : Guide about usage of Data Structures in Python
     - Added new directory 'pip' in 'Docs/Programming/Languages/Python/Libraries' : to contain documentations regarding using Pip as a python library/module
+
+### 2023-12-21
+#### 2204H
+- New
+    - Added new folder 'Guides' in 'Docs/Git' for all Git-related guides, tips and tricks
+        - Added new document 'diy-remote-repository-server.md' : Documentations containing write-up on how to create your own Git remote repository server from scratch/source
+    - Added new folder 'Blueprints' in 'Docs/Programming' for all programming project ideas and constructive blueprints on how to create them from scratch/source (i.e. TCP server, HTTP Server, Web Server etc)
 
