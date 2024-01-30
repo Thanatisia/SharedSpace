@@ -93,6 +93,7 @@ sudo docker {actions} [image-name]
                     + Format: "[user-id]:[group-id]"
                     + Recommended Values : "$(id -u):$(id -g)"
 		+ -v [host-directory]:[container-volume]:[permissions] : To attach the specified host directory to the specified container volume location located in the container's filesystem; Used for storage sharing between container and host; Corresponds to docker-compose'd "volumes" keyword
+        + --device=[disk-label] : Adding/Passthrough the disk/devices to container; If you require a chroot environment for disk partition and management (i.e. formatting)
 		+ --name=[Container ID] : Provide a specific Container ID as the name of the container; aka Set container name
 		+ --network=[bridge-name] : Specify the Network Bridge Interface for the container to use; aka Run Docker container with a specific network
 		+ --rm : Delete the container created and its cache after the Docker instance has ended
@@ -291,9 +292,33 @@ sudo docker {actions} [image-name]
         curl -sL [server-ip-address]:[port]
         ```
 
+#### System Device and Disk Operations
+- Adding/Passthrough the disk/devices to container
+    - Information
+        - If you require a chroot environment for disk partition and management (i.e. formatting)
+    - Examples
+        - SATA/AHCI
+            ```console
+            --device=/dev/sdX
+            ```
+        - NVME
+            ```console
+            --device=/dev/nvme[device-number]
+            ```
+        - Loopback Device
+            ```console
+            --device=/dev/loop[device-number]
+            ```
+    ```console
+    docker run -itd --name="container-name" --device=[disk-label] image:tag
+    ```
+
+
 ## Resources
 
 ## References
++ [Docker Documentations - Command Line - Add Host device to container device](https://docs.docker.com/engine/reference/commandline/run/#add-host-device-to-container-device)
 + [StackOverflow - how to run arm64 docker images on amd64 host platform](https://stackoverflow.com/questions/68675532/how-to-run-arm64-docker-images-on-amd64-host-platform?rq=3)
++ [How to mount a device of host to host in a Docker container](https://stackoverflow.com/questions/38736319/how-to-mount-a-device-of-host-to-host-in-a-docker-container)
 
 ## Remarks

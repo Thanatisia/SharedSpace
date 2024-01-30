@@ -28,6 +28,12 @@
 + [2023-11-26](#2023-11-26)
 + [2023-11-28](#2023-11-28)
 + [2023-11-29](#2023-11-29)
++ [2023-12-02](#2023-12-02)
++ [2023-12-03](#2023-12-03)
++ [2023-12-04](#2023-12-04)
++ [2023-12-18](#2023-12-18)
++ [2023-12-21](#2023-12-21)
++ [2024-01-30](#2024-01-30)
 
 ## Version History
 ```
@@ -472,4 +478,169 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'vboxmanage.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line'
         - New parameter 'convertdd'
         - New usage to convert a raw image created from dd into a bootable Virtual Disk Image file
+
+### 2023-12-02
+#### 1409H
+- New
+    - Added new document 'security.md' in 'Docs/Linux/tips-n-tricks' related to Linux System Security, Security Hardening and Validations
+
+#### 2344H
+- New
+    - Added new folder 'Snippets-and-Examples' in 'Docs/Programming/Languages/Powershell' for Write-ups, simple guides and snippets on usage for Powershell
+        - Added new document 'syntaxes.md' for Powershell Syntax
+        - Added new document 'built-in.md' for Built-in Powershell functionalities, attributes and objects
+
+    - Added new folder 'stack-setup-from-scratch' in 'Docs/Programming'
+        - Added new document 'php-mysql-apache.md' for Setting up the LAMP stack from scratch
+
+### 2023-12-03
+#### 0014H
+- New
+    - Created new folder 'Keywords' in 'Docs/Programming/Languages/Python' for holding Python keywords
+        - Migrated 'match-case.md' from 'Docs/Programming/Languages/Python/Guides/Version-Specific/Python3.10/Keywords' => 'Docs/Programming/Languages/Python/Keywords'
+    - Created new folder 'Python3.10' in 'Docs/Programming/Languages/Python/Guides/Versions' to hold information about Python 3.10
+        - Added new document 'README.md'
+
+- Updates
+    - Renamed folder 'Version-Specific' in 'Docs/Programming/Languages/Python/Guides' to 'Versions' to hold information regarding each of the Python release versions
+
+#### 1507H
+- New
+    - Created new folder 'Resources in 'Docs/CyberSecurity'
+        - Added new document 'websites.md'
+    - Created new folder 'Resources in 'Docs/Programming'
+        - Added new document 'websites.md'
+
+- Updates
+    - Updated document 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references'
+        - Added Deployment steps for Aligning and Digitally Signing APK file 
+
+#### 1518H
+- New
+    - Created new folder 'JDK' in 'Docs/Programming/Languages/Java/Guides'
+        - Created new folder 'packages' for information on JDK binaries and packages
+            - Added new document 'keytool.md' for info on the PKE CLI utility 'keytool'
+
+- Updates
+    - Updated document 'android-application-development-from-the-command-line.md' in 'Docs/Programming/Mobile-App-Development/Android/Quickstart topic and references'
+        - Added a line in 'keytool' explanation
+
+#### 1543H
+- New
+    - Added new folder 'Snippets' in 'Docs/Programming/Mobile-App-Development/Android'
+        - Added new document 'views.md' to store Snippets and usages of Views (Widgets)
+
+#### 2255H
+- New
+    - Added new folder 'packages' in 'Docs/Linux/distros/ArchLinux' for all ArchLinux-related packages, tools and utilities
+        - Added new document 'devtools.md' containing build guide on how to compile ArchLinux's 'devtools' package that is used for ArchLinux development
+    - Added new document 'compile-from-scratch.md' in 'Docs/Linux/distros/ArchLinux/pacman' about compiling the ArchLinux pacman package manager from scratch
+
+#### 2319H
+- New
+    - Added new folder 'Snippets' in 'Docs/Linux/distros/ArchLinux' for ArchLinux-related Snippets, Tips and Tricks
+        - Added new document 'using-archlinux-from-existing-non-arch-system.md' in 'Docs/Linux/distros/ArchLinux/Snippets' for a setup on how to use ArchLinux-related utilities (i.e. pacman, pacstrap) on an existing linux system (non-ArchLinux)
+
+- Updated
+    - Updated document 'compile-from-scratch.md' in 'Docs/Linux/distros/ArchLinux/pacman' with new references
+
+#### 2328H
+- New
+    - Added new document 'mkarchroot.md' in 'Docs/Linux/distros/ArchLinux/packages' for the archlinux/devtools framework CLI utility 'mkarchroot' which is used to generate a clean root filesystem for chrooting into
+
+### 2023-12-04
+#### 2252H
+- Updates
+    - Updated document 'using-archlinux-from-existing-non-arch-system.md' in 'Docs/Linux/distros/ArchLinux/Snippets'
+        - Added new method of creating a chroot environment : using a container (Docker)
+    - Updated document 'docker.md' in 'Docs/Technology/Containers/Docker/Guides'
+        - Added documentation on Adding/Passthrough the disk/devices to container
+        - Added documentation Usage examples on Adding/Passthrough the disk/devices to container
+    - Updated document 'Snippets.md' in 'Docs/Technology/Containers/Docker/Using Docker'
+        - Added new snippet topic on 'Create a chroot environment using a container'
+            - Added steps and useful settings
+
+### 2023-12-18
+#### 2131H
+- New
+    - Added new document 'complete-compendium.md' in 'Docs/Linux/Guides/System Administration' for being a complete compendium of sysadmin commands, guides, snippets, syntax and usage examples. 
+    - Added new topical directory 'Media' in 'Docs/' to contain all Media-related guides and documentations
+    - Added new document 'project-structure-layout-compendium.md' in 'Docs/Programming/Files' for containing all project structure layout(s) information for various programming languages, frameworks, toolkits and programming utilities
+    - Added new documents in 'Docs/Programming/Languages/Python/Guides' 
+        + built-in-system-functionalities.md : Guide regarding Python built-in keywords and system functionalities such as handling package management etc
+        + data-structures.md : Guide about usage of Data Structures in Python
+    - Added new directory 'pip' in 'Docs/Programming/Languages/Python/Libraries' : to contain documentations regarding using Pip as a python library/module
+
+### 2023-12-21
+#### 2204H
+- New
+    - Added new folder 'Guides' in 'Docs/Git' for all Git-related guides, tips and tricks
+        - Added new document 'diy-remote-repository-server.md' : Documentations containing write-up on how to create your own Git remote repository server from scratch/source
+    - Added new folder 'Blueprints' in 'Docs/Programming' for all programming project ideas and constructive blueprints on how to create them from scratch/source (i.e. TCP server, HTTP Server, Web Server etc)
+
+### 2024-01-30
+#### 1408H
+- New
+    - Added new document 'wireshark.md' in 'Docs/CyberSecurity/Cheatsheets'
+    - Added new document 'apktool.md' in 'Docs/CyberSecurity/Tools'
+    - Added new directory 'DIY' in 'Docs'
+        - Added new directory 'development'
+            - Added new directory 'environments'
+                - Added new document 'python-development-environment.md'
+    - Added new directory 'Guides' in 'Docs/Gaming/Hardware/Consoles/PS3/Hacking-and-Mods'
+        - Added new document 'installing-cfw.md' : Guide to install PS3 Custom Firmware
+    - Added new document 'setup.py' in 'Docs/Networking/Guides' : Setup documentations on setting up various Networking servers, protocols etc from scratch
+    - Added new directory 'Hardware' in 'Docs/Networking' for documentations pertaining to Network Hardware (i.e. Switches, Routers)
+        - Added new directory 'Network-Switches'
+            - Added new document 'models.md'
+    - Added new directory 'VLAN' in 'Docs/Networking/Topics' for information on Virtual LAN (VLAN)
+        - Added new directory 'Guides'
+            - Added new document 'setting-vlan.md' : Guide to setup VLAN from scratch
+    - Added new project blueprint 'sample-codebase-entry-points' in 'Docs/Programming/Blueprints'
+    - Added new directory 'Game Development' in 'Docs/Programming' for holding information on Game Development
+    - Added new directory 'Javascript' in 'Docs/Programming/Languages'
+        - Added new directory 'Package Managers' for package manager information
+            - Added new directory 'NodeJS' for nodejs-related package manager(s)
+                - Added new document 'npm.md' for setting up NPM
+    - Added new directory 'Packaging-Distribution-and-Deployment' in 'Docs/Programming/Languages/Python/Guides'
+        - Added new document 'README.md' for python packaging and deployment
+    - Added new document 'project-structure.md' in 'Docs/Programming/Languages/Python/Guides'
+    - Added new document 'algorithms.md' in 'Docs/Programming/Languages/Python/wiki'
+    - Added new document 'operator-chaining.md' in 'Docs/Programming/Shellscript/guides'
+    - Added new directory 'Usage' in 'Docs/Programming/Vim' for information regarding vim run-time functionalities
+        - Added new document 'regex.md' to hold information on using Regex in Vim
+    - Added new directory 'SvelteJS' in 'Docs/Programming/Web-Development/Frameworks'
+        - Added new directory 'Guides' for handling Svelte
+            - Added new document 'setup.md' to setup SvelteJS
+    - Added new directory 'SvelteKit' in 'Docs/Programming/Web-Development/Frameworks'
+        - Added new directory 'Guides' for handling SvelteKit
+            - Added new document 'setup.md' to setup SvelteKit
+            - Added new document 'using-sveltekit-and-tailwind-css.md' for setting up usage of SvelteKit with Tailwind
+    - Added new directory 'Tailwind-CSS' in 'Docs/Programming/Web-Development/Frameworks'
+        - Added new directory 'Guides' for handling Tailwind CSS
+            - Added new document 'setup.md' to setup Tailwind
+            - Added new document 'using-sveltekit-and-tailwind-css.md' for setting up usage of SvelteKit with Tailwind
+    - Added new directory 'Project Ideas' in 'Docs/Programming/Web-Development' to hold various web application project ideas and blueprint designs
+        - Added new directory 'Portfolio Website' to hold implementation of Portfolio Website in various frameworks and languages
+            - Added new document 'using-sveltekit-and-tailwind-css.md' for creating a simple portfolio website using SvelteKit and Tailwind
+    - Added new document 'keybindings.md' in 'Docs/Software/Tmux'
+    - Added new directory 'Dockerfile' in 'Docs/Technology/Containers/Docker/Guides'
+        - Added new directory 'differences' to hold information about differences between instructions
+            - Added new document 'ARG-vs-ENV.md' for differences between the instructions 'ARG' and 'ENV'
+    - Added new document 'running-gui-applications.md' in 'Docs/Technology/Containers/Docker/Using Docker' for a simple write-up on setting up a GUI-executable Docker container
+
+- Updates
+    - Docs/Home Lab/Services and Tools/services.md
+        + Added new SSH WebUI service 'wetty' 
+    - Docs/CyberSecurity/Tools/tools-summary.md
+        + Added 'apktool' into summary
+    - Docs/Linux/packages/package-name-reference.md
+        + Updated with new packages and important scripts found in them
+    - Docs/Networking/Guides/protocols.md
+        + Updated protocol definitions
+    - Docs/Virtual Machines/VirtualBox/Command-Line/vboxmanage.md
+        + Updated options for firmware and handling Virtual Machine bootloading
+    - Docs/Virtual Machines/VirtualBox/Guest Additions.md
+        + Converted syntax from plaintext to markdown
+        + Added more information to setup and use VirtualBox Guest Additions
 

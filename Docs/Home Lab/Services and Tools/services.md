@@ -43,4 +43,5 @@ Feel free to contribute and add here based on the various categories.
 + pihole : DNS Sinkhole, DNS (Forwarder) Server
 + unbound : DNS Resolver
 + uptime kuma : Uptime Monitoring
++ wetty : Made by butlerx, WeTTY = Web + TTY; WeTTY is a Web Application terminal over HTTP and HTTPS. WebUI written in Javascript, uses xterm.js for rendering and uses websocket for web rendering
 
