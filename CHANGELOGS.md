@@ -33,6 +33,7 @@
 + [2023-12-04](#2023-12-04)
 + [2023-12-18](#2023-12-18)
 + [2023-12-21](#2023-12-21)
++ [2024-01-30](#2024-01-30)
 
 ## Version History
 ```
@@ -576,4 +577,70 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new folder 'Guides' in 'Docs/Git' for all Git-related guides, tips and tricks
         - Added new document 'diy-remote-repository-server.md' : Documentations containing write-up on how to create your own Git remote repository server from scratch/source
     - Added new folder 'Blueprints' in 'Docs/Programming' for all programming project ideas and constructive blueprints on how to create them from scratch/source (i.e. TCP server, HTTP Server, Web Server etc)
+
+### 2024-01-30
+#### 1408H
+- New
+    - Added new document 'wireshark.md' in 'Docs/CyberSecurity/Cheatsheets'
+    - Added new document 'apktool.md' in 'Docs/CyberSecurity/Tools'
+    - Added new directory 'DIY' in 'Docs'
+        - Added new directory 'development'
+            - Added new directory 'environments'
+                - Added new document 'python-development-environment.md'
+    - Added new directory 'Guides' in 'Docs/Gaming/Hardware/Consoles/PS3/Hacking-and-Mods'
+        - Added new document 'installing-cfw.md' : Guide to install PS3 Custom Firmware
+    - Added new document 'setup.py' in 'Docs/Networking/Guides' : Setup documentations on setting up various Networking servers, protocols etc from scratch
+    - Added new directory 'Hardware' in 'Docs/Networking' for documentations pertaining to Network Hardware (i.e. Switches, Routers)
+        - Added new directory 'Network-Switches'
+            - Added new document 'models.md'
+    - Added new directory 'VLAN' in 'Docs/Networking/Topics' for information on Virtual LAN (VLAN)
+        - Added new directory 'Guides'
+            - Added new document 'setting-vlan.md' : Guide to setup VLAN from scratch
+    - Added new project blueprint 'sample-codebase-entry-points' in 'Docs/Programming/Blueprints'
+    - Added new directory 'Game Development' in 'Docs/Programming' for holding information on Game Development
+    - Added new directory 'Javascript' in 'Docs/Programming/Languages'
+        - Added new directory 'Package Managers' for package manager information
+            - Added new directory 'NodeJS' for nodejs-related package manager(s)
+                - Added new document 'npm.md' for setting up NPM
+    - Added new directory 'Packaging-Distribution-and-Deployment' in 'Docs/Programming/Languages/Python/Guides'
+        - Added new document 'README.md' for python packaging and deployment
+    - Added new document 'project-structure.md' in 'Docs/Programming/Languages/Python/Guides'
+    - Added new document 'algorithms.md' in 'Docs/Programming/Languages/Python/wiki'
+    - Added new document 'operator-chaining.md' in 'Docs/Programming/Shellscript/guides'
+    - Added new directory 'Usage' in 'Docs/Programming/Vim' for information regarding vim run-time functionalities
+        - Added new document 'regex.md' to hold information on using Regex in Vim
+    - Added new directory 'SvelteJS' in 'Docs/Programming/Web-Development/Frameworks'
+        - Added new directory 'Guides' for handling Svelte
+            - Added new document 'setup.md' to setup SvelteJS
+    - Added new directory 'SvelteKit' in 'Docs/Programming/Web-Development/Frameworks'
+        - Added new directory 'Guides' for handling SvelteKit
+            - Added new document 'setup.md' to setup SvelteKit
+            - Added new document 'using-sveltekit-and-tailwind-css.md' for setting up usage of SvelteKit with Tailwind
+    - Added new directory 'Tailwind-CSS' in 'Docs/Programming/Web-Development/Frameworks'
+        - Added new directory 'Guides' for handling Tailwind CSS
+            - Added new document 'setup.md' to setup Tailwind
+            - Added new document 'using-sveltekit-and-tailwind-css.md' for setting up usage of SvelteKit with Tailwind
+    - Added new directory 'Project Ideas' in 'Docs/Programming/Web-Development' to hold various web application project ideas and blueprint designs
+        - Added new directory 'Portfolio Website' to hold implementation of Portfolio Website in various frameworks and languages
+            - Added new document 'using-sveltekit-and-tailwind-css.md' for creating a simple portfolio website using SvelteKit and Tailwind
+    - Added new document 'keybindings.md' in 'Docs/Software/Tmux'
+    - Added new directory 'Dockerfile' in 'Docs/Technology/Containers/Docker/Guides'
+        - Added new directory 'differences' to hold information about differences between instructions
+            - Added new document 'ARG-vs-ENV.md' for differences between the instructions 'ARG' and 'ENV'
+    - Added new document 'running-gui-applications.md' in 'Docs/Technology/Containers/Docker/Using Docker' for a simple write-up on setting up a GUI-executable Docker container
+
+- Updates
+    - Docs/Home Lab/Services and Tools/services.md
+        + Added new SSH WebUI service 'wetty' 
+    - Docs/CyberSecurity/Tools/tools-summary.md
+        + Added 'apktool' into summary
+    - Docs/Linux/packages/package-name-reference.md
+        + Updated with new packages and important scripts found in them
+    - Docs/Networking/Guides/protocols.md
+        + Updated protocol definitions
+    - Docs/Virtual Machines/VirtualBox/Command-Line/vboxmanage.md
+        + Updated options for firmware and handling Virtual Machine bootloading
+    - Docs/Virtual Machines/VirtualBox/Guest Additions.md
+        + Converted syntax from plaintext to markdown
+        + Added more information to setup and use VirtualBox Guest Additions
 

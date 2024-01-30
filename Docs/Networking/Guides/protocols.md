@@ -17,7 +17,8 @@ Collection/Documentation of Networking Protocols and the relevant port numbers
     + Port Number : 443
 - ICMP      : Internet Control Message Protocol
     + No Port Number
-- IGMP      : Internet Group Message Protocol
+    + used by ping
+- IGMP      : Internet Group Message Protocol; used by Multicasting devices such as HDMI over IP Extenders that requires '1-to-many' packet broadcasting. IGMP does not have a port number
 - IMAP(4)   : Internet Message Access Protocol
     + Email-related Protocol/Service
 - IPSEC     : IP Secured VPN Protocol

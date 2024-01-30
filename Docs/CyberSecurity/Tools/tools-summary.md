@@ -10,6 +10,9 @@ More information on the tools can be found within the recorded documentations th
 ```
 
 ## Tools and Utilities
+### Cross-Platform
++ apktool         : Reverse Engineering; Extracting source files from the android APK/Java compressed files
+
 ### Linux
 + airmon-ng       : Offensive (Red Team), Defensive (Blue Team) : Scanning & Enumeration : Network Packet Capture, Network WiFi Cracking
 + arpscan         : Offensive (Red Team) : Scanning & Enumeration : ARP Scanner

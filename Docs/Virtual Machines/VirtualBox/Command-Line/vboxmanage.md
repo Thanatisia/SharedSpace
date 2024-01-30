@@ -91,12 +91,16 @@ VBoxManage [action] [options [arguments]...]
 	- modifyvm : To Modify an existing Virtual Machine
 		- Syntax: VBoxManage modifyvm [Virtual Machine Name] [{options} {arguments}...]
 		- Options: 
-			+ --boot(n) [boot-type] : Set the Boot Order of your bootloader; What types to run first
+			- --boot(n) [boot-type] : Set the Boot Order of your bootloader; What types to run first
 				- boot types:
 					+ dvd
 					+ disk
 				- Examples:
 					+ --boot1 dvd --boot2 disk --boot3 none --boot4 none : Set system to look for a DVD first before proceeding to look for disk (if failed)
+            - --firmware {firmware} : Set the Virtual Machine's firmware
+                - efi : Set the firmware of the Virtual Machine to EFI with the bitness matching the Virtual Machine's CPU
+                - efi32 : IA32 EFI
+                - efi64 : x86_64 EFI
 			+ --ioapic {on|off} : Enable/Disable Input-Output Advanced Programmable Interrupt Controllers (IO APIC)
 			+ --memory {ram-memory} : Set your Memory (RAM)
 			+ --vram {vram-size} : Set your Virtual Memory to allocate (Optional)	
@@ -162,6 +166,13 @@ VBoxManage modifyhd file.vdi --resize N{GiB|GB|MiB|MB}
     ```console
     vboxmanage convertdd [path-to-virtual-hard-disk-img] [vdi-output-file].vdi
     ```
+
+### Modify Virtual Machine properties
+- Firmware
+    - Set Virtual Machine as UEFI (EFI)
+        ```console
+        vboxmanage modifyvm "virtual-machine-name" --firmware efi
+        ```
 
 ## Wiki
 
