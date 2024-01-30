@@ -644,3 +644,15 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Converted syntax from plaintext to markdown
         + Added more information to setup and use VirtualBox Guest Additions
 
+#### 2139H
+- New
+    - Added new directory 'Book' to 'Docs/Git'
+    - Added new directory 'scripts' to 'Docs/Git'
+- Updates
+    - Migrated numbered git notes to directory 'Book'
+    - Moved document 'cheatsheet.txt' from 'Docs/Git' => 'Docs/Git/Guides'
+    - Moved document 'Glossary.txt' from 'Docs/Git' => 'Docs/Git/Guides'
+    - Moved document 'Git Workflow.txt' from 'Docs/Git' => 'Docs/Git/Guides'
+    - Moved document 'Starters-Guide.txt' from 'Docs/Git' => 'Docs/Git/Guides'
+    - Moved script 'User-Example.sh' from 'Docs/Git' => 'Docs/Git/scripts'
+    
