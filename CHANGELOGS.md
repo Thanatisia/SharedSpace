@@ -671,3 +671,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Migrated document 'pip.txt' in 'Docs/Programming/Languages/Python/Packages' => 'pip.md' for PyPI (pip) package manager in 'Docs/Programming/Package Managers'
     - Migrated document 'npm.md' in 'Docs/Programming/Languages/Javascript/Package Managers/NodeJS' => 'npm.md' in 'Docs/Programming/Package Managers'
 
+#### 1731H
+- Updates
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Added new setuptools setup() parameter
+

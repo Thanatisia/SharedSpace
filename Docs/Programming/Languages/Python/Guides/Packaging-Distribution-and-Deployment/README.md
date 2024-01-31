@@ -406,7 +406,10 @@
                             + Type: String
                         - packages : Specify the (sub)packages in your project
                             + Type: List
-                            + Default: find_packages()
+                            - Recommended: 
+                                + find_packages()
+                        - py_modules : Specify a list of single-file python modules (without the .py extension) you want to let setuptools be aware of that are not part of a package
+                            + Type: List
                         - install_requires : Specify list containing your dependencies
                             + Type: List
                         - entry_points: Contains a dictionary (key-value) mapping scripts to execute on startup/entry
@@ -623,6 +626,7 @@
 ## Resources
 
 ## References
++ [python packaging - packaging and distribution packages - using setuptools](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/)
 + [python-poetry - Documentations - pyproject - packages](https://python-poetry.org/docs/pyproject/#packages)
 + [StackOverflow - How poetry knows my package is located in the src folder?](https://stackoverflow.com/questions/68684670/how-poetry-knows-my-package-is-located-in-the-src-folder)
 
