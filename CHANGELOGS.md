@@ -685,3 +685,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
         + Separated sections 'setuptools' and 'poetry' into their standalone documentations
 
+#### 1625H
+- Updates
+    - Updated document 'setuptools.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Removed repetition
+

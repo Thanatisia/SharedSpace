@@ -64,21 +64,6 @@
         + This file contains metadata about your package and instructions for setuptools
         + Please refer to [Snippets](#snippets) for an example design of the setup file
 
-- Create a virtual environment folder for the project
-    ```console
-    python -m venv [virtual-environment-name]
-    ```
-
-- Source and chroot into virtual environment
-    - Windows
-        ```console
-        .\[virtual-environment-name]\Scripts\activate
-        ```
-    - Linux
-        ```console
-        . [virtual-environment-name]/bin/activate
-        ```
-
 ## Documentations
 ### API Documentation
 - Package
