@@ -676,3 +676,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
         + Added new setuptools setup() parameter
 
+#### 1804H
+- New
+    - Added document 'poetry.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment' about the python packaging, containerization and distribution system 'poetry'
+    - Added document 'setuptools.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment' about the tried and tested python packaging, distribution system 'setuptools' that uses setup.py
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Separated sections 'setuptools' and 'poetry' into their standalone documentations
+
