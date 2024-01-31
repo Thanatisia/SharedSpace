@@ -234,6 +234,10 @@
                 ```console
                 pip install git+git@github.com:username/repo-name.git@[branch-or-tag]
                 ```
+            - Install python package directly from github in a subdirectory
+                ```console
+                pip install git+https://github.com/username/repo-name.git#subdirectory=/path/to/package
+                ```
 
 ### Usage
 - To import from command line as a package.module

@@ -34,6 +34,7 @@
 + [2023-12-18](#2023-12-18)
 + [2023-12-21](#2023-12-21)
 + [2024-01-30](#2024-01-30)
++ [2024-01-31](#2024-01-31)
 
 ## Version History
 ```
@@ -655,4 +656,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Moved document 'Git Workflow.txt' from 'Docs/Git' => 'Docs/Git/Guides'
     - Moved document 'Starters-Guide.txt' from 'Docs/Git' => 'Docs/Git/Guides'
     - Moved script 'User-Example.sh' from 'Docs/Git' => 'Docs/Git/scripts'
-    
+
+### 2024-01-31
+#### 1617H
+- New
+    - Added new directory 'Package Managers' in 'Docs/Programming/' 
+        + This directory is created to be a standalone location to hold documentation on various Package Managers for programming/webdev/scripting languages
+
+- Updates
+    - Updated document 'python-development-environment.md' in 'Docs/DIY/development/environments'
+        + Added pip install instruction to install from a specific directory
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Added pip install instruction to install from a specific directory
+    - Migrated document 'pip.txt' in 'Docs/Programming/Languages/Python/Packages' => 'pip.md' for PyPI (pip) package manager in 'Docs/Programming/Package Managers'
+    - Migrated document 'npm.md' in 'Docs/Programming/Languages/Javascript/Package Managers/NodeJS' => 'npm.md' in 'Docs/Programming/Package Managers'
+

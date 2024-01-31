@@ -319,6 +319,10 @@
                 ```console
                 pip install git+git@github.com:username/repo-name.git@[branch-or-tag]
                 ```
+            - Install python package directly from github in a subdirectory
+                ```console
+                pip install git+https://<token>@github.com/username/repo-name.git#subdirectory=/path/to/package
+                ```
         - Using poetry (Recommended)
             - Install the latest version from the default branch
                 ```console
@@ -605,6 +609,10 @@
                     + Setup SSH keys with GitHub
                 ```console
                 pip install git+git@github.com:username/repo-name.git@[branch-or-tag]
+                ```
+            - Install python package directly from github in a subdirectory
+                ```console
+                pip install git+https://<token>@github.com/username/repo-name.git#subdirectory=/path/to/package
                 ```
 
 ## Wiki
