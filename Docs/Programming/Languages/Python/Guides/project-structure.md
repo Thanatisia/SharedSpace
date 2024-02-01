@@ -32,10 +32,42 @@
         - Explanation
             - Take note of the __init__.py file
                 + By placing an '__init__.py' file, you are initializing that folder as a package/module to be imported (like an constructor initializer)
-- When importing from current working directory
-    + Import using `from . import [module|function|attributes] as [alias]`
-- When importing libraries, modules and packages from another directory
-    + Import using `from .{[directories].} import [module|function|attributes] as [alias]` instead of `import .{[directories].} as alias`
-- When importing libraries, modules and packages from parent directories
-    - Import using `from ...{[directories].} import [module|function|attributes] as [alias]` instead of `import ...{[directories].} as alias`
-        + Each dot represents 1 directory backwards
+
+- Importing
+    - When importing from current working directory
+        + Import using `from . import [module|function|attributes] as [alias]`
+
+    - When importing libraries, modules and packages from another directory
+        + Import using `from .{[directories].} import [module|function|attributes] as [alias]` instead of `import .{[directories].} as alias`
+
+    - When importing libraries, modules and packages from parent directories
+        - Import using `from ...{[directories].} import [module|function|attributes] as [alias]` instead of `import ...{[directories].} as alias`
+            + Each dot represents 1 directory backwards
+
+- Use 'if __name__ == "__main__"' only if you are using it as a importable module/package/framework, and not if you are using it as an executable application
+    - The `if __name__ == "__main__":` condition will only be run if the script is run directly like you have done, and not in pretty much any other circumstance.
+        - This means that, given the following flow
+            1. Install package
+                - Using pip
+                    ```console
+                    pip install .
+                    ```
+                - Using setuptools
+                    ```console
+                    python setup.py install
+                    ```
+            2. Execute executable application
+                ```console
+                application-name
+                ```
+            + If your application's entry point (i.e. main()) is under an `if __name__ == "__main__":`, only the specified entry point function will be executed
+
+## Resources
+
+## References
+- [StackOverflow - Questions - 58426719 - Building a Python CLI: how to properly declare entry_points in setuptools.setup](https://stackoverflow.com/questions/58426719/building-a-python-cli-how-to-properly-declare-entry-points-in-setuptools-setup)
+    - Purpose
+        + To figure out why using an executable with 'if __name__ == "__main__"' kept executing just main()
+
+## Remarks
+

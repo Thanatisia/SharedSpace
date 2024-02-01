@@ -57,7 +57,7 @@ git {options} [actions]
                 ```
             - Options
                 - Flags
-                    + 
+                    + --no-checkout : Clone the repository but not download/clone the files
                 - With Arguments
                     + -b | --branch [branch-name] : Clone a specific branch into your local git repository
                     + --depth=[depth] : Clone the repository starting from a specific depth
@@ -112,6 +112,28 @@ git {options} [actions]
                 + set-url [remote-repository-server]              : Set and add the remote repository server URL only
                 + show [origin-alias]                             : Show entries for that origin/URL
                 + remove [origin-alias]                           : Remove the specific origin/URL
+        - sparse-checkout : Use sparse-checkout to manage the target directory you want to work with, instead of checking out the entire repository
+            - Synopsis/Syntax
+                ```console
+                git sparse-checkout {options} <argument> [actions] <target>
+                ```
+            - Notes
+                - After setting the sparse-checkout directory/file, checking out to a new branch will clone only the specified directory/file
+                    ```console
+                    git checkout -b [new-branch-name]
+                    ```
+            - Options
+            - Actions
+                - `add [target-directory|file-path]` : Set and append a target directory/file you want to checkout and clone
+                    - Notes
+                        + This will not overwrite any existing contents within that same parent
+                - disable : Disables the current sparse-checkout session and checkout the entire repository; Opposite of `sparse-checkout init`
+                - help : Display help message; List all commands
+                - init : Enable the ongoing sparse-checkout session and checkout the existing sparse-checkout target contents; Opposite of `sparse-checkout disable`
+                - `set [target-directory|file-path]` : Set a target directory/file you want to to checkout with
+                    - Notes
+                        + You can call this multiple times in order to checkout multiple distinct paths
+                        + Using this in paths that already exists will overwrite all child contents with the newly-specified directory/file
         - status : Specify current git status
         - switch : Switch to another branch
             - Synopsis/Syntax
@@ -144,6 +166,38 @@ git {options} [actions]
         ```console
         git clone [repository-url] --depth=1
         ```
+    - Clone the repository without 'checking out' (aka cloning the files as well) the repository
+        ```console
+        git clone --no-checkout [remote-repository-url]
+        ```
+    - Clone a specific directory/file
+        - Using 'sparse-checkout'
+            1. Clone the repository without 'checking out' (aka cloning the files as well) the repository
+                - Explanation
+                    + --depth N : Clone N branches down the repository tree instead of the entire history
+                    + --branch [custom-branch-name] : Specify the branch you want to clone the repository from
+                    + --no-checkout : Clone the repository but not download/clone the files
+                ```console
+                git clone --depth [number-of-branches] --branch [custom-branch-name] --no-checkout [git-remote-repository-url]
+                ```
+
+            2. Change directory into local repository
+                ```console
+                cd [local-repository-directory]
+                ```
+
+            3. Set the sparse checkout directory in the git repository folder
+                - Explanation
+                    - `git sparse-checkout` : Use sparse-checkout to manage the target directory you want to work with, instead of checking out the entire repository
+                        - `set [target-directory-path]` : Set a target directory you want to to checkout with; You can call this multiple times in order to checkout multiple distinct paths
+                ```console
+                git sparse-checkout set [target-directory-path]
+                ```
+
+            4. Checkout the target directory/file you have set to a custom branch
+                ```console
+                git checkout -b [new-branch-name]
+                ```
 
 - Create new branch
     - Checkout branch

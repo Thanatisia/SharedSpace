@@ -35,6 +35,7 @@
 + [2023-12-21](#2023-12-21)
 + [2024-01-30](#2024-01-30)
 + [2024-01-31](#2024-01-31)
++ [2024-02-01](#2024-02-01)
 
 ## Version History
 ```
@@ -689,4 +690,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'setuptools.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
         + Removed repetition
+
+### 2024-02-01
+#### 2353H
+- New
+    - Added new document 'git-clone-only-specific-file-or-directory.md' in 'Docs/Git/Guides' : Hold snippets and usage of git cloning only a specific file/directory using sparse-checkout
+
+- Updates
+    - Updated document 'git.md' in 'Docs/Git/commands' with new git commands for sparse-checkout
+    - Updated document 'project-structure.md' in 'Docs/Programming/Languages/Python/Guides' with new pythonic best practices for if __name__ == __main__
 
