@@ -708,3 +708,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new document 'javascript.md' in 'Docs/Programming/Cheatsheets' : Storing a simple rundown/cheatsheet for Javascript
     - Added new document 'comparisons-of-syntax-between-languages.md' in 'Docs/Programming/Guides' : A simple rundown comparing the differences in implementation syntaxes before languages
 
+#### 1606H
+- New
+    - Added new directory 'Snippets' in 'Docs/Programming/Web-Development/Javascript' to hold Javascript snippets and implementations
+        - Added new documents 'template.md' to be a reference template for all files in this directory
+        - Added new documents 'benchmarking.md' for a simple implementation of creating a benchmark function in JavaScript
+        - Added new documents 'leftpad.md' for a simple implementation of leftpad in JavaScript
+
