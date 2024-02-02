@@ -36,6 +36,7 @@
 + [2024-01-30](#2024-01-30)
 + [2024-01-31](#2024-01-31)
 + [2024-02-01](#2024-02-01)
++ [2024-02-02](#2024-02-02)
 
 ## Version History
 ```
@@ -699,4 +700,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'git.md' in 'Docs/Git/commands' with new git commands for sparse-checkout
     - Updated document 'project-structure.md' in 'Docs/Programming/Languages/Python/Guides' with new pythonic best practices for if __name__ == __main__
+
+
+### 2024-02-02
+#### 1202H
+- New
+    - Added new document 'javascript.md' in 'Docs/Programming/Cheatsheets' : Storing a simple rundown/cheatsheet for Javascript
+    - Added new document 'comparisons-of-syntax-between-languages.md' in 'Docs/Programming/Guides' : A simple rundown comparing the differences in implementation syntaxes before languages
 
