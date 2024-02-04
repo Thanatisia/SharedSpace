@@ -37,6 +37,7 @@
 + [2024-01-31](#2024-01-31)
 + [2024-02-01](#2024-02-01)
 + [2024-02-02](#2024-02-02)
++ [2024-02-04](#2024-02-04)
 
 ## Version History
 ```
@@ -714,4 +715,26 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new documents 'template.md' to be a reference template for all files in this directory
         - Added new documents 'benchmarking.md' for a simple implementation of creating a benchmark function in JavaScript
         - Added new documents 'leftpad.md' for a simple implementation of leftpad in JavaScript
+
+### 2024-02-04
+#### 2205H
+- New
+    - Added new directory 'Guides' in 'Docs/Linux/Linux-From-Scratch'
+        - Added new directory 'Versions' for guides relating to specific versions of LFS
+            - Added new directory 'LFS-12.0' for LFS v12.0 documentations
+                - Added new document 'base-install.md' for a full write-up to install LFS from scratch from the command line like in Arch-Linux
+    - Added new directory 'filesystems' in 'Docs/Linux' : Documentations of filesystems
+        - Added new directory 'ext4' : Documentations of scripts, packages and guides regarding the filesystem 'ext4'
+            + Added new document 'resize2fs.md' : Documentation of the resize2fs CLI utility used to resize the filesystem after changes made
+    - Added new directory 'Concepts' in 'Docs/Programming/Languages/C' for info about C programming concepts and ideas
+        - Added new document 'memory-and-systems-architecture.md' for documentation on Memory management and systems architecture in programming, and in the context of C programming
+        - Added new document 'streams.md' for documentation about data streams in computing, and how C programming uses it
+    - Added new directory 'Keywords' in 'Docs/Programming/Languages/C' for info about C programming built-in keywords
+        - Added new document 'strings.md' for handling strings in C programming
+        - Added new document 'structures.md' for handling struct (and objects) in C programming
+
+- Updates
+    - Updated 'parted.md' in 'Docs/Linux/commands'
+        + Refreshed documentation with my newer style of writing and improved structuring
+        + Added new usage for resizing partitions
 
