@@ -159,6 +159,8 @@ yt-dlp {options} <arguments> [video-url]
             + --skip-download : To get only subtitles
         - Video Format Options
             + -F | --list-formats : List all available video/audio encoding format codes
+        - Workarounds
+            + --legacy-server-connect : Explicitly allow HTTPS connection to servers that do not support RFC 5746 secure renegotiations. Only do this if downloads errors out (i.e. with a 'Forbidden' scenario)
 
 ### Snippets and Examples
 - Download specific video/audio encoding format(s)
@@ -259,6 +261,15 @@ yt-dlp {options} <arguments> [video-url]
     - Typical options
         ```console
         yt-dlp --ignore-errors --continue --no-overwrites --download-archive progress.txt <other options> [URL]
+        ```
+
+- Error Troubleshooting
+    - 'Forbidden' in websites without credentials required
+        - Pre-Requisites
+            - Ensure that the website does not require tokens and/or credential authentication and authorization
+                + The following example does not include options used for websites that requires logging in
+        ```console
+        yt-dlp --legacy-server-connect [URL]
         ```
 
 ### Configuration

@@ -38,6 +38,7 @@
 + [2024-02-01](#2024-02-01)
 + [2024-02-02](#2024-02-02)
 + [2024-02-04](#2024-02-04)
++ [2024-02-18](#2024-02-18)
 
 ## Version History
 ```
@@ -737,4 +738,51 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated 'parted.md' in 'Docs/Linux/commands'
         + Refreshed documentation with my newer style of writing and improved structuring
         + Added new usage for resizing partitions
+
+### 2024-02-18
+#### 1719H
+- New
+    - Added new document 'signals.md' in 'Docs/Linux/Concepts/'
+    - Added new document 'streams.md' in 'Docs/Linux/Tutorials/'
+    - Added new document 'jq.md' in 'Docs/Linux/packages/'
+    - Added new document 'signals.md' in 'Docs/Programming/Languages/C/Concepts/'
+    - Added new document 'packaging-and-installation.md' in ' Docs/Programming/Languages/C/'
+    - Added new folder 'MinGW' in 'Docs/Programming/Languages/C/utilities/'
+        - Added new document 'README.md'
+        - Added new document 'mingw-w64.md'
+    - Added new document 'cut.md' in 'Docs/Linux/commands/'
+    - Added new document 'queries.md' in 'Docs/CyberSecurity/Resources/'
+    - Added new folder 'Packages' in 'Docs/CyberSecurity/Tools/'
+        - Added new folder 'john' for the John The Ripper Framework
+            - Added new folder 'binaries' for holding documentations of the package binaries
+                + Added new document 'zip2john.md' for the zip2john ZIP to hash CLI utility
+    - Added new document 'fcrackzip.md' in 'Docs/CyberSecurity/Tools/'
+    - Added new document 'df.md' in 'Docs/Linux/commands/'
+    - Added new document 'du.md' in 'Docs/Linux/commands/'
+    - Added new document 'sort.md' in 'Docs/Linux/commands/'
+    - Added new document 'zip.md' in 'Docs/Linux/commands/'
+    - Added new document 'mpv.md' in 'Docs/Linux/packages/'
+    - Added new document 'lfs-book-differences-between-sysv-and-systemd.md' in 'Docs/Linux/Linux-From-Scratch/Guides/Versions/LFS-12.0/' with Differeces between SystemV (SysV) and SystemD
+
+- Updates
+    - Updated document 'base-install.md' in 'Docs/Linux/Linux-From-Scratch/Guides/Versions/LFS-12.0/'
+        + Linux From Scratch v12.0 Book installation steps
+        - Fixed and reached LFS Book v12.0 final chapter
+            - TODO:
+                + Clean up current documentation and continue in another date
+                + Copy and create a documentation for the systemd book
+                + Potentially read up on BLFS
+    - Updated document 'tar.md' in 'Docs/Linux/commands/' 
+        + with new options
+    - Updated document 'project-filesystem-structure.md' in 'Docs/Programming/Languages/C/' 
+        + with information to the C project structure layout
+    - Updated document 'README.md' in 'Docs/Software/Video Downloader/yt-dlp/' 
+        + with new options
+    - Updated document 'websites.md' in 'Docs/CyberSecurity/Resources/'
+        + New websites and resources
+    - Updated document 'john-the-ripper.md' in 'Docs/CyberSecurity/Tools/john-the-ripper.md'
+        + New usage examples for ZIP files
+        + Refactored and restructure document to not specifically be about unshadowing
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Updated and populated with information
 

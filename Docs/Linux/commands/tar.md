@@ -41,6 +41,7 @@
 + -owner : Set owner ID (Default: 0 for no owner)
 + -group : Set group ID (Default: 0 for no group)
 + -exclude : Exclude certain file(s)
++ --strip-components=n : Remove the first n leading components of the filename (i.e. /path/to/output : --strip-components=1 => /to/output)
 
 ### Usage
 
