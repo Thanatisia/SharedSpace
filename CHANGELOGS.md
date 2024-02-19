@@ -39,6 +39,7 @@
 + [2024-02-02](#2024-02-02)
 + [2024-02-04](#2024-02-04)
 + [2024-02-18](#2024-02-18)
++ [2024-02-19](#2024-02-19)
 
 ## Version History
 ```
@@ -785,4 +786,17 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Refactored and restructure document to not specifically be about unshadowing
     - Updated document 'find.md' in 'Docs/Linux/commands/'
         + Updated and populated with information
+
+### 2024-02-19
+#### 1413H
+- New
+    - Added new document 'customizing-a-custom-bootable-live-cd.md' in 'Docs/Linux/Guides/Linux Live CD-ISO/Modifying Live CD/'
+        + Added steps to unsquash a squashfs liveUSB disk image and extract the contents, mount, modify, unmount, import the root filesystem, re-squash back into a squashfs disk image and export into a bootable disk image
+    - Added new document 'xorriso.md' in 'Docs/Linux/packages/' : Contain a write-up on the xorriso disk image (ISO) CLI utility
+
+- Updates 
+    - Updated document 'controls.md' in 'Docs/Programming/Vim/'
+        + Added command line history keybindings
+    + Replaced document 'unsquashing live cd.txt' in 'Docs/Linux/Guides/Linux Live CD-ISO/Modifying Live CD/' with 'customizing-a-custom-bootable-live-cd.md'
+
 

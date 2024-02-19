@@ -1,4 +1,4 @@
-# Basics : Vim Controls 
+# Basics : Vim Controls, Keymappings/Keybindings
 
 ## Information
 ### Basics
@@ -19,6 +19,9 @@
 + <Shift>l : Go to bottom of screen
 + <Ctrl>u : Go directly to bottom of page
 + <Ctrl>d : Go directly to top of page
+
+#### Command Line
++ q: : Bring up command line history
 
 #### Editing
 + gi : Starts Insert mode in the last place where you have inserted text before : Escape, move to other places, 'gi', you are back at the original place
