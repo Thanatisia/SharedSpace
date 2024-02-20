@@ -40,6 +40,7 @@
 + [2024-02-04](#2024-02-04)
 + [2024-02-18](#2024-02-18)
 + [2024-02-19](#2024-02-19)
++ [2024-02-20](#2024-02-20)
 
 ## Version History
 ```
@@ -799,4 +800,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added command line history keybindings
     + Replaced document 'unsquashing live cd.txt' in 'Docs/Linux/Guides/Linux Live CD-ISO/Modifying Live CD/' with 'customizing-a-custom-bootable-live-cd.md'
 
+### 2024-02-20 
+#### 1553H 
+- New
+    - Added document 'foss-software-list.md' in 'Docs/Software/'
 
