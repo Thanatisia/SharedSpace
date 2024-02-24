@@ -314,6 +314,7 @@ uses and extends the SQL language combined with many features that safely store 
 - Positionals
 - Optionals
     + `-c [command]` : Execute the specified SQL command into server instance
+    + `-d | --dbname [database-name]` : Specify the name of the database you want to connect to in the database server
     + `-h [host-ip|server]` : Establish a connection with the specified database server host ip/domain
     + `-U [username]` : Establish a connection with the database server using the specified username
 
@@ -332,6 +333,11 @@ uses and extends the SQL language combined with many features that safely store 
         ```console
         psql -U [username]
         ```
+
+- Connect to a custom database with a specific user
+    ```console
+    psql -d [custom-database-name] -U [username] {-c "SQL-statement-to-execute;" ...}
+    ```
 
 ### Database Server Interactive Mode Commands
 + `\c [database-name]` : Connect to the specified database

@@ -843,3 +843,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new usage example for PostgreSQL schema command execution as a user without sudo 
         + Added new environment variable for Postgresql 'POSTGRES_PASSWORD'
 
+#### 2324H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added new option to the 'psql' command section: '-d | --dbname'
+        + Added new usage example for Connecting to a custom database with a specific user
+
