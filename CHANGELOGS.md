@@ -41,6 +41,7 @@
 + [2024-02-18](#2024-02-18)
 + [2024-02-19](#2024-02-19)
 + [2024-02-20](#2024-02-20)
++ [2024-02-24](#2024-02-24)
 
 ## Version History
 ```
@@ -804,4 +805,17 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 1553H 
 - New
     - Added document 'foss-software-list.md' in 'Docs/Software/'
+
+### 2024-02-24
+#### 1113H
+- Updates
+    - Updated document 'nmap.md' in 'Docs/CyberSecurity/Tools/'
+        + Formatted usages
+        + Added usage examples for Network Mapping the operating system specifications of the system mapped to the IP address
+
+#### 2141H
+- New
+    - Added new directory 'RDBMS' in 'Docs/Database Systems/' for documentations regarding Relational Database Management Systems
+        - Added new directory 'PostgreSQL' for documentations regarding the RDBMS system - PostgreSQL
+            + Added new document 'README.md'
 

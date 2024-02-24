@@ -88,9 +88,24 @@ nmap [option] <target_IP_address>
     + -oX [filename] : Set XML output (This format can be converted to HTML format)
 
 ### Usage
+- TCP Scan (Full Open Scan)
+    ```console
+    nmap –sT –v <target IP address>
+    ```
+- SYN Scan (Half Open Scan)
+    ```console 
+    nmap –sS –v <target IP address>
+    ```
 
-+ TCP Scan (Full Open Scan) : nmap –sT –v <target IP address>
-+ SYN Scan (Half Open Scan) : nmap –sS –v <target IP address>
+- Network Mapping the operating system specifications of the system mapped to the IP address
+    ```console
+    nmap -sV 192.168.1.1-254 -oX 192.168.1.1-254.xml
+    ```
 
 ## Resources
 - [Manual](https://nmap.org)
+
+## References
+
+## Remarks
+
