@@ -18,6 +18,18 @@ uses and extends the SQL language combined with many features that safely store 
         ```sql
         CREATE DATABASE [database-name] WITH ENCODING 'UTF8|UCS2' LC_COLLATE='<locale-encoding>' LC_CTYPE='<locale-encoding>';
         ```
+- Commit changes
+    - Notes
+        - Similar to a git version control repository
+            + A Relational Database like PostgreSQL needs to 'commit' the transaction/changes made from any interaction to the database tables
+            + This is primarily due to safety - in a sense, you should confirm that you really do want to make these changes, as the changes are final
+        - In the case whereby you wish to revert the changes/transactions
+            + You can rollback by executing the SQL statement 'ROLLBACK;'
+            - However, you need to have created a transaction history before making the changes
+                + By executing the SQL statement 'transaction;'
+    ```sql
+    commit;
+    ```
 - Grant Privileges
     - Create Temporary Tables
         - Explanation

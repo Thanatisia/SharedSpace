@@ -819,3 +819,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new directory 'PostgreSQL' for documentations regarding the RDBMS system - PostgreSQL
             + Added new document 'README.md'
 
+#### 2248H
+- New
+    - Added new directory 'usage-and-implementation/' in 'Docs/Database Systems/RDBMS/PostgreSQL/' : For storing all implementations and usage snippets of PostgreSQL in various programming languages, frameworks, libraries etc.
+        - Added new document 'python.md' : Contains usage and implementation of PostgreSQL in Python
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added SQL schema for Committing changes
+
