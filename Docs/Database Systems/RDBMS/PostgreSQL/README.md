@@ -314,12 +314,24 @@ uses and extends the SQL language combined with many features that safely store 
 - Positionals
 - Optionals
     + `-c [command]` : Execute the specified SQL command into server instance
+    + `-h [host-ip|server]` : Establish a connection with the specified database server host ip/domain
+    + `-U [username]` : Establish a connection with the database server using the specified username
 
 ### Usage
 - Create Database in-line
     ```console
     sudo -u [username] psql -c "CREATE DATABASE [database-name];"
     ```
+
+- PostgreSQL schema command execution as a user
+    - Notes
+        - By default, 
+            - if no options are specified
+                + You will logon to the psql CLI session as the specified user
+    - without sudo
+        ```console
+        psql -U [username]
+        ```
 
 ### Database Server Interactive Mode Commands
 + `\c [database-name]` : Connect to the specified database
@@ -331,6 +343,7 @@ uses and extends the SQL language combined with many features that safely store 
 ### Environment Variables
 + `POSTGRES_DB=[database-name]` : Specify the name of the database to connect to
 + `POSTGRES_HOST_AUTH_METHOD=trust` : PostgreSQL database host authentication method
++ `POSTGRES_PASSWORD=[database-password]` : Specify the password to the database
 
 ### Networking
 #### Port Forwarding/Translation/Mapping

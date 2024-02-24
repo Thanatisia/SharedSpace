@@ -836,3 +836,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'python.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/usage-and-implementation'
         + Added documentations for psycopg2
 
+#### 2317H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added new options to the 'psql' command
+        + Added new usage example for PostgreSQL schema command execution as a user without sudo 
+        + Added new environment variable for Postgresql 'POSTGRES_PASSWORD'
+
