@@ -344,6 +344,12 @@ uses and extends the SQL language combined with many features that safely store 
             - postgresql/ PostgreSQL database application directory
                 - data/ : PostgreSQL database data directory
 
+#### Files
+- /usr/local/var/
+    - postgresql/ : The Postgre database application local directory
+        + pg_hba.conf : Postgre Host Bridge Networking Configuration File
+        + postgresql.conf : Primary postgresql database configuration file
+
 ### Docker mappings
 #### Default Volumes
 - PostgreSQL

@@ -109,6 +109,20 @@
 
 ## Documentations
 
+### Package
++ psycopg2
+
+### Modules/Libraries
+- psycopg2
+
+### Classes
+
+### Functions
+
+### Attributes/Variables
+- Exceptions
+    + psycopg2.DatabaseError : Exception check for error occuring in the database
+
 ## Wiki
 
 ## Resources

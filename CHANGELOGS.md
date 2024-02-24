@@ -828,3 +828,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
         + Added SQL schema for Committing changes
 
+#### 2307H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added Files used by Postgresql
+
+    - Updated document 'python.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/usage-and-implementation'
+        + Added documentations for psycopg2
+
