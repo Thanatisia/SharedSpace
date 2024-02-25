@@ -43,6 +43,7 @@
 + [2024-02-20](#2024-02-20)
 + [2024-02-24](#2024-02-24)
 + [2024-02-25](#2024-02-25)
++ [2024-02-26](#2024-02-26)
 
 ## Version History
 ```
@@ -871,4 +872,20 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/'
         + Added special characters
+
+#### 2340H
+- New
+    - Added new directory 'NoSQL' in 'Docs/Database Systems/' for documentations regarding the document-based database system
+        + Added new document 'README.md'
+        - Added new directory 'MongoDB' for documentations regarding the NoSQL system - MongoDB
+            + Added new document 'README.md'
+
+### 2024-02-26
+#### 0025H
+- New 
+    - Added new document 'operators.md' in 'Docs/Database Systems/NoSQL/MongoDB/'
+        + Information about MongoDB operators and symbols
+    - Added new document 'tui-commands.md' in 'Docs/Database Systems/NoSQL/MongoDB/'
+        + Information about MongoDB's client TUI commands and 
+        + Inforation about MongoDB scripting
 
