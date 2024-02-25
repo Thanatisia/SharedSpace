@@ -7,57 +7,6 @@ PostgreSQL is a powerful, open source object-relational database system that
 uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.
 ```
 
-### Basics
-#### Relational Database Schema/Commands
-- Create Database
-    - Default/Base 
-        ```sql
-        CREATE DATABASE [database-name];
-        ```
-    - With Encoding
-        ```sql
-        CREATE DATABASE [database-name] WITH ENCODING 'UTF8|UCS2' LC_COLLATE='<locale-encoding>' LC_CTYPE='<locale-encoding>';
-        ```
-- Commit changes
-    - Notes
-        - Similar to a git version control repository
-            + A Relational Database like PostgreSQL needs to 'commit' the transaction/changes made from any interaction to the database tables
-            + This is primarily due to safety - in a sense, you should confirm that you really do want to make these changes, as the changes are final
-        - In the case whereby you wish to revert the changes/transactions
-            + You can rollback by executing the SQL statement 'ROLLBACK;'
-            - However, you need to have created a transaction history before making the changes
-                + By executing the SQL statement 'transaction;'
-    ```sql
-    commit;
-    ```
-- Grant Privileges
-    - Create Temporary Tables
-        - Explanation
-            - `GRANT {actions/keywords}` : You want to grant/allow this set of action/keywords to the specified user as a privilege
-        ```sql
-        GRANT TEMP ON DATABASE [database-name] TO [username];
-        ```
-    - Select, Insert, Update, Delete all tables
-        - Explanation
-            - `ON {schema-target-table}` : Specify the target tables you want to apply the privilege grant on
-            - `IN SCHEMA [schema]` : Specify the schema that contains the tables (i.e. public)
-            - `TO [username]` : Specify the target user to grant this privilege to
-        ```sql
-        GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO [username];
-        ```
-    - Function Execution capabilities
-        - Explanation
-            - `IN SCHEMA [schema]` : Specify the schema that contains the tables (i.e. public)
-        ```sql
-        GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO [username];
-        ```
-    - Sequence Usage permissions
-        - Explanation
-            - `IN SCHEMA [schema]` : Specify the schema that contains the tables (i.e. public)
-        ```sql
-        GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO [username];
-        ```
-
 ## Setup
 ### Installation via Bare Metal (Host Machine)
 #### Dependencies

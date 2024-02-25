@@ -42,6 +42,7 @@
 + [2024-02-19](#2024-02-19)
 + [2024-02-20](#2024-02-20)
 + [2024-02-24](#2024-02-24)
++ [2024-02-25](#2024-02-25)
 
 ## Version History
 ```
@@ -848,4 +849,26 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
         + Added new option to the 'psql' command section: '-d | --dbname'
         + Added new usage example for Connecting to a custom database with a specific user
+
+### 2024-02-25
+#### 1535H
+- New
+    - Added new directory 'MySQL' in 'Docs/Database Systems/RDBMS' for documentations regarding the RDBMS system - MySQL
+        + Added new document 'README.md'
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        - Moved the Relational Database basics to 'Docs/Database Systems/RDBMS/README.md' in an all-in-one reference
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/'
+        - Moved the Relational Database basics from 'Docs/Database Systems/RDBMS/PostgreSQL/README.md' in an all-in-one reference
+
+#### 1702H
+- New
+    - Added new directory 'usage-and-implementation/' in 'Docs/Database Systems/RDBMS/MySQL/' : For storing all implementations and usage snippets of MySQL in various programming languages, frameworks, libraries etc.
+        - Added new document 'python.md' : Contains usage and implementation of MySQL in Python
+
+#### 1807H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/'
+        + Added special characters
 
