@@ -894,3 +894,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new document '20. Returning to a previous commit.md' in 'Docs/Git/Book'
         + Instructions on revertting/resetting back to a previous version in the repository's git history
 
+#### 1608H
+- New
+    - Added new directory 'SQLite' in 'Docs/Database Systems/RDBMS' for documentations regarding the file-based RDBMS system
+        + Added new document 'README.md'
+
+#### 1948H
+- New
+    - Added new directory 'usage-and-implementation/' in 'Docs/Database Systems/RDBMS/SQLite/' : For storing all implementations and usage snippets of SQLite in various programming languages, frameworks, libraries etc.
+        - Added new document 'python.md' : Contains usage and implementation of SQLite in Python
+        - Added new document 'c.md' : Contains building, importing, usage and implementation of SQLite in C
+
