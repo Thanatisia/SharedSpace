@@ -889,3 +889,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Information about MongoDB's client TUI commands and 
         + Inforation about MongoDB scripting
 
+#### 1346H
+- New
+    - Added new document '20. Returning to a previous commit.md' in 'Docs/Git/Book'
+        + Instructions on revertting/resetting back to a previous version in the repository's git history
+
