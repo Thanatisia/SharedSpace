@@ -44,6 +44,7 @@
 + [2024-02-24](#2024-02-24)
 + [2024-02-25](#2024-02-25)
 + [2024-02-26](#2024-02-26)
++ [2024-02-28](#2024-02-28)
 
 ## Version History
 ```
@@ -904,4 +905,22 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'usage-and-implementation/' in 'Docs/Database Systems/RDBMS/SQLite/' : For storing all implementations and usage snippets of SQLite in various programming languages, frameworks, libraries etc.
         - Added new document 'python.md' : Contains usage and implementation of SQLite in Python
         - Added new document 'c.md' : Contains building, importing, usage and implementation of SQLite in C
+
+### 2024-02-28
+#### 0030H
+- New
+    - Added new directory 'NixOS' in 'Docs/Linux/distros' : For NixOS-related information
+        + Added new document 'README.md'
+        + Added new document 'nix-packages-list.md' : Contain a full compilation of nix packages
+        - Added new directory 'Packages' : For documentation on all Nix packages and executables
+            - Added new directory 'nixos-install-tools' : For documentation on the Nix package 'nixos-install-tools'
+                + Added new document 'README.md'
+                + Added new document 'nixos-enter.md'
+                + Added new document 'nixos-generate-config.md'
+                + Added new document 'nixos-install.md'
+        - Added new directory 'Package Manager' : For Nix-based Package Managers-related information
+            - Added neww directory 'nix' : For information about the nix package manager
+                + Added new document 'README.md' 
+
+- Updates
 
