@@ -922,5 +922,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             - Added neww directory 'nix' : For information about the nix package manager
                 + Added new document 'README.md' 
 
-- Updates
+#### 1329H
+- New
+    - Added new directory 'From-Scratch' in 'Docs/Programming/Languages/C' for holding all 'Build from Scratch' guides and documentations in the particular language
+        - Added new document 'setting-up-and-compiling-a-sqlite-project.md' for Setting up and compiling a SQLite project
 
