@@ -943,3 +943,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'nixos-rebuild' in 'Docs/Linux/distros/NixOS/Packages/' for the nixos-rebuild package
         + Added new document 'README.md'
 
+#### 2307H
+- New
+    - Added new directory 'Configurations' in 'Docs/Linux/distros/NixOS/' for storing documentations regarding NixOS configurations
+        + Added new document 'configuration.nix.md' for NixOS System Configuration settings
+
