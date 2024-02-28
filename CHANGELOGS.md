@@ -938,3 +938,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'nix-packages-list.md' in 'Docs/Linux/distros/NixOS/'
         + Added information for nix package 'nixos-rebuild'
 
+#### 1619H
+- New
+    - Added new directory 'nixos-rebuild' in 'Docs/Linux/distros/NixOS/Packages/' for the nixos-rebuild package
+        + Added new document 'README.md'
+
