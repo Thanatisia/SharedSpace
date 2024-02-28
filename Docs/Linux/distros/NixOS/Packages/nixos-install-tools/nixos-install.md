@@ -180,6 +180,12 @@ nixos-install is the NixOS Bootstrap Command Line (CLI) Root/Base Filesystem ins
 ### Environment Variables
 + NIX_PATH :  Contains the Nix expression search path
 
+### Things to note
+- NixOS (or Nix-related system operations) wont run properly on docker (without --privileged or the likes) because it requires systemd
+    - So functionalities like
+        + Base/Root Filesystem Bootstrap Installation via 'nixos-install'
+    + will not work properly without '--privileged' passed into 'docker run', or 'privileged: true' set in docker-compose.yaml
+
 ## Resources
 
 ## References

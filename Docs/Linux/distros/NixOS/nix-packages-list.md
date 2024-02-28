@@ -16,6 +16,7 @@
     - nixos-install-tools : The essential commands from the NixOS installer as a package
         - tools of note
             + nixos-generate-config : NixOS's root filesystem bootstrapper CLI utility
+    - nixos-rebuild : Rebuild your NixOS configuration and switch to it, on local hosts and remote.
 - Text Editors
     - neovim : Fork of vim that has lua integrated into the codebase
     - vim : Vi-Improved Modal Text Editor
@@ -62,6 +63,27 @@
     - Using nix-shell
         ```bash
         nix-shell -p nixos-install-tools
+        ```
+
+- nixos-rebuild
+    - Using nix-env
+        - On NixOS
+            ```bash
+            nix-env -iA nixos.nixos-rebuild
+            ```
+        - On Non-NixOS
+            ```bash
+            nix-env -iA nixpkgs.nixos-rebuild
+            ```
+    - Using the NixOS Configuration
+        ```
+        environment.systemPackages = [
+            pkgs.nixos-rebuild
+        ];
+        ```
+    - Using nix-shell
+        ```bash
+        nix-shell -p nixos-rebuild
         ```
 
 ### Text Editors
@@ -111,5 +133,8 @@
 
 ## References
 + [NixOS packages](https://search.nixos.org/)
++ [NixOS Wiki - nixos-rebuild](https://nixos.wiki/wiki/Nixos-rebuild)
++ [TheGeekDiary - nixos-rebuild command examples in linux](https://www.thegeekdiary.com/nixos-rebuild-command-examples-in-linux/)
 
 ## Remarks
+

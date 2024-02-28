@@ -927,3 +927,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'From-Scratch' in 'Docs/Programming/Languages/C' for holding all 'Build from Scratch' guides and documentations in the particular language
         - Added new document 'setting-up-and-compiling-a-sqlite-project.md' for Setting up and compiling a SQLite project
 
+#### 1534H
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/'
+        + Added things to note when running nix on docker
+    - Updated document 'nixos-install.md' in 'Docs/Linux/distros/NixOS/Packages/nixos-install-tools/'
+        + Added things to note when running nix on docker
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Package Manager/nix/'
+        + Added things to note when running nix on docker
+    - Updated document 'nix-packages-list.md' in 'Docs/Linux/distros/NixOS/'
+        + Added information for nix package 'nixos-rebuild'
+

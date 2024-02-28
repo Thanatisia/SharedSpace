@@ -140,6 +140,12 @@ The Nix Package Manager is a standalone package manager that uses declarative co
 - Docker Repository:
     + Docker Hub: https://hub.docker.com/r/nixos/nix/
 
+#### Things to note
+- NixOS (or Nix-related system operations) wont run properly on docker (without --privileged or the likes) because it requires systemd
+    - So functionalities like
+        + Base/Root Filesystem Bootstrap Installation via nixos-install
+    + will not work properly without '--privileged' passed into 'docker run', or 'privileged: true' set in docker-compose.yaml
+
 #### Dependencies
 + docker
 + docker-compose
