@@ -53,6 +53,7 @@ find [directory] {options} <argument> [search-keyword]
         + -not : Find all results the negative of the specified options
         + -o : OR operator; Allows you to specify multiple conditions
         + -prune : Exclude a target file/directory; Must be used with '-name "file-name"'
+        + -print0 : Print only the filename strings excluding the nul-character separators, which basically prevents any whitespaces or other stray characters in the filenames causing problems
 
 ### Usage
 - Find only files
@@ -97,6 +98,34 @@ find [directory] {options} <argument> [search-keyword]
         - Using rm
             ```console
             find [directory] -type f -size {+|-}N{b|c|w|k|M|G} -exec rm -f {} \;
+            ```
+
+- Using find to locate files of a certain filter and tar archive it
+    - Using '-exec'
+        - Compress and archive using xz
+            ```bash
+            find [root-path-to-search] -type {f|d} -name "specific-name" -size {{+|-}N{K|G|B}} {other-options ...} -exec tar -cJvf [output-tar-file] {} \;
+            ```
+
+        - Compress and archive using gz
+            ```bash
+            find [root-path-to-search] -type {f|d} -name "specific-name" -size {{+|-}N{K|G|B}} {other-options ...} -exec tar -czvf [output-tar-file] {} \;
+            ```
+
+        - Compress and archive with the same permissions
+            ```bash
+            find [root-path-to-search] -type {f|d} -name "specific-name" -size {{+|-}N{K|G|B}} {other-options ...} -exec tar -cvpf [output-tar-file] {} \;
+            ```
+
+    - Using 'xargs'
+        - Compress and archive using xz
+            ```bash
+            find [root-path-to-search] -type {f|d} -name "specific-name" -size {{+|-}N{K|G|B}} {other-options ...} -print0 | xargs -0 tar --null -cJvf [tar-file]
+            ```
+
+        - Compress and archive using gz
+            ```bash
+            find [root-path-to-search] -type {f|d} -name "specific-name" -size {{+|-}N{K|G|B}} {other-options ...} -print0 | xargs -0 tar --null -czvf [tar-file]
             ```
 
 ## Wiki

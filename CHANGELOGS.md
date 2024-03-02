@@ -45,6 +45,7 @@
 + [2024-02-25](#2024-02-25)
 + [2024-02-26](#2024-02-26)
 + [2024-02-28](#2024-02-28)
++ [2024-03-02](#2024-03-02)
 
 ## Version History
 ```
@@ -947,4 +948,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     - Added new directory 'Configurations' in 'Docs/Linux/distros/NixOS/' for storing documentations regarding NixOS configurations
         + Added new document 'configuration.nix.md' for NixOS System Configuration settings
+
+### 2024-03-02
+#### 2203H
+- New 
+    - Added new directory 'Streaming' in 'Docs/Technology' for Media Content streaming information
+        - Added new directory 'Live' for Live-Streaming documentations
+            + Added new document 'README.md'
+- Updates
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Added usage with 'xargs'
+    - Updated document 'xargs.md' in 'Docs/Linux/commands/'
+        + Added usage with 'tar' and 'find'
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations/'
+        + Added configuration key-value settings for Nix flakes
 

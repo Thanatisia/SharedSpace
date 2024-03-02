@@ -210,8 +210,11 @@
 ### Generating Configuration File
 - Generate initial configuration modules before the base/root filesystem installation
     - Explanation
-        - This will bootstrap the distribution's base filesystem into the mount point's root directory
-            + as well as the configuration file containing NixOS's recipe/installing configs
+        - This will generate the NixOS system configuration files (containing NixOS's recipe/installing configs) for you to edit 
+            + before you run 'nixos-install' to bootstrap the distribution's base filesystem into the mount point's root directory
+        - 2 Files
+            + configuration.nix : Software configuration and specifications
+            + hardware-configuration.nix : Hardware configuration and specifications
     ```bash
     nixos-generate-config --root [root-partition-mount-point]
     ```
