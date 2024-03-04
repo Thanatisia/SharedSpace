@@ -8,10 +8,11 @@ The Nix Package Manager is a standalone package manager that uses declarative co
 
 ### Project
 - Github: 
-    + Main repository: https://github.com/NixOS/nix
+    + Official Nix repository: https://github.com/NixOS/nix
     + Nix Packages: https://github.com/NixOS/nixpkgs
     + NixOS Hardware Repository: https://github.com/NixOS/nixos-hardware
     + NixOS Installation Tools: github.com/NixOS/nixos-install-tools
+    + Nix community repositories of docker images (nix-community/docker-nixpkgs) : https://github.com/nix-community/docker-nixpkgs)
 
 ## Setup
 ### Installation via Bare Metal (Host Machine)
@@ -137,8 +138,10 @@ The Nix Package Manager is a standalone package manager that uses declarative co
 
 ### Installation via Docker
 #### Container
-- Docker Repository:
-    + Docker Hub: https://hub.docker.com/r/nixos/nix/
+- Docker Images
+    - DockerHub
+        + [nixos/nix](https://hub.docker.com/r/nixos/nix) : Official Nix docker image; Made in BusyBox
+        + [nixpkgs/nix-unstable](https://hub.docker.com/r/nixpkgs/nix-unstable) : Managed and driven by the Nix community
 
 #### Things to note
 - NixOS (or Nix-related system operations) wont run properly on docker (without --privileged or the likes) because it requires systemd
@@ -163,6 +166,7 @@ The Nix Package Manager is a standalone package manager that uses declarative co
         ```
 
 #### Using docker run
+##### Official Image (uses BusyBox)
 - Starting up
     - Nix
         ```console
@@ -191,6 +195,42 @@ The Nix Package Manager is a standalone package manager that uses declarative co
 - Restart a running container
     ```console
     docker container restart nix
+    ```
+
+##### Community-managed (using rootfs)
+- Startup ['nixpkgs/nix-unstable:latest'](https://hub.docker.com/r/nixpkgs/nix-unstable) docker container
+    ```bash
+    docker run -itd --name=nix-unstable \
+        --restart=unless-stopped \
+        --privileged \
+        -v /path/to/workdir:/workdir \
+        -v [root-mount-point]:[root-mount-point] \
+        nixpkgs/nix-unstable:[tag|version]
+    ```
+
+- Enter the nix container
+    ```bash
+    docker exec -it nix-unstable /bin/sh
+    ```
+
+- Add nix channel
+    ```bash
+    nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+    ```
+
+- Verify channel
+    ```bash
+    nix-channel --list
+    ```
+
+- Update channel
+    ```bash
+    nix-channel --update
+    ```
+
+- Set environment variable 'NIX_PATH'
+    ```bash
+    export NIX_PATH="nixpkgs=channel:nixos-[nixos-version]"
     ```
 
 #### Using docker-compose
@@ -369,12 +409,28 @@ The Nix Package Manager is a standalone package manager that uses declarative co
 
 ### Templates
 #### docker compose
-- Nix Package Manager
+- Nix Package Manager (Official - uses BusyBox)
     ```yaml
     version: "3.7"
     services:
       nix:
         image: nixos/nix:latest
+        container_name: nix
+        restart: unless-stopped
+        tty: true
+        stdin_open: true
+        volumes:
+          ## Mount volumes from host system into container
+          ## [host-system-volume]:[container-volume]:[permissions]
+          - ${PWD}/workdir:/workdir
+    ```
+
+- Nix community-managed (uses rootfs)
+    ```yaml
+    version: "3.7"
+    services:
+      nix:
+        image: nixpkgs/nix-unstable:latest
         container_name: nix
         restart: unless-stopped
         tty: true

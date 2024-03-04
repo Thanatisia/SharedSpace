@@ -46,6 +46,7 @@
 + [2024-02-26](#2024-02-26)
 + [2024-02-28](#2024-02-28)
 + [2024-03-02](#2024-03-02)
++ [2024-03-04](#2024-03-04)
 
 ## Version History
 ```
@@ -962,4 +963,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added usage with 'tar' and 'find'
     - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations/'
         + Added configuration key-value settings for Nix flakes
+
+### 2024-03-04
+#### 1542H
+- New
+    - Added new document 'nix-expression.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Information of the Nix Expression (flake) files
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Package Manager/nix/'
+        + Added new information using community-managed Nix docker image that uses rootfs instead of busybox - nixpkgs/nix
 
