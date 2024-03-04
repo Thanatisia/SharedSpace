@@ -994,3 +994,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     + Added new document 'hardware-configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations/' for storing documentations regarding NixOS hardware configurations
 
+#### 2242H
+- Updates
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Added settings and key-value attributes for 'nix', 'nix.gc' and 'system.autoUpgrade'
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Post-Installation'
+        - Added new post-install tasks
+            - i.e. Upgrading packages
+        + Added resources
+

@@ -185,7 +185,32 @@
                     + `enableSSHSupport = true|false` : Enable/Disable SSH support for GNU GPG agent
 
 - NixOS system-related settings
+    - nix : Manage nix package management settings
+        - `.gc = { attributes = values; ...};` : Manage Nix Package Manager Garbage Collection
+            - Garbage Collection Attributes
+                + `automatic = {true|false}` : Enable/Disable automatic garbage collection
+                - `dates = "[period]"` : Specify the period of time to perform the Garbage collection
+                    - Periods
+                        + weekly : Remove garbage packages weekly
+                - `options = "{options} <arguments>"` : Specify additional options to parse into the garbage collector; Format: `{options} <arguments>`
+                    - Options
+                        + `--delete-older-than {N}d` : Delete unnecessary files that are older than the specified period (i.e. {N}d = N days; 7d = Older than 7 Days)
+            - Examples
+                ```nix
+                {
+                    ...
+                    # Automatic garbage collection
+                    nix.gc = {
+                        automatic = {true|false};
+                        dates = "[period]";
+                        options = "{options} <arguments>";
+                    };
+                }
+                ```
     - system : Manage NixOS system settings and operations
+        - `.autoUpgrade = { attributes = values; ... };` : Manage NixOS system auto-updating
+            - Attributes
+                + `enable = [true|false]` : Enable/Disable NixOS Auto-update and Auto-upgrading
         - `.copySystemConfiguration = true|false;` : Enable/Disable copying of the NixOS configuration file and link it from the resulting system (/run/current-system/configuration.nix); This is useful in case you accidentally deleted '/etc/nixos/configuration.nix'
         - `.stateVersion = "X.Y"` : Specify the NixOS system state version; Format: X = Major, Y = Minor; This value determines the NixOS release from which the default settings for stateful data (like file locations and database versions) on your system were taken. TLDR: Its the built version
 
