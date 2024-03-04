@@ -990,3 +990,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new property for 'user': description
         + Added new template for 'configuration.nix' file
 
+#### 2213H
+- New
+    + Added new document 'hardware-configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations/' for storing documentations regarding NixOS hardware configurations
+
