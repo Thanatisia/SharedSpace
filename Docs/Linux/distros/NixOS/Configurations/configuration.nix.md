@@ -222,9 +222,27 @@
 - Edit the generated configuration file
     - Explanation
         + Uncomment all settings you want in your system
-    ```console
+    ```bash
     $EDITOR [root-partition-mount-point]/etc/nixos/configuration.nix
     ```
+
+- Perform initial bootstrap base installation
+    - Explanation
+        + This is only performed once at the start
+        + This will bootstrap install the base/root filesystem structure into the mounted root filesystem partition
+    - Defaults
+        - The default root partition mount point is '/mnt'
+            + Set '--root [root-partition-mount-point]' to explicitly specify the root mount point
+    ```bash
+    nixos-install --root [root-partition-mount-point]
+    ```
+
+## Templates
+### configuration.nix
+#### Default
+```nix
+
+```
 
 ## Resources
 

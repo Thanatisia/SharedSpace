@@ -973,3 +973,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Package Manager/nix/'
         + Added new information using community-managed Nix docker image that uses rootfs instead of busybox - nixpkgs/nix
 
+#### 2119H
+- Updates
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Added new section block 'Templates': to add template snippets
+        + Added steps for initial bootstrap root filesystem installation
+
