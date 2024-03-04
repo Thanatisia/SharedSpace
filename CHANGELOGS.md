@@ -984,3 +984,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'Post-Installation' in 'Docs/Linux/distros/NixOS/' for storing post-base installation steps and information
         - Added new document 'README.md'
 
+#### 2144H
+- Updates
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Added new property for 'user': description
+        + Added new template for 'configuration.nix' file
+
