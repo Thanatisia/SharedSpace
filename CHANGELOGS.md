@@ -1003,3 +1003,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             - i.e. Upgrading packages
         + Added resources
 
+#### 2252H
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Post-Installation'
+        + Added new tasks to Table of Contents
+

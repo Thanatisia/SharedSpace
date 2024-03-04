@@ -7,6 +7,13 @@ Collection of tasks/things to do in post-installation (after base installation)
 ## Tasks
 ### Table of Contents
 + [Update Nix package repository channels](#update-nix-package-repository-channels)
++ [Install essential packages](#install-essential-packages)
+- [Edit configuration file](#edit-configuration-file)
+    + [System Services](#system-services)
+    + [System Network Management](#system-network-management)
+    + [Nix Package Manager Settings](#nix-package-manager-settings)
+    + [NixOS-related settings](#nixos-related-settings)
++ [Rebuild system configuration](#rebuild-system-configuration)
 
 ### Update Nix package repository channels
 - Add nix channel
@@ -21,7 +28,6 @@ Collection of tasks/things to do in post-installation (after base installation)
     ```bash
     nix-channel --update
     ```
-
 - Upgrade packages
     ```bash
     sudo nix-rebuild switch --upgrade
