@@ -47,6 +47,7 @@
 + [2024-02-28](#2024-02-28)
 + [2024-03-02](#2024-03-02)
 + [2024-03-04](#2024-03-04)
++ [2024-03-05](#2024-03-05)
 
 ## Version History
 ```
@@ -1007,4 +1008,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Post-Installation'
         + Added new tasks to Table of Contents
+
+### 2024-03-05
+#### 1606H
+- New
+    - Added new directory 'Tools' in 'Docs/Operating Systems/Windows/' for holding information on Windows System Tools and Utilities
+        + Added new document 'full-list.md' with a full compilation of Windows System Utilities
+    - Added new document 'regex-uses.md' in 'Docs/Programming/Vim/Usage/' with Vim file manipulation using regex
 
