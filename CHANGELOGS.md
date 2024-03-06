@@ -34,6 +34,20 @@
 + [2023-12-18](#2023-12-18)
 + [2023-12-21](#2023-12-21)
 + [2024-01-30](#2024-01-30)
++ [2024-01-31](#2024-01-31)
++ [2024-02-01](#2024-02-01)
++ [2024-02-02](#2024-02-02)
++ [2024-02-04](#2024-02-04)
++ [2024-02-18](#2024-02-18)
++ [2024-02-19](#2024-02-19)
++ [2024-02-20](#2024-02-20)
++ [2024-02-24](#2024-02-24)
++ [2024-02-25](#2024-02-25)
++ [2024-02-26](#2024-02-26)
++ [2024-02-28](#2024-02-28)
++ [2024-03-02](#2024-03-02)
++ [2024-03-04](#2024-03-04)
++ [2024-03-05](#2024-03-05)
 
 ## Version History
 ```
@@ -655,4 +669,350 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Moved document 'Git Workflow.txt' from 'Docs/Git' => 'Docs/Git/Guides'
     - Moved document 'Starters-Guide.txt' from 'Docs/Git' => 'Docs/Git/Guides'
     - Moved script 'User-Example.sh' from 'Docs/Git' => 'Docs/Git/scripts'
-    
+
+### 2024-01-31
+#### 1617H
+- New
+    - Added new directory 'Package Managers' in 'Docs/Programming/' 
+        + This directory is created to be a standalone location to hold documentation on various Package Managers for programming/webdev/scripting languages
+
+- Updates
+    - Updated document 'python-development-environment.md' in 'Docs/DIY/development/environments'
+        + Added pip install instruction to install from a specific directory
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Added pip install instruction to install from a specific directory
+    - Migrated document 'pip.txt' in 'Docs/Programming/Languages/Python/Packages' => 'pip.md' for PyPI (pip) package manager in 'Docs/Programming/Package Managers'
+    - Migrated document 'npm.md' in 'Docs/Programming/Languages/Javascript/Package Managers/NodeJS' => 'npm.md' in 'Docs/Programming/Package Managers'
+
+#### 1731H
+- Updates
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Added new setuptools setup() parameter
+
+#### 1804H
+- New
+    - Added document 'poetry.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment' about the python packaging, containerization and distribution system 'poetry'
+    - Added document 'setuptools.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment' about the tried and tested python packaging, distribution system 'setuptools' that uses setup.py
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Separated sections 'setuptools' and 'poetry' into their standalone documentations
+
+#### 1625H
+- Updates
+    - Updated document 'setuptools.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment'
+        + Removed repetition
+
+### 2024-02-01
+#### 2353H
+- New
+    - Added new document 'git-clone-only-specific-file-or-directory.md' in 'Docs/Git/Guides' : Hold snippets and usage of git cloning only a specific file/directory using sparse-checkout
+
+- Updates
+    - Updated document 'git.md' in 'Docs/Git/commands' with new git commands for sparse-checkout
+    - Updated document 'project-structure.md' in 'Docs/Programming/Languages/Python/Guides' with new pythonic best practices for if __name__ == __main__
+
+
+### 2024-02-02
+#### 1202H
+- New
+    - Added new document 'javascript.md' in 'Docs/Programming/Cheatsheets' : Storing a simple rundown/cheatsheet for Javascript
+    - Added new document 'comparisons-of-syntax-between-languages.md' in 'Docs/Programming/Guides' : A simple rundown comparing the differences in implementation syntaxes before languages
+
+#### 1606H
+- New
+    - Added new directory 'Snippets' in 'Docs/Programming/Web-Development/Javascript' to hold Javascript snippets and implementations
+        - Added new documents 'template.md' to be a reference template for all files in this directory
+        - Added new documents 'benchmarking.md' for a simple implementation of creating a benchmark function in JavaScript
+        - Added new documents 'leftpad.md' for a simple implementation of leftpad in JavaScript
+
+### 2024-02-04
+#### 2205H
+- New
+    - Added new directory 'Guides' in 'Docs/Linux/Linux-From-Scratch'
+        - Added new directory 'Versions' for guides relating to specific versions of LFS
+            - Added new directory 'LFS-12.0' for LFS v12.0 documentations
+                - Added new document 'base-install.md' for a full write-up to install LFS from scratch from the command line like in Arch-Linux
+    - Added new directory 'filesystems' in 'Docs/Linux' : Documentations of filesystems
+        - Added new directory 'ext4' : Documentations of scripts, packages and guides regarding the filesystem 'ext4'
+            + Added new document 'resize2fs.md' : Documentation of the resize2fs CLI utility used to resize the filesystem after changes made
+    - Added new directory 'Concepts' in 'Docs/Programming/Languages/C' for info about C programming concepts and ideas
+        - Added new document 'memory-and-systems-architecture.md' for documentation on Memory management and systems architecture in programming, and in the context of C programming
+        - Added new document 'streams.md' for documentation about data streams in computing, and how C programming uses it
+    - Added new directory 'Keywords' in 'Docs/Programming/Languages/C' for info about C programming built-in keywords
+        - Added new document 'strings.md' for handling strings in C programming
+        - Added new document 'structures.md' for handling struct (and objects) in C programming
+
+- Updates
+    - Updated 'parted.md' in 'Docs/Linux/commands'
+        + Refreshed documentation with my newer style of writing and improved structuring
+        + Added new usage for resizing partitions
+
+### 2024-02-18
+#### 1719H
+- New
+    - Added new document 'signals.md' in 'Docs/Linux/Concepts/'
+    - Added new document 'streams.md' in 'Docs/Linux/Tutorials/'
+    - Added new document 'jq.md' in 'Docs/Linux/packages/'
+    - Added new document 'signals.md' in 'Docs/Programming/Languages/C/Concepts/'
+    - Added new document 'packaging-and-installation.md' in ' Docs/Programming/Languages/C/'
+    - Added new folder 'MinGW' in 'Docs/Programming/Languages/C/utilities/'
+        - Added new document 'README.md'
+        - Added new document 'mingw-w64.md'
+    - Added new document 'cut.md' in 'Docs/Linux/commands/'
+    - Added new document 'queries.md' in 'Docs/CyberSecurity/Resources/'
+    - Added new folder 'Packages' in 'Docs/CyberSecurity/Tools/'
+        - Added new folder 'john' for the John The Ripper Framework
+            - Added new folder 'binaries' for holding documentations of the package binaries
+                + Added new document 'zip2john.md' for the zip2john ZIP to hash CLI utility
+    - Added new document 'fcrackzip.md' in 'Docs/CyberSecurity/Tools/'
+    - Added new document 'df.md' in 'Docs/Linux/commands/'
+    - Added new document 'du.md' in 'Docs/Linux/commands/'
+    - Added new document 'sort.md' in 'Docs/Linux/commands/'
+    - Added new document 'zip.md' in 'Docs/Linux/commands/'
+    - Added new document 'mpv.md' in 'Docs/Linux/packages/'
+    - Added new document 'lfs-book-differences-between-sysv-and-systemd.md' in 'Docs/Linux/Linux-From-Scratch/Guides/Versions/LFS-12.0/' with Differeces between SystemV (SysV) and SystemD
+
+- Updates
+    - Updated document 'base-install.md' in 'Docs/Linux/Linux-From-Scratch/Guides/Versions/LFS-12.0/'
+        + Linux From Scratch v12.0 Book installation steps
+        - Fixed and reached LFS Book v12.0 final chapter
+            - TODO:
+                + Clean up current documentation and continue in another date
+                + Copy and create a documentation for the systemd book
+                + Potentially read up on BLFS
+    - Updated document 'tar.md' in 'Docs/Linux/commands/' 
+        + with new options
+    - Updated document 'project-filesystem-structure.md' in 'Docs/Programming/Languages/C/' 
+        + with information to the C project structure layout
+    - Updated document 'README.md' in 'Docs/Software/Video Downloader/yt-dlp/' 
+        + with new options
+    - Updated document 'websites.md' in 'Docs/CyberSecurity/Resources/'
+        + New websites and resources
+    - Updated document 'john-the-ripper.md' in 'Docs/CyberSecurity/Tools/john-the-ripper.md'
+        + New usage examples for ZIP files
+        + Refactored and restructure document to not specifically be about unshadowing
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Updated and populated with information
+
+### 2024-02-19
+#### 1413H
+- New
+    - Added new document 'customizing-a-custom-bootable-live-cd.md' in 'Docs/Linux/Guides/Linux Live CD-ISO/Modifying Live CD/'
+        + Added steps to unsquash a squashfs liveUSB disk image and extract the contents, mount, modify, unmount, import the root filesystem, re-squash back into a squashfs disk image and export into a bootable disk image
+    - Added new document 'xorriso.md' in 'Docs/Linux/packages/' : Contain a write-up on the xorriso disk image (ISO) CLI utility
+
+- Updates 
+    - Updated document 'controls.md' in 'Docs/Programming/Vim/'
+        + Added command line history keybindings
+    + Replaced document 'unsquashing live cd.txt' in 'Docs/Linux/Guides/Linux Live CD-ISO/Modifying Live CD/' with 'customizing-a-custom-bootable-live-cd.md'
+
+### 2024-02-20 
+#### 1553H 
+- New
+    - Added document 'foss-software-list.md' in 'Docs/Software/'
+
+### 2024-02-24
+#### 1113H
+- Updates
+    - Updated document 'nmap.md' in 'Docs/CyberSecurity/Tools/'
+        + Formatted usages
+        + Added usage examples for Network Mapping the operating system specifications of the system mapped to the IP address
+
+#### 2141H
+- New
+    - Added new directory 'RDBMS' in 'Docs/Database Systems/' for documentations regarding Relational Database Management Systems
+        - Added new directory 'PostgreSQL' for documentations regarding the RDBMS system - PostgreSQL
+            + Added new document 'README.md'
+
+#### 2248H
+- New
+    - Added new directory 'usage-and-implementation/' in 'Docs/Database Systems/RDBMS/PostgreSQL/' : For storing all implementations and usage snippets of PostgreSQL in various programming languages, frameworks, libraries etc.
+        - Added new document 'python.md' : Contains usage and implementation of PostgreSQL in Python
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added SQL schema for Committing changes
+
+#### 2307H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added Files used by Postgresql
+
+    - Updated document 'python.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/usage-and-implementation'
+        + Added documentations for psycopg2
+
+#### 2317H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added new options to the 'psql' command
+        + Added new usage example for PostgreSQL schema command execution as a user without sudo 
+        + Added new environment variable for Postgresql 'POSTGRES_PASSWORD'
+
+#### 2324H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        + Added new option to the 'psql' command section: '-d | --dbname'
+        + Added new usage example for Connecting to a custom database with a specific user
+
+### 2024-02-25
+#### 1535H
+- New
+    - Added new directory 'MySQL' in 'Docs/Database Systems/RDBMS' for documentations regarding the RDBMS system - MySQL
+        + Added new document 'README.md'
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/PostgreSQL/'
+        - Moved the Relational Database basics to 'Docs/Database Systems/RDBMS/README.md' in an all-in-one reference
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/'
+        - Moved the Relational Database basics from 'Docs/Database Systems/RDBMS/PostgreSQL/README.md' in an all-in-one reference
+
+#### 1702H
+- New
+    - Added new directory 'usage-and-implementation/' in 'Docs/Database Systems/RDBMS/MySQL/' : For storing all implementations and usage snippets of MySQL in various programming languages, frameworks, libraries etc.
+        - Added new document 'python.md' : Contains usage and implementation of MySQL in Python
+
+#### 1807H
+- Updates
+    - Updated document 'README.md' in 'Docs/Database Systems/RDBMS/'
+        + Added special characters
+
+#### 2340H
+- New
+    - Added new directory 'NoSQL' in 'Docs/Database Systems/' for documentations regarding the document-based database system
+        + Added new document 'README.md'
+        - Added new directory 'MongoDB' for documentations regarding the NoSQL system - MongoDB
+            + Added new document 'README.md'
+
+### 2024-02-26
+#### 0025H
+- New 
+    - Added new document 'operators.md' in 'Docs/Database Systems/NoSQL/MongoDB/'
+        + Information about MongoDB operators and symbols
+    - Added new document 'tui-commands.md' in 'Docs/Database Systems/NoSQL/MongoDB/'
+        + Information about MongoDB's client TUI commands and 
+        + Inforation about MongoDB scripting
+
+#### 1346H
+- New
+    - Added new document '20. Returning to a previous commit.md' in 'Docs/Git/Book'
+        + Instructions on revertting/resetting back to a previous version in the repository's git history
+
+#### 1608H
+- New
+    - Added new directory 'SQLite' in 'Docs/Database Systems/RDBMS' for documentations regarding the file-based RDBMS system
+        + Added new document 'README.md'
+
+#### 1948H
+- New
+    - Added new directory 'usage-and-implementation/' in 'Docs/Database Systems/RDBMS/SQLite/' : For storing all implementations and usage snippets of SQLite in various programming languages, frameworks, libraries etc.
+        - Added new document 'python.md' : Contains usage and implementation of SQLite in Python
+        - Added new document 'c.md' : Contains building, importing, usage and implementation of SQLite in C
+
+### 2024-02-28
+#### 0030H
+- New
+    - Added new directory 'NixOS' in 'Docs/Linux/distros' : For NixOS-related information
+        + Added new document 'README.md'
+        + Added new document 'nix-packages-list.md' : Contain a full compilation of nix packages
+        - Added new directory 'Packages' : For documentation on all Nix packages and executables
+            - Added new directory 'nixos-install-tools' : For documentation on the Nix package 'nixos-install-tools'
+                + Added new document 'README.md'
+                + Added new document 'nixos-enter.md'
+                + Added new document 'nixos-generate-config.md'
+                + Added new document 'nixos-install.md'
+        - Added new directory 'Package Manager' : For Nix-based Package Managers-related information
+            - Added neww directory 'nix' : For information about the nix package manager
+                + Added new document 'README.md' 
+
+#### 1329H
+- New
+    - Added new directory 'From-Scratch' in 'Docs/Programming/Languages/C' for holding all 'Build from Scratch' guides and documentations in the particular language
+        - Added new document 'setting-up-and-compiling-a-sqlite-project.md' for Setting up and compiling a SQLite project
+
+#### 1534H
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/'
+        + Added things to note when running nix on docker
+    - Updated document 'nixos-install.md' in 'Docs/Linux/distros/NixOS/Packages/nixos-install-tools/'
+        + Added things to note when running nix on docker
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Package Manager/nix/'
+        + Added things to note when running nix on docker
+    - Updated document 'nix-packages-list.md' in 'Docs/Linux/distros/NixOS/'
+        + Added information for nix package 'nixos-rebuild'
+
+#### 1619H
+- New
+    - Added new directory 'nixos-rebuild' in 'Docs/Linux/distros/NixOS/Packages/' for the nixos-rebuild package
+        + Added new document 'README.md'
+
+#### 2307H
+- New
+    - Added new directory 'Configurations' in 'Docs/Linux/distros/NixOS/' for storing documentations regarding NixOS configurations
+        + Added new document 'configuration.nix.md' for NixOS System Configuration settings
+
+### 2024-03-02
+#### 2203H
+- New 
+    - Added new directory 'Streaming' in 'Docs/Technology' for Media Content streaming information
+        - Added new directory 'Live' for Live-Streaming documentations
+            + Added new document 'README.md'
+- Updates
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Added usage with 'xargs'
+    - Updated document 'xargs.md' in 'Docs/Linux/commands/'
+        + Added usage with 'tar' and 'find'
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations/'
+        + Added configuration key-value settings for Nix flakes
+
+### 2024-03-04
+#### 1542H
+- New
+    - Added new document 'nix-expression.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Information of the Nix Expression (flake) files
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Package Manager/nix/'
+        + Added new information using community-managed Nix docker image that uses rootfs instead of busybox - nixpkgs/nix
+
+#### 2119H
+- Updates
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Added new section block 'Templates': to add template snippets
+        + Added steps for initial bootstrap root filesystem installation
+
+#### 2135H
+- New
+    - Added new directory 'Post-Installation' in 'Docs/Linux/distros/NixOS/' for storing post-base installation steps and information
+        - Added new document 'README.md'
+
+#### 2144H
+- Updates
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Added new property for 'user': description
+        + Added new template for 'configuration.nix' file
+
+#### 2213H
+- New
+    + Added new document 'hardware-configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations/' for storing documentations regarding NixOS hardware configurations
+
+#### 2242H
+- Updates
+    - Updated document 'configuration.nix.md' in 'Docs/Linux/distros/NixOS/Configurations'
+        + Added settings and key-value attributes for 'nix', 'nix.gc' and 'system.autoUpgrade'
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Post-Installation'
+        - Added new post-install tasks
+            - i.e. Upgrading packages
+        + Added resources
+
+#### 2252H
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/Post-Installation'
+        + Added new tasks to Table of Contents
+
+### 2024-03-05
+#### 1606H
+- New
+    - Added new directory 'Tools' in 'Docs/Operating Systems/Windows/' for holding information on Windows System Tools and Utilities
+        + Added new document 'full-list.md' with a full compilation of Windows System Utilities
+    - Added new document 'regex-uses.md' in 'Docs/Programming/Vim/Usage/' with Vim file manipulation using regex
+

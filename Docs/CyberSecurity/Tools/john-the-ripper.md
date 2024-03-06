@@ -21,7 +21,11 @@ John the Ripper is also capable of performing Brute-force attacks.
 + Package Name: john
 + Repository URL: https://github.com/openwall/john
 
+### Related Tools
++ [zip2john](zip2john.md)
+
 ### Attack Steps
+#### Cracking Linux /etc/passwd and /etc/shadow
 1. Unshadowing
 	- Combine */etc/passwd* and */etc/shadow* files using unshadow
 		- Synopsis/Syntax
@@ -41,7 +45,6 @@ John the Ripper is also capable of performing Brute-force attacks.
 
 ### Pre-Requisites
 + sudo priviledges
-+ Get the unshadowed password file from running 'sudo unshadow /etc/passwd /etc/shadow'
 
 ### Dependencies
 + john-data
@@ -75,30 +78,59 @@ John the Ripper is also capable of performing Brute-force attacks.
 ### Synopsis/Syntax
 
 ```console
-john {options} [victims password from unshadow]
+john {options} [word-list]
 ```
 
 ### Parameters
-
-+ --format=[formats]		: Explicitly Specify the hashing algorithm used to encrypt/hash the shadow file
-	- Formats
-		+ $0$ : crypt
-		+ $1$ : MD5
-		+ $5$ : SHA256
-		+ $6$ : SHA512
-+ --show passwd			: To retrieve the cracked password; Cracked passwords are saved in the file called $JOHN/john.pot
-+ --wordlist=[password list] 	: Specify the password list to use to break the unshadowed list
+- Positionals
+    - word-list : Specify the word list file you wish to use as the dictionary
+        - Word List (Dictionary) examples
+            + Password List: victims password from unshadow
+            + rockyou.txt
+- Optionals
+    + --format=[formats]		: Explicitly Specify the hashing algorithm used to encrypt/hash the shadow file
+        - Formats
+            + $0$ : crypt
+            + $1$ : MD5
+            + $5$ : SHA256
+            + $6$ : SHA512
+    + --show passwd			: To retrieve the cracked password; Cracked passwords are saved in the file called $JOHN/john.pot
+    + --wordlist=[password list] 	: Specify the password list to use to break the unshadowed list
 
 ### Usage
 
-- Basic
-	```console
-	sudo unshadow /etc/passwd /etc/shadow > ./victims_pwd
+- Cracking Linux system password
+    - Using dictionary attack
+        - Get the unshadowed password file from the system
+            ```console 
+            sudo unshadow /etc/passwd /etc/shadow
+            ```
+        - Unshadow the /etc/shadow password hash file to obtain the victims password list
+            ```console
+            sudo unshadow /etc/passwd /etc/shadow > ./victims_pwd
+            ```
+        - Password crack the system password list using crypt
+            ```console
+            john --format=crypt --wordlist=/usr/share/john/password.list ./victims_pwd
+            ```
 
-	john --format=crypt --wordlist=/usr/share/john/password.list ./victims_pwd
-	```
+- Zip file password-cracking
+    - Convert a zip file to hash
+        - Using 'zip2john'
+            ```console
+            zip2john [zip-archive-file] > [output-hash-file]
+            ```
+    - Crack the Password-protected ZIP file's password
+        - Using Dictionary Attack
+            - Using the rockyou.txt Password list (Dictionary)
+                + If you are using Kali Linux, rockyou.txt is included with the system in '/usr/share/wordlists/rockyou.txt'
+                ```console
+                john --wordlist=/usr/share/wordlists/rockyou.txt [target-hash-file]
+                ```
 
 ## Resources
++ [CyberSecurity Lists](https://github.com/danielmiessler/SecLists)
++ [Medium - Daviesombasa - Crack the Vault: How to Access Password Protected .zip Files](https://daviesombasa.medium.com/crack-the-vault-how-to-access-password-protected-zip-files-ade73d073bf0)
 + [Openwall - John the Ripper Official Website](https://www.openwall.com/john/)
 
 ## References
@@ -108,3 +140,4 @@ john {options} [victims password from unshadow]
 ## Notes
 + /etc/passwd stores a list of registered users in the system and
 + /etc/shadow stores the hashes of the passwords
+
