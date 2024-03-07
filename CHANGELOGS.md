@@ -48,6 +48,7 @@
 + [2024-03-02](#2024-03-02)
 + [2024-03-04](#2024-03-04)
 + [2024-03-05](#2024-03-05)
++ [2024-03-07](#2024-03-07)
 
 ## Version History
 ```
@@ -1015,4 +1016,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'Tools' in 'Docs/Operating Systems/Windows/' for holding information on Windows System Tools and Utilities
         + Added new document 'full-list.md' with a full compilation of Windows System Utilities
     - Added new document 'regex-uses.md' in 'Docs/Programming/Vim/Usage/' with Vim file manipulation using regex
+
+### 2024-03-07
+#### 1609H
+- Updates
+    - Updated document 'api.md' in 'Docs/Programming/Vim/Distros/Neovim/Lua/'
+        + Refreshed and added new documentation and explanation of functions in the neovim vim api
+    - Updated document 'glyphicons.md' in 'Docs/Texts/Unicode/'
+        + Added new glyphicon
 
