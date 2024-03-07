@@ -11,6 +11,9 @@ These characters can also be known as
  * ASCII Characters
  * Symbols
 
+## Movements
++ ↪ : Newline/Enter
+
 ## Greek
 + ∆ : Delta; Difference; Change
 + λ : Lambda
