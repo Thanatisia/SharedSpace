@@ -50,6 +50,7 @@
 + [2024-03-05](#2024-03-05)
 + [2024-03-07](#2024-03-07)
 + [2024-03-08](#2024-03-08)
++ [2024-03-09](#2024-03-09)
 
 ## Version History
 ```
@@ -1039,4 +1040,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 1638H
 - New
     - Added new documentation for linux command 'stat.md' in 'Docs/Linux/commands'
+
+### 2024-03-09
+#### 0011H
+- New
+    - Added new directory 'Guides' in 'Docs/Linux/distros/Debian/' : This will hold information on Debian-based topics
+        - Added new directory 'package-manager/'
+            - Added new directory 'apt/' : This will store documentation about the apt package manager
+                + Added new document 'README.md'
 
