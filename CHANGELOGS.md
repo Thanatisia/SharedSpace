@@ -49,6 +49,7 @@
 + [2024-03-04](#2024-03-04)
 + [2024-03-05](#2024-03-05)
 + [2024-03-07](#2024-03-07)
++ [2024-03-08](#2024-03-08)
 
 ## Version History
 ```
@@ -1024,4 +1025,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Refreshed and added new documentation and explanation of functions in the neovim vim api
     - Updated document 'glyphicons.md' in 'Docs/Texts/Unicode/'
         + Added new glyphicon
+
+### 2024-03-08
+#### 1441H
+- New
+    - Added new documentation for linux command 'xxd.md' in 'Docs/Linux/commands'
+
+- Updates
+    - Renamed documentation 'sed' in 'Docs/Linux/commands' => 'sed.md'
+        + Reformatted documentation structures
+        + Added new usages and information
+
+#### 1638H
+- New
+    - Added new documentation for linux command 'stat.md' in 'Docs/Linux/commands'
 
