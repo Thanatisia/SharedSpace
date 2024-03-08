@@ -1036,3 +1036,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Reformatted documentation structures
         + Added new usages and information
 
+#### 1638H
+- New
+    - Added new documentation for linux command 'stat.md' in 'Docs/Linux/commands'
+
