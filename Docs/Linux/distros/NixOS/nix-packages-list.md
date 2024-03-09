@@ -36,6 +36,13 @@ Initially was just a collection of essential packages so as to avoid package ove
         - tools of note
             + nixos-generate-config : NixOS's root filesystem bootstrapper CLI utility
     - nixos-rebuild : Rebuild your NixOS configuration and switch to it, on local hosts and remote.
+- System Utilities
+    - findutils : The GNU Find Utilities, basic directory searching utilities by GNU
+        - tools
+            + find : Search for files in a directory hierarchy/filesystem
+            + xargs : Build and perform command line execution from a given standard input
+            + locate : list files in databases that match a pattern;
+            + updatedb : update a file name database;
 - Text Editors
     - neovim : Fork of vim that has lua integrated into the codebase
     - vim : Vi-Improved Modal Text Editor
@@ -195,6 +202,28 @@ Initially was just a collection of essential packages so as to avoid package ove
     - Using nix-shell
         ```bash
         nix-shell -p nixos-rebuild
+        ```
+
+### System Utilities
+- findutils
+    - Using nix-env
+        - On NixOS
+            ```bash
+            nix-env -iA nixos.findutils
+            ```
+        - On Non-NixOS
+            ```bash
+            nix-env -iA nixpkgs.findutils
+            ```
+    - Using the NixOS Configuration
+        ```
+        environment.systemPackages = [
+            pkgs.findutils
+        ];
+        ```
+    - Using nix-shell
+        ```bash
+        nix-shell -p findutils
         ```
 
 ### Text Editors

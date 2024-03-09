@@ -1060,3 +1060,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + websocket server
             + vnc servers
 
+#### 1708H
+- Updates
+    - Updated documentation 'nix-packages-list.md' in 'Docs/Linux/distros/NixOS/'
+        + Added new package 'findutils'
+
