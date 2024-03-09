@@ -1049,3 +1049,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             - Added new directory 'apt/' : This will store documentation about the apt package manager
                 + Added new document 'README.md'
 
+#### 1659H
+- Updates
+    - Updated documentation 'nix-packages-list.md' in 'Docs/Linux/distros/NixOS/'
+        - Added essential packages for 
+            + development essentials
+            + headless and server management
+            + Xorg Display Server utilities
+            + python packages
+            + websocket server
+            + vnc servers
+
