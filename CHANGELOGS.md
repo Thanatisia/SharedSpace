@@ -1086,3 +1086,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new document 'nix-store.md'
             + includes go-to information about nix store and packages
 
+#### 2240H
+- New
+    - Added new document 'setup-docker-based-development-environment.md' in 'Docs/DIY/development/environments/'
+        + Reference document to setup a docker-based local/remote/cloud-based IDE like repl.it or VPS through the use of containerization like docker and virtualization
+
