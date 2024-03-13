@@ -25,6 +25,72 @@ By just importing any configuration file(s) you wish to reproduce,
 ## Documentations
 
 ### Running on Docker
+#### Debugging
+> If you need to figure out what package to install, or what documents is in a default location, or test certain actions, you can use nix on a docker container for isolated testing
+
+- Information
+    - Images
+        + nixos/nix : Official NixOS image; used BusyBox
+        + nixpkgs/nix{-unstable} : Community-managed nix package manager docker image; Uses default Nix rootfs instead of BusyBox
+- (Optional) Pull latest image
+    - nixos/nix
+        ```bash
+        docker pull nixos/nix
+        ```
+    - nixpkgs/nix{-unstable} (Recommended)
+        ```bash
+        docker pull nixpkgs/nix{-unstable}
+        ```
+- Startup
+    - nixos/nix
+        ```bash
+        docker run -itd --name [container-name] nixos/nix
+        ```
+    - nixpkgs/nix{-unstable} (Recommended)
+        ```bash
+        docker run -itd --name [container-name] nixpkgs/nix-unstable
+        ```
+- Post-Startup
+    - Execute and run pre-requisite setup commands
+        - Explanation
+            + Add the default 'nixpkgs-unstable' nixos channel
+            + Update the nix package manager repositories with the channel
+            + Install findutils and other essential debugging tools to use
+        ```bash
+        docker exec -it [container-name] /bin/bash -c "\
+            nix-channel --add https://nixos.org/channels/nixpkgs-unstable \
+            && nix-channel --update \
+            && nix-env -iA \
+                nixpkgs.findutils \
+                nixpkgs.nix-index
+        "
+        ```
+    - Chroot and enter the shell
+        ```bash
+        docker exec -it [container-name] /bin/bash
+        ```
+    - Append the user's binary directory to path for usage
+        ```bash
+        export PATH+=:$HOME/.nix-profile/bin/:
+        ```
+- Clean-up
+    - Once you are done with the container
+        - Stop the container
+            ```bash
+            docker stop [container-name]
+            ```
+        - Remove the container
+            ```bash
+            docker rm [container-name]
+            ```
+    - (Optional) If the image is no longer necessary
+        - Prune the image list
+            - Notes
+                + Parse the '-a' flag to prune/remove all unused images (not used by a container)
+            ```bash
+            docker image prune -a
+            ```
+
 #### Things to note
 - NixOS (or Nix-related system operations) wont run properly on docker (without --privileged or the likes) because it requires systemd
     - So functionalities like

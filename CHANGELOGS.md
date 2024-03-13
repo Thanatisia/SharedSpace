@@ -51,6 +51,8 @@
 + [2024-03-07](#2024-03-07)
 + [2024-03-08](#2024-03-08)
 + [2024-03-09](#2024-03-09)
++ [2024-03-11](#2024-03-11)
++ [2024-03-13](#2024-03-13)
 
 ## Version History
 ```
@@ -1064,4 +1066,28 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated documentation 'nix-packages-list.md' in 'Docs/Linux/distros/NixOS/'
         + Added new package 'findutils'
+
+### 2024-03-11
+#### 2101H
+- New
+    - Added new directory 'vhs' in 'Docs/Linux/packages/': for documentations on VHS - The Command Line Interface (CLI) command to animation gif recorder for documentation and demo
+        + Added new document 'README.md'
+    - Added new document 'regex-syntax-comparison.md' in 'Docs/Programming/Regular Expressions/'
+        + Specifying the syntax differences between various regex engines (vim vs sed etc etc)
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/'
+        + Added NixOS debugging steps using the docker images (if necessary)
+
+### 2024-03-13
+#### 1511H
+- New
+    - Added new directory 'cheatsheets' in 'Docs/Linux/distros/NixOS/'
+        - Added new document 'nix-store.md'
+            + includes go-to information about nix store and packages
+
+#### 2240H
+- New
+    - Added new document 'setup-docker-based-development-environment.md' in 'Docs/DIY/development/environments/'
+        + Reference document to setup a docker-based local/remote/cloud-based IDE like repl.it or VPS through the use of containerization like docker and virtualization
 
