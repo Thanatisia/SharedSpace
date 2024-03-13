@@ -52,6 +52,7 @@
 + [2024-03-08](#2024-03-08)
 + [2024-03-09](#2024-03-09)
 + [2024-03-11](#2024-03-11)
++ [2024-03-13](#2024-03-13)
 
 ## Version History
 ```
@@ -1078,4 +1079,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Linux/distros/NixOS/'
         + Added NixOS debugging steps using the docker images (if necessary)
 
+### 2024-03-13
+#### 1511H
+- New
+    - Added new directory 'cheatsheets' in 'Docs/Linux/distros/NixOS/'
+        - Added new document 'nix-store.md'
+            + includes go-to information about nix store and packages
 
