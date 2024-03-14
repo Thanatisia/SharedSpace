@@ -53,6 +53,7 @@
 + [2024-03-09](#2024-03-09)
 + [2024-03-11](#2024-03-11)
 + [2024-03-13](#2024-03-13)
++ [2024-03-14](#2024-03-14)
 
 ## Version History
 ```
@@ -1090,4 +1091,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     - Added new document 'setup-docker-based-development-environment.md' in 'Docs/DIY/development/environments/'
         + Reference document to setup a docker-based local/remote/cloud-based IDE like repl.it or VPS through the use of containerization like docker and virtualization
+
+### 2024-03-14
+#### 1713H
+- Updates 
+    - Updated document 'ssh.md' in 'Docs/Networking/Topics/Remote Connection/commands/SSH/commands/'
+        + Added new flag '-t'
+        + Added new usage examples for connecting to a remote server
 
