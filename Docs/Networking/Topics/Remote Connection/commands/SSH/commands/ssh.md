@@ -38,6 +38,7 @@ ssh {options} [username]@[ip-address|domain-name]
     - Flags
         + -N : This tells to not execute remote command, just forward the port
         + -C : This tells to compress the data over the tunnel
+        + -t : Startup TTY (similar to 'docker run -dit')
 
 ### Usage
 - Basic Usage
@@ -63,6 +64,16 @@ ssh {options} [username]@[ip-address|domain-name]
     ssh -D 1337 -N -C [proxy-server (username@server-ip)]
     ```
 
+- Connect to a remote server, startup a terminal tty and execute a command
+    ```bash
+    ssh -t [username]@[server-ip] 'command; bash -l'
+    ```
+
+- Connect to a remote docker server/session/instance
+    ```bash
+    ssh -t [username]@[server-ip] "docker exec -it [container-name] [command <arguments>...]"
+    ```
+
 ## Additionals
 
 ### File Sharing between Guest and Host
@@ -72,6 +83,7 @@ ssh {options} [username]@[ip-address|domain-name]
 ## Resources
 
 ## References
++ [Stackoverflow - Questions - 18522647 - Run ssh and immediately execute command](https://stackoverflow.com/questions/18522647/run-ssh-and-immediately-execute-command)
 
 ## Remarks
 
