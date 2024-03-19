@@ -1,0 +1,25 @@
+# GitHub Actions workflow YAML configuration file
+name: GitHub Action name ## Specify name of current Github action workflow
+on: ## Action Targets; What to work on
+  push: ## push: Git push the result
+    branches: ## Git push the results to the following list of branches
+      - main # Main branch
+jobs: ## CI/CD Pipeline automation jobs, tasks and workflows
+  ## [job-name]:
+  ##  runs-on: [docker-image-name]
+  ##  steps:
+  ##    - name: Name of step
+  ##      uses: actions/[github-action-recipe]
+  ##      run: command and arguments to execute in this step
+  setup-docker:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Login to GitHub Package Registry
+        run: echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+      - name: Build and tag the Docker image
+        run: docker build . --tag ghcr.io/mmafrar/alpine-react-native-android:latest
+      - name: Push the Docker image to the registry
+        run: docker push ghcr.io/mmafrar/alpine-react-native-android:latest
+
