@@ -55,6 +55,7 @@
 + [2024-03-13](#2024-03-13)
 + [2024-03-14](#2024-03-14)
 + [2024-03-19](#2024-03-19)
++ [2024-03-20](#2024-03-20)
 
 ## Version History
 ```
@@ -1110,4 +1111,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'README.md' in 'Docs/Git/Remote Repository Hosts/GitHub/GitHub Actions/'
         + Added new usage + explanation of GitHub Actions YAML file
+
+### 2024-03-20
+#### 1421H
+- New
+    - Added new directory for package 'git/git' in 'Docs/Linux/packages/Build from Source/packages/'
+        + Added new document 'README.md'
+
+- Updates
+    - Updated document 'git.md' in 'Docs/Git/commands/'
+        + Added build from source dependencies and steps
 
