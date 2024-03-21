@@ -12,6 +12,7 @@ More information on the tools can be found within the recorded documentations th
 ## Tools and Utilities
 ### Cross-Platform
 + apktool         : Reverse Engineering; Extracting source files from the android APK/Java compressed files
++ dnstwist        : Monitoring and Cyber Threat Intelligence; A Typosquatting DNS (Domain Name) intelligence gathering CLI utility that allows you to detect typosquat domains, phishing attacks, fraud and brand impersonation.
 
 ### Linux
 + airmon-ng       : Offensive (Red Team), Defensive (Blue Team) : Scanning & Enumeration : Network Packet Capture, Network WiFi Cracking
@@ -34,3 +35,4 @@ More information on the tools can be found within the recorded documentations th
 + setoolkit       : Social Engineering : Offensive (Red Team) : Reconnaissance
 + theHarvester    : Data Harvesting : Offensive (Red Team) : Reconnaissance
 + weevely         : PHP Backdoor Generation Utility and Stealth Web Shell : Offensive (Red Team) : Exploitation
+

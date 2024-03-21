@@ -1134,3 +1134,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     + Added new document 'documentation-writing.md' in 'Docs/Programming/Languages/Markdown/Guides/' to contain writing guides and snippets for writing documentations (i.e. software development, project documentations)
     + Added new document 'snippets.md' in 'Docs/Programming/Languages/Markdown/Guides/' to contain markdown file snippets
 
+#### 1111H
+- Updates
+    - Updated document 'tools-summary.md' in 'Docs/CyberSecurity/Tools/'
+        + Added new entry for 'dnstwist'
+
