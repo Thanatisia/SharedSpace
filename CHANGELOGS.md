@@ -56,6 +56,7 @@
 + [2024-03-14](#2024-03-14)
 + [2024-03-19](#2024-03-19)
 + [2024-03-20](#2024-03-20)
++ [2024-03-21](#2024-03-21)
 
 ## Version History
 ```
@@ -1125,4 +1126,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 1811H
 - New
     + Added new document 'tcpdump.md' in 'Docs/Networking/Tools/'
+
+### 2024-03-21
+#### 1011H
+- New
+    + Added new document 'dnstwist.md' in 'Docs/CyberSecurity/Tools/' for the Domain Name (DNS) Typosquatting intelligence gathering CLI utility 
+    + Added new document 'documentation-writing.md' in 'Docs/Programming/Languages/Markdown/Guides/' to contain writing guides and snippets for writing documentations (i.e. software development, project documentations)
+    + Added new document 'snippets.md' in 'Docs/Programming/Languages/Markdown/Guides/' to contain markdown file snippets
 
