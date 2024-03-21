@@ -103,7 +103,7 @@ test {options} <arguments> [expression]
                     ```bash
                     test FILE1 -ot FILE2
                     ```
-                - Check if file exists and is block special : '-b' flag
+                - Check if file exists and is block special : '-b' flag; Checks for block files such as SATA|AHCI = /dev/sdX, NVME = /dev/nvme[disk-number], Loopback = /dev/loop[loop-device-number]
                     ```bash
                     test -b FILE
                     ```
@@ -119,7 +119,7 @@ test {options} <arguments> [expression]
                     ```bash
                     test -e FILE
                     ```
-                - Check if file exists and is a file : '-f' flag
+                - Check if file exists and is a file : '-f' flag; Returns false for a directory
                     ```bash
                     test -f FILE
                     ```
@@ -245,6 +245,7 @@ test -x [file] && \
 ## Resources
 
 ## References
++ [OpenSource - 2022-10-26 - Tips for using the Linux test command](https://opensource.com/article/22/10/test-command-linux)
 
 ## Remarks
 
