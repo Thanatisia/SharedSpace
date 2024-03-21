@@ -1139,3 +1139,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'tools-summary.md' in 'Docs/CyberSecurity/Tools/'
         + Added new entry for 'dnstwist'
 
+#### 2025H
+- New
+    + Added new document 'test.md' in 'Docs/Linux/commands': Documentation for the comparison/testing utility
+
