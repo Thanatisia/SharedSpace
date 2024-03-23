@@ -1162,3 +1162,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + Added new document 'software-development.md' : Markdown documentations for general software development
             + Added new document 'standard.md' : Standard formatting when writing in markdown
 
+#### 1730H
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides'
+        + Added new tasks
+        + Added new Wiki
+        + Added new resources
+
