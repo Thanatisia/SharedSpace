@@ -54,6 +54,9 @@
 + [2024-03-11](#2024-03-11)
 + [2024-03-13](#2024-03-13)
 + [2024-03-14](#2024-03-14)
++ [2024-03-19](#2024-03-19)
++ [2024-03-20](#2024-03-20)
++ [2024-03-21](#2024-03-21)
 
 ## Version History
 ```
@@ -1098,4 +1101,51 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'ssh.md' in 'Docs/Networking/Topics/Remote Connection/commands/SSH/commands/'
         + Added new flag '-t'
         + Added new usage examples for connecting to a remote server
+
+### 2024-03-19
+#### 1543H
+- New
+    + Added new document 'action.yml' in 'Docs/Git/Remote Repository Hosts/GitHub/GitHub Actions/': Demo Github Action YAML file    
+    + Added new document 'versions.md' in 'Docs/Programming/Mobile-App-Development/Android/Documentations/Android-SDK/': Contains Android SDK and platform versions
+    + Added new document 'tips-and-tricks.md' in 'Docs/Technology/Containers/Docker/Guides/Dockerfile/': Contains snippets, tips and tricks when writing Dockerfile
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Git/Remote Repository Hosts/GitHub/GitHub Actions/'
+        + Added new usage + explanation of GitHub Actions YAML file
+
+### 2024-03-20
+#### 1421H
+- New
+    - Added new directory for package 'git/git' in 'Docs/Linux/packages/Build from Source/packages/'
+        + Added new document 'README.md'
+
+- Updates
+    - Updated document 'git.md' in 'Docs/Git/commands/'
+        + Added build from source dependencies and steps
+
+#### 1811H
+- New
+    + Added new document 'tcpdump.md' in 'Docs/Networking/Tools/'
+
+### 2024-03-21
+#### 1011H
+- New
+    + Added new document 'dnstwist.md' in 'Docs/CyberSecurity/Tools/' for the Domain Name (DNS) Typosquatting intelligence gathering CLI utility 
+    + Added new document 'documentation-writing.md' in 'Docs/Programming/Languages/Markdown/Guides/' to contain writing guides and snippets for writing documentations (i.e. software development, project documentations)
+    + Added new document 'snippets.md' in 'Docs/Programming/Languages/Markdown/Guides/' to contain markdown file snippets
+
+#### 1111H
+- Updates
+    - Updated document 'tools-summary.md' in 'Docs/CyberSecurity/Tools/'
+        + Added new entry for 'dnstwist'
+
+#### 2025H
+- New
+    + Added new document 'test.md' in 'Docs/Linux/commands': Documentation for the comparison/testing utility
+
+#### 2029H
+- Updates
+    - Updated document 'test.md' in 'Docs/Linux/commands'
+        + Updated expression list with new examples
+        + Added new reference
 

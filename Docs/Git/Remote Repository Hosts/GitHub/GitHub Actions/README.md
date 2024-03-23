@@ -123,6 +123,36 @@ You can create workflows that build and test every pull request to your reposito
                       run: make build
         ```
 
+- Build Docker Image
+    - Explanation
+        - YAML key-value (Dictionary) mappings
+            + name: Specify the name of the action
+            - on: Prepare to specify the targets of the action
+                - push: Prepare to specify where to push the resulting out of the action
+                    - branches: Prepare to specify and list all the branches you want to push the result of the CI/CD pipeline to
+                        + [branch-name]
+            - jobs: Prepare to specify all of the CI/CD Pipeline automation jobs/tasks
+                - [job|task-name] : Specify the name of the job and configure all the options/attributes of the job
+                    + runs-on: Specify the base docker image to run the automation job/task on
+                    - steps: Specify all steps to be taken by the job/task
+                        + name: Specify the name of the step
+                        + uses: Specify the github action/rule to execute with the steps
+                        + run: Specify the shell command to execute with the steps
+    ```yaml
+    name: Build Docker Image
+    on:
+      push:
+        branches:
+          - main
+    jobs:
+      setup-docker:
+        runs-on: docker-image
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v2
+          - name: Build and tag the Docker image
+            run: docker build --tag author-name/image-name:[tag|version] -f [dockerfile] [context]
+    ```
 
 ## Wiki
 
