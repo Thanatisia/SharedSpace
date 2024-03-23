@@ -1179,3 +1179,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new step 'Edit/Configure Termux configuration file'
             + Important: Custom Keybinding
 
+#### 2233H
+- New
+    + Added new document 'pretty.md' in 'Docs/Programming/Languages/Markdown/Resources/Writing-Documentations/Formats/' : Pretty/formatted Markdown documentations for a better looking documentation
+
