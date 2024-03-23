@@ -27,23 +27,91 @@ Collection of things to do Out-of-the-Box after installation
         - Parameters
             + `pkg upgrade` : Upgrade local packages
     ```bash
-    pkg update
+    pkg upgrade
     ```
 
 - Install essential packages
     - Packages
-        + termux-setup-storage : Gives Termux permissions to access your files in the Internal Storage
-        + termux-api : Termux API; Access Android and Chrome hardware features.
+        - Development
+            + git : Version Control and obtaining of packages
+            + vim : Terminal Text Editor
+            + tmux : Terminal Multiplexer
+            + jq : JSON Parser/Processor
+            + yq : YAML Parser/Processor
+        - Linux/System Administration
+            + man : Linux manual
+        - Termux-related
+            + termux-api : Termux API; Access Android and Chrome hardware features.
+            + termux-tools: Basic system tools for Termux
+            + termux-services : contains a set of scripts for controlling services
+    - Notes
+        - To find other termux CLI packages, you can search using the pkg package manager
+            ```bash
+            pkg search termux-
+            ```
     ```bash
-    pkg install termux-setup-storage termux-api
+    pkg {install|add} termux-api termux-tools termux-services man git vim tmux jq yq
     ```
 
-- Setup mapping of your Host System's Internal Storage filesystem into Termux's filesystem
+- Setup mapping of your Host System's Internal Storage filesystem into Termux's filesystem in the directory '~/storage'
     - Notes
+        + termux-setup-storage: Gives Termux permissions to access your files in the Internal Storage
         + The mounted host system's filesystem is mounted as read-only for security purposes
     ```bash
     termux-setup-storage
     ```
+
+- Edit/Configure Termux Configuration File
+    - Explanation
+    - Termux Filesystem Structure
+        - $HOME/
+            - .termux : this is the termux emulator application configuration directory
+                + termux.properties : This is the main configuration file; This is where the keybinding/keymappings, settings are all set
+    - Notes
+        + Please refer to [Termux Wiki - Terminal Settings](https://wiki.termux.com/wiki/Terminal_Settings) for a full list
+    - Edit '.termux/termux.properties'
+        ```bash
+        $EDITOR .termux/termux.properties
+        ```
+    - '.termux/termux.properties' Configuration settings and options Quickstart
+        - Setting Key and Values
+            - `extra-keys = [ keys... ]` : Set the keymapping/keybinding of the Terminal emulator (the quick-touch buttons above the keyboard)
+                - Format:
+                    ```
+                    extra-keys = [
+                        [ row-1, keys ], \
+                        [ row-2, keys ], \
+                        [ ... ], \
+                        [ row-N, keys ] \
+                    ]
+                    ```
+                - Notes
+                    - Every list in the master list represents 1 row
+                        + Each row list has to be separated by a comma
+                        + If a row is in a new row, you need to separate with a '\' delimiter
+                + Default Keys: `[ [ESC, TAB, CTRL, ALT, {key: '-', popup: '|'}, DOWN, UP] ]`
+                - Supported Key characters
+                    + ESC : Escape
+                    + TAB : Tab
+                    + CTRL : Control
+                    + ALT : Alternate
+                    + Custom : You can put whatever you want, what you type will be printed if pressed
+                - Recommended Examples
+                    - Base
+                        ```
+                        extra-keys = [
+                            ['ESC', '/', '-', 'HOME', 'UP', 'END', 'PGUP'], \
+                            ['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN'] \
+                        ]
+                        ```
+                    - Vim Key 3rd Row
+                        ```
+                        extra-keys = [
+                            ['ESC', '/', '-', 'HOME', 'UP', 'END', 'PGUP'], \
+                            ['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN'], \
+                            [':wq'] \
+                        ]
+                        ```
 
 ## Wiki
 - Backup Termux files

@@ -1169,3 +1169,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new Wiki
         + Added new resources
 
+#### 2223H
+- New
+    + Added new document 'customization.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/': Documentation and writeup on customizing/configuring Termux
+
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added essential packages to install
+        - Added new step 'Edit/Configure Termux configuration file'
+            + Important: Custom Keybinding
+
