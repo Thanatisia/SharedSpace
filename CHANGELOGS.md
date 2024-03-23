@@ -57,6 +57,7 @@
 + [2024-03-19](#2024-03-19)
 + [2024-03-20](#2024-03-20)
 + [2024-03-21](#2024-03-21)
++ [2024-03-23](#2024-03-23)
 
 ## Version History
 ```
@@ -1148,4 +1149,16 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'test.md' in 'Docs/Linux/commands'
         + Updated expression list with new examples
         + Added new reference
+
+### 2024-03-23
+#### 1707H
+- New
+    - Added new directory 'Guides' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/': For storing Termux guides and write-ups
+        + Added new documentation 'things-to-do-after-installation.md' for holding a list of tasks you should do after installing Termux
+    - Added new directory 'Writing-Documentations' in 'Docs/Programming/Languages/Markdown/Resources' for holding helpful resources regarding writing documentations of various kinds in Markdown 
+        - Added new directory 'Format/' to hold template files representing various formats of writing documentations in markdown
+            + Added new document 'libraries.md' : Markdown documentations for Frameworks and Library development
+            + Added new document 'programming-cli-utilies.md' : Markdown documentations for CLI application development
+            + Added new document 'software-development.md' : Markdown documentations for general software development
+            + Added new document 'standard.md' : Standard formatting when writing in markdown
 
