@@ -58,6 +58,7 @@
 + [2024-03-20](#2024-03-20)
 + [2024-03-21](#2024-03-21)
 + [2024-03-23](#2024-03-23)
++ [2024-03-24](#2024-03-24)
 
 ## Version History
 ```
@@ -1182,4 +1183,20 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 2233H
 - New
     + Added new document 'pretty.md' in 'Docs/Programming/Languages/Markdown/Resources/Writing-Documentations/Formats/' : Pretty/formatted Markdown documentations for a better looking documentation
+
+### 2024-03-24
+#### 1557H
+- New
+    - Added new directory 'Setup' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/': For holding guides on setting up various services/concepts in Termux
+        - Added new directory 'Server': for holding setup guides for server and services
+            + Added new document 'ssh.md' For setting up a SSH server on Termux
+- Updates
+    - Updated document 'customization.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added new special keywords
+        + Added new writeups on format
+        + Added examples to formats
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added new packages to install
+        + Added steps to setup SSH
+        + Added resources
 
