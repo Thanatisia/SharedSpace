@@ -36,6 +36,7 @@ Collection of things to do Out-of-the-Box after installation
             + git : Version Control and obtaining of packages
             + vim : Terminal Text Editor
             + tmux : Terminal Multiplexer
+            + build-essential : Essential tools for building/development
             + jq : JSON Parser/Processor
             + yq : YAML Parser/Processor
         - Linux/System Administration
@@ -51,7 +52,7 @@ Collection of things to do Out-of-the-Box after installation
             pkg search termux-
             ```
     ```bash
-    pkg {install|add} termux-api termux-tools termux-services man iproute2 git vim tmux jq yq
+    pkg {install|add} termux-api termux-tools termux-services man iproute2 git vim tmux build-essential jq yq
     ```
 
 - Setup mapping of your Host System's Internal Storage filesystem into Termux's filesystem in the directory '~/storage'

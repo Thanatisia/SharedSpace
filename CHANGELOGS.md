@@ -1204,3 +1204,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     + Added new document 'create-tunnel-from-server-to-external-vps.md' in 'Docs/Home Lab/Ideas and Concepts/': Documentation with steps + design specifications to create a tunnel/proxy interfaxe between your home self-hosted server and an external VPS, then connect to the services in the home lab without port forwarding
 
+### 2024-03-25
+#### 2355H
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        - Added new essential package
+            + build-essential
+
