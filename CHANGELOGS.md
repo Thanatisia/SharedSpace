@@ -59,6 +59,8 @@
 + [2024-03-21](#2024-03-21)
 + [2024-03-23](#2024-03-23)
 + [2024-03-24](#2024-03-24)
++ [2024-03-25](#2024-03-25)
++ [2024-03-26](#2024-03-26)
 
 ## Version History
 ```
@@ -1210,4 +1212,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
         - Added new essential package
             + build-essential
+
+### 2024-03-26
+#### 1624H
+- New
+    - Added new directory 'templates' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment/' for storing Python packaging template files (i.e. setup.py for setuptools)
+        + Added new python packaging template 'setup.py'
+    - Added new directory 'docs/' in 'Docs/Programming/Languages/Python/Libraries/flask/'
+        + Added new document 'quickstart-guide.md' which is a Quickstart reference guide to starting up a proper flask webserver with routing
 
