@@ -1228,3 +1228,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + webserver route with nested pages variables defined in the routing scheme/layout
             + webserver route with multiple variables
 
+#### 2132H
+- New
+    - Added new directory 'Plugin Management' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/' for storing Neovim Lua Plugin Package development tips, tricks and guides
+        + Added new document 'neovim-plugin-packaging-format-and-structures.md' for Neovim Plugin and Packaging format, structures and documentations
+
