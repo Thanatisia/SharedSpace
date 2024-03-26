@@ -60,6 +60,36 @@ Neovim Packaging Format and Structure Documentations
 
 ## Wiki
 
+### Templates
+- init.lua
+    ```lua
+    --- Place your dependencies here
+    local pkg = require("your-lua-script")
+
+    --- Initialize your master (aka 'M') configuration dictionary
+    local M = {}
+
+    --- Design your plugin's configuration settings here
+    M.config = {
+        --- Specify the available configurations here
+        --- Format:
+        --- configuration-variable = value
+    }
+
+    --- Specify the functions to execute when the plugin is opened
+    M.open = function()
+        --- Statements...
+    end
+
+    --- Specify the default application setup configurations that will be applied when installed and loaded here
+    M.setup = function(config)
+        --- Defaults here
+    end
+
+    --- Return the plugin specifications to the caller (which is the local user's Neovim instance when loaded)
+    return M
+    ```
+
 ### Popular Neovim plugins for development
 + plenary.nvim : Plugin library/framework containing pre-defined useful Neovim-lua functionalities
 

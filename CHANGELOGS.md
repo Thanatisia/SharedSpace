@@ -1233,3 +1233,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'Plugin Management' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/' for storing Neovim Lua Plugin Package development tips, tricks and guides
         + Added new document 'neovim-plugin-packaging-format-and-structures.md' for Neovim Plugin and Packaging format, structures and documentations
 
+#### 2141H
+- Updates
+    - Updated document 'neovim-plugin-packaging-format-and-structures.md' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/Plugin Management'
+        - Added new templates header section block
+            + Added new template for init.lua (usable for any other lua script layouts)
+
