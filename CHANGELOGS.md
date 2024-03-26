@@ -1221,3 +1221,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'docs/' in 'Docs/Programming/Languages/Python/Libraries/flask/'
         + Added new document 'quickstart-guide.md' which is a Quickstart reference guide to starting up a proper flask webserver with routing
 
+#### 1722H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        - Added various optional webserver routing layouts 
+            + webserver route with nested pages variables defined in the routing scheme/layout
+            + webserver route with multiple variables
+

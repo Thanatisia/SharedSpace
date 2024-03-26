@@ -118,6 +118,41 @@
             def index(): 
                return render_template("index.html")
             ```
+        - Add a webserver route with a variable
+            - You can define a variable in the route using the `<variable-name>` keyword/identifier
+            - When the criteria/expression matches with the route syntax
+                + The variable will be passed from the routing URL into the function
+            ```python
+            @app.route("/[route-name]/<variable_name>")
+            def route_function_name(variable_name): 
+                # Initialize Variables
+                res = ""
+
+                # Process variable
+
+                # Return back to DOM
+                return res
+            ```
+        - Add a webserver route with multiple variables
+            - You can obtain multiple variables without defining in the path
+                - using the 'request' function
+                    - To pass the variables in the URL
+                        - Access the URL using the following format: `[protocol]://[server-ip|domain]:[server-port-number]/[route-name]?[query-conditions]
+                            + The query conditions are your variable-value mappings: `variable-1=value-1&variable-2=value-2`
+                            - Notes
+                                + Note the '?' at the end of the route, this essentially tells the webserver that you have query/data to parse into the function that is decorated/attached to the route
+                                + Please separate all `variable=value` mappings with a '&' delimiter
+            ```python
+            @app.route("/[route-name]")
+            def route_function_name():
+                # Initialize Variables
+
+                # Obtain the variable
+                value = request.args.get(variable_name, default_value)
+
+                # Return back to DOM
+                return value
+            ```
         - Add a POST request application route
             - When the route '[route-name]' is accessed (i.e. http://[server-ip|domain]:[server-port]/[route-name]/) with a POST request
                 - i.e.
