@@ -58,6 +58,9 @@
 + [2024-03-20](#2024-03-20)
 + [2024-03-21](#2024-03-21)
 + [2024-03-23](#2024-03-23)
++ [2024-03-24](#2024-03-24)
++ [2024-03-25](#2024-03-25)
++ [2024-03-26](#2024-03-26)
 
 ## Version History
 ```
@@ -1182,4 +1185,57 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 2233H
 - New
     + Added new document 'pretty.md' in 'Docs/Programming/Languages/Markdown/Resources/Writing-Documentations/Formats/' : Pretty/formatted Markdown documentations for a better looking documentation
+
+### 2024-03-24
+#### 1557H
+- New
+    - Added new directory 'Setup' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/': For holding guides on setting up various services/concepts in Termux
+        - Added new directory 'Server': for holding setup guides for server and services
+            + Added new document 'ssh.md' For setting up a SSH server on Termux
+- Updates
+    - Updated document 'customization.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added new special keywords
+        + Added new writeups on format
+        + Added examples to formats
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added new packages to install
+        + Added steps to setup SSH
+        + Added resources
+
+#### 1605H
+- New
+    + Added new document 'create-tunnel-from-server-to-external-vps.md' in 'Docs/Home Lab/Ideas and Concepts/': Documentation with steps + design specifications to create a tunnel/proxy interfaxe between your home self-hosted server and an external VPS, then connect to the services in the home lab without port forwarding
+
+### 2024-03-25
+#### 2355H
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        - Added new essential package
+            + build-essential
+
+### 2024-03-26
+#### 1624H
+- New
+    - Added new directory 'templates' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment/' for storing Python packaging template files (i.e. setup.py for setuptools)
+        + Added new python packaging template 'setup.py'
+    - Added new directory 'docs/' in 'Docs/Programming/Languages/Python/Libraries/flask/'
+        + Added new document 'quickstart-guide.md' which is a Quickstart reference guide to starting up a proper flask webserver with routing
+
+#### 1722H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        - Added various optional webserver routing layouts 
+            + webserver route with nested pages variables defined in the routing scheme/layout
+            + webserver route with multiple variables
+
+#### 2132H
+- New
+    - Added new directory 'Plugin Management' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/' for storing Neovim Lua Plugin Package development tips, tricks and guides
+        + Added new document 'neovim-plugin-packaging-format-and-structures.md' for Neovim Plugin and Packaging format, structures and documentations
+
+#### 2141H
+- Updates
+    - Updated document 'neovim-plugin-packaging-format-and-structures.md' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/Plugin Management'
+        - Added new templates header section block
+            + Added new template for init.lua (usable for any other lua script layouts)
 
