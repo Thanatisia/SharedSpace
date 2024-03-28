@@ -1269,3 +1269,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Performed some cleanup
         + Added steps for manual secret key generation
 
+#### 2119H
+- New
+    - Added directory 'Guides' in 'Docs/Programming/Vim/Distros/Neovim' for holding Neovim Guides
+        + Added document 'cool-tricks.md' : Cool tips and tricks and things you can do with Neovim
+        + Added document 'environment-variables.md' : Collection of Neovim Environment Variables
+
