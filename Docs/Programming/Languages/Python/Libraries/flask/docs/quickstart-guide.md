@@ -110,6 +110,43 @@
             ```python
             app = Flask(__name__)
             ```
+        - Configure your webserver using the Flask class
+            - Explanation
+                - 'app.config' returns a dictionary (key-value) object containing the configuration settings for your webserver
+                    - Recommended Configuration Key-Value Settings
+                        - PREFERRED_URL_SCHEME : Use this scheme for generating external URLs when not in a request context.
+                            + Default: 'http'
+                        - SERVER_NAME : Set your Server's custom IP/domain name and the custom port number here; Format: "[protocol]://[server-ip|domain]:[server-port-number]"
+                            + Default: None
+                        - SECRET_KEY : Set your secret key that will be used for securely signing the session cookie and can be used for any other security related needs by extensions or your application. It should be a long random bytes or str. For example, copy the output of this to your config:
+                            - Prefixed Environment Variables
+                                + FLASK_SECRET_KEY : This corresponds to the configuration key 'SECRET_KEY'
+                            - Notes
+                                - To generate a secret key to parse into the application
+                                    - Using python
+                                        - Generate hexadecimal token
+                                            ```bash
+                                            python -c "import secrets; print(secrets.token_hex())'
+                                            ```
+                                        - Export the result to the prefixed environment variable
+                                            ```bash
+                                            export FLASK_SECRET_KEY="[your-secret-key]"
+                                            ```
+                                        - Access the secret key in the webserver
+                                            ```python
+                                            app.config.from_prefixed_env()
+                                            print(app.config["SECRET_KEY"])
+                                            ```
+                                - Alternatively
+                                    - Please set the secret key as an Environment Variable (i.e. 'SECRET_KEY=[your-secret-key]') in your host system and
+                                        - obtain the environment variable using 'os.getenv()'
+                                            ```python
+                                            SECRET_KEY = os.getenv("SECRET_KEY")
+                                            ```
+                            + Default: None
+            ```python
+            app.config[CONFIGURATION_KEY] = "value"
+            ```
         - Add the application route '/' (the webserver routing pointing to the home/root page) 
             - This will render the 'index.html' (home) page from the 'templates/' folder when accessed (i.e. http://[server-ip|domain]:[server-port]/)
                 + This will be the home page of the website
@@ -339,6 +376,7 @@
 ## Resources
 
 ## References
++ [Flask - 2.3.X - Configurations](https://flask.palletsprojects.com/en/2.3.x/config/)
 + [GeeksforGeeks - How to change port in flask app](https://www.geeksforgeeks.org/how-to-change-port-in-flask-app/)
 
 ## Remarks

@@ -1258,3 +1258,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
         + Added steps to change the server hostname/IP and port numbers
 
+#### 1443H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        + Added step to 'Configure your webserver using the Flask class'
+
