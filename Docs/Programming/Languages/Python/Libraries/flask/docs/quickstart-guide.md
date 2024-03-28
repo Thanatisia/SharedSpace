@@ -180,10 +180,21 @@
                 return redirect('/')
             ```
         - Add an `if __name__ == "__main__":` to run the webserver only if you are running it directly and not as a module
-            ```python
-            if __name__ =="__main__":
-                app.run(debug=True)
-            ```
+            - Baseline
+                ```python
+                if __name__ =="__main__":
+                    app.run(debug=True)
+                ```
+            - Change the port number via app.run
+                ```python
+                if __name__ =="__main__":
+                    app.run(debug=True, port=PORT)
+                ```
+            - Change the server host name/ip via app.run
+                ```python
+                if __name__ =="__main__":
+                    app.run(debug=True, host=SERVER_IP)
+                ```
 
 - Optionals
     - Setup a simple SMTP server login function
@@ -326,6 +337,9 @@
     ```
 
 ## Resources
+
 ## References
++ [GeeksforGeeks - How to change port in flask app](https://www.geeksforgeeks.org/how-to-change-port-in-flask-app/)
+
 ## Remarks
 

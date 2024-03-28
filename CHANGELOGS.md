@@ -1253,3 +1253,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'string-handling.md' in 'Docs/Programming/Shellscript/Code-Snippets/'
         + Added code snippet examples to storing/reading multiline string standard outputs into an array/list using '$(command)'
 
+#### 1423H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        + Added steps to change the server hostname/IP and port numbers
+
