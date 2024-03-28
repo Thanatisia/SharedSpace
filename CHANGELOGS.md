@@ -61,6 +61,7 @@
 + [2024-03-24](#2024-03-24)
 + [2024-03-25](#2024-03-25)
 + [2024-03-26](#2024-03-26)
++ [2024-03-28](#2024-03-28)
 
 ## Version History
 ```
@@ -1238,4 +1239,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'neovim-plugin-packaging-format-and-structures.md' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/Plugin Management'
         - Added new templates header section block
             + Added new template for init.lua (usable for any other lua script layouts)
+
+### 2024-03-28
+#### 1030H
+- Updates
+    - Updated document 'sed.md' in 'Docs/Linux/commands'
+        + Added new header block 'Useful Regex Patterns and Usages'
+        + Added new snippet to 'Pipe a standard output into sed as a standard input and split each entry/item ending with a specific delimiter with a newline'
+        + Added new snippet to 'Echo/Print the System Environment PATH as a readable form'
 

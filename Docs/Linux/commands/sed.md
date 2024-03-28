@@ -147,6 +147,18 @@
     echo -n [hexadecimal-string] | sed 's/\([0-9A-F]\{2\}\)/\\\\\\x\1/gI' | xargs printf && echo ''
     ```
 
+- Pipe a standard output into sed as a standard input and split each entry/item ending with a specific delimiter with a newline
+    - Explanation
+        + This will replace the specified delimiter with line breaks to make the standard output more readable
+        - Regular Express Pattern
+            - `s/[original-search-string]/[replacement-string]` : Stands for 'Substitution'; This searches for the a target string [original-search-string] and substitute/replace it with [replacement-string]
+                + original-search-string : `/[the-delimiter]/`; Search for the specified delimiter (i.e. colon (':'), commas (','))
+                + replacement-string : `/\n/`; Replaces/Substitutes it with a newline to split it up
+            + `/g` : Stands for 'Global'; Apply the substitution command globally
+    ```bash
+    [command] | sed 's/[the-delimiter]/\n/g'
+    ```
+
 ## Wiki
 ### .sed script files
 #### Format
@@ -159,6 +171,19 @@
     ```
 
 ### Snippets
+#### Useful Regex Patterns and Usages
+- Echo/Print the System Environment PATH as a readable form
+    - Explanation
+        + This will replace colons with line breaks to make the PATH standard output more readable
+        - Regular Express Pattern
+            - `s/[original-search-string]/[replacement-string]` : Stands for 'Substitution'; This searches for the a target string [original-search-string] and substitute/replace it with [replacement-string]
+                + original-search-string : `/:/`; Search for colons (':')
+                + replacement-string : `/\n/`; Replaces/Substitutes it with a newline to split it up
+            + `/g` : Stands for 'Global'; Apply the substitution command globally
+    ```bash
+    echo $PATH | sed 's/:/\n/g'
+    ```
+
 #### One-Liner
 - Comment a locale in '/etc/locale.gen'
     ```bash
