@@ -16,7 +16,8 @@
             ```
 
 ## Snippets
-- Getting multiline string and storing into variable
+### Multiline Strings
+- Getting multiline string and storing into variable using EOF
     ```console
     msg="$(cat << EOF
 line1
@@ -40,4 +41,22 @@ EOF
     echo -e "$contents" | tee -a [configuration-file] && \
         echo -e "file written.
     ```
+
+- Storing a multiline string standard output into an array/list
+    - Executing command and storing standard output into array
+        ```bash
+        arr=( $(command) )
+        ```
+    - Accessing the array
+        ```bash
+        echo -e "${arr[@]}"
+        ```
+
+## Wiki
+
+## Resources
+
+## References
+
+## Remarks
 

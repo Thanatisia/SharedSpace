@@ -1248,3 +1248,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new snippet to 'Pipe a standard output into sed as a standard input and split each entry/item ending with a specific delimiter with a newline'
         + Added new snippet to 'Echo/Print the System Environment PATH as a readable form'
 
+#### 1046H
+- Updates 
+    - Updated document 'string-handling.md' in 'Docs/Programming/Shellscript/Code-Snippets/'
+        + Added code snippet examples to storing/reading multiline string standard outputs into an array/list using '$(command)'
+
