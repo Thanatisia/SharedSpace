@@ -1263,3 +1263,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
         + Added step to 'Configure your webserver using the Flask class'
 
+#### 1448H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        + Performed some cleanup
+        + Added steps for manual secret key generation
+

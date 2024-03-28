@@ -118,7 +118,7 @@
                             + Default: 'http'
                         - SERVER_NAME : Set your Server's custom IP/domain name and the custom port number here; Format: "[protocol]://[server-ip|domain]:[server-port-number]"
                             + Default: None
-                        - SECRET_KEY : Set your secret key that will be used for securely signing the session cookie and can be used for any other security related needs by extensions or your application. It should be a long random bytes or str. For example, copy the output of this to your config:
+                        - SECRET_KEY : Set your secret key that will be used for securely signing the session cookie and can be used for any other security related needs by extensions or your application. It should be a long random bytes or str. 
                             - Prefixed Environment Variables
                                 + FLASK_SECRET_KEY : This corresponds to the configuration key 'SECRET_KEY'
                             - Notes
@@ -138,7 +138,20 @@
                                             print(app.config["SECRET_KEY"])
                                             ```
                                 - Alternatively
-                                    - Please set the secret key as an Environment Variable (i.e. 'SECRET_KEY=[your-secret-key]') in your host system and
+                                    - Obtaining secret key via base python
+                                        - Generate secret key 
+                                            - using OpenSSL
+                                                ```bash
+                                                openssl rand -hex 16
+                                                ```
+                                            - using hexdump
+                                                ```bash
+                                                hexdump -vn16 -e'4/4 "%08X" 1 "\n"' /dev/urandom
+                                                ```
+                                        - Set the secret key as an Environment Variable in your host system
+                                            ```bash
+                                            SECRET_KEY=[your-secret-key]
+                                            ```
                                         - obtain the environment variable using 'os.getenv()'
                                             ```python
                                             SECRET_KEY = os.getenv("SECRET_KEY")
