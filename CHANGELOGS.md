@@ -61,6 +61,7 @@
 + [2024-03-24](#2024-03-24)
 + [2024-03-25](#2024-03-25)
 + [2024-03-26](#2024-03-26)
++ [2024-03-28](#2024-03-28)
 
 ## Version History
 ```
@@ -1238,4 +1239,33 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'neovim-plugin-packaging-format-and-structures.md' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/Plugin Management'
         - Added new templates header section block
             + Added new template for init.lua (usable for any other lua script layouts)
+
+### 2024-03-28
+#### 1030H
+- Updates
+    - Updated document 'sed.md' in 'Docs/Linux/commands'
+        + Added new header block 'Useful Regex Patterns and Usages'
+        + Added new snippet to 'Pipe a standard output into sed as a standard input and split each entry/item ending with a specific delimiter with a newline'
+        + Added new snippet to 'Echo/Print the System Environment PATH as a readable form'
+
+#### 1046H
+- Updates 
+    - Updated document 'string-handling.md' in 'Docs/Programming/Shellscript/Code-Snippets/'
+        + Added code snippet examples to storing/reading multiline string standard outputs into an array/list using '$(command)'
+
+#### 1423H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        + Added steps to change the server hostname/IP and port numbers
+
+#### 1443H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        + Added step to 'Configure your webserver using the Flask class'
+
+#### 1448H
+- Updates
+    - Updated document 'quickstart-guide.md' in 'Docs/Programming/Languages/Python/Libraries/flask/docs/'
+        + Performed some cleanup
+        + Added steps for manual secret key generation
 
