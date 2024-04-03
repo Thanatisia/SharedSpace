@@ -62,6 +62,7 @@
 + [2024-03-25](#2024-03-25)
 + [2024-03-26](#2024-03-26)
 + [2024-03-28](#2024-03-28)
++ [2024-04-03](#2024-04-03)
 
 ## Version History
 ```
@@ -1274,4 +1275,21 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added directory 'Guides' in 'Docs/Programming/Vim/Distros/Neovim' for holding Neovim Guides
         + Added document 'cool-tricks.md' : Cool tips and tricks and things you can do with Neovim
         + Added document 'environment-variables.md' : Collection of Neovim Environment Variables
+
+### 2024-04-03
+#### 2200H
+- New
+    - Added new directory 'Guides' in 'Docs/Git/Remote Repository Hosts/GitHub/'
+        + Added new documentation 'github-api.md' containing information pertaining to the GitHub API itself
+        - Added new documentation 'backup-and-migration.md' containing step-by-step documentation and additional notes
+            - regarding
+                + Obtaining a complete list of all your repositories (public and/or private and forks) as a JSON file and
+                + Backing up and Archiving all your repositories by refeencing that list to obtain the project repository full names and clone them
+    - Added new directory 'paramiko' in 'Docs/Programming/Languages/Python/Libraries/' for holding documentations for the Python SSH python implementation library 'paramiko'
+        + Added new document 'README.md'
+    + Added new documentation 'docs.md' in 'Docs/Programming/Languages/Python/Libraries/rich/' designed to replace 'manual.md'
+
+- Updates
+    - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added all packages currently written in the python libraries directory
 
