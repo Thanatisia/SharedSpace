@@ -1301,3 +1301,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - such as
             + Differences between setup.py and pyproject.toml
 
+#### 2137H
+- Updates
+    - Updated document 'pyproject.md' in 'Docs/Programming/Languages/Python/Guides/Packaging-Distribution-and-Deployment/': A complete write-up on how to setup the pyproject.toml python packaging configuration file, as well as complete documentations and information
+        + Replaced 'install_requires' key-value setting to 'dependencies'
+        + Added configuration steps for adding project entry points for generating CLI and GUI executables
+        + Added resources
+        + Added new Header Blocks for generating executables of CLI and GUI scripts
+

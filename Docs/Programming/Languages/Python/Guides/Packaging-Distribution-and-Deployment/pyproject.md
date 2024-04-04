@@ -123,7 +123,7 @@ classifiers = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
 ]
-install_requires=[
+dependencies=[
     # List your dependencies here
 ]
 ```
@@ -134,6 +134,20 @@ install_requires=[
 [project.urls]
 Homepage = "https://github.com/author/project-name"
 Repository = "https://github.com/author/project-name.git"
+```
+
+> Configure project Entry Points for generating CLI executables
+
+```toml
+[project.scripts]
+cli-executable-name = "package.module:main_function_name"
+```
+
+> Configure project Entry Points for generating GUI executables
+
+```toml
+[project.gui-scripts]
+gui-executable-name = "package.module:main_function_name"
 ```
 
 ### Optionals
@@ -240,7 +254,7 @@ where = ["src"]
                         + 'Programming Language :: Python :: 3.10' : Supports Python 3.10
                         + 'Programming Language :: Python :: 3.11' : Supports Python 3.11
                         + 'Programming Language :: Python :: 3.12' : Supports Python 3.12
-        - `install_requires=[ dependencies ]` : List all your project dependencies here; These packages will be installed alongside this package
+        - `dependencies=[ dependencies ]` : List all your project dependencies here; These packages will be installed alongside this package
             + Type: List
 
 - `[project.urls]` : This TOML header block is where you specify URL and links related to your project
@@ -251,6 +265,18 @@ where = ["src"]
                 + GitHub: https://github.com/author/project-name
         - `Repository = "https://github.com/author/project-name.git"` : Specify the git remote repository server containing the project repository to pull from
             + Type: String
+
+- `[project.scripts]` : This TOML header block is where you configure your project entry points for generating CLI executables
+    - Key-Value Settings
+        - `cli-executable-name = "package.module:main_function_name"` : Map the CLI script/executable name to the execution functions
+            + Type: String
+            + Format: `[package-name].[module-name]:main_function_name`
+
+- `[project.gui-scripts]` : This TOML header block is where you configure your project entry points for generating GUI executables
+    - Key-Value Settings
+        - `gui-executable-name = "package.module:main_function_name"` : Map the GUI script/executable name to the execution functions
+            + Type: String
+            + Format: `[package-name].[module-name]:main_function_name`
 
 - `[tools]` : This TOML header block is where you configure your backend build tool specifications
     - Key-Value Settings
@@ -310,13 +336,21 @@ classifiers = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
 ]
-install_requires=[
+dependencies = [
     # List your dependencies here
 ]
 
 [project.urls]
 Homepage = "https://github.com/author/project-name"
 Repository = "https://github.com/author/project-name.git"
+
+[project.scripts]
+# CLI Program Entry Point(s) and scripts
+cli-executable-name = "package.module:main_function_name"
+
+[project.gui-scripts]
+# GUI Program Entry Point(s) and scripts
+gui-executable-name = "package.module:main_function_name"
 
 [tools.setuptools.packages.find]
 where = ["src"]
@@ -328,8 +362,12 @@ where = ["src"]
 + [PyPI Classifiers List - Raw](https://pypi.org/pypi?%3Aaction=list_classifiers)
 + [PyPI Classifiers List - Web](https://pypi.org/classifiers/)
 + [Python Packaging - Tutorials - Packaging Projects (in Python)](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
++ [Python Packaging - Guides - Writing pyproject.toml - Creating executable scripts](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#creating-executable-scripts)
 + [Python Packaging - Guides - Writing pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#writing-pyproject-toml)
++ [Python Packaging - Specifications - pyProject.toml - Entry Points](https://packaging.python.org/en/latest/specifications/pyproject-toml/#entry-points)
 + [setuptools - User Guide - pyproject configurations](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html)
++ [StackOverflow - Questions - 75419794 - How to specify setuptools entrypoints in a pyproject.toml](https://stackoverflow.com/questions/75419794/how-to-specify-setuptools-entrypoints-in-a-pyproject-toml)
++ [TOML](https://toml.io/en/)
 
 ## Remarks
 
