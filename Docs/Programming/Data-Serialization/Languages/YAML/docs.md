@@ -292,6 +292,32 @@
 
 ## Wiki
 
+### Example YAML file use-cases
+
+> docker-compose.yaml
+
+```yaml
+version: "3.7"
+services:
+  service-name:
+    image: "image-name"
+    container_name: "container-name"
+    restart: unless-stopped
+    environment:
+      - "ENV_NAME=value"
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+    ports:
+      ## Port Forward/Translate/Map from host system to container
+      ## {host-ip-address}:[host-port-number]:[container-port-number]
+      - "8080:8080"
+    volumes:
+      ## Mount volumes from host system into container
+      ## [host-system-volume]:[container-volume]:{permissions (rwx)}
+      - "/path/to/volumes:/app"
+```
+
 ### Terminologies
 + Dictionary : generally categorised as Key-Value Mappings, also known as HashMap, Associative Arrays
 

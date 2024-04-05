@@ -1326,3 +1326,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'docs.md' in 'Docs/Programming/Data-Serialization/Languages/TOML/'
         + Added setup details for importing TOML into Python
 
+#### 2341H
+- Updates
+    - Updated document 'docs.md' in 'Docs/Programming/Data-Serialization/Languages/YAML/'
+        - Added new header block for 'Example YAML file use-cases' under 'Wiki'
+            + To hold real life project use cases for YAML configuration files
+        + Added new use case template - docker-compose.yaml
+
