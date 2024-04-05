@@ -64,6 +64,7 @@
 + [2024-03-28](#2024-03-28)
 + [2024-04-03](#2024-04-03)
 + [2024-04-04](#2024-04-04)
++ [2024-04-05](#2024-04-05)
 
 ## Version History
 ```
@@ -1308,4 +1309,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added configuration steps for adding project entry points for generating CLI and GUI executables
         + Added resources
         + Added new Header Blocks for generating executables of CLI and GUI scripts
+
+### 2024-04-05
+#### 1503H
+- New 
+    - Added new directory 'TOML' in 'Docs/Programming/Data-Serialization/Languages/' for documentations on the TOML Data Serizalization language
+        + Added new document 'docs.md': Contains a complete documentation write-up on TOML components, syntax structure/tree and things to note
 
