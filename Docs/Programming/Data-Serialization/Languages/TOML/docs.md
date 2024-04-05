@@ -215,6 +215,14 @@
 ### Parsing TOML as a Dictionary (Key-Value) mapping
 > Note: The following will be using Python as a pseudocode representative of the concept of Key-Value Mappings (equivalents excluding dictionary are: HashMap, Associative Arrays)
 
+- Setup
+    - Dependencies
+        + python
+        + python-pip
+        + python-venv
+        - Python package dependencies
+            + tomllib
+
 - Header Key-Value Mappings
     - TOML
         ```toml

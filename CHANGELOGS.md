@@ -1316,3 +1316,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'TOML' in 'Docs/Programming/Data-Serialization/Languages/' for documentations on the TOML Data Serizalization language
         + Added new document 'docs.md': Contains a complete documentation write-up on TOML components, syntax structure/tree and things to note
 
+#### 2334H
+- New
+    - Added new directory 'YAML' in 'Docs/Programming/Data-Serialization/Languages/' for documentations on the YAML Data Serizalization language
+        + Added new document 'docs.md': Contains a complete documentation write-up on YAML components, syntax structure/tree and things to note
+    + Added new document 'using-docker-inspect-for-visualization.md' in 'Docs/Technology/Containers/Docker/Using Docker/': Tips and trick for using docker - Guide to using docker inspect for visualizing and obtaining information about existing images and containers
+
+- Updates
+    - Updated document 'docs.md' in 'Docs/Programming/Data-Serialization/Languages/TOML/'
+        + Added setup details for importing TOML into Python
+
