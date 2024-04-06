@@ -65,6 +65,7 @@
 + [2024-04-03](#2024-04-03)
 + [2024-04-04](#2024-04-04)
 + [2024-04-05](#2024-04-05)
++ [2024-04-06](#2024-04-06)
 
 ## Version History
 ```
@@ -1332,4 +1333,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new header block for 'Example YAML file use-cases' under 'Wiki'
             + To hold real life project use cases for YAML configuration files
         + Added new use case template - docker-compose.yaml
+
+### 2024-04-06
+#### 1833H
+- New 
+    - Added new directory 'BeautifulSoup4' in 'Docs/Programming/Languages/Python/Libraries/' for documentations on the BeautifulSoup Web scraping/HTML parser framework for python
+        + Addedd new document 'README.md'
+
+- Updates
+    - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added new library 'beautifulsoup4'
 

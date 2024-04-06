@@ -10,6 +10,7 @@ This list will specify also specify which packages has been documented (as found
 ## Packages
 + argparse               : CLI Argument Parser framework/library
 + binascii               : Binary to ASCII Encoder/Decoder package
++ BeautifulSoup4         : A Python framework/library that performs allows data scraping on the web (aka web scraping); Using this along with the functionality to 'crawl' the web, and you will have a webcrawler
 + flask                  : Lightweight Python Web Server framework; Backend, to be used with a frontend language/framework like HTML5-CSS3, SvelteJS, ReactJS
 + hashlib                : Hashing Algorithm library
 + json                   : JSON Parser for Python
