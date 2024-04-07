@@ -1373,3 +1373,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
         + Added new entry for library 'html'
 
+#### 2320H
+- Updates
+    - Updated document 'docs.md' in 'Docs/Programming/Languages/Python/Libraries/html/'
+        + Added module imports for clearer understanding
+        + Added new snippet example for 'parsing and storing all callback results into a reference dictionary for access'
+
