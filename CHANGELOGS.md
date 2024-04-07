@@ -1368,3 +1368,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'Project-Ideas' in 'Docs/Programming/' to store all Project Ideas in a single directory with subdirectories, following a template with detailed instructions and requirements
         + Added new document 'README.md'
 
+#### 2155H
+- Updates
+    - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added new entry for library 'html'
+
