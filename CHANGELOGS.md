@@ -66,6 +66,7 @@
 + [2024-04-04](#2024-04-04)
 + [2024-04-05](#2024-04-05)
 + [2024-04-06](#2024-04-06)
++ [2024-04-07](#2024-04-07)
 
 ## Version History
 ```
@@ -1349,4 +1350,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new python library directory 'sys' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the built-in python library 'sys'
         + Added new document 'manual.md'
 
+
+### 2024-04-07
+#### 1348H
+- New 
+    + Added new document 'cargo.md' in 'Docs/Programming/Package Managers/': Contains documentations on the Rust package manager 'cargo'
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Libraries/BeautifulSoup4'
+        + Updated document and rewrote sentences to be neater and include the primary functionality as a HTML Parser
 

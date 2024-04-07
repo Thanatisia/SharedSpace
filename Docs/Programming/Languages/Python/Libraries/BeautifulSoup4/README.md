@@ -2,8 +2,10 @@
 
 ## Information
 ### Description
-- BeautifulSoup is a Python framework/library that performs allows data scraping on the web (aka web scraping)
-    + Using this along with the functionality to 'crawl' the web, and you will have a webcrawler
+- BeautifulSoup is a HTML Parser framework/library for python that also container additional functionalities, 
+    - such as
+        - Webscraping: Scraping data on the web
+            + Using this along with the functionality to 'crawl' the web, and you will have a webcrawler
 
 ## Setup
 ### Dependencies
@@ -38,10 +40,10 @@
 ## Documentation
 
 ### Packages
-- bs4 : The BeautifulSoup4 Web scraper project
+- bs4 : The BeautifulSoup4 HTML Parser + WebScraper
 
 ### Library/Modules
-- bs4.BeautifulSoup : The core BeautifulSoup4 
+- bs4.BeautifulSoup : The core BeautifulSoup4
 - bs4.element : Contains HTML elements
 
 ### Data Types/Objects
@@ -51,15 +53,15 @@
 
 ### Classes
 - bs4.BeautifulSoup
-    - `.BeautifulSoup(text, features="parser")`: Initialize the BeautifulSoup core Web scraper functionality class
+    - `.BeautifulSoup(text, features="parser")`: Initialize the BeautifulSoup core HTML Parser and Web scraper class functionalities
         - Parameter/Argument Signatures
-            - text : Specify the HTML5 text string to scrape through and parse; 
+            - text : Specify the HTML5 text string to scrape through and parse;
                 + Type: String
                 - Notes:
                     + Generally obtained via GET request using an HTTP REST API library (i.e requests)
             - features : Specify other features to enable
                 - Example features
-                    + html.parser : Run webcrawler class as a HTML parser (Recommended)
+                    + html.parser : Initialize the class as a HTML parser (Recommended)
         - Return
             - soup: The BeautifulSoup HTML5 Parser class object
                 + Type: bs4.BeautifulSoup
@@ -106,7 +108,7 @@
     response_text = response.text
     ```
 
-- Initialize BeautifulSoup to crawl the response text HTML5 code
+- Initialize BeautifulSoup to parse the HTML5 code response text into Python
     + Type: bs4.BeautifulSoup
     ```bash
     soup = BeautifulSoup(response_text, features="html.parser")
