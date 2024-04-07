@@ -1360,3 +1360,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Libraries/BeautifulSoup4'
         + Updated document and rewrote sentences to be neater and include the primary functionality as a HTML Parser
 
+#### 2142H
+- New
+    + Added new document 'self-hosting-otg.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/': Documentations on using a self-hosting web applications, services, servers and protocols on-the-go on an mobile device (Android) 
+    - Added new python library directory 'html' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the built-in python library 'html' and HTML parser 'html.parser'
+        + Added new document 'docs.md'
+    - Added new directory 'Project-Ideas' in 'Docs/Programming/' to store all Project Ideas in a single directory with subdirectories, following a template with detailed instructions and requirements
+        + Added new document 'README.md'
+
