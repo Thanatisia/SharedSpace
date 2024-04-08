@@ -1409,3 +1409,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new colorscheme groups and a new header block 'Color Palettes' for Individual color palletes and its hexadecimal color codes and combinations that fits
         + Added new resources and websites
 
+#### 2353H
+- Updates 
+    - Updated document 'README.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/'
+        + Added new Table of Content Entry to 'Build from Source'
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added optional step to create an empty raw disk image file
+        + Fixed some typographcial errors/mistakes
+        + Fixed the disk image filename
+        - Added steps to '(Optional) If you are running/booting from a Virtual Machine Hypervisor'
+            + Create a new Virtual Machine
+            + Configure Virtual Machine
+            + Start Virtual Machine
+        + Added Post-Installation Setup steps (To consider placing it in a separate file)
+        + Added new Remarks
+

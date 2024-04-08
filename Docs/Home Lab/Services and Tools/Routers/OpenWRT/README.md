@@ -11,6 +11,7 @@
 
 ## Table of Contents
 + [Setup Guide](Guides/base-installation-guide.md)
++ [Build from Source](Guides/build-from-source.md)
 
 ## Documentations
 
