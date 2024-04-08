@@ -67,6 +67,7 @@
 + [2024-04-05](#2024-04-05)
 + [2024-04-06](#2024-04-06)
 + [2024-04-07](#2024-04-07)
++ [2024-04-08](#2024-04-08)
 
 ## Version History
 ```
@@ -1378,4 +1379,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'docs.md' in 'Docs/Programming/Languages/Python/Libraries/html/'
         + Added module imports for clearer understanding
         + Added new snippet example for 'parsing and storing all callback results into a reference dictionary for access'
+
+### 2024-04-08
+#### 1614H
+- Added new directory 'Routers' in 'Docs/Home Lab/Services and Tools/' for holding documentations on Router software and services
+    - Added new directory 'OpenWRT' for documentations of the Open Source Router server sofware OpenWRT
+        + Added new document 'README.md'
+        - Added new directory 'Guides' for Guides
+            + Added new document 'base-installation-guide.md' containing written step-by-step instructions and explanations on installing a Base Installation of OpenWRT using the command line
 
