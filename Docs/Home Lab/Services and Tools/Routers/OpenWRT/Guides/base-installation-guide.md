@@ -250,6 +250,55 @@ EOF
                 reboot
                 ```
 
+- (Optional) Set DHCP to Bridged Network Interface
+    - For <= 22.03
+        - Set Network LAN interface, Network interface name and Network Protocol using uci batch
+            ```bash
+        uci batch <<EOF 
+set network.lan=interface
+set network.lan.ifname='eth2'
+set network.lan.proto='dhcp'
+EOF
+            ```
+        - Commit all changes made
+            ```bash
+            uci commit
+            ```
+
+    - For >= 23.05
+        - Set Network LAN interface, Network interface name and Network Protocol using uci batch
+            ```bash
+        uci batch <<EOF 
+set network.lan=interface
+set network.lan.device='eth2'
+set network.lan.proto='dhcp'
+EOF
+uci commit
+service network restart
+            ```
+        - Commit all changes made
+            ```bash
+            uci commit
+            ```
+        - Restart Network Manager service
+            ```bash
+            service network restart
+            ```
+
+- Install packages as normal
+    - Using 'opkg'
+        - Basics
+            - Update the Package Manager repositories database
+                ```bash
+                opkg update
+                ```
+            - Install packages
+                ```bash
+                opkg install [package-names ...]
+                ```
+        - Recommended Packages
+            + luci : The WebUI Management Interface
+
 ## Documentations
 
 - Run with VirtualBox automatically on Start of Windows OS

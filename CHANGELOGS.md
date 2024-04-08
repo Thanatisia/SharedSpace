@@ -68,6 +68,7 @@
 + [2024-04-06](#2024-04-06)
 + [2024-04-07](#2024-04-07)
 + [2024-04-08](#2024-04-08)
++ [2024-04-09](#2024-04-09)
 
 ## Version History
 ```
@@ -1423,4 +1424,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + Start Virtual Machine
         + Added Post-Installation Setup steps (To consider placing it in a separate file)
         + Added new Remarks
+
+### 2024-04-09
+#### 0008H
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added Optional step to set DHCP to Bridged Network Interface
+        + Added Optional step to install packages
 
