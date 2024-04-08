@@ -78,7 +78,37 @@
     ```python
     import sys
     ```
-    
+
+- Setting up a CLI interface with Stream, Pipe and CLI argument parsing support
+    ```python
+    # Initialize Variables
+    results = []
+
+    # Use the standard input stream if it is full/populated
+    if not sys.stdin.isatty():
+        # Obtain the Standard Input Stream
+        input_stream = sys.stdin
+
+        for line in input_stream:
+            # Sanitize current line
+            line = line.strip()
+
+            # Append into a results list
+            results.append(line)
+    else:
+        # Obtain arguments from the CLI argument parser
+        exec = sys.argv[0]
+        argv = sys.argv[1:]
+        argc = len(argv)
+        results = argv.copy()
+
+    # Check if there are data
+    if len(results) > 0:
+        for result in results:
+            print(result)
+    else:
+        print("No URLs provided.")
+    ```
 
 ## Wiki
 

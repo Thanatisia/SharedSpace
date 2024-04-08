@@ -1393,3 +1393,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     + Added new document 'build-from-source.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/': Step-by-Step instruction for building OpenWRT image from source
 
+#### 2015H
+- Updates 
+    - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/sys/'
+        + Added new snippet - Setting up a CLI interface with Stream, Pipe and CLI argument parsing support
+
