@@ -1398,3 +1398,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/sys/'
         + Added new snippet - Setting up a CLI interface with Stream, Pipe and CLI argument parsing support
 
+#### 2150H
+- New
+    - Added new document 'colorschemes.md' in 'Docs/Programming/Web-Development/Languages/CSS/Guides/' for storing various colorscheme combinations and hex values for Frontend Application (Web Site/Page, Application and Server) Development references.
+        + This hopes to be a useful one-stop reference for frontend design and planning with regards to colorscheme/color picking 
+
