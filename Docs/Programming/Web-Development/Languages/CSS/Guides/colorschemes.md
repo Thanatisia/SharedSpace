@@ -88,9 +88,31 @@ Color scheme compilation
     + pink-sand     : #FFA8B6
     + dark-sand     : #A28089
 
+## Color Palettes
+
+> Individual Color Palettes
+
++ Majorelle Blue           : #574AE2
++ Royal Blue (Traditional) : #222A68
++ Ultra Violet             : #654597
++ Lavender (Floral)        : #AB81CD
++ Mauve                    : #E2ADF2
+
+> Color Palette combinations
+
+--------------------------------------------------------------------------------------------
+| Color-1        | Color-2                  | Color-3      | Color-4             | Color-5 |
+|:--------------:|:------------------------:|:------------:|:-------------------:|:-------:|
+| Majorelle Blue | Royal Blue (Traditional) | Ultra Violet | Lavender (Floral)   | Mauve   |
+--------------------------------------------------------------------------------------------
+
 ## Wiki
 
 ## Resources
+
+### Websites
+- Color picker
+    + [coolors.co](coolors.co)
 
 ## References
 

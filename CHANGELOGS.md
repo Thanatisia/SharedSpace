@@ -1403,3 +1403,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new document 'colorschemes.md' in 'Docs/Programming/Web-Development/Languages/CSS/Guides/' for storing various colorscheme combinations and hex values for Frontend Application (Web Site/Page, Application and Server) Development references.
         + This hopes to be a useful one-stop reference for frontend design and planning with regards to colorscheme/color picking 
 
+#### 2211H
+- Updates
+    - Updated document 'colorschemes.md' in 'Docs/Programming/Web-Development/Languages/CSS/Guides/'
+        + Added new colorscheme groups and a new header block 'Color Palettes' for Individual color palletes and its hexadecimal color codes and combinations that fits
+        + Added new resources and websites
+
