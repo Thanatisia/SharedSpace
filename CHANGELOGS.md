@@ -1382,9 +1382,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 
 ### 2024-04-08
 #### 1614H
-- Added new directory 'Routers' in 'Docs/Home Lab/Services and Tools/' for holding documentations on Router software and services
-    - Added new directory 'OpenWRT' for documentations of the Open Source Router server sofware OpenWRT
-        + Added new document 'README.md'
-        - Added new directory 'Guides' for Guides
-            + Added new document 'base-installation-guide.md' containing written step-by-step instructions and explanations on installing a Base Installation of OpenWRT using the command line
+- New
+    - Added new directory 'Routers' in 'Docs/Home Lab/Services and Tools/' for holding documentations on Router software and services
+        - Added new directory 'OpenWRT' for documentations of the Open Source Router server sofware OpenWRT
+            + Added new document 'README.md'
+            - Added new directory 'Guides' for Guides
+                + Added new document 'base-installation-guide.md' containing written step-by-step instructions and explanations on installing a Base Installation of OpenWRT using the command line
+
+#### 1659H
+- New
+    + Added new document 'build-from-source.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/': Step-by-Step instruction for building OpenWRT image from source
 
