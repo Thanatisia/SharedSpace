@@ -64,6 +64,11 @@
 + [2024-03-28](#2024-03-28)
 + [2024-04-03](#2024-04-03)
 + [2024-04-04](#2024-04-04)
++ [2024-04-05](#2024-04-05)
++ [2024-04-06](#2024-04-06)
++ [2024-04-07](#2024-04-07)
++ [2024-04-08](#2024-04-08)
++ [2024-04-09](#2024-04-09)
 
 ## Version History
 ```
@@ -1308,4 +1313,179 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added configuration steps for adding project entry points for generating CLI and GUI executables
         + Added resources
         + Added new Header Blocks for generating executables of CLI and GUI scripts
+
+### 2024-04-05
+#### 1503H
+- New 
+    - Added new directory 'TOML' in 'Docs/Programming/Data-Serialization/Languages/' for documentations on the TOML Data Serizalization language
+        + Added new document 'docs.md': Contains a complete documentation write-up on TOML components, syntax structure/tree and things to note
+
+#### 2334H
+- New
+    - Added new directory 'YAML' in 'Docs/Programming/Data-Serialization/Languages/' for documentations on the YAML Data Serizalization language
+        + Added new document 'docs.md': Contains a complete documentation write-up on YAML components, syntax structure/tree and things to note
+    + Added new document 'using-docker-inspect-for-visualization.md' in 'Docs/Technology/Containers/Docker/Using Docker/': Tips and trick for using docker - Guide to using docker inspect for visualizing and obtaining information about existing images and containers
+
+- Updates
+    - Updated document 'docs.md' in 'Docs/Programming/Data-Serialization/Languages/TOML/'
+        + Added setup details for importing TOML into Python
+
+#### 2341H
+- Updates
+    - Updated document 'docs.md' in 'Docs/Programming/Data-Serialization/Languages/YAML/'
+        - Added new header block for 'Example YAML file use-cases' under 'Wiki'
+            + To hold real life project use cases for YAML configuration files
+        + Added new use case template - docker-compose.yaml
+
+### 2024-04-06
+#### 1833H
+- New 
+    - Added new directory 'BeautifulSoup4' in 'Docs/Programming/Languages/Python/Libraries/' for documentations on the BeautifulSoup Web scraping/HTML parser framework for python
+        + Addedd new document 'README.md'
+
+- Updates
+    - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added new library 'beautifulsoup4'
+
+#### 2349H
+- Updates
+    - Added new python library directory 'sys' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the built-in python library 'sys'
+        + Added new document 'manual.md'
+
+
+### 2024-04-07
+#### 1348H
+- New 
+    + Added new document 'cargo.md' in 'Docs/Programming/Package Managers/': Contains documentations on the Rust package manager 'cargo'
+
+- Updates
+    - Updated document 'README.md' in 'Docs/Programming/Languages/Python/Libraries/BeautifulSoup4'
+        + Updated document and rewrote sentences to be neater and include the primary functionality as a HTML Parser
+
+#### 2142H
+- New
+    + Added new document 'self-hosting-otg.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/': Documentations on using a self-hosting web applications, services, servers and protocols on-the-go on an mobile device (Android) 
+    - Added new python library directory 'html' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the built-in python library 'html' and HTML parser 'html.parser'
+        + Added new document 'docs.md'
+    - Added new directory 'Project-Ideas' in 'Docs/Programming/' to store all Project Ideas in a single directory with subdirectories, following a template with detailed instructions and requirements
+        + Added new document 'README.md'
+
+#### 2155H
+- Updates
+    - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added new entry for library 'html'
+
+#### 2320H
+- Updates
+    - Updated document 'docs.md' in 'Docs/Programming/Languages/Python/Libraries/html/'
+        + Added module imports for clearer understanding
+        + Added new snippet example for 'parsing and storing all callback results into a reference dictionary for access'
+
+### 2024-04-08
+#### 1614H
+- New
+    - Added new directory 'Routers' in 'Docs/Home Lab/Services and Tools/' for holding documentations on Router software and services
+        - Added new directory 'OpenWRT' for documentations of the Open Source Router server sofware OpenWRT
+            + Added new document 'README.md'
+            - Added new directory 'Guides' for Guides
+                + Added new document 'base-installation-guide.md' containing written step-by-step instructions and explanations on installing a Base Installation of OpenWRT using the command line
+
+#### 1659H
+- New
+    + Added new document 'build-from-source.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/': Step-by-Step instruction for building OpenWRT image from source
+
+#### 2015H
+- Updates 
+    - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/sys/'
+        + Added new snippet - Setting up a CLI interface with Stream, Pipe and CLI argument parsing support
+
+#### 2150H
+- New
+    - Added new document 'colorschemes.md' in 'Docs/Programming/Web-Development/Languages/CSS/Guides/' for storing various colorscheme combinations and hex values for Frontend Application (Web Site/Page, Application and Server) Development references.
+        + This hopes to be a useful one-stop reference for frontend design and planning with regards to colorscheme/color picking 
+
+#### 2211H
+- Updates
+    - Updated document 'colorschemes.md' in 'Docs/Programming/Web-Development/Languages/CSS/Guides/'
+        + Added new colorscheme groups and a new header block 'Color Palettes' for Individual color palletes and its hexadecimal color codes and combinations that fits
+        + Added new resources and websites
+
+#### 2353H
+- Updates 
+    - Updated document 'README.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/'
+        + Added new Table of Content Entry to 'Build from Source'
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added optional step to create an empty raw disk image file
+        + Fixed some typographcial errors/mistakes
+        + Fixed the disk image filename
+        - Added steps to '(Optional) If you are running/booting from a Virtual Machine Hypervisor'
+            + Create a new Virtual Machine
+            + Configure Virtual Machine
+            + Start Virtual Machine
+        + Added Post-Installation Setup steps (To consider placing it in a separate file)
+        + Added new Remarks
+
+### 2024-04-09
+#### 0008H
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added Optional step to set DHCP to Bridged Network Interface
+        + Added Optional step to install packages
+
+#### 1516H
+- New
+    + Added new document 'disk-partition-mounting.md' in 'Docs/Linux/Guides/Disk Management/': One-stop reference for mounting disk devices and images to a mount point and as a chrootable root filesystem
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added optional step for preparing a raw disk image to install using the rootfs tarball archive directly
+        - Added new optional guide for setting up booting via containerization platforms
+            + Added container platform step for LXC
+        + Added new references
+
+#### 1525H
+- Updates
+    - Updated document 'disk-partition-mounting.md' in 'Docs/Linux/Guides/Disk Management/'
+        + Replaced 'modprobe' with 'losetup'
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Replaced 'modprobe' with 'losetup'
+
+#### 1601H
+- New
+    - Added new directory 'LXC' in 'Docs/Technology/Containers/' for holding documentations about the LXC containerization platform
+        + Added new document 'README.md'
+        - Added new directory 'commands' for holding manuals about LXC commands
+            + Added new document 'lxc-start.md' for a write-up on using lxc-start
+    - Added new directory for new category 'Operating Systems' in 'Docs/Home Lab/Services and Tools/' for holding Operating System-based Home Lab applications and tools
+        - Added new directory 'Proxmox' for Proxmox-VE documentations
+            + Added new document 'README.md'
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added steps to create a network bridge for LXC in Proxmox
+        + Added steps to create a Proxmox template for a LXC container
+        + Added steps to Configure the Network Configurations to use the Network Bridge created
+        + Added steps to start the LXC container
+        + Added resources
+
+#### 1636H
++ Updated CHANGELOGS to fix '1601H'
+
+#### 1654H
+- Updates
+    - Updated document 'README.md' in 'Docs/Home Lab/Services and Tools/Operating Systems/Proxmox/'
+        + Added Descriptions of Proxmox
+    - Updated document 'README.md' in 'Docs/Technology/Containers/LXC/'
+        + Added Descriptions of LXC
+
+#### 1709H
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added steps to Create a Network Bridge Interface from command line 
+        + Added steps to Add the Host Network Interface to the target Bridge Network Interfaces
+        + Added references
+
+#### 1712H
+- Updates
+    - Updated document 'README.md' in 'Docs/Home Lab/Services and Tools/Operating Systems/Proxmox/'
+        - Added installation step 'Install from an existing system manually via the command line'
+            + Moved the installation steps to under this header
 
