@@ -123,9 +123,9 @@ Linux Disk and Partition Management - Mounting disk devices and raw disk images 
             ```
 
     - Mount Disk Image as loop devices
-        - Modprobe loop devices
+        - Setup loopback devices
             ```bash
-            modprobe -o loop
+            losetup -Pf [disk-image-file]
             ```
         - Mount disk image Loop devices
             ```bash

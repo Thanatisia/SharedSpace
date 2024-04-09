@@ -85,9 +85,9 @@ OpenWRT - Installation Guide
             ```
 
     - Mount Disk Image as loop devices
-        - Modprobe loop devices
+        - Setup loopback devices
             ```bash
-            modprobe -o loop
+            losetup -Pf [disk-image-file]
             ```
         - Mount disk image Loop devices
             ```bash

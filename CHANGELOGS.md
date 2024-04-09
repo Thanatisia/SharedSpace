@@ -1442,3 +1442,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + Added container platform step for LXC
         + Added new references
 
+#### 1525H
+- Updates
+    - Updated document 'disk-partition-mounting.md' in 'Docs/Linux/Guides/Disk Management/'
+        + Replaced 'modprobe' with 'losetup'
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Replaced 'modprobe' with 'losetup'
+
