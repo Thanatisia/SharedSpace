@@ -45,17 +45,106 @@ OpenWRT - Installation Guide
         gunzip openwrt-*.img.gz
         ```
 
-- (Optional) Create an empty raw disk image file
-    - Notes
-        + This will create a (10 * 1G) == 10G file
-        + Do this if you wish to use a raw disk image file of another size
-    - Explanation
-        - bs: The Block Size; The size of each individual block; Use alongside 'count' to calculate the total disk size written (bs * count)
-            + Example Value(s): 1{M|G}
-        + count: The number of blocks to create; Use alongside 'bs' to calculate the total disk size written (bs * count)
-    ```bash
-    dd if=/dev/zero of=disk.img bs=1G count=10
-    ```
+- (Optional) Using the rootfs directly
+    - Downlad the rootfs tarball archive
+        - Information
+            - Parameters
+                - Architecture : The target CPU architecture
+                    - Supported Architectures
+                        + amd64 : 64-bit Intel/AMD CPU
+                        + arm64 : 64-bit ARM CPU
+        ```bash
+        wget https://sgp1lxdmirror01.do.letsbuildthe.cloud/images/openwrt/[version]/[architecture]/default/[build-date]/rootfs.tar.xz
+        ```
+
+    - Untar and extract the tarball archive
+        ```bash
+        tar -xvJf rootfs.tar.xz
+        ```
+
+    - (Optional) Create an empty raw disk image file
+        - Notes
+            + This will create a (10 * 1G) == 10G file
+            + Do this if you wish to use a raw disk image file of another size
+        - Explanation
+            - bs: The Block Size; The size of each individual block; Use alongside 'count' to calculate the total disk size written (bs * count)
+                + Example Value(s): 1{M|G}
+            + count: The number of blocks to create; Use alongside 'bs' to calculate the total disk size written (bs * count)
+        ```bash
+        dd if=/dev/zero of=disk.img bs=1G count=10
+        ```
+
+    - Disk Filesystem Management
+        - Format raw disk image filesystem label
+            ```bash
+            parted disk.img mklabel [msdos|gpt]
+            ```
+        - Create new partitions
+            ```bash
+            parted disk.img mkpart [partition-type|partition-label] [filesystem-type] [start-size] [end-size]
+            ```
+
+    - Mount Disk Image as loop devices
+        - Modprobe loop devices
+            ```bash
+            modprobe -o loop
+            ```
+        - Mount disk image Loop devices
+            ```bash
+            mount -o loop disk.img
+            ```
+
+    - Partition Management
+        - Format partition filesystem type
+            - ext4
+                ```bash
+                mkfs.ext4 /dev/loop[loopback-device-number]p[partition-number]
+                ```
+            - fat{8|16|32}
+                ```bash
+                mkfs.fat -f {8|16|32} /dev/loop[loopback-device-number]p[partition-number]
+                ```
+        - Optionals
+            - Set partition as bootable
+                - MBR/MSDOS (BIOS)
+                    ```bash
+                    parted set [boot-partition-number] boot on
+                    ```
+                - EFI (UEFI)
+                    ```bash
+                    parted set [boot-partition-number] esp on
+                    ```
+
+    - (Optionals) Create additional nested mount points
+        - Boot Partition
+            ```
+            mkdir -pv [mount-point]/boot
+            ```
+        - Home Partition
+            ```
+            mkdir -pv [mount-point]/home
+            ```
+
+    - Mount disk image partitions to mount point
+        - Mount loopback device partitions
+            - Examples
+                + Root Partition: `mount /dev/loop[loopback-device-number]p2 [mount-point]/`
+                + Boot Partition: `mount /dev/loop[loopback-device-number]p1 [mount-point]/boot`
+                + Home Partition: `mount /dev/loop[loopback-device-number]p3 [mount-point]/home`
+            ```bash
+            mount /dev/loop[loopback-device-number]p[partition-number] [mount-point]
+            ```
+
+    - Untar and extract root filesystem image contents into mount point
+        - Explanation
+            + x : Extract files
+            + v : Verbose output (i.e. show progress on screen)
+            + z : Extract/Compress using the gzip compression algorithm
+            + f : Specify the tar archive filename
+            + -C | --directory : Specify a custom output directory to extract the files to
+        ```bash
+        tar -xvzf rootfs.tar.xz -C [mount-point]
+        ```
 
 > Installation
 
@@ -72,6 +161,28 @@ OpenWRT - Installation Guide
             ```bash
             dd if=openwrt-[version]-[platform]-[architecture]-generic-{squashfs|ext4}-combined{-efi}.img of=[disk-label] bs=[block-size]
             ```
+
+- (Optional) If you are running/booting from a containerization platform
+    - LXC (Linux Container)
+        - Dependencies
+            + lxc
+        - Pre-Requisites
+            - Prepare and mount the raw disk image to extract the rootfs tarball archive contents into
+                + Please refer to the above header block `(Optional) Using the rootfs directly` for the full steps
+            - Downlad the rootfs tarball archive
+                - Information
+                    - Parameters
+                        - Architecture : The target CPU architecture
+                            - Supported Architectures
+                                + amd64 : 64-bit Intel/AMD CPU
+                                + arm64 : 64-bit ARM CPU
+                ```bash
+                wget https://sgp1lxdmirror01.do.letsbuildthe.cloud/images/openwrt/[version]/[architecture]/default/[build-date]/rootfs.tar.xz
+                ```
+            - Untar and extract the tarball archive
+                ```bash
+                tar -xvJf rootfs.tar.xz -C [mount-point]
+                ```
 
 - (Optional) If you are running/booting from a Virtual Machine Hypervisor
     - VirtualBox
@@ -323,5 +434,7 @@ service network restart
 + [OpenWRT - Documentations - User Guide - Installation - x86](https://openwrt.org/docs/guide-user/installation/openwrt_x86)
 + [OpenWRT - Documentations - User Guide - Virtualization - VirtualBox](https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm)
 + [OpenWRT - Downloads - Releases - 23.05.3 - x86 - Generic](https://downloads.openwrt.org/releases/23.05.3/targets/x86/generic/)
++ [Linuxcontainers (LXC) Images (Previously images.linuxcontainers.org](https://sgp1lxdmirror01.do.letsbuildthe.cloud/images/)
 
 ## Remarks
+

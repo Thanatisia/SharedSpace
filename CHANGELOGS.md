@@ -1432,3 +1432,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added Optional step to set DHCP to Bridged Network Interface
         + Added Optional step to install packages
 
+#### 1516H
+- New
+    + Added new document 'disk-partition-mounting.md' in 'Docs/Linux/Guides/Disk Management/': One-stop reference for mounting disk devices and images to a mount point and as a chrootable root filesystem
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added optional step for preparing a raw disk image to install using the rootfs tarball archive directly
+        - Added new optional guide for setting up booting via containerization platforms
+            + Added container platform step for LXC
+        + Added new references
+
