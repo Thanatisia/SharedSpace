@@ -69,6 +69,7 @@
 + [2024-04-07](#2024-04-07)
 + [2024-04-08](#2024-04-08)
 + [2024-04-09](#2024-04-09)
++ [2024-04-10](#2024-04-10)
 
 ## Version History
 ```
@@ -1488,4 +1489,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Home Lab/Services and Tools/Operating Systems/Proxmox/'
         - Added installation step 'Install from an existing system manually via the command line'
             + Moved the installation steps to under this header
+
+### 2024-04-10
+#### 0102H
+- New
+    - Added new python library directory 'ruamel.yaml' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the YAML Parser library
+        + Added new document 'docs.md'
+    - Added new python library directory 'toml' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the TOML Parser (writing/output) library
+        + Added new document 'docs.md'
+    - Added new python library directory 'tomllib' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the built-in TOML Parser (read-only) library
+        + Added new document 'docs.md'
 
