@@ -1,5 +1,12 @@
 # Home Lab Services, Software and Tools - Proxmox
 
+## Information
+### Description
+- Proxmox is a powerful Open Source Server Virtualization Platform, and a Type-1 Hypervisor that uses QEMU/KVM for Virtualization and LXC for containerization
+    - Proxmox is Type-1 because it is an Operating System, hence there is no existing Operating System underneath Proxmox
+        + and as such, it will be close to native/bare metal
++ Proxmox also contains a Web interface for admin and management access
+
 ## Setup
 ### Dependencies
 
