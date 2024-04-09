@@ -13,34 +13,35 @@
 ### Pre-Requisites
 
 ### Installation
-- Add the Proxmox Virtual Environment repository into the debian mirrorlists
-    - Notes
-        + For Multiarch support: append '[arch=amd64]' after 'deb'
-    ```bash
-    echo "deb http://download.proxmox.com/debian [debian-version-codename] pve-no-subscription" > /etc/apt/sources.list.d/pve-install-repo.list
-    ```
+- Install from an existing system manually via the command line
+    - Add the Proxmox Virtual Environment repository into the debian mirrorlists
+        - Notes
+            + For Multiarch support: append '[arch=amd64]' after 'deb'
+        ```bash
+        echo "deb http://download.proxmox.com/debian [debian-version-codename] pve-no-subscription" > /etc/apt/sources.list.d/pve-install-repo.list
+        ```
 
-- Add the Proxmox Virtual Environment repository private key for authentication and authorisation of the apt package repository
-    ```bash
-    wget -O- "http://download.proxmox.com/debian/key.asc" | apt-key add -
-    ```
+    - Add the Proxmox Virtual Environment repository private key for authentication and authorisation of the apt package repository
+        ```bash
+        wget -O- "http://download.proxmox.com/debian/key.asc" | apt-key add -
+        ```
 
-- Update the repository list and upgrade packages and system
-    ```bash
-    apt update && apt upgrade
-    ```
+    - Update the repository list and upgrade packages and system
+        ```bash
+        apt update && apt upgrade
+        ```
 
-- Install the Proxmox Virtual Environment Packages
-    - Package List
-        + proxmox-ve
-        + ssh
-        + postfix
-        + ksm-control-daemon
-        + open-iscsi
-        + systemd-sysv
-    ```bash
-    apt install proxmox-ve ssh postfix ksm-control-daemon open-iscsi systemd-sysv
-    ```
+    - Install the Proxmox Virtual Environment Packages
+        - Package List
+            + proxmox-ve
+            + ssh
+            + postfix
+            + ksm-control-daemon
+            + open-iscsi
+            + systemd-sysv
+        ```bash
+        apt install proxmox-ve ssh postfix ksm-control-daemon open-iscsi systemd-sysv
+        ```
 
 ### Access Admin Web Interface
 - Enter your browser

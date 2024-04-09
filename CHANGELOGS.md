@@ -1483,3 +1483,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added steps to Add the Host Network Interface to the target Bridge Network Interfaces
         + Added references
 
+#### 1712H
+- Updates
+    - Updated document 'README.md' in 'Docs/Home Lab/Services and Tools/Operating Systems/Proxmox/'
+        - Added installation step 'Install from an existing system manually via the command line'
+            + Moved the installation steps to under this header
+
