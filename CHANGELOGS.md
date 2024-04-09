@@ -1449,3 +1449,23 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
         + Replaced 'modprobe' with 'losetup'
 
+#### 1601H
+- New
+    - Added new directory 'LXC' in 'Docs/Technology/Containers/' for holding documentations about the LXC containerization platform
+        + Added new document 'README.md'
+        - Added new directory 'commands' for holding manuals about LXC commands
+            + Added new document 'lxc-start.md' for a write-up on using lxc-start
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added steps to create a network bridge for LXC in Proxmox
+        + Added steps to create a Proxmox template for a LXC container
+        + Added steps to Configure the Network Configurations to use the Network Bridge created
+        + Added steps to start the LXC container
+        + Added resources
+
+#### 1636H
+- New
+    - Added new directory for new category 'Operating Systems' in 'Docs/Home Lab/Services and Tools/' for holding Operating System-based Home Lab applications and tools
+        - Added new directory 'Proxmox' for Proxmox-VE documentations
+            + Added new document 'README.md'
+

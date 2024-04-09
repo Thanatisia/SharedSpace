@@ -167,6 +167,13 @@ OpenWRT - Installation Guide
         - Dependencies
             + lxc
         - Pre-Requisites
+            - Create Network Bridge
+                - Using Proxmox
+                    - Click on the Proxmox group
+                        - Enter 'Network'
+                            - Click 'Create' to create a new Network Adapter
+                                + Select 'Linux Bridge'
+                                + Leave it as default
             - Prepare and mount the raw disk image to extract the rootfs tarball archive contents into
                 + Please refer to the above header block `(Optional) Using the rootfs directly` for the full steps
             - Downlad the rootfs tarball archive
@@ -183,6 +190,60 @@ OpenWRT - Installation Guide
                 ```bash
                 tar -xvJf rootfs.tar.xz -C [mount-point]
                 ```
+            - (Optionals) Create a Proxmox template
+                - Explanation
+                    + `pct create [container-id] [rootfs-tarball-archive-file]` : Create a new Proxmox container template with the LXC container ID of 'container-id' holding the specified root filesystem tarball archive
+                    + container-id : Create a LXC container of this ID; This will be tracked by proxmox's pct
+                    + rootfs-tarball-archive-file : Attach the specified root filesystem tarball archive file to this container on creation
+                    + `--unprivileged 1` : Enable/Disable (1|0) unprivileged/privileged mode
+                    + `--ostype [managed|unmanaged]` : Specify whether you want the Operating System to be managed or unmanaged
+                    + `--hostname [server-hostname]` : Specify the network hostname for the server (i.e. openwrt)
+                    + `--net0 name=[eth0-network-name]` : Specify the Network Interface name for port 0 (i.e. eth0)
+                    + `--net1 name=[eth1-network-name]` : Specify the Network Interface name for port 1 (i.e. eth1)
+                    + `--storage [storage-controller-name]` : Specify the name of the storage controller to attach to this container (i.e. local-lvm)
+                ```bash
+                pct create [container-id] ./rootfs.tar.xz \
+                    --unprivileged 1 \
+                    --ostype unmanaged \
+                    --hostname openwrt \
+                    --net0 name=eth0 \
+                    --net1 name=eth1 \
+                    --storage local-lvm
+                ```
+        - Configure container
+            - Network Configurations
+                - Goals
+                    + Edit Network Interface 'net0' to 'vmbr0' (Bridged Network)
+                    + Edit Network Interface 'net1' to 'vmbr1' (Bridged Network)
+                - On Proxmox
+                    - Select your OpenWRT container
+                        - Click on 'Network' page
+                            - Edit Network Interface 'net0'
+                                + Change 'Bridge' to vmbr0
+                            - Edit Network Interface 'net1'
+                                + Change 'Bridge' to vmbr1
+                    - Enter shell
+                        - Edit the '/etc/pve/lxc/106.conf' configuration file
+                            - Notes
+                                - This is the configuration file for the OpenWRT container
+                                    - specifically, the PVE directory '/etc/pve/lxc' contains the configuration files for LXC containers
+                                        + with the name being the LXC container ID
+                            ```bash
+                            $EDITOR /etc/pve/lxc/[container-id].conf
+                            ```
+                        - Append the following into the bottom of the configuration file
+                            - Explanation
+                                + `lxc.cgroup2.devices.allow: c 10:200 rwm` : Allow the use of this container's tunnel interface from the host
+                                + `lxc.mount.entry: /dev/net dev/net none bind,create=dir` : Enable the mounting of the network device from the host into this LXC container
+                            ```
+                            ...
+                            lxc.cgroup2.devices.allow: c 10:200 rwm
+                            lxc.mount.entry: /dev/net dev/net none bind,create=dir
+                            ```
+        - Start container
+            ```bash
+            lxc-start -n [container-id]
+            ```
 
 - (Optional) If you are running/booting from a Virtual Machine Hypervisor
     - VirtualBox
@@ -435,6 +496,7 @@ service network restart
 + [OpenWRT - Documentations - User Guide - Virtualization - VirtualBox](https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm)
 + [OpenWRT - Downloads - Releases - 23.05.3 - x86 - Generic](https://downloads.openwrt.org/releases/23.05.3/targets/x86/generic/)
 + [Linuxcontainers (LXC) Images (Previously images.linuxcontainers.org](https://sgp1lxdmirror01.do.letsbuildthe.cloud/images/)
++ [YouTube - Novaspirit Tech - Must-Have OpenWrt Router Setup For Your Proxmox](https://www.youtube.com/watch?v=3mPbrunpjpk)
 
 ## Remarks
 
