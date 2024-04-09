@@ -1455,6 +1455,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new document 'README.md'
         - Added new directory 'commands' for holding manuals about LXC commands
             + Added new document 'lxc-start.md' for a write-up on using lxc-start
+    - Added new directory for new category 'Operating Systems' in 'Docs/Home Lab/Services and Tools/' for holding Operating System-based Home Lab applications and tools
+        - Added new directory 'Proxmox' for Proxmox-VE documentations
+            + Added new document 'README.md'
 - Updates
     - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
         + Added steps to create a network bridge for LXC in Proxmox
@@ -1464,8 +1467,6 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added resources
 
 #### 1636H
-- New
-    - Added new directory for new category 'Operating Systems' in 'Docs/Home Lab/Services and Tools/' for holding Operating System-based Home Lab applications and tools
-        - Added new directory 'Proxmox' for Proxmox-VE documentations
-            + Added new document 'README.md'
++ Updated CHANGELOGS to fix '1601H'
+
 
