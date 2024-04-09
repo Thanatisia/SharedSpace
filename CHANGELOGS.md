@@ -1476,3 +1476,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Technology/Containers/LXC/'
         + Added Descriptions of LXC
 
+#### 1709H
+- Updates
+    - Updated document 'base-installation-guide.md' in 'Docs/Home Lab/Services and Tools/Routers/OpenWRT/Guides/'
+        + Added steps to Create a Network Bridge Interface from command line 
+        + Added steps to Add the Host Network Interface to the target Bridge Network Interfaces
+        + Added references
+
