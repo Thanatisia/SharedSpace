@@ -33,6 +33,12 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
             + command-to-execute : Specify the command line string(s) to execute when called. Separate each command into a new line for a multiline command
 
 - vim.api
+    - `.nvim_buf_get_name(buffer_id)` : Get the name of the provided buffer ID
+        - Parameter/Argument Signature
+            - buffer_id : Specify the ID of the target buffer that you want to receive the name of
+                + Type: Integer
+                - Explanation
+                    + Index 0: Current Buffer
     - `.nvim_command "command-to-execute"` : Execute Neovim commands
         - Parameters
             + command-to-execute : Specify the command line string to execute when called
@@ -59,6 +65,15 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
 
 - vim.fn
     + `.empty(path)` : Check for the number of files in the specified path; Returns the number of files in the specified path
+    - `.expand(expression)` : Expand the given string with an expression
+        - Parameter/Argument Signature
+            - expression : Specify the keyword, string or filepath format to expand
+                - Special Keywords/Wildcards
+                    + '%' : Expanded to the current filename
+                - Filename Modifiers
+                    - '<path>:p' : Gives the full (absolute) path of the provided file path
+                        - i.e.
+                            + '%:p' : Give the full (absolute) path of the current working directory regardless of the current path
     + `.glob(path)` : Check if the path specified is a glob file
     - `.stdpath('keywords')` : Obtain the standard path for a special directory defined by (neo)vim
         - Keywords
@@ -142,6 +157,12 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
     nvim_config = vim.fn.stdpath('config')
     ```
 
+### Filepath expansion
+- Expand the filepath to the current filename
+    ```lua
+    vim.fn.expand('%:p')
+    ```
+
 ### Filesystem
 - Recursive Filesystem check
     ```lua
@@ -164,6 +185,7 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
 ## Resources
 
 ## References
++ [Neovim Documentations - User API - vim.api.nvim_buf_get_name(index)](https://neovim.io/doc/user/api.html#nvim_buf_get_name())
 + [Reddit - Neovim - Lua keybindings via vim keymap set](https://www.reddit.com/r/neovim/comments/101b07t/lua_keybindings_via_vimkeymapset/)
 
 ## Remarks

@@ -1539,3 +1539,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new directory for plugin 'harpoon' 
             + Added new document 'README.md'
 
+#### 2259H
+- Updates
+    - Updated the Neovim Lua vim API document 'api.md' in 'Docs/Programming/Vim/Distros/Neovim/Lua/'
+        + Added documentation for 'vim.api.nvim_buf_get_name(buffer_id)'
+        + Added documentation for 'vim.fn.expand(expression)'
+        + Added usage snippet for filepath expansion
+
