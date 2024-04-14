@@ -1546,3 +1546,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added documentation for 'vim.fn.expand(expression)'
         + Added usage snippet for filepath expansion
 
+#### 2352H
+- Updates
+    - Updated the Neovim Lua vim API document 'api.md' in 'Docs/Programming/Vim/Distros/Neovim/Lua/'
+        + Added documentation for 'vim.api.nvim_get_runtime_file(filename, all)'
+

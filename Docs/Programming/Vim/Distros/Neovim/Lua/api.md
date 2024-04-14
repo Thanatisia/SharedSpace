@@ -57,6 +57,12 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
             - Optional Key Values
                 - Options
                     + `silent=[true|false]` : Enable/Disable Verbose message output
+    - `.nvim_get_runtime_file(filename, all)`: Get the specified/all runtime files
+        - Parameter/Argument Signature
+            - filename: Specify the name of the runtime file to return; Pass '' to get all
+                + Type: String
+            - all: Enable/Disable getting all runtime files
+                + Type: Boolean
 
 - vim.cmd
     - `.edit(file)` : Open up the specified filepath/filename to edit
