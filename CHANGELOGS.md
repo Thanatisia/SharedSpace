@@ -1531,3 +1531,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
         + Added new python libraries as entries
 
+#### 2242H
+- New
+    - Added new directory 'docs/' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/' for storing Neovim lua plugin documentations
+        + Added new document 'README.md'
+        + Added new document 'packages-list.md'
+        - Added new directory for plugin 'harpoon' 
+            + Added new document 'README.md'
+
