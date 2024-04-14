@@ -27,10 +27,13 @@ This list will specify also specify which packages has been documented (as found
 + re                     : Regular Express library
 + requests               : HTTP REST-API network requests library
 + rich                   : Rich text and widget TUI designer library (i.e. pretty printing, tables etc etc)
++ ruamel.yaml            : YAML Parser python library
 + scapy                  : Interactive network snippet and packet manipulation library in Python
 + setuptools             : Python packaging framework
 + socket                 : Python socket programming framework; allows for creating a network server infrastructure (web servers etc), enabling connection between client and server
 + subprocess             : System Subprocesses handler library/module in python; manages system command line execution, pipes, standard output, input and errors etc
 + sys                    : System (Executables i.e. CLI arguments) library for Python; built-in
 + tensorflow             : Machine Learning/LLM framework
++ toml                   : TOML Parser python library with TOML export/write functionality
++ tomllib                : TOML Parser python library with TOML read-only functionality
 

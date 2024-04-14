@@ -25,6 +25,7 @@ Feel free to contribute and add here based on the various categories.
 + samba : SMB File Server protocol implementation
 + strongswan : IPSec (Tunneling) VPN Server implementation
 + xl2tpd : L2TP (Encryption Algorithm) protocol daemon implementation
++ wireguard : VPN Server protocol similar to IPSec/IKEv2
 
 ## Services
 + jellyfin : Media Server
@@ -38,6 +39,7 @@ Feel free to contribute and add here based on the various categories.
 ## Utilities/Tools
 + Apache Guacamole : Remote Desktop Gateway
 + bind9 : DNS (Authoritative) Server
++ flaresolverr : Cloudflare Challenge Solver Proxy Server and DDoS-GUARD Protection Breaker
 + heimdall : Dashboard
 + [bastienwirtz/homer](https://github.com/bastienwirtz/homer/) : Dashboard
 + pihole : DNS Sinkhole, DNS (Forwarder) Server
