@@ -70,6 +70,7 @@
 + [2024-04-08](#2024-04-08)
 + [2024-04-09](#2024-04-09)
 + [2024-04-10](#2024-04-10)
++ [2024-04-14](#2024-04-14)
 
 ## Version History
 ```
@@ -1499,4 +1500,34 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new document 'docs.md'
     - Added new python library directory 'tomllib' in 'Docs/Programming/Languages/Python/Libraries/' containing documentations on the built-in TOML Parser (read-only) library
         + Added new document 'docs.md'
+
+### 2024-04-14
+#### 1553H
+- New
+    - Added new directory 'Network Tools and Services/' in 'Docs/Home Lab/Services and Tools/': Containing information about networking-based tools and services in the home lab
+        - Added new directory 'flaresolverr' 
+            + Added new document 'README.md'
+    - Added new directory 'iPXE Boot' in 'Docs/Home Lab/Services and Tools/': Containing information about services allowing for PXE Boot over the Network
+        + Added new document 'README.md'
+        - Added new directory 'Netboot.xyz/'
+            - Added new directory 'Guides/'
+                + Added new document 'base-installation-guide.md'
+    + Added new document 'web-api.md' in 'Docs/Networking/Resources/' containing Web API links that performs services via HTTP
+    - Added new directory 'TOR-Network' in 'Docs/Networking/Topics/' containing documentations on setting up TOR access + usages for educational purposes
+        + Added new document 'README.md'
+        - Added new directory 'Guides/'
+            + Added new document 'setting-up-tor.md'
+            + Added new document 'accessing-the-tor-network.md'
+            + Added new document 'webscraping-tor-network.md'
+    - Added new directory 'components' in 'Docs/Operating Systems/Windows/' for containing information on Windows system programs, applications and functionalities
+        - Added new directory 'File Explorer/'
+            - Added new directory 'features/'
+                + Added new document 'search.md'
+    + Added new document 'manual-installing-plugin-packages.md' in 'Docs/Programming/Vim/Distros/Neovim/Guides/' for information on how to manually install plugins for Neovim
+
+- Updates
+    - Updated document 'services.md' in 'Docs/Home Lab/Services and Tools/'
+        + Added new service as entries
+    - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added new python libraries as entries
 
