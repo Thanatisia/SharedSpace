@@ -71,6 +71,7 @@
 + [2024-04-09](#2024-04-09)
 + [2024-04-10](#2024-04-10)
 + [2024-04-14](#2024-04-14)
++ [2024-04-16](#2024-04-16)
 
 ## Version History
 ```
@@ -1550,4 +1551,24 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated the Neovim Lua vim API document 'api.md' in 'Docs/Programming/Vim/Distros/Neovim/Lua/'
         + Added documentation for 'vim.api.nvim_get_runtime_file(filename, all)'
+
+### 2024-04-16
+#### 2152H
+- New
+    - Added new directory for package 'rust-lang/' in Docs/Linux/packages/Build from Source/packages/' for building rust-lang packages from source
+        - Added new directory 'rust' for building 'rust-lang/rust' package from source
+            +  Added new document 'README.md'
+    - Added new directory 'Documentations' in 'Docs/Programming/' for Programming/Software Development-based documentations
+        + Added new document 'recording-demo.md' for holding documentation/guide for how to record a demo GIF, screenshot or animation to use in a software development/programming/project documentation
+    - Added new directory' Guides/' in 'Docs/Programming/Languages/Rust/' for Rust-based Guides
+        - Added new directory 'Rust Compiler' for documentation on the rust compiler 'rustc'
+            + Added new document 'build-from-source.md'
+            + Added new document 'installation-methods.md' containing various installation methods
+    - Added new directory 'Network-Access/' in 'Docs/Linux/Guides/Security Hardening/' for documentations on how to enhance network security (i.e. via SSH)
+        + Added new document 'ssh.md' on various SSH security configurations to improve network security
+    + Added new document 'creating-your-own-source-or-binary-based-package-repository.md' in 'Docs/DIY/development/environments/'
+
+- Updates
+    - Updated document 'du.md' in 'Docs/Linux/commands/'
+        + Added new argument option '--threshold' and usage snippets
 
