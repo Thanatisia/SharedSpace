@@ -1,5 +1,50 @@
 # Python Development/Workspace Environment 
 
+*Information*
+-------------
+- Python project layout/structures
+    - Source-layout
+        ```
+        root/
+            + README.md : Your main document
+            + BUILD.md  : Place the steps to build the program here
+            + CHANGELOGS.md : Place all changes here
+            + CONTRIBUTING.md : Place all contribution steps for contributing members
+            + USAGE.md : Contains all usages of the modules/libraries/scripts
+            + requirements.txt : Contains your python package dependencies
+            + pyproject.toml | setup.py
+            - docs/
+            - src/
+                - [package-name]/ : Place your package here
+                    - __init__.py : Package and Module initializer
+                    + module.py
+                    - [submodules]/ : Place all submodules here; Repeat this for every submodule directories
+                        + __init__.py
+                        + module.py
+                    - [script-name]/ : Place your script projects here (if is a utility)
+                        + main.py : Your main entry point/runner/launcher script/file
+        ```
+    - Root-layout
+        ```
+        root/
+            + README.md : Your main document
+            + BUILD.md  : Place the steps to build the program here
+            + CHANGELOGS.md : Place all changes here
+            + CONTRIBUTING.md : Place all contribution steps for contributing members
+            + USAGE.md : Contains all usages of the modules/libraries/scripts
+            + requirements.txt : Contains your python package dependencies
+            + pyproject.toml | setup.py
+            - docs/
+            - [package-name]/ : Place your package here
+                - __init__.py : Package and Module initializer
+                + module.py
+                - [submodules]/ : Place all submodules here; Repeat this for every submodule directories
+                    + __init__.py
+                    + module.py
+                - [script-name]/ : Place your script projects here (if is a utility)
+                    + main.py : Your main entry point/runner/launcher script/file
+        ```
+
 ## Setup
 ### Dependencies
 + python3
@@ -7,31 +52,43 @@
 + python-venv
 
 ### Pre-Requisites
+- Generate Project Layout
+    - Make directories
+        - Source ('src') layout
+            - Linux
+                ```bash
+                mkdir -pv [project-workspace-root]/{docs,src/[package-name]}
+                ```
+            - Windows
+                ```bash
+                mkdir [project-workspace-root]\docs
+                mkdir [project-workspace-root]\src
+                mkdir [project-workspace-root]\[package-name]
+                ```
+        - Root layout
+            - Linux
+                ```bash
+                mkdir -pv [project-workspace-root]/{docs,[package-name]}
+                ```
+            - Windows
+                ```bash
+                mkdir [project-workspace-root]\docs
+                mkdir [project-workspace-root]\[package-name]
+                ```
+
+    - Create documentation and files
+        - Documentations
+            - Linux
+                ```bash
+                touch [project-workspace-root]/{README,BUILD,CHANGELOGS,CONTRIBUTING,USAGE}.md
+                ```
+        - Python package dependencies file
+            - Linux
+                ```bash
+                touch [project-workspace-root]/requirements.txt
+                ```
+
 - Create project filesystem structure
-    - Explanation
-        - Files
-            + __init__.py : Module/package constructor/initializer file
-            + __main__.py : Your main entry point/runner/launcher script/file
-        - File Structure
-            - root/
-                - README.md
-                - CHANGELOGS.md
-                - requirements.txt : Contains your package dependencies
-                - setup.py / pyproject.toml : For packaging
-                - src/
-                    - [package-name]
-                        - __main__.py
-                        - module-N
-                            - __init__.py
-                            - submodules-1
-                            - submodules-2
-                            - ...
-                            - submodules-N
-                        - lib/
-                            - __init__.py
-                            - utils/
-                                - __init__.py
-                - res
     - Windows
         ```console
         mkdir [project]\app\src\lib
@@ -45,48 +102,82 @@
 - Create requirements file
     + Place your python-pip dependencies here
     + Each line is 1 package
+    ```
+    # Python packages and dependencies here
 
-- Create setup file (i.e. setup.py/pyproject.toml)
-    - setup.py
-        ```python
-        from setuptools import setup, find_packages
+    ## Pip Packages
+    "package-name"
 
-        setup(
-            name='your_package',
-            version='0.1.0',
-            packages=find_packages(),
-            install_requires=[
-                # List your dependencies here
-            ],
-            entry_points={
-                # Set your entry point scripts and groups here
-                'console_scripts': [
-                    '[script-name] = [your-namespace].[your-package].[your-module]:[function-to-run]',
-                ],
-            },
-            author='Your Name',
-            author_email='your.email@example.com',
-            description='A short description of your package',
-            url='https://github.com/yourusername/your_package',
-            classifiers=[
-                'Development Status :: 3 - Alpha',
-                'Intended Audience :: Developers',
-                'License :: OSI Approved :: MIT License',
-                'Programming Language :: Python :: 3',
-                'Programming Language :: Python :: 3.6',
-                'Programming Language :: Python :: 3.7',
-                'Programming Language :: Python :: 3.8',
-            ],
-            package_data = {
-                'your_package' : ['data/*.txt'],
-            }
-        )
+    ## Git Packages
+    "[package-name] @ git+https://github.com/author-name/repository-name{@[branch-name]|#options=value}"
+    ```
+
+### Python configuration
+
+- pyproject.toml (Recommended)
+    - setuptools
+        ```toml
+        [build-system]
+        requires = ["setuptools>=61.0"]
+        build-backend = "setuptools.build_meta"
+
+        [project]
+        name = "your-package-name"
+        version = "project-current-version"
+        description = "project-description"
+        authors = [
+            { name="author-name", email="author-email@domain" },
+        ]
+        readme = "README.md"
+        requires-python = ">=3.8"
+        classifiers = [
+            # How mature is this project? Common values are
+            #   3 - Alpha
+            #   4 - Beta
+            #   5 - Production/Stable
+            'Development Status :: 3 - Alpha',
+
+            # Indicate who your project is intended for
+            'Intended Audience :: Developers',
+            'Operating System :: OS Independent',
+
+            # Pick your license as you wish
+            'License :: OSI Approved :: MIT License',
+
+            # Specify the Python versions you support here.
+            'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3.8',
+            'Programming Language :: Python :: 3.9',
+            'Programming Language :: Python :: 3.10',
+            'Programming Language :: Python :: 3.11',
+            'Programming Language :: Python :: 3.12',
+        ]
+        dependencies = [
+            # List your dependencies here
+            ## Pip Packages
+            "package-name",
+            ## Git Packages
+            "[package-name]@git+https://github.com/author-name/project-name",
+        ]
+
+        [project.scripts]
+        # Program Entry Point(s) and scripts
+        # executable-name = "package.submodule.module:entry_point_function"
+
+        [project.urls]
+        Homepage = "https://github.com/author/repository-name"
+        Repository = "https://github.com/author/repository-name.git"
+
+        [tools.setuptools.packages.find]
+        where = ["src"]
         ```
-    - pyproject.toml
+    - poetry
         ```toml
         [tool.poetry]
         name = "your-project-name"
-        version = "0.1.0"
+        version = "program-version"
         description = "your project description"
         authors = ["your-name <your-email>"]
         packages = [{include = "your-package-name", from="src"}]
@@ -99,25 +190,57 @@
         package-name = "^package-version"
         ```
 
-- Create a virtual environment folder for the project
-    ```console
-    python -m venv [virtual-environment-name]
+- setup.py : Setuptools
+    ```python
+    from setuptools import setup, find_packages
+
+    setup(
+        name='your_package',
+        version='0.1.0',
+        packages=find_packages(),
+        install_requires=[
+            # List your dependencies here
+        ],
+        entry_points={
+            # Set your entry point scripts and groups here
+            'console_scripts': [
+                '[script-name] = [your-namespace].[your-package].[your-module]:[function-to-run]',
+            ],
+        },
+        author='Your Name',
+        author_email='your.email@example.com',
+        description='A short description of your package',
+        url='https://github.com/yourusername/your_package',
+        classifiers=[
+            'Development Status :: 3 - Alpha',
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: MIT License',
+            'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3.8',
+        ],
+        package_data = {
+            'your_package' : ['data/*.txt'],
+        }
+    )
     ```
 
-- Source and chroot into virtual environment
-    - Windows
-        ```console
-        .\[virtual-environment-name]\Scripts\activate
-        ```
-    - Linux
-        ```console
-        . [virtual-environment-name]/bin/activate
+- Create a Python Virtual Environment for the project
+    - Generate Virtual Environment
+        ```bash
+        python3 -m venv [virtual-environment-name]
         ```
 
-- Install python packages
-    ```console
-    {python -m} pip install -Ur requirements.txt
-    ```
+    - Source and chroot into virtual environment
+        - Linux
+            ```bash
+            . [virtual-environment-name]/bin/activate
+            ```
+        - Windows
+            ```bash
+            .\[virtual-environment-name]\Scripts\activate
+            ```
 
 ## Documentations
 
@@ -127,24 +250,9 @@
         ```console
         cd [project-root-directory]
         ```
-    - Create Virtual Environment
+    - (Optional) Install python packages and dependencies
         ```console
-        python -m venv env
-        ```
-    - Chroot into Virtual Environment
-        - Linux
-            ```console
-            . env/bin/activate
-            ```
-        - Windows
-            ```console
-            .\env\Scripts\activate
-            ```
-    - Install dependencies (Optional)
-        - Note
-            + if requirements.txt are available
-        ```console
-        python -m pip install -Ur requirement.txt
+        {python3 -m} pip install -Ur requirements.txt
         ```
     - Install the current package in editable mode
         + This allows you to make changes without reinstalling
@@ -194,6 +302,7 @@
         ```console
         python setup.py install
         ```
+
 - Install using pip
     - Install from manually-shared distribution files
         - Using the created files, you can share these distribution files with others for installation
@@ -205,15 +314,14 @@
                 ```console
                 python -m pip install '[package-name]-[version]-[python-version]-none-any.wh1'
                 ```
+
     - Install from PyPI (Official)
         ```console
         python -m pip install [your-package-name]
         ```
+
     - Install python package directly from github
-        - Notes
-            - This is often referred to as "editable" or "development" mode
-                + It will allow you to install the package in such a way that changes made to the source code are immediately reflected without needing to reinstall
-        - using pip
+        - Install git package
             - Install the latest version from the default branch
                 ```console
                 pip install git+https://github.com/username/repo-name.git
@@ -256,6 +364,96 @@
     ```
 
 ## Wiki
+### Templates
+
+> README.md
+
+```markdown
+# Program Title Here
+## Information
+### Project
++ Project Author: your-author-name
++ Project Name: project-repository-name
++ Project Version: package-version-number
+
+### Description
++ Place your descriptions here
+
+## Setup
+### Dependencies
+### Pre-Requisites
+### Build
+### Installation
+### Uninstallation
+### Cleanup
+
+## Quickstart Documentations
+### Synopsis/Syntax
+### Parameters
+### Usage
+
+## Wiki
+
+## Resources
+
+## References
+
+## Remarks
+```
+
+> BUILD.md
+
+> CHANGELOGS.md
+
+```markdown
+# CHANGELOGS
+## Table of Contents
++ [yyyy-mm-dd](#yyyy-mm-dd)
+
+## Entries
+### yyyy-mm-dd
+#### HH:MM(H)
++ Version Number: [package-new-version-number]
+
+- Version Changes:
+    - Changes made
+
+- New
+    + Added new [document|directory] 'file-name' in '/path/to/file'
+- Updates
+    - Updated 'filename' in '/path/to/file'
+        + Changes made
+```
+
+> CONTRIBUTING.md
+
+```markdown
+# CONTRIBUTING
+
+## Table of Contents
++ [Rules](#rules)
++ [Distribution and Packaging](#distribution-and-packaging)
+
+## Rules
+### Open Source Contribution
+- Create a fork/branch to your contribution
+- Open Pull Request to request to merge your updates into the 'development' branch
+    - Please specify your contribution details in the following in your Pull Request
+        + Title: `[category] : [summary]`
+        - Body:
+            '''
+            Author Name: [your-name]
+            Files Modified:
+                - Files changed here
+            Reason/Motivation:
+            Summary:
+                - Your changes here
+            '''
++ Do not force merge directly to the main branch
+```
+
+> USAGE.md
+
 
 ## Resources
 

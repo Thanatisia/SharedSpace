@@ -72,6 +72,7 @@
 + [2024-04-10](#2024-04-10)
 + [2024-04-14](#2024-04-14)
 + [2024-04-16](#2024-04-16)
++ [2024-04-18](#2024-04-18)
 
 ## Version History
 ```
@@ -1571,4 +1572,19 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'du.md' in 'Docs/Linux/commands/'
         + Added new argument option '--threshold' and usage snippets
+
+### 2024-04-18
+#### 2216H
+- New
+    - Added new directory 'Languages' in 'Docs/Programming/Shellscript/' for holding documentations on various Shellscripting languages
+        - Added new directory 'Bash' for bash shellscripting information
+            - Added new directory 'Guides' for holding Bash-related Guides
+                + Added new document 'snippets.md' to hold Bash snippets
+
+- Updates
+    - Updated document 'python-development-environment.md' in 'Docs/DIY/development/environments/'
+        + Added more information and refactored structuring to be more verbose and clearer
+        + Modernised the information
+    - Updated document 'README.md' in 'Docs/Technology/Containers/LXC/'
+        + Added the operational workflow and setup process of LXC
 
