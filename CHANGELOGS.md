@@ -71,6 +71,9 @@
 + [2024-04-09](#2024-04-09)
 + [2024-04-10](#2024-04-10)
 + [2024-04-14](#2024-04-14)
++ [2024-04-16](#2024-04-16)
++ [2024-04-18](#2024-04-18)
++ [2024-04-20](#2024-04-20)
 
 ## Version History
 ```
@@ -1550,4 +1553,53 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated the Neovim Lua vim API document 'api.md' in 'Docs/Programming/Vim/Distros/Neovim/Lua/'
         + Added documentation for 'vim.api.nvim_get_runtime_file(filename, all)'
+
+### 2024-04-16
+#### 2152H
+- New
+    - Added new directory for package 'rust-lang/' in Docs/Linux/packages/Build from Source/packages/' for building rust-lang packages from source
+        - Added new directory 'rust' for building 'rust-lang/rust' package from source
+            +  Added new document 'README.md'
+    - Added new directory 'Documentations' in 'Docs/Programming/' for Programming/Software Development-based documentations
+        + Added new document 'recording-demo.md' for holding documentation/guide for how to record a demo GIF, screenshot or animation to use in a software development/programming/project documentation
+    - Added new directory' Guides/' in 'Docs/Programming/Languages/Rust/' for Rust-based Guides
+        - Added new directory 'Rust Compiler' for documentation on the rust compiler 'rustc'
+            + Added new document 'build-from-source.md'
+            + Added new document 'installation-methods.md' containing various installation methods
+    - Added new directory 'Network-Access/' in 'Docs/Linux/Guides/Security Hardening/' for documentations on how to enhance network security (i.e. via SSH)
+        + Added new document 'ssh.md' on various SSH security configurations to improve network security
+    + Added new document 'creating-your-own-source-or-binary-based-package-repository.md' in 'Docs/DIY/development/environments/'
+
+- Updates
+    - Updated document 'du.md' in 'Docs/Linux/commands/'
+        + Added new argument option '--threshold' and usage snippets
+
+### 2024-04-18
+#### 2216H
+- New
+    - Added new directory 'Languages' in 'Docs/Programming/Shellscript/' for holding documentations on various Shellscripting languages
+        - Added new directory 'Bash' for bash shellscripting information
+            - Added new directory 'Guides' for holding Bash-related Guides
+                + Added new document 'snippets.md' to hold Bash snippets
+
+- Updates
+    - Updated document 'python-development-environment.md' in 'Docs/DIY/development/environments/'
+        + Added more information and refactored structuring to be more verbose and clearer
+        + Modernised the information
+    - Updated document 'README.md' in 'Docs/Technology/Containers/LXC/'
+        + Added the operational workflow and setup process of LXC
+
+### 2024-04-20
+#### 1253H
+- New
+    - Added new directory 'fontconfig' in 'Docs/Linux/packages/'
+        + Added new document 'fc-cache.md' for documentations on using the fontconfig package application fc-cache
+        + Added new document 'fc-list.md' for documentations on using the fontconfig package application fc-list
+        + Added new document 'fc-match.md' for documentations on using the fontconfig package application fc-match
+    + Added new document 'gif-manipulation-tools.md' in 'Docs/Programming/Documentations/' containing documentations of various GIF encoding, manipulation and handling tools
+    + Added new document 'getopt.py' in 'Docs/Programming/Languages/Python/Examples/Code-Snippets/' containing a simple recreation of the CLI argument parsing function 'getopts' from C in Python
+
+- Updates
+    - Updated document 'recording-demo.md' in 'Docs/Programming/Documentations/'
+        + Added new options to 'agg'
 

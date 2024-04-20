@@ -18,6 +18,7 @@ du {options} <arguments> [target-directory]
     - With Arguments
         + `-B | --block-zie=[size]` : Scale sizes to the specified block size before printing to standard output
         + `-d | -max-depth=[depth]` : Specify a maximum depth of directories; print total for directory only if it is at the specified depth or lower
+        + `--threshold=[size]`      : Specify a specific size to filter; This will make du only show folders over the specified size
     - Flags
         + -0 | -null : End each output line with NULL
         + -a : Display disk usage information for all files and directories, including hidden ones
@@ -40,6 +41,16 @@ du {options} <arguments> [target-directory]
     du -sh [directory-path]
     ```
 
+- Display/Show only folders over 1GB in size
+    - Display
+        ```bash
+        du -hca --threshold=1G
+        ```
+    - Sort/Order by size to find the biggest files
+        ```bash
+        du -hca --threshold=1G | sort -h
+        ```
+
 - Print directories and files that are consuming the most disk space
     - Explanation
         - sort : Sort the results of du
@@ -59,6 +70,7 @@ du {options} <arguments> [target-directory]
 
 ## References
 + [GeeksForGeeks - du command line examples](https://www.geeksforgeeks.org/du-command-linux-examples/)
++ [ServerFault - Questions - 225777 - how to use du to see files greater than a threshold size](https://serverfault.com/questions/225777/how-to-use-du-to-see-files-greater-than-a-threshold-size)
 
 ## Remarks
 
