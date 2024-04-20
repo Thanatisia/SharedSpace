@@ -91,18 +91,42 @@
                         - With Arguments
                             - `--cols [number-of-columns]` : Horizontal size (width of the animation canvas)
                             - `--rows [number-of-rows]` : Vertical size (Height of the animation canvas)
+                            - `--font-family [font-family]` : Specify font family of your target font
+                                - Notes
+                                    - Finding Font Family:
+                                        - Using fc-list
+                                            ```bash
+                                            fc-list
+                                            ```
                             - `--font-size [font-size]` : Specify the font size to render the texts in the animation
                             - `--theme [theme]` : Specify the theme to apply to the background of the gif
                                 - Example Themes
                                     + solarized-light
+                                    + monokai
                         - Flags
             - Usage
                 - Convert the terminal recording into an animated demo gif with a 'solarized-light' theme
                     ```bash
                     agg --theme solarized-light [terminal-recording-cast-file.cast] [output-animation-gif-file.gif]
+                    ```
+                - Convert the terminal recording into an animated demo gif with a 'monokai' theme
+                    ```bash
+                    agg --theme monokai [terminal-recording-cast-file.cast] [output-animation-gif-file.gif]
+                    ```
                 - Convert the terminal recording into an animated demo gif with a width of 71, height of 13, font size 16
                     ```bash
                     agg --cols 71 --rows 13 --font-size 16 [terminal-recording-cast-file.cast] [output-animation-gif-file.gif]
+                    ```
+                - Convert the terminal recording into an animated demo gif with a specific font family
+                    - Explanation
+                        - font-family
+                            - To find the font family
+                                - Using 'fontconfig'
+                                    ```bash
+                                    fc-list
+                                    ```
+                    ```bash
+                    agg --font-family "font-family" [terminal-recording-cast-file.cast] [output-animation-gif-file.gif]
                     ```
 
 ## Resources

@@ -73,6 +73,7 @@
 + [2024-04-14](#2024-04-14)
 + [2024-04-16](#2024-04-16)
 + [2024-04-18](#2024-04-18)
++ [2024-04-20](#2024-04-20)
 
 ## Version History
 ```
@@ -1587,4 +1588,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Modernised the information
     - Updated document 'README.md' in 'Docs/Technology/Containers/LXC/'
         + Added the operational workflow and setup process of LXC
+
+### 2024-04-20
+#### 1253H
+- New
+    - Added new directory 'fontconfig' in 'Docs/Linux/packages/'
+        + Added new document 'fc-cache.md' for documentations on using the fontconfig package application fc-cache
+        + Added new document 'fc-list.md' for documentations on using the fontconfig package application fc-list
+        + Added new document 'fc-match.md' for documentations on using the fontconfig package application fc-match
+    + Added new document 'gif-manipulation-tools.md' in 'Docs/Programming/Documentations/' containing documentations of various GIF encoding, manipulation and handling tools
+    + Added new document 'getopt.py' in 'Docs/Programming/Languages/Python/Examples/Code-Snippets/' containing a simple recreation of the CLI argument parsing function 'getopts' from C in Python
+
+- Updates
+    - Updated document 'recording-demo.md' in 'Docs/Programming/Documentations/'
+        + Added new options to 'agg'
 
