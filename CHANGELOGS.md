@@ -74,6 +74,7 @@
 + [2024-04-16](#2024-04-16)
 + [2024-04-18](#2024-04-18)
 + [2024-04-20](#2024-04-20)
++ [2024-04-22](#2024-04-22)
 
 ## Version History
 ```
@@ -1602,4 +1603,15 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'recording-demo.md' in 'Docs/Programming/Documentations/'
         + Added new options to 'agg'
+
+### 2024-04-22
+#### 2328H
+- New
+    + Added new document 'creating-your-own-c#-project-workspace.md' in 'Docs/DIY/development/environments/'
+    - Added new directory 'markdown/' in 'Docs/Programming/Language-Server-Packs/Languages/'
+        - Added new directory 'marksman/'
+            + Added new document 'setup.md'
+    - Added new directory 'Compiler/' in 'Docs/Programming/Languages/C#/Guides/'
+        - Added new directory 'dotnet/'
+            + Added new directory 'setup.md'
 
