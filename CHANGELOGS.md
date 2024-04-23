@@ -75,6 +75,7 @@
 + [2024-04-18](#2024-04-18)
 + [2024-04-20](#2024-04-20)
 + [2024-04-22](#2024-04-22)
++ [2024-04-23](#2024-04-23)
 
 ## Version History
 ```
@@ -1614,4 +1615,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'Compiler/' in 'Docs/Programming/Languages/C#/Guides/'
         - Added new directory 'dotnet/'
             + Added new directory 'setup.md'
+
+### 2024-04-23
+#### 2224H
+- New
+    - Added new directory 'Guides/' in 'Docs/Technology/Containers/LXC/'
+        + Added new document 'quickstart-playbook.md' for a simple Quickstart guide to using LXC/LXD
 
