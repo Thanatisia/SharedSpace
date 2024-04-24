@@ -76,6 +76,7 @@
 + [2024-04-20](#2024-04-20)
 + [2024-04-22](#2024-04-22)
 + [2024-04-23](#2024-04-23)
++ [2024-04-24](#2024-04-24)
 
 ## Version History
 ```
@@ -1621,4 +1622,17 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     - Added new directory 'Guides/' in 'Docs/Technology/Containers/LXC/'
         + Added new document 'quickstart-playbook.md' for a simple Quickstart guide to using LXC/LXD
+
+### 2024-04-24
+#### 1658H
+- New
+    - Added new directory 'PRoot' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/' containing documentations on the userspace implementation of chroot 'proot' used by Termux
+        + Addded new document 'README.md'
+        - Added new directory 'distributions/' : Containing documentations of various PRoot distributions used in Termux/ARM-based systems
+            - Added new directory 'TermuxArch/' : Containing documentations for the Termux ArchLinux PRoot chroot container
+                + Added new document 'setup.md'
+
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added new task - 'Setup PRoot Containers to access other distributions'
 
