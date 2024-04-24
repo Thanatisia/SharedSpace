@@ -168,6 +168,47 @@ Collection of things to do Out-of-the-Box after installation
             + wget
         - Pre-Requisites
             + Setup storage support using 'termux-setup-storage'
+    - PRoot Distributions and Tools
+        - proot-distro
+            - Information
+                - Repositories
+                    + [GitHub - termux/proot-distro](https://github.com/termux/proot-distro) : A Bash script wrapper for utility proot for easy management of chroot-based Linux distribution installations. It does not require root or any special ROM, kernel, etc. Everything you need to get started is the latest version of Termux application
+            - Dependencies
+                + bash
+                + bzip2
+                + coreutils
+                + curl
+                + findutils
+                + gzip
+                + ncurses-utils
+                + proot
+                + sed
+                + tar
+                + xz-utils
+            - Pre-Requisites
+                - (Optionals) If you want command line autocompletion
+                    + Install the 'bash-completion' package
+                    ```bash
+                    pkg install bash-completion
+                    ```
+            - Installation
+                - Using package manager
+                    ```bash
+                    pkg install proot-distro
+                    ```
+                - Using git
+                    - Git clone the source repository
+                        ```bash
+                        git clone https://github.com/termux/proot-distro
+                        ```
+                    - Change directory into repository
+                        ```bash
+                        cd proot-distro
+                        ```
+                    - Begin installation using install script
+                        ```bash
+                        ./install.sh
+                        ```
     - PRoot Containers
         - TermuxArch : PRoot virtual environment for ArchLinux in Termux
             - Information

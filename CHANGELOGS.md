@@ -1636,3 +1636,15 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
         + Added new task - 'Setup PRoot Containers to access other distributions'
 
+#### 2151H
+- New
+    - Added new directory 'tools' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/PRoot/'
+        - Added new directory 'proot-distro'  for documentations on the PRoot wrapper and CLI utility
+            + Added new document 'README.md'
+            + Added new document 'docs.md'
+            + Added new document 'setup.md'
+
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added 'PRoot distributions and tools' and 'proot-distro' installation steps
+
