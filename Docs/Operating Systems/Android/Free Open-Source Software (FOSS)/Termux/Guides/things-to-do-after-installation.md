@@ -156,6 +156,134 @@ Collection of things to do Out-of-the-Box after installation
         ssh -p 8022 [username]@[ssh-host-ip|domain]
         ```
 
+- Setup PRoot Containers to access other distributions
+    - Notes
+        - PRoot in Termux are Virtual chroot envrionments of various other distributions and package managers
+            - i.e.
+                + TermuxArch : PRoot of ArchLinux in Termux
+    - Setup
+        - Dependencies
+            + termux
+            + git
+            + wget
+        - Pre-Requisites
+            + Setup storage support using 'termux-setup-storage'
+    - PRoot Distributions and Tools
+        - proot-distro
+            - Information
+                - Repositories
+                    + [GitHub - termux/proot-distro](https://github.com/termux/proot-distro) : A Bash script wrapper for utility proot for easy management of chroot-based Linux distribution installations. It does not require root or any special ROM, kernel, etc. Everything you need to get started is the latest version of Termux application
+            - Dependencies
+                + bash
+                + bzip2
+                + coreutils
+                + curl
+                + findutils
+                + gzip
+                + ncurses-utils
+                + proot
+                + sed
+                + tar
+                + xz-utils
+            - Pre-Requisites
+                - (Optionals) If you want command line autocompletion
+                    + Install the 'bash-completion' package
+                    ```bash
+                    pkg install bash-completion
+                    ```
+            - Installation
+                - Using package manager
+                    ```bash
+                    pkg install proot-distro
+                    ```
+                - Using git
+                    - Git clone the source repository
+                        ```bash
+                        git clone https://github.com/termux/proot-distro
+                        ```
+                    - Change directory into repository
+                        ```bash
+                        cd proot-distro
+                        ```
+                    - Begin installation using install script
+                        ```bash
+                        ./install.sh
+                        ```
+    - PRoot Containers
+        - TermuxArch : PRoot virtual environment for ArchLinux in Termux
+            - Information
+                - Repositories
+                    + [GitHub - TermuxArch/TermuxArch](https://github.com/TermuxArch/TermuxArch)
+                    + [GitHub - sdrausty/TermuxArch](https://github.com/sdrausty/TermuxArch)
+                - Source Files
+                    + setupTermuxArch.sh : https://raw.githubusercontent.com/sdrausty/TermuxArch/master/setupTermuxArch.sh
+            - Pre-Requisites
+                - Obtain installation script 'setupTermuxArch' from 'sdrausty/TermuxArch'
+                    - Using git repository
+                        - Clone TermuxArch repository
+                            ```bash
+                            git clone https://github.com/sdrausty/TermuxArch
+                            ```
+                        - Change directory to source code
+                            ```bash
+                            cd TermuxArch
+                            ```
+                    - Using curl
+                        ```bash
+                        curl -L -O https://raw.githubusercontent.com/sdrausty/TermuxArch/master/setupTermuxArch.sh
+                        ```
+                    - Using wget
+                        ```bash
+                        wget https://sdrausty.github.io/TermuxArch/setupTermuxArch.sh
+                        ```
+            - Installation
+                - Startup the script 'setupTermuxArch.sh'
+                    ```bash
+                    ./setupTermuxArch.sh
+                    ```
+            - Post-Installation
+                - User Management
+                    - Add new user
+                        ```bash
+                        useradd -m -g wheel -G users -d [custom-home-directory] [username]
+                        ```
+                    - Set password to new user
+                        ```bash
+                        passwd [username]
+                        ```
+                    - Enable sudo in '/etc/sudoers'
+                        ```bash
+                        EDITOR=[your-editor] sudo visudo
+                        ```
+                - To add mirrors for other distributions
+                    - Edit your pacman ('/etc/pacman.conf') configuration file
+                        - ArchStrike
+                            - Add the following mirrors to your pacman configuration file
+                                ```
+                                [archstrike]
+                                Server = https://mirror.archstrike.org/$arch/$repo
+                                ```
+                        - BlackArch
+                            - Add the following mirrors to your pacman configuration file
+                                ```
+                                [blackarch]
+                                Server = http://blackarch.org/blackarch/$repo/os/$arch
+                                ```
+                    - Update your package manager's repository database and Upgrade all installed packages
+                        ```bash
+                        pacman -Syu
+                        ```
+                    - Install the distribution as necessary
+                        - ArchStrike
+                            ```bash
+                            pacman -S archstrike --needed
+                            ```
+                        - BlackArch
+                            ```bash
+                            pacman -S blackarch --needed
+                            ```
+
+
 ## Wiki
 - Backup Termux files
     - Pre-Requisites
@@ -209,6 +337,7 @@ Collection of things to do Out-of-the-Box after installation
 ## Resources
 
 ## References
++ [TermuxArch Documentations - Installation](https://termuxarch.github.io/docsTermuxArch/install)
 + [Termux Wiki - Backing up Termux](https://wiki.termux.com/wiki/Backing_up_Termux)
 + [Termux Wiki - Getting Started](https://wiki.termux.com/wiki/Getting_started)
 + [Termux Wiki - termux-setup-storage](https://wiki.termux.com/wiki/Termux-setup-storage)

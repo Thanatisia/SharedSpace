@@ -76,6 +76,8 @@
 + [2024-04-20](#2024-04-20)
 + [2024-04-22](#2024-04-22)
 + [2024-04-23](#2024-04-23)
++ [2024-04-24](#2024-04-24)
++ [2024-04-25](#2024-04-25)
 
 ## Version History
 ```
@@ -1621,4 +1623,43 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     - Added new directory 'Guides/' in 'Docs/Technology/Containers/LXC/'
         + Added new document 'quickstart-playbook.md' for a simple Quickstart guide to using LXC/LXD
+
+### 2024-04-24
+#### 1658H
+- New
+    - Added new directory 'PRoot' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/' containing documentations on the userspace implementation of chroot 'proot' used by Termux
+        + Addded new document 'README.md'
+        - Added new directory 'distributions/' : Containing documentations of various PRoot distributions used in Termux/ARM-based systems
+            - Added new directory 'TermuxArch/' : Containing documentations for the Termux ArchLinux PRoot chroot container
+                + Added new document 'setup.md'
+
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added new task - 'Setup PRoot Containers to access other distributions'
+
+#### 2151H
+- New
+    - Added new directory 'tools' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/PRoot/'
+        - Added new directory 'proot-distro'  for documentations on the PRoot wrapper and CLI utility
+            + Added new document 'README.md'
+            + Added new document 'docs.md'
+            + Added new document 'setup.md'
+
+- Updates
+    - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
+        + Added 'PRoot distributions and tools' and 'proot-distro' installation steps
+
+### 2024-04-25
+#### 2217H
+- New
+    - Added new directory 'asciinema-agg/' in 'Docs/Linux/packages/' for documentations on the project 'asciinema/agg'
+        - Added new directory 'commands/'
+            + Added new document 'agg.md' for documentations on using agg (originally from 'Docs/Programming/Documentations/recording-demo.md')
+    - Added new directory 'asciinema/' in 'Docs/Linux/packages/' for documentations on the project 'asciinema/asciinema'
+        - Added new directory 'commands/'
+            + Added new document 'asciinema.md' for documentations on using asciinema for local terminal screen recording (originally from 'Docs/Programming/Documentations/recording-demo.md')
+
+- Updates
+    - Updated document 'recording-demo.md' in 'Docs/Programming/Documentations/'
+        + Added new examples on using font family
 

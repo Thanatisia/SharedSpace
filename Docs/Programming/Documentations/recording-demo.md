@@ -60,6 +60,11 @@
                     ```bash
                     asciinema rec -c [command-to-execute] output.cast
                     ```
+        - Examples
+            - Overwrite existing files
+                ```bash 
+                record --output-terminal-rec-filename output.cast --asciinema-opts "--overwrite" 
+                ```
 
 - To generate a GIF image:
     - Regenerate from the asciinema terminal recording file
@@ -128,6 +133,11 @@
                     ```bash
                     agg --font-family "font-family" [terminal-recording-cast-file.cast] [output-animation-gif-file.gif]
                     ```
+        - Examples
+            - Using theme: 'monokai' and font family 'JetBrainsMono Nerd Font Patched'
+                ```bash
+                asciinema-util convert --theme monokai --input-terminal-rec-filename output.cast --output-animation-filename output.gif --asciinema-agg-opts "--font-family JetBrainsMono Nerd Font Mono,JetBrainsMono NFM,JetBrainsMono NFM ExtraBold"
+                ```
 
 ## Resources
 + [GitHub - asciinema/asciinema](https://github.com/asciinema/asciinema)
