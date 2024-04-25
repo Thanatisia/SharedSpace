@@ -77,6 +77,7 @@
 + [2024-04-22](#2024-04-22)
 + [2024-04-23](#2024-04-23)
 + [2024-04-24](#2024-04-24)
++ [2024-04-25](#2024-04-25)
 
 ## Version History
 ```
@@ -1647,4 +1648,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'things-to-do-after-installation.md' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/Guides/'
         + Added 'PRoot distributions and tools' and 'proot-distro' installation steps
+
+### 2024-04-25
+#### 2217H
+- New
+    - Added new directory 'asciinema-agg/' in 'Docs/Linux/packages/' for documentations on the project 'asciinema/agg'
+        - Added new directory 'commands/'
+            + Added new document 'agg.md' for documentations on using agg (originally from 'Docs/Programming/Documentations/recording-demo.md')
+    - Added new directory 'asciinema/' in 'Docs/Linux/packages/' for documentations on the project 'asciinema/asciinema'
+        - Added new directory 'commands/'
+            + Added new document 'asciinema.md' for documentations on using asciinema for local terminal screen recording (originally from 'Docs/Programming/Documentations/recording-demo.md')
+
+- Updates
+    - Updated document 'recording-demo.md' in 'Docs/Programming/Documentations/'
+        + Added new examples on using font family
 
