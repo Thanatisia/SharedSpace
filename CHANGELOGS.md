@@ -1663,3 +1663,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'recording-demo.md' in 'Docs/Programming/Documentations/'
         + Added new examples on using font family
 
+### 2024-04-28
+#### 2302H
+- New
+    - Added new directory 'Algorithms' in 'Docs/Programming/'
+        - Added new directory 'sorting' for documentations on sorting algorithms (ie. mechanic, algorithm, components)
+            + Added new document 'bubble-sort.md' : A work-in-progres Bubble Sorting documentation algorithm
+    - Added new directory 'multiprocessing' in 'Docs/Programming/Languages/Python/Libraries/' for containing documentations for the python library 'multiprocessing'
+        - Added new directory 'Snippets/' for snippets relating to the library
+            + Added new document 'list-iteration-vs-for-loop.md' containing information relating to the implementation of List iteration via multiprocessing vs list iteration via for loops
+    + Added new document 'stream-redirects-equivalent-in-python.md' in 'Docs/Programming/Languages/Python/Libraries/subprocess/examples/'
+- Updates
+    - Updated document 'basics.md' in 'Docs/Programming/Languages/Python/Topics/Decorators/'
+        + Cleaning up python decorator definitions and usages, to be continued
+        + Added documentations of the various python decorator types, structures and syntaxes of how to implement those decorators
+
