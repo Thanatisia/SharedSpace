@@ -15,9 +15,170 @@
         + `result = outer(caller_function)` will be executed first
         + then `result()` will be executed
 
+### Decorator Types
+- Decorator (standalone)
+    - Decorator function
+        - Components
+            - decorator (outer function) : This is the main decorator function which will take in the decorated function (if there are no arguments) or argument key-value mappings (if there are arguments)
+                - wrapper (inner/nested function) : This is the inner wrapper function that will take in the argument passed into the function and expand into the function when executed
+                    + return wrapper function object to the decorator
+        ```python
+        def decorator(fn):
+            """
+            Decorator to apply to a function to execute
+            """
+            def wrapper(*args, **kwargs):
+                """
+                Internal function that takes in the arguments to pass into the function
+                """
+                result = fn(*args, **kwargs)
+
+            return wrapper
+        ```
+    - Decorate function
+        - Notes
+            + This is equivalent to `decorated_function = (decorator())(decorated_function)`
+        ```python
+        @decorator
+        def decorated_function():
+            print("Executed inside 'wrapper'")
+        ```
+    - This is how the execution looks like when called
+        - Notes
+            - When this function returns a value, it is None
+                + This is because you didnt return the result in the decorater's wrapper function
+        ```python
+        result = decorator(decorated_function)()
+        ```
+
+- Decorator with variable-length and keyword arguments
+    - Decorator function
+        - Components
+            - decorator (outer function) : This is the main decorator function which will take in the decorated function (if there are no arguments) or argument key-value mappings (if there are arguments)
+                - wrapper (inner/nested function) : This is the inner wrapper function that will take in the argument passed into the function and expand into the function when executed
+                    + return the function object to the wrapper
+                + Return the wrapper function object to the decorator
+        ```python
+        def decorator(*args, **kwargs):
+            """
+            Decorator to take in the arguments to pass into the function inside the wrapper
+            """
+            def wrapper(fn):
+                """
+                Internal function that takes in the arguments provided at the decorator by the caller and pass into the function
+                """
+                result = func(*args, **kwargs)
+            return wrapper
+        ```
+    - Decorate function
+        - Notes
+            + This is equivalent to `decorated_function = (decorator(key=value))(decorated_function)`
+        ```python
+        @decorator(key=value)
+        def decorated_function():
+            print("Executed inside 'wrapper'")
+        ```
+    - This is how the execution looks like when called
+        - Notes
+            + When this function returns a value, it is None
+            + This is because you didnt return the result in the decorater's wrapper function
+        ```python
+        result = outer_function(decorated_function)(arguments, passed, here)
+        ```
+
+- Decorator with static arguments
+    - Decorator function
+        - Components
+            - outer_function : This is the outer decorator function that will take in the static parameters to pass into the decorator inner function and wrappers
+                - decorator : This is the main decorator function which will take in the decorated function (if there are no arguments) or argument key-value mappings (if there are arguments)
+                    - wrapper (inner/nested function) : This is the inner wrapper function that will take in the argument passed into the function and expand into the function when executed
+                        + return the function object to the wrapper
+                    + Return the wrapper function object to the decorator
+                + Return the decorator function object to the outer function and the caller
+        ```python
+        def outer_function(key_1=value, key_2=value_2):
+            """
+            Outer function to take in the arguments to pass into the function inside the wrapper
+            """
+            def decorator(fn):
+                """
+                Decorator function that will take the decorated function and pass it to the wrapper to execute
+                """
+                def wrapper(*args, **kwargs):
+                    """
+                    Internal function that takes in the arguments provided at the decorator by the caller and pass into the function
+                    """
+                    result = func(*args, **kwargs)
+                return wrapper
+            return decorator
+        ```
+    - Decorate function
+        - Notes
+            - This is equivalent to 
+                + `outer_function(key_1, key_2)(decorated_function)(arguments1, argument2, argument3)`
+        ```python
+        @outer_function(key=value)
+        def decorated_function():
+            print("Executed inside 'wrapper'")
+        ```
+    - This is how the execution looks like when called
+        - Notes
+            + When this function returns a value, it is None
+            + This is because you didnt return the result in the decorater's wrapper function
+        ```python
+        result = outer_function(decorated_function)(arguments, passed, here)
+        ```
+
+- Decorator with return values
+    - Decorator function
+        - Components
+            - outer_function : This is the outer decorator function that will take in the static parameters to pass into the decorator inner function and wrappers
+                - decorator : This is the main decorator function which will take in the decorated function (if there are no arguments) or argument key-value mappings (if there are arguments)
+                    - wrapper (inner/nested function) : This is the inner wrapper function that will take in the argument passed into the function and expand into the function when executed
+                        + return the result
+                    + Return the wrapper function object to the decorator
+                + Return the decorator function object to the outer function and the caller
+        ```python
+        def outer_function(key_1=value, key_2=value_2):
+            """
+            Outer function to take in the arguments to pass into the function inside the wrapper
+            """
+            def decorator(fn):
+                """
+                Decorator function that will take the decorated function and pass it to the wrapper to execute
+                """
+                def wrapper(*args, **kwargs):
+                    """
+                    Internal function that takes in the arguments provided at the decorator by the caller and pass into the function
+                    """
+                    result = func(*args, **kwargs)
+                    return result
+                return wrapper
+            return decorator
+        ```
+    - Decorate function
+        - Notes
+            - This is equivalent to 
+                + `result = outer_function(key_1, key_2)(decorated_function)(arguments1, argument2, argument3)`
+        ```python
+        @outer_function(key=value)
+        def decorated_function():
+            return "Executed inside 'wrapper'"
+        ```
+    - This is how the execution looks like when called
+        - Notes
+            + When this function returns a value, it will be the result from calling the function
+        - Format 1
+            ```python
+            result = outer_function(decorated_function)(arguments, passed, here)
+            ```
+        - Format 2
+            ```python
+            result = outer_function(decorated_function(arguments, passed, here))
+            ```
+
 ## Documentation
 ### Synopsis/Syntax
-
 - Decorator Declaration
     - Decorator Functions
         ```python
@@ -72,7 +233,6 @@
     display()
     display_info("Hello", "World")
     ```
-
 
 ## Wiki
 
