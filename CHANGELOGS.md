@@ -78,6 +78,7 @@
 + [2024-04-23](#2024-04-23)
 + [2024-04-24](#2024-04-24)
 + [2024-04-25](#2024-04-25)
++ [2024-04-30](#2024-04-30)
 
 ## Version History
 ```
@@ -1677,4 +1678,15 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'basics.md' in 'Docs/Programming/Languages/Python/Topics/Decorators/'
         + Cleaning up python decorator definitions and usages, to be continued
         + Added documentations of the various python decorator types, structures and syntaxes of how to implement those decorators
+
+### 2024-04-30
+#### 2114H
+- New
+    - Added new directory for the python library 'multiprocessing' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added new document 'manual.md' for documentations on the 'multiprocessing' library
+
+- Updates
+    - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/os/'
+        + Added new function for use to obtain the current process' ID (pid)
+        + Added usage examples with 'multiprocessing' to anchor the data contents received from multiprocessing
 
