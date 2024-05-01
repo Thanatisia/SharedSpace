@@ -1707,3 +1707,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
         + Added packages 'asyncio', 'multiprocessing' and 'threading'
 
+#### 2207H
+- New
+    - Added new directory 'playbooks' in 'Docs/CyberSecurity/' for storing all Cybersecurity-related playbooks for various roles, job, topics and categories
+        + Added new document 'SOC-monitoring.md': Playbook for monitoring roles and tasks in a SOC environment
+    - Added new directory 'Layout and Structuring/' in 'Docs/Home Lab/' for holding the Layouts and Structuring of various system infrastructure type in an Home Lab
+        - Added new directory 'Cybersecurity Lab' for documentations on setting up an Cybersecurity Lab in the home lab/server
+            + Added document 'README.md'
+
