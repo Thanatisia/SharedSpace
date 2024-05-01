@@ -1715,3 +1715,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new directory 'Cybersecurity Lab' for documentations on setting up an Cybersecurity Lab in the home lab/server
             + Added document 'README.md'
 
+#### 2241H
+- Updates
+    - Updated document 'manual.md' for the python library 'multiprocessing' in 'Docs/Programming/Languages/Python/Libraries/multiprocessing'
+        + Updated description of library and added extra examples of use cases
+        + Added parameters to functions
+        + Added new usages
+    - Updated document 'manual.md' for the python library 'threading' in 'Docs/Programming/Languages/Python/Libraries/threading'
+        + Updated description of library and added extra examples of use cases
+        + Added parameters to functions
+        + Added new usages
+
