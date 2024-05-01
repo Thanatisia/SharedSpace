@@ -79,6 +79,7 @@
 + [2024-04-24](#2024-04-24)
 + [2024-04-25](#2024-04-25)
 + [2024-04-30](#2024-04-30)
++ [2024-05-01](#2024-05-01)
 
 ## Version History
 ```
@@ -1689,4 +1690,20 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/os/'
         + Added new function for use to obtain the current process' ID (pid)
         + Added usage examples with 'multiprocessing' to anchor the data contents received from multiprocessing
+
+### 2024-05-01
+#### 0959H
+- New
+    - Added new directories for python libraries in 'Docs/Programming/Languages/Python/Libraries/'
+        + asyncio
+        + threading
+    + Added new document 'terminology-and-comparisons.md' in 'Docs/Programming/' holding various terminologies and comparisons
+
+- Updates
+    - Updated document 'manual.md' for python library 'multiprocessing' in 'Docs/Programming/Languages/Python/Libraries/multiprocessing/'
+        + Added category separatros to improve readability of the usages
+        + Added new description for the use of 'multiprocessing' in parallel/concurrency programming
+        + Added new functions and usages
+    - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
+        + Added packages 'asyncio', 'multiprocessing' and 'threading'
 
