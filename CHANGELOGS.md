@@ -1726,3 +1726,16 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added parameters to functions
         + Added new usages
 
+#### 2337H
+- New
+    - Added new directory 'playbooks' in 'Docs/Linux/' for storing all Linux-related playbooks for various roles, job, topics and categories
+        - Added new directory 'system-administration' for storing all Linux Sysadmin-based playbooks
+            + Added document 'system-log-investigation.md': Playbook for Investigations and using the system log
+    + Added new document 'dmesg.md' in 'Docs/Linux/commands' for the Linux built-in Kernel message CLI utility 'dmesg'
+    + Added new document 'journalctl.md' in 'Docs/Linux/commands' for the Linux built-in system logs CLI utility 'journalctl'
+- Updates
+    - Updated document 'masterlist.md' in 'Docs/Linux/commands'
+        - Added entries for new linux commands:
+            + dmesg
+            + journalctl
+

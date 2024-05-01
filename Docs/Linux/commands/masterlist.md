@@ -24,6 +24,7 @@ Documentations and Writeups for Linux Commands, a Markdown version of (Linux Com
 	#### Parameters
 	+ -h : Human Readable Format
 - dir : Displays files and folders in current working directory
+- dmesg : Kernel-level message CLI utility
 - find : Used to search for files, strings and directories
 - free : Shows current system memory - free, total and swap (RAM)
 	#### Synopsis/Syntax
@@ -31,6 +32,7 @@ Documentations and Writeups for Linux Commands, a Markdown version of (Linux Com
 	#### Parameters	
 	+ -h : Human Readable Format
 - ftp : File Transfer Protocol; To remotely connect to a remote ftp host
+- journalctl : System Logs CLI utility
 - kill : Terminate processes; used alongside ps command (to get process id)
 - last : Watch the user's activity in the system
 - less : Allows quickly viewing of file
