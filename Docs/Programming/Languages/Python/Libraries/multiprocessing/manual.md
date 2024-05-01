@@ -5,10 +5,12 @@
 
 ## Information
 ### DESCRIPTION
-+ multiprocessing is a built-in python library that allows developers to implement multiprocessing/concurrency/parallel programming into their program
++ multiprocessing is a built-in python library that allows developers to implement multiprocessing/parallel programming into their program
 - Multiprocessing overcomes the limitations of multi-threading by creating multiple processes, 
     + each having its own Python interpreter and memory space. 
-    + This makes multiprocessing ideal for CPU-bound tasks, as it allows for true parallel execution.
+    - This makes multiprocessing ideal for CPU-bound tasks, as it allows for true parallel execution and achieves parallelism.
+        - i.e.
+            + Computationally heavy tasks
 
 ## Documentation
 
@@ -29,10 +31,12 @@
                 + Type: Function
             - `initargs=(,)` : This arguments is a tuple containing the arguments/parameters you wish to pass into the initializer function (if available)
                 + Type: Tuple
-    - `Process(target, options...)` : Initializes a new process object for Multiprocessing, each having its own python interpreter and memory space. Initialize a new class for every process you want to use for parallel execution
+    - `Process(target, args, options...)` : Initializes a new process object for Multiprocessing, each having its own python interpreter and memory space. Initialize a new class for every process you want to use for parallel execution
         - Parameter Header/Signatures
-            - target : Specify a new target function to attach to this process to be executed
+            - `target=<function-to-execute>` : Specify a new target function to attach to this process to be executed
                 + Type: Function
+            - `args=(your, arguments, to, pass, into, function)` : Specify a tuple containing all the arguments you wish to pass into the function's parameter/argument signature/header
+                + Type: Tuple
 
 ### Functions
 - multiprocessing.Pool()
@@ -220,6 +224,30 @@
         p1.join()
         p2.join()
         ```
+    - Create multiple process objects
+        ```python
+        from multiprocessing import Process
+
+        # Initialize variables
+        number_of_processes = 4
+        processes = []
+
+        # Iterate number_of_processes times
+        for i in range(number_of_processes):
+            # Create a new Process() object
+            curr_proc = Process(target=<function-to-execute>, args=(your, arguments, to, pass, into, function))
+
+            # Append newly created object into the pool/storage
+            processes.append(curr_proc)
+
+        # Iterate through process pool and start all tasks
+        for proc in processes:
+            # Start all processes
+            proc.start()
+
+            # Wait for the process to complete execution before continuing
+            proc.join()
+        ```
 
 ### Operational Workflow
 - Import package and modules
@@ -316,6 +344,7 @@
 ## References
 
 ## Resources
++ [builtin - data science - multithreading vs multiprocessing](https://builtin.com/data-science/multithreading-multiprocessing)
 + [Python Docs - multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
 + [run.ai - deep learning for computer vision - python parallel programming](https://www.run.ai/guides/deep-learning-for-computer-vision/python-parallel-processing)
 

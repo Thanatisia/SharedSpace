@@ -1707,3 +1707,35 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'packages-masterlist.md' in 'Docs/Programming/Languages/Python/Libraries/'
         + Added packages 'asyncio', 'multiprocessing' and 'threading'
 
+#### 2207H
+- New
+    - Added new directory 'playbooks' in 'Docs/CyberSecurity/' for storing all Cybersecurity-related playbooks for various roles, job, topics and categories
+        + Added new document 'SOC-monitoring.md': Playbook for monitoring roles and tasks in a SOC environment
+    - Added new directory 'Layout and Structuring/' in 'Docs/Home Lab/' for holding the Layouts and Structuring of various system infrastructure type in an Home Lab
+        - Added new directory 'Cybersecurity Lab' for documentations on setting up an Cybersecurity Lab in the home lab/server
+            + Added document 'README.md'
+
+#### 2241H
+- Updates
+    - Updated document 'manual.md' for the python library 'multiprocessing' in 'Docs/Programming/Languages/Python/Libraries/multiprocessing'
+        + Updated description of library and added extra examples of use cases
+        + Added parameters to functions
+        + Added new usages
+    - Updated document 'manual.md' for the python library 'threading' in 'Docs/Programming/Languages/Python/Libraries/threading'
+        + Updated description of library and added extra examples of use cases
+        + Added parameters to functions
+        + Added new usages
+
+#### 2337H
+- New
+    - Added new directory 'playbooks' in 'Docs/Linux/' for storing all Linux-related playbooks for various roles, job, topics and categories
+        - Added new directory 'system-administration' for storing all Linux Sysadmin-based playbooks
+            + Added document 'system-log-investigation.md': Playbook for Investigations and using the system log
+    + Added new document 'dmesg.md' in 'Docs/Linux/commands' for the Linux built-in Kernel message CLI utility 'dmesg'
+    + Added new document 'journalctl.md' in 'Docs/Linux/commands' for the Linux built-in system logs CLI utility 'journalctl'
+- Updates
+    - Updated document 'masterlist.md' in 'Docs/Linux/commands'
+        - Added entries for new linux commands:
+            + dmesg
+            + journalctl
+
