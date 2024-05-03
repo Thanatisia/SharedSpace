@@ -76,6 +76,10 @@
             - Similar to how in 'git' where you need to 'confirm' the changes you have made by committing the changes made into the git repository database
                 + RDBMS Databases like SQLite requires committing all changes made to the database as any changes made and actions taken are ephemeral (is temporary) and will revert back when the database is closed without committing
     + `.execute(sql_stmt, parameterized_values, optionals, ...)` : This routine is a shortcut/wrapper of `cursor.execute()` provided by the cursor object, and it creates an intermediate cursor object by calling the `conn.cursor()` function then calls `cur.execute()` with the parameters given
+    - `.rollback()` : Rollback to the start of any pending transaction. 
+        - Notes:
+            + If autocommit is True, or there is no open transaction, this method does nothing.
+            + If autocommit is False, a new transaction is implicitly opened if a pending transaction was rolled back by this method
 
 - sqlite3.Cursor()
     + `.close()` : Close the database cursor pointer object after usage
@@ -285,6 +289,11 @@
         blob.close()
     ```
 
+- Rollback any changes made to the database if you want to cancel changes
+    ```python
+    conn.rollback()
+    ```
+
 - Commit all changes made to the database
     - Explanation
         - Similar to how in 'git' where you need to 'confirm' the changes you have made by committing the changes made into the git repository database
@@ -430,6 +439,11 @@
         ```python
         rows = cur.fetchall(N)
         ```
+
+- Rollback any changes made to the database if you want to cancel changes
+    ```python
+    conn.rollback()
+    ```
 
 - Commit all changes made to the database
     - Explanation

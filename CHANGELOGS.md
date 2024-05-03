@@ -1768,6 +1768,12 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'compilation.md' in 'Docs/Linux/packages/Build from Source/packages/fastfetch-cli/fastfetch/'
         + Added instructions to manually install fastfetch into the system
         + Added instructions to manually uninstall fastfetch from the system
-    - Docs/Programming/Languages/Python/Libraries/packages-masterlist.md
+    - Updated document 'Docs/Programming/Languages/Python/Libraries/packages-masterlist.md'
         + Added python library 'sqlite3'
+
+#### 1443H
+- Updates
+    - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/sqlite3'
+        + Added function documentation for 'sqlite3.Connection().rollback()' to rollback any non-committed transactions back to the baseline
+        + Added usages and operational workflow usages for '.rollback()'
 
