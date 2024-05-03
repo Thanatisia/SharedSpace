@@ -80,6 +80,7 @@
 + [2024-04-25](#2024-04-25)
 + [2024-04-30](#2024-04-30)
 + [2024-05-01](#2024-05-01)
++ [2024-05-03](#2024-05-03)
 
 ## Version History
 ```
@@ -1738,4 +1739,35 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added entries for new linux commands:
             + dmesg
             + journalctl
+
+### 2024-05-03
+#### 1012H
+- New
+    - Added new directory 'fastfetch-cli/' in Docs/Linux/packages/Build from Source/packages/ for holding documentations on building projects made by 'fastfetch-cli' from source
+        - Added new directory 'fastfetch' for building 'fastfetch' from source
+            + Added new document 'compilation.md'
+    - Added new directory 'Programming' in 'Docs/Operating Systems/Windows/' for holding documentations on Programming/Software Development Tools and Environments in Windows
+        - Added new directory 'Software Distribution and Building Platform' for holding documentations on various Software Distribution tools and Building Platforms for cross-compilation and cross-platform development
+            - Added new directory 'msys2' for the msys2 build system compilation
+                + Added new document 'README.md'
+    - Added new directory 'CMake' in 'Docs/Programming/Build Systems/' for documentations on using the Build System cmake
+        - Added new directory 'commands' holding CMake commands
+            + Added new document 'cmake.md' for documentations on the cmake CLI utility
+    - Added new directory 'sqlite3' in 'Docs/Programming/Languages/Python/Libraries/' for documentations on the Python library 'sqlite3'
+        + Added new document 'manual.md'
+
+- Updates
+    - Updated document 'commands.md' in 'Docs/Programming/Languages/Powershell/'
+        + Added new command 'Get-FileHash' for obtaining the hash hexdigest of a file using various cryptographic hashing functions
+        + Added usage of 'Get-FileHash' with SHA256
+
+#### 1138H
+- Updates
+    - Updated document 'package-list.md' in 'Docs/Linux/packages/Build from Source/'
+        + Updated package list with 'fastfetch-cli/fastfetch'
+    - Updated document 'compilation.md' in 'Docs/Linux/packages/Build from Source/packages/fastfetch-cli/fastfetch/'
+        + Added instructions to manually install fastfetch into the system
+        + Added instructions to manually uninstall fastfetch from the system
+    - Docs/Programming/Languages/Python/Libraries/packages-masterlist.md
+        + Added python library 'sqlite3'
 

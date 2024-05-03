@@ -33,6 +33,7 @@ This list will specify also specify which packages has been documented (as found
 + scapy                  : Interactive network snippet and packet manipulation library in Python
 + setuptools             : Python packaging framework
 + socket                 : Python socket programming framework; allows for creating a network server infrastructure (web servers etc), enabling connection between client and server
++ sqlite3                : Python library and re-implementation for the SQLite file-based Relational Database Management System (RDBMS), which works as a portable, small form factor RDBMS like MySQL
 + subprocess             : System Subprocesses handler library/module in python; manages system command line execution, pipes, standard output, input and errors etc
 + sys                    : System (Executables i.e. CLI arguments) library for Python; built-in
 + tensorflow             : Machine Learning/LLM framework
