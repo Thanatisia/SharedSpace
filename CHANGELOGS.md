@@ -80,6 +80,7 @@
 + [2024-04-25](#2024-04-25)
 + [2024-04-30](#2024-04-30)
 + [2024-05-01](#2024-05-01)
++ [2024-05-03](#2024-05-03)
 
 ## Version History
 ```
@@ -1759,4 +1760,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'commands.md' in 'Docs/Programming/Languages/Powershell/'
         + Added new command 'Get-FileHash' for obtaining the hash hexdigest of a file using various cryptographic hashing functions
         + Added usage of 'Get-FileHash' with SHA256
+
+#### 1138H
+- Updates
+    - Updated document 'package-list.md' in 'Docs/Linux/packages/Build from Source/'
+        + Updated package list with 'fastfetch-cli/fastfetch'
+    - Updated document 'compilation.md' in 'Docs/Linux/packages/Build from Source/packages/fastfetch-cli/fastfetch/'
+        + Added instructions to manually install fastfetch into the system
+        + Added instructions to manually uninstall fastfetch from the system
+    - Docs/Programming/Languages/Python/Libraries/packages-masterlist.md
+        + Added python library 'sqlite3'
 

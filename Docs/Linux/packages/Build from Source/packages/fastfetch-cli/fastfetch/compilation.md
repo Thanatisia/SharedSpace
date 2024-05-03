@@ -118,10 +118,60 @@
         ```
     - Manually
         - Linux
-            - Install the built executables 'fastfetch' and 'flashfetch' to '/usr/local/bin'
+            - Binaries/Executables
+                + /usr/local/bin/fastfetch
+                + /usr/local/bin/flashfetch
                 ```bash
                 cp {fastfetch,flashfetch} /usr/local/bin
                 ```
+            - Bash auto-completions
+                + /usr/local/share/bash-completion/completions/fastfetch
+                ```bash
+                cp ../completions/bash /usr/local/share/bash-completion/completions/fastfetch
+                ```
+            - Fish auto-completions
+                + /usr/local/share/fish/vendor_completions.d/fastfetch.fish
+                ```bash
+                cp ../completions/fish /usr/local/share/fish/vendor_completions.d/fastfetch.fish
+                ```
+            - Shared Resources
+                - Presets
+                    - /usr/local/share/fastfetch/presets
+                        + /usr/local/share/fastfetch/presets/neofetch.jsonc
+                        + /usr/local/share/fastfetch/presets/paleofetch.jsonc
+                        - /usr/local/share/fastfetch/presets/examples
+                            + /usr/local/share/fastfetch/presets/examples/8.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/3.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/12.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/4.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/9.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/6.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/7.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/13.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/10.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/11.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/5.jsonc
+                            + /usr/local/share/fastfetch/presets/examples/2.jsonc
+                        + /usr/local/share/fastfetch/presets/hardware.jsonc
+                        + /usr/local/share/fastfetch/presets/btw.jsonc
+                        + /usr/local/share/fastfetch/presets/all.jsonc
+                        + /usr/local/share/fastfetch/presets/software.jsonc
+                        + /usr/local/share/fastfetch/presets/ci.jsonc
+                    ```bash
+                    mkdir -pv /usr/local/share/fastfetch
+                    cp -r ../presets /usr/local/share/fastfetch
+                    ```
+                - Licenses
+                    + /usr/local/share/licenses/fastfetch/LICENSE
+                    ```bash
+                    mkdir -pv /usr/local/share/licenses/fastfetch
+                    cp ../LICENSE /usr/local/share/licenses/fastfetch
+                    ```
+                - Manual
+                    + /usr/local/share/man/man1/fastfetch.1
+                    ```bash
+                    cp fastfetch.1 /usr/local/share/man/man1
+                    ```
 
         - Windows
             - Copy the built executables 'fastfetch' and 'flashfetch' to a bin directory in the system
@@ -173,6 +223,39 @@
         ```bash
         zypper install fastfetch
         ```
+
+### Uninstallation
+- Manually
+    - Delete binaries/executables from the system
+        - '[installation-root-directory]/bin/fastfetch'
+            ```bash
+            rm -r ${INSTALL_PATH}/bin/fastfetch
+            ```
+        - '[installation-root-directory]/bin/flashfetch'
+            ```bash
+            rm -r ${INSTALL_PATH}/bin/flashfetch
+            ```
+    - Delete bash auto-completions
+        - '[installation-root-directory]/share/bash-completion/completions/fastfetch'
+            ```bash
+            rm -r ${INSTALL_PATH}/share/bash-completion/completions/fastfetch
+            ```
+        - '[installation-root-directory]/share/fish/vendor_completions.d/fastfetch.fish'
+            ```bash
+            rm -r ${INSTALL_PATH}/share/fish/vendor_completions.d/fastfetch.fish
+            ```
+        - '[installation-root-directory]/share/fastfetch/'
+            ```bash
+            rm -r ${INSTALL_PATH}/share/fastfetch/
+            ```
+        - '[installation-root-directory]/share/licenses/fastfetch/LICENSE' 
+            ```bash
+            rm -r ${INSTALL_PATH}/share/licenses/fastfetch
+            ```
+        - '[installation-root-directory]/share/man/man1/fastfetch.1'
+            ```bash
+            rm -r ${INSTALL_PATH}/share/man/man1/fastfetch.1
+            ```
 
 ## Documentations
 
