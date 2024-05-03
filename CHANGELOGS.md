@@ -1739,3 +1739,24 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + dmesg
             + journalctl
 
+### 2024-05-03
+#### 1012H
+- New
+    - Added new directory 'fastfetch-cli/' in Docs/Linux/packages/Build from Source/packages/ for holding documentations on building projects made by 'fastfetch-cli' from source
+        - Added new directory 'fastfetch' for building 'fastfetch' from source
+            + Added new document 'compilation.md'
+    - Added new directory 'Programming' in 'Docs/Operating Systems/Windows/' for holding documentations on Programming/Software Development Tools and Environments in Windows
+        - Added new directory 'Software Distribution and Building Platform' for holding documentations on various Software Distribution tools and Building Platforms for cross-compilation and cross-platform development
+            - Added new directory 'msys2' for the msys2 build system compilation
+                + Added new document 'README.md'
+    - Added new directory 'CMake' in 'Docs/Programming/Build Systems/' for documentations on using the Build System cmake
+        - Added new directory 'commands' holding CMake commands
+            + Added new document 'cmake.md' for documentations on the cmake CLI utility
+    - Added new directory 'sqlite3' in 'Docs/Programming/Languages/Python/Libraries/' for documentations on the Python library 'sqlite3'
+        + Added new document 'manual.md'
+
+- Updates
+    - Updated document 'commands.md' in 'Docs/Programming/Languages/Powershell/'
+        + Added new command 'Get-FileHash' for obtaining the hash hexdigest of a file using various cryptographic hashing functions
+        + Added usage of 'Get-FileHash' with SHA256
+
