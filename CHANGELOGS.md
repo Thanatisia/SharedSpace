@@ -81,6 +81,7 @@
 + [2024-04-30](#2024-04-30)
 + [2024-05-01](#2024-05-01)
 + [2024-05-03](#2024-05-03)
++ [2024-05-05](#2024-05-05)
 
 ## Version History
 ```
@@ -1776,4 +1777,31 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/sqlite3'
         + Added function documentation for 'sqlite3.Connection().rollback()' to rollback any non-committed transactions back to the baseline
         + Added usages and operational workflow usages for '.rollback()'
+
+### 2024-05-05
+#### 1613H
+- New
+    + Added document 'creating-your-own-rust-project-workspace.md' in 'Docs/DIY/development/environments/' containing documentations on creating a proper, full working rust project structure, ready for development
+    + Added document 'glossary-and-dictionary.md' in 'Docs/Home Lab/' containing terminologies and glossary for Home Lab necessities
+    - Added new directory 'Libraries' in 'Docs/Programming/Languages/Rust/' to store Rust libraries/packages (aka 'crates' in rust)
+        - Added new directory 'built-in' for Rust built-in libraries
+            + Added new document 'std.md' for the Rust built-in standard library
+        - Added new directory 'crates' for Rust external libraries/packages
+            + Added new document 'rng.md' for the Rust Random Number Generator crate
+    - Added new directory 'Packaging-Distribution-and-Deployment/' in 'Docs/Programming/Languages/Rust/'
+        - Added new directory 'cargo/' for documentations on the use of the Cargo package manager for development 
+            + Added new document 'cargo-toml-configuration.md' for documentations on the Cargo.toml configuration
+
+- Updates
+    - Docs/Programming/Languages/Python/Libraries/threading/manual.md
+        + Updated usage example to use the size of the array list for 'number_of_threads'
+        + Separated thread.start() and thread.join()
+    - Docs/Programming/Languages/Rust/Basics/Syntax.md
+        + Updated Rus syntax documentations with improved examples and information
+        + Added header blocks
+        + Modernized layout structure
+    - Docs/Programming/Package Managers/cargo.md
+        + Added new documentations on cargo actions
+        + Added cargo usage and snippets
+        + Added references
 

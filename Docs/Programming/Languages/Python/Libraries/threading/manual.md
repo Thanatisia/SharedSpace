@@ -78,10 +78,11 @@
     from threading import Thread
 
     # Initialize variables
-    number_of_threads = 4
+    argv = []
+    number_of_threads = len(argv)
     threads = []
 
-    # Iterate number_of_threads times
+    # Iterate number_of_threads times and create a thread for every item in the arguments list (to run concurrently)
     for i in range(number_of_threads):
         # Create a new Thread() object
         curr_thread = Thread(target=<function-to-execute>, args=(your, arguments, to, pass, into, function))
@@ -89,11 +90,13 @@
         # Append newly created object into the pool/storage
         threads.append(curr_thread)
 
-    # Iterate through threads pool and start all tasks
+    # Iterate through the list of threads and start all tasks
     for thread in threads:
         # Start all threads
         thread.start()
 
+    # Iterate through the list of threads and wait for the thread to complete before proceeding
+    for thread in threads:
         # Wait for the thread to complete execution before continuing
         thread.join()
     ```
