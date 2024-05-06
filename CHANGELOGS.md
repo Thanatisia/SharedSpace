@@ -1816,3 +1816,9 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'find.md' in 'Docs/Linux/commands/'
         + Added new usage: Find all git directories
 
+#### 2344H
+- Updates
+    - Updated document 'creating-your-own-rust-project-workspace.md' in 'Docs/DIY/development/environments/'
+        - Added new post-installation section 'Install essential utilities'
+            + Added entry 'rust-analyzer : Rust LSP'
+
