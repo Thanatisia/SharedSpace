@@ -91,6 +91,28 @@
         rustup doc
         ```
 
+- Install essential utilities
+    - rust-analyzer : Rust LSP
+        - Notes
+            + For more information, please refer to '[rust-analyzer Setup Guide](Docs/Programming/Languages/Rust/Guides/rust-analyzer/setup.md)'
+        - Using rustup
+            ```bash
+            rustup component add rust-analyzer
+            ```
+        - Using cargo
+            - Clone git repository
+                ```bash
+                git clone https://github.com/rust-lang/rust-analyzer
+                ```
+            - Change directory into local repository
+                ```bash
+                cd rust-analyzer
+                ```
+            - Build and Install LSP server only manually from source
+                ```bash
+                cargo xtask install --server
+                ```
+
 ### Initialize a Rust project workspace
 - Using cargo
     - Create a project directory using cargo

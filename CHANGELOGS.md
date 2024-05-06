@@ -82,6 +82,7 @@
 + [2024-05-01](#2024-05-01)
 + [2024-05-03](#2024-05-03)
 + [2024-05-05](#2024-05-05)
++ [2024-05-06](#2024-05-06)
 
 ## Version History
 ```
@@ -1804,4 +1805,20 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new documentations on cargo actions
         + Added cargo usage and snippets
         + Added references
+
+### 2024-05-06
+#### 2230H
+- New
+    - Added new directory 'rust-analyzer' in 'Docs/Programming/Languages/Rust/Guides/': Contains documentations regarding 'rust-lang/rust-analyzer'
+        + Added new document 'setup.md' : Setup guide
+
+- Updates
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Added new usage: Find all git directories
+
+#### 2344H
+- Updates
+    - Updated document 'creating-your-own-rust-project-workspace.md' in 'Docs/DIY/development/environments/'
+        - Added new post-installation section 'Install essential utilities'
+            + Added entry 'rust-analyzer : Rust LSP'
 
