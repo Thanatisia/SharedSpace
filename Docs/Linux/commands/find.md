@@ -66,6 +66,11 @@ find [directory] {options} <argument> [search-keyword]
     find [directory] -type d -name "folder"
     ```
 
+- Find all git directories
+    ```bash
+    find [directory] -name ".git" -type d
+    ```
+
 - Find files 
     - Using a specific name
         ```console
