@@ -1829,6 +1829,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory for package author 'sharkdp/' in Docs/Linux/packages/Build from Source/packages/' for building sharkdp packages from source
         - Added new directory 'bat' for building 'sharkdp/bat' package from source
             + Added new document 'README.md'
+- Updates
     - Updated document 'package-list.md' in 'Docs/Linux/packages/Build from Source/'
         + Updated package list with 'sharkdp/bat'
 
