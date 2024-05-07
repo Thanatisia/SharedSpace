@@ -83,6 +83,7 @@
 + [2024-05-03](#2024-05-03)
 + [2024-05-05](#2024-05-05)
 + [2024-05-06](#2024-05-06)
++ [2024-05-07](#2024-05-07)
 
 ## Version History
 ```
@@ -1821,4 +1822,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'creating-your-own-rust-project-workspace.md' in 'Docs/DIY/development/environments/'
         - Added new post-installation section 'Install essential utilities'
             + Added entry 'rust-analyzer : Rust LSP'
+
+### 2024-05-07
+#### 2058H
+- New
+    - Added new directory for package author 'sharkdp/' in Docs/Linux/packages/Build from Source/packages/' for building sharkdp packages from source
+        - Added new directory 'bat' for building 'sharkdp/bat' package from source
+            + Added new document 'README.md'
+- Updates
+    - Updated document 'package-list.md' in 'Docs/Linux/packages/Build from Source/'
+        + Updated package list with 'sharkdp/bat'
 
