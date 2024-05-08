@@ -84,6 +84,7 @@
 + [2024-05-05](#2024-05-05)
 + [2024-05-06](#2024-05-06)
 + [2024-05-07](#2024-05-07)
++ [2024-05-08](#2024-05-08)
 
 ## Version History
 ```
@@ -1832,4 +1833,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'package-list.md' in 'Docs/Linux/packages/Build from Source/'
         + Updated package list with 'sharkdp/bat'
+
+### 2024-05-08
+#### 1842H
+- Updates
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Added new usage: Find all git directories and obtain the directory name
 

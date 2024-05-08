@@ -71,6 +71,11 @@ find [directory] {options} <argument> [search-keyword]
     find [directory] -name ".git" -type d
     ```
 
+- Find all git directories and cut/filter out the directory names
+    ```bash
+    find [directory] -name ".git" -type d | cut -d '/' -f2
+    ```
+
 - Find files 
     - Using a specific name
         ```console
