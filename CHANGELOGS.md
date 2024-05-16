@@ -86,6 +86,7 @@
 + [2024-05-07](#2024-05-07)
 + [2024-05-08](#2024-05-08)
 + [2024-05-15](#2024-05-15)
++ [2024-05-16](#2024-05-16)
 
 ## Version History
 ```
@@ -1855,4 +1856,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new attribute to module 'os': '.sep'
         + Added new documentation for function 'os.path.join()'
         + Added new usages for manipulating path
+
+### 2024-05-16
+#### 0946H
+- Updates
+    - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/os/'
+        + Added new function entry for 'os.walk()'
+        + Added new usage for 'os.walk()': Tree Traversal
 
