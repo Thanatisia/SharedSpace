@@ -71,6 +71,20 @@ find [directory] {options} <argument> [search-keyword]
     find [directory] -name ".git" -type d
     ```
 
+- Find all git directories and cut/filter out the directory names, and using rev to obtain the last field
+    - Explanation
+        + `[command-output] | rev` : Reverse the standard output returned by the command
+        - `[command-output] | cut -d '/' -f1` : Pipe the reversed standard output string stream into cut as a standard input to split the string by the specified delimiter/separator.
+            + After splitting, obtain the first column (aka field) of every line of the list
+            - However, because the data is the reverse of the initial command output stream, 
+                + '-f1' will give you the last element of the list
+                + '-f2' will give you the second last element of the list, etc etc
+                + Essentially, '-fN' will give you the Nth last element of the list (backwards) instead of forwards
+        + `[command-output] | rev` : Reverse the characters of the new standard output backwards to revert back to the original structure
+    ```bash
+    find [directory] -name ".git" -type d | rev | cut -d '/' -f1 | rev
+    ```
+
 - Find files 
     - Using a specific name
         ```console

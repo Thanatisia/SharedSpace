@@ -32,11 +32,14 @@ OS is a built-in python library to provide a portable way of handling Operating 
 ### Variables
 - os
     - .name : Returns the name of the Operating System-dependent module import
+        + Type: String
         - Notes
             + Similar to 'sys.platform' or the 'platform' module
         - Examples
             + posix : For UNIX/Linux systems
             + nt : For Windows (NT) systems
+    - .sep : Returns the path separator for the detected operating system (i.e. '/' for Linux, '\' for Windows)
+        + Type: String
 
 ### Functions
 
@@ -53,7 +56,18 @@ OS is a built-in python library to provide a portable way of handling Operating 
             - env_variable_key : The Environment Variable to get
                 + Type : String
         + Return Type: String
-      
+
+- os.path
+    - `.join(src_path, additional_paths, ...)` : Joins the additional paths specified to the source path with the path separated based on the host operating system
+        - Parameter Signature/Header
+            - src_path : Specify the root top-level directory path
+                + Type: String
+            - additional_paths : Variable-Length; Specify all additional paths you wish to append to the back of the top-level directory
+                + Type: String
+        - Return
+            - path : The combined path of the source and the additional paths
+                + Type: String
+
 ### Usage
 - Get Environment Variables
     ```python
@@ -120,6 +134,25 @@ OS is a built-in python library to provide a portable way of handling Operating 
 
             # perform statements here
         ```
+
+- To obtain the detected operating system's path separator
+    - Notes
+        + Linux: "top-level-directory-path/additional/paths"
+        + Windows: "top-level-directory-path\additional\paths"
+    ```python
+    separator = os.sep
+    ```
+
+- Join paths
+    - Explanation
+        - The below will return 
+            + Linux: "top-level-directory-path/additional/paths"
+            + Windows: "top-level-directory-path\additional\paths"
+    ```python
+    import os
+
+    path = os.path.join("top-level-directory-path", "additional", "paths")
+    ```
 
 ## Wiki
 

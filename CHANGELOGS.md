@@ -84,6 +84,8 @@
 + [2024-05-05](#2024-05-05)
 + [2024-05-06](#2024-05-06)
 + [2024-05-07](#2024-05-07)
++ [2024-05-08](#2024-05-08)
++ [2024-05-15](#2024-05-15)
 
 ## Version History
 ```
@@ -1832,4 +1834,25 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'package-list.md' in 'Docs/Linux/packages/Build from Source/'
         + Updated package list with 'sharkdp/bat'
+
+### 2024-05-08
+#### 1842H
+- Updates
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Added new usage: Find all git directories and obtain the directory name
+
+### 2024-05-15
+#### 1456H
+- New
+    + Added new document 'git-mass-pull.md' in 'Docs/Git/scripts/': Documentation on implementing 'git-mass-pull.sh' and how it works
+
+- Updates
+    - Updated document 'cut.md' in 'Docs/Linux/commands/'
+        + Added new usage: Using alongside rev to obtain the last fields instead of the first by reversing the strings
+    - Updated document 'find.md' in 'Docs/Linux/commands/'
+        + Updated usage: Find all git directories and obtain the directory name, then using rev to obtain the last elements of the path
+    - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/os/'
+        + Added new attribute to module 'os': '.sep'
+        + Added new documentation for function 'os.path.join()'
+        + Added new usages for manipulating path
 
