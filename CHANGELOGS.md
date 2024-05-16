@@ -1868,3 +1868,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     + Added new document 'multithreaded-command-execution.md' in 'Docs/Programming/Languages/Python/Examples/Code-Snippets/' for Multithreaded system command execution
 
+#### 1831H
+- New
+    - Added new directory for plugin 'oil.nvim' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/docs/'
+        + Added new document 'README.md
+- Updates
+    - Updated document 'packages-list.md' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/docs/'
+        + Added new plugin entry 'stevearc/oil.nvim'
+
