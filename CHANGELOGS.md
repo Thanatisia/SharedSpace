@@ -87,6 +87,7 @@
 + [2024-05-08](#2024-05-08)
 + [2024-05-15](#2024-05-15)
 + [2024-05-16](#2024-05-16)
++ [2024-05-17](#2024-05-17)
 
 ## Version History
 ```
@@ -1875,4 +1876,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'packages-list.md' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/docs/'
         + Added new plugin entry 'stevearc/oil.nvim'
+
+### 2024-05-17
+#### 1452H
+- Updates
+    - Updated document 'jq.md' in 'Docs/Linux/packages/'
+        + Added usage to retrieve/list all elements/items in an array/arraylist/list
 
