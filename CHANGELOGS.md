@@ -86,6 +86,9 @@
 + [2024-05-07](#2024-05-07)
 + [2024-05-08](#2024-05-08)
 + [2024-05-15](#2024-05-15)
++ [2024-05-16](#2024-05-16)
++ [2024-05-17](#2024-05-17)
++ [2024-05-20](#2024-05-20)
 
 ## Version History
 ```
@@ -1855,4 +1858,49 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new attribute to module 'os': '.sep'
         + Added new documentation for function 'os.path.join()'
         + Added new usages for manipulating path
+
+### 2024-05-16
+#### 0946H
+- Updates
+    - Updated document 'manual.md' in 'Docs/Programming/Languages/Python/Libraries/os/'
+        + Added new function entry for 'os.walk()'
+        + Added new usage for 'os.walk()': Tree Traversal
+
+#### 1009H
+- New
+    + Added new document 'multithreaded-command-execution.md' in 'Docs/Programming/Languages/Python/Examples/Code-Snippets/' for Multithreaded system command execution
+
+#### 1831H
+- New
+    - Added new directory for plugin 'oil.nvim' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/docs/'
+        + Added new document 'README.md
+- Updates
+    - Updated document 'packages-list.md' in 'Docs/Programming/Vim/Distros/Neovim/Plugins/docs/'
+        + Added new plugin entry 'stevearc/oil.nvim'
+
+### 2024-05-17
+#### 1452H
+- Updates
+    - Updated document 'jq.md' in 'Docs/Linux/packages/'
+        + Added usage to retrieve/list all elements/items in an array/arraylist/list
+
+### 2024-05-20
+#### 1443H
+- New
+    - Added new directory 'Tutorials' in 'Docs/Programming/Languages/Rust/' for Rust Tutorials to concepts and topics
+        - Added new directory 'Topics' for Rust Topics
+            - Added new directory 'Iteration' for Rust Iteration of iterable/loopable container objects
+                + Added new document 'for-loop.md' for documentation on Rust 'for' keyword
+
+- Updates
+    - Docs/Programming/Languages/Rust/Libraries/built-in/std.md
+        - Added documentation on Rust (sub)process command execution
+            - Classes and Objects
+                + '::process'
+                + '::Command'
+            + Snippet/Usage of command subprocess execution in Rust
+        + Added new snippet/usage on checking the platform/operating system
+        - Added documentation on new Rust standard library functions
+            + '.to_string()'
+
 

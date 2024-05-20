@@ -49,6 +49,27 @@ OS is a built-in python library to provide a portable way of handling Operating 
         - Return
             - pid : The current process's ID
                 + Type: Integer
+    - `.walk(top_level_dir)` : Walk through all directories and subdirectories starting from the root/top-level directory down the tree
+        - Parameter Signature/Header
+            - top_level_dir : Specify the top level root directory to start the digging from
+                + Type: String
+                - Explanation
+                    - python will dig and traverse through every branch (directory) and 
+                        + store the current branch's directory name into index [0] of the current branch's list entry
+                        + store every subbranches (subdirectories) into index [1] of the current branch's list entry
+                        + store every file contents in the current branch into index [2] of the current branch's list entry
+        - Return
+            - tree_contents : os.walk() will return a list of tuples where each tuple is
+                - Type: Iterable<tuple<String, List, List>>
+                - Contents
+                    1. Current path
+                        + Type: String
+                    2. Nested subdirectories in directory branch
+                        + Type: Tuple
+                    3. Files in directory branch
+                        + Type: Tuple
+        - Notes
+            + Convert the returned object into a list using `list(os.walk(top_level_dir))` to manage the generator object as a list
 
 - os.environ
     - .get(env_variable_key) : Get value of the Environment Variable
@@ -152,6 +173,43 @@ OS is a built-in python library to provide a portable way of handling Operating 
     import os
 
     path = os.path.join("top-level-directory-path", "additional", "paths")
+    ```
+
+- Tree Traversal 
+    - Explanation
+        + Walk through all directories and subdirectories starting from the root/top-level directory down the tree
+        - os.walk() will return a list of tuples where each tuple is
+            + [0] = String, Current path
+            + [1] = Tuple, Nested subdirectories in directory branch
+            + [2] = Tuple, Files in directory branch
+    ```python
+    import os
+
+    # Initialize Variables
+    tree_branch_mappings = {
+        # path : { directories : [subdirectories in current directory], files : [files in current directory], },
+    }
+    top_level_dir = "."
+
+    # Begin walking through the tree and navigate through all nested directories and subdirectories and the files within
+    tree_iterable = list(os.walk(top_level_dir))
+
+    # Iterate through tree iterable
+    for i in range(len(tree_iterable)):
+        # Get current branch
+        curr_branch = tree_iterable[i]
+
+        # Get branch tuple objects
+        curr_path = curr_branch[0]
+        curr_dir_dirs = curr_branch[1]
+        curr_dir_files = curr_branch[2]
+
+        # Check if path is in mapping
+        if curr_path not in tree_branch_mappings:
+            tree_branch_mappings[curr_path] = {"directories" : curr_dir_dirs, "files" : curr_dir_files}
+ 
+    # Output
+    return tree_branch_mappings
     ```
 
 ## Wiki

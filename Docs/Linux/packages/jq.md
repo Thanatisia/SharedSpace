@@ -99,6 +99,11 @@ jq (JSON Query) is a JSON Parser CLI utility that will take a JSON string as inp
     jq .[key] < [file-name]
     ```
 
+- To list all elements/items in an array/arraylist/list
+    ```bash
+    jq '.key[]'
+    ```
+
 - To select a specific value of a key from a JSON (Key-Value) entry without the raw string quotes
     ```console
     jq -r .[key] < [file-name]
@@ -241,6 +246,7 @@ jq (JSON Query) is a JSON Parser CLI utility that will take a JSON string as inp
 ## Wiki
 
 ## Resources
++ [StackOverflow - Questions - 45523425 - Getting all the values of an array with jq](https://stackoverflow.com/questions/45523425/getting-all-the-values-of-an-array-with-jq)
 
 ## References
 + [YouTube - ThePrimeTime - The BEST CLI Tool](https://www.youtube.com/watch?v=n8sOmEe2SDg)

@@ -12,6 +12,7 @@
 - std
     - `::cmp` : Standard comparison library
     - `::io` : Standard Input-Output operations library
+    - `::process` : Standard (sub)process pipe/system command execution functions library
 
 ### Classes
 - std::io
@@ -36,12 +37,19 @@
         + Greater
         + Equal
 + `std::io::Stdin` : Data type that represents a handle to the standard input for your terminal
+- `std::process`
+    - `::Command` : Process builder that when initialized, will return a `std::process:Command` structure that contains information relating to system command/(sub)process that you wish to execute as well as the arguments
+        + Type: Result
 
 ### Functions
 - std
     - `println(str)` : Print a new line
         - Parameter Signature/Header
             + str : Print the specified message to the standard output
+    - `.to_string()` : Convert an object to String
+        - Return
+            - res : Return the converted string object
+                + Type: str
 - std::io::stdin()
     - `.read_line(buffer)` : Read the line received by the standard input stream and store the result in the specified buffer (memory container - i.e. the memory address pointing to a String variable)
         + Type: Bytes
@@ -49,6 +57,54 @@
         - Return
             - Result : besides storing the value into the String container, the function will also return a Results enumeration (enum) value
                 + Type: enum.Result
+- std::process::Command
+    - `::new(command_string)` : Initialize a new 'Command' structure object with the specified command to be executed
+        - Parameter Signature/Header
+            - command_string : Specify the command string you would like to execute in the subprocess pipe
+                + Type: String
+        - Return
+            - command : The Command process builder structure containing the command string to be executed
+                + Type: Command
+    - `.args(argument_list)` : Specify list of arguments you wish to pass into the structure to be executed with the command
+        - Parameter Signature/Header
+            - argument_list : Specify an array/arraylist/list of arguments to be passed into the Command structure to be executed by the process
+                + Type: Array/ArrayList/List
+                - Notes
+                    + Please place all your arguments as a new element in the list
+        - Return
+            - command : The modified Command process builder structure with the appended arguments
+                + Type: Command
+    - `.arg(argument_string)` : Specify an argument string you wish to pass into the structure to be executed with the command; Append this behind the Command process object to add to the command
+        - Parameter Signature/Header
+            - argument_string : Specify an argument string containing all the arguments and values you wish to be passed into the Command structure to be executed by the process
+                + Type: String
+        - Return
+            - command : The modified Command process builder structure with the appended argument
+                + Type: Command
+    - `.current_dir(new_path)` : Specify and sets the new path you want to change the current subprocess execution context/path to. The process will execute the command and arguments in this new path
+        - Parameter Signature/Header
+            - new_path : Specify the new path you wish to change to and execute the command in
+                + Type: String
+        - Return
+            - command : The modified Command process builder structure with the new path
+                + Type: Command
+    - `.get_current_dir()` : Returns the working directory for the child process
+        - Return
+            - curr_dir : The returned working directory of the current child process; This returns None if the working directory will not be changes
+                + Type: Option<&Path> | None
+    - `.status()` : Executes a command as a child process, wait for it to finish then collecting its status code (aka return code, retcode or result code)
+        - Return
+            - status_code : The returned status code after the process has been completed (Polling has stopped and a status code has been returned)
+                + Type: Result<ExitStatus>
+    - `.output()` : Executes the command as a child process, wait for it to finish then returns all of its output
+        - Return
+            - proc_out : Returned process output
+                + Type: Result<Output>
+    - `.spawn()` : Executes the command as a child process, wait for it to finish then returns a handle to it
+        - Return
+            - proc_out : Returned process output
+                + Type: Result<Child>
+
 - enum.Result
     - `.expect(error_message)` : Function used for Exception handling (try catch) where when an exception is triggered, the program will crash and an error message will be printed
         - Parameter Signature/Header
@@ -78,6 +134,12 @@
                 + Type: String
 
 ### Attributes/Variables
+- std::process::Command 
+    - Result<Output>
+        - `.stdout` : Obtain the standard output from the executed subprocess, or the statements in the block of statements
+            + Type: String
+        - `.status` : Return the status of the output
+            + Type: Integer
 
 ### Usage
 - Initialize a new string object and make it mutable (in rust, variables are immutable by default)
@@ -102,6 +164,13 @@
     - Unsigned 64-bit Integer/Number
         ```rust
         let variable_number: u64 = str.trim().parse().expect("Please type a number!");
+        ```
+
+- Convert an object into String (Polymorphism)
+    - Integer
+        ```rust
+        // Convert number into string
+        let num_as_string = num.to_string();
         ```
 
 ### Operational Workflow
@@ -129,10 +198,163 @@
         let variable_number: u64 = variable_name.trim().parse().expect("Please type a number!");
         ```
 
+- Check if Operating System is Windows/UNIX-based
+    - Explanation
+        - `let output = if cfg!(target_os = "windows")` : Check if the target platform is Windows
+            + If it is, Execute windows-based commands
+            - If it is not, the operating system is *NIX based (UNIX, Linux, MacOS)
+                + Execute *NIX-based commands
+        - `let res = output.stdout`
+            + The variable 'output' (type <Result>) will contain the result of the statements that are executed within the macro/operation bracket
+            + To obtain the standard outputs returned by the statements, access the `Result.stdout` property/attribute/variable
+    ```rust
+    /* Operating System/Platform-specific checks */
+
+    // Check if Operating System is Windows
+    let output = if cfg!(target_os = "windows") {
+        // Is Windows
+        // ...
+    } else {
+        // Not Windows
+        // ...
+    }
+
+    // Obtain the standard output of the result
+    let res = output.stdout;
+    ```
+
+- Create a new process for system command execution
+    - Import dependencies
+        ```rust
+        // Import Command structure
+        use std::process::Command;
+        ```
+    - Initialize a new Command structure object 
+        ```rust
+        let mut proc:Result = Command::new("your-cmd-here")
+        ```
+    - Append arguments to be executed with the command
+        - For a command with multiple arguments specified in a list
+            ```rust
+            proc.args(["place", "your", "arguments", "here"]);
+            ```
+        - For a command with multiple arguments specified in a string
+            ```rust
+            proc.arg("option 1").arg("option 2");
+            ```
+    - Execute the command and return the results
+        ```rust
+        let proc_res:Result = proc.output().expect("Failed to execute process");
+        ```
+    - Obtain the standard output from the result
+        ```rust
+        let stdout = proc_res.stdout;
+        ```
+
+- subprocess Command execution structure examples
+    - Initialize a new Command structure object for a command with multiple arguments
+        - Explanation
+            - Note that this uses '.args([])' instead of '.arg("")'
+                + `.args([])` will take in a list containing all arguments and values you wish to pass to the command
+                + `.arg("")` will take in a string containing the arguments and values in 1 string
+                + Using `.args([])` basically allows for sanitized standard input arguments instead of raw string which makes formatting/sanitization difficult
+            - `Command` can be reused to spawn multiple processes
+                + The builder methods change the command without needing to immediately spawn the process.
+        ```rust
+        // Initialize a new Command structure object for a single command with multiple arguments specified in a list
+        let mut proc:Result = Command::new("your-cmd-here")
+
+        // Append arguments to be executed with the command
+        proc.args(["place", "your", "arguments", "here"]);
+
+        // Execute the command and return the results
+        let proc_res:Result = proc.output().expect("Failed to execute process");
+
+        // Obtain the standard output
+        let stdout = proc_res.stdout;
+        ```
+    - Initialize a new Command structure object for parsing/passing string arguments
+        - Explanation
+            - Note that this uses '.arg("")' instead of '.args([])'
+                + `.args([])` will take in a list containing all arguments and values you wish to pass to the command
+                + `.arg("")` will take in a string containing the arguments and values in 1 string
+                - Using `.args([])` basically allows for sanitized standard input arguments instead of raw string which makes formatting/sanitization difficult
+                    + However, `.arg("")` contains better readability
+        ```rust
+        // Initialize a new Command structure object for a single command with multiple arguments specified in a list
+        let mut proc:Result = Command::new("your-cmd-here")
+
+        // Append arguments to be executed with the command
+        proc.arg("option 1").arg("option 2");
+
+        // Execute the command and return the results
+        let proc_res:Result = proc.output().expect("Failed to execute process");
+
+        // Obtain the standard output
+        let stdout = proc_res.stdout;
+        ```
+    - Initialize a new Command structure object for a shell executing options and commands
+        - Explanation
+            - Note that this uses '.arg("")' instead of '.args([])'
+                + `.args([])` will take in a list containing all arguments and values you wish to pass to the command
+                + `.arg("")` will take in a string containing the arguments and values in 1 string
+            - `Command::new("your-cmd-here").arg("sh").arg("echo hello world").output().expect()`
+                - This line will perform the following
+                    1. Create a new Command subprocess pipe executing the command provided.
+                    2. The arguments appended will be passed into the command pipe and appended to the command string to be executed as a whole
+                    3. The command with the arguments and values will finally be executed
+                    4. If any exceptions were encountered
+                        + Print 'Failed to execute process'
+            + `let stdout = output.stdout;` : Obtain the standard output from the subprocess pipe
+        ```rust
+        // Initialize a new Command structure object for a shell executing options and commands
+        let mut proc = Command::new("your-cmd-here")
+
+        // Append arguments to be executed with the command
+        proc.arg("sh").arg("-c").arg("echo hello world");
+
+        // Execute the command and return the results
+        let proc_res:Result = proc.output().expect("Failed to execute process");
+
+        // Obtain the standard output
+        let stdout = proc_res.stdout;
+        ```
+
+- Subprocess command execution snippets
+    - Execute 'ls' in the current working directory
+        ```rust
+        // Initialize a new Command structure object for a shell executing options and commands
+        let mut proc = Command::new("ls")
+
+        // Execute 'ls' in the current working directory
+        proc.status().expect("Process failed to execute");
+        ```
+    - Calling builder methods after spawning a process and then spawn a new process with the modified settings
+        - Initialize a new Command structure object for a shell executing options and commands
+            ```rust
+            // Initialize a new Command structure object for a shell executing options and commands
+            let mut proc = Command::new("ls")
+            ```
+        - Execute 'ls' in the current working directory
+            ```rust
+            proc.status().expect("Process failed to execute");
+            ```
+        - Modify settings of the Command process
+            ```rust
+            // Change `ls` to execute in the root directory.
+            proc.current_dir("/");
+            ```
+        - Execute `ls` again but in the root directory.
+            ```rust
+            proc.status().expect("Process failed to execute");
+            ```
+
 ## Resources
 
 ## References
 + [Rust Book - Chapter 2.0 - Programming a Guessing Game](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html)
++ [Rustjobs - blog - Converting an int to String in Rust](https://rustjobs.dev/blog/convert-int-to-string-in-rust/)
++ [Rustlang Documentations - Library - std - process - struct.Command](https://doc.rust-lang.org/std/process/struct.Command.html)
 
 ## Remarks
 
