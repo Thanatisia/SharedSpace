@@ -89,6 +89,7 @@
 + [2024-05-16](#2024-05-16)
 + [2024-05-17](#2024-05-17)
 + [2024-05-20](#2024-05-20)
++ [2024-05-22](#2024-05-22)
 
 ## Version History
 ```
@@ -1903,4 +1904,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added documentation on new Rust standard library functions
             + '.to_string()'
 
+### 2024-05-22
+#### 1025H
+- New
+    - Added new directory 'Open-Source-Software' in 'Docs/Software/'
+        - Added new directory 'projects/'
+            - Added new directory 'rclone'
+                + Added new document 'README.md'
 
