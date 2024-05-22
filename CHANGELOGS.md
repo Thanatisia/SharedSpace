@@ -1912,3 +1912,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             - Added new directory 'rclone'
                 + Added new document 'README.md'
 
+#### 1449H
+- Updates
+    - Updated document 'README.md'  in 'Docs/Software/Open-Source-Software/projects/rclone/'
+        + Added new parameters and usages for listing and filters
+

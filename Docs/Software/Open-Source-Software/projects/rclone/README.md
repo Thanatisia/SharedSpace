@@ -19,6 +19,11 @@
         ...
         ```
 
+### rclone configuration file settings
+- your-remote-session-id : Each new `[section/header blocks]` represents the remote platform's profile in your configuration. Each profile contains key-value setting mappings to the server side information (i.e. title, configurations)
+    - Key-Value Settings
+        + `server_side_across_configs = [true|false]` : Enable/Disable I/O operations between remote server sessions
+
 ## Setup
 ### Dependencies
 
@@ -75,24 +80,79 @@
                             + Type: String
                 - Notes
                     + Leave 'target-directory' empty if you wish to copy everything from the root as the top-level directory
-            - `ls [remote-id]:{target-directory}` : List all files in the server mapped to the specified remote-id starting from 'target-directory'
+            - `move [source] [destination]` : Move files from the source to the destination path of your specification
                 - Parameters
                     - Positionals
-                        - remote-id : This remote id refers to the remote target (added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file) corresponding to a remote server profile that you wish to mount on your local directory
+                        - source : Specify the source directory you wish to move
+                            + Local: /path/to/local/clone/directory
+                            - Remote Platform: [remote-id]:{target-directory}
+                                + Leave 'target-directory' empty if you wish to move everything from the root as the top-level directory (Not Recommended)
+                        - destination : Specify the target destination directory you wish to move into
+                            + Local: /path/to/local/clone/directory
+                            - Remote Platform: [remote-id]:{target-directory}
+                                + Leave 'target-directory' empty if you wish to move everything from the root as the top-level directory (Not Recommended)
+                    - Optionals
+                        - With Arguments
+                            + `--files-from [files-list]` : Move only files specified inside the provided file 'files-list' containing a list of all files to move
+                        - Flags
+            - `ls [remote-id]:{target-directory}` : List all files and directories in the server mapped to the specified remote-id starting from 'target-directory'
+                - Parameters
+                    - Positionals
+                        - remote-id : This remote id refers to the remote target (added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file) corresponding to a remote server profile that you wish to list
                             + Type: String
                         - target-directory : Specify a target top-level root directory you wish to start the listing/searching from
                             + Type: String
                             - Notes
                                 + Leave 'target-directory' empty if you wish to copy everything from the root as the top-level directory
+                - Optionals
+                    - With Arguments
+                    - Flags
+                        + --human-readable : Print the size output as human readable format (i.e. 1024 = 1KiB)
             - `lsd [remote-id]:{target-directory}` : List all directories in the server mapped to the specified remote-id starting from 'target-directory'
                 - Parameters
                     - Positionals
-                        - remote-id : This remote id refers to the remote target (added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file) corresponding to a remote server profile that you wish to mount on your local directory
+                        - remote-id : This remote id refers to the remote target (added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file) corresponding to a remote server profile that you wish to list
                             + Type: String
                         - target-directory : Specify a target top-level root directory you wish to start the listing/searching from
                             + Type: String
                             - Notes
                                 + Leave 'target-directory' empty if you wish to copy everything from the root as the top-level directory
+            - `lsf [remote-id]:{target-directory}` : List all files in the server mapped to the specified remote-id starting from 'target-directory'
+                - Parameters
+                    - Positionals
+                        - remote-id : This remote id refers to the remote target (added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file) corresponding to a remote server profile that you wish to list
+                            + Type: String
+                        - target-directory : Specify a target top-level root directory you wish to start the listing/searching from
+                            + Type: String
+                            - Notes
+                                + Leave 'target-directory' empty if you wish to copy everything from the root as the top-level directory
+            - `lsl [remote-id]:{target-directory}` : List all files in the server mapped to the specified remote-id starting from 'target-directory' but list only the modification time, size and path of the objects
+                - Parameters
+                    - Positionals
+                        - remote-id : This remote id refers to the remote target (added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file) corresponding to a remote server profile that you wish to list
+                            + Type: String
+                        - target-directory : Specify a target top-level root directory you wish to start the listing/searching from
+                            + Type: String
+                            - Notes
+                                + Leave 'target-directory' empty if you wish to copy everything from the root as the top-level directory
+                - Optionals
+                    - With Arguments
+                        + `--min-size [minimum-size]` : Filter all files found to be at least more than the specified minimum-size
+                    - Flags
+                        + --human-readable : Print the size output as human readable format (i.e. 1024 = 1KiB)
+            - `size [remote-id]:{target-directory}` : Obtains and prints the total size and number of objects in the given `remote:path`
+                - Parameters
+                    - Positionals
+                        - remote-id : This remote id refers to the remote target (added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file) corresponding to a remote server profile that you wish to find the size to
+                            + Type: String
+                        - target-directory : Specify a target top-level root directory you wish to start the listing/searching from
+                            + Type: String
+                            - Notes
+                                + Leave 'target-directory' empty if you wish to copy everything from the root as the top-level directory
+                - Optionals
+                    - With Arguments
+                    - Flags
+                        + --json : Format output as JSON
             - `sync [source] [destination]` : Sync the specified source directory to the destination directory
                 - Parameters
                     - Positionals
@@ -116,13 +176,14 @@
                 - configuration-file-path : Specify the custom configuration file path
                     + Type: String
     - Flags
-        + -P : Optional argument to display progress of the copy
+        + -P | --progress : Optional argument to display progress of the copy
+        + --progress-terminal-title : Use the terminal as the progress bar title
         - Platform-specific
             - Google Drive
                 + --drive-shared-with-me : Only show files that are shared with me. Instructs rclone to operate on your "Shared with me" folder (where Google Drive lets you access the files and folders others have shared with you).
 
 ### Usage
-- List all files in a remote source
+- List all files and directories in a remote source
     - Explanation
         + remote-id : This remote id refers to the remote target added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file
         - /path/to/files : This refers to the source directory in the remote session you wish to list from as the top-level root directory
@@ -130,6 +191,38 @@
                 + Leave this empty if you wish to copy everything from the root as the top-level directory
     ```bash
     rclone ls [remote-id]:/path/to/files >> drive-contents-yyyymmdd-HHMMSS.log
+    ```
+
+- List all files in a remote source
+    - Explanation
+        + remote-id : This remote id refers to the remote target added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file
+        - /path/to/files : This refers to the source directory in the remote session you wish to list from as the top-level root directory
+            - Notes
+                + Leave this empty if you wish to copy everything from the root as the top-level directory
+    ```bash
+    rclone lsf [remote-id]:/path/to/files >> drive-contents-yyyymmdd-HHMMSS.log
+    ```
+
+- List all files with only the modification time, size and path of the objects
+    - Explanation
+        + `--min-size [minimum-size]` : Filter all files found to be at least more than the specified minimum-size
+        + remote-id : This remote id refers to the remote target added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file
+        - /path/to/files : This refers to the source directory in the remote session you wish to list from as the top-level root directory
+            - Notes
+                + Leave this empty if you wish to copy everything from the root as the top-level directory
+    ```bash
+    rclone lsl [remote-id]:/path/to/files
+    ```
+
+- List all files bigger than a certain size with only the modification time, size and path of the objects
+    - Explanation
+        + `--min-size [minimum-size]` : Filter all files found to be at least more than the specified minimum-size
+        + remote-id : This remote id refers to the remote target added into your ['$HOME'/'%APPDATA%]']/rclone/rclone.conf configuration file
+        - /path/to/files : This refers to the source directory in the remote session you wish to list from as the top-level root directory
+            - Notes
+                + Leave this empty if you wish to copy everything from the root as the top-level directory
+    ```bash
+    rclone lsl --min-size [minimum-size] [remote-id]:/path/to/files
     ```
 
 - List all directories in Google Drive
@@ -204,6 +297,11 @@
 - List all files in Google Drive
     ```bash
     rclone ls clone-google-drive: >> drive-contents-yyyymmdd-HHMMSS.log
+    ```
+
+- List all files bigger than a certain size with only the modification time, size and path of the objects
+    ```bash
+    rclone lsl --min-size [minimum-size] clone-google-drive:
     ```
 
 - List all directories in Google Drive
