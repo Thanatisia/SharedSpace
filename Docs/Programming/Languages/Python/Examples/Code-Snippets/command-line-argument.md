@@ -268,6 +268,151 @@ However, it is actually possible to create your own command line argument suppor
         main()
     ```
 
+- Command Line Argument Parser with default values set if no values are provided to the argument
+    - parsing example
+        - Explanation
+            + If 'value' is left out, a default value will be provided
+        ```bash
+        command --optional {value}
+        ```
+    ```python
+    def init():
+        global argparser
+
+        # Initialize Variables
+        argparser = {
+            "positionals" : [],
+            "optionals" : {
+                "with-arguments" : {},
+                "flags" : {}
+            }
+        }
+
+    def get_cli_arguments():
+        """
+        Get and parse CLI arguments provided by users
+        """
+        global argparser
+
+        # Initialize Variables
+
+        # Get CLI arguments
+        exec = sys.argv[0]
+        argv = sys.argv[1:]
+        argc = len(argv)
+
+        # Iterate through all CLI arguments and format into the arguments parser
+        i:int = 0
+        while i < argc:
+            # Get current argument
+            curr_arg:str = argv[i]
+
+            # Match/switch case the current argument
+            match curr_arg:
+                ## Optional Flags
+                case "-<short-form>" | "--<long-form>":
+                    """
+                    Replace this with any option that requires a subargument
+                    """
+                    # Optional argument with values required
+                    ## Get next index
+                    next_idx = i+1
+                    ## Check if next argument value is provided
+                    if next_idx <= (argc-1):
+                        # Next index is not last element
+                        next_element = argv[next_idx]
+
+                        # Data Validation: Check if a filter value is specified
+                        if next_element != "":
+                            # Data Validation: Check Condition is met
+                            if ([your-condition-here] == True):
+                                # Accepted Filter
+                                # Map the optional to the argument keyword corresponding to this option
+                                argparser["optionals"]["with-arguments"]["argument-id-here"] = next_element
+
+                                # Increment index counter by 1 to jump to the subsequent element
+                                i += 1
+                            else:
+                                # Map the optional to the default value
+                                argparser["optionals"]["with-arguments"]["argument-id-here"] = default_value_here
+                        else:
+                            # Empty value: set to default
+                            # Map the optional to the default value
+                            argparser["optionals"]["with-arguments"]["argument-id-here"] = default_value_here
+                    else:
+                        # Argument not provided
+                        # Map the optional to the default value
+                        argparser["optionals"]["with-arguments"]["argument-id-here"] = default_value_here
+                ## Optional With Arguments
+                case "-<short-form>" | "--<long-form>":
+                    # Enable/Disable a flag (boolean value)
+                    argparser["optionals"]["flags"]["argument-id-here"] = True|False
+                case _:
+                    # Default: Positional
+                    argparser["positionals"].append(curr_arg)
+
+            # Increment index counter and go to the next element
+            i += 1
+
+        # Output/Return
+        return argparser
+
+    def main():
+        """
+        Perform Pre-Initialization Setup
+        """
+        init()
+
+        """
+        Get CLI arguments
+        """
+        argparser = get_cli_arguments()
+
+        """
+        Extract CLI arguments as necessary
+        """
+        positionals = argparser["positionals"]
+        optionals = argparser["optionals"]
+        opt_with_args = optionals["with-arguments"]
+        opt_with_args_Keys = list(opt_with_args.keys())
+        opt_Flags = optionals["flags"]
+        opt_flags_Keys = list(opt_Flags.keys())
+        number_of_pos = len(positionals)
+        number_of_opt = len(optionals)
+
+        if ("verbose" in opt_flags_Keys):
+            if opt_Flags["verbose"]:
+                pprint_info(argparser)
+                pprint_info(opt_with_args_Keys)
+
+        """
+        Process obtained CLI arguments
+        """
+        ## Iterate through the optional categories
+        for opt_category_key, opt_category_values in optionals.items():
+            for opt_name, opt_value in opt_category_values.items():
+                # Switch case and check values
+                match opt_name:
+                    case "argument-id-here":
+                        ## Perform actions here
+                        exit(0)
+                    case opt_name if not (opt_name in list(opt_category_values.keys())):
+                        ## Default: If current option is not in the list
+                        print("Invalid optional provided in category [{}]: {}={}".format(opt_category_key, opt_name, opt_value))
+
+        """
+        Process obtained positional arguments
+        """
+        for i in range(number_of_pos):
+            # Get current positional
+            curr_pos = positionals[i]
+
+            # Do what you need with the current positional
+
+    if __name__ == "__main__":
+        main()
+    ```
+
 - Entry point/main runner
     - Notes
         + Checks if the script is being called, and not being imported/sourced as a module/library/class

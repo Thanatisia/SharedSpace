@@ -90,6 +90,7 @@
 + [2024-05-17](#2024-05-17)
 + [2024-05-20](#2024-05-20)
 + [2024-05-22](#2024-05-22)
++ [2024-05-23](#2024-05-23)
 
 ## Version History
 ```
@@ -1916,4 +1917,17 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'README.md'  in 'Docs/Software/Open-Source-Software/projects/rclone/'
         + Added new parameters and usages for listing and filters
+
+### 2024-05-23
+#### 2028H
+- Updates
+    - Updated document 'command-line-argument.md' in 'Docs/Programming/Languages/Python/Examples/Code-Snippets/'
+        + Added new snippet for setting up a CLI argument parser manually with default value setting when passing an optional argument (i.e. '--opt {value}')
+    - Updated document 'cli-argument-parsing.md' in 'Docs/Programming/Languages/Python/wiki/'
+        - Added explanation for the updated structuring of the CLI argument parsing process
+            + This updated structure includes ability to set a default value if user passed an incorrect value to the flag/optional argument
+            - The pointer index will only jump to the next element in the arguments list if the value provided is valid
+                - Hence, if the next index contains an optional argument and not a value,
+                    + it will not skip the next element and read the following optional argument properly
+        + Added new snippet for setting up a CLI argument parser manually with default value setting when passing an optional argument (i.e. '--opt {value}')
 
