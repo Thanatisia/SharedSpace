@@ -91,6 +91,7 @@
 + [2024-05-20](#2024-05-20)
 + [2024-05-22](#2024-05-22)
 + [2024-05-23](#2024-05-23)
++ [2024-05-25](#2024-05-25)
 
 ## Version History
 ```
@@ -1930,4 +1931,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
                 - Hence, if the next index contains an optional argument and not a value,
                     + it will not skip the next element and read the following optional argument properly
         + Added new snippet for setting up a CLI argument parser manually with default value setting when passing an optional argument (i.e. '--opt {value}')
+
+### 2024-05-25
+#### 0028H
+- New
+    - Added new directory 'lua' in 'Docs/Programming/Language-Server-Packs/Languages' 
+        - Added new directory 'lua-language-server' for the lua-language-server lua LSP server
+            + Added new document 'README.md' containing the setup/build from source guide
+    - Added new directory 'rust' in 'Docs/Programming/Language-Server-Packs/Languages' 
+        - Added new directory 'rust-analyzer' for the rust-analyzer Rust LSP server
+            + Added new document 'README.md' containing the setup/build from source guide
 
