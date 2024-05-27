@@ -89,6 +89,10 @@
 + [2024-05-16](#2024-05-16)
 + [2024-05-17](#2024-05-17)
 + [2024-05-20](#2024-05-20)
++ [2024-05-22](#2024-05-22)
++ [2024-05-23](#2024-05-23)
++ [2024-05-25](#2024-05-25)
++ [2024-05-27](#2024-05-27)
 
 ## Version History
 ```
@@ -1903,4 +1907,48 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added documentation on new Rust standard library functions
             + '.to_string()'
 
+### 2024-05-22
+#### 1025H
+- New
+    - Added new directory 'Open-Source-Software' in 'Docs/Software/'
+        - Added new directory 'projects/'
+            - Added new directory 'rclone'
+                + Added new document 'README.md'
+
+#### 1449H
+- Updates
+    - Updated document 'README.md'  in 'Docs/Software/Open-Source-Software/projects/rclone/'
+        + Added new parameters and usages for listing and filters
+
+### 2024-05-23
+#### 2028H
+- Updates
+    - Updated document 'command-line-argument.md' in 'Docs/Programming/Languages/Python/Examples/Code-Snippets/'
+        + Added new snippet for setting up a CLI argument parser manually with default value setting when passing an optional argument (i.e. '--opt {value}')
+    - Updated document 'cli-argument-parsing.md' in 'Docs/Programming/Languages/Python/wiki/'
+        - Added explanation for the updated structuring of the CLI argument parsing process
+            + This updated structure includes ability to set a default value if user passed an incorrect value to the flag/optional argument
+            - The pointer index will only jump to the next element in the arguments list if the value provided is valid
+                - Hence, if the next index contains an optional argument and not a value,
+                    + it will not skip the next element and read the following optional argument properly
+        + Added new snippet for setting up a CLI argument parser manually with default value setting when passing an optional argument (i.e. '--opt {value}')
+
+### 2024-05-25
+#### 0028H
+- New
+    - Added new directory 'lua' in 'Docs/Programming/Language-Server-Packs/Languages' 
+        - Added new directory 'lua-language-server' for the lua-language-server lua LSP server
+            + Added new document 'README.md' containing the setup/build from source guide
+    - Added new directory 'rust' in 'Docs/Programming/Language-Server-Packs/Languages' 
+        - Added new directory 'rust-analyzer' for the rust-analyzer Rust LSP server
+            + Added new document 'README.md' containing the setup/build from source guide
+
+### 2024-05-27
+#### 1422H
+- New
+    + Added new document 'autocmd-buffer-events.md' in 'Docs/Programming/Vim/Guides/' containing a list of buffer events used in vim for reference
+- Updates
+    - Updated document 'api.md' in 'Docs/Programming/Vim/Distros/Neovim/Lua/' for Neovim lua API
+        + Added documentation for neovim lua api function '.nvim_create_autocmd()'
+        + Added usge snippets for neovim lua api function '.nvim_create_autocmd()'
 

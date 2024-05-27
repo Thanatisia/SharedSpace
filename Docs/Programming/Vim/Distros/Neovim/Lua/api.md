@@ -42,6 +42,15 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
     - `.nvim_command "command-to-execute"` : Execute Neovim commands
         - Parameters
             + command-to-execute : Specify the command line string to execute when called
+    - `.nvim_create_autocmd(events, {pattern={file-extensions,...}, command="command-to-execute"})` : Create an autocommand to map a command to a set of buffer events and file types
+        - Parameter Signature/Headers
+            - events : Specify a list of vim buffer events/action to check for. the command will execute only for the specified file types, and during the event
+                + Type: List of Event Strings
+                + Format: `{events}`
+            - pattern : Specify a list of file extensions for the autocommand to detect
+                + Type: List of file extensions/type strings
+            - command : Specify the command to execute during the Buffer event when the file extension/types are detected
+                + Type: String
     - `.nvim_create_user_command('CommandName', target_function, {option-keys=values});` : Create user commands in command mode; The commands created will be executable using ':YourCommandHere <arguments>'
         - Parameters
             + CommandName : Specify the name of the command; You call call the command using "<Cmd>:CommandName<CR>"
@@ -184,6 +193,18 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
         vim.keymap.set('n', "<leader>e", "<Cmd>NvimTreeToggle<CR>", {silent=true})
         ```
 
+### Buffer Event Autocommands
+- Create autocommand
+    ```lua
+    vim.api.nvim_create_autocmd(
+        {"BufEnter", "BufWinEnter"},
+        {
+            pattern = {"*.c", "*.h"},
+            command = "echo 'Entering a C or C++ file'",
+        }
+    )
+    ```
+
 ## Wiki
 
 ### Snippets
@@ -192,6 +213,7 @@ A documentation/write-up of various settings, syntax and structures to the Lua V
 
 ## References
 + [Neovim Documentations - User API - vim.api.nvim_buf_get_name(index)](https://neovim.io/doc/user/api.html#nvim_buf_get_name())
++ [Neovim Documentations - User API - vim.api.nvim_create_autocmd()](https://neovim.io/doc/user/api.html#nvim_create_autocmd())
 + [Reddit - Neovim - Lua keybindings via vim keymap set](https://www.reddit.com/r/neovim/comments/101b07t/lua_keybindings_via_vimkeymapset/)
 
 ## Remarks
