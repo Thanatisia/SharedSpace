@@ -92,6 +92,7 @@
 + [2024-05-22](#2024-05-22)
 + [2024-05-23](#2024-05-23)
 + [2024-05-25](#2024-05-25)
++ [2024-05-27](#2024-05-27)
 
 ## Version History
 ```
@@ -1941,4 +1942,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'rust' in 'Docs/Programming/Language-Server-Packs/Languages' 
         - Added new directory 'rust-analyzer' for the rust-analyzer Rust LSP server
             + Added new document 'README.md' containing the setup/build from source guide
+
+### 2024-05-27
+#### 1422H
+- New
+    + Added new document 'autocmd-buffer-events.md' in 'Docs/Programming/Vim/Guides/' containing a list of buffer events used in vim for reference
+- Updates
+    - Updated document 'api.md' in 'Docs/Programming/Vim/Distros/Neovim/Lua/' for Neovim lua API
+        + Added documentation for neovim lua api function '.nvim_create_autocmd()'
+        + Added usge snippets for neovim lua api function '.nvim_create_autocmd()'
 
