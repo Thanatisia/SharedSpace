@@ -1952,3 +1952,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added documentation for neovim lua api function '.nvim_create_autocmd()'
         + Added usge snippets for neovim lua api function '.nvim_create_autocmd()'
 
+#### 2248H
+- New
+    - Added new directory 'Guides' in 'Docs/Programming/Languages/Lua/' containing documentations and guides relating to the Lua embedded programming/scripting language
+        + Added new document 'introduction-to-lua.md' : A beginner's guide and quickstart introduction documentation to the Lua language
+
