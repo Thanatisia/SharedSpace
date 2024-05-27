@@ -1957,3 +1957,7 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'Guides' in 'Docs/Programming/Languages/Lua/' containing documentations and guides relating to the Lua embedded programming/scripting language
         + Added new document 'introduction-to-lua.md' : A beginner's guide and quickstart introduction documentation to the Lua language
 
+#### 2324H
+- New
+    + Added new document 'neovim-lua-plugin-development-lifecycle.md' in 'Docs/Programming/Vim/Distros/Neovim/Guides/'
+
