@@ -93,6 +93,7 @@
 + [2024-05-23](#2024-05-23)
 + [2024-05-25](#2024-05-25)
 + [2024-05-27](#2024-05-27)
++ [2024-05-28](#2024-05-28)
 
 ## Version History
 ```
@@ -1960,4 +1961,14 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 #### 2324H
 - New
     + Added new document 'neovim-lua-plugin-development-lifecycle.md' in 'Docs/Programming/Vim/Distros/Neovim/Guides/'
+
+### 2024-05-28
+#### 1022H
+- New
+    + Added new document 'creating-your-own-neovim-lua-api-development-environment.md' in 'Docs/DIY/development/environments/'
+    - Added new directory 'Build-from-Source' in 'Docs/Programming/': An all-in-one directory for storing all build from source recipes for various projects
+        + Added new document 'README.md'
+        - Added new directory 'neovim' for the project author 'neovim'
+            + Added new documentation 'neovim.md' for 'neovim/neovim'
+    + Added new document 'README.md' in 'Docs/Software/Open-Source-Software/'
 
