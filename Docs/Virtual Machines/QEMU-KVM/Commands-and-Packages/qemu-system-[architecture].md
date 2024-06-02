@@ -66,6 +66,18 @@ qemu-system-[architecture] {options} <arguments>
                     + host:d                    : Specify allowed hosts; TCP connections will only be allowed from host on display 'd'. By convention, the TCP port is '5900+d'. Optionally, host can be omitted in which case the server will accept connections from any host
                     + none                      : VNC is initialized but not started; The monitor 'change' command can be used later to start the VNC server
             + `-vga [interface]`                : Video Graphics Appliance (Default: std) 
+        - System Options
+            - `-append [kernel-command-line-options]` : Appends and passed the specified command line option to the kernel's command line
+                - Kernel Command Line Options
+                    + nokaslr : Appends the 'nokaslr' option and pass this to the kernel command line. nokaslr will turn off KASLR. This is necessary because KASLR will cause the kernel to be loaded on a different memory address each time its booted up and this is a security measure but it is important when debugging the kernel.
+            - `-kernel [kernel-image]` : This will startup the QEMU virtual machine using the specified Kernel Image you compiled using that particular architecture
+                - Parameters
+                    - Positionals
+                        + kernel-image : Specify the path to the kernel image you wish to startup the QEMU Virtual Machine with
+                - Kernel Image Examples
+                    - Linux Kernel: `linux/arch/[architecture]/boot/bzImage`
+                        - Notes
+                            + bzImage is the Kernel Image application
         - Network Options
             - `-net [network-objects],{options}`        : Set network objects
                 - Network Objects
@@ -80,6 +92,12 @@ qemu-system-[architecture] {options} <arguments>
                         - Options
                             - `smb=/path/to/folder` : Startup a Samba (SMB) server in the Virtual Machine with the specified folder mounted from the host system into the virtual machine as a network shared drive
     - Flags
+        - System
+            - `-S` : Tells QEMU to startup the system suspended.
+                - Usage Examples
+                    + This will help to freeze the system until we connect with the debugger and explicitly tell QEMU to continue running.
+        - Debugging
+            + `-s` : QEMU will listen on GDB connections and connect to GDB as debugger
 
 ### Usage
 - To boot an iso
@@ -89,6 +107,17 @@ qemu-system-[architecture] {options} <arguments>
 - To boot an existing qcow2 image
     ```console
     qemu-system-[architecture] -hda [virtual-disk-name (.qcow2 format)] -m [memory-size] -boot [boot-options]
+    ```
+- Boot up a custom kernel using qemu-system-[architecture] with GDB remote debugging
+    - Explanation
+        + `-kernel [path-to-kernel-image]` : This will startup the QEMU virtual machine using the specified Kernel Image you compiled using that particular architecture
+        + `-s` : QEMU will listen on GDB connections and connect to GDB as debugger
+        + `-S` : Tells QEMU to startup the system suspended. This will help to freeze the system until we connect with the debugger and explicitly tell QEMU to continue running.
+        + `-append [kernel-command-line-option]` : Appends and pass the specified command line options to the kernel command line.
+    - QEMU will start but the guest will not initialize the display
+        + It is in a suspended state and waiting for the debugger to load and continue
+    ```bash
+    qemu-system-[architecture] -kernel [path-to-kernel-image] -s -S -append [kernel-command-line-option]
     ```
 
 ## Wiki
@@ -110,8 +139,26 @@ qemu-system-[architecture] {options} <arguments>
                 http://domain-name:59<display>
                 ```
 
+- If you are debugging a Systems Application (i.e. Kernel, Operating System)
+    - Linux Kernel
+        - Boot up the kernel you compiled using qemu-system-x86_64 (QEMU x86_64 Virtualization)
+            - Explanation
+                - `-kernel arch/x86_64/boot/bzImage` : This will startup the QEMU virtual machine using the specified Kernel Image you compiled using that particular architecture
+                    + Format: `/path/to/linux/arch/[architecture]/boot/bzImage`
+                    + bzImage is the Kernel Image application
+                + `-s` : QEMU will listen on GDB connections and connect to GDB as debugger
+                + `-S` : Tells QEMU to startup the system suspended. This will help to freeze the system until we connect with the debugger and explicitly tell QEMU to continue running.
+                - `-append nokaslr` : Appends the 'nokaslr' option and pass this to the kernel command line. nokaslr will turn off KASLR. This is necessary because KASLR will cause the kernel to be loaded on a different memory address each time its booted up and this is a security measure but it is important when debugging the kernel.
+            - QEMU will start but the guest will not initialize the display
+                + It is in a suspended state and waiting for the debugger to load and continue
+            ```bash
+            qemu-system-x86_64 -kernel arch/x86_64/boot/bzImage -s -S -append nokaslr
+            ```
+
 ## Resources
 
 ## References
++ [YouTube - Nir Lichtman - How to Debug Linux Kernel with GDB](https://www.youtube.com/watch?v=D4k1Q3aHpT8&pp=ygUgaG93IHRvIGRlYnVnIGxpbnV4IGtlcm5lbCBpbiBnZGI%3D)
 
 ## Remarks
+
