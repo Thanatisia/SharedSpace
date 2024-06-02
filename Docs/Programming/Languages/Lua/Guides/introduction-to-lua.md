@@ -27,6 +27,9 @@
     + [File I/O Processing](#file-io-processing)
 - [System Process Calls](#system-process-calls)
     + [Subprocess pipes](#subprocess-pipes)
+- [Coroutines](#coroutines)
+    + [Functions](#coroutine-functions)
+    + [Setup Flow](#setup-flow)
 
 ## Basics
 
@@ -160,6 +163,31 @@
     arr[1] = "new_value"
     ```
 
+- To obtain the number of elements in an array
+    - Using the '#' prefix
+        - Explanation
+            + Use the '#' prefix behind the variable
+        ```lua
+        local arr = {}
+        local number_of_elements = #arr
+        ```
+    - Manually using a function
+        ```lua
+        function M.get_list_size(list)
+            --- Initialize Variables
+            local size = 0
+
+            --- Iterate through the list/array and count the nuber of elements
+            for _ in pairs(list) do
+                --- Increment List Size
+                size = size + 1
+            end
+
+            --- return
+            return size
+        end
+        ```
+
 #### Functions and Usages
 
 > Inserting a line into an array
@@ -183,6 +211,14 @@ table.insert(arr, line)
     ```lua
     arr = {}
     arr.key = "new_value"
+    ```
+
+- To obtain the number of elements in a table
+    - Explanation
+        + Use the '#' prefix behind the variable
+    ```lua
+    local arr = {}
+    local number_of_elements = #arr
     ```
 
 ## Iterations
@@ -356,6 +392,57 @@ end
     local result = arr.function_name(parameters, ...)
     ```
 
+## Command Line Arguments
+
+### Obtaining Command Line Arguments in Lua
+- To obtain the CLI arguments passed in lua (aka 'argv')
+    - Explanation
+        - Use the 'arg' variable
+            + The 'arg' variable is a special 'keyword' that contains all arguments passed in an array (Ordered/Positional/Indexed-based container) (aka ArrayList, List, Vector)
+    ```lua
+    local argv = arg
+    ```
+
+- To obtain the number of arguments passed (aka 'argc')
+    - Using the '#' prefix behind the variable
+        - Explanation
+            + '#arr' is used to obtain the number of elements within a table
+        ```lua
+        local argc = #argv
+        ```
+    - Manually using a function
+        ```lua
+        function M.get_list_size(list)
+            --- Initialize Variables
+            local size = 0
+
+            --- Iterate through the list/array and count the nuber of elements
+            for _ in pairs(list) do
+                --- Increment List Size
+                size = size + 1
+            end
+
+            --- return
+            return size
+        end
+        ```
+
+- Iterate through the CLI arguments list for usage
+    ```lua
+    --- Check if CLI arguments are provided
+    if argc > 0 then
+        for i = 1, argc do
+            --- Get current argument
+            local curr_arg = argv[i]
+
+            --- Process current argument
+            print(i .. " : " .. curr_arg)
+        end
+    else
+        error("No arguments provided.")
+    end
+    ```
+
 ## External Files
 ### Importing
 - Import an external library/module or package
@@ -472,6 +559,102 @@ end
                     - Value: If result is false
     ```lua
     local rc, object = pcall("command", "arguments", "here")
+    ```
+
+## Coroutines
+
+### Coroutine Functions
+- `coroutine.create(function)` : Create a new coroutine for handling asynchronous function synchronously
+    - Parameter Signature/Header
+        - function : Specify the function you wish to execute when the coroutine is started/executed
+            + Type: Function
+    - Return
+        - co : The coroutine object containing the coroutine created
+            + Type: coroutine
+- `coroutine.resume(co, item_selection)` : Resume the coroutine when the callback event handler function has been triggered
+    - Parameter Signature/Header
+        - co : Specify the Coroutine object
+            + Type: coroutine
+        - item_selection : (Optional) Specify the value you want to resume the process/coroutine from
+            + Type: any
+    - Notes
+        + The first time `.resume()` is executed, it will start the coroutine after the asynchronous operation is completed, and to wait for the user selection to complete.
+        + Subsequent uses will be resuming the coroutine if `.yield()` is used to suspend the coroutine executions
++ `coroutine.running()` : Make the stream synchronous
+- `coroutine.yield(value)` : Suspend the coroutine executions with the specified value as the last item, until the callback event hander function resumes the coroutine.
+    - Parameter Signature/Header
+        - value : Specify the value that will be stored as the last item for retrieval
+            + Type: any
+            - Notes
+                + If the value is not provided, it will suspend the coroutine executions with the last item that was stored
+
+### Setup Flow
+- Create a new coroutine for handling asynchronous function synchronously
+    ```lua
+    local co = coroutine.create(function()
+        --- Perform Asynchronous functions and operations here
+    end)
+    ```
+
+    - Design your asynchronous operation/function
+        - Create a asynchronous function (or a function that contains an asynchronous operation) to execute
+            ```lua
+            local func_name = function(parameter_signature, ...)
+                --- Statements
+            end
+            ```
+
+            - Make the stream synchronous
+                ```lua
+                local co = coroutine.running()
+                ```
+            - Ensure that 'co' is a valid coroutine
+                ```lua
+                if not co then
+                    error("This function must be called within a coroutine")
+                end
+                ```
+            - (Optional) Define callback event function. 
+                - Explanation 
+                    + This Callback Event Handler function will be triggered after an asynchronous event (i.e. menu item is selected from a popup menu window) is detected
+                    + To resume the coroutine at the end of the event handler: `coroutine.resume(co, selected_item)`
+                ```lua
+                local cb = function(_, sel)
+                    --- Return the result of the attached function back up to the 'sel' callback object and
+                    --- store the sel local variable result into 'async_res.result'
+                    async_res.result = sel
+
+                    --- Resume the coroutine after the menu has been created
+                    coroutine.resume(co, sel)
+                end
+                ```
+            - Activate asynchronous function
+                ```lua
+                your_async_function(opts, cb)
+                ```
+            - Suspend execution until the callback event handler resumes it
+                - Explanation
+                    - `coroutine.yield(value)` will suspend the coroutine executions with the specified value as the last item, until the callback event hander function resumes the coroutine.
+                        + If the value is not provided, it will suspend the coroutine executions with the last item that was stored
+                    + To resume the coroutine at the end of the event handler: `coroutine.resume(co, selected_item)`
+                ```lua
+                local result = coroutine.yield()
+                ```
+            - Return the result back to the caller of the asynchronous function
+                ```lua
+                return result
+                ```
+
+- Start the coroutine after the asynchronous operation is completed, and to wait for the user selection to complete.
+    ```lua
+    local success, message = coroutine.resume(co)
+    ```
+
+- Check if coroutine ran successfully
+    ```lua
+    if not success then
+        error("Coroutine error: " .. tostring(message))
+    end
     ```
 
 ## Resources

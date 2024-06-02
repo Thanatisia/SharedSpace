@@ -94,6 +94,7 @@
 + [2024-05-25](#2024-05-25)
 + [2024-05-27](#2024-05-27)
 + [2024-05-28](#2024-05-28)
++ [2024-06-02](#2024-06-02)
 
 ## Version History
 ```
@@ -1971,4 +1972,34 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new directory 'neovim' for the project author 'neovim'
             + Added new documentation 'neovim.md' for 'neovim/neovim'
     + Added new document 'README.md' in 'Docs/Software/Open-Source-Software/'
+
+### 2024-06-02
+#### 2214H
+- New
+    - Added new directory 'Debugging' in 'Docs/Programming/' for Software Development Debugging guides and documentations
+        - Added new directory 'Debuggers' for information relating to specific debuggers
+            - Added new directory 'gdb' for documentations regarding the GDB debugger
+                - Added new directory 'Guides' for GDB guides
+                    + Added new document 'debugging-basics.md': Debugging basics using GDB
+                - Added new directory 'commands' for commands in the GDB project
+                    + Added new document 'gdb.md' for documentations to the 'gdb' debugger CLI utility
+    + Added new document 'usage-snippets.md' in 'Docs/Programming/Languages/Lua/Guides/' for Lua Usage and Snippets
+    - Added new directory 'Travel' in 'Docs/Recreational/' for Travel Planning and logistic documentations
+        - Added new directory 'Planning' for Travel Planning-related information
+            - Added new directory 'Guides'
+                + Added new document 'travel-itinerary-planning.md' : Step-by-Step guide on planning an itinerary
+- Updates
+    - Updated document 'introduction-to-lua.md' in 'Docs/Programming/Languages/Lua/Guides/'
+        + Added new header for 'Coroutines'
+        + Added documentation on how to obtain the number of elements in an array
+        + Added documentation on how to obtain the number of elements in a table
+        + Added documentations on using Command Line Argument parsing in lua
+        + Added coroutine functions
+        + Added coroutine setup flow 
+    - Updated document 'qemu-system-[architecture].md' in 'Docs/Virtual Machines/QEMU-KVM/Commands-and-Packages/'
+        + Added documentation for new System-based arguments
+        + Added new flag options
+        + Added new usage for booting custom kernel
+        + Added new snippets for debugging system application
+
 
