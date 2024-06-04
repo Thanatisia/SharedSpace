@@ -95,6 +95,7 @@
 + [2024-05-27](#2024-05-27)
 + [2024-05-28](#2024-05-28)
 + [2024-06-02](#2024-06-02)
++ [2024-06-04](#2024-06-04)
 
 ## Version History
 ```
@@ -2002,4 +2003,24 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new usage for booting custom kernel
         + Added new snippets for debugging system application
 
+### 2024-04-06
+#### 1129H
+- Updates
+    - Updated document 'introduction-to-lua.md' in 'Docs/Programming/Languages/Lua/Guides/'
+        - Added new table header block 'Syntax' for Basic Syntaxes
+            - Added Syntax: Commenting (Single line and multiline block comments)
+    - Updated document 'quickstart-and-operational-flow.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line/'
+        + Added Quickstart steps to set a device port in a storage controller as hotpluggable
+        + Updated steps to attach and detach Virtual drive files to be according to order
+        + Replaced the storage controller used in the example from 'AHCI' => 'SATA'
+    - Updated document 'use-cases-and-snippets.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line/'
+        + Added header blocks to the usages for compartmentalization and categorisation
+        + Added usages for storage management - Detaching and attaching Virtual Disks from a Virtual Machine using command line
+    - Updated document 'vboxmanage.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line/'
+        - Updated documentation for 'storageattach'
+            + Formatted the syntax explanation
+            + Categorised positional and optional arguments
+            + Added explanation
+            + Added new option '--hotpluggable [on|off]'
+        + Added usages for storage management: Detaching and attaching Virtual Disks from a Virtual Machine using command line
 

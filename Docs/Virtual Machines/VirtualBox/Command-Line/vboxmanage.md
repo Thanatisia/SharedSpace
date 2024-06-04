@@ -108,17 +108,27 @@ VBoxManage [action] [options [arguments]...]
 			+ --vrdemulticon {on|off} : Enable/Disable Virtual Remote Desktop Environment Multicon 
 			+ --vrdeport [port_number] : Set VRDE Port Number
 	- storageattach : Attach a Storage Device to an existing Virtual Machine
-		- Syntax: storageattach [Virtual Machine Name] [{options} {arguments}...]
-		- Options:
-			+ --storagectl "Storage Controller Name" : Set the Storage Controller to use with the Virtual Machine
-			+ --port [port_number] : Set Port Number for the storage device (start from 0)
-			+ --device [device_number] : Set Device Number for the Storage Device (start from 0)
-			+ --type [storage_medium_type] : Set the type of storage 
-				- Examples:
-					+ cddrive : CD Drive
-					+ dvddrive : DVD Drive
-					+ hdd : Hard Disk Drive
-			+ --medium [path-to-image-or-file] : Set the path to the Image or Storage File to attach with the Storage Controller of the attached Virtual Machine (.vmdk/.vdi/.iso files etc.)
+		+ Syntax: `storageattach [Virtual Machine Name] [{options} {arguments}...]`
+        - Parameters
+            - Positionals
+                + virtual-machine-name : Specify the name of the target virtual machine
+            - Optionals:
+                - With Arguments
+                    - `--storagectl "Storage Controller Name"` : Set the Storage Controller to use with the Virtual Machine
+                        - Storage Controllers
+                            + IDE : For CD/ISO Images
+                            + SATA : For Disk Images (i.e. VDI, VMDK, VHD)
+                    + `--port [port_number]` : Set Port Number for the storage device (start from 0)
+                    + `--device [device_number]` : Set Device Number for the Storage Device (start from 0)
+                    - `--type [storage_medium_type]` : Set the type of storage 
+                        - Examples:
+                            + cddrive : CD Drive
+                            + dvddrive : DVD Drive
+                            + hdd : Hard Disk Drive
+                    - `--medium [path-to-image-or-file]` : Set the path to the Image or Storage File to attach with the Storage Controller of the attached Virtual Machine (.vmdk/.vdi/.iso files etc.)
+                        - Notes
+                            + Set the medium as 'none' (Recommended) or 'emptydrive' to detach the storage controller's port from the Virtual Machine
+                    + `--hotpluggable [on|off]` : Enables/Disables the 'hotpluggable' property/attribute of this storage port on the storage controller
 	- storagectl : Modify/Create Storage Controller
 		- Syntax: VBoxManage storagectl [Virtual Machine Name] [{options} {arguments}...]
 		- Options:
@@ -174,13 +184,59 @@ VBoxManage modifyhd file.vdi --resize N{GiB|GB|MiB|MB}
         vboxmanage modifyvm "virtual-machine-name" --firmware efi
         ```
 
+### Storage Management
+- Set your storage ports as 'hot-pluggable'
+    + This is required if you wish to detach the storage from the command line while the Virtual Machine is running
+    ```bash
+    VBoxManage storageattach [virtual-machine-name] --storagectl [storage-controller] --port [port-number] --hotpluggable on
+    ```
+
+- Detach a storage device/disk from a Virtual Machine using the command line
+    - Setup
+        - Pre-Requisites
+            + Set your storage ports as 'hot-pluggable'
+
+    - Explanation
+        + virtual-machine-name : Specify the name of your target virtual machine
+        - storage-controller : Specify the Controller of your storage device
+            + IDE  : CD/ISO
+            + SATA : Virtual Disk Images (i.e. VDI/VMDK/VHD)
+        + port-number : Specify the target disk port number you wish to detach from the Virtual Machine
+        + medium : Set as none to detach the port from the Virtual Machine
+    ```bash
+    VBoxManage storageattach [virtual-machine-name] --storagectl [storage-controller] --port [port-number] --type hdd --medium none
+    ```
+
+- Attach a storage device/disk from a Virtual Machine using the command line
+    - Setup
+        - Pre-Requisites
+            + Set your storage ports as 'hot-pluggable'
+
+    - Explanation
+        + virtual-machine-name : Specify the name of your target virtual machine
+        - storage-controller : Specify the Controller of your storage device
+            + IDE  : CD/ISO
+            + SATA : Virtual Disk Images (i.e. VDI/VMDK/VHD)
+        + port-number : Specify the target disk port number you wish to detach from the Virtual Machine
+        - type : Specify the type of medium you wish to attach to the Virtual Machine
+            + hdd : Hard Disk Drive Disks Image (i.e. VDI, VMDK, VHD)
+        + "\path\to\disk-to-mount" : Specify the target disk you wish to mount (i.e. *.vdi, *.vmdk, *.vhd)
+    ```bash
+    VBoxManage storageattach [virtual-machine-name] --storagectl [storage-controller] --port [port-number] --type hdd --medium "\path\to\disk-to-mount"
+    ```
+
+## Snippets
+
 ## Wiki
 
 ## Resources
 
 ## References
++ [Serverfault - Questions - 171665 - How to attach a virtual hard disk using VBoxManage](https://serverfault.com/questions/171665/how-to-attach-a-virtual-hard-disk-using-vboxmanage)
++ [StackOverflow - Questions - 41463588 - How to detach VMDK using VBoxManage CLI](https://stackoverflow.com/questions/41463588/how-to-detach-vmdk-using-vboxmanage-cli)
 + [VirtualBox - How to Boot from USB | How to Convert Bootable USB device to VMDK Raw file](https://www.how2shout.com/how-to/virtualbox-virtual-machine-boot-usb.html)
 + [VirtualBox - How to create a virtualbox vm from command line | How to create a VM from Terminal](https://andreafortuna.org/2019/10/24/how-to-create-a-virtualbox-vm-from-command-line/)
 + [VirtualBox - How to resize a VirtualBox VM from command line](https://www.techrepublic.com/article/how-to-resize-a-virtualbox-vm-from-the-command-line/)
 
 ## Remarks
+
