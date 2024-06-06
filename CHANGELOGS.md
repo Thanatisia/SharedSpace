@@ -95,6 +95,8 @@
 + [2024-05-27](#2024-05-27)
 + [2024-05-28](#2024-05-28)
 + [2024-06-02](#2024-06-02)
++ [2024-06-04](#2024-06-04)
++ [2024-06-06](#2024-06-06)
 
 ## Version History
 ```
@@ -2002,4 +2004,39 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new usage for booting custom kernel
         + Added new snippets for debugging system application
 
+### 2024-06-04
+#### 1129H
+- Updates
+    - Updated document 'introduction-to-lua.md' in 'Docs/Programming/Languages/Lua/Guides/'
+        - Added new table header block 'Syntax' for Basic Syntaxes
+            - Added Syntax: Commenting (Single line and multiline block comments)
+    - Updated document 'quickstart-and-operational-flow.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line/'
+        + Added Quickstart steps to set a device port in a storage controller as hotpluggable
+        + Updated steps to attach and detach Virtual drive files to be according to order
+        + Replaced the storage controller used in the example from 'AHCI' => 'SATA'
+    - Updated document 'use-cases-and-snippets.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line/'
+        + Added header blocks to the usages for compartmentalization and categorisation
+        + Added usages for storage management - Detaching and attaching Virtual Disks from a Virtual Machine using command line
+    - Updated document 'vboxmanage.md' in 'Docs/Virtual Machines/VirtualBox/Command-Line/'
+        - Updated documentation for 'storageattach'
+            + Formatted the syntax explanation
+            + Categorised positional and optional arguments
+            + Added explanation
+            + Added new option '--hotpluggable [on|off]'
+        + Added usages for storage management: Detaching and attaching Virtual Disks from a Virtual Machine using command line
+
+
+### 2024-06-06
+#### 2310H
+- New
+    - Added new directory 'Built-in' in 'Docs/Programming/Languages/Python/'
+        - Added new directory 'functions' for documentations on Python built-in functions
+            + Added new document 'print.md' for the print() function
+    - Added new directory 'Concepts' in 'Docs/Programming/Languages/Python/'
+        - Aded new directory 'chroot' for Chrooting in python
+            + Added new document 'chrooting-in-python.md': Documentation on the steps to chroot and traverse using python
+    - Added new directory 'progress-bar/' in 'Docs/Programming/Languages/Python/Examples/Code-Snippets/'
+        + Added new document 'README.md'
+    - Added new directory 'ctypes' in 'Docs/Programming/Languages/Python/Libraries/' for documentations on the python library
+        + Added new document 'manual.md'
 

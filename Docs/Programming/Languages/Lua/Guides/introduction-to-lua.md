@@ -9,6 +9,7 @@
 - [Basics](#basics)
     + [Operators](#operators)
     + [Variables](#variables)
+    + [Syntaxes](#basic-syntax)
 - [Data Types](#data-types)
     + [String](#string)
     + [nil](#nil)
@@ -88,6 +89,27 @@
                 key = value
             }
             ```
+
+### Basic Syntax
+- Commenting
+    - Single Line Comment
+        - Explanation
+            + Use the '--' operator.
+            + Use at least 2 '--', more is also allowed
+        ```lua
+        -- comment here
+        ```
+    - Multiline block comments
+        - Explanation
+            + Use the '--[[' : Notice the '[[' used to indicate to open a block of strings
+            + Close the multiline block with ']]'
+        ```lua
+        --[[
+        Multiline
+        Coments
+        Here
+        ]]
+        ```
 
 ## Data Types
 ### String

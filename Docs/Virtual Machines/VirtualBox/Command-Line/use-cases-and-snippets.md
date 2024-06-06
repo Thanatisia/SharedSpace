@@ -1,6 +1,7 @@
 # VirtualBox - Useful Use-Cases and Snippets
 
 ## Use Cases
+### Networking
 - Modify Virtual Machine Settings
     - Examples
         - (Optional) List all bridgeable network interfaces on your host system
@@ -35,6 +36,7 @@
             vboxmanage modifyvm "your-vm-name" --vrde-port [port-numbers,port-range,...]
             ```
 
+### Power
 - Control Running Virtual Machine Options
     - Examples
         - (Optional) Power off the Virtual Machine
@@ -42,6 +44,7 @@
             vboxmanage controlvm "your-vm-name" poweroff
             ```
 
+### Virtual Machine
 - Start Virtual Machine from command line as headless
     - Pre-Requisites
         - Recommended to modify settings before proceeding
@@ -94,6 +97,53 @@
             + Note down the MAC address
             + Check the IP address on your router for DHCP
 
+### Storage
+- Detach a storage device/disk from a Virtual Machine using the command line
+    - Setup
+        - Pre-Requisites
+            - Set your storage ports as 'hot-pluggable'
+                + This is required if you wish to detach the storage from the command line while the Virtual Machine is running
+                - Using VBoxManage
+                    ```bash
+                    VBoxManage storageattach [virtual-machine-name] --storagectl [storage-controller] --port [port-number] --hotpluggable on
+                    ```
+
+    - Using VBoxManage
+        - Explanation
+            + virtual-machine-name : Specify the name of your target virtual machine
+            - storage-controller : Specify the Controller of your storage device
+                + IDE  : CD/ISO
+                + SATA : Virtual Disk Images (i.e. VDI/VMDK/VHD)
+            + port-number : Specify the target disk port number you wish to detach from the Virtual Machine
+            + medium : Set as none to detach the port from the Virtual Machine
+        ```bash
+        VBoxManage storageattach [virtual-machine-name] --storagectl [storage-controller] --port [port-number] --type hdd --medium none
+        ```
+
+- Attach a storage device/disk from a Virtual Machine using the command line
+    - Setup
+        - Pre-Requisites
+            - Set your storage ports as 'hot-pluggable'
+                + This is required if you wish to detach the storage from the command line while the Virtual Machine is running
+                - Using VBoxManage
+                    ```bash
+                    VBoxManage storageattach [virtual-machine-name] --storagectl [storage-controller] --port [port-number] --hotpluggable on
+                    ```
+
+    - Using VBoxManage
+        - Explanation
+            + virtual-machine-name : Specify the name of your target virtual machine
+            - storage-controller : Specify the Controller of your storage device
+                + IDE  : CD/ISO
+                + SATA : Virtual Disk Images (i.e. VDI/VMDK/VHD)
+            + port-number : Specify the target disk port number you wish to detach from the Virtual Machine
+            - type : Specify the type of medium you wish to attach to the Virtual Machine
+                + hdd : Hard Disk Drive Disks Image (i.e. VDI, VMDK, VHD)
+            + "\path\to\disk-to-mount" : Specify the target disk you wish to mount (i.e. *.vdi, *.vmdk, *.vhd)
+        ```bash
+        VBoxManage storageattach [virtual-machine-name] --storagectl [storage-controller] --port [port-number] --type hdd --medium "\path\to\disk-to-mount"
+        ```
+
 ## Terminologies
 + Headless : Run in the background without a GUI
 
@@ -102,5 +152,8 @@
 ## References
 + [VirtualBox Forums - VBoxManage startvm VM --type headless vs VBoxHeadless](https://forums.virtualbox.org/viewtopic.php?t=30245)
 + [VirtualBox Documentations Chapter 7 - Remote Virtual Machines](https://www.virtualbox.org/manual/ch07.html)
++ [Serverfault - Questions - 171665 - How to attach a virtual hard disk using VBoxManage](https://serverfault.com/questions/171665/how-to-attach-a-virtual-hard-disk-using-vboxmanage)
++ [StackOverflow - Questions - 41463588 - How to detach VMDK using VBoxManage CLI](https://stackoverflow.com/questions/41463588/how-to-detach-vmdk-using-vboxmanage-cli)
 
 ## Remarks
+
