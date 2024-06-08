@@ -97,6 +97,7 @@
 + [2024-06-02](#2024-06-02)
 + [2024-06-04](#2024-06-04)
 + [2024-06-06](#2024-06-06)
++ [2024-06-08](#2024-06-08)
 
 ## Version History
 ```
@@ -2039,4 +2040,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new document 'README.md'
     - Added new directory 'ctypes' in 'Docs/Programming/Languages/Python/Libraries/' for documentations on the python library
         + Added new document 'manual.md'
+
+### 2024-06-08
+#### 1727H
+- New
+    - Added new directory 'dictionary' in 'Docs/Programming/Languages/Python/Guides/Types/'
+        - Added new directory 'Algorithms'
+            + Added new document 'dynamically-searching-key-values.md'
 
