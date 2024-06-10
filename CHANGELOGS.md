@@ -98,6 +98,7 @@
 + [2024-06-04](#2024-06-04)
 + [2024-06-06](#2024-06-06)
 + [2024-06-08](#2024-06-08)
++ [2024-06-10](#2024-06-10)
 
 ## Version History
 ```
@@ -2047,4 +2048,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Added new directory 'dictionary' in 'Docs/Programming/Languages/Python/Guides/Types/'
         - Added new directory 'Algorithms'
             + Added new document 'dynamically-searching-key-values.md'
+
+### 2024-06-10
+#### 2211H
+- New
+    + Added new document 'attacks-vulnerabilities-and-exploits.md' in 'Docs/CyberSecurity/Cheatsheets/' containing a quick cheatsheet containing a summary of various attacks, vulnerabilities and exploits
+    + Added new document 'terminologies.md' in 'Docs/CyberSecurity/Cheatsheets/' containing a quick cheatsheet about cybersecurity (and related sub/supersets thereof) terminologies
 
