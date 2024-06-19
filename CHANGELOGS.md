@@ -2075,3 +2075,25 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     + Added new document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/' : A beginner's guide and quickstart introduction documentation to the Rust Programming Language - still a WIP
     + Added new document 'regex-patterns.md' in 'Docs/Programming/Vim/Documents/' containing documentations on various useful Regex patterns using vim's regex engine
 
+#### 2240H
+- Updates
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Fixed syntax for 'for i in range()' => 'for i in min..max' : The usage of '..' denoting range between 2 ends instead of 'range()'
+        + Added new syntax example for iterating over the index(es) of an array and accessing the values in the memory address of the array to obtain the value in that index
+        + Removed redundant example
+        - Added CLI argument parsing syntax and usage examples
+            + Added explanations
+            + Added syntax to obtain the argument count (argc)
+            + Added iteration of arguments to obtain the values
+        + Added syntax for importing of crates/packages from external files
+    - Updated document 'keyword-and-usages.md' in 'Docs/Programming/Languages/Rust/Documentations'
+        + Added new keyword 'use' for importing external files/crates into the application
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations'
+        + Fixed syntax for 'for i in range()' => 'for i in min..max' : The usage of '..' denoting range between 2 ends instead of 'range()'
+        + Added new syntax example for iterating over the index(es) of an array and accessing the values in the memory address of the array to obtain the value in that index
+        - Added CLI argument parsing syntax and usage examples
+            + Added explanations
+            + Added syntax to obtain the argument count (argc)
+            + Added iteration of arguments to obtain the values
+        + Added syntax for importing of crates/packages from external files
+

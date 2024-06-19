@@ -480,7 +480,7 @@ vec.push("new-entry")
 
 - Iterate over a range of numbers
     ```rust
-    for i in range(min, max) {
+    for i in min..max {
         // statements
     }
     ```
@@ -494,28 +494,21 @@ vec.push("new-entry")
     ```
 - Iterate over the index of an array
     ```rust
-    for i in range(array.len()) {
-        // Get current element
-        let curr_element = array[i];
+    for i in 0..array.len() {
+        // print
+        print!("{}", i);
+    }
+    ```
+- Iterate over the index of an array and obtaining the array values
+    ```rust
+    for i in 0..array.len() {
+        // Access the values in the array's memory address and Get the current element
+        let curr_element = &array[i];
 
         // print
         print!("{} : {}", i, curr_element);
     }
     ```
-
-> Iterating over an array and just obtaining the values
-
-```rust
-let strarr:[String; 10] = [];
-
-for i in range(strarr.len()) {
-    // Get current element
-    let curr_element = strarr[i];
-
-    // print
-    print!("{} : {}", i, curr_element);
-}
-```
 
 #### Key-Value Mappings
 
@@ -726,62 +719,55 @@ fn some_unused_variables() {
 
 ## Command Line Arguments
 
-### Obtaining Command Line Arguments in Lua
-- To obtain the CLI arguments passed in lua (aka 'argv')
+### Obtaining Command Line Arguments
+- To obtain the CLI arguments passed in rust (aka 'argv')
     - Explanation
-        - Use the 'arg' variable
-            + The 'arg' variable is a special 'keyword' that contains all arguments passed in an array (Ordered/Positional/Indexed-based container) (aka ArrayList, List, Vector)
-    ```lua
-    local argv = arg
+        + Import the 'std::env' System Environment built-in standard library/crate 
+        - Obtain the CLI arguments parsed into the system environment and collect the arguments in a string vector
+            - The 'env::args()' function contains all arguments passed into the application 
+                + `.collect()` will store the results in an array (Ordered/Positional/Indexed-based container) (aka ArrayList, List, Vector)
+    ```rust
+    use std::env;
+
+    // Get the CLI arguments parsed into the system environment and collect the arguments 
+    // in a string vector
+    let args: Vec<String> = env::args().collect();
     ```
 
 - To obtain the number of arguments passed (aka 'argc')
-    - Using the '#' prefix behind the variable
+    - Using the '.len()' function from the array/vector built-in functions
         - Explanation
-            + '#arr' is used to obtain the number of elements within a table
-        ```lua
-        local argc = #argv
-        ```
-    - Manually using a function
-        ```lua
-        function M.get_list_size(list)
-            --- Initialize Variables
-            local size = 0
-
-            --- Iterate through the list/array and count the nuber of elements
-            for _ in pairs(list) do
-                --- Increment List Size
-                size = size + 1
-            end
-
-            --- return
-            return size
-        end
+            + `arr.len()` will return the length/size of the array(list)
+        ```rust
+        let argc:uint8 = argv.len();
         ```
 
 - Iterate through the CLI arguments list for usage
-    ```lua
-    --- Check if CLI arguments are provided
-    if argc > 0 then
-        for i = 1, argc do
-            --- Get current argument
-            local curr_arg = argv[i]
+    - Notes
+        - Index 0 (The first argument) in the CLI argument parser is always the binary/executable
+            + Hence, all CLI arguments parsed will start from index 1 (The second argument)
+    ```rust
+    // Check if CLI arguments are provided
+    if argc > 0 {
+        for i in 1..args.len() {
+            // Access the argument vector's memory address values and Get current argument
+            let arg = &args[i];
 
-            --- Process current argument
-            print(i .. " : " .. curr_arg)
-        end
-    else
-        error("No arguments provided.")
-    end
+            // Print argument
+            print!("{}\n", arg);
+        }
+    } else {
+        print!("{}", "No arguments provided.");
+    }
     ```
 
 ## External Files
 ### Importing
 - Import an external library/module or package
     - Explanation
-        + Use the `use(package)` keyword to import/source an external library into the local variable as an object
+        + Use the `use <package|crate>::<module>` keyword to import/source an external library into the local variable as an object
     ```rust
-    use 'package/crate-name'
+    use <package|crate>::<module>
     ```
 
 ### File IO Processing
@@ -990,6 +976,7 @@ fn some_unused_variables() {
 ## References
 + [brson - A Guide to Rust Syntax](https://gist.github.com/brson/9dec4195a88066fa42e6)
 + [GeeksForGeeks - Rust - Array](https://www.geeksforgeeks.org/rust-array/)
++ [RustLang Documentations - Rust By Example - Flow Control - For loop](https://doc.rust-lang.org/rust-by-example/flow_control/for.html)
 
 ## Remarks
 

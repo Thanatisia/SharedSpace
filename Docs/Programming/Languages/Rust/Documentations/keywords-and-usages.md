@@ -142,6 +142,10 @@
     ```rust  
     type alias_type = target_type;  
     ```
+- use : Import an external crate/package and its modules/libraries into the application
+    ```rust
+    use <package|crate>::<module>;
+    ```
 
 ## Usages
 
