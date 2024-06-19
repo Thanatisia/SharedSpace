@@ -99,6 +99,7 @@
 + [2024-06-06](#2024-06-06)
 + [2024-06-08](#2024-06-08)
 + [2024-06-10](#2024-06-10)
++ [2024-06-19](#2024-06-19)
 
 ## Version History
 ```
@@ -2054,4 +2055,23 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     + Added new document 'attacks-vulnerabilities-and-exploits.md' in 'Docs/CyberSecurity/Cheatsheets/' containing a quick cheatsheet containing a summary of various attacks, vulnerabilities and exploits
     + Added new document 'terminologies.md' in 'Docs/CyberSecurity/Cheatsheets/' containing a quick cheatsheet about cybersecurity (and related sub/supersets thereof) terminologies
+
+### 2024-06-19
+#### 2147H
+- New
+    - Added new directory 'Registry' in 'Docs/Operating Systems/Windows/Guides/' for documentations regarding the Windows Registry in general
+        + Added new document 'understanding-the-windows-registry.md' : A Quickstart guide on how to maneuvre and understand the windows registry
+    - Added new directory 'Concepts and Topics' in 'Docs/Programming/' : central folder containing documentations on various programming concepts and topics on a generic level/scale
+        - Added new directory 'Image Manipulation' for information regarding the handling of Images with software 
+            - Added new directory 'Guides'
+                + Added new document 'pixel-color-modification.md' containing information on Image pixels and modification of colors via software (i.e. grayscaling)
+    - Added new directory 'pillow' in 'Docs/Programming/Languages/Python/Libraries/' : to contain documentations regarding the usage of the pillow (PIL) python library/module
+        + Added new document 'manual.md'
+    - Added new directory 'Documentations' 'Docs/Programming/Languages/Rust/'
+        + Added new document 'attributes.md': Contains documentations about Rust Attributes as well as attribute entries/usages
+        + Added new document 'keywords-and-usages.md': Contains documentations on Rust Keywords and usages/snippets on how to use them
+        + Added new document 'operators.md' : Contains documentations on Rust operators
+        + Added new document 'syntax-and-structure.md': Contains documentations on the syntax for Rust
+    + Added new document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/' : A beginner's guide and quickstart introduction documentation to the Rust Programming Language - still a WIP
+    + Added new document 'regex-patterns.md' in 'Docs/Programming/Vim/Documents/' containing documentations on various useful Regex patterns using vim's regex engine
 
