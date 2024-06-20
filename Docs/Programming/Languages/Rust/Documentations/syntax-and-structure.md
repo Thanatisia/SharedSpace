@@ -261,6 +261,168 @@
     use <package|crate>::<module>
     ```
 
+### System process calls 
+- also known as system command execution
+    + process calls is used to execute system commands
+
+> Import the crate/package/library
+
+- Modules
+    - std::process
+        + self
+        + Command
+```rust
+use std::process::{self, Command};
+```
+
+> For Cross-Platform Compatibility: Check if the Operating System is for Windows or *NIX and return the command output to the variable 'output'
+
+- Explanation
+    - `let output = if cfg!(target_os = "windows")` : Check if the target platform is Windows
+        + If it is, Execute windows-based commands
+        - If it is not, the operating system is *NIX based (UNIX, Linux, MacOS)
+            + Execute *NIX-based commands
+    - `let res = output.stdout`
+        + The variable 'output' (type <Result>) will contain the result of the statements that are executed within the macro/operation bracket
+        + To obtain the standard outputs returned by the statements, access the `Result.stdout` property/attribute/variable
+```rust
+let output = if cfg!(target_os = "windows") {
+    // Windows
+} else {
+    // *NIX
+}
+```
+
+> System Command Execution
+
+- Create a new process for system command execution
+    - Initialize a new Command structure object 
+        - Explanation
+            - `Command` can be reused to spawn multiple processes
+                + The builder methods change the command without needing to immediately spawn the process.
+        ```rust
+        let mut proc:Result = Command::new("your-cmd-here")
+        ```
+
+- Append arguments to be executed with the command
+    - For a command with multiple arguments specified in a list
+        - Explanation
+            - Note that this uses '.args([])' instead of '.arg("")'
+                + `.args([])` will take in a list containing all arguments and values you wish to pass to the command
+                + Using `.args([])` basically allows for sanitized standard input arguments instead of raw string which makes formatting/sanitization difficult
+        ```rust
+        proc.args(["place", "your", "arguments", "here"]);
+        ```
+    - For a command with multiple arguments specified in a string
+        - Explanation
+            - Note that this uses '.arg("")' instead of '.args([])'
+                + `.arg("")` will take in a string containing the arguments and values in 1 string
+        ```rust
+        proc.arg("option 1").arg("option 2");
+        ```
+
+- Execute the command and return the results
+    ```rust
+    let proc_res:Result = proc.output().expect("Failed to execute process");
+    ```
+
+- Obtain the standard output/error streams from the result
+    - Notes
+        + The result stdout (`output.stdout`) and stderr (`output.stderr`) are in Vec<u8> vector containers
+    ```rust
+    let u8_stdout = proc_res.stdout;
+    let u8_stderr = proc_res.stderr;
+    ```
+
+- Obtain the status/result/return code containing the result of the process pipe
+    - If you are using `.output()`
+        - Explanation
+            + `.success()` will return the success status in a bool type (true = Success, false = Error)
+        ```rust
+        let rc = output.status.success();
+        ```
+
+- Pass and unwrap the UTF-8 Vec<u8> objects into strings for usage
+    - Explanation
+        + Pass the Vec<u8> object into the `String::from_utf8(vec_object)` function to format it into a 'Result<String, FromUTF8Error>' object
+        + Execute `.unwrap()` to obtain the String value from the vector of Bytes
+    ```rust
+    let stdout = String::from_utf8(u8_stdout).unwrap();
+    let stderr = String::from_utf8(u8_stderr).unwrap();
+    ```
+
+- Match-case the result code basing off the success status (true/false)
+    ```rust
+    match rc {
+        true => {
+            print!("{}\n", "Standard Output:");
+            // Print result
+            print!("{}\n", stdout);
+        }
+        false => {
+            print!("{}\n", "Standard Error:");
+            // Print result
+            print!("{}\n", stderr);
+        }
+    }
+    ```
+
+> Subprocess pipes
+
+- Introduction
+    - Subprocess pipes are essentially dedicated pathways setup specifically for commands (and its parameters/arguments) called processes (or proc for short)
+        + These processes have specific IDs known as Process IDs (or PIDs) that can be used to track the status of each process.
+        - By using subprocess pipes, you can create processes for multiple commands and track all of them for easier synchronous (and even asynchronous) command execution
+            + As well as obtaining the standard streams (standard output and standard error) from the process result output
+
+- This is similar to `subprocess.Popen()` in python
+    ```python
+    from subprocess import Popen, PIPE, DEVNULL
+
+    with Popen(["command", "arguments", "here"], stdin=PIPE, stdout=PIPE, stderr=PIPE) as proc:
+        # Execute process using `.communicate()` for synchronous command execution
+        stdout, stderr = proc.communicate()
+
+        # Obtain status code on completion
+        rc = proc.returncode
+    ```
+
+- To execute the command and arguments as a (sub)process pipe and return the standard output and the status/return/result code
+    - Set Standard Input stream
+        - Explanation
+            + Set the stream handle as `process::Stdio::piped()` to PIPE into the standard input from the process's standard output
+            - Set the stream handle as `process::Stdio::from(proc_stdout.unwrap())` to PIPE the standard output of the specified process into the current process as a standard input
+                - Where
+                    - proc_stdout : The standard output of a previously-specified process handle that exists and you wish to pipe the data from standard output into the new process as a standard input
+                        + Type: Vec<u8>
+        ```rust
+        let proc = Command::new("cmd")
+            .args(["place", "your", "arguments", "here"])
+            .stdin(process::Stdio::piped())
+            .output()
+            .expect("Failed to execute process")
+        ```
+    - Set Standard Output stream
+        - Explanation
+            + Set the stream handle as `process::Stdio::piped()` to PIPE the result of the (sub)process command execution to the standard output
+        ```rust
+        let proc = Command::new("cmd")
+            .args(["place", "your", "arguments", "here"])
+            .stdout(process::Stdio::piped())
+            .output()
+            .expect("Failed to execute process")
+        ```
+    - Set Standard Error stream
+        - Explanation
+            + Set the stream handle as `process::Stdio::piped()` to PIPE the result of the (sub)process command execution to the standard error
+        ```rust
+        let proc = Command::new("cmd")
+            .args(["place", "your", "arguments", "here"])
+            .stderr(process::Stdio::piped())
+            .output()
+            .expect("Failed to execute process")
+        ```
+
 ## Wiki
 
 ## Resources

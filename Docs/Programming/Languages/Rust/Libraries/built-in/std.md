@@ -57,6 +57,11 @@
         - Return
             - Result : besides storing the value into the String container, the function will also return a Results enumeration (enum) value
                 + Type: enum.Result
+- std::process::Stdio
+    - `::piped()` : Initializes a new pipe when used in a standard stream to connect the parent and child processes (used with 'std::process::Command')
+        - Return
+            - pipe : The pipe object used to stream the results from the stream source to a destination buffer
+                + Type: std::process::Stdio
 - std::process::Command
     - `::new(command_string)` : Initialize a new 'Command' structure object with the specified command to be executed
         - Parameter Signature/Header
@@ -92,6 +97,37 @@
         - Return
             - curr_dir : The returned working directory of the current child process; This returns None if the working directory will not be changes
                 + Type: Option<&Path> | None
+    - `.stdin(cfg)` : Specifies the configuration for the child process's standard input (stdin) handle
+        - Parameter Signature/Header
+            - cfg : The process handle configuration used to connect the parent process to the child process
+                + Type: std::process::Stdio
+        - Return
+            - stdout : Returns the standard output process handle
+                + Type: std::process::Command
+        - Notes
+            + Set the stream handle as `process::Stdio::piped()` to PIPE into the standard input from the process's standard output
+            - Set the stream handle as `process::Stdio::from(proc_stdout.unwrap())` to PIPE the standard output of the specified process into the current process as a standard input
+                - Where
+                    - proc_stdout : The standard output of a previously-specified process handle that exists and you wish to pipe the data from standard output into the new process as a standard input
+                        + Type: Vec<u8>
+    - `.stdout(cfg)` : Specifies the configuration for the child process's standard output (stdout) handle
+        - Parameter Signature/Header
+            - cfg : The process handle configuration used to connect the parent process to the child process
+                + Type: std::process::Stdio
+        - Return
+            - stdout : Returns the standard output process handle
+                + Type: std::process::Command
+        - Notes
+            + Set the stream handle as `process::Stdio::piped()` to PIPE the standard output of the (sub)process command execution to the variable for display and retrieval
+    - `.stderr(cfg)` : Specifies the configuration for the child process's standard error (stderr) handle
+        - Parameter Signature/Header
+            - cfg : The process handle configuration used to connect the parent process to the child process
+                + Type: std::process::Stdio
+        - Return
+            - stdout : Returns the standard output process handle
+                + Type: std::process::Command
+        - Notes
+            + Set the stream handle as `process::Stdio::piped()` to PIPE the standard error of the (sub)process command execution to the variable for display and retrieval
     - `.status()` : Executes a command as a child process, wait for it to finish then collecting its status code (aka return code, retcode or result code)
         - Return
             - status_code : The returned status code after the process has been completed (Polling has stopped and a status code has been returned)
@@ -115,11 +151,22 @@
                 + The program will compile but you'll get a warning
                 - Rust warns that you havent used the `enum.Result` value returned from the function, 
                     + indicating that the program has not handled a possible error
+    - `.unwrap()` : Unwrap the result object to obtain the string result
+        - Return
+            - res_str : The obtained string in the Result
+                + Type: String
 - String
     - `::new()` : Initialize a new String variable/object
         - Return
             - str_variable : Return the initialized String object instance
                 + Type: String
+    - `::from_utf8(vec)` : Converts a vector of bytes into a String, returning as a Result<String, FromUtf8Error> object to be unwrapped for use
+        - Parameter Signature/Headers
+            - vec : Pass the target vector of type bytes (u8 etc) that you wish to convert into a string
+                + Type: Vec<u8>
+        - Return
+            - res : The converted vector of bytes packed into a string to be unwrapped
+                + Type: Result<String, FromUtf8Error>
     - `.cmp(&variable)` : Compare the string value with another string value
         - Return
             - cmp_result: The comparison result - Less if the string is less than the target, More if the string is more than the target, Equal if the string is equals to the target
@@ -172,6 +219,14 @@
         // Convert number into string
         let num_as_string = num.to_string();
         ```
+
+- To convert a Vec<u8> UTF-8 vector container into a string (by unwrapping it)
+    - Explanation
+        + Pass the Vec<u8> object into the `String::from_utf8(vec_object)` function to format it into a 'Result<String, FromUTF8Error>' object
+        + Execute `.unwrap()` to obtain the String value from the vector of Bytes
+    ```rust
+    let unwrapped = String::from_utf8(vec_object).unwrap();
+    ```
 
 ### Operational Workflow
 - Initialize a new string object and make it mutable (in rust, variables are immutable by default)

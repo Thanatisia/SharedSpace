@@ -100,6 +100,7 @@
 + [2024-06-08](#2024-06-08)
 + [2024-06-10](#2024-06-10)
 + [2024-06-19](#2024-06-19)
++ [2024-06-20](#2024-06-20)
 
 ## Version History
 ```
@@ -2096,4 +2097,39 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + Added syntax to obtain the argument count (argc)
             + Added iteration of arguments to obtain the values
         + Added syntax for importing of crates/packages from external files
+
+### 2024-06-20
+#### 1508H
+- New
+    - Added new directory 'Snippets' in 'Docs/Programming/Languages/Rust/'
+        - Added new directory 'system-command-exec' for snippets on System (sub)process Command Execution
+            + Added document 'std-process-command.md' : Snippet and explanation on System Command Execution using the built-in standard library process crate
+        - Added new directory 'cli-argument-parsing' for snippets on CLI Argument Pars(ing/er) in Rust
+            + Added document 'standard-env.md' : Snippet nd explanation on CLI Argument parsing using just the built-in stadnard environment crate
+- Updates
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations/'
+        + Added new section block system process calls (subprocess) and execution
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Added new section block and header for Command Line Arguments
+        + Added new section block and header for System Command Execution
+        + Added new mathematics operators
+        + Added new component of match-case in rust
+        + Added new functionality for the 'String' class
+        + Updated/fixed the 'use' keyword syntax
+        + Added example for importing multiple functions using 'use'
+        - Section: System Command Execution
+            + Added importing of dependencies
+            + Operational Workflow to implement system command execution
+            + Added Subprocess pipe implementation examples and explanation
+        + Added resources and references
+    - Updated document 'std.md' in 'Docs/Programming/Languages/Rust/Libraries/built-in/'
+        + Added definition for 'std::process::Stdio()'
+        + Added definition for 'std::process::Stdio()::piped()'
+        + Added definition for 'std::process::Command().stdin(cfg)'
+        + Added definition for 'std::process::Command().stdout(cfg)'
+        + Added definition for 'std::process::Command().stderr(cfg)'
+        + Added definition for 'std::enum::Result().unwrap()'
+        + Added definition for 'std::enum::Result().from_utf8(vec)'
+        + Added usage for converting Vector of bytes (Vec<u8>) into string
+
 
