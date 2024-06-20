@@ -261,6 +261,41 @@
     use <package|crate>::<module>
     ```
 
+### Reading files
+- Import the crate/package/library
+    ```rust
+    use std::fs;
+    use std::path::Path;
+    ```
+
+- Check if the file exists
+    - Explanation
+        - Use the `Path::new(file_path)` to create a new file path class object that will contain properties/details about the existence of the file
+            + The `.exists()` function will contain the status of the file (if it exists - true, or not - false)
+    ```rust
+    // Initialize Variables
+    let f_name = "file-name.txt";
+
+    // Check if file exists
+    if Path::new().exists() {
+        // File exists
+    } else {
+        print!("File '{f_name}' does not exist.\n");
+    }
+    ```
+
+- Read the contents of the specified file to string and store in the contents variable (buffer)
+    - Explanation
+        + The `fs::read_to_string(filename)` will read the contents of the file into the string
+    ```rust
+    let f_contents = fs::read_to_string(f_name).expect(err_msg);
+    ```
+
+- Print file contents
+    ```rust
+    print!("{}", f_contents);
+    ```
+
 ### System process calls 
 - also known as system command execution
     + process calls is used to execute system commands

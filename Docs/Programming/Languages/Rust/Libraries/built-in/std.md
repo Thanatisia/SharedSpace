@@ -11,7 +11,10 @@
 ### Libraries/Modules
 - std
     - `::cmp` : Standard comparison library
+    - `::env` : Standard system environment library
+    - `::fs`  : Standard Filesystem library
     - `::io` : Standard Input-Output operations library
+    - `::path` : Standard file(path) library
     - `::process` : Standard (sub)process pipe/system command execution functions library
 
 ### Classes
@@ -37,6 +40,7 @@
         + Greater
         + Equal
 + `std::io::Stdin` : Data type that represents a handle to the standard input for your terminal
++ `std::path::Path` : Structure containing attributes and functions related to filepaths
 - `std::process`
     - `::Command` : Process builder that when initialized, will return a `std::process:Command` structure that contains information relating to system command/(sub)process that you wish to execute as well as the arguments
         + Type: Result
@@ -50,6 +54,14 @@
         - Return
             - res : Return the converted string object
                 + Type: str
+- std::fs
+    - `::read_to_string(filename)` : Read the contents of the specified file to string and store in the contents variable (buffer)
+        - Parameter Signature/Header
+            - filename : Specify the name of the target file you wish to read
+                + Type: String
+        - Return
+            - f_contents : The string contents of the specified file
+                + Type: io::Result<String>
 - std::io::stdin()
     - `.read_line(buffer)` : Read the line received by the standard input stream and store the result in the specified buffer (memory container - i.e. the memory address pointing to a String variable)
         + Type: Bytes
@@ -57,6 +69,18 @@
         - Return
             - Result : besides storing the value into the String container, the function will also return a Results enumeration (enum) value
                 + Type: enum.Result
+- std::path::Path
+    - `::new(filename)` : Initializes a new Path class object containing the specified filepath's properties/information/attributes
+        - Parameter Signature/Headers
+            - filename : Specify the filepath you wish to query about
+                + Type: String
+        - Return
+            - path : the initialized Path class object for the provided file
+                + Type: std::path::Path
+    - `::exists()` : Checks if the Path entity exists
+        - Return
+            - flag : Returns true if the path points at an existing entity and false if it doesnt (Doesnt exist)
+                + Type: Boolean
 - std::process::Stdio
     - `::piped()` : Initializes a new pipe when used in a standard stream to connect the parent and child processes (used with 'std::process::Command')
         - Return
@@ -403,6 +427,41 @@
             ```rust
             proc.status().expect("Process failed to execute");
             ```
+
+- File Reading
+    - Import the crate/package/library
+        ```rust
+        use std::fs;
+        use std::path::Path;
+        ```
+
+    - Check if the file exists
+        - Explanation
+            - Use the `Path::new(file_path)` to create a new file path class object that will contain properties/details about the existence of the file
+                + The `.exists()` function will contain the status of the file (if it exists - true, or not - false)
+        ```rust
+        // Initialize Variables
+        let f_name = "file-name.txt";
+
+        // Check if file exists
+        if Path::new().exists() {
+            // File exists
+        } else {
+            print!("File '{f_name}' does not exist.\n");
+        }
+        ```
+
+    - Read the contents of the specified file to string and store in the contents variable (buffer)
+        - Explanation
+            + The `fs::read_to_string(filename)` will read the contents of the file into the string
+        ```rust
+        let f_contents = fs::read_to_string(f_name).expect(err_msg);
+        ```
+
+    - Print file contents
+        ```rust
+        print!("{}", f_contents);
+        ```
 
 ## Resources
 

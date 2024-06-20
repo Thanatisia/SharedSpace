@@ -2132,4 +2132,22 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added definition for 'std::enum::Result().from_utf8(vec)'
         + Added usage for converting Vector of bytes (Vec<u8>) into string
 
+#### 1556H
+- New
+    - Added new snippet directory 'file-io' in ''Docs/Programming/Languages/Rust/Snippets' for snippets on File I/O Handling and processing functions
+        + Added new snippet document 'std-fs-file-reading.md' on reading files using the standard filesystem library
+- Updates
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations/'
+        + Added new section block on reading files
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Updated File I/O Processing to include snippets and explanation for reading files
+    - Updated document 'std.md' in 'Docs/Programming/Languages/Rust/Libraries/built-in/'
+        + Added definition for 'std::env'
+        + Added definition for 'std::fs'
+        + Added definition for 'std::path'
+        + Added definition for 'std::path::Path'
+        + Added definition for 'std::fs::read_to_string()'
+        + Added definition for 'std::path::Path::new(filename)'
+        + Added definition for 'std::path::Path::exists()'
+        + Added usage for file reading
 

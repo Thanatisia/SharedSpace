@@ -795,65 +795,39 @@ fn some_unused_variables() {
     ```
 
 ### File IO Processing
-- File I/O Operations
-    - To open a file for usage
-        - Explanation
-            - Use the function `.open()` from the `io` library in the lua standard library to open files for usage
-                - `io.open(file_name, mode)`
-                    - Parameter Signature/Headers
-                        - file_name : Specify the target file you wish to open
-                            + Type: String
-                        - mode : Specify the mode which you want to open with
-                            + Type: String
-                            - Modes:
-                                + r : Read
-                                + w : Write
-                    - Return
-                        - file : Return the opened file pointer (fp)/file descriptor (fd) containing the opened file contents
-                            + Type: IO
-        ```lua
-        local file = io.open(file_name, mode)
-        ```
 
-- Open a file to read
-    ```lua
-    --- Initialize Variables
-    local opts = {}
-
-    --- Null Validation: Check if file name is provided
-    if file_name ~= nil then
-        --- Open file (in read mode) for reading
-        local file = io.open(file_name, "r")
-
-        --- Null Validation: Check if file was opened properly
-        if file then
-            --- Statements here
-        else
-            print("Error opening File Name: [" .. file_name .. "]")
-        end
-    else
-        print("File Name not provided")
-    end
+- Import the crate/package/library
+    ```rust
+    use std::fs;
+    use std::path::Path;
     ```
 
-- Obtaining the contents of a file
-    ```lua
-    --- Open file (in read mode) for reading
-    local file = io.open(file_name, "r")
+- Check if the file exists
+    - Explanation
+        - Use the `Path::new(file_path)` to create a new file path class object that will contain properties/details about the existence of the file
+            + The `.exists()` function will contain the status of the file (if it exists - true, or not - false)
+    ```rust
+    // Initialize Variables
+    let f_name = "file-name.txt";
 
-    --- Null Validation: Check if file was opened properly
-    if file then
-        --- Obtain the file contents
-        local file_contents = file:lines()
+    // Check if file exists
+    if Path::new().exists() {
+        // File exists
+    } else {
+        print!("File '{f_name}' does not exist.\n");
+    }
+    ```
 
-        --- Iterate through the file contents and insert into table (dictionary/key-value mappings)
-        for line in file_contents do
-            --- Insert the current line into the options table
-            table.insert(opts, line)
-        end
-    else
-        print("Error opening File Name: [" .. file_name .. "]")
-    end
+- Read the contents of the specified file to string and store in the contents variable (buffer)
+    - Explanation
+        + The `fs::read_to_string(filename)` will read the contents of the file into the string
+    ```rust
+    let f_contents = fs::read_to_string(f_name).expect(err_msg);
+    ```
+
+- Print file contents
+    ```rust
+    print!("{}", f_contents);
     ```
 
 ## System process calls 
