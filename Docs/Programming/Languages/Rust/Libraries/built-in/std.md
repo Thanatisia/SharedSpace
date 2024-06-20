@@ -11,7 +11,10 @@
 ### Libraries/Modules
 - std
     - `::cmp` : Standard comparison library
+    - `::env` : Standard system environment library
+    - `::fs`  : Standard Filesystem library
     - `::io` : Standard Input-Output operations library
+    - `::path` : Standard file(path) library
     - `::process` : Standard (sub)process pipe/system command execution functions library
 
 ### Classes
@@ -37,6 +40,7 @@
         + Greater
         + Equal
 + `std::io::Stdin` : Data type that represents a handle to the standard input for your terminal
++ `std::path::Path` : Structure containing attributes and functions related to filepaths
 - `std::process`
     - `::Command` : Process builder that when initialized, will return a `std::process:Command` structure that contains information relating to system command/(sub)process that you wish to execute as well as the arguments
         + Type: Result
@@ -50,6 +54,14 @@
         - Return
             - res : Return the converted string object
                 + Type: str
+- std::fs
+    - `::read_to_string(filename)` : Read the contents of the specified file to string and store in the contents variable (buffer)
+        - Parameter Signature/Header
+            - filename : Specify the name of the target file you wish to read
+                + Type: String
+        - Return
+            - f_contents : The string contents of the specified file
+                + Type: io::Result<String>
 - std::io::stdin()
     - `.read_line(buffer)` : Read the line received by the standard input stream and store the result in the specified buffer (memory container - i.e. the memory address pointing to a String variable)
         + Type: Bytes
@@ -57,6 +69,23 @@
         - Return
             - Result : besides storing the value into the String container, the function will also return a Results enumeration (enum) value
                 + Type: enum.Result
+- std::path::Path
+    - `::new(filename)` : Initializes a new Path class object containing the specified filepath's properties/information/attributes
+        - Parameter Signature/Headers
+            - filename : Specify the filepath you wish to query about
+                + Type: String
+        - Return
+            - path : the initialized Path class object for the provided file
+                + Type: std::path::Path
+    - `::exists()` : Checks if the Path entity exists
+        - Return
+            - flag : Returns true if the path points at an existing entity and false if it doesnt (Doesnt exist)
+                + Type: Boolean
+- std::process::Stdio
+    - `::piped()` : Initializes a new pipe when used in a standard stream to connect the parent and child processes (used with 'std::process::Command')
+        - Return
+            - pipe : The pipe object used to stream the results from the stream source to a destination buffer
+                + Type: std::process::Stdio
 - std::process::Command
     - `::new(command_string)` : Initialize a new 'Command' structure object with the specified command to be executed
         - Parameter Signature/Header
@@ -92,6 +121,37 @@
         - Return
             - curr_dir : The returned working directory of the current child process; This returns None if the working directory will not be changes
                 + Type: Option<&Path> | None
+    - `.stdin(cfg)` : Specifies the configuration for the child process's standard input (stdin) handle
+        - Parameter Signature/Header
+            - cfg : The process handle configuration used to connect the parent process to the child process
+                + Type: std::process::Stdio
+        - Return
+            - stdout : Returns the standard output process handle
+                + Type: std::process::Command
+        - Notes
+            + Set the stream handle as `process::Stdio::piped()` to PIPE into the standard input from the process's standard output
+            - Set the stream handle as `process::Stdio::from(proc_stdout.unwrap())` to PIPE the standard output of the specified process into the current process as a standard input
+                - Where
+                    - proc_stdout : The standard output of a previously-specified process handle that exists and you wish to pipe the data from standard output into the new process as a standard input
+                        + Type: Vec<u8>
+    - `.stdout(cfg)` : Specifies the configuration for the child process's standard output (stdout) handle
+        - Parameter Signature/Header
+            - cfg : The process handle configuration used to connect the parent process to the child process
+                + Type: std::process::Stdio
+        - Return
+            - stdout : Returns the standard output process handle
+                + Type: std::process::Command
+        - Notes
+            + Set the stream handle as `process::Stdio::piped()` to PIPE the standard output of the (sub)process command execution to the variable for display and retrieval
+    - `.stderr(cfg)` : Specifies the configuration for the child process's standard error (stderr) handle
+        - Parameter Signature/Header
+            - cfg : The process handle configuration used to connect the parent process to the child process
+                + Type: std::process::Stdio
+        - Return
+            - stdout : Returns the standard output process handle
+                + Type: std::process::Command
+        - Notes
+            + Set the stream handle as `process::Stdio::piped()` to PIPE the standard error of the (sub)process command execution to the variable for display and retrieval
     - `.status()` : Executes a command as a child process, wait for it to finish then collecting its status code (aka return code, retcode or result code)
         - Return
             - status_code : The returned status code after the process has been completed (Polling has stopped and a status code has been returned)
@@ -115,11 +175,22 @@
                 + The program will compile but you'll get a warning
                 - Rust warns that you havent used the `enum.Result` value returned from the function, 
                     + indicating that the program has not handled a possible error
+    - `.unwrap()` : Unwrap the result object to obtain the string result
+        - Return
+            - res_str : The obtained string in the Result
+                + Type: String
 - String
     - `::new()` : Initialize a new String variable/object
         - Return
             - str_variable : Return the initialized String object instance
                 + Type: String
+    - `::from_utf8(vec)` : Converts a vector of bytes into a String, returning as a Result<String, FromUtf8Error> object to be unwrapped for use
+        - Parameter Signature/Headers
+            - vec : Pass the target vector of type bytes (u8 etc) that you wish to convert into a string
+                + Type: Vec<u8>
+        - Return
+            - res : The converted vector of bytes packed into a string to be unwrapped
+                + Type: Result<String, FromUtf8Error>
     - `.cmp(&variable)` : Compare the string value with another string value
         - Return
             - cmp_result: The comparison result - Less if the string is less than the target, More if the string is more than the target, Equal if the string is equals to the target
@@ -172,6 +243,14 @@
         // Convert number into string
         let num_as_string = num.to_string();
         ```
+
+- To convert a Vec<u8> UTF-8 vector container into a string (by unwrapping it)
+    - Explanation
+        + Pass the Vec<u8> object into the `String::from_utf8(vec_object)` function to format it into a 'Result<String, FromUTF8Error>' object
+        + Execute `.unwrap()` to obtain the String value from the vector of Bytes
+    ```rust
+    let unwrapped = String::from_utf8(vec_object).unwrap();
+    ```
 
 ### Operational Workflow
 - Initialize a new string object and make it mutable (in rust, variables are immutable by default)
@@ -348,6 +427,41 @@
             ```rust
             proc.status().expect("Process failed to execute");
             ```
+
+- File Reading
+    - Import the crate/package/library
+        ```rust
+        use std::fs;
+        use std::path::Path;
+        ```
+
+    - Check if the file exists
+        - Explanation
+            - Use the `Path::new(file_path)` to create a new file path class object that will contain properties/details about the existence of the file
+                + The `.exists()` function will contain the status of the file (if it exists - true, or not - false)
+        ```rust
+        // Initialize Variables
+        let f_name = "file-name.txt";
+
+        // Check if file exists
+        if Path::new().exists() {
+            // File exists
+        } else {
+            print!("File '{f_name}' does not exist.\n");
+        }
+        ```
+
+    - Read the contents of the specified file to string and store in the contents variable (buffer)
+        - Explanation
+            + The `fs::read_to_string(filename)` will read the contents of the file into the string
+        ```rust
+        let f_contents = fs::read_to_string(f_name).expect(err_msg);
+        ```
+
+    - Print file contents
+        ```rust
+        print!("{}", f_contents);
+        ```
 
 ## Resources
 

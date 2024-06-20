@@ -97,6 +97,10 @@
 + [2024-06-02](#2024-06-02)
 + [2024-06-04](#2024-06-04)
 + [2024-06-06](#2024-06-06)
++ [2024-06-08](#2024-06-08)
++ [2024-06-10](#2024-06-10)
++ [2024-06-19](#2024-06-19)
++ [2024-06-20](#2024-06-20)
 
 ## Version History
 ```
@@ -2039,4 +2043,124 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new document 'README.md'
     - Added new directory 'ctypes' in 'Docs/Programming/Languages/Python/Libraries/' for documentations on the python library
         + Added new document 'manual.md'
+
+### 2024-06-08
+#### 1727H
+- New
+    - Added new directory 'dictionary' in 'Docs/Programming/Languages/Python/Guides/Types/'
+        - Added new directory 'Algorithms'
+            + Added new document 'dynamically-searching-key-values.md'
+
+### 2024-06-10
+#### 2211H
+- New
+    + Added new document 'attacks-vulnerabilities-and-exploits.md' in 'Docs/CyberSecurity/Cheatsheets/' containing a quick cheatsheet containing a summary of various attacks, vulnerabilities and exploits
+    + Added new document 'terminologies.md' in 'Docs/CyberSecurity/Cheatsheets/' containing a quick cheatsheet about cybersecurity (and related sub/supersets thereof) terminologies
+
+### 2024-06-19
+#### 2147H
+- New
+    - Added new directory 'Registry' in 'Docs/Operating Systems/Windows/Guides/' for documentations regarding the Windows Registry in general
+        + Added new document 'understanding-the-windows-registry.md' : A Quickstart guide on how to maneuvre and understand the windows registry
+    - Added new directory 'Concepts and Topics' in 'Docs/Programming/' : central folder containing documentations on various programming concepts and topics on a generic level/scale
+        - Added new directory 'Image Manipulation' for information regarding the handling of Images with software 
+            - Added new directory 'Guides'
+                + Added new document 'pixel-color-modification.md' containing information on Image pixels and modification of colors via software (i.e. grayscaling)
+    - Added new directory 'pillow' in 'Docs/Programming/Languages/Python/Libraries/' : to contain documentations regarding the usage of the pillow (PIL) python library/module
+        + Added new document 'manual.md'
+    - Added new directory 'Documentations' 'Docs/Programming/Languages/Rust/'
+        + Added new document 'attributes.md': Contains documentations about Rust Attributes as well as attribute entries/usages
+        + Added new document 'keywords-and-usages.md': Contains documentations on Rust Keywords and usages/snippets on how to use them
+        + Added new document 'operators.md' : Contains documentations on Rust operators
+        + Added new document 'syntax-and-structure.md': Contains documentations on the syntax for Rust
+    + Added new document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/' : A beginner's guide and quickstart introduction documentation to the Rust Programming Language - still a WIP
+    + Added new document 'regex-patterns.md' in 'Docs/Programming/Vim/Documents/' containing documentations on various useful Regex patterns using vim's regex engine
+
+#### 2240H
+- Updates
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Fixed syntax for 'for i in range()' => 'for i in min..max' : The usage of '..' denoting range between 2 ends instead of 'range()'
+        + Added new syntax example for iterating over the index(es) of an array and accessing the values in the memory address of the array to obtain the value in that index
+        + Removed redundant example
+        - Added CLI argument parsing syntax and usage examples
+            + Added explanations
+            + Added syntax to obtain the argument count (argc)
+            + Added iteration of arguments to obtain the values
+        + Added syntax for importing of crates/packages from external files
+    - Updated document 'keyword-and-usages.md' in 'Docs/Programming/Languages/Rust/Documentations'
+        + Added new keyword 'use' for importing external files/crates into the application
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations'
+        + Fixed syntax for 'for i in range()' => 'for i in min..max' : The usage of '..' denoting range between 2 ends instead of 'range()'
+        + Added new syntax example for iterating over the index(es) of an array and accessing the values in the memory address of the array to obtain the value in that index
+        - Added CLI argument parsing syntax and usage examples
+            + Added explanations
+            + Added syntax to obtain the argument count (argc)
+            + Added iteration of arguments to obtain the values
+        + Added syntax for importing of crates/packages from external files
+
+### 2024-06-20
+#### 1508H
+- New
+    - Added new directory 'Snippets' in 'Docs/Programming/Languages/Rust/'
+        - Added new directory 'system-command-exec' for snippets on System (sub)process Command Execution
+            + Added document 'std-process-command.md' : Snippet and explanation on System Command Execution using the built-in standard library process crate
+        - Added new directory 'cli-argument-parsing' for snippets on CLI Argument Pars(ing/er) in Rust
+            + Added document 'standard-env.md' : Snippet nd explanation on CLI Argument parsing using just the built-in stadnard environment crate
+- Updates
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations/'
+        + Added new section block system process calls (subprocess) and execution
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Added new section block and header for Command Line Arguments
+        + Added new section block and header for System Command Execution
+        + Added new mathematics operators
+        + Added new component of match-case in rust
+        + Added new functionality for the 'String' class
+        + Updated/fixed the 'use' keyword syntax
+        + Added example for importing multiple functions using 'use'
+        - Section: System Command Execution
+            + Added importing of dependencies
+            + Operational Workflow to implement system command execution
+            + Added Subprocess pipe implementation examples and explanation
+        + Added resources and references
+    - Updated document 'std.md' in 'Docs/Programming/Languages/Rust/Libraries/built-in/'
+        + Added definition for 'std::process::Stdio()'
+        + Added definition for 'std::process::Stdio()::piped()'
+        + Added definition for 'std::process::Command().stdin(cfg)'
+        + Added definition for 'std::process::Command().stdout(cfg)'
+        + Added definition for 'std::process::Command().stderr(cfg)'
+        + Added definition for 'std::enum::Result().unwrap()'
+        + Added definition for 'std::enum::Result().from_utf8(vec)'
+        + Added usage for converting Vector of bytes (Vec<u8>) into string
+
+#### 1556H
+- New
+    - Added new snippet directory 'file-io' in ''Docs/Programming/Languages/Rust/Snippets' for snippets on File I/O Handling and processing functions
+        + Added new snippet document 'std-fs-file-reading.md' on reading files using the standard filesystem library
+- Updates
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations/'
+        + Added new section block on reading files
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Updated File I/O Processing to include snippets and explanation for reading files
+    - Updated document 'std.md' in 'Docs/Programming/Languages/Rust/Libraries/built-in/'
+        + Added definition for 'std::env'
+        + Added definition for 'std::fs'
+        + Added definition for 'std::path'
+        + Added definition for 'std::path::Path'
+        + Added definition for 'std::fs::read_to_string()'
+        + Added definition for 'std::path::Path::new(filename)'
+        + Added definition for 'std::path::Path::exists()'
+        + Added usage for file reading
+
+#### 2206H
+- New
+    - Added new snippet directory 'concurrency' in 'Docs/Programming/Languages/Rust/Snippets' for snippets on Concurrent programming'
+        + Added new snippet document 'simple-thread.md' on making a simple example of multithreading using the built-in thread module/library
+- Updates
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations/'
+        + Added new section block on concurrency
+        + Added steps to begin initializing multiple threads to make a simpel multi-threaded structure
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Added new section block and header for Asynchronous programming
+        + Added new section block and header for Concurrency programming and Threads
+        + Added steps to begin initializing multiple threads to make a simpel multi-threaded structure
 
