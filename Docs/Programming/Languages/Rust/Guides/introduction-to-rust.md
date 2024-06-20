@@ -66,82 +66,82 @@
 ### Keywords
 - enum : Create an enumeration (Array/Mapping of values that can be selected from)
     ```rust
-    enum EnumName {
-        variable = value,
-        variable = value,
-        /// ...
-    }
+    enum EnumName {
+        variable = value,
+        variable = value,
+        /// ...
+    }
     ```
 - fn : Declare and initialize a new function
     ```rust
-    fn func_name(parameter_signature/header) -> return_type {
-        /*
-         * Statements
-         */
-    }
-    ```
+    fn func_name(parameter_signature/header) -> return_type {
+        /*
+         * Statements
+         */
+    }
+    ```
 - impl : Implement some functionality/a specific trait for a given type/object/struct
     - Particular Type
         ```rust
-        impl <type> {
-            // Define functions available only for this type/structure
-            fn func_name(parameter_sig/header) -> <return_type> {
-                // Statements
-            }
+        impl <type> {
+            // Define functions available only for this type/structure
+            fn func_name(parameter_sig/header) -> <return_type> {
+                // Statements
+            }
 
-            // Define function with a global implementation variable
-            fn func_name(&mut self) -> <return_type> {
-                self.var = value;
-            }
+            // Define function with a global implementation variable
+            fn func_name(&mut self) -> <return_type> {
+                self.var = value;
+            }
         }
         ```
     - Trait (Prototype Function Definition)
         ```rust
-        impl <trait_name> for <type> {
-            // Define functions available only for this type/structure
-            fn func_name(parameter_sig/header) -> <return_type> {
-                // Statements
-            }
+        impl <trait_name> for <type> {
+            // Define functions available only for this type/structure
+            fn func_name(parameter_sig/header) -> <return_type> {
+                // Statements
+            }
 
-            // Define function with a global implementation variable
-            fn func_name(&mut self) -> <return_type> {
-                self.var = value;
-            }
-        }
-        ```
+            // Define function with a global implementation variable
+            fn func_name(&mut self) -> <return_type> {
+                self.var = value;
+            }
+        }
+        ```
     - Structure (Implementing functions in a struc)
         - Declare the public struct object
             ```rust
-            pub struct StructName;
-            ```
-        - Implement your struct function attribute and logics
+            pub struct StructName;
+            ```
+        - Implement your struct function attribute and logics
             ```rust
-            impl StructName {
-                pub fn func_name(parameter-signature/header:<data-type>) {
-                    // Function statements
-                }
-            }
-            ```
-        - Calling the function from a struct
+            impl StructName {
+                pub fn func_name(parameter-signature/header:<data-type>) {
+                    // Function statements
+                }
+            }
+            ```
+        - Calling the function from a struct
             ```rust
-            StructName::func_name(arguments, ...);
-            ```
+            StructName::func_name(arguments, ...);
+            ```
 - let : Declare a new variable (Immutable by default)
     ```rust
-    let var_name:<data-type> = "value";
-    ```
+    let var_name:<data-type> = "value";
+    ```
 - mod : Declare and define a new module (Similar to a function with different properties)
     ```rust
-    mod module_name {
-        /*
-         * Module function
-         */
-    }
-    ```
+    mod module_name {
+        /*
+         * Module function
+         */
+    }
+    ```
 - mut : Define a variable as mutable (In Rust - All variables are immutable/read-only by default)
     ```rust
-    let mut var_name:<data-type> = "value";
-    ```
+    let mut var_name:<data-type> = "value";
+    ```
 - pub : Define the assigned object as a publicly-accessible object
     ```rust
     pub <object> {
@@ -154,14 +154,14 @@
         attribute: type,
         /// ...
     }
-    ```
+    ```
     - Usages
         - Create a new instance of a struct
             ```rust
             fn main() {
-                let struct_obj = struct_name {
-                    attribute: new-value,
-                    /// ... 
+                let struct_obj = struct_name {
+                    attribute: new-value,
+                    /// ... 
                 };
             }
             ```
@@ -173,36 +173,36 @@
 
         - Modify a value from a struct  
             ```rust  
-            struct_obj.attribute = String::from("new-value");  
-            ```
+            struct_obj.attribute = String::from("new-value");  
+            ```
 
         - Implementing functions in a struct  
-            - Declare the public struct object  
+            - Declare the public struct object  
                 ```rust  
                 pub struct StructName;  
-                ```  
-            - Implement your struct function attribute and logics  
+                ```  
+            - Implement your struct function attribute and logics  
                 ```rust  
-                impl StructName {  
-                    pub fn func_name(parameter-signature/header:<data-type>) {  
-                        // Function statements  
-                    }  
-                }  
-                ```  
-            - Calling the function from a struct  
+                impl StructName {  
+                    pub fn func_name(parameter-signature/header:<data-type>) {  
+                        // Function statements  
+                    }  
+                }  
+                ```  
+            - Calling the function from a struct  
                 ```rust  
-                StructName::func_name(arguments, ...);  
+                StructName::func_name(arguments, ...);  
                 ```
 - trait : Define the prototype functions within the trait that will be initialized by an impl (Implementation) of a type and provided with the function's statements  
     ```rust  
-    trait <trait-name> {  
-        fn function_name(parameter_signature);  
-    }  
+    trait <trait-name> {  
+        fn function_name(parameter_signature);  
+    }
     ```  
 - type : Create a new Type alias to be used as a mirror of the original type. The variable declared with this type will inherit the properties and attributes assigned/defined in this Type  
     ```rust  
-    type alias_type = target_type;  
-    ```
+    type alias_type = target_type;  
+    ```
 
 ### Variables
 > Declaration and Initialization
@@ -417,66 +417,66 @@ vec.push("new-entry")
 
 #### Synopsis/Syntax
 - struct : Declare and initialize a new structure that will be used as a "Class", namespaces or data structure to hold common attributes  
-    ```rust  
-    struct struct_name {  
-        attribute: type,  
-        /// ...  
-    }  
-    ```  
+    ```rust  
+    struct struct_name {  
+        attribute: type,  
+        /// ...  
+    }  
+    ```  
 
 #### Usages
-- Create a new instance of a struct  
-    ```rust
-    fn main() {  
-        let struct_obj = struct_name {  
-            attribute: new-value,  
-            /// ...  
-        };  
-    }  
-    ```
+- Create a new instance of a struct
+    ```rust
+    fn main() {  
+        let struct_obj = struct_name {  
+            attribute: new-value,  
+            /// ...  
+        };  
+    }  
+    ```
 
 - Accessing an attribute from a struct  
-    ```rust  
-    let struct_attr = struct_obj.attribute  
-    ```
+    ```rust  
+    let struct_attr = struct_obj.attribute  
+    ```
 
 - Modify a value from a struct  
-    ```rust  
-    struct_obj.attribute = String::from("new-value");  
-    ```
+    ```rust  
+    struct_obj.attribute = String::from("new-value");  
+    ```
 
 - Implementing functions in a struct  
-    - Declare the public struct object  
-        ```rust  
-        pub struct StructName;  
-        ```  
-    - Implement your struct function attribute and logics  
-        ```rust  
-        impl StructName {  
-            pub fn func_name(parameter-signature/header:<data-type>) {  
-                // Function statements  
-            }  
-        }  
-        ```  
-    - Calling the function from a struct  
-        ```rust  
-        StructName::func_name(arguments, ...);  
-        ```
+    - Declare the public struct object  
+        ```rust  
+        pub struct StructName;  
+        ```  
+    - Implement your struct function attribute and logics  
+        ```rust  
+        impl StructName {  
+            pub fn func_name(parameter-signature/header:<data-type>) {  
+                // Function statements  
+            }  
+        }
+        ```  
+    - Calling the function from a struct  
+        ```rust  
+        StructName::func_name(arguments, ...);  
+        ```
 
 - Prototype function declaration and definition  
     - Declare your prototype functions in a trait  
         ```rust  
-        trait YourTrait {  
-            fn function_name(&mut self);  
-        }  
+        trait YourTrait {  
+            fn function_name(&mut self);  
+        }  
         ```
 
     - Implement this trait for a specific type  
         ```rust  
-        impl YourTrait for <target-type> {  
-            fn function_name(&mut self) {  
-                self.var = value;  
-            }  
+        impl YourTrait for <target-type> {  
+            fn function_name(&mut self) {  
+                self.var = value;  
+            }  
         }  
         ```
 
@@ -585,17 +585,17 @@ vec.push("new-entry")
 
 ### Synopsis/Syntax  
 - Apply a general metadata Attribute to the whole module  
-    ```rust  
-    #![attribute = "value"]  
-    ```
+    ```rust  
+    #![attribute = "value"]  
+    ```
 
 - Apply attribute to a function  
-    ```rust  
-    #[attribute_key]  
-    fn func_name() {
+    ```rust  
+    #[attribute_key]  
+    fn func_name() {
 
-    }  
-    ```
+    }  
+    ```
 
 ### Usage
 
@@ -704,35 +704,35 @@ fn some_unused_variables() {
 - Implementing functions in a struct  
     - Declare the public struct object  
         ```rust  
-        pub struct StructName;  
-        ```  
+        pub struct StructName;  
+        ```  
     - Implement your struct function attribute and logics  
         ```rust  
-        impl StructName {  
-            pub fn func_name(parameter-signature/header:<data-type>) {  
-                // Function statements  
-            }  
-        }  
+        impl StructName {  
+            pub fn func_name(parameter-signature/header:<data-type>) {  
+                // Function statements  
+            }  
+        }  
         ```  
-    - Calling the function from a struct  
+    - Calling the function from a struct  
         ```rust  
-        StructName::func_name(arguments, ...);  
+        StructName::func_name(arguments, ...);  
         ```
 
 ### Prototype function declaration and definition  
 - Declare your prototype functions in a trait  
     ```rust  
-    trait YourTrait {  
-        fn function_name(&mut self);  
-    }  
+    trait YourTrait {  
+        fn function_name(&mut self);  
+    }  
     ```
 
 - Implement this trait for a specific type  
     ```rust  
-    impl YourTrait for <target-type> {  
-        fn function_name(&mut self) {  
-            self.var = value;  
-        }  
+    impl YourTrait for <target-type> {  
+        fn function_name(&mut self) {  
+            self.var = value;  
+        }  
     }  
     ```
 

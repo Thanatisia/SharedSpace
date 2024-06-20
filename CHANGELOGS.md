@@ -2164,3 +2164,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added new section block and header for Concurrency programming and Threads
         + Added steps to begin initializing multiple threads to make a simpel multi-threaded structure
 
+#### 2245H
+- Updates
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Hotfix: Fixed formatting by changing spaces to tabs
+
