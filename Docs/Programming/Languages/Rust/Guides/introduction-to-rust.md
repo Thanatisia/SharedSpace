@@ -39,9 +39,9 @@
 - [System Process Calls](#system-process-calls)
     + [System Command Execution](#system-command-execution)
     + [Subprocess pipes](#subprocess-pipes)
-- [Coroutines](#coroutines)
-    + [Functions](#coroutine-functions)
-    + [Setup Flow](#setup-flow)
+- [Asynchronous Programming](#asynchronous-programming)
+- [Concurrency](#concurrency)
+    + [Threads](#threads)
 
 ## Basics
 
@@ -988,100 +988,40 @@ let output = if cfg!(target_os = "windows") {
             .expect("Failed to execute process")
         ```
 
-## Coroutines
+## Asynchronous Programming
 
-### Coroutine Functions
-- `coroutine.create(function)` : Create a new coroutine for handling asynchronous function synchronously
-    - Parameter Signature/Header
-        - function : Specify the function you wish to execute when the coroutine is started/executed
-            + Type: Function
-    - Return
-        - co : The coroutine object containing the coroutine created
-            + Type: coroutine
-- `coroutine.resume(co, item_selection)` : Resume the coroutine when the callback event handler function has been triggered
-    - Parameter Signature/Header
-        - co : Specify the Coroutine object
-            + Type: coroutine
-        - item_selection : (Optional) Specify the value you want to resume the process/coroutine from
-            + Type: any
+## Concurrency
+### Threads
+- Import the 'std::thread' threads built-in standard library/crate 
+    ```rust
+    use std::thread;
+    ```
+- Spawn threads for each task/job (the function you want the thread to execute concurrently/asynchronously)
+    - Explanation
+        - `thread::spawn(action || thread_stmt)` will initialize a new thread mapped to the function you provided and return the thread object
+            - Parameter Signature/Header
+                - action : Specify a spawn action (leave empty to not execute a purpose)
+                    - Values
+                        + move
+                - thread_stmt : Pass the function you wish to execute
+                    + Type: `&dyn Fn()`
+                    - Format
+                        ```rust
+                        {
+                            // Your statement here
+                        }
+                        ```
+            - Return
+                + The thread object is of type JoinHandle<T>
+    ```rust
+    let thread = thread::spawn(|| function(parameter_signature));
+    ```
+
+- Wait for all your threads to complete
     - Notes
-        + The first time `.resume()` is executed, it will start the coroutine after the asynchronous operation is completed, and to wait for the user selection to complete.
-        + Subsequent uses will be resuming the coroutine if `.yield()` is used to suspend the coroutine executions
-+ `coroutine.running()` : Make the stream synchronous
-- `coroutine.yield(value)` : Suspend the coroutine executions with the specified value as the last item, until the callback event hander function resumes the coroutine.
-    - Parameter Signature/Header
-        - value : Specify the value that will be stored as the last item for retrieval
-            + Type: any
-            - Notes
-                + If the value is not provided, it will suspend the coroutine executions with the last item that was stored
-
-### Setup Flow
-- Create a new coroutine for handling asynchronous function synchronously
-    ```lua
-    local co = coroutine.create(function()
-        --- Perform Asynchronous functions and operations here
-    end)
-    ```
-
-    - Design your asynchronous operation/function
-        - Create a asynchronous function (or a function that contains an asynchronous operation) to execute
-            ```lua
-            local func_name = function(parameter_signature, ...)
-                --- Statements
-            end
-            ```
-
-            - Make the stream synchronous
-                ```lua
-                local co = coroutine.running()
-                ```
-            - Ensure that 'co' is a valid coroutine
-                ```lua
-                if not co then
-                    error("This function must be called within a coroutine")
-                end
-                ```
-            - (Optional) Define callback event function. 
-                - Explanation 
-                    + This Callback Event Handler function will be triggered after an asynchronous event (i.e. menu item is selected from a popup menu window) is detected
-                    + To resume the coroutine at the end of the event handler: `coroutine.resume(co, selected_item)`
-                ```lua
-                local cb = function(_, sel)
-                    --- Return the result of the attached function back up to the 'sel' callback object and
-                    --- store the sel local variable result into 'async_res.result'
-                    async_res.result = sel
-
-                    --- Resume the coroutine after the menu has been created
-                    coroutine.resume(co, sel)
-                end
-                ```
-            - Activate asynchronous function
-                ```lua
-                your_async_function(opts, cb)
-                ```
-            - Suspend execution until the callback event handler resumes it
-                - Explanation
-                    - `coroutine.yield(value)` will suspend the coroutine executions with the specified value as the last item, until the callback event hander function resumes the coroutine.
-                        + If the value is not provided, it will suspend the coroutine executions with the last item that was stored
-                    + To resume the coroutine at the end of the event handler: `coroutine.resume(co, selected_item)`
-                ```lua
-                local result = coroutine.yield()
-                ```
-            - Return the result back to the caller of the asynchronous function
-                ```lua
-                return result
-                ```
-
-- Start the coroutine after the asynchronous operation is completed, and to wait for the user selection to complete.
-    ```lua
-    local success, message = coroutine.resume(co)
-    ```
-
-- Check if coroutine ran successfully
-    ```lua
-    if not success then
-        error("Coroutine error: " .. tostring(message))
-    end
+        + Specify this for all threads you spawned
+    ```rust
+    thread.join().expect("Thread N panicked");
     ```
 
 ## Resources
@@ -1089,6 +1029,7 @@ let output = if cfg!(target_os = "windows") {
 ## References
 + [brson - A Guide to Rust Syntax](https://gist.github.com/brson/9dec4195a88066fa42e6)
 + [GeeksForGeeks - Rust - Array](https://www.geeksforgeeks.org/rust-array/)
++ [RustLang Documentations - Async Book - Getting Started - 02. Why Async](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html)
 + [RustLang Documentations - Rust By Example - Flow Control - For loop](https://doc.rust-lang.org/rust-by-example/flow_control/for.html)
 + [RustLang Documentations - std - process - Handling I/O](https://doc.rust-lang.org/std/process/index.html#handling-io)
 

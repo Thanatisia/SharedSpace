@@ -2151,3 +2151,16 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added definition for 'std::path::Path::exists()'
         + Added usage for file reading
 
+#### 2206H
+- New
+    - Added new snippet directory 'concurrency' in 'Docs/Programming/Languages/Rust/Snippets' for snippets on Concurrent programming'
+        + Added new snippet document 'simple-thread.md' on making a simple example of multithreading using the built-in thread module/library
+- Updates
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations/'
+        + Added new section block on concurrency
+        + Added steps to begin initializing multiple threads to make a simpel multi-threaded structure
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        + Added new section block and header for Asynchronous programming
+        + Added new section block and header for Concurrency programming and Threads
+        + Added steps to begin initializing multiple threads to make a simpel multi-threaded structure
+
