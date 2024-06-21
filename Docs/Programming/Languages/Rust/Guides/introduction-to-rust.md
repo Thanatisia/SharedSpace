@@ -316,6 +316,15 @@
 + u64 : 64-bit unsigned integer
 
 ### String
+
+#### String formatting
+- In-line string formatting using variables
+    ```rust
+    let msg = "Hello World";
+    print!("{msg}");
+    ```
+
+#### Functions
 - To convert a Vec<u8> UTF-8 vector container into a string (by unwrapping it)
     - Explanation
         + Pass the Vec<u8> object into the `String::from_utf8(vec_object)` function to format it into a 'Result<String, FromUTF8Error>' object
@@ -325,22 +334,154 @@
     ```
 
 ### NULL
+
+#### Introduction
 - Explanation
     + also known as None, nil, null
     - null is basically an empty object, it is not even intiialized
         + Hence, you should do data validations such as a Null-value check to ensure a memory container is in a safe state to be used
 
-- To check if a variable is NULL-value
-    - Using the object directly
-        ```rust
-        let var = NULL;
+- There's no built-in empty value keywords in rust (and no Null-pointer exceptions, as Rust is designed for safety)
+    - Alternatives
+        1. Use an Option (`std::option`)
 
-        if (var == NULL) {
-            // nil object
-        } else {
-            // Not nil object
+#### Using Option
+- The type `Option` represents an optional value: Some (contains a value) or None (does not contains a value)
+    - Uses
+        + Initial values
+        + Return values for functions that are not defined over their entire input range (partial functions)
+        + Return value for otherwise reporting simple errors, where None is returned on error
+        + Optional struct fields
+        + Struct fields that can be loaned or “taken”
+        + Optional function arguments
+        + Nullable pointers
+        + Swapping things out of difficult situations
+    - Use Cases
+        + Commonly paired with pattern matching to query the presence of a value and take action, and always accounting for the None case
+
+- Using `std::option`
+    - Documentations
+        - Attributes
+            - Option<PointerHandle<T>>
+                - `Some(value)` : Checks if the Pointer Handle contains the specified `value`
+                - None : If the pointer handle does not contain the specified value
+
+    - Syntax and Synopsis
+        - Declaring and Initialization
+            ```rust
+            let optional: Option<PointerHandle<T>> = SomePointer_of_type_T;
+            ```
+        - Usage
+            ```rust
+            match optional {
+                Some(p) => println!("has value {p}"),
+                None => println("has no value"),
+            }
+            ```
+
+    - Examples
+        - Division
+            - Define function
+                - Explanation
+                    - In the function `divide`
+                        - Take in the parameter signature of
+                            + `numerator<f64>`: The numerator (top half of the division) of type 64-bit float
+                            + `denominator<f64>` : The denominator (bottom half of the division) of type 64-bit float
+                        - Return
+                            - the division in an Option<f64> object: optional of type 64-bit float
+                                + If denominator is 0.0: Return None (Cannot divide by 0)
+                                + Else: Return the division of `numerator/denominator`
+                ```rust
+                fn divide(numerator: f64, denominator: f64) -> Option<f64> {
+                    if denominator == 0.0 {
+                        None
+                    } else {
+                        Some(numerator / denominator)
+                    }
+                }
+                ```
+
+            - Invoke/Call the function
+                ```rust
+                // The return value of the function is an option
+                let result = divide(2.0, 3.0);
+                ```
+
+            - Pattern match to retrieve the value
+                - Explanation
+                    - `Some(x)` will initialize the variable passed in the local scope, check if the `Some` result was found,
+                        + and return the value into the local variable
+                ```rust
+                // Pattern match to retrieve the value
+                match result {
+                    // The division was valid
+                    Some(x) => println!("Result: {x}"),
+                    // The division was invalid
+                    None    => println!("Cannot divide by 0"),
+                }
+                ```
+
+#### Options and Pointers
++ aka "Nullable" pointers
+
+- In Rust, there are no "null" pointer references
+    + pointer types *must* always point to a valid location
+    + Instead, Rust has *optional* pointers, essentially Option for the specified pointer reference's type (`Option<PointerHandle<T>`)
+
+- Examples
+    - Using an Option to create an optional Box of type i32 (Box<i32>)
+        - Notes
+            - In order to access the inner i32 value, the function `check_optional()` first needs to use pattern matching to determine whether the box has a value
+                + `Some(...)`
+                + `!None`
+        ```rust
+        let optional = None;
+        check_optional(optional);
+
+        let optional = Some(Box::new(9000));
+        check_optional(optional);
+
+        fn check_optional(optional: Option<Box<i32>>) {
+            match optional {
+                Some(p) => println!("has value {p}"),
+                None => println!("has no value"),
+            }
         }
         ```
+
+#### Question Mark Operator
+- Purpose
+    - Similar to the `Result` type, when writing code that calls many functions that return the `Option` type, handling `Some/None` can be tedious
+        - The question mark operator (`?` ) hides some of the boilerplate of propagating values up the call stack
+
+- Syntax/Structure
+    + `?` is like the ternary operator, where it checks if the passed value(s) (which the operator have been appended to) exists
+    ```rust
+    fn function_name(parameter_signature) -> Option<T> {
+        Some(value?)
+    }
+    ```
+
+- Example
+    - Add last numbers to the stack
+        - Without question mark operator
+            ```rust
+            fn add_last_numbers(stack: &mut Vec<i32>) -> Option<i32> {
+                let a = stack.pop();
+                let b = stack.pop();
+
+                match (a,b) {
+                    (Some(x), Some(y)) => Some(x+y),
+                    _ => None,
+                }
+            }
+            ```
+        - With question mark operator
+            ```rust
+            fn add_last_numbers(stack: &mut Vec<i32>) -> Option<i32> {
+                Some(stack.pop()? + stack.pop()?)
+            }
+            ```
 
 ## Standard Streams
 ### Standard Output
@@ -1031,7 +1172,9 @@ let output = if cfg!(target_os = "windows") {
 + [GeeksForGeeks - Rust - Array](https://www.geeksforgeeks.org/rust-array/)
 + [RustLang Documentations - Async Book - Getting Started - 02. Why Async](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html)
 + [RustLang Documentations - Rust By Example - Flow Control - For loop](https://doc.rust-lang.org/rust-by-example/flow_control/for.html)
++ [RustLang Documentations - std - option](https://doc.rust-lang.org/std/option/)
 + [RustLang Documentations - std - process - Handling I/O](https://doc.rust-lang.org/std/process/index.html#handling-io)
++ [StackOverflow - Questions - 57962168 - How to set a field in a struct with an empty value](https://stackoverflow.com/questions/57962168/how-to-set-a-field-in-a-struct-with-an-empty-value)
 
 ## Remarks
 

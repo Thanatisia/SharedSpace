@@ -101,6 +101,7 @@
 + [2024-06-10](#2024-06-10)
 + [2024-06-19](#2024-06-19)
 + [2024-06-20](#2024-06-20)
++ [2024-06-21](#2024-06-21)
 
 ## Version History
 ```
@@ -2168,4 +2169,23 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
         + Hotfix: Fixed formatting by changing spaces to tabs
+
+### 2024-06-21
+#### 1108H
+- New
+    - Added new snippet directory 'option' in 'Docs/Programming/Languages/Rust/Snippets' for snippets and example usages of the 'Option<T>' type in Rust
+        - Added new snippet directory 'divide' for snippets on making a simple divide function with the data type 'Option<T>' as the return value
+            + Added new snippet document 'divide-with-pattern-matching.md' on making a simple example of the 'Option<T>' data type and the Some/Nome pattern matching with a division function
+- Updates
+    - Updated document 'syntax-and-structure.md' in 'Docs/Programming/Languages/Rust/Documentations/'
+        + Updated section block 'NULL' with rust's Option type
+    - Updated document 'introduction-to-rust.md' in 'Docs/Programming/Languages/Rust/Guides/'
+        - Updated section block 'String'
+            + Added String Formatting
+            + Added subheader 'Functions'
+        - Updated section block 'NULL' with rust's Option type
+            + Added subheader 'Introduction'
+            + Added info on the rust Option type
+            + Added info on the Question Mark Operator
+
 
