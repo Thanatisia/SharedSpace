@@ -2188,4 +2188,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + Added info on the rust Option type
             + Added info on the Question Mark Operator
 
+#### 2321H
+- New
+    - Added new directory 'Frameworks' in 'Docs/Programming/Languages/Rust/' for holding documentations on various rust multi-package (crate) frameworks
+        - Added new subdirectory 'wasm' for the Rust WASM framework
+            + Added new document 'quickstart-setup.md' : A quickstart guide to setup a working Rust-WASM project workspace structure and working web page interfacing with rust code
+    + Added new document 'development-workflow-using-cargo.md' in 'Docs/Programming/Languages/Rust/Guides/' containing a simple all-in-one, writeup on the general operational development workflow in Rust using cargo to get started
+    - Added new directory 'http-servers' in 'Docs/Programming/Web-Development/Javascript/Snippets/' for snippets on developing HTTP Servers in Javascript
+        - Added new subdirectory 'nodejs-http-module' for snippets on creating HTTP Servers in Javascript using NodeJS and the 'http' module in Javascript
+            + Added new document 'README.md'
+            + Added new document 'simple-http-server.md' : Chapter 1 of the NodeJS HTTP Server using 'http' snippet sequence - Simple base HTTP Server
+            + Added new document 'http-server-with-response.md' : Chapter 2 of the NodeJS HTTP Server using 'http' snippet sequence - Obtaining HTTP Requests and returning HTTP Responses
+            + Added new document 'http-server-serving-html-page.md' : Chapter 3 of the NodeJS HTTP Server using 'http' snippet sequence - Serving HTML page from a file
+            + Added new document 'serving-html-page-efficiently.md' : Chapter 4 of the NodeJS HTTP Server using 'http' snippet sequence - Refactoring the HTTP server to be more efficient
+            + Added new document 'http-webserver-routing.md' : Chapter 5 of the NodeJS HTTP Server using 'http' snippet sequence - Webserver Routing
 
