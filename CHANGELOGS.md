@@ -103,6 +103,7 @@
 + [2024-06-20](#2024-06-20)
 + [2024-06-21](#2024-06-21)
 + [2024-06-25](#2024-06-25)
++ [2024-06-26](#2024-06-26)
 
 ## Version History
 ```
@@ -2251,4 +2252,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - New
     - Added new directory 'key-lookup' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/dictionary/' for snippets on dictionary key lookup via algorithms like nested Tree traversal
         + Added new document 'nested-key-lookup-function.md' : Simple snippet on creating a dictionary key lookup function utilising for-loop iteration and tree traversals
+
+### 2024-06-26
+#### 0021H
+- New
+    - Added new directory 'cli-argument-parsing' in 'Docs/Programming/Languages/Python/Snippets/algorithms/' for snippets on CLI argument parsing in Python
+        - Added new directory 'manual' for snippets on CLI argument parsing manually without external dependencies in python
+            + Added new document 'using-sys-argv.md' : Snippet on manually parsing CLI arguments using the built-in standard library 'sys' in Python
 
