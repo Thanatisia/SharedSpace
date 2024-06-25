@@ -2247,3 +2247,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
                     + Added new document 'client.md' : Creating a simple TCP/IP Echo client using the 'socket' module
                     + Added new document 'server.md' : Creating a simple TCP/IP Echo server using the 'socket' module
 
+#### 2316H
+- New
+    - Added new directory 'key-lookup' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/dictionary/' for snippets on dictionary key lookup via algorithms like nested Tree traversal
+        + Added new document 'nested-key-lookup-function.md' : Simple snippet on creating a dictionary key lookup function utilising for-loop iteration and tree traversals
+
