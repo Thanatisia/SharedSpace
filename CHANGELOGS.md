@@ -102,6 +102,7 @@
 + [2024-06-19](#2024-06-19)
 + [2024-06-20](#2024-06-20)
 + [2024-06-21](#2024-06-21)
++ [2024-06-25](#2024-06-25)
 
 ## Version History
 ```
@@ -2202,4 +2203,47 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + Added new document 'http-server-serving-html-page.md' : Chapter 3 of the NodeJS HTTP Server using 'http' snippet sequence - Serving HTML page from a file
             + Added new document 'serving-html-page-efficiently.md' : Chapter 4 of the NodeJS HTTP Server using 'http' snippet sequence - Refactoring the HTTP server to be more efficient
             + Added new document 'http-webserver-routing.md' : Chapter 5 of the NodeJS HTTP Server using 'http' snippet sequence - Webserver Routing
+
+### 2024-06-25
+#### 1613H
+- New
+    - Added new topic directory 'HTTP' in 'Docs/Networking/Topics/' for documentations on the HTTP protocol
+        - Added new directory 'Guides'
+            - Added new directory 'HTTP-Protocol/'
+                + Added new document 'protocol-specifications.md'
+    - Added new topic directory 'TCP-IP' in 'Docs/Networking/Topics/' for documentations on the TCP/IP protocol
+        - Added new directory 'Guides'
+            - Added new directory 'TCP-IP-Protocol/'
+                + Added new document 'protocol-specifications.md'
+    - Added new directory 'Recursion' in 'Docs/Programming/Algorithms/' containing documentations on the basics and concept of Recursion and implementing Recursive functions as a core concept (language-agnostic)
+        + Added new document 'README.md'
+        - Added new directory 'tree-traversal' for documentations on traversing tree-like data structures with nested branches and sub-branches using recursion (i.e. tail-calls)
+            + Added new document 'recursive-dictionary-traversal.md'
+    - Added new directory 'Guides' in 'Docs/Programming/Data-Serialization/' for holding Guides on Data Serialization Configuration Files
+        + Added new document 'data-serialization-types-comparison.md' : Documentation containing a simple comparison of the various config file types when imported into python as a list/dictionary object (for simple peudocode example)
+    - Added new directory 'Algorithms' in 'Docs/Programming/Languages/Python/Guides/' containing documentations on various Software Development Algorithms in the context of implementation and usage within python
+        - Added new directory 'Recursion' containing documentations on the basics and concept of Recursion and implementing Recursive functions within Python
+            + Added new document 'README.md'
+            - Added new directory 'tree-traversal' for documentations on traversing tree-like data structures with nested branches and sub-branches using recursion (i.e. tail-calls)
+                + Added new document 'recursive-dictionary-traversal.md'
+    - Added new directory 'Snippets' in 'Docs/Programming/Languages/Python/' to hold Python snippets and implementations
+        - Added new directory 'algorithms' for snippets on Data Structures and Algorithms example/implementations in Python
+            - Added new subdirectory for algorithm snippet category 'traversals' : Traversing/Digging down data structures (i.e. tree traversal)
+                - Added new subdirectory for category target 'dictionary' : Snippets on traversing dictionaries (key-value mappings, i.e. hashmap)
+                    + Added document 'recursive-dict-traversal.md' : Snippet and explanation on traversing a nested dictionary tree with subkeys and nested subvalues using Recursion/Recursive functions
+        - Added new subdirectory 'http-server-api' for snippets on communicating with HTTP Server and API Endpoints in Python
+            - Added new subdirectory 'http-api-communication-using-requests' for snippets on using the 'requests' module/library in python to communicate with a HTTP API End point
+                + Added new document 'simple-http-requests' : Implement simple HTTP API Endpoint communication using the 'requests' module/library
+                + Added new document 'error-handling.md' : Implement error handling to protect against issues during the API Communication
+                + Added new document 'http-requests-with-sessions.md' : Implement the use of sessions to segregate various requests types into groups
+        - Added new subdirectory 'socket-programming' for snippets on Socket Programming - implementing Server-Client stacks and Network infrastructure using the 'socket' library/module in Python
+            - Added new directory 'http-server' for snippets on developing HTTP Servers in Python using Socket programming
+                - Added new directory 'socket-http-server' for snippets on developing HTTP Servers in Python using the 'socket' module
+                    + Added new document 'simple-socket-http1.0-server.md' : Chapter 1 of Creating a simple HTTP/1.0 server using the 'socket' module - able to handling a simple connection receive and reply with a response text
+                    + Added new document 'serving-html-file.md' : Chapter 2 of Creating a simple HTTP/1.0 server using the 'socket' module - Serving an index HTML file ala a webserver
+                    + Added new document 'serving-html-files-in-a-webserver-route.md' : Chapter 3 of Creating a simple HTTP/1.0 server using the 'socket' module - Serving a webserver with routing according to the page/route specified to the URL and processing the page based on the route
+            - Added new directory 'tcp-server' for snippets on developing a TCP server in Python using the 'socket' module (Socket Programming) for Client-Server Network Communication (passing of TCP/IP packets)
+                - Added new directory 'echo-server-client' for snippets on creating an TCP/IP Echo Server-Client stack
+                    + Added new document 'client.md' : Creating a simple TCP/IP Echo client using the 'socket' module
+                    + Added new document 'server.md' : Creating a simple TCP/IP Echo server using the 'socket' module
 
