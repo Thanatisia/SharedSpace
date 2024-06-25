@@ -88,6 +88,89 @@
     }
     ```
 
+### Null
+
+> Introduction
+
+- Explanation
+    + also known as None, nil, null
+    - null is basically an empty object, it is not even intiialized
+        + Hence, you should do data validations such as a Null-value check to ensure a memory container is in a safe state to be used
+
+- There's no built-in empty value keywords in rust (and no Null-pointer exceptions, as Rust is designed for safety)
+    - Alternatives
+        1. Use an Option (`std::option`)
+
+> Using Option
+
+- The type `Option` represents an optional value: Some (contains a value) or None (does not contains a value)
+    - Uses
+        + Initial values
+        + Return values for functions that are not defined over their entire input range (partial functions)
+        + Return value for otherwise reporting simple errors, where None is returned on error
+        + Optional struct fields
+        + Struct fields that can be loaned or “taken”
+        + Optional function arguments
+        + Nullable pointers
+        + Swapping things out of difficult situations
+    - Use Cases
+        + Commonly paired with pattern matching to query the presence of a value and take action, and always accounting for the None case
+
+- Using `std::option`
+    - Documentations
+        - Attributes
+            - Option<PointerHandle<T>>
+                - `Some(value)` : Checks if the Pointer Handle contains the specified `value`
+                - None : If the pointer handle does not contain the specified value
+
+    - Syntax and Synopsis
+        - Declaring and Initialization
+            ```rust
+            let optional: Option<PointerHandle<T>> = SomePointer_of_type_T;
+            ```
+        - Usage
+            ```rust
+            match optional {
+                Some(p) => println!("has value {p}"),
+                None => println("has no value"),
+            }
+            ```
+
+> Question Mark Operator
+
+- Purpose
+    - Similar to the `Result` type, when writing code that calls many functions that return the `Option` type, handling `Some/None` can be tedious
+        - The question mark operator (`?` ) hides some of the boilerplate of propagating values up the call stack
+
+- Syntax/Structure
+    + `?` is like the ternary operator, where it checks if the passed value(s) (which the operator have been appended to) exists
+    ```rust
+    fn function_name(parameter_signature) -> Option<T> {
+        Some(value?)
+    }
+    ```
+
+- Example
+    - Add last numbers to the stack
+        - Without question mark operator
+            ```rust
+            fn add_last_numbers(stack: &mut Vec<i32>) -> Option<i32> {
+                let a = stack.pop();
+                let b = stack.pop();
+
+                match (a,b) {
+                    (Some(x), Some(y)) => Some(x+y),
+                    _ => None,
+                }
+            }
+            ```
+        - With question mark operator
+            ```rust
+            fn add_last_numbers(stack: &mut Vec<i32>) -> Option<i32> {
+                Some(stack.pop()? + stack.pop()?)
+            }
+            ```
+
 ### Enumeration
 - Define a new Enumeration object
     - Ordered List without any discriminator values
