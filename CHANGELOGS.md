@@ -2260,3 +2260,18 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new directory 'manual' for snippets on CLI argument parsing manually without external dependencies in python
             + Added new document 'using-sys-argv.md' : Snippet on manually parsing CLI arguments using the built-in standard library 'sys' in Python
 
+#### 2233H
+- New
+    - Added new document 'git-commit-schema.md' in 'Docs/Git/Guides/' containing documentation on git commit messaging schema and formats of writing a proper git commit message
+    - Added new document 'versioning.md' in 'Docs/Programming/Guides/' containing documentation on various versioning schema/format in version control and project management
+    - Added new directory 'python-syntax' in 'Docs/Programming/Languages/Python/Snippets/' containing snippets on python syntax and built-in keyword, concepts
+        - Added new directory 'data-typing' containing snippets on data typing-related functions and usages within python
+            - Added new directory 'type-checking' containing snippets on variable type checking implementations within python
+                + Added new document 'using-isinstance.md' : Snippet on using the python built-in type checker function 'isinstance()'
+    - Added new directory 'tty' in 'Docs/Programming/Languages/Python/Snippets/' containing snippets on TTY CLI application development on python, including modules, frameworks
+        - Added new directory 'frameworks' containing snippets on various TTY CLI application development frameworks on python
+            - Added new directory 'rich' containing snippets on using the framework 'rich'
+                - Added new directory 'ui-components' containing snippets on handling UI components in rich
+                    - Added new directory 'grouped-panel-arrangements' containing snippets on Groupings and widget/object arrangements using Panels and Columns
+                        + Added new document 'creating-a-simple-table-panel-arrangement.md' : Snippet on creating a simple Table grouped using Columns with Panel arrangement
+
