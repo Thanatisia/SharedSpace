@@ -104,6 +104,7 @@
 + [2024-06-21](#2024-06-21)
 + [2024-06-25](#2024-06-25)
 + [2024-06-26](#2024-06-26)
++ [2024-07-01](#2024-07-01)
 
 ## Version History
 ```
@@ -2274,4 +2275,22 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
                 - Added new directory 'ui-components' containing snippets on handling UI components in rich
                     - Added new directory 'grouped-panel-arrangements' containing snippets on Groupings and widget/object arrangements using Panels and Columns
                         + Added new document 'creating-a-simple-table-panel-arrangement.md' : Snippet on creating a simple Table grouped using Columns with Panel arrangement
+
+### 2024-07-01
+#### 2129H
+- New
+    - Added new directory 'Guides' in 'Docs/Programming/Languages/Golang/' for holding Guides and documentations to using Golang
+        + Added new document 'introduction-to-rust.md' : A beginner's guide and quickstart introduction documentation to the Go Programming Language - still a WIP
+    + Added new document 'recursive-print-key-value.md' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/dictionary/' containing snippet to print all key-values and nested sub-key and sub-values from a nested tree data structure (i.e. a nested dictionary) using a recursive function
+- Updates
+    - Updated document 'recursive-dict-traversal.md' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/dictionary/'
+        + Added new subheader 'Nested Tree Traversal' for containing an identifier for what the function does
+        - Function 'dictionary_traversal()'
+            + Renamed function 'dictionary_traversal()' => 'traversal()'
+            + Added documentations and comments
+            + Nested the function under the 'Nested Tree Traversal'
+        - added usage use-case 'Check if a target key is a subkey'
+            + Added function 'check_if_subkey()' to check if a target key is a subkey using recursive function
+        + Added example for manually checking if a key is a subkey using the result of 'traversal()'
+
 
