@@ -2293,4 +2293,10 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             + Added function 'check_if_subkey()' to check if a target key is a subkey using recursive function
         + Added example for manually checking if a key is a subkey using the result of 'traversal()'
 
+#### 2202H
+- Updates
+    - Updated document 'docs.md' in 'Docs/Programming/Data-Serialization/Languages/YAML/'
+        + Added operators
+    - Updated document 'introduction-to-golang.md' in 'Docs/Programming/Languages/Golang/Guides/'
+        + Added conditional statements
 

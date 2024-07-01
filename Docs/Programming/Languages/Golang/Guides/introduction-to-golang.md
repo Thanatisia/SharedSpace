@@ -117,6 +117,18 @@
     }
     ```
 
+- Conditional Statements
+    - If, else if, else
+        ```go
+        if <expression> {
+            // Statement 1
+        } else if <alternate-expression> {
+            // Alternate Statement
+        } else {
+            // Default statement
+        }
+        ```
+
 ## Data Types
 + string : An array of characters; strings are texts
 + int : Integer (0-9)

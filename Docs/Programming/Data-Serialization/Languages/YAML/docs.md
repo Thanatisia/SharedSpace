@@ -89,6 +89,11 @@
                         - "element-2"
             ```
 
+## Operators
+- '-' : Any usage will define a new list mapping to the key
+    + If you want to use only 1 '-', place all subsequent elements of the list in the same column/tab/indentation as the dash key-value
++ ':' : Declare everything under this key-value mapping as a new nested list/dictionary
+
 ## Structure
 
 ### Syntax Tree
