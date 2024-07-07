@@ -8,16 +8,16 @@
                 - data : This is the main dictionary target to loop and traverse through
                     + This parameter is needed to receive the nested subkeys and the nested dictionary-typed subvalues
                     + During every iteration, it will dig through all nested subkeys and subvalues until it reaches the last key (iteration stops recursing)
-                - entries : For holding the current state of all ongoing processes during the recursion
+                - results : For holding the current state of all ongoing processes during the recursion
                     + This container will be brought all the way until the return keyword (break condition) is received to end the recursion
     ```python
-    def dictionary_traversal(data, entries=None): 
+    def traverse(data, results=None): 
     ```
 
 2. Initialize all variables (if it doesnt exist)
     ```python
         # Initialize Variables
-        if entries == None: entries = []
+        if results == None: results = []
     ```
 
 3. Recursively iterate and traverse through the dictionary key-value (and sub-key values)
@@ -29,22 +29,39 @@
     ```python
         # Recursively iterate and traverse through the dictionary key-value (and sub-key values) 
         for k, v in data.items():
+            # Append a new entry for the current key, with the current key being the root
+            curr_iter_res = [k]
+
             # Check data type of value
-            # if isinstance(v, dict): 
-            if type(v) == dict:
-                # entries.append({k : v})
-                entries.append(k)
-                dictionary_traversal(v, entries)
-            else: 
-                # print("{0} : {1}".format(k, v))
+            if isinstance(v, dict):
+                print("")
+                print("{0} : {1}".format(k, v))
+                # Append current element to the current results list
+                curr_iter_res.append(v)
+                # Append the iteration to the results
+                results.append(curr_iter_res)
+                traverse(v, results)
+            elif isinstance(v, list):
+                print("{}".format(k))
+                for i in range(len(v)):
+                    # Get current element
+                    curr_element = v[i]
+                    # Append current element to the current results list
+                    curr_iter_res.append(curr_element)
+                # Append the iteration to the results
+                results.append(curr_iter_res)
+            else:
+                print("{0} : {1}".format(k, v))
+                # Append current element to the current results list
+                curr_iter_res.append(v)
                 # Append the value into the key-value results list
-                entries.append({k : v})
+                results.append(curr_iter_res)
     ```
 
-4. Break Condition: Return the entries if no more Iterables are detected
+4. Break Condition: Return the results if no more Iterables are detected
     ```python
         # Return
-        return entries
+        return results
     ```
 
 ## Snippets

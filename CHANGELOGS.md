@@ -105,6 +105,7 @@
 + [2024-06-25](#2024-06-25)
 + [2024-06-26](#2024-06-26)
 + [2024-07-01](#2024-07-01)
++ [2024-07-07](#2024-07-07)
 
 ## Version History
 ```
@@ -2299,4 +2300,39 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added operators
     - Updated document 'introduction-to-golang.md' in 'Docs/Programming/Languages/Golang/Guides/'
         + Added conditional statements
+
+### 2024-07-07
+#### 1746H
+- New
+    - Added new directory 'Self-Hosting' in 'Docs/DIY/' for containing DIY guides to various generic self-hosting concepts
+        - Added new directory 'recipe-cookbooks' for containing DIY cookbooks and recipes for setting up self-hosting solutions, services, servers manually from scratch
+            + Added new recipe 'git-bare-remote-repository-server-with-reverse-proxy.md' for manually setting up a simple self-hosted diy git remote repository server using git bare, a DNS server and a Reverse Proxy Server that is Web-routable (similar to remote git repository servers like GitHub, GitLab or Gitea) from scratch
+    - Added new directory 'Cybersecurity' in 'Docs/Linux/Snippets-and-Examples/'
+        - Added new directory 'Protection' containing snippets related to Linux Cybersecurity blue-teaming (defensive/protection) implementations and ideas
+            - Added new directory 'Encryption-and-Decryption' containing snippets related to Linux Cybersecurity (Cryptography) - Encryption and Decryption
+                - Added new directory 'using-gpg/' containing cybersecurity (cryptography) snippets on encrypting and decrypting files using gpg on Linux
+                    + Added new document 'decryption-public-key-encryption.md'
+                    + Added new document 'decryption-symmetric-key.md'
+                    + Added new document 'digital-signature.md'
+                    + Added new document 'encryption-backup-and-recovery-decryption.md'
+                    + Added new document 'encryption-public-key-encryption.md'
+                    + Added new document 'encryption-symmetric-key.md'
+                    + Added new document 'public-keys-delete.md'
+                    + Added new document 'secret-keys-delete.md'
+                    + Added new document 'secret-keys-listing.md'
+    - Added new directory 'tree-data-structure' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/'
+        - Added new directory 'using-while-loop'
+            + Added new document 'node-traversal-with-depth-tracking.md'
+            + Added new document 'simple-tree-node-traversal.md'
+
+- Updates
+    - Updated document 'recursive-dict-traversal.md' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/dictionary/'
+        + Replaced variable 'entries' => 'results'
+        + Renamed function 'dictionary_traversal()' => 'traversal()'
+        + Updated step 3 with the logic to consolidate results for usage and returning back to the caller
+    - Updated document 'recursive-print-key-value.md' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/dictionary/'
+        + Updated function documentations
+        + Renamed function 'dictionary_traversal()' => 'print_nested()'
+    - Updated document 'README.md' in 'Docs/Software/Video Downloader/yt-dlp/'
+        + Added new usage 'Downloading m3u8 cookies from embedded Authentication/Authorization video players/platforms'
 

@@ -201,6 +201,10 @@ yt-dlp {options} <arguments> [video-url]
                 ```console
                 yt-dlp -o [output-file-name] --referer [video-page-URL] [m3u8-cache-link]
                 ```
+- Downloading m3u8 cookies from embedded Authentication/Authorization video players/platforms
+    ```bash
+    yt-dlp --add-header "Origin: https://video.domain/" --add-header "Referer: https://video.domain/" [m3u8-cookie-url]
+    ```
 - Faster Downloads using External Downloader
     - Some websites throttle transfer speeds
         - You can often get around this by
