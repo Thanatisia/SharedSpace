@@ -2336,3 +2336,19 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'README.md' in 'Docs/Software/Video Downloader/yt-dlp/'
         + Added new usage 'Downloading m3u8 cookies from embedded Authentication/Authorization video players/platforms'
 
+#### 1826H
+- New
+    - Added new directory 'cybersecurity' in 'Docs/DIY/' containing snippets and documentations to DIY create various cybersecurity ideas and concepts from scratch
+        - Added new directory 'authenticators' containing DIY recipe/cookbooks for Authenticators on
+            + Added new document 'rolling-your-own-auth.md' containing a write-down on rolling your own DIY Authenticator using Password Salt and Hashing
+    + Added new document 'accessing-home-lab-webservices-with-vpc.md' in 'Docs/Home Lab/Snippets-and-Examples/' containing a snippet documentation for accessing your home lab webservices with the use of a VPS/VPC
+    + Added new document 'accessing-home-lab-webservices-without-vpc.md' in 'Docs/Home Lab/Snippets-and-Examples/' containing a snippet documentation for accessing your home lab webservices without the use of a VPS/VPC
+    - Added new directory 'Snippets' in 'Docs/Operating Systems/Android/Free Open-Source Software (FOSS)/Termux/' for containing snippets and implementations for features related to within the Termux terminal emulator within android
+        - Added new directory 'backup-and-recovery' containing snippets for backup and recovery in Termux
+            + Added new document 'termux-backup-using-git-bare.md' : Snippet/instruction to backup and recover your termux dotfiles using git bare
+    - Added new directory 'web-application-development' in 'Docs/Programming/Languages/Python/Frameworks/' containing documentations and guides to Web Application (and site/pages) development using python
+        - Added directory 'frameworks' for documentations on various Web Application/Site Developemnt frameworks
+            - Added new directory 'flask' containing documentation and guides regarding the flask Web Application framework for python
+                - Added new directory 'Guides' containing guides for python flask
+                    + Added new document 'introduction-to-flask.md' : A beginner's guide and quickstart introduction documentation to the Lua language
+
