@@ -106,6 +106,7 @@
 + [2024-06-26](#2024-06-26)
 + [2024-07-01](#2024-07-01)
 + [2024-07-07](#2024-07-07)
++ [2024-07-08](#2024-07-08)
 
 ## Version History
 ```
@@ -2351,4 +2352,21 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
             - Added new directory 'flask' containing documentation and guides regarding the flask Web Application framework for python
                 - Added new directory 'Guides' containing guides for python flask
                     + Added new document 'introduction-to-flask.md' : A beginner's guide and quickstart introduction documentation to the Lua language
+
+### 2024-07-08
+#### 1139H
+- New
+    + Added new document 'android-app-development-from-command-line.md' in 'Docs/DIY/development/environments/' : Standardized reference document to setup a Android application project workspace/structure/development environment from scratch and building from command line
+    - Added new directory 'Concepts' in 'Docs/Programming/Computer Science/'
+        - Added new directory 'Memory Management'
+            + Added new document 'stack-and-heap.md' containing documentation on what is 'Stack and Heap' in Computer Science and Operating Systems
+    - Added new directory 'using-recursion' in 'Docs/Programming/Languages/Python/Snippets/algorithms/traversals/tree-data-structure/'
+        + Added new document 'dynamically-generate-tables-during-traversal.md' : Snippet for implementing tree data structure traversal and dynamically generating tables when detecting nested branches/sub-branches
+    - Added new directory 'Guides' in 'Docs/Programming/Languages/CPP/'
+        - Added new directory 'operator-overloading/'
+            + Added new document 'syntax.md'
+- Updates
+    - Updated document 'generating-new-project-from-scratch.md' in 'Docs/Programming/Mobile-App-Development/Android/Project/'
+        + Added new reference URL
+
 

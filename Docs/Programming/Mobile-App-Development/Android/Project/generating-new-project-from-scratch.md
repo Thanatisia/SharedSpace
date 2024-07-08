@@ -83,5 +83,7 @@ However, for the most part, the structure should be pretty much similar
 ## Resources
 
 ## References
++ [Revelo - Blog - How to build an android development environment without android studio](https://www.revelo.com/blog/how-to-build-an-android-development-environment-without-android-studio)
 
 ## Remarks
+
