@@ -107,6 +107,7 @@
 + [2024-07-01](#2024-07-01)
 + [2024-07-07](#2024-07-07)
 + [2024-07-08](#2024-07-08)
++ [2024-07-10](#2024-07-10)
 
 ## Version History
 ```
@@ -2369,4 +2370,11 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
     - Updated document 'generating-new-project-from-scratch.md' in 'Docs/Programming/Mobile-App-Development/Android/Project/'
         + Added new reference URL
 
+### 2024-07-10
+#### 0050H
+- New
+    + Added new document 'creating-your-own-github-pages-static-website.md' in 'Docs/DIY/development/environments/' containing documentations on creating a working github pages static web site/page/application development environment
+    - Added new directory 'async-coroutines' in 'Docs/Programming/Languages/Python/Snippets/' for Snippets relating to asynchronous programming
+        - Added new directory 'simple-async-await' containing simple snippets of async-await uses
+            + Added new document 'simple-async-await-application.md': Snippets containing the implementations and explanation of a simple Asynchronous concurrent program in python using async-await
 
