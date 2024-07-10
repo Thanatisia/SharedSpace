@@ -2378,3 +2378,8 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         - Added new directory 'simple-async-await' containing simple snippets of async-await uses
             + Added new document 'simple-async-await-application.md': Snippets containing the implementations and explanation of a simple Asynchronous concurrent program in python using async-await
 
+#### 2147H
+- Updates
+    - Updated document 'simple-async-await-application.md' in 'Docs/Programming/Languages/Python/Snippets/async-coroutines/simple-async-await'
+        + Added introduction to asynchronous programming and its usage in python
+

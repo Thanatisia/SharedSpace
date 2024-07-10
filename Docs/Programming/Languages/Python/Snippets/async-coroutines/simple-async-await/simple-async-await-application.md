@@ -2,10 +2,36 @@
 
 ## Information
 ### Asynchronous Programming
-- Components
-    - `async def func_name(params, ...)`
-        + `await command()`
-    - `asyncio.run(func_name())`
+> Introduction
+- Asynchronous Programming, also known as Coroutines, is a concept in software development in which programs run instructions concurrently (back to back, one after another), 
+    + unlike parallelism (multiprocessing, multithreading) whereby the instructions are run at the same time (side by side at the same time)
+- To implement asynchronous programming in your python application
+    + There are 2 keywords - async and await.
+    + async essentially defines the attached function as an asynchronous function
+    - await will tell the asynchronous function to wait for this function to complete before proceeding further regardless of what other ongoing functions are still running.
+        + Run all other functions and this until the await function is completed
+        + This is useful for synchronization within asynchronocity, when you want to execute an asynchronous function synchronously
+
+> Components
+- `async def func_name(params, ...)`
+    + `await command()`
+- `asyncio.run(func_name())`
+
+> Syntax
+```python
+import asyncio
+
+async def func_name(params, ...):
+    # Statements here
+    # Asynchronously sleep for the specified number of seconds and concurrently let the other processes run
+    await asyncio.sleep(0)
+
+async def main():
+    results = await asyncio.gather(func_name(params,...))
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
 
 ## Steps
 1. Import dependencies and packages
@@ -23,11 +49,13 @@
             - await will tell the asynchronous function to wait for this function to complete before proceeding further regardless of what other ongoing functions are still running.
                 + Run all other functions and this until the await function is completed
                 + This is useful for synchronization within asynchronocity, when you want to execute an asynchronous function synchronously
+                + `await asyncio.sleep(0)` : Asynchronously sleep for the specified number of seconds and concurrently let the other processes run
     ```python
     async def for_loop(min=0, increment=1, max=1_000_000):
         for i in range(min, max, increment):
             print("Looping for: {}".format(max))
             print(i)
+            # Asynchronously sleep for the specified number of seconds and concurrently let the other processes run
             await asyncio.sleep(0)
     ```
 
@@ -65,10 +93,20 @@ import os
 import sys
 import asyncio
 
+async def while_loop_increment(min=0, incr=1, max=1_000_000):
+    i = min
+    while i < max:
+        print("Looping for: {}".format(max))
+        print(i)
+        i += incr
+        # Asynchronously sleep for the specified number of seconds and concurrently let the other processes run
+        await asyncio.sleep(0)
+
 async def for_loop(min=0, increment=1, max=1_000_000):
     for i in range(min, max, increment):
         print("Looping for: {}".format(max))
         print(i)
+        # Asynchronously sleep for the specified number of seconds and concurrently let the other processes run
         await asyncio.sleep(0)
 
 async def exec_command(fn, *vargs, **kwargs):
