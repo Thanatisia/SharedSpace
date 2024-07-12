@@ -108,6 +108,7 @@
 + [2024-07-07](#2024-07-07)
 + [2024-07-08](#2024-07-08)
 + [2024-07-10](#2024-07-10)
++ [2024-07-12](#2024-07-12)
 
 ## Version History
 ```
@@ -2382,4 +2383,27 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
 - Updates
     - Updated document 'simple-async-await-application.md' in 'Docs/Programming/Languages/Python/Snippets/async-coroutines/simple-async-await'
         + Added introduction to asynchronous programming and its usage in python
+
+### 2024-07-12
+#### 2323H
+- New
+    + Added new document 'introduction-to-python.md' in 'Docs/Programming/Languages/Python/Guides' : A beginner's guide and quickstart introduction documentation to the Python language
+    - Added new directory 'Guides' in 'Docs/CyberSecurity/Topics/Red-Team/Ethical-Hacking/Guides'
+        + Added new document 'bug-bounty.md'
+    + Added new document 'creating-your-own-javascript-project-workspace.md' in 'Docs/DIY/development/environments/'
+    - Added new directory 'System-Diagnostics' in 'Docs' containing dicumentations on system error troubleshooting and debugging
+        + Added new document 'README.md'
+        - Added new directory 'Software'
+            - Added new directory 'Operating-Systems'
+                - Added new directory 'Linux'
+                    + Added new document 'troubleshooting-and-triage.md'
+        - Added new directory 'setup'
+            + Added new document 'preparing-linux-liveiso.md'
+    - Added new directory 'Distribution' in 'Docs/Linux/Snippets-and-Examples/'
+        - Added new directory 'Root-filesystem'
+            - Added new directory 'bootstrap-installation'
+                + Added new document 'installing-into-disk-image.md'
+                - Added new directory 'base-distributions'
+                    - Added new directory 'ArchLinux'
+                        + Added new document 'install-into-disk-image.md'
 
