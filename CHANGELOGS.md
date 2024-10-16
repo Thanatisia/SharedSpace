@@ -109,6 +109,7 @@
 + [2024-07-08](#2024-07-08)
 + [2024-07-10](#2024-07-10)
 + [2024-07-12](#2024-07-12)
++ [2024-10-16](#2024-10-16)
 
 ## Version History
 ```
@@ -2406,4 +2407,26 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
                 - Added new directory 'base-distributions'
                     - Added new directory 'ArchLinux'
                         + Added new document 'install-into-disk-image.md'
+
+### 2024-10-16
+#### 1826H
+- New
+    - Added new directory 'Mathematics' in 'Docs/Programming/Algorithms/' for writing documentations on Data Structures and Algorithms to programmatically/algorithmically execute Mathematics concepts
+        - Added new directory 'matrix' for Matrix vector-related implementation concepts
+            + Added new document 'matrix-multiplication.md' for Matrix Multiplying 2 matrix vectors
+            + Added new document 'generating-a-matrix-results-board.md' for Generating a zero-ed out results matrix vector board
+    - Added new directory 'ascii-art' in 'Docs/Programming/Algorithms/' for writing documentations on Data Structures and Algorithms to programmatically/algorithmically draw ASCII art
+        + Added new document 'drawing-a-matrix-square.md' for Drawing a matrix square in ASCII art
+- Updates
+    - Updated document 'introduction-to-golang.md' in 'Docs/Programming/Languages/Golang/Guides/'
+        + Performed mass re-write with new up-to-date information with an all-in-one quickstart setup and installation guide to prepare an out-of-the-box working project (aka 'go package') directory
+        + Added 'String Formatting'
+        + Reordered 'Package Management'
+        + Moved explanations into the documentation body content
+        + Added content to the section 'CLI argument parsing with delimiter'
+        + Modified content example for 'CLI argument parsing' with newer examples
+        + Added snippet for 'CLI argument parsing with delimiter'
+        + Added an operational flow chart/diagram for the general project/package manager workflow for golang
+        + Added documentation on the 'any' type
+        + Added snippet on initializing a new key-value mapping with 'any' data type for generics
 
