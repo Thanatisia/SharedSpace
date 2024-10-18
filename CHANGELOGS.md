@@ -110,6 +110,7 @@
 + [2024-07-10](#2024-07-10)
 + [2024-07-12](#2024-07-12)
 + [2024-10-16](#2024-10-16)
++ [2024-10-18](#2024-10-18)
 
 ## Version History
 ```
@@ -2429,4 +2430,16 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Added an operational flow chart/diagram for the general project/package manager workflow for golang
         + Added documentation on the 'any' type
         + Added snippet on initializing a new key-value mapping with 'any' data type for generics
+
+### 2024-10-18
+#### 2351H
+- New
+    - Added new directory 'Local AI Server' for documentation regarding self-hosting your own local AI (LLM) server
+        - Added new directory 'Ollama' for self-hosting the Ollama FOSS Large Language Model (LLM) Model Management CLI utility
+            + Added new document 'README.md'
+- Updates
+    - Updated document 'introduction-to-golang.md' in 'Docs/Programming/Languages/Golang/Guides/'
+        + Performed a reorganization of documentation and restructuring of the documentation flow
+        + Added golang data types
+
 

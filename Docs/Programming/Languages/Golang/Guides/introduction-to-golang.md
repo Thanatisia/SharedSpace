@@ -7,43 +7,72 @@
 
 ## Table of Contents
 - [Basics](#basics)
-    + [Setup](#setup)
-    + [Golang Project Workspaces and Development](#golang-projects)
-    + [Operators](#operators)
-    + [Keywords](#keywords)
-    + [Variables](#variables)
-    + [Basic Syntax](#Syntax)
-    + [Conditional Statements](#conditional-statements)
-- [Data Types](#data-types)
-    + [Floats](#floats)
-    + [Integers](#integers)
-    + [String](#string)
-    + [null](#null)
-- [Standard Streams](#standard-streams)
-    + [Standard Output (stdout)](#standard-output)
+- [Setup](#setup)
+    + [Dependencies](#dependencies)
+    + [Pre-Requisites](#pre-requisites)
+    - Golang Project Workspaces and Development
+        - [main.go in root directory](#project-workspace-structure/layout-setup-main.go-in-root-directory)
+            + [Project Layout](#project-layout)
+            + [Quickstart Setup](#quickstart-setup)
+            + [Snippet and Examples - Generating the project/package hierarchy/structure](#snippet-and-examples)
+        - [main.go in module subdirectory](#project-workspace-structure/layout-setup-main.go-in-module-subdirectory)
+            + [Project Layout](#project-layout)
+            + [Quickstart Setup](#quickstart-setup)
+            + [Snippet and Examples - Generating the project/package hierarchy/structure](#snippet-and-examples)
+    + [Operational Flow chart/diagram](#operational-flow-chart/diagram)
++ [Data Types](#data-types)
++ [Keywords](#keywords)
++ [Operators](#operators)
+- Built-in
+    + [Built-in System Functions](#built-in-system-functions)
+    + [Built-in System Libraries](#built-in-system-libraries)
++ [Variables](#variables)
++ [Basic Syntax](#Syntax)
 - [Data Structures](#data-structures)
-    + [Arrays](#arrays)
-    + [Vectors](#vectors)
-    + [Structure](#structure)
+    + [Index-Based (Array, ArrayList, List, Vector)](#index-based)
+    + [Key-Value Mappings (Associative Array, Dictionary, Map, HashMap)](#key-value-mappings)
+    + [Structure (aka 'struct')](#structure-aka-struct)
+- [Conditional Statements](#conditions)
+    + [If else-if else condition](#if-else-if-else-condition)
+    + [In-line if condition check](#in-line-if-condition-check)
+    + [Switch-case](#switch-case)
+- [String Formatting](#string-formatting)
 - [Iterative](#iterations)
-    - [For Loop](#for-loop)
-        + [Indexed-based](#indexed-based)
-        + [Key-Value Mappings](#key-value-mappings)
-    - [While Loop](#while-loop)
-+ [Enumeration](#enumeration)
-+ [Attributes](#attributes)
-+ [Crates](#crates)
+    + [For Loop](#for-loop)
+    + [While Loop](#while-loop)
 - [Functions](#functions)
 - [Command Line Arguments](#command-line-arguments)
++ [Logging](#logging)
++ [Filesystem](#filesystem)
 - [External Files](#external-files)
-    + [Importing External Libraries and packages](#importing)
+    + [Package Management](#package-management)
+    + [Importing External Libraries and packages](#importing-external-libraries-and-packages)
     + [File I/O Processing](#file-io-processing)
 - [System Process Calls](#system-process-calls)
     + [System Command Execution](#system-command-execution)
     + [Subprocess and Pipes](#subprocess-and-pipes)
+    - Standard Streams
+        + Standard Input (stdin)
+        + Standard Output (stdout)
+        + Standard Error (stderr)
 - [Asynchronous Programming](#asynchronous-programming)
 - [Concurrency](#concurrency)
     + [Threads](#threads)
+- [Documentations](#documentations)
+    + [Go compiler](#go-compiler)
+- [Snippets](#snippets)
+    + [Algorithms](#algorithms)
+    + [CLI Argument Parsing from Scratch](#cli-argument-parsing-from-scratch)
+    + [CLI Argument Parsing with Delimiter](#cli-argument-parsing-with-delimiter)
+    + [System Command Execution (Synchronous)](#system-command-execution-synchronous)
+    + [Generate new scanner instance and buffer container to store the data stream(s) obtained/stored by the scanner](#generate-new-scanner-instance-and-buffer-container-to-store-the-data-streams-obtainedstored-by-the-scanner)
+    + [System Command Execution with Redirection via Pipes and Buffers](#system-command-execution-with-redirection-via-pipes-and-buffers)
+- [Wiki](#wiki)
+    + [Terminologies](#terminologies)
+    + [Templates](#templates)
+- [Resources](#resources)
+- [References](#references)
+- [Remarks](#remarks)
 
 ## Basics
 
@@ -506,43 +535,20 @@ EOF
     - [package-root-directory] --> Edit 'go.mod' and append a new 'replace package-root-directory/[module-directory-name] => ./path/to/module/directory' --> Reload the go.mod file using 'go mod tidy'
     ```
 
-## Package Management
-- Built-in System Libraries
-    + fmt
-    + log
-    + math/rand
-    + os
-    + os/exec
-    + path/filepath
-    + strings
-    + syscall
-    + time
-
-- Defining a new package
-    ```go
-    package [package-name]
-    ```
-
-- Import all libraries/dependencies required
-    ```go
-    import (
-        // To import Packages/modules/libraries
-        "package/module"
-
-        // To import a package with an alias name
-        variable_alias "package/module/your-library-here"
-
-        // To import a package from a git remote repository server (i.e. github)
-        variable_alias "github.com/repo-author/repo-name"
-    )
-    ```
-
 ## Data Types
++ nil : Empty object; aka None, NULL, null
 + any : Generic dynamic-typed; use this to accept any data type
-+ int : Short Integer (32-bit)
-+ int64 : Long Integer (64-bit)
++ int : Integer; Dynamically-sized (32-bits wide on 32-bit systems and 64-bits wide on 64-bit systems)
++ int{8,16,32,64} : Long Integer (8-bit/16-bit/32-bit/64-bit)
++ uint : Unsigned Integer; Dynamically-sized (32-bits wide on 32-bit systems and 64-bits wide on 64-bit systems)
++ uint{8,16,32,64} : Unsigned Integer (8/16/32/64-bit)
++ uintptr : Unsigned integer Pointer; Dynamically-sized (32-bits wide on 32-bit systems and 64-bits wide on 64-bit systems)
++ float{32,64} : Floating-point Number (32/64-bit)
++ complex{64,128} : Complex number (64/128-bit)
 + string : String/Text data; Array of characters
 + bool : Boolean (True/False); aka 'fork' in golang
++ byte : alias for uint8 (8-bit Unsigned Integer); 1 Byte = 8-Bits
++ rune : alias for uint32 (32-bit Unsigned Integer); Represents a Unicode code point
 + `[]<data-type>` : Array/List of the data type specified
 + struct : Define and initialize a new structure object containing various attributes/properties describing a concept
 
@@ -561,6 +567,17 @@ EOF
     ```go
     len(obj)
     ```
+
+### Built-in System Libraries
++ fmt
++ log
++ math/rand
++ os
++ os/exec
++ path/filepath
++ strings
++ syscall
++ time
 
 ## Variables
 - Declare a constant
@@ -1371,6 +1388,30 @@ switch [variable] {
     files, err := os.ReadDir(dir_path)
     ```
 
+## External Files
+### Package Management
+- Defining a new package
+    ```go
+    package [package-name]
+    ```
+
+### Importing External Libraries and packages
+- Import all libraries/dependencies required
+    ```go
+    import (
+        // To import Packages/modules/libraries
+        "package/module"
+
+        // To import a package with an alias name
+        variable_alias "package/module/your-library-here"
+
+        // To import a package from a git remote repository server (i.e. github)
+        variable_alias "github.com/repo-author/repo-name"
+    )
+    ```
+
+### File IO Processing
+
 ## System Process Calls
 ### System Command Execution
 - Using the 'os' module
@@ -1621,6 +1662,15 @@ switch [variable] {
             log.Fatal(err)
         }
         ```
+
+## Asynchronous Programming
++ TBC
+
+## Concurrency
++ TBC
+
+### Threads
++ TBC
 
 ## Documentations
 
