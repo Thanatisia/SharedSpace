@@ -111,6 +111,7 @@
 + [2024-07-12](#2024-07-12)
 + [2024-10-16](#2024-10-16)
 + [2024-10-18](#2024-10-18)
++ [2024-10-19](#2024-10-19)
 
 ## Version History
 ```
@@ -2442,4 +2443,13 @@ Version Syntax : Update yyyy-mm-dd HHMM(H), Author
         + Performed a reorganization of documentation and restructuring of the documentation flow
         + Added golang data types
 
+### 2024-10-19
+#### 2323H
+- Updates
+    - Updated document 'introduction-to-golang.md' in 'Docs/Programming/Languages/Golang/Guides/'
+        + Added defining a multiline string
+        + Added defining public and private functions
+        + Added data validation - Null Value Check
+        + Updated 'os.Args' with a proper example
+        + Added usage of Stdin to pipe/stream the standard output of a command into the standard input of the executable
 

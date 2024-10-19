@@ -41,7 +41,10 @@
     + [For Loop](#for-loop)
     + [While Loop](#while-loop)
 - [Functions](#functions)
+- [Data Validation](#data-validation)
+    - [Null Value Check](#null-value-check)
 - [Command Line Arguments](#command-line-arguments)
+    + [Standard Streams and Pipes](#standard-streams-and-pipes)
 + [Logging](#logging)
 + [Filesystem](#filesystem)
 - [External Files](#external-files)
@@ -570,10 +573,13 @@ EOF
 
 ### Built-in System Libraries
 + fmt
++ io
 + log
++ math
 + math/rand
 + os
 + os/exec
++ path
 + path/filepath
 + strings
 + syscall
@@ -811,6 +817,17 @@ switch [variable] {
 
 ### String Formatting
 
+- Defining a multi-line string variable
+    - Explanation
+        + Use the backtick operator to define/declare that this string is a multiline string block
+    ```go
+    var str_var string = `
+    Multiline
+    Statements
+    Here
+    `;
+    ```
+
 - Printing to standard output
     ```go
     print("your message")
@@ -984,6 +1001,30 @@ switch [variable] {
     }
     ```
 
+- Defining a private function
+    - Explanation
+        + If the function has a lowercase starting character, it is a private function that cannot be 'exported' to be used as a library function
+    ```go
+    func func_name(param_name param_type, ...) (<return-types>, ...) {
+        // Statements
+
+        // Return/Output
+        return val1, val2, ...
+    }
+    ```
+
+- Defining a public function
+    - Explanation
+        + The starting alphabet/character of the function name has to be capitalized for go to export the function to be usable by another file
+    ```go
+    func FunctionName(param_name param_type, ...) (<return-types>, ...) {
+        // Statements
+
+        // Return/Output
+        return val1, val2, ...
+    }
+    ```
+
 - Invoking/Calling a function
     - Statically declare and return the return value
         ```go
@@ -992,6 +1033,22 @@ switch [variable] {
     - Dynamically assign the return value
         ```go
         return_objs := func_name(arguments, ...)
+        ```
+
+## Data Validation
+
+### Null Value Check
+
+- Function parameter/argument value
+    - Define a function with parameter arguments
+        ```go
+        func func_name(param_name param_type, ...) {
+            // Data Validation: Null Value Check
+            if param_name == "" {
+                // Set default value
+                param_name = "your-default-value-here"
+            }
+        }
         ```
 
 ## Command Line Arguments
@@ -1005,7 +1062,7 @@ switch [variable] {
             + `argv[1]` : will contain the first argument value passed onwards
             + `argv[1:]` : will contain all subsequent argument value(s) passed by the user to the command
     ```go
-    os.Args
+    var argv []string = os.Args
     ```
 
 - Iterating with the CLI Arguments list
@@ -1034,6 +1091,49 @@ switch [variable] {
                     // Default case
             }
         }
+        ```
+
+### Standard Streams and Pipes 
+- Introduction
+    + The built-in Standard Library 'os' contains the Standard Streams - 'Stdin', 'Stdout' and 'Stderr' - as Open File Handler/Pointer objects (*os.File) pointing to the Standard Input, Standard Output and Standard Error File Descriptors (fd) pointer object respectively
+
+- To receive input from the user by streaming/piping the standard output of a command into the standard input of the executable
+    - Import the package/library dependencies
+        ```go
+        import (
+            "fmt"
+            "io"
+            "os"
+            "strings"
+        )
+        ```
+    - Read all data from the Stdin (Standard Input) data stream piped/streamed into the application from the user and store into a bytes array
+        - Explanation
+            - The Stdin (Standard Input) data stream contains all data sent from the user into the application either by piping ('|' operator) the standard output of a command into the application, or streaming ('<<<') a string into the application
+                + Hence, the Standard Input is used to receive data instead of just CLI argument parsing
+            - However, because `os.Stdin` is a File Descriptor object,
+                + you need to read all the data (stored as 'bytes') within the os.Stdin file descriptor into a bytes array (collection of bytes where each byte is a message)
+            - To read all bytes within the `os.Stdin` File Descriptor object, you need to use `io.ReadAll(os.Stdin)` which will dig through the Standard Input data stream and store all the data as bytes in a bytes array (`[]bytes`)
+                - `io.ReadAll(os.Stdin)` will return 2 values
+                    1. The Bytes Array containing all the message string obtained via Standard Input (needs to be converted to string)
+                    2. Error object, This is used to perform Error Checking
+        ```go
+        stdin_bytes, err := io.ReadAll(os.Stdin)
+        if err != nil {
+            panic(err)
+        }
+        ```
+    - Convert the Bytes Array into String
+        - Explanation
+            - The message obtained from `io.ReadAll()` is in the form of a Bytes Array ([]bytes)
+                + This means that the data are all in binary and only readable by the machine
+                + Hence you need to convert the bytes array into string to merge the data and be printable as the readable message
+        ```go
+        var stdin_str string = string(stdin_bytes)
+        ```
+    - (Optional) Trim the suffix newline
+        ```go
+        stdin_str = strings.TrimSuffix(stdin_str, "\n")
         ```
 
 ### Methodologies
@@ -2154,6 +2254,7 @@ func main() {
 + [GeeksForGeeks - Golang - Switch with multiple case values](https://www.geeksforgeeks.org/golang-program-that-uses-switch-multiple-value-cases/)
 + [Go By Example - Executing Processes (using syscall)](https://gobyexample.com/execing-processes)
 + [go.dev - Wiki - GOPATH](https://go.dev/wiki/GOPATH)
++ [jvt - Posts - 2022-02-21 - go stdin](https://www.jvt.me/posts/2022/02/21/go-stdin/)
 + [Stackoverflow - Questions - 8018719 - Iterating through a golang map](https://stackoverflow.com/questions/8018719/iterating-through-a-golang-map)
 + [Stackoverflow - Questions - 37091316 - How to get the realtime output for a shell command in golang](https://stackoverflow.com/questions/37091316/how-to-get-the-realtime-output-for-a-shell-command-in-golang)
 + [tutorialsedge - Golang - Executing system commands with Golang](https://tutorialedge.net/golang/executing-system-commands-with-golang/)
